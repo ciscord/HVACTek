@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Job" representedClassName="Job" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="completionTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dispatchTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="endTimeQuestions" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="jobID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startTimeQuestions" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="swapiJobInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="jobs" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="add2cart" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tech" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="userCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="jobs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Job" inverseName="user" inverseEntity="Job" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Job" positionX="288" positionY="-25" width="128" height="193"/>
+        <element name="User" positionX="90" positionY="68" width="128" height="150"/>
+    </elements>
+</model>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SystemInfoHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="254" height="28"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Av8-iy-m01">
+                    <rect key="frame" x="0.0" y="0.0" width="254" height="28"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAP-17-6c9">
+                            <rect key="frame" x="10" y="0.0" width="234" height="1"/>
+                            <color key="backgroundColor" red="0.46666666666666667" green="0.74117647058823533" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="8s8-N2-4eE"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="68" translatesAutoresizingMaskIntoConstraints="NO" id="rvw-7h-BXf">
+                            <rect key="frame" x="12" y="4" width="68" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="8zf-M9-lad"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="APf-fs-fwM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="147" translatesAutoresizingMaskIntoConstraints="NO" id="0fF-NZ-1vB">
+                            <rect key="frame" x="82" y="4" width="147" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" priority="995" constant="147" id="YZu-av-8K9"/>
+                                <constraint firstAttribute="height" constant="21" id="yLu-8x-58t"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBG-j6-oyI">
+                            <rect key="frame" x="228" y="0.0" width="26" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="26" id="K4B-N3-BLd"/>
+                            </constraints>
+                            <color key="tintColor" red="0.46666666670000001" green="0.74117647060000003" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" image="customer-overview-arrow-colapsed">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapStateToggleBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="1KK-PU-fkC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="CBG-j6-oyI" secondAttribute="trailing" id="1uR-RL-h30"/>
+                        <constraint firstItem="rvw-7h-BXf" firstAttribute="top" secondItem="Av8-iy-m01" secondAttribute="top" constant="4" id="7dt-Wm-GVb"/>
+                        <constraint firstItem="wAP-17-6c9" firstAttribute="leading" secondItem="Av8-iy-m01" secondAttribute="leading" constant="10" id="FaH-Ve-Gdk"/>
+                        <constraint firstAttribute="bottom" secondItem="CBG-j6-oyI" secondAttribute="bottom" id="LHK-Vr-06l"/>
+                        <constraint firstItem="wAP-17-6c9" firstAttribute="top" secondItem="Av8-iy-m01" secondAttribute="top" id="LnB-PG-0Uq"/>
+                        <constraint firstItem="0fF-NZ-1vB" firstAttribute="leading" secondItem="rvw-7h-BXf" secondAttribute="trailing" constant="2" id="SDw-mY-RFm"/>
+                        <constraint firstAttribute="trailing" secondItem="wAP-17-6c9" secondAttribute="trailing" constant="10" id="XdR-O4-MuD"/>
+                        <constraint firstItem="0fF-NZ-1vB" firstAttribute="top" secondItem="Av8-iy-m01" secondAttribute="top" constant="4" id="YxZ-Wc-bDK"/>
+                        <constraint firstItem="rvw-7h-BXf" firstAttribute="leading" secondItem="Av8-iy-m01" secondAttribute="leading" constant="12" id="a5W-oh-Y6Q"/>
+                        <constraint firstItem="CBG-j6-oyI" firstAttribute="leading" secondItem="0fF-NZ-1vB" secondAttribute="trailing" priority="998" constant="-1" id="aY9-9D-9RS"/>
+                        <constraint firstItem="CBG-j6-oyI" firstAttribute="top" secondItem="Av8-iy-m01" secondAttribute="top" id="qVO-Ek-DCr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Av8-iy-m01" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="04j-Lo-qA6"/>
+                <constraint firstItem="Av8-iy-m01" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FyZ-gv-dxg"/>
+                <constraint firstAttribute="bottom" secondItem="Av8-iy-m01" secondAttribute="bottom" id="QSN-Nq-6hU"/>
+                <constraint firstAttribute="trailing" secondItem="Av8-iy-m01" secondAttribute="trailing" id="cbn-Xp-3cI"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnCollapse" destination="CBG-j6-oyI" id="usf-zj-ODX"/>
+                <outlet property="lbName" destination="0fF-NZ-1vB" id="t8X-qK-LlE"/>
+                <outlet property="lbTitle" destination="rvw-7h-BXf" id="WIm-7W-dN4"/>
+            </connections>
+            <point key="canvasLocation" x="606" y="221"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="customer-overview-arrow-colapsed" width="13" height="18"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
