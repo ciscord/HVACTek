@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="enC-KU-ZUB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="enC-KU-ZUB">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Product Admin Table View Controller-->
@@ -1463,6 +1463,7 @@ $</string>
                     </view>
                     <navigationItem key="navigationItem" id="7LT-L2-noz"/>
                     <connections>
+                        <outlet property="btnEmail" destination="0II-78-nMD" id="IFk-B1-sog"/>
                         <outlet property="lblFinancingD" destination="zie-gm-ybA" id="0T4-7r-tTu"/>
                         <outlet property="lblFinancingSum" destination="KIK-QJ-0Bd" id="I0W-tM-kPl"/>
                         <outlet property="lblInvestment" destination="zSa-cq-WXa" id="qZB-2Q-tOx"/>

@@ -67,7 +67,7 @@
     finacePay = 0.0f;
     monthlyPay = 0.0f;
     //Months set to default at 60
-    months = 60;
+    months = 36;
     
     //Move to a mutable array for later.
     cartItems = [[NSMutableArray alloc]init];
@@ -1787,12 +1787,12 @@
         }
             //(((C4 / .8975) * 0.0144)*84)
         case 84:{
-            finacePay = ((totalAmount - totalSavings)/.89755)*0.0144;
+            finacePay = ((totalAmount - totalSavings)/.8975);
               invest = (finacePay*84);
             break;
         }
         case 144:{
-            finacePay = (totalAmount - totalSavings)/.909*0.0111;
+            finacePay = (totalAmount - totalSavings)/.909;
              invest = (finacePay *144);
             break;
         }

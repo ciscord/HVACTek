@@ -79,6 +79,7 @@
     
     [self buildQuote];
     [self updateProductList];
+    [self.btnEmail setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning

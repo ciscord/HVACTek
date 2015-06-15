@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *finance;
 @property (weak, nonatomic) IBOutlet UILabel *monthlypayment;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnEmail;
 @property (weak, nonatomic) IBOutlet UITextView *productsView;
 @property (nonatomic, strong) NSArray *cartItems;
 @property (nonatomic) int months;
