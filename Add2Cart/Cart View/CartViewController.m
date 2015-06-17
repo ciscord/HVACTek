@@ -195,12 +195,12 @@
             break;
         }
         case 84:{
-            finacePay = (totalAmount - totalSavings)/.8975 * 0.0144;
+            finacePay = ((totalAmount - totalSavings)/.8975) * 0.0144;
             invest = (totalAmount - totalSavings)/.8975;
             break;
         }
         case 144:{
-            finacePay = (totalAmount - totalSavings)/.909 * 0.0111;
+            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
             invest = (totalAmount - totalSavings)/.909;
             break;
         }
