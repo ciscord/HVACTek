@@ -194,19 +194,20 @@
     //Need to itterate through all of the items for included items.  Once we have an included item check if it matches type 1 or 2. Then check its price and add to final
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
+        NSLog(@"%@",itm.TitleText);
         
         if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
             NSLog(@"aaaa");
         }
         
         int tID = [itm.typeID intValue];
-        if (tID == cool) {
+        if (tID == cool && (![coolProds containsObject:itm])) {
             [coolProds addObject:itm];
         }
-        if (tID == heat) {
+        if (tID == heat && (![heatProds containsObject:itm])) {
             [heatProds addObject:itm];
         }
-        if (tID == 3) {
+        if ((tID == 3)&& (![typeThrees containsObject:itm])) {
           //  itm.finalOption = itm.optionOne;
           //  itm.finalPrice = itm.optOnePrice;
             NSLog(@"type is %@",itm.type);
@@ -219,7 +220,7 @@
             [typeThrees addObject:itm];
         }// end of 3's
         
-        if (tID == 4) {
+        if ((tID == 4)&& (![typeFours containsObject:itm])) {
             // This item is added no matter what.
             
             [typeFours addObject:itm];
@@ -660,6 +661,8 @@
 
 -(void) fillArrays:(Item *)itm {
     
+
+    
     if ([itm.type isEqualToString:@"Air Conditioners"]) {
         [airCon addObject:itm];
     } else if ([itm.type isEqualToString:@"Heat Pumps"]) {
@@ -670,11 +673,14 @@
         [airH addObject:itm];
     } else if ([itm.type isEqualToString:@"Geothermal"]) {
         [geo addObject:itm];
-    }else if ([itm.type isEqualToString:@"IAQ"]) {
+    }
+    else
+        if ([itm.type isEqualToString:@"IAQ"]) {
         if (![iaq containsObject:itm]) {
             [iaq addObject:itm];
         }
-    } else if ([itm.type isEqualToString:@"Boilers"]) {
+    }
+        else if ([itm.type isEqualToString:@"Boilers"]) {
         [boilers addObject:itm];
     } else if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
         [hotwater addObject:itm];
@@ -1224,6 +1230,10 @@
         
         
         if (iaq.count > 0 && f < iaq.count-1 ) {
+            itm = iaq[f];
+          //  [self removeTheProd:itm];
+            itm=iaq[(f+1)];
+         //   [self purchase:itm];
             f++;
             change = YES;
         } else {
