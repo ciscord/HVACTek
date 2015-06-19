@@ -7,7 +7,7 @@
 //
 
 #import "testerViewController.h"
-
+//#undef NSLog
 
 @interface testerViewController (){
     
@@ -106,7 +106,8 @@
   // cartItems = [[NSMutableArray alloc]initWithArray:additemsB];
     //Fetch the data.
     [self fetchData];
-
+    
+    
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     afterSavings =0.0f ;
@@ -144,7 +145,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"type" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+      NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, ordSort, nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -341,7 +343,7 @@
 
 -(void) arraySort {
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"manu" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"ord" ascending:YES];
     NSSortDescriptor *sortA = [NSSortDescriptor sortDescriptorWithKey:@"finalPrice" ascending:NO];
     
     NSArray *sortDec = @[sort,sortA];
@@ -676,7 +678,16 @@
     }
     else
         if ([itm.type isEqualToString:@"IAQ"]) {
-        if (![iaq containsObject:itm]) {
+            NSLog(@"dca");
+            //NSLog(@"%@",itm.TitleText);
+            int c =0;
+            for (Item * ii in iaq) {
+                if ([ii.modelName isEqualToString:itm.modelName]) {
+                    c++;
+                }
+            }
+            
+            if (![iaq containsObject:itm]&& c==0) {
             [iaq addObject:itm];
         }
     }
@@ -688,7 +699,7 @@
     } else if ([itm.type isEqualToString:@"Accessories"]) {
         [acces addObject:itm];
     }
-   
+    
     
 }
 
@@ -1231,9 +1242,9 @@
         
         if (iaq.count > 0 && f < iaq.count-1 ) {
             itm = iaq[f];
-          //  [self removeTheProd:itm];
+           // [self removeTheProd:itm];
             itm=iaq[(f+1)];
-         //   [self purchase:itm];
+          //  [self purchase:itm];
             f++;
             change = YES;
         } else {

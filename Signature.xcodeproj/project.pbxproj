@@ -32,7 +32,6 @@
 		4FD2EB161A361A000056D4C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2EB151A361A000056D4C4 /* Images.xcassets */; };
 		4FD2EB621A361A0F0056D4C4 /* AddProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB1A1A361A0F0056D4C4 /* AddProductViewController.m */; };
 		4FD2EB631A361A0F0056D4C4 /* FirstOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB1D1A361A0F0056D4C4 /* FirstOption.m */; };
-		4FD2EB641A361A0F0056D4C4 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB1F1A361A0F0056D4C4 /* Item.m */; };
 		4FD2EB661A361A0F0056D4C4 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB241A361A0F0056D4C4 /* CartViewController.m */; };
 		4FD2EB671A361A0F0056D4C4 /* aQuoteFirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB271A361A0F0056D4C4 /* aQuoteFirstTableViewController.m */; };
 		4FD2EB681A361A0F0056D4C4 /* MiscAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EB291A361A0F0056D4C4 /* MiscAddViewController.m */; };
@@ -105,6 +104,7 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		91159A421B344F4C00F7899C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 91159A411B344F4C00F7899C /* Item.m */; };
 		918BEF2F1AD55A1F001DFAD6 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 918BEF2E1AD55A1F001DFAD6 /* Job.m */; };
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
 		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
@@ -166,8 +166,6 @@
 		4FD2EB1A1A361A0F0056D4C4 /* AddProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProductViewController.m; sourceTree = "<group>"; };
 		4FD2EB1C1A361A0F0056D4C4 /* FirstOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstOption.h; sourceTree = "<group>"; };
 		4FD2EB1D1A361A0F0056D4C4 /* FirstOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstOption.m; sourceTree = "<group>"; };
-		4FD2EB1E1A361A0F0056D4C4 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		4FD2EB1F1A361A0F0056D4C4 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		4FD2EB231A361A0F0056D4C4 /* CartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartViewController.h; sourceTree = "<group>"; };
 		4FD2EB241A361A0F0056D4C4 /* CartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartViewController.m; sourceTree = "<group>"; };
 		4FD2EB261A361A0F0056D4C4 /* aQuoteFirstTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aQuoteFirstTableViewController.h; sourceTree = "<group>"; };
@@ -286,6 +284,9 @@
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 4.xcdatamodel"; sourceTree = "<group>"; };
+		91159A401B344F4C00F7899C /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		91159A411B344F4C00F7899C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		918BEF261AD556ED001DFAD6 /* SignatureModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		918BEF2D1AD55A1F001DFAD6 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
 		918BEF2E1AD55A1F001DFAD6 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
@@ -425,10 +426,10 @@
 			isa = PBXGroup;
 			children = (
 				4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */,
+				91159A401B344F4C00F7899C /* Item.h */,
+				91159A411B344F4C00F7899C /* Item.m */,
 				4FD2EB1C1A361A0F0056D4C4 /* FirstOption.h */,
 				4FD2EB1D1A361A0F0056D4C4 /* FirstOption.m */,
-				4FD2EB1E1A361A0F0056D4C4 /* Item.h */,
-				4FD2EB1F1A361A0F0056D4C4 /* Item.m */,
 			);
 			path = Add2CartDataModel;
 			sourceTree = "<group>";
@@ -1028,7 +1029,6 @@
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
-				4FD2EB641A361A0F0056D4C4 /* Item.m in Sources */,
 				75D73F101A387DCD0051143C /* SystemInfoHeaderView.m in Sources */,
 				4F11D4041AA77417007FC0A8 /* User+Functional.m in Sources */,
 				4F11D3FD1AA772E4007FC0A8 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
@@ -1062,6 +1062,7 @@
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
+				91159A421B344F4C00F7899C /* Item.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				4FD2EB6A1A361A0F0056D4C4 /* TypeOneTableViewCell.m in Sources */,
@@ -1251,11 +1252,12 @@
 		4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */,
 				4F11D3D71A9F7DEB007FC0A8 /* Unifeiyed_Quoting 2.xcdatamodel */,
 				4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */,
 				4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */,
 			);
-			currentVersion = 4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */;
+			currentVersion = 91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */;
 			path = Unifeiyed_Quoting.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

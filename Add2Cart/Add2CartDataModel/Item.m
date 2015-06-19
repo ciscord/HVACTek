@@ -1,9 +1,9 @@
 //
 //  Item.m
-//  Signature
+//  
 //
-//  Created by James Buckley on 02/09/2014.
-//  Copyright (c) 2014 Unifeyed. All rights reserved.
+//  Created by Mihai Tugui on 6/19/15.
+//
 //
 
 #import "Item.h"
@@ -16,25 +16,26 @@
 @dynamic include;
 @dynamic manu;
 @dynamic modelName;
+@dynamic optEightPrice;
+@dynamic optFivePrice;
 @dynamic optFourPrice;
+@dynamic optionEight;
+@dynamic optionFive;
 @dynamic optionFour;
 @dynamic optionOne;
+@dynamic optionSeven;
+@dynamic optionSix;
 @dynamic optionThree;
 @dynamic optionTwo;
 @dynamic optOnePrice;
+@dynamic optSevenPrice;
+@dynamic optSixPrice;
 @dynamic optThreePrice;
 @dynamic optTwoPrice;
 @dynamic photo;
 @dynamic type;
 @dynamic typeID;
-@dynamic optionFive;
-@dynamic optionSix;
-@dynamic optionSeven;
-@dynamic optionEight;
-@dynamic optFivePrice;
-@dynamic optSixPrice;
-@dynamic optSevenPrice;
-@dynamic optEightPrice;
 @dynamic usserAdet;
+@dynamic ord;
 
 @end

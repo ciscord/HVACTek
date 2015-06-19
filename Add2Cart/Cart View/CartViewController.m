@@ -59,15 +59,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
     
-
+    
     headers = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Heat Pumps", @"Furnaces",@"Air Handlers"
                ,@"Geothermal", @"Indoor Air Quality",@"Controls", nil]; //@"Rebates"
-
- 
+    
+    
     products = [[NSMutableString alloc]init];
     self.productList =[[NSMutableArray alloc]init];
     
@@ -80,13 +90,9 @@
     [self buildQuote];
     [self updateProductList];
     [self.btnEmail setHidden:YES];
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 -(void) buildQuote {
 //    
 //    

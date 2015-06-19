@@ -132,9 +132,10 @@
 -(void) addProducts:(NSArray *)products {
     
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
-    
+   
      for (int x = 0; x < products.count; x++) {
-         Item *itm;
+         
+                 Item *itm;
          NSArray *options;
          //Check to see if we want this profuct.
          NSString *inc = [products[x] objectForKey:@"included"];
@@ -149,6 +150,8 @@
              itm.type = [products[x] objectForKey:@"category_name"];
              NSString *tID = [products[x] objectForKey:@"types"];
              itm.typeID = [NSNumber numberWithInt:[tID intValue]];
+             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
+             
              //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
              
              //Options
@@ -217,7 +220,8 @@
          else {
              //Not adding this item.
          }
-        
+     
+    
      }// end of for loop
     
       NSError *errorz;
@@ -305,6 +309,7 @@
              itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
              itm.type = @"Rebates";
              itm.typeID = [NSNumber numberWithInt:99];
+             itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
              //add the item
              [newRebates addObject:itm];
     //}
@@ -357,6 +362,7 @@
             item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
             item.type = itm[@"type"];
             item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
+            item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
         }
         NSError *error;
         if (![managedObjectContext save:&error]) {
