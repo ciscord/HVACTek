@@ -326,7 +326,7 @@ recommendations to review with you.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="8qd-Vt-zmM" kind="push" id="9JH-AD-0Wf"/>
+                                            <segue destination="EPT-2t-ogo" kind="push" id="Srl-QP-rjh"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -339,7 +339,7 @@ recommendations to review with you.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQN-Vf-qPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="3206"/>
+            <point key="canvasLocation" x="660" y="3206"/>
         </scene>
         <!--Summary Of FindingsVC-->
         <scene sceneID="aei-zq-f1M">
@@ -1391,7 +1391,7 @@ you must debrief from job</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="EPT-2t-ogo" kind="push" id="xaW-CJ-085"/>
+                                            <segue destination="iP6-St-rfT" kind="push" id="Tyj-cC-NFW"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="OZT-M3-SFp">
@@ -1530,7 +1530,7 @@ you must debrief from job</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="iP6-St-rfT" kind="push" id="AiB-qs-kys"/>
+                                            <segue destination="8qd-Vt-zmM" kind="push" id="2dB-gR-Mnj"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="c8P-WC-s5v">
@@ -1570,7 +1570,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfh-TC-yZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="655" y="3206"/>
+            <point key="canvasLocation" x="1531" y="3206"/>
         </scene>
         <!--Summary Of Findings OptionsVC-->
         <scene sceneID="Rlq-Yp-tu5">

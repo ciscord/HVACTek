@@ -8,6 +8,7 @@
 
 #import "ViewOptionsVC.h"
 #import "ServiceOptionVC.h"
+#import "PlatinumOptionsVC.h"
 
 @interface ViewOptionsVC ()
 
@@ -30,12 +31,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    ServiceOptionVC *vc = [segue destinationViewController];
-    if ([vc isKindOfClass:[ServiceOptionVC class]]) {
+  //  ServiceOptionVC *vc = [segue destinationViewController];
+    if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
         ServiceOptionVC *vc = [segue destinationViewController];
         vc.optionsDisplayType = odtReadonlyWithPrice;
         vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
     }
+    
+    if ([[segue destinationViewController] isKindOfClass:[PlatinumOptionsVC class]]) {
+        
+        PlatinumOptionsVC *vc = [segue destinationViewController];
+        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+    }
+
 }
 
 @end

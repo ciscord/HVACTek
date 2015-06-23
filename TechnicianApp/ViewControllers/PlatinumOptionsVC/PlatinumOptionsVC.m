@@ -9,6 +9,7 @@
 #import "PlatinumOptionsVC.h"
 #import "ViewOptionsVC.h"
 #import "PlatinumOptionCell.h"
+#import "ServiceOptionVC.h"
 
 @interface PlatinumOptionsVC ()
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
@@ -38,12 +39,17 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
         ViewOptionsVC *vc = [segue destinationViewController];
         vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
     }
+    
+    if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
+        ServiceOptionVC *vc = [segue destinationViewController];
+        vc.optionsDisplayType = odtReadonlyWithPrice;
+        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+    }
 }
 
 #pragma mark - UITableViewDelegate & DataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     return 60;
 }
 

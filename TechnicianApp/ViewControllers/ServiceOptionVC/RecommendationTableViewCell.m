@@ -171,13 +171,13 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
 - (IBAction)btnPrice1touch:(UIButton *)sender {
     if (self.onPriceSelected) {
-        self.onPriceSelected(self.rowIndex, NO);
+        self.onPriceSelected(self.rowIndex, YES);
     }
 }
 
 - (IBAction)btnPrice2touch:(UIButton *)sender {
     if (self.onPriceSelected) {
-        self.onPriceSelected(self.rowIndex, YES);
+        self.onPriceSelected(self.rowIndex, NO);
     }
 }
 
@@ -217,8 +217,11 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
 //                CGFloat discountedPrice = totalPrice * 0.85;
                 
-                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceNormal] forState:UIControlStateNormal];
-                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceESA] forState:UIControlStateNormal];
+//                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceNormal] forState:UIControlStateNormal];
+//                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceESA] forState:UIControlStateNormal];
+                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceESA ] forState:UIControlStateNormal];
+                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceNormal] forState:UIControlStateNormal];
+
                 self.lb24MonthRates.text = (totalPriceESA > 1500 ? [NSString stringWithFormat:@"24 payments of $%.2f", totalPriceESA/24.] : @"");
             }
         }
