@@ -152,6 +152,7 @@
              itm.typeID = [NSNumber numberWithInt:[tID intValue]];
              itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
              
+           
              //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
              
              //Options
@@ -183,6 +184,7 @@
                 itm.optionEight = name;
                 itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
             }
+            
         } //end of options
          
        

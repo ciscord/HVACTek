@@ -145,8 +145,9 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"type" ascending:YES];
+        NSSortDescriptor *manSort = [[NSSortDescriptor alloc]initWithKey:@"manu" ascending:YES];
       NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, ordSort, nil];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, manSort, ordSort, nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -663,8 +664,6 @@
 
 -(void) fillArrays:(Item *)itm {
     
-
-    
     if ([itm.type isEqualToString:@"Air Conditioners"]) {
         [airCon addObject:itm];
     } else if ([itm.type isEqualToString:@"Heat Pumps"]) {
@@ -678,15 +677,12 @@
     }
     else
         if ([itm.type isEqualToString:@"IAQ"]) {
-            NSLog(@"dca");
-            //NSLog(@"%@",itm.TitleText);
             int c =0;
             for (Item * ii in iaq) {
                 if ([ii.modelName isEqualToString:itm.modelName]) {
                     c++;
                 }
             }
-            
             if (![iaq containsObject:itm]&& c==0) {
             [iaq addObject:itm];
         }
@@ -694,7 +690,15 @@
         else if ([itm.type isEqualToString:@"Boilers"]) {
         [boilers addObject:itm];
     } else if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
+        int c =0;
+        for (Item * ii in hotwater) {
+            if ([ii.modelName isEqualToString:itm.modelName]) {
+                c++;
+            }
+        }
+        if (c==0) {
         [hotwater addObject:itm];
+        }
         
     } else if ([itm.type isEqualToString:@"Accessories"]) {
         [acces addObject:itm];
