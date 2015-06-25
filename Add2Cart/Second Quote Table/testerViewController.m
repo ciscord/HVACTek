@@ -146,8 +146,8 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"type" ascending:YES];
         NSSortDescriptor *manSort = [[NSSortDescriptor alloc]initWithKey:@"manu" ascending:YES];
-      NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, manSort, ordSort, nil];
+  //    NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, manSort,  nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -344,10 +344,11 @@
 
 -(void) arraySort {
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"ord" ascending:YES];
+   // NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"ord" ascending:YES];
+   NSSortDescriptor *manSort = [NSSortDescriptor sortDescriptorWithKey :@"manu" ascending:YES];
     NSSortDescriptor *sortA = [NSSortDescriptor sortDescriptorWithKey:@"finalPrice" ascending:NO];
     
-    NSArray *sortDec = @[sort,sortA];
+    NSArray *sortDec = @[manSort,sortA];
     
     if (airCon.count>0) {
         airCon = [[airCon sortedArrayUsingDescriptors:sortDec] mutableCopy];
