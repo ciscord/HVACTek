@@ -16,13 +16,18 @@
 #import "Job+Functional.h"
 #import "User+Functional.h"
 
-#define NSLog(...)
+//#define NSLog(...)
 
 typedef NS_ENUM (NSInteger, QuestionType){
     qtHeating = 1,
     qtCooling,
     qtTechnician
 
+};
+
+typedef NS_ENUM (NSInteger, QuestionTypeAPI){
+    apiqtCustomer = 1,
+    apiqtTechnician = 2
 };
 
 typedef NS_ENUM (NSInteger, ServiceType){
@@ -84,7 +89,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError;
 
--(void)getAssignmentListFromSWAPIonSuccess:(void (^)(NSString *successMessage))onSuccess
+-(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
+                                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                                    onError:(void (^)(NSError *error))onError;
 
 - (void)getInspirationInfoOnSuccess:(void (^)(NSString *successMessage))onSuccess
@@ -100,6 +106,9 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 - (void)debriefJobWithInfo:(NSDictionary*)debriefInfo
                  onSuccess:(void (^)(NSString *message))onSuccess
                    onError:(void (^)(NSError *error))onError;
+
+
+
 
 //- (void)connectToSWAPIonSucces:(void (^)(NSString *message))onSuccess
 //                   onError:(void (^)(NSError *error))onError;

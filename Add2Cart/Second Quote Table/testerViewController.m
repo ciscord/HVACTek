@@ -197,7 +197,7 @@
     //Need to itterate through all of the items for included items.  Once we have an included item check if it matches type 1 or 2. Then check its price and add to final
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
-        NSLog(@"%@",itm.TitleText);
+    //    NSLog(@"%@",itm.TitleText);
         
         if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
             NSLog(@"aaaa");

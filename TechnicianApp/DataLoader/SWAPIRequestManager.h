@@ -32,7 +32,8 @@
                       onError:(void (^)(NSError *error))onError;
 
 - (void)assignmentListQueryForEmployee:(NSString *)employeeCode
+                             withJobID:(NSString *)JobID
                              onSuccess:(void (^)(NSString *successMessage))onSuccess
-                               onError:(void (^)(NSError *error))onError;
+                               onError:(void (^)(NSError *error))onError ;
 
 @end

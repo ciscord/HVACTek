@@ -30,15 +30,17 @@
     return [[self.jobs filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"jobStatus != %i", jstDone]] anyObject];
 }
 
-+(NSDictionary*)getNextJobFromList:(NSArray*)jobslist{
++(NSDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID {
     
     NSMutableArray * jobIds = [[NSMutableArray alloc]init];
     for (Job * job in [DataLoader sharedInstance].currentUser.jobs) {
         [jobIds addObject:job.jobID];
     }
     NSArray *activeJobs = [jobslist filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(NOT (JobID IN %@) ) AND (Progress == %@)", jobIds, @"new"]];
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Scheduled" ascending:YES];
     
-    return  [activeJobs sortedArrayUsingDescriptors:@[descriptor]].firstObject;
+    //NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Scheduled" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"JobID == %@",JobID];
+    
+    return  [activeJobs filteredArrayUsingPredicate:predicate].firstObject;
 }
 @end

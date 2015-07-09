@@ -25,14 +25,25 @@
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
+//NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
+//NSString *const kSWAPIAgentName     = @"SIG01";
+//NSString *const kSWAPIAgentPassword = @"Signature01";
+//NSString *const kSWAPIMasterID      = @"02364";
+//NSString *const kSWAPIMode          = @"tutorial";
+//NSString *const kSWAPICompanyNo     = @"1001";
+//NSString *const kSWAPIUsername      = @"SIG01";
+//NSString *const kSWAPIUserPassword  = @"Signature01";
+//NSString *const kSWAPITerminal      = @"0";
+//NSString *const kSWAPIRemoteTC      = @"0";
+
 NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
 NSString *const kSWAPIAgentName     = @"SIG01";
 NSString *const kSWAPIAgentPassword = @"Signature01";
 NSString *const kSWAPIMasterID      = @"02364";
-NSString *const kSWAPIMode          = @"tutorial";
+NSString *const kSWAPIMode          = @"live";
 NSString *const kSWAPICompanyNo     = @"1001";
-NSString *const kSWAPIUsername      = @"SIG01";
-NSString *const kSWAPIUserPassword  = @"Signature01";
+//    NSString *const kSWAPIUsername      = @"agt_SIG01";
+//    NSString *const kSWAPIUserPassword  = @"Signature01";
 NSString *const kSWAPITerminal      = @"0";
 NSString *const kSWAPIRemoteTC      = @"0";
 
@@ -61,6 +72,7 @@ NSString *const INSPIRATION      = @"inspiration";
 NSString *const QUESTIONS        = @"questions";
 NSString *const PRICEBOOK        = @"pricebook";
 NSString *const DEBRIEF          = @"addDebrief";
+NSString *const SURVEY           = @"saveSurvey";
 
 #define kStatusOK 1
 
@@ -301,7 +313,8 @@ NSString *const DEBRIEF          = @"addDebrief";
        }];
 }
 
--(void)getAssignmentListFromSWAPIonSuccess:(void (^)(NSString *successMessage))onSuccess
+-(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
+                                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                                    onError:(void (^)(NSError *error))onError {
 
     self.SWAPIManager.SWAPIUserCode = self.currentUser.userCode;
@@ -309,6 +322,7 @@ NSString *const DEBRIEF          = @"addDebrief";
     self.SWAPIManager.SWAPIUserPassword = self.currentUser.password;
     [self.SWAPIManager connectOnSuccess:^(NSString *successMessage) {
         [self.SWAPIManager assignmentListQueryForEmployee:self.SWAPIManager.SWAPIUserCode
+                                                withJobID:JobID
                                                     onSuccess:^(NSString *successMessage) {
                                                         
                                                         if (self.SWAPIManager.currentJob && !self.currentUser.activeJob) {
@@ -475,10 +489,56 @@ NSString *const DEBRIEF          = @"addDebrief";
                  onSuccess:(void (^)(NSString *message))onSuccess
                    onError:(void (^)(NSError *error))onError {
     
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc]init];
+    
+    NSArray * questions = self.currentUser.activeJob.custumerQuestions;
+    NSMutableArray * custumerQuestions = [[NSMutableArray alloc]init];
+    for (Question *q in questions) {
+        [custumerQuestions addObject:@{[NSString stringWithFormat:@"%i",[q.ID intValue]]   : q.answer}];
+    }
+    
+    questions = self.currentUser.activeJob.techObservations;
+    NSMutableArray * techObservations = [[NSMutableArray alloc]init];
+    for (Question *q in questions) {
+        [techObservations addObject:@{[NSString stringWithFormat:@"%i",[q.ID intValue]]: q.answer}];
+    }
+    
+    [temp setObject:@{@"1" : custumerQuestions, @"2" : techObservations} forKey:@"questions"];
+    
+    
+    
+    NSArray * options = self.currentUser.activeJob.selectedServiceOptions;
+    NSMutableArray * selectedServiceOptions = [[NSMutableArray alloc]init];
+    for (PricebookItem *q in options) {
+        [selectedServiceOptions addObject:@{q.itemID: q.name}];
+    }
+    
+    options = self.currentUser.activeJob.unselectedServiceOptiunons;
+    NSMutableArray * unselectedServiceOptiunons = [[NSMutableArray alloc]init];
+    for (PricebookItem *q in options) {
+        [unselectedServiceOptiunons addObject:@{q.itemID: q.name}];
+    }
+    
+    [temp setObject:selectedServiceOptions forKey:@"selected"];
+    [temp setObject:unselectedServiceOptiunons forKey:@"not_selected"];
+    
+    
+    UIImage *image = [UIImage imageWithData:self.currentUser.activeJob.signatureFile];
+    NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [temp setObject:signature forKey:@"signature"];
+    
+    [temp setObject:[NSString stringWithFormat:@"%i",[self.currentUser.activeJob.serviceLevel intValue]] forKey:@"service_level"];
+    [temp setObject:[NSString stringWithFormat:@"%f",[self.currentUser.activeJob.price floatValue]] forKey:@"price"];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
+    [params setObject:temp forKey:@"survey"];
+    
+
     self.responseSerializer = [AFJSONResponseSerializer serializer];
-    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
     [self POST:DEBRIEF
-    parameters:@{ @"debrief" : debriefInfo, @"api_key" : API_KEY }
+    parameters:@{ @"debrief" : params }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {
@@ -500,7 +560,24 @@ NSString *const DEBRIEF          = @"addDebrief";
        }];
 }
 
+
+- (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
+{
+    NSError* error;
+    NSDictionary* tempDict = [dict copy]; // get Dictionary from mutable Dictionary
+    //giving error as it takes dic, array,etc only. not custom object.
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:tempDict
+                                                       options:0 error:&error];
+    NSString* nsJson=  [[NSString alloc] initWithData:jsonData
+                                             encoding:NSUTF8StringEncoding];
+    return nsJson;
+}
+
+
+
 @end
+
+
 
 void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewController)
 {

@@ -52,13 +52,13 @@
 	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
 	paragraphStyle.alignment = NSTextAlignmentCenter;
 
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
-	[string addAttributes:@{ NSForegroundColorAttributeName : [UIColor blackColor],
-	                         NSFontAttributeName : font,
-	                         NSStrokeWidthAttributeName : [NSNumber numberWithFloat:-2.0],
-	                         NSStrokeColorAttributeName : [UIColor whiteColor],
-	                         NSParagraphStyleAttributeName : paragraphStyle }
-	                range:NSMakeRange(0, [text length])];
+//	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+//	[string addAttributes:@{ NSForegroundColorAttributeName : [UIColor blackColor],
+//	                         NSFontAttributeName : font,
+//	                         NSStrokeWidthAttributeName : [NSNumber numberWithFloat:-2.0],
+//	                         NSStrokeColorAttributeName : [UIColor whiteColor],
+//	                         NSParagraphStyleAttributeName : paragraphStyle }
+//	                range:NSMakeRange(0, [text length])];
 
 //	self.lbInspirationSentence.attributedText = string;
     self.lbInspirationSentence.text = @"";

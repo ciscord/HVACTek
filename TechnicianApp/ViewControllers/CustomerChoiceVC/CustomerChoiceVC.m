@@ -57,6 +57,12 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         [job.managedObjectContext save];
     }
     
+    
+    job.signatureFile = self.signatureView.signatureData;
+    job.unselectedServiceOptiunons = self.unusedServiceOptions;
+    job.selectedServiceOptions = self.selectedServiceOptions[@"items"];
+    job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptions[@"ServiceID"]intValue]];
+    
     job.jobStatus = @(jstNeedDebrief);
    // job.startTime = [NSDate date];
     [job.managedObjectContext save];
@@ -138,6 +144,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         cell.optionsDisplayType        = odtCustomerFinalChoice;
         cell.isDiscounted              = self.isDiscounted;
         [cell displayServiceOptions:items1];
+       
+        //set job price
+         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+        job.price = [NSNumber numberWithFloat:[cell.lbSelectOption.text floatValue]];
+        [job.managedObjectContext save];
         result = cell;
     }
 

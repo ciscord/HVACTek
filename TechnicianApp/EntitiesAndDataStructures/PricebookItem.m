@@ -27,4 +27,33 @@
     return pricebook;
 }
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.itemID     = [aDecoder decodeObjectForKey:@"itemID"] ;
+        self.itemNumber = [aDecoder decodeObjectForKey:@"itemNumber"];
+        self.itemGroup  = [aDecoder decodeObjectForKey:@"itemGroup"];
+        self.name       =[aDecoder decodeObjectForKey:@"name"];
+        self.amount     =[aDecoder decodeObjectForKey:@"amount"];
+        self.amountESA  = [aDecoder decodeObjectForKey:@"amountESA"];
+        self.isMain     = [[aDecoder decodeObjectForKey:@"isMain"]boolValue];
+
+    }
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    // Override in descending classes
+   [aCoder encodeObject:self.itemID forKey:@"itemID"] ;
+   [aCoder encodeObject:self.itemNumber forKey:@"itemNumber"];
+   [aCoder encodeObject:self.itemGroup forKey:@"itemGroup"];
+   [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.amount forKey:@"amount"];
+   [aCoder encodeObject:self.amountESA forKey:@"amountESA"];
+    [aCoder encodeObject:[NSNumber numberWithBool:self.isMain]   forKey:@"isMain"];
+
+}
 @end

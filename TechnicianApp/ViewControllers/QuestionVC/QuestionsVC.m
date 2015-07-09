@@ -167,15 +167,27 @@
          [job.managedObjectContext save];
          }*/
         self.currentQuestionIndex--;
-        
+        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
         if (self.questionType!=qtTechnician) {
-            Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+            
             if (!job.endTimeQuestions) {
                 job.endTimeQuestions = [NSDate date];
                 [job.managedObjectContext save];
             }
         }
-        [self performSegueWithIdentifier:(self.questionType == qtTechnician ? @"selectOptionsIpadRepairsSegue" : @"exploreSummarySegue") sender:self];
+        
+       
+        if (self.questionType == qtTechnician) {
+            job.techObservations = self.questions;
+            [job.managedObjectContext save];
+            [self performSegueWithIdentifier:@"selectOptionsIpadRepairsSegue" sender:self];
+        } else
+        {
+            job.custumerQuestions = self.questions;
+            [job.managedObjectContext save];
+            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
+        }
+        
     }
 }
 

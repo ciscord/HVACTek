@@ -105,8 +105,8 @@
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
 		91159A421B344F4C00F7899C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 91159A411B344F4C00F7899C /* Item.m */; };
-		918BEF2F1AD55A1F001DFAD6 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 918BEF2E1AD55A1F001DFAD6 /* Job.m */; };
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
+		91EE85A11B4EBAB100811D39 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 91EE85A01B4EBAB100811D39 /* Job.m */; };
 		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
 		AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */; };
 		AAE7D16E1A39CFBA00F95495 /* CHDropDownTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7D16B1A39CFBA00F95495 /* CHDropDownTextField.m */; };
@@ -287,12 +287,13 @@
 		91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 4.xcdatamodel"; sourceTree = "<group>"; };
 		91159A401B344F4C00F7899C /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		91159A411B344F4C00F7899C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 5.xcdatamodel"; sourceTree = "<group>"; };
 		918BEF261AD556ED001DFAD6 /* SignatureModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 3.xcdatamodel"; sourceTree = "<group>"; };
-		918BEF2D1AD55A1F001DFAD6 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
-		918BEF2E1AD55A1F001DFAD6 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		91CA5EFA1ADFF86B00D871FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		91EE859F1B4EBAB100811D39 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		91EE85A01B4EBAB100811D39 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		AA23D6471A379B4B00703952 /* TechnicianDebriefVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnicianDebriefVC.h; sourceTree = "<group>"; };
 		AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnicianDebriefVC.m; sourceTree = "<group>"; };
 		AAE7D16A1A39CFBA00F95495 /* CHDropDownTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextField.h; sourceTree = "<group>"; };
@@ -681,10 +682,10 @@
 			isa = PBXGroup;
 			children = (
 				4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */,
+				91EE859F1B4EBAB100811D39 /* Job.h */,
+				91EE85A01B4EBAB100811D39 /* Job.m */,
 				91CA5EFA1ADFF86B00D871FD /* User.h */,
 				91CA5EFB1ADFF86B00D871FD /* User.m */,
-				918BEF2D1AD55A1F001DFAD6 /* Job.h */,
-				918BEF2E1AD55A1F001DFAD6 /* Job.m */,
 				4F11D4021AA77417007FC0A8 /* User+Functional.h */,
 				4F11D4031AA77417007FC0A8 /* User+Functional.m */,
 				4F11D4051AA77579007FC0A8 /* Job+Functional.h */,
@@ -1077,7 +1078,7 @@
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
 				4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */,
 				4F11D4071AA77579007FC0A8 /* Job+Functional.m in Sources */,
-				918BEF2F1AD55A1F001DFAD6 /* Job.m in Sources */,
+				91EE85A11B4EBAB100811D39 /* Job.m in Sources */,
 				4FD2EBAF1A384CE00056D4C4 /* RoundCornerView.m in Sources */,
 				4F11D3DD1AA1F7F1007FC0A8 /* SWAPIRequestManager.m in Sources */,
 				4F11D3FC1AA772E4007FC0A8 /* NSManagedObjectContext+Custom.m in Sources */,
@@ -1265,12 +1266,13 @@
 		4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */,
 				91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */,
 				918BEF261AD556ED001DFAD6 /* SignatureModel 3.xcdatamodel */,
 				91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */,
 				4F11D3E61AA76FA7007FC0A8 /* SignatureModel.xcdatamodel */,
 			);
-			currentVersion = 91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */;
+			currentVersion = 9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

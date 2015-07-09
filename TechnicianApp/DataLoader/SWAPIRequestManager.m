@@ -58,7 +58,7 @@ NSString *const kResultStatusOK = @"000";
     request.HTTPBody = [XMLString dataUsingEncoding:NSUTF8StringEncoding];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-                                             NSDictionary *d = [NSDictionary dictionaryWithXMLParser:responseObject];
+                                                  NSDictionary *d = [NSDictionary dictionaryWithXMLParser:responseObject];
                                              if ([d[kResultCode] isEqualToString:kResultStatusOK]) {
                                                  if (success) {
                                                      success(operation, d);
@@ -134,6 +134,7 @@ NSString *const kResultStatusOK = @"000";
 }
 
 - (void)assignmentListQueryForEmployee:(NSString *)employeeCode
+                             withJobID:(NSString *)JobID
                              onSuccess:(void (^)(NSString *successMessage))onSuccess
                                onError:(void (^)(NSError *error))onError {
 
@@ -155,7 +156,7 @@ NSString *const kResultStatusOK = @"000";
 
          id list = result[@"AssignmentListQueryData"][@"AssignmentListQueryRecord"];
          if ([list isKindOfClass:[NSArray class]]) {
-             weakSelf.currentJob = [User getNextJobFromList:list];
+             weakSelf.currentJob = [User getNextJobFromList:list withJobID:JobID];
 
          } else {
 

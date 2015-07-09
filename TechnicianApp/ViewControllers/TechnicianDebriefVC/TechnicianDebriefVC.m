@@ -469,7 +469,6 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     double         totalMinutes             = ABS(distanceBetweenQuestions / secondsInAnHour);
     [result addEntriesFromDictionary:@{@"time_of_questions" : [NSString stringWithFormat:@"%.2f", totalMinutes]}];
 
-
     return result;
 }
 
@@ -479,9 +478,13 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     NSDictionary *params = [self dictionaryWithvaluesForAPI];
+    
     [[DataLoader sharedInstance] debriefJobWithInfo:params
                                           onSuccess:^(NSString *message) {
 
+          
+                                              
+                                              
          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
          [weakSelf debriefCurrentJob];
 
@@ -500,6 +503,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     [appDelegate.homeController getNextJob];
     ShowOkAlertWithTitle(@"Job Done!", appDelegate.homeController);
 }
+
+
 
 #pragma mark - Table view data source
 
