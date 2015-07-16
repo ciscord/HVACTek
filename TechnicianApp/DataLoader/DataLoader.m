@@ -510,7 +510,9 @@ NSString *const SURVEY           = @"saveSurvey";
     NSArray * options = self.currentUser.activeJob.selectedServiceOptions;
     NSMutableArray * selectedServiceOptions = [[NSMutableArray alloc]init];
     for (PricebookItem *q in options) {
+        if (q.itemID && q.name) {
         [selectedServiceOptions addObject:@{q.itemID: q.name}];
+        }
     }
     
     options = self.currentUser.activeJob.unselectedServiceOptiunons;
