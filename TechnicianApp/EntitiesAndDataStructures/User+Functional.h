@@ -12,7 +12,7 @@
 
 + (instancetype)userWithName:(NSString*)userName userID:(NSNumber*)userID andCode:(NSString*)userCode;
 
-+(NSDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID;
++(NSMutableDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID ;
 
 @property(nonatomic, readonly) Job *activeJob;
 

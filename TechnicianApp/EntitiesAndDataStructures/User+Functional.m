@@ -30,7 +30,7 @@
     return [[self.jobs filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"jobStatus != %i", jstDone]] anyObject];
 }
 
-+(NSDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID {
++(NSMutableDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID {
     
     NSMutableArray * jobIds = [[NSMutableArray alloc]init];
     for (Job * job in [DataLoader sharedInstance].currentUser.jobs) {

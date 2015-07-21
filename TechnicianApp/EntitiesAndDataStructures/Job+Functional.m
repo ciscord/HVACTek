@@ -24,7 +24,8 @@
 }
 -(NSDictionary*)swapiCustomerInfo {
     
-    return [self.swapiJobInfo valueForKeyPath:@"dsLocationList.dsLocation"];
+    return self.swapiJobInfo;
+   // return [self.swapiJobInfo valueForKeyPath:@"dsLocationList.dsLocation"];
 }
 
 @end

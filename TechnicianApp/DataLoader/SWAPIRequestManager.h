@@ -14,7 +14,7 @@
 @property(nonatomic, copy)   NSString     *SWAPIUsername;
 @property(nonatomic, copy)   NSString     *SWAPIUserPassword;
 
-@property(nonatomic, strong) NSDictionary *currentJob;
+@property(nonatomic, strong) NSMutableDictionary *currentJob;
 @property(nonatomic, strong) NSArray      *equipmentList;
 @property(nonatomic, strong) NSArray      *departmentList;
 @property(nonatomic, strong) NSArray      *whoList;
@@ -35,5 +35,7 @@
                              withJobID:(NSString *)JobID
                              onSuccess:(void (^)(NSString *successMessage))onSuccess
                                onError:(void (^)(NSError *error))onError ;
+
+
 
 @end

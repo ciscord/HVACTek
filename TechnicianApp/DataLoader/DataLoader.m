@@ -550,7 +550,7 @@ NSString *const SURVEY           = @"saveSurvey";
            else if (onError)
            {
                NSError *error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : responseObject[@"message"]}];
-               [self showErrorMessage:error];
+           //    [self showErrorMessage:error];
                onError(error);
            }
        }

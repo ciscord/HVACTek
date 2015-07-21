@@ -500,7 +500,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     [self.jobToDebrief.managedObjectContext save];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self.navigationController popToViewController:appDelegate.homeController animated:YES];
-    [appDelegate.homeController getNextJob];
+    //[appDelegate.homeController getNextJob];
     ShowOkAlertWithTitle(@"Job Done!", appDelegate.homeController);
 }
 
