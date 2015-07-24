@@ -105,6 +105,7 @@ NSString *const SURVEY           = @"saveSurvey";
         [self.reachabilityManager startMonitoring];
         //s_dl_instance.responseSerializer = [AFJSONResponseSerializer serializer];
         //[s_dl_instance.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+//        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [self.requestSerializer setValue:API_KEY forHTTPHeaderField:@"API-KEY"];
         
         self.SWAPIManager = [SWAPIRequestManager sharedInstance];
@@ -537,8 +538,9 @@ NSString *const SURVEY           = @"saveSurvey";
     
 
     self.responseSerializer = [AFJSONResponseSerializer serializer];
-    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
+      [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+//    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  
     [self POST:DEBRIEF
     parameters:@{ @"debrief" : params }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -481,9 +481,6 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
     [[DataLoader sharedInstance] debriefJobWithInfo:params
                                           onSuccess:^(NSString *message) {
-
-          
-                                              
                                               
          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
          [weakSelf debriefCurrentJob];

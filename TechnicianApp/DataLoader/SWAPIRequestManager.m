@@ -149,6 +149,13 @@ NSString *const kResultStatusOK = @"000";
                       @"<SessionRequest SessionID=\"%@\"> <JobQuery> <JobNo>%@</JobNo></JobQuery></SessionRequest>",
                       self.sessionID,JobID
                       ];
+//    NSString *body = [NSString stringWithFormat:
+//                      @"<SessionRequest SessionID=\"%@\"><AssignmentListQuery><SchedDate>%@</SchedDate><EmployeeCode>%@</EmployeeCode>\
+//                      </AssignmentListQuery></SessionRequest>",
+//                      self.sessionID,
+//                      [dateTimeFormatter stringFromDate:[NSDate date]],
+//                      //     [dateTimeFormatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:60*60*24*-2]],
+//                      employeeCode];
 
 
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
