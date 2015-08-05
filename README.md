@@ -2,7 +2,7 @@
 
 This document describes how to find the necessary files to complete this project.
 
-![SmallStart.png](https://bitbucket.org/repo/nra5EE/images/3252186446-SmallStart.png)
+![logo.png](https://bitbucket.org/repo/G9KdBy/images/4233656408-logo.png)
 
 ### Details ###
 
