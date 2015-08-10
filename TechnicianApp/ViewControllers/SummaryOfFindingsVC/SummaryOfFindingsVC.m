@@ -44,7 +44,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"Develop Summary of Findings";
+    self.title = @"Specialized Repairs";
     self.vControlContainer.backgroundColor = [UIColor colorWithRed:0.937 green:0.965 blue:0.886 alpha:1.000];
     
     self.tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 0.0)];

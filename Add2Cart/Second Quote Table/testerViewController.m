@@ -1838,11 +1838,11 @@
     
     
     
-    totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.2f",total];
-    totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.2f",totalSave];
-    afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.2f",afterSaving];
-    financeMonthLabel.text = [NSString stringWithFormat:@"0%% Financing\nMonthlyPayment\n$%.2f",financeP];
-    monthlyPayment.text = [NSString stringWithFormat:@"Monthly Payment\n$%.2f",month];
+    totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
+    totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
+    afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.0f",afterSaving];
+    financeMonthLabel.text = [NSString stringWithFormat:@"0%% Financing\nMonthlyPayment\n$%.0f",financeP];
+    monthlyPayment.text = [NSString stringWithFormat:@"Monthly Payment\n$%.0f",month];
     
     //new
     

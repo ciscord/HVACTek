@@ -56,7 +56,7 @@
         edit = YES;
          nameField.text = itemz.modelName;
          float p = [itemz.finalPrice floatValue];
-         priceField.text = [NSString stringWithFormat:@"%.2f",p];
+         priceField.text = [NSString stringWithFormat:@"%.0f",p];
             }
 }
 

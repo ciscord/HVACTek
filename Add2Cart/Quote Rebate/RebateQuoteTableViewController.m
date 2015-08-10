@@ -142,7 +142,7 @@
     RebateQuoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Item *itm = selected[indexPath.row];
     cell.nameLabel.text = itm.modelName;
-    cell.priceLabel.text = [NSString stringWithFormat:@"-$%.2f",[itm.finalPrice floatValue]];
+    cell.priceLabel.text = [NSString stringWithFormat:@"-$%.0f",[itm.finalPrice floatValue]];
     BOOL j = [itm.include boolValue];
     if (j) {
         [cell.switchOn setOn:YES];
