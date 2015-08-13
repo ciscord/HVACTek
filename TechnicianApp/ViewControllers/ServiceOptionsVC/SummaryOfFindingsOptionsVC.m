@@ -27,7 +27,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Develop Summary of Findings";
+    self.title = @"Common Repairs";
     
     self.filteredOptions = @[].mutableCopy;
     

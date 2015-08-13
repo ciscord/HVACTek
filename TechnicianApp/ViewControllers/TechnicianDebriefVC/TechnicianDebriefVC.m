@@ -552,8 +552,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
          [weakSelf.elementsToShow enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
               if ([obj[@"cellType"] integerValue] == ctCellTotalRevenueGenerated) {
-                  obj[@"accVal"] = [NSString stringWithFormat:@"$%.2f", totalSum];
-                  obj[@"APIValues"] = @[[NSString stringWithFormat:@"%.2f", totalSum]];
+                  obj[@"accVal"] = [NSString stringWithFormat:@"$%.0f", totalSum];
+                  obj[@"APIValues"] = @[[NSString stringWithFormat:@"%.0f", totalSum]];
                   weakSelf.totalRevenuGeneratedCell.cellData = obj;
                   *stop = YES;
               }

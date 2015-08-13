@@ -35,11 +35,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 
     if (self.optionsDisplayType == odtEditing) {
-        self.options = @[@{@"ServiceID": @"0", @"title": @"Platinum", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"1",@"title": @"Gold", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"2",@"title": @"Silver", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"3",@"title": @"Bronze", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"4",@"title": @"Basic", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
+        self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
 
     }
 

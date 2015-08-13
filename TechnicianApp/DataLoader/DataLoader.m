@@ -531,7 +531,7 @@ NSString *const SURVEY           = @"saveSurvey";
     [temp setObject:signature forKey:@"signature"];
     
     [temp setObject:[NSString stringWithFormat:@"%i",[self.currentUser.activeJob.serviceLevel intValue]] forKey:@"service_level"];
-    [temp setObject:[NSString stringWithFormat:@"%f",[self.currentUser.activeJob.price floatValue]] forKey:@"price"];
+    [temp setObject:[NSString stringWithFormat:@"%.0f",[self.currentUser.activeJob.price floatValue]] forKey:@"price"];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
