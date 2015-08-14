@@ -67,7 +67,7 @@
     finacePay = 0.0f;
     monthlyPay = 0.0f;
     //Months set to default at 60
-    months = 36;
+    months = 24;
     
     //Move to a mutable array for later.
     cartItems = [[NSMutableArray alloc]init];
