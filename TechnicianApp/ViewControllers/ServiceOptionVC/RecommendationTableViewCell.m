@@ -207,10 +207,10 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                 
                 if (self.isDiscounted) {
 //                    CGFloat discountedPrice = totalPrice * 0.85;
-                    self.lbSelectOption.text = [NSString stringWithFormat:@"$%.0f", totalPriceESA];
+                    self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceESA];
                 }
                 else {
-                    self.lbSelectOption.text = [NSString stringWithFormat:@"$%.0f", totalPriceNormal];
+                    self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceNormal];
                 }
 
             } else {
@@ -219,8 +219,8 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                 
 //                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceNormal] forState:UIControlStateNormal];
 //                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceESA] forState:UIControlStateNormal];
-                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceESA ] forState:UIControlStateNormal];
-                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceNormal] forState:UIControlStateNormal];
+                [self.btnPrice1 setTitle:[self changeCurrencyFormat:totalPriceESA] forState:UIControlStateNormal];
+                [self.btnPrice2 setTitle:[self changeCurrencyFormat:totalPriceNormal] forState:UIControlStateNormal];
 
                 self.lb24MonthRates.text = (totalPriceESA > 1500 ? [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceESA/24.] : @"");
             }
@@ -296,6 +296,20 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 
     return MAX(130.0, height);
+}
+
+#pragma mark - Currency String
+
+- (NSString *)changeCurrencyFormat:(float)number {
+    
+    NSNumberFormatter *formatterCurrency;
+    formatterCurrency = [[NSNumberFormatter alloc] init];
+    
+    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency stringFromNumber: @(12345.2324565)];
+    
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
 }
 
 @end

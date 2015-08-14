@@ -552,8 +552,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
          [weakSelf.elementsToShow enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
               if ([obj[@"cellType"] integerValue] == ctCellTotalRevenueGenerated) {
-                  obj[@"accVal"] = [NSString stringWithFormat:@"$%.0f", totalSum];
-                  obj[@"APIValues"] = @[[NSString stringWithFormat:@"%.0f", totalSum]];
+                  obj[@"accVal"] = [self changeCurrencyFormat:totalSum];
+                  obj[@"APIValues"] = @[[self changeCurrencyFormat:totalSum]];
                   weakSelf.totalRevenuGeneratedCell.cellData = obj;
                   *stop = YES;
               }
@@ -576,6 +576,20 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
     return cell;
 
+}
+
+#pragma mark - Currency String
+
+- (NSString *)changeCurrencyFormat:(float)number {
+    
+    NSNumberFormatter *formatterCurrency;
+    formatterCurrency = [[NSNumberFormatter alloc] init];
+    
+    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency stringFromNumber: @(12345.2324565)];
+    
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
 }
 
 /*

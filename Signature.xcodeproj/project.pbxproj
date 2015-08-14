@@ -90,6 +90,9 @@
 		4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901B61AB845F500D87FAB /* PlatinumOptionsVC.m */; };
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
 		4FF901BD1AB847FE00D87FAB /* PlatinumOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */; };
+		522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */; };
+		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
+		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
 		75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75399F611A39D7FB0013EAC0 /* PriceBookView.xib */; };
@@ -257,6 +260,11 @@
 		4FF901B91AB847FE00D87FAB /* PlatinumOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatinumOptionCell.h; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.h; sourceTree = SOURCE_ROOT; };
 		4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatinumOptionCell.m; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.m; sourceTree = SOURCE_ROOT; };
 		4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlatinumOptionCell.xib; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.xib; sourceTree = SOURCE_ROOT; };
+		522746D01B79FB6A00AC38A5 /* NewCustomerChoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCustomerChoiceVC.h; sourceTree = "<group>"; };
+		522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCustomerChoiceVC.m; sourceTree = "<group>"; };
+		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
+		524FDFF41B79046100480987 /* CustomerChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerChoiceCell.m; sourceTree = "<group>"; };
+		524FDFF51B79046100480987 /* CustomerChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerChoiceCell.xib; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75399F591A39CD2E0013EAC0 /* RepairVsServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairVsServiceVC.h; sourceTree = "<group>"; };
 		75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairVsServiceVC.m; sourceTree = "<group>"; };
@@ -793,6 +801,11 @@
 			children = (
 				75F3DF8B1A3F057200F60652 /* CustomerChoiceVC.h */,
 				75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */,
+				522746D01B79FB6A00AC38A5 /* NewCustomerChoiceVC.h */,
+				522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */,
+				524FDFF31B79046100480987 /* CustomerChoiceCell.h */,
+				524FDFF41B79046100480987 /* CustomerChoiceCell.m */,
+				524FDFF51B79046100480987 /* CustomerChoiceCell.xib */,
 			);
 			path = CustomerChoiceVC;
 			sourceTree = "<group>";
@@ -940,6 +953,7 @@
 				4FD2EB8A1A361A0F0056D4C4 /* InfoPlist.strings in Resources */,
 				4FD2EB6E1A361A0F0056D4C4 /* Daikin96.jpg in Resources */,
 				4FD2EB771A361A0F0056D4C4 /* produ.png in Resources */,
+				524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */,
 				4FD2EB7A1A361A0F0056D4C4 /* shopping_cart.png in Resources */,
 				4FD2EB981A36231D0056D4C4 /* TechnicianAppStoryboard.storyboard in Resources */,
 				75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */,
@@ -1025,6 +1039,7 @@
 			files = (
 				4FD2EB681A361A0F0056D4C4 /* MiscAddViewController.m in Sources */,
 				4FD2EB831A361A0F0056D4C4 /* RebateQuoteTableViewCell.m in Sources */,
+				524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */,
 				4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */,
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
@@ -1046,6 +1061,7 @@
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
 				4FD2EB811A361A0F0056D4C4 /* ProdAdminTableViewCell.m in Sources */,
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
+				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,

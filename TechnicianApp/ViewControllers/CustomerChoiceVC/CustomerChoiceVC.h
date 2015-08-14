@@ -8,10 +8,13 @@
 
 #import "BaseVC.h"
 
-@interface CustomerChoiceVC : BaseVC
+@interface CustomerChoiceVC : BaseVC <UITextFieldDelegate> {
+    
+}
 
 @property (nonatomic, strong) NSDictionary *fullServiceOptions;
 @property (nonatomic, strong) NSDictionary *selectedServiceOptions;
 @property (nonatomic, assign) BOOL isDiscounted;
+@property (nonatomic, assign) BOOL isOnlyDiagnostic;
 
 @end

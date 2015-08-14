@@ -528,7 +528,10 @@ NSString *const SURVEY           = @"saveSurvey";
     
     UIImage *image = [UIImage imageWithData:self.currentUser.activeJob.signatureFile];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if (signature == nil)  //signature was removed
+        signature = @"";
     [temp setObject:signature forKey:@"signature"];
+    
     
     [temp setObject:[NSString stringWithFormat:@"%i",[self.currentUser.activeJob.serviceLevel intValue]] forKey:@"service_level"];
     [temp setObject:[NSString stringWithFormat:@"%.0f",[self.currentUser.activeJob.price floatValue]] forKey:@"price"];

@@ -11,6 +11,8 @@
 #import <SignatureView.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import "CustomerChoiceCell.h"
+#import "NewCustomerChoiceVC.h"
 
 @interface CustomerChoiceVC ()
 
@@ -19,12 +21,17 @@
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
 @property (weak, nonatomic) IBOutlet UITableView   *tvUnselectedOptions;
 @property (strong, nonatomic) NSMutableArray       *unusedServiceOptions;
+@property (weak, nonatomic) IBOutlet UILabel *subtotaPriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *descriptionView;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldComfortClub;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDisconts;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDeposit;
 
 @end
 
 @implementation CustomerChoiceVC
 
-static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
+static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTableViewCell
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,14 +45,60 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tvMainTable registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 //    [self.tvMainTable reloadData];
 
+    
+    self.descriptionView.layer.borderWidth   = 1.5;
+    self.descriptionView.layer.borderColor   = [[UIColor lightGrayColor] CGColor];
+    
     self.signatureView.layer.borderWidth   = 1.5;
     self.signatureView.layer.borderColor   = [[UIColor darkGrayColor] CGColor];
     self.signatureView.foregroundLineColor = [UIColor colorWithRed:0.000 green:0.250 blue:0.702 alpha:1.000];
+    
+    self.textFieldComfortClub.layer.borderWidth   = 1.0;
+    self.textFieldComfortClub.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    self.textFieldDisconts.layer.borderWidth   = 1.0;
+    self.textFieldDisconts.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    self.textFieldDeposit.layer.borderWidth   = 1.0;
+    self.textFieldDeposit.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+
+    
+    [self refreshSubtotalPrice];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)refreshSubtotalPrice {
+    NSMutableArray *items1 = self.selectedServiceOptions[@"items"];
+    
+    if (items1.count) {
+        CGFloat totalPriceNormal = 0;
+        CGFloat totalPriceESA = 0;
+        for (PricebookItem *p in items1) {
+            totalPriceNormal += p.amount.floatValue;
+            totalPriceESA += p.amountESA.floatValue;
+        }
+        
+        //[self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceESA ] forState:UIControlStateNormal];
+        //[self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceNormal] forState:UIControlStateNormal];
+
+        
+        if (self.isDiscounted)
+            self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
+        else
+            self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
+
+        
+    }
+}
+- (IBAction)btnContinue:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"newCustomerChoiceSegue" sender:self];
+}
+
+- (IBAction)btnBack:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnSave:(id)sender {
@@ -97,15 +150,119 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tvMainTable reloadData];
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    
+    NewCustomerChoiceVC *vc = [segue destinationViewController];
+    vc.isDiscounted       = self.isDiscounted;
+    vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
+    vc.unselectedOptionsArray = self.unusedServiceOptions;
+    //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
+    vc.selectedServiceOptionsDict = [self addDiscountsToArray];
+
+    
+    if (self.isOnlyDiagnostic) {
+        
+        PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
+        
+        PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
+        diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
+        diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
+        diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
+        diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
+        
+        NSDictionary *d = @{
+                            @"items" : @[diagnosticOnlyItemNoTitle],
+                            @"title" : @"Diagnostic Only"
+                            };
+        
+        vc.selectedServiceOptionsDict = d;
+    }
+    
+}
+
+- (NSDictionary *)addDiscountsToArray {
+    
+    
+    PricebookItem *discount = [PricebookItem new];
+    discount.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]];
+    discount.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]];
+    discount.name = @"Discount";
+    
+    PricebookItem *clubMembership = [PricebookItem new];
+    clubMembership.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
+    clubMembership.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
+    clubMembership.name = @"Comfort Club Membership";
+    
+    PricebookItem *deposit = [PricebookItem new];
+    deposit.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]];
+    deposit.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]];
+    deposit.name = @"50% Deposit";
+    
+    
+    NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"items"]];
+    
+    [newArray addObject:clubMembership];
+    [newArray addObject:deposit];
+    [newArray addObject:discount];
+    
+    
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:self.selectedServiceOptions];
+    
+    [newDict removeObjectForKey:@"items"];
+    [newDict setObject:newArray forKey:@"items"];
+    
+    return newDict;
+}
+
+- (NSString *)cutString:(NSString*)string {
+    
+    NSString *newText;
+    
+    if (string.length > 1){
+        newText = [string substringFromIndex:1];
+    }else{
+        newText = @"0";
+    }
+    
+    return newText;
+}
+
+#pragma mark - UITextField Delegates
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField.text.length  == 0)
+    {
+        //textField.text = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
+        textField.text = @"$";
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    // Make sure that the currency symbol is always at the beginning of the string:
+    if (![newText hasPrefix:@"$"])
+    {
+        return NO;
+    }
+    
+    // Default:
+    return YES;
+}
+
 #pragma mark - UITableViewDelegate & DataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tvMainTable) {
-        return 160;
+        return 25;
     }
 
     if (tableView == self.tvUnselectedOptions) {
-        return 35;
+        return 25;
     }
 
     return 0;
@@ -121,7 +278,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tvMainTable) {
-        return 1;
+        return [self.selectedServiceOptions[@"items"] count];
     }
 
     if (tableView == self.tvUnselectedOptions) {
@@ -132,23 +289,54 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *result;
+    
     if (tableView == self.tvMainTable) {
 
-        NSMutableArray *items1 = self.selectedServiceOptions[@"items"];
+//        NSMutableArray *items1 = self.selectedServiceOptions[@"items"];
+//
+//        RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
+//        cell.gradientView.image        = self.selectedServiceOptions[@"backgroundImage"];
+//        cell.lbRecommandationName.text = self.selectedServiceOptions[@"title"];
+//        cell.rowIndex                  = indexPath.row;
+//        cell.optionsDisplayType        = odtCustomerFinalChoice;
+//        cell.isDiscounted              = self.isDiscounted;
+//        [cell displayServiceOptions:items1];
+//       
+//        //set job price
+//         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+//        job.price = [NSNumber numberWithFloat:[cell.lbSelectOption.text floatValue]];
+//        [job.managedObjectContext save];
+//        result = cell;
+        
 
-        RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-        cell.gradientView.image        = self.selectedServiceOptions[@"backgroundImage"];
-        cell.lbRecommandationName.text = self.selectedServiceOptions[@"title"];
-        cell.rowIndex                  = indexPath.row;
-        cell.optionsDisplayType        = odtCustomerFinalChoice;
-        cell.isDiscounted              = self.isDiscounted;
-        [cell displayServiceOptions:items1];
-       
-        //set job price
-         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-        job.price = [NSNumber numberWithFloat:[cell.lbSelectOption.text floatValue]];
-        [job.managedObjectContext save];
+        
+        CustomerChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
+        
+        
+        if (indexPath.row % 2)
+        {
+            cell.contentView.backgroundColor = [UIColor clearColor];
+        }else {
+            cell.contentView.backgroundColor = [UIColor colorWithRed:239/255.0f green:246/255.0f blue:225/255.0f alpha:1.0f];
+        }
+        
+        if (self.isOnlyDiagnostic)
+            cell.descriptionLabel.text = self.selectedServiceOptions[@"title"];
+        else
+            cell.descriptionLabel.text = [[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] name];
+        
+        if (self.isDiscounted) {
+            NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
+            
+            cell.priceLabel.text = priceString;
+        }
+        else{
+                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
+                cell.priceLabel.text = priceString;
+            }
+        
         result = cell;
     }
 
@@ -163,12 +351,26 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         cell.textLabel.text          = p.name;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
-        cell.textLabel.textColor     = [UIColor grayColor];
+        cell.textLabel.textColor     = [UIColor darkGrayColor];
 
         result = cell;
     }
 
     return result;
+}
+
+#pragma mark - Currency String
+
+- (NSString *)changeCurrencyFormat:(float)number {
+    
+    NSNumberFormatter *formatterCurrency;
+    formatterCurrency = [[NSNumberFormatter alloc] init];
+    
+    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency stringFromNumber: @(12345.2324565)];
+    
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
 }
 
 @end

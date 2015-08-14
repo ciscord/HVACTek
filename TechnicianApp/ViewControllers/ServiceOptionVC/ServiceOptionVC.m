@@ -78,6 +78,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         CustomerChoiceVC *vc = [segue destinationViewController];
         vc.fullServiceOptions = self.options.firstObject[@"items"];
         vc.isDiscounted       = self.isDiscountedPriceSelected;
+        vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
+        
         if (self.isDiagnositcOnlyPriceSelected) {
 
             PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
