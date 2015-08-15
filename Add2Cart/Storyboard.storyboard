@@ -689,7 +689,7 @@ $</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Py2-wF-Ysj">
-                                                <rect key="frame" x="70" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="70" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="24">
@@ -701,7 +701,7 @@ $</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uRq-Ei-2Cu">
-                                                <rect key="frame" x="177" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="177" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="36">
@@ -713,7 +713,7 @@ $</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="48" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WDe-AO-H2P">
-                                                <rect key="frame" x="284" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="284" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="48">
@@ -725,7 +725,7 @@ $</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="60" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZsP-8a-D2g">
-                                                <rect key="frame" x="390" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="390" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="60">
@@ -756,7 +756,7 @@ $</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" tag="84" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ABi-nR-gSN">
-                                                <rect key="frame" x="497" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="497" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="84">
@@ -768,7 +768,7 @@ $</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="144" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KDf-IA-B8R">
-                                                <rect key="frame" x="603" y="118" width="95" height="44"/>
+                                                <rect key="frame" x="603" y="98" width="95" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="144">
@@ -777,19 +777,6 @@ $</string>
                                                 </state>
                                                 <connections>
                                                     <action selector="monthBut:" destination="3cm-Mv-pde" eventType="touchUpInside" id="3kA-Mm-h4M"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bdb-am-SIb">
-                                                <rect key="frame" x="70" y="73" width="628" height="37"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.20392156859999999" green="0.66274509800000003" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="CASH / CHECK / CREDIT">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="monthBut:" destination="3cm-Mv-pde" eventType="touchUpInside" id="Koa-7y-uMS"/>
                                                 </connections>
                                             </button>
                                         </subviews>

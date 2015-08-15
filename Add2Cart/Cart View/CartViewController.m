@@ -179,7 +179,7 @@
     switch (months) {
         case 24:
         {
-            finacePay =  (totalAmount - totalSavings)/.915/24;
+            finacePay =  (totalAmount - totalSavings);///.915/24;
             invest = (finacePay*24);
             break;
         }
