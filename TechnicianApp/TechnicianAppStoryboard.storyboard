@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -832,7 +832,7 @@ the work you've selected</string>
                                                 <color key="backgroundColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4YE-km-UXy">
-                                                <rect key="frame" x="12" y="230" width="660" height="148"/>
+                                                <rect key="frame" x="12" y="230" width="660" height="85"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -849,21 +849,21 @@ the work you've selected</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I Agree That The Above Work Was Completed To My Satisfaction And I Agree To Pay The Above Total." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jVX-HB-v7c">
-                                                <rect key="frame" x="58" y="485" width="595" height="21"/>
+                                                <rect key="frame" x="58" y="405" width="595" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Saved $254 By Being A Member Of Our Comfort Club!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kZF-Dp-QkI">
-                                                <rect key="frame" x="116" y="421" width="452" height="21"/>
+                                                <rect key="frame" x="116" y="351" width="452" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" id="jIG-l4-gAw">
-                                                <rect key="frame" x="14" y="395" width="658" height="70"/>
+                                                <rect key="frame" x="14" y="325" width="658" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signature Stop Image" id="6q1-57-53N">
@@ -902,7 +902,7 @@ the work you've selected</string>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0X3-V1-o3Y">
-                                                <rect key="frame" x="25" y="486" width="20" height="20"/>
+                                                <rect key="frame" x="25" y="406" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" backgroundImage="summary-findings-checkbox-bg">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -912,6 +912,25 @@ the work you've selected</string>
                                                     <action selector="agreeBtnClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="POE-gm-nYq"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" id="jca-Uy-Buc" customClass="SignatureView">
+                                                <rect key="frame" x="14" y="437" width="658" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JPo-rW-tiD">
+                                                        <rect key="frame" x="619" y="0.0" width="39" height="33"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                                        <state key="normal" title="X">
+                                                            <color key="titleColor" red="0.85970908720000005" green="0.25061677630000001" blue="0.022383840459999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="btnClearSignature:" destination="J4s-ud-uAn" eventType="touchUpInside" id="6wW-DU-7Lg"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.96470588450000005" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
@@ -924,6 +943,7 @@ the work you've selected</string>
                     <connections>
                         <outlet property="optionsView" destination="gNB-jv-kcf" id="nBA-W2-yvr"/>
                         <outlet property="selectedOptionsTableView" destination="wyb-m8-ikz" id="qUR-ZL-JTg"/>
+                        <outlet property="signatureView" destination="jca-Uy-Buc" id="I2c-Ip-fAw"/>
                         <outlet property="snapShotView" destination="wWf-yg-uG2" id="kIs-id-NNI"/>
                         <outlet property="stopView" destination="jIG-l4-gAw" id="Omg-6e-ATD"/>
                         <outlet property="textFieldInitials" destination="LVe-Wc-Bo1" id="rlQ-G7-0x7"/>

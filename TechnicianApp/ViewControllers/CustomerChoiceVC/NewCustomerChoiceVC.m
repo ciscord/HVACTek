@@ -9,6 +9,7 @@
 #import "NewCustomerChoiceVC.h"
 #import "CustomerChoiceCell.h"
 #import "AppDelegate.h"
+#import <SignatureView.h>
 
 @interface NewCustomerChoiceVC ()
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldInitials;
 @property (weak, nonatomic) IBOutlet UIView *stopView;
 @property (weak, nonatomic) IBOutlet UIView *snapShotView;
+@property (weak, nonatomic) IBOutlet SignatureView *signatureView;
 
 
 @end
@@ -83,7 +85,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     }
     
     
-    //job.signatureFile = self.signatureView.signatureData;
+    job.signatureFile = self.signatureView.signatureData;
     job.unselectedServiceOptiunons = self.unselectedOptionsArray;
     job.selectedServiceOptions = self.selectedServiceOptionsDict[@"items"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
@@ -101,6 +103,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         button.selected = YES;
     else
         button.selected = NO;
+}
+
+#pragma mark - SignatureView
+
+- (IBAction)btnClearSignature:(id)sender {
+    [self.signatureView clear];
 }
 
 #pragma mark - UITableViewDelegate & DataSource
