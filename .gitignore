@@ -6,3 +6,4 @@ Build
 *.xccheckout
 Signature_IOS7_v1.psd
 SignatureApp.zip
+Signature-Info.plist
