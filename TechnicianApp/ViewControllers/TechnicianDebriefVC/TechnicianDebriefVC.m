@@ -48,6 +48,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) IBOutlet UIView              *paddingView;
 @property (nonatomic, strong) UIButton                     *btnRightTextFiled;
 @property (nonatomic, copy) void (^onDropDown)(DebriefCell *cell);
+@property (nonatomic, copy) void (^onDropDownValueChange)(DebriefCell *cell);
 @property (nonatomic, copy) void (^onTextChange)(DebriefCell *cell, NSString *str);
 @property (nonatomic, strong) NSMutableDictionary *cellData;
 @property (nonatomic, readonly) NSDictionary      *valueForApi;
@@ -59,7 +60,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-
+        
     }
     return self;
 }
@@ -74,7 +75,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     _cellData               = cellData;
     self.lblSubtitle.hidden = YES;
     self.txtField.hidden    = YES;
-
+  
     self.cellType = [cellData[@"accType"] integerValue];
 
     self.lblTitle.text = cellData[@"title"];
@@ -109,7 +110,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         }
         self.txtField.rightView     = self.btnRightTextFiled;
         self.txtField.rightViewMode = UITextFieldViewModeAlways;
-
+        
         if (!self.paddingView) {
             self.paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
         }
@@ -120,7 +121,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtField.hidden                       = NO;
         self.txtField.dropDownTableVisibleRowCount = MIN(6, [(NSArray *)cellData[@"possVals"] count]);
         self.txtField.dropDownTableTitlesArray     = cellData[@"possVals"];
-//        self.txtField.delegate                     = self;
+        self.txtField.dropDownDelegate                     = self;
         break;
     }
     case txtViewCellAcc:
@@ -152,7 +153,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         if (self.cellType == txtFieldNumericCellAcc) {
             self.txtField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         }
-        self.txtField.delegate = self;
+      //  self.txtField.delegate = self;
         break;
     }
     case chkBoxCellAcc:
@@ -217,8 +218,10 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 }
 
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
-
     self.txtField.text = self.txtField.dropDownTableTitlesArray[index];
+    if (self.onDropDownValueChange) {
+        self.onDropDownValueChange(self);
+    }
 }
 
 - (void)dropDown:(id)sender {
@@ -270,6 +273,10 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) DebriefCell *totalRevenuCell;
 @property (nonatomic, strong) DebriefCell *addOnFutureRevenuCell;
 @property (nonatomic, strong) DebriefCell *totalRevenuGeneratedCell;
+
+@property (nonatomic, strong) DebriefCell *priceQuotedCell;
+@property (nonatomic, strong) DebriefCell *priceAppruvedCell;
+@property (nonatomic, strong) DebriefCell *whoCell;
 
 @end
 
@@ -533,6 +540,18 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     cell.cellData        = self.elementsToShow[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == drpDownCellAcc) {
+        
+        [cell setOnDropDownValueChange:^(DebriefCell *aCell) {
+            if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
+                self.priceQuotedCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+                self.priceAppruvedCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+            }
+            
+            if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
+                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+            }
+        }];
+        
         [cell setOnDropDown:^(DebriefCell *aCell) {
              if ([self.tableView.subviews containsObject:aCell.txtField.dropDownTableView]) {
                  [aCell.txtField resignFirstResponder];
@@ -542,6 +561,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
                  [self.tableView addSubview:aCell.txtField.dropDownTableView];
 
              }
+            
+           
 
              CGRect frame = [self.tableView convertRect:aCell.txtField.dropDownTableView.frame fromView:aCell.txtField];
              aCell.txtField.dropDownTableView.frame = frame;
@@ -580,6 +601,24 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
         break;
     }
 
+    
+    //*************************************************************
+    if ([cell.lblTitle.text isEqualToString:@"Price Quoted"]) {
+        self.priceQuotedCell  = cell;
+        self.priceQuotedCell.hidden = YES;
+    }
+    
+    if ([cell.lblTitle.text isEqualToString:@"Price Approved"]) {
+          self.priceAppruvedCell  = cell;
+        self.priceAppruvedCell.hidden = YES;
+    }
+    
+    if ([cell.lblTitle.text isEqualToString:@"Who"]) {
+        self.whoCell  = cell;
+        self.whoCell.hidden = YES;
+    }
+   
+  
     return cell;
 
 }
