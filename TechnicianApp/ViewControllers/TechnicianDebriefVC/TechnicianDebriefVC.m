@@ -480,6 +480,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSTimeInterval distanceBetweenQuestions = [self.jobToDebrief.startTimeQuestions timeIntervalSinceDate:self.jobToDebrief.endTimeQuestions];
     double         secondsInAnHour          = 60;
     double         totalMinutes             = ABS(distanceBetweenQuestions / secondsInAnHour);
+    
     [result addEntriesFromDictionary:@{@"time_of_questions" : [NSString stringWithFormat:@"%.2f", totalMinutes]}];
 
     return result;

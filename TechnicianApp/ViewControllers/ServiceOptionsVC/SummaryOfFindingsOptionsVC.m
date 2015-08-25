@@ -27,7 +27,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Common Repairs";
+    self.title = (self.isiPadCommonRepairsOptions ? @"Common Repairs" : @"Specialized Repairs");
     
     self.filteredOptions = @[].mutableCopy;
     

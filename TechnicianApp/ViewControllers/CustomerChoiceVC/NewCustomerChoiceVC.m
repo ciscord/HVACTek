@@ -33,6 +33,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = NSLocalizedString(@"Customer's Choice", nil);
+    
     self.textFieldInitials.layer.borderWidth   = 1.0;
     self.textFieldInitials.layer.borderColor   = [[UIColor grayColor] CGColor];
     
@@ -147,7 +149,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     return 0;
 }
-
+//NSLog(@"tralalalalalal  %f",-fabsf(tralala));
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *result;
@@ -170,13 +172,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         else
             cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
         
-        if (self.isDiscounted) {
-            NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
-            cell.priceLabel.text = priceString;
-        }
-        else{
-            NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
-            cell.priceLabel.text = priceString;
+        if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Discount"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Comfort Club Membership"]) {
+            
+            if (self.isDiscounted) {
+                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
+                cell.priceLabel.text = priceString;
+            }
+            else{
+                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
+                cell.priceLabel.text = priceString;
+            }
         }
         
         result = cell;

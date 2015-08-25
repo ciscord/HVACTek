@@ -117,7 +117,7 @@
 //        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
 //                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
 //    }
-    _questions = questions;  //necomentat, restu commentat
+    _questions = questions;
 }
 
 -(void)showNextQuestionView:(QuestionView*)currentView moveFromRightToLeft:(BOOL)moveFromRightToLeft

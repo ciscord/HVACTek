@@ -391,10 +391,13 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
         job.startTime = [NSDate date];
         [job.managedObjectContext save];
     }
-    if (!job.startTimeQuestions) {
-        job.startTimeQuestions = [NSDate date];
-        [job.managedObjectContext save];
-    }
+//    if (!job.startTimeQuestions) {
+//        job.startTimeQuestions = [NSDate date];
+//        [job.managedObjectContext save];
+//    }
+    
+    job.startTimeQuestions = [NSDate date];
+    [job.managedObjectContext save];
     
     [self performSegueWithIdentifier:@"customerQuestionsSegue" sender:self];
 }

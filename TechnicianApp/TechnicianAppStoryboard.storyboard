@@ -1376,7 +1376,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="WxA-6S-Qmm" customClass="RoundCornerView">
-                                <rect key="frame" x="156" y="386" width="456" height="458"/>
+                                <rect key="frame" x="156" y="386" width="456" height="167"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DT0-xz-w87">
@@ -1407,7 +1407,7 @@ Troy, PA 16947</string>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" id="ZyT-cF-0W4">
+                                    <view hidden="YES" contentMode="scaleToFill" id="ZyT-cF-0W4">
                                         <rect key="frame" x="29" y="135" width="399" height="291"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>

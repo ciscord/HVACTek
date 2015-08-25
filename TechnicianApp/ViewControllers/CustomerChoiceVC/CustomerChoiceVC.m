@@ -184,28 +184,34 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
 - (NSDictionary *)addDiscountsToArray {
     
-    
-    PricebookItem *discount = [PricebookItem new];
-    discount.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]];
-    discount.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]];
-    discount.name = @"Discount";
-    
-    PricebookItem *clubMembership = [PricebookItem new];
-    clubMembership.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
-    clubMembership.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
-    clubMembership.name = @"Comfort Club Membership";
-    
-    PricebookItem *deposit = [PricebookItem new];
-    deposit.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]];
-    deposit.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]];
-    deposit.name = @"50% Deposit";
-    
-    
     NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"items"]];
     
-    [newArray addObject:clubMembership];
-    [newArray addObject:deposit];
-    [newArray addObject:discount];
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]].floatValue != 0) {
+        PricebookItem *clubMembership = [PricebookItem new];
+        clubMembership.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
+        clubMembership.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
+        clubMembership.name = @"Comfort Club Membership";
+        
+        [newArray addObject:clubMembership];
+    }
+    
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]].floatValue != 0){
+        PricebookItem *deposit = [PricebookItem new];
+        deposit.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
+        deposit.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
+        deposit.name = @"50% Deposit";
+        
+        [newArray addObject:deposit];
+    }
+    
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]].floatValue != 0) {
+        PricebookItem *discount = [PricebookItem new];
+        discount.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
+        discount.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
+        discount.name = @"Discount";
+        
+        [newArray addObject:discount];
+    }
     
     
     NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:self.selectedServiceOptions];
