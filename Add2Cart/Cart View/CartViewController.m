@@ -7,6 +7,7 @@
 //
 
 #import "CartViewController.h"
+#import "CartCell.h"
 
 //cels
 @interface CellProducts : UITableViewCell;
@@ -31,13 +32,14 @@
 
 
 @interface CartViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) NSMutableArray *productList;
-@property (strong, nonatomic) IBOutlet UIView *vTableviewHeader;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblSystemRebate;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingD;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingSum;
 @property (strong, nonatomic) IBOutlet UILabel *lblInvestment;
+@property (strong, nonatomic) IBOutlet UITableView *cartstableView;
 @end
 
 @implementation CartViewController
@@ -59,6 +61,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configureVC];
   }
 
 - (void)didReceiveMemoryWarning
@@ -93,66 +96,17 @@
 
 }
 
--(void) buildQuote {
-//    
-//    
-//    float totalAmount;
-//    float totalSavings;
-//    float afterSavings;
-//    float finacePay;
-//    float monthlyPay;
-//    
-//    totalAmount = 0.0f;
-//    
-//    for (int jj = 0; jj <cartItems.count; jj++) {
-//        Item *itm = cartItems[jj];
-//        totalAmount += [itm.finalPrice floatValue];
-//    }
-//    
-//    for (int jj = 0; jj <rebates.count; jj++) {
-//        Item *itm = rebates[jj];
-//        totalSavings += [itm.finalPrice floatValue];
-//    }
-//    
-//    
-//    
-//    //months = 60;
-//    if (months == 60) {
-//        perc = 1.67f;
-//    } else if  (months == 24){
-//        perc = 4.17f;
-//    } else if (months == 36) {
-//        perc = 2.78f;
-//    } else if (months == 48) {
-//        perc     = 2.09f;
-//    } else if (months == 120){
-//        perc = 1.06f;
-//    }
-//    
-//     NSLog(@"Months is %d and perc is %f",months,perc);
-//    
-//    afterSavings = totalAmount - totalSavings;
-//    float o = afterSavings / 100.0f;
-//    float p = o * perc;
-//    float q = p + afterSavings;
-//    finacePay = q / months;
-//    
-//    float n = afterSavings / 100.0f;
-//    float m = n * 4.99f;
-//    float w = m + afterSavings;
-//    float y = w / 100.0f;
-//    float i = y * 1.06f;
-//    float j = i + afterSavings;
-//    monthlyPay = j / 120.0f;
-//    [self updateLabels:totalAmount :totalSavings :afterSavings :finacePay :monthlyPay];
-//    
-//
+-(void)configureVC{
+    [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell"];
+     self.cartstableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
 
+-(void) buildQuote {
     float totalAmount;
-       float totalSavings;
-        float afterSavings;
-        float finacePay;
-        float monthlyPay;
+    float totalSavings;
+    float afterSavings;
+    float finacePay;
+    float monthlyPay;
     totalAmount = 0.0f;
  
     
@@ -329,9 +283,9 @@
     }
     
     productsView.text = products;
-    [self.tableView reloadData];
-    
-    self.vTableviewHeader.hidden=(self.productList.count==0);
+//    [self.tableView reloadData];
+//    
+//    self.vTableviewHeader.hidden=(self.productList.count==0);
 }
 
 
@@ -390,7 +344,12 @@
 #pragma marck tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.productList.count;
+    
+    
+    
+    return 3;
+    
+    //self.productList.count;
 };
 
 
@@ -398,9 +357,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    
-    CellProducts *acell = [self.tableView dequeueReusableCellWithIdentifier:@"cellP" forIndexPath:indexPath];
-    [acell.lblTitle setText:self.productList[indexPath.row]];
+CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
+//    CellProducts *acell = [self.tableView dequeueReusableCellWithIdentifier:@"cellP" forIndexPath:indexPath];
+//    [acell.lblTitle setText:self.productList[indexPath.row]];
        return acell;
     
 };
@@ -408,7 +367,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-      return 50;
+      return 230 + (50 * 3);
 }
 
 

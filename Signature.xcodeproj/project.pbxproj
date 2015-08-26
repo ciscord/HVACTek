@@ -108,6 +108,10 @@
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
 		91159A421B344F4C00F7899C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 91159A411B344F4C00F7899C /* Item.m */; };
+		91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA99FF1B8DDC78005EA4EA /* CartCell.xib */; };
+		91BA9A041B8DE09F005EA4EA /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A031B8DE09F005EA4EA /* CartCell.m */; };
+		91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A061B8DF034005EA4EA /* ProductCell.m */; };
+		91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA9A071B8DF034005EA4EA /* ProductCell.xib */; };
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
 		91EE85A11B4EBAB100811D39 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 91EE85A01B4EBAB100811D39 /* Job.m */; };
 		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
@@ -297,6 +301,12 @@
 		91159A411B344F4C00F7899C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 5.xcdatamodel"; sourceTree = "<group>"; };
 		918BEF261AD556ED001DFAD6 /* SignatureModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 3.xcdatamodel"; sourceTree = "<group>"; };
+		91BA99FF1B8DDC78005EA4EA /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
+		91BA9A021B8DE09F005EA4EA /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartCell.h; sourceTree = "<group>"; };
+		91BA9A031B8DE09F005EA4EA /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartCell.m; sourceTree = "<group>"; };
+		91BA9A051B8DF034005EA4EA /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
+		91BA9A061B8DF034005EA4EA /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
+		91BA9A071B8DF034005EA4EA /* ProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		91CA5EFA1ADFF86B00D871FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -446,6 +456,12 @@
 		4FD2EB221A361A0F0056D4C4 /* Cart View */ = {
 			isa = PBXGroup;
 			children = (
+				91BA9A021B8DE09F005EA4EA /* CartCell.h */,
+				91BA9A031B8DE09F005EA4EA /* CartCell.m */,
+				91BA99FF1B8DDC78005EA4EA /* CartCell.xib */,
+				91BA9A051B8DF034005EA4EA /* ProductCell.h */,
+				91BA9A061B8DF034005EA4EA /* ProductCell.m */,
+				91BA9A071B8DF034005EA4EA /* ProductCell.xib */,
 				4FD2EB231A361A0F0056D4C4 /* CartViewController.h */,
 				4FD2EB241A361A0F0056D4C4 /* CartViewController.m */,
 			);
@@ -950,6 +966,7 @@
 			files = (
 				4FD2EB761A361A0F0056D4C4 /* prod.png in Resources */,
 				4F8EC7BD1A6053A400999FA1 /* QuestionSummaryCell.xib in Resources */,
+				91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */,
 				4FD2EB8A1A361A0F0056D4C4 /* InfoPlist.strings in Resources */,
 				4FD2EB6E1A361A0F0056D4C4 /* Daikin96.jpg in Resources */,
 				4FD2EB771A361A0F0056D4C4 /* produ.png in Resources */,
@@ -977,6 +994,7 @@
 				4FD2EB7E1A361A0F0056D4C4 /* x@2x.png in Resources */,
 				4FD2EB7D1A361A0F0056D4C4 /* x.png in Resources */,
 				4FD2EB701A361A0F0056D4C4 /* email.png in Resources */,
+				91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */,
 				4FD2EB7C1A361A0F0056D4C4 /* txt.png in Resources */,
 				4FD2EB711A361A0F0056D4C4 /* go-previous-orange.png in Resources */,
 				4FD2EB6F1A361A0F0056D4C4 /* DZ18TC.jpg in Resources */,
@@ -1049,6 +1067,7 @@
 				4F11D4041AA77417007FC0A8 /* User+Functional.m in Sources */,
 				4F11D3FD1AA772E4007FC0A8 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				AAE7D16F1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m in Sources */,
+				91BA9A041B8DE09F005EA4EA /* CartCell.m in Sources */,
 				4F11D3E31AA63F84007FC0A8 /* ViewOptionsVC.m in Sources */,
 				4FD2EB871A361A0F0056D4C4 /* HardTableViewCell.m in Sources */,
 				4FD2EB141A3619F40056D4C4 /* AppDelegate.m in Sources */,
@@ -1075,6 +1094,7 @@
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
+				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
