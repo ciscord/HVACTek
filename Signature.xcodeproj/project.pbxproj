@@ -90,6 +90,10 @@
 		4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901B61AB845F500D87FAB /* PlatinumOptionsVC.m */; };
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
 		4FF901BD1AB847FE00D87FAB /* PlatinumOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */; };
+		520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C51B8D8CBC0035909C /* SettingAgendaVC.m */; };
+		520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C81B8D8CCF0035909C /* AgendaPictureVC.m */; };
+		520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CC1B8D8D830035909C /* ESABenefitsVC.m */; };
+		520159D01B8D9C590035909C /* AgendaPictureRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CF1B8D9C590035909C /* AgendaPictureRoundView.m */; };
 		522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */; };
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
@@ -260,6 +264,14 @@
 		4FF901B91AB847FE00D87FAB /* PlatinumOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatinumOptionCell.h; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.h; sourceTree = SOURCE_ROOT; };
 		4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatinumOptionCell.m; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.m; sourceTree = SOURCE_ROOT; };
 		4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlatinumOptionCell.xib; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.xib; sourceTree = SOURCE_ROOT; };
+		520159C41B8D8CBC0035909C /* SettingAgendaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAgendaVC.h; sourceTree = "<group>"; };
+		520159C51B8D8CBC0035909C /* SettingAgendaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAgendaVC.m; sourceTree = "<group>"; };
+		520159C71B8D8CCF0035909C /* AgendaPictureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaPictureVC.h; sourceTree = "<group>"; };
+		520159C81B8D8CCF0035909C /* AgendaPictureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaPictureVC.m; sourceTree = "<group>"; };
+		520159CB1B8D8D830035909C /* ESABenefitsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESABenefitsVC.h; sourceTree = "<group>"; };
+		520159CC1B8D8D830035909C /* ESABenefitsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESABenefitsVC.m; sourceTree = "<group>"; };
+		520159CE1B8D9C590035909C /* AgendaPictureRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaPictureRoundView.h; sourceTree = "<group>"; };
+		520159CF1B8D9C590035909C /* AgendaPictureRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaPictureRoundView.m; sourceTree = "<group>"; };
 		522746D01B79FB6A00AC38A5 /* NewCustomerChoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCustomerChoiceVC.h; sourceTree = "<group>"; };
 		522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCustomerChoiceVC.m; sourceTree = "<group>"; };
 		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
@@ -597,6 +609,8 @@
 			children = (
 				4FD2EB9E1A37337A0056D4C4 /* BaseVC.h */,
 				4FD2EB9F1A37337A0056D4C4 /* BaseVC.m */,
+				520159CA1B8D8D630035909C /* BenefitsESA */,
+				520159C31B8D8C940035909C /* Agenda */,
 				4FD2EB9D1A3624180056D4C4 /* MainVC */,
 				4FD2EBA41A3762350056D4C4 /* LoginVC */,
 				4FD2EBAC1A376E670056D4C4 /* TechnicianHomeVC */,
@@ -733,6 +747,28 @@
 			);
 			name = PlatinumOptionsVC;
 			path = SummaryOfFindingsVC;
+			sourceTree = "<group>";
+		};
+		520159C31B8D8C940035909C /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+				520159C41B8D8CBC0035909C /* SettingAgendaVC.h */,
+				520159C51B8D8CBC0035909C /* SettingAgendaVC.m */,
+				520159C71B8D8CCF0035909C /* AgendaPictureVC.h */,
+				520159C81B8D8CCF0035909C /* AgendaPictureVC.m */,
+				520159CE1B8D9C590035909C /* AgendaPictureRoundView.h */,
+				520159CF1B8D9C590035909C /* AgendaPictureRoundView.m */,
+			);
+			path = Agenda;
+			sourceTree = "<group>";
+		};
+		520159CA1B8D8D630035909C /* BenefitsESA */ = {
+			isa = PBXGroup;
+			children = (
+				520159CB1B8D8D830035909C /* ESABenefitsVC.h */,
+				520159CC1B8D8D830035909C /* ESABenefitsVC.m */,
+			);
+			path = BenefitsESA;
 			sourceTree = "<group>";
 		};
 		75399F581A39CD250013EAC0 /* RepairVsServiceVC */ = {
@@ -1071,12 +1107,16 @@
 				4FD2EB801A361A0F0056D4C4 /* HeaderTableViewCell.m in Sources */,
 				75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */,
 				4F11D3FB1AA772E4007FC0A8 /* NSManagedObject+CoreDataCustom.m in Sources */,
+				520159D01B8D9C590035909C /* AgendaPictureRoundView.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
+				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
+				520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */,
+				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
 				91159A421B344F4C00F7899C /* Item.m in Sources */,
