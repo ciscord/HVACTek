@@ -9,5 +9,5 @@
 #import "BaseVC.h"
 
 @interface AgendaPictureVC : BaseVC
-
+@property (nonatomic, assign) QuestionType choosedType;
 @end
