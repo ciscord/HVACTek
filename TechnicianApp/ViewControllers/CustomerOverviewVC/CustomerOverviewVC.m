@@ -8,9 +8,10 @@
 
 #import "CustomerOverviewVC.h"
 #import "SystemInfoHeaderView.h"
-#import "QuestionsVC.h"
+//#import "QuestionsVC.h"
 #import "ServiceHistoryTableViewCell.h"
 #import "SServiceHistory.h"
+#import "SettingAgendaVC.h"
 
 #pragma mark - DataStructure
 
@@ -369,10 +370,16 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
-        QuestionsVC *vc = segue.destinationViewController;
-        vc.questionType = self.selectedType;
+//    if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
+//        QuestionsVC *vc = segue.destinationViewController;
+//        vc.questionType = self.selectedType;
+//    }
+    
+    if ([segue.identifier isEqualToString:@"goSettingAgenda"]) {
+        SettingAgendaVC *vc = segue.destinationViewController;
+        vc.choosenType = self.selectedType;
     }
+    
 }
 
 #pragma mark -
@@ -385,7 +392,11 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 }
 
 - (IBAction)beginAppointment:(id)sender {
-
+    
+    
+    [self performSegueWithIdentifier:@"goSettingAgenda" sender:self];
+    
+/*
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     if (!job.startTime) {
         job.startTime = [NSDate date];
@@ -400,6 +411,7 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     [job.managedObjectContext save];
     
     [self performSegueWithIdentifier:@"customerQuestionsSegue" sender:self];
+    */
 }
 
 - (void)toggleSectionVisibility:(NSInteger)section {

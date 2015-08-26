@@ -3,16 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "signature snapshot logo.png"
+      "filename" : "agenda-optionsIcon.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "signature snapshot logo@2x.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "agenda-optionsIcon@2x.png"
     }
   ],
   "info" : {

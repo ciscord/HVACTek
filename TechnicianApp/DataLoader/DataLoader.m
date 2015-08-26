@@ -540,7 +540,7 @@ NSString *const SURVEY           = @"saveSurvey";
     [params setObject:temp forKey:@"survey"];
     
 
-    self.responseSerializer = [AFJSONResponseSerializer serializer];
+      self.responseSerializer = [AFJSONResponseSerializer serializer];
       [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
 //    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
