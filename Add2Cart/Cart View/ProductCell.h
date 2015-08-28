@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ProductCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 
 @end

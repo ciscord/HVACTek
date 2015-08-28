@@ -17,6 +17,9 @@
     
     IBOutlet UIButton *btnFinancing;
     IBOutlet UILabel *lblFinancingValue;
+    IBOutlet UIButton *btnCart1;
+    IBOutlet UIButton *btnCart2;
+    IBOutlet UIButton *btnCart3;
 }
 
 @end
@@ -70,8 +73,11 @@
     months = 24;
     
     //Move to a mutable array for later.
-    cartItems = [[NSMutableArray alloc]init];
-    NSLog(@" The Cart has %d in it just now",cartItems.count);
+    _cartItems = [[NSMutableArray alloc]init];
+    self.carts = [[NSMutableArray alloc]init];
+     self.savedCarts = [[NSMutableArray alloc]init];
+    
+    NSLog(@" The Cart has %d in it just now",_cartItems.count);
     
     //Setup the navbar.
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
@@ -90,7 +96,7 @@
     [tableViewX addGestureRecognizer:sgl];
     [self.view sendSubviewToBack:secView];
     
-    
+
    }
 
 -(void) home {
@@ -103,7 +109,7 @@
 
 -(void) viewDidAppear:(BOOL)animated   {
     NSLog(@"called agin");
-  // cartItems = [[NSMutableArray alloc]initWithArray:additemsB];
+ 
     //Fetch the data.
     [self fetchData];
     
@@ -114,6 +120,10 @@
     finacePay = 0.0f;
     monthlyPay = 0.0f;
     [self buildQuote];
+    
+    btnCart1.hidden = !(self.savedCarts.count > 0);
+    btnCart2.hidden = !(self.savedCarts.count > 1);
+    btnCart3.hidden = !(self.savedCarts.count > 2);
    
 }
 
@@ -198,10 +208,6 @@
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
     //    NSLog(@"%@",itm.TitleText);
-        
-        if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
-            NSLog(@"aaaa");
-        }
         
         int tID = [itm.typeID intValue];
         if (tID == cool && (![coolProds containsObject:itm])) {
@@ -1550,12 +1556,12 @@
         [al show];*/
 
     } else {
-         [cartItems addObject:itm];
+         [_cartItems addObject:itm];
         
     }
         
         
-          NSLog(@"Purchased cart has %d items",cartItems.count);
+          NSLog(@"Purchased cart has %d items",_cartItems.count);
         
         
         if ([itm.type isEqualToString:@"IAQ"]||[itm.type isEqualToString:@"Accessories"]) {
@@ -1577,8 +1583,8 @@
     
     Item *del;
     BOOL done = FALSE;
-    for (int x = 0; x < cartItems.count; x ++) {
-        Item *itemz = cartItems[x];
+    for (int x = 0; x < _cartItems.count; x ++) {
+        Item *itemz = _cartItems[x];
         if ([itemz.modelName isEqualToString:itm.modelName] && !done) {
             del = itemz;
             done = TRUE;
@@ -1586,7 +1592,7 @@
         
     }
     
-    [cartItems removeObject:del];
+    [_cartItems removeObject:del];
     
     
     /*
@@ -1602,7 +1608,7 @@
    // [additems removeObject:itm];*/
     [self buildQuote];
     
-    NSLog(@"** removed ** cart has %d items",cartItems.count);
+    NSLog(@"** removed ** cart has %d items",_cartItems.count);
     
 
 }
@@ -1611,10 +1617,10 @@
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
 
   //  rebates = [[NSArray alloc]initWithArray:theRebateData];
-    if (cartItems.count == 0) {
-        [cartItems addObjectsFromArray:purchData];
+    if (_cartItems.count == 0) {
+        [_cartItems addObjectsFromArray:purchData];
     }
-    NSLog(@"Cart has %d items",cartItems.count);
+    NSLog(@"Cart has %lu items",(unsigned long)_cartItems.count);
     
 }
 
@@ -1670,8 +1676,8 @@
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     
-    for (int jj = 0; jj <cartItems.count; jj++) {
-        Item *itm = cartItems[jj];
+    for (int jj = 0; jj <_cartItems.count; jj++) {
+        Item *itm = _cartItems[jj];
        // NSLog(@"%@",itm.finalOption);
         if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
         {
@@ -1841,7 +1847,7 @@
     if ([segue.identifier isEqualToString:@"rebate"]) {
         RebateQuoteTableViewController *rq = segue.destinationViewController;
         rq.managedObjectContext = managedObjectContext;
-        rq.purch = cartItems ;
+        rq.purch = _cartItems ;
         rq.delegate = self;
        // second = YES;
         
@@ -1849,21 +1855,62 @@
     
     if ([segue.identifier isEqualToString:@"cart"]) {
         CartViewController *cartView = segue.destinationViewController;
-        NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:cartItems];
+        NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
         for (int jj = 0; jj <additemsB.count; jj++) {
             Item *itm = additemsB[jj];
             [tt addObject:itm];
         }
-         cartView.cartItems = tt;
         
-        cartView.months = months;
-        cartView.rebates = rebates;
+        NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
+        [cart setObject:tt forKey:@"cartItems"];
+        [cart setObject:[NSNumber numberWithInt:months] forKey:@"cartMonths"];
+        [cart setObject:rebates forKey:@"cartRebates"];
+    
+        cartView.testerVC = self;
+       
+        self.carts = [[NSMutableArray alloc]initWithArray:@[cart]];
+        
+        cartView.carts = self.carts;
+        [cartView.cartstableView reloadData];
+//        cartView.cartItems = tt;
+//        cartView.months = months;
+//        cartView.rebates = rebates;
     }
+    
+    if ([segue.identifier isEqualToString:@"savedCart"]) {
+        CartViewController *cartView = segue.destinationViewController;
+        
+        cartView.testerVC = self;
+        
+        
+        
+        self.carts = [[NSMutableArray alloc]initWithArray:self.savedCarts];
+        
+        cartView.carts = self.carts;
+        [cartView.cartstableView reloadData];
+        //        cartView.cartItems = tt;
+        //        cartView.months = months;
+        //        cartView.rebates = rebates;
+    }
+
 }
 - (IBAction)btnFinancing:(id)sender {
     secView.hidden = NO;
     [self.view bringSubviewToFront:secView];
 }
 
+
+# pragma Cart 
+- (IBAction)btncart1:(id)sender {
+    [self performSegueWithIdentifier:@"savedCart" sender:self];
+    
+}
+- (IBAction)btnCart2:(id)sender {
+      [self performSegueWithIdentifier:@"savedCart" sender:self];
+}
+
+- (IBAction)btnCart3:(id)sender {
+      [self performSegueWithIdentifier:@"savedCart" sender:self];
+}
 
 @end

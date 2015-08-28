@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="finalOption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="finalPrice" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0.0" syncable="YES"/>
@@ -29,6 +29,6 @@
         <attribute name="usserAdet" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-2565" positionY="-2556" width="128" height="435"/>
+        <element name="Item" positionX="-5985" positionY="-2559" width="128" height="433"/>
     </elements>
 </model>

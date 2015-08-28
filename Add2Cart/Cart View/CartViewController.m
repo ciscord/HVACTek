@@ -9,29 +9,7 @@
 #import "CartViewController.h"
 #import "CartCell.h"
 
-//cels
-@interface CellProducts : UITableViewCell;
-@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
-
-@end
-
-@implementation CellProducts
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
-
-@end
-
-
-@interface CartViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface CartViewController ()<UITableViewDataSource, UITableViewDelegate, CartCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *productList;
 
@@ -39,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingD;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingSum;
 @property (strong, nonatomic) IBOutlet UILabel *lblInvestment;
-@property (strong, nonatomic) IBOutlet UITableView *cartstableView;
+
 @end
 
 @implementation CartViewController
@@ -75,23 +53,6 @@
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
-    
-    
-    headers = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Heat Pumps", @"Furnaces",@"Air Handlers"
-               ,@"Geothermal", @"Indoor Air Quality",@"Controls", nil]; //@"Rebates"
-    
-    
-    products = [[NSMutableString alloc]init];
-    self.productList =[[NSMutableArray alloc]init];
-    
-    productsView.editable = YES;
-    [productsView setFont:[UIFont fontWithName:@"arial" size:24]];
-    
-    productsView.editable = NO;
-    
-    
-    [self buildQuote];
-    [self updateProductList];
     [self.btnEmail setHidden:YES];
 
 }
@@ -99,123 +60,6 @@
 -(void)configureVC{
     [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell"];
      self.cartstableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
-
--(void) buildQuote {
-    float totalAmount;
-    float totalSavings;
-    float afterSavings;
-    float finacePay;
-    float monthlyPay;
-    totalAmount = 0.0f;
- 
-    
-    for (int jj = 0; jj <cartItems.count; jj++) {
-        Item *itm = cartItems[jj];
-        if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
-        {
-            totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
-        }
-        else
-        {
-            totalAmount += [itm.finalPrice floatValue];
-        }
-
-      //  totalAmount += [itm.finalPrice floatValue];
-    }
-
-    for (int jj = 0; jj <rebates.count; jj++) {
-        Item *itm = rebates[jj];
-        totalSavings += [itm.finalPrice floatValue];
-    }
-    
-    float invest;
-    switch (months) {
-        case 24:
-        {
-            finacePay =  (totalAmount - totalSavings);///.915/24;
-            invest = (finacePay*24);
-            break;
-        }
-            
-        case 36:
-        {
-            finacePay = (totalAmount - totalSavings)/.88/36;
-            invest = (finacePay*36);
-            break;
-        }
-        case 48:{
-            finacePay = (totalAmount - totalSavings)/.865/48;
-            invest = (finacePay*48);
-            break;
-        }
-        case 60:{
-            finacePay = (totalAmount - totalSavings)/.85/60;
-            invest = (finacePay*60);
-            break;
-        }
-        case 84:{
-            finacePay = ((totalAmount - totalSavings)/.8975) * 0.0144;
-            invest = (totalAmount - totalSavings)/.8975;
-            break;
-        }
-        case 144:{
-            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
-            invest = (totalAmount - totalSavings)/.909;
-            break;
-        }
-        default:
-        {
-            finacePay = totalAmount - totalSavings;
-            invest=  (totalAmount - totalSavings);
-            break;
-        }
-    }
-    
-    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
-    //[self updateLabels:totalAmount :totalSavings :afterSavings :finacePay :monthlyPay ];
-
-}
-
-//-(void) updateLabels:(float)totalAmount :(float)totalSavings :(float)afterSavings :(float)finacePay :(float)monthlyPay {
-
--(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month {
-//    yourOrderLabel.text = [NSString stringWithFormat:@"$%.2f",totalAmount];
-//    afterSavingsLabel.text =[NSString stringWithFormat:@"$%.2f",afterSavings];
-//    finance.text = [NSString stringWithFormat:@"$%.2f",finacePay];
-//    monthlypayment.text = [NSString stringWithFormat:@"$%.2f",monthlyPay];
-   
-    NSNumberFormatter *nf = [NSNumberFormatter new];
-    nf.numberStyle = NSNumberFormatterDecimalStyle;
-    [nf setMaximumFractionDigits:2];
-    [nf setMinimumFractionDigits:2];
-    //[formatter setRoundingMode: NSNumberFormatterRoundUp];
-    
-    //new
-    self.lblSystemRebate.text=[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-    self.lblInvestment.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:total]]];
-    switch (months) {
-        case 84:
-            //3.99% Best Rate 84 Months
-            self.lblFinancingD.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months",months];
-           
-            break;
-        case 144:
-            self.lblFinancingD.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months",months];
-            break;
-            
-        case 0:
-            self.lblFinancingD.text =[NSString stringWithFormat:@"Cash /Check /Credit Card"];
-            break;
-            
-        default:
-            self.lblFinancingD.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments",months];
-            break;
-    }
-    
-     self.lblFinancingSum.text =[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:financeP]]];
-    
-
 }
 
 
@@ -264,28 +108,6 @@
 
 -(void) back {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-
--(void) updateProductList {
-    for (int x = 0; x < cartItems.count; x++){
-        Item *itm = cartItems[x];
-        
-        if ( [itm.type isEqualToString:@"TypeOne"] || [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeThree"] ) {
-            // do nothing
-            
-        } else {
-            [products appendString:[NSString stringWithFormat:@"%@\n",itm.modelName]];
-            [self.productList addObject:itm.modelName];
-        }
-        
-       
-    }
-    
-    productsView.text = products;
-//    [self.tableView reloadData];
-//    
-//    self.vTableviewHeader.hidden=(self.productList.count==0);
 }
 
 
@@ -344,12 +166,8 @@
 #pragma marck tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    
-    
-    return 3;
-    
-    //self.productList.count;
+    return self.carts.count;
+
 };
 
 
@@ -358,32 +176,63 @@
     
     
 CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
-//    CellProducts *acell = [self.tableView dequeueReusableCellWithIdentifier:@"cellP" forIndexPath:indexPath];
-//    [acell.lblTitle setText:self.productList[indexPath.row]];
+    acell.delegate = self;
+    acell.cart = self.carts[indexPath.row];
+    acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];
+    [acell updateProductList];
        return acell;
-    
 };
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-      return 230 + (50 * 3);
+    
+    NSMutableDictionary * ar = self.carts[indexPath.row];
+    NSMutableArray * crti = [ar objectForKey:@"cartItems"];
+    NSMutableArray * nsar  = [[NSMutableArray alloc]init];
+    
+    for (int x = 0; x < crti.count; x++){
+        Item *itm = crti[x];
+        
+        if ( [itm.type isEqualToString:@"TypeOne"] || [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeThree"] ) {
+            // do nothing
+            
+        } else {
+            [nsar addObject:itm.modelName];
+        }
+        
+        
+    }
+    
+      return 230 + (50 * nsar.count);
 }
 
 
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return 5;
-    
 }
 
-
+#pragma marck cart cell delegate
+-(void)editCard:(NSMutableDictionary*)cart{
+//     testerViewController * vc =(testerViewController*)self.testerVC;
+//     vc.cartItems = [cart objectForKey:@"cartItems"];
+     [self.navigationController popViewControllerAnimated:YES];
+};
+-(void)save:(NSMutableDictionary*)cart{
+    
+    testerViewController * vc =(testerViewController*)self.testerVC;
+    if (vc.savedCarts.count < 3) {
+        [vc.savedCarts addObject:cart];
+    }
+    [self.navigationController popViewControllerAnimated:YES]; 
+    
+};
+-(void)done{
+    [self home];
+};
 
 
 @end
-
-
-
 
 

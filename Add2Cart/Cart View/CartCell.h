@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CartCell;
+@protocol CartCellDelegate
+-(void)editCard:(NSMutableDictionary*)cart;
+-(void)save:(NSMutableDictionary*)cart;
+-(void)done;
+@end
 
 @interface CartCell : UITableViewCell<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabLeviewHeihghtContrain;
+@property (nonatomic, retain) id<CartCellDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITableView *poductTableView;
+@property (nonatomic, strong)  NSMutableDictionary *cart;
+@property (strong, nonatomic) IBOutlet UILabel *lblCartNumber;
 
+@property (weak, nonatomic) IBOutlet UILabel *systemRebates;
+@property (weak, nonatomic) IBOutlet UILabel *financing;
+@property (weak, nonatomic) IBOutlet UILabel *investemnt;
+@property (strong, nonatomic) IBOutlet UILabel *lblFinaincinSum;
+-(void) updateProductList;
 @end

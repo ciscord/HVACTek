@@ -53,7 +53,9 @@
     NSMutableSet *sections;
     
     NSMutableArray *rebates;
-    NSMutableArray *cartItems;
+  
+ 
+   
   //  BOOL second;
     
     NSArray *test;
@@ -89,7 +91,9 @@
 @property (strong, nonatomic) NSMutableArray *additemsB;
 
 @property (nonatomic, strong) FirstOption *firstOption;
-
+@property (nonatomic, strong)  NSMutableArray *carts;
+@property (nonatomic, strong)  NSMutableArray *savedCarts;
+@property (nonatomic, strong)  NSMutableArray *cartItems;
 - (IBAction)cartButon:(id)sender;
 - (IBAction)rebateButton:(id)sender;
 - (IBAction)monthBut:(id)sender;

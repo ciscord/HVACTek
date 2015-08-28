@@ -110,23 +110,23 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Financing" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsZ-sN-FjD">
-                        <rect key="frame" x="311" y="72" width="160" height="58"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="590$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfV-8P-1ps">
+                        <rect key="frame" x="313" y="124" width="160" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="58" id="7vb-o5-tOB"/>
-                            <constraint firstAttribute="width" constant="160" id="r06-ES-64h"/>
+                            <constraint firstAttribute="height" constant="29" id="NBJ-fQ-cir"/>
+                            <constraint firstAttribute="width" constant="160" id="zg9-fP-UHw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="590$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nx4-dh-otT">
-                        <rect key="frame" x="313" y="125" width="160" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Financing" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsZ-sN-FjD">
+                        <rect key="frame" x="311" y="72" width="160" height="54"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="29" id="ecD-JH-Ytl"/>
-                            <constraint firstAttribute="width" constant="160" id="naX-rm-FUh"/>
+                            <constraint firstAttribute="height" constant="54" id="7vb-o5-tOB"/>
+                            <constraint firstAttribute="width" constant="160" id="r06-ES-64h"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -159,6 +159,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="editCart:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="La1-Zk-NOy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jgy-Ya-l5c" userLabel="done">
                                 <rect key="frame" x="505" y="11" width="185" height="35"/>
@@ -168,6 +171,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="done:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2jX-YN-tly"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXK-sT-6zq" userLabel="Save Cart">
                                 <rect key="frame" x="97" y="11" width="185" height="35"/>
@@ -177,6 +183,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveCart:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="njQ-xo-VkG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -191,12 +200,10 @@
                     <constraint firstAttribute="bottomMargin" secondItem="7f6-iV-T67" secondAttribute="bottom" constant="45" id="4xz-HJ-vUe"/>
                     <constraint firstItem="2JS-N3-02R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="67x-h3-pa6"/>
                     <constraint firstItem="VRm-ww-Qec" firstAttribute="top" secondItem="7f6-iV-T67" secondAttribute="top" constant="-2" id="85W-ui-AZt"/>
-                    <constraint firstItem="Nx4-dh-otT" firstAttribute="top" secondItem="nHy-fE-vKC" secondAttribute="bottom" constant="-36" id="Ejc-p9-e61"/>
-                    <constraint firstItem="nHy-fE-vKC" firstAttribute="top" secondItem="hsZ-sN-FjD" secondAttribute="bottom" constant="-58" id="GqI-e5-K6m"/>
+                    <constraint firstItem="nHy-fE-vKC" firstAttribute="top" secondItem="hsZ-sN-FjD" secondAttribute="bottom" constant="-54" id="GqI-e5-K6m"/>
                     <constraint firstItem="YhN-aT-Xjt" firstAttribute="centerX" secondItem="3vU-1B-BDg" secondAttribute="centerX" constant="0.5" id="IgK-8d-PhW"/>
                     <constraint firstItem="NnD-7a-ucI" firstAttribute="centerY" secondItem="yEV-mI-i6n" secondAttribute="centerY" constant="22.5" id="NJs-Ho-NwU"/>
                     <constraint firstAttribute="centerX" secondItem="yEV-mI-i6n" secondAttribute="centerX" constant="172" id="O14-EX-6V2"/>
-                    <constraint firstItem="nHy-fE-vKC" firstAttribute="centerX" secondItem="Nx4-dh-otT" secondAttribute="centerX" id="Q34-Zf-Xnc"/>
                     <constraint firstItem="Gyq-QT-76K" firstAttribute="centerX" secondItem="yEV-mI-i6n" secondAttribute="centerX" id="Sq3-SF-Ciu"/>
                     <constraint firstItem="yEV-mI-i6n" firstAttribute="top" secondItem="2JS-N3-02R" secondAttribute="bottom" constant="8" id="USp-S8-oxQ"/>
                     <constraint firstItem="NnD-7a-ucI" firstAttribute="top" secondItem="yEV-mI-i6n" secondAttribute="bottom" constant="-36" id="WGT-XL-dkG"/>
@@ -205,10 +212,14 @@
                     <constraint firstItem="Jc6-Py-vEP" firstAttribute="centerX" secondItem="3vU-1B-BDg" secondAttribute="centerX" id="aeb-QA-rsw"/>
                     <constraint firstItem="A7c-v4-g5g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="f7h-bV-uGm"/>
                     <constraint firstItem="yEV-mI-i6n" firstAttribute="top" secondItem="Gyq-QT-76K" secondAttribute="bottom" constant="-40" id="fwG-G2-vbP"/>
+                    <constraint firstItem="gfV-8P-1ps" firstAttribute="top" secondItem="hsZ-sN-FjD" secondAttribute="bottom" constant="-2" id="gKQ-0I-Iib"/>
+                    <constraint firstItem="nHy-fE-vKC" firstAttribute="top" secondItem="hsZ-sN-FjD" secondAttribute="bottom" constant="-54" id="iis-Ld-gPb"/>
+                    <constraint firstItem="gfV-8P-1ps" firstAttribute="leading" secondItem="NnD-7a-ucI" secondAttribute="trailing" constant="10" id="jiW-Wv-eck"/>
                     <constraint firstItem="YhN-aT-Xjt" firstAttribute="top" secondItem="3vU-1B-BDg" secondAttribute="bottom" constant="-38" id="lKx-rA-KpE"/>
                     <constraint firstAttribute="centerX" secondItem="3vU-1B-BDg" secondAttribute="centerX" constant="-172" id="law-6R-pPf"/>
                     <constraint firstAttribute="bottom" secondItem="A7c-v4-g5g" secondAttribute="bottom" id="pS4-fl-saN"/>
                     <constraint firstAttribute="trailing" secondItem="2JS-N3-02R" secondAttribute="trailing" id="q80-xx-bVM"/>
+                    <constraint firstItem="3vU-1B-BDg" firstAttribute="leading" secondItem="gfV-8P-1ps" secondAttribute="trailing" constant="12" id="rWd-6W-0wY"/>
                     <constraint firstItem="nHy-fE-vKC" firstAttribute="centerX" secondItem="hsZ-sN-FjD" secondAttribute="centerX" constant="2" id="s9R-2j-CMn"/>
                     <constraint firstAttribute="trailing" secondItem="A7c-v4-g5g" secondAttribute="trailing" id="u1g-6u-AGo"/>
                     <constraint firstAttribute="centerX" secondItem="nHy-fE-vKC" secondAttribute="centerX" id="vZE-aa-Qef"/>
@@ -226,7 +237,12 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="financing" destination="hsZ-sN-FjD" id="rlW-a1-IiW"/>
+                <outlet property="investemnt" destination="YhN-aT-Xjt" id="1vH-VZ-dmP"/>
+                <outlet property="lblCartNumber" destination="RNf-dW-QE3" id="F2o-W2-6PA"/>
+                <outlet property="lblFinaincinSum" destination="gfV-8P-1ps" id="Vci-yQ-ZdW"/>
                 <outlet property="poductTableView" destination="7f6-iV-T67" id="6gp-gf-fvL"/>
+                <outlet property="systemRebates" destination="NnD-7a-ucI" id="uC1-Tw-N00"/>
             </connections>
             <point key="canvasLocation" x="461" y="327.5"/>
         </tableViewCell>

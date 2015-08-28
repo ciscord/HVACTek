@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "Item.h"
+#import "testerViewController.h"
 
 @interface CartViewController : UIViewController <MFMailComposeViewControllerDelegate>
 {
@@ -18,7 +19,7 @@
     NSMutableString *products;
     
 }
-
+@property (strong, nonatomic) IBOutlet UITableView *cartstableView;
 @property (weak, nonatomic) IBOutlet UILabel *yourOrderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *afterSavingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *finance;
@@ -29,6 +30,8 @@
 @property (nonatomic, strong) NSArray *cartItems;
 @property (nonatomic) int months;
 @property (nonatomic, strong) NSArray *rebates;
+@property (nonatomic, strong)  NSMutableArray *carts;
+@property (nonatomic, strong) id testerVC;
 - (IBAction)email:(id)sender;
 - (IBAction)mainMenu:(id)sender;
 
