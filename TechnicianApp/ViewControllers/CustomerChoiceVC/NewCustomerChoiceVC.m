@@ -168,7 +168,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         }
         
         if (self.isOnlyDiagnostic)
-            cell.descriptionLabel.text = self.selectedServiceOptionsDict[@"title"];
+        {
+            if (indexPath.row == 0)
+                cell.descriptionLabel.text = self.selectedServiceOptionsDict[@"title"];
+            else
+                cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
+        }
         else
             cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
         

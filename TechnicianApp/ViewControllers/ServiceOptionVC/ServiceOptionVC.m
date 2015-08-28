@@ -11,6 +11,8 @@
 #import "ViewOptionsVC.h"
 #import "CustomerChoiceVC.h"
 #import "PlatinumOptionsVC.h"
+#import "ESABenefitsVC.h"
+#import "EnlargeOptionsVC.h"
 
 @interface ServiceOptionVC ()
 
@@ -34,14 +36,26 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     self.title = @"Customer's Choice";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 
+//    if (self.optionsDisplayType == odtEditing) {
+//        self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
+//                         @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
+//                         @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
+//                         @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
+//                         @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
+//
+//    }
+    
+    
     if (self.optionsDisplayType == odtEditing) {
         self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
-
+        
     }
+    
+    
 
     self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
 
@@ -103,7 +117,20 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
         PlatinumOptionsVC *vc = [segue destinationViewController];
         vc.priceBookAndServiceOptions = self.options;
+        
     }
+    else if ([vc isKindOfClass:[ESABenefitsVC class]]) {
+        ESABenefitsVC *vc = [segue destinationViewController];
+        vc.serviceOptionsPriceBook = self.options;
+    }
+    
+    
+//    if ([segue.destinationViewController isKindOfClass:[EnlargeOptionsVC class]])
+//    {
+//        EnlargeOptionsVC *vc = (EnlargeOptionsVC*)segue.destinationViewController;
+//       
+//
+//    }
 }
 
 - (void)setPriceBookAndServiceOptions:(NSArray *)priceBookAndServiceOptions {
@@ -145,17 +172,29 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
     NSMutableDictionary *option = self.options[index];
     NSMutableArray      *items  = option[@"items"];
-    [items removeObjectAtIndex:optionIndex];
+    
+    //////
+    
+    NSMutableArray *allItems  = [self.options[0] objectForKey:@"items"];
+    [items removeObjectAtIndex:[items indexOfObject:allItems[optionIndex]]];
+    
+    /////
+    
+   // [items removeObjectAtIndex:optionIndex];
     option[@"items"]      = items;
     option[@"isEditable"] = @(NO);
-    NSArray *editableItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]];
-    if (editableItems.count > 0 && self.options.count > index+1) {
+    
+    NSArray *editableItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]]; ///items inloc de 0
+    
+    NSLog(@"editableItems %lu",(unsigned long)editableItems.count);
+    
+    if (editableItems.count -1 > 0 && self.options.count > index+1) {   ///.count
         NSMutableDictionary *nextOption = self.options[index+1];
         nextOption[@"items"]      = items.mutableCopy;
         nextOption[@"isEditable"] = @(items.count > 1);
     }
-
-    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
+    
+    self.btnContinue.hidden = ([editableItems count] -1 > 0) && (self.options.lastObject != option);  ///count
 
     [self.tableView reloadData];
 }
@@ -170,7 +209,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self.options objectAtIndex:indexPath.section];
+    
     return [RecommendationTableViewCell heightWithData:items];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -182,7 +223,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return self.options.count;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,7 +246,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
          [weakSelf resetOptions];
      }];
 
-    [cell displayServiceOptions:items];
+    ///[cell displayServiceOptions:items];
+    [cell displayServiceOptions:items andRemovedServiceOptions:[self.options[0] objectForKey:@"items"]];
     [cell setOnOptionSelected:^(NSInteger rowIndex, NSInteger itemIndex){
          [weakSelf didSelectOptionsWithRow:rowIndex withOptionIndex:itemIndex];
      }];
@@ -215,6 +259,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
          [weakSelf performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
      }];
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showEnlargeOptions" sender:self];
 }
 
 @end

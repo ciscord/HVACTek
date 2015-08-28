@@ -60,6 +60,8 @@ typedef void (^OnDidRemoveOption)(NSInteger rowIndex);
 @property (weak, nonatomic) IBOutlet UILabel     *lbESAsaving;
 @property (weak, nonatomic) IBOutlet UILabel     *lb24MonthRates;
 
+@property (nonatomic, strong) NSMutableArray     *serviceOptionsRemoved;
+
 @end
 
 @implementation RecommendationTableViewCell
@@ -188,9 +190,10 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 }
 
-- (void)displayServiceOptions:(NSArray *)options {
+- (void)displayServiceOptions:(NSArray *)options andRemovedServiceOptions:(NSArray *)removedOptions {
 
     self.serviceOptions = [NSMutableArray arrayWithArray:options];
+    self.serviceOptionsRemoved = [NSMutableArray arrayWithArray:removedOptions];
 
     if (self.optionsDisplayType == odtReadonlyWithPrice || _optionsDisplayType == odtCustomerFinalChoice) {
 
@@ -247,18 +250,49 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.serviceOptions count] - 1;
+    ///return [self.serviceOptions count] - 1;
+    ///return [self.serviceOptionsUpdated count] - 1;
+    
+    if ([self.serviceOptions count] == 0){
+        return 0;
+    }else{
+        return [self.serviceOptionsRemoved count] - 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak RecommendationTableViewCell *weakSelf = self;
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-    PricebookItem                  *p    = self.serviceOptions[indexPath.row+1];
-    cell.textLabel.text       = p.name;
-    cell.textLabel.font       = [UIFont fontWithName:@"Calibri-Light" size:17];
+    ///PricebookItem                  *p    = self.serviceOptions[indexPath.row+1];
+    PricebookItem                  *p    = self.serviceOptionsRemoved[indexPath.row+1];
+    
     cell.accessoryView.hidden = !self.isEditable || p.isMain;
+    
+    
+    if (![self.serviceOptions containsObject:p]){
+        
+        NSDictionary* attributes = @{
+                                     NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
+                                     };
+        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:p.name attributes:attributes];
+        cell.textLabel.attributedText = attrText;
+        
+        cell.accessoryView.hidden = YES;
+        
+    }else{
+        if (cell.textLabel.attributedText){
+            cell.textLabel.attributedText = nil;
+        }
+        cell.textLabel.text = p.name;
+    }
+    
+    ///cell.textLabel.text = p.name;
+    cell.textLabel.font       = [UIFont fontWithName:@"Calibri-Light" size:17];
+    ///cell.accessoryView.hidden = !self.isEditable || p.isMain;
     cell.rowIndex             = indexPath.row;
+    
+    ///cell.rowIndex = [self.serviceOptions indexOfObject:p];
     [cell setOnRemovedOption:^(NSInteger rowIndex) {
          [weakSelf didRemoveOptionAtIndex:rowIndex];
      }];

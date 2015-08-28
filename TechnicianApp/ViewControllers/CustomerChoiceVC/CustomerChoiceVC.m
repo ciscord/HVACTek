@@ -159,7 +159,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
     vc.unselectedOptionsArray = self.unusedServiceOptions;
     //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
-    vc.selectedServiceOptionsDict = [self addDiscountsToArray];
+    vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
 
     
     if (self.isOnlyDiagnostic) {
@@ -177,14 +177,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
                             @"title" : @"Diagnostic Only"
                             };
         
-        vc.selectedServiceOptionsDict = d;
+        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
     }
     
 }
 
-- (NSDictionary *)addDiscountsToArray {
+- (NSDictionary *)addDiscountsToDictionary:(NSDictionary *)dictionary {
     
     NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"items"]];
+
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]].floatValue != 0) {
         PricebookItem *clubMembership = [PricebookItem new];
@@ -214,7 +215,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     }
     
     
-    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:self.selectedServiceOptions];
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:dictionary]; //self.selectedServiceOptions
     
     [newDict removeObjectForKey:@"items"];
     [newDict setObject:newArray forKey:@"items"];

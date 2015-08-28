@@ -2503,11 +2503,133 @@ you must debrief from job</string>
                     <connections>
                         <outlet property="tableView" destination="VmU-RT-fY5" id="tqT-H1-oIK"/>
                         <segue destination="PVm-o9-UYq" kind="push" identifier="customerChoiceSegue" id="DnI-yT-bKf"/>
+                        <segue destination="sFe-4S-ONH" kind="modal" identifier="showEnlargeOptions" modalTransitionStyle="crossDissolve" id="Gis-yL-ftw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CJ-XQ-aSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2425" y="3206"/>
+        </scene>
+        <!--Enlarge OptionsVC-->
+        <scene sceneID="VdB-j4-f4E">
+            <objects>
+                <viewController id="sFe-4S-ONH" customClass="EnlargeOptionsVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gJ9-7z-6u0">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="MYs-VR-G1s" customClass="RoundCornerView">
+                                <rect key="frame" x="39" y="247" width="690" height="664"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zML-XZ-EUZ">
+                                        <rect key="frame" x="0.0" y="97" width="690" height="364"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="8qd-Vt-zmM" id="dyh-pr-ee5"/>
+                                            <outlet property="delegate" destination="8qd-Vt-zmM" id="kk6-Xc-eWJ"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" id="g2g-fV-8K7">
+                                        <rect key="frame" x="26" y="97" width="638" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="fdh-gn-XOY">
+                                        <rect key="frame" x="26" y="459" width="638" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="6ez-g6-dAw">
+                                        <rect key="frame" x="228" y="536" width="235" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommendation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Epg-Pd-ap1">
+                                        <rect key="frame" x="273" y="23" width="144" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" id="9PK-vg-WbL">
+                                        <rect key="frame" x="325" y="45" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ng0-o1-nA4">
+                                                <rect key="frame" x="-1" y="4" width="42" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12395" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ULf-mc-uBH">
+                                        <rect key="frame" x="0.0" y="486" width="690" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="45"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$10132" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kZO-RB-cgq">
+                                        <rect key="frame" x="0.0" y="541" width="690" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="45"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 payments of $254" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M5j-0Q-Vsu">
+                                        <rect key="frame" x="0.0" y="635" width="690" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% ESA Savings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RpC-X2-z59">
+                                        <rect key="frame" x="0.0" y="617" width="690" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fuf-Kw-161">
+                                        <rect key="frame" x="37" y="34" width="89" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBack:" destination="sFe-4S-ONH" eventType="touchUpInside" id="Yq2-R2-LlA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.96470588450000005" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="ESAPriceLbl" destination="kZO-RB-cgq" id="Z7u-Pv-GZY"/>
+                        <outlet property="enlargeIndexLbl" destination="ng0-o1-nA4" id="20l-sX-0PK"/>
+                        <outlet property="enlargeTable" destination="zML-XZ-EUZ" id="AGf-Mc-36f"/>
+                        <outlet property="monthlyPaymentsLbl" destination="M5j-0Q-Vsu" id="bD6-fj-kMr"/>
+                        <outlet property="savingESALbl" destination="RpC-X2-z59" id="07q-Ut-M6T"/>
+                        <outlet property="totalPriceLbl" destination="ULf-mc-uBH" id="vjz-Va-bWc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kmS-JN-8Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2425" y="4429"/>
         </scene>
         <!--Platinum OptionsVC-->
         <scene sceneID="YrD-1r-tZa">

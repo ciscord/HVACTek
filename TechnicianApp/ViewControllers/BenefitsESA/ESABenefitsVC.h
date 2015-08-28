@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *discountView;
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 
+@property(nonatomic, strong) NSArray *serviceOptionsPriceBook;
+
 @end
