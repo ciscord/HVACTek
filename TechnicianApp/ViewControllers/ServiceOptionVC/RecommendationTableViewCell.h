@@ -27,7 +27,9 @@ typedef void (^OnPriceSelected)(NSInteger rowIndex, BOOL isDiscounted);
 @property (nonatomic, copy) OnOptionSelected     onOptionSelected;
 @property (nonatomic, copy) OnPriceSelected      onPriceSelected;
 
-- (void)displayServiceOptions:(NSArray *)options;
+//- (void)displayServiceOptions:(NSArray *)options;
+- (void)displayServiceOptions:(NSArray *)options andRemovedServiceOptions:(NSArray *)removedOptions;
+
 
 + (CGFloat)heightWithData:(id)data;
 

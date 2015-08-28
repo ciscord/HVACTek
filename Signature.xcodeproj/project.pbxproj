@@ -97,6 +97,7 @@
 		522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */; };
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
+		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
 		75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75399F611A39D7FB0013EAC0 /* PriceBookView.xib */; };
@@ -281,6 +282,8 @@
 		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
 		524FDFF41B79046100480987 /* CustomerChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerChoiceCell.m; sourceTree = "<group>"; };
 		524FDFF51B79046100480987 /* CustomerChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerChoiceCell.xib; sourceTree = "<group>"; };
+		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
+		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75399F591A39CD2E0013EAC0 /* RepairVsServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairVsServiceVC.h; sourceTree = "<group>"; };
 		75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairVsServiceVC.m; sourceTree = "<group>"; };
@@ -639,6 +642,7 @@
 				75D73F131A38A9D20051143C /* SummaryOfFindingsOptionsVC */,
 				75399F581A39CD250013EAC0 /* RepairVsServiceVC */,
 				75D73F1C1A38BFD10051143C /* SummaryOfFindingsVC */,
+				52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */,
 				75D1A8FE1A3B15B5000F6765 /* ServiceOptionVC */,
 				4FF901B81AB8460900D87FAB /* PlatinumOptionsVC */,
 				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
@@ -785,6 +789,15 @@
 				520159CC1B8D8D830035909C /* ESABenefitsVC.m */,
 			);
 			path = BenefitsESA;
+			sourceTree = "<group>";
+		};
+		52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */ = {
+			isa = PBXGroup;
+			children = (
+				52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */,
+				52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */,
+			);
+			path = EnlargeViewOptions;
 			sourceTree = "<group>";
 		};
 		75399F581A39CD250013EAC0 /* RepairVsServiceVC */ = {
@@ -1127,6 +1140,7 @@
 				75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */,
 				4F11D3FB1AA772E4007FC0A8 /* NSManagedObject+CoreDataCustom.m in Sources */,
 				520159D01B8D9C590035909C /* AgendaPictureRoundView.m in Sources */,
+				52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
