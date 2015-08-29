@@ -108,6 +108,9 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                    onError:(void (^)(NSError *error))onError;
 
 
+- (void)postInvoice:(NSDictionary*)InvoiceInfo
+                 onSuccess:(void (^)(NSString *message))onSuccess
+                   onError:(void (^)(NSError *error))onError;
 
 
 //- (void)connectToSWAPIonSucces:(void (^)(NSString *message))onSuccess

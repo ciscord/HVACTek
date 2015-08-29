@@ -247,6 +247,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     }
 }
 
+
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];

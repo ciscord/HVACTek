@@ -17,7 +17,7 @@
 
 
 
-#define DEVELOPMENT
+//#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 
@@ -40,7 +40,7 @@ NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143"
 NSString *const kSWAPIAgentName     = @"SIG01";
 NSString *const kSWAPIAgentPassword = @"Signature01";
 NSString *const kSWAPIMasterID      = @"02364";
-NSString *const kSWAPIMode          = @"live";
+NSString *const kSWAPIMode          = @"tutorial";
 NSString *const kSWAPICompanyNo     = @"1001";
 //    NSString *const kSWAPIUsername      = @"agt_SIG01";
 //    NSString *const kSWAPIUserPassword  = @"Signature01";
@@ -73,6 +73,7 @@ NSString *const QUESTIONS        = @"questions";
 NSString *const PRICEBOOK        = @"pricebook";
 NSString *const DEBRIEF          = @"addDebrief";
 NSString *const SURVEY           = @"saveSurvey";
+NSString *const INVOICE          = @"emailInvoice";
 
 #define kStatusOK 1
 
@@ -567,6 +568,38 @@ NSString *const SURVEY           = @"saveSurvey";
        }];
 }
 
+- (void)postInvoice:(NSMutableDictionary*)InvoiceInfo
+          onSuccess:(void (^)(NSString *message))onSuccess
+            onError:(void (^)(NSError *error))onError{
+    NSLog(@"%@", InvoiceInfo);
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:INVOICE
+    parameters:@{ @"invoice" : InvoiceInfo }
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               if (onSuccess) {
+                   onSuccess(nil);
+               }
+           }
+           else if (onError)
+           {
+               NSError *error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : responseObject[@"message"]}];
+               //    [self showErrorMessage:error];
+               NSLog(@"%@",error);
+               onError(error);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"%@", error);
+           if (onError) {
+               onError(error);
+           }
+       }];
+
+    
+}
 
 - (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
 {

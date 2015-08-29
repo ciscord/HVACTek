@@ -8,7 +8,7 @@
 
 #import "BaseVC.h"
 
-@interface NewCustomerChoiceVC : BaseVC <UITableViewDataSource, UITableViewDelegate> {
+@interface NewCustomerChoiceVC : BaseVC <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     
 }
 

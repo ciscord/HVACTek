@@ -153,8 +153,8 @@ NSString *const kResultStatusOK = @"000";
 //                      @"<SessionRequest SessionID=\"%@\"><AssignmentListQuery><SchedDate>%@</SchedDate><EmployeeCode>%@</EmployeeCode>\
 //                      </AssignmentListQuery></SessionRequest>",
 //                      self.sessionID,
-//                      [dateTimeFormatter stringFromDate:[NSDate date]],
-//                      //     [dateTimeFormatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:60*60*24*-2]],
+//                     // [dateTimeFormatter stringFromDate:[NSDate date]],
+//                          [dateTimeFormatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:60*60*24*-1]],
 //                      employeeCode];
 
 

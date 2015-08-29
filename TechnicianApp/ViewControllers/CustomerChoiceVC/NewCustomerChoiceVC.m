@@ -95,8 +95,60 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     job.jobStatus = @(jstNeedDebrief);
     // job.startTime = [NSDate date];
     [job.managedObjectContext save];
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [self.navigationController popToViewController:appDelegate.homeController animated:YES];
+   
+    NSMutableArray *items1 = self.selectedServiceOptionsDict[@"items"];
+    NSMutableArray * selArray = [[NSMutableArray alloc]init];
+    
+    for (PricebookItem *p in items1) {
+        if (p.itemID != nil) {
+        
+        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
+        [parDic setObject:p.itemID forKey:@"itemID"];
+        [parDic setObject:p.itemNumber forKey:@"itemNumber"];
+        [parDic setObject:p.itemGroup forKey:@"itemGroup"];
+        [parDic setObject:p.name forKey:@"name"];
+        [parDic setObject:p.amount forKey:@"amount"];
+        [parDic setObject:p.amountESA forKey:@"amountESA"];
+        
+        [selArray addObject:parDic];
+        }
+    }
+    
+    
+    NSMutableArray * unselArray = [[NSMutableArray alloc]init];
+    NSMutableArray *items2 =  self.unselectedOptionsArray;
+    for (PricebookItem *p in items2) {
+      if (p.itemID != nil) {
+        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
+        [parDic setObject:p.itemID forKey:@"itemID"];
+         [parDic setObject:p.itemNumber forKey:@"itemNumber"];
+         [parDic setObject:p.itemGroup forKey:@"itemGroup"];
+         [parDic setObject:p.name forKey:@"name"];
+         [parDic setObject:p.amount forKey:@"amount"];
+         [parDic setObject:p.amountESA forKey:@"amountESA"];
+        [unselArray addObject:parDic];
+      }
+        
+    }
+    
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+    dict[@"unselectedServiceOptiunons"] = unselArray;
+    dict[@"selectedServiceOptions"] = selArray;
+    dict[@"totalprice"] = self.totalPriceLabel.text;
+    dict[@"serviceLevel"] = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
+ 
+    
+    
+    __weak __typeof(self)weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+ [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
+     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+     
+ } onError:^(NSError *error) {
+      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+ }];
 }
 - (IBAction)agreeBtnClicked:(id)sender {
     UIButton *button = sender;

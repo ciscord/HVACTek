@@ -274,10 +274,14 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) DebriefCell *addOnFutureRevenuCell;
 @property (nonatomic, strong) DebriefCell *totalRevenuGeneratedCell;
 
-@property (nonatomic, strong) DebriefCell *priceQuotedCell;
-@property (nonatomic, strong) DebriefCell *priceAppruvedCell;
-@property (nonatomic, strong) DebriefCell *whoCell;
 
+@property (nonatomic, strong) DebriefCell *whoCell;
+@property (nonatomic, strong) NSMutableArray * scheduledDependecesCells;
+@property (nonatomic, strong) NSMutableArray * scheduledDependecesCellsTitles;
+
+@property (nonatomic, strong) NSNumber* hideSection1;
+@property (nonatomic, strong) NSNumber* hideSection2;
+@property (nonatomic, strong) NSNumber* hideSection3;
 @end
 
 @implementation TechnicianDebriefVC
@@ -287,7 +291,22 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.hideSection1 = [NSNumber numberWithBool:NO];
+    self.hideSection2 = [NSNumber numberWithBool:NO];
+    self.hideSection3 = [NSNumber numberWithBool:NO];
+    
+    self.scheduledDependecesCells = [[NSMutableArray alloc]init];
+    self.scheduledDependecesCellsTitles = [[NSMutableArray alloc] initWithArray:@[@"Price Quoted",
+                                                                                  @"Price Approved",
+                                                                                  @"Ammount Of 50% Deposit Collected",
+                                                                                  @"Parts Ordered By",
+                                                                                  @"Suppler Parts Ordered From",
+                                                                                  @"Time Needed For Repair",
+                                                                                  @"When Is The Repair Scheduled",
+                                                                                  @"Model Of System Needing Repair",
+                                                                                  @"Serial Number Of System Needing Repair",
+                                                                                  @"Location of System Needing Repair",
+                                                                                  @"Special Instructions Or Tools Required"]];
     self.keyboardAvoiding.contentSize = self.tableView.frame.size;
 
     self.jobToDebrief = [[[DataLoader sharedInstance] currentUser] activeJob];
@@ -383,6 +402,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *attachAllPartsUsedToTicked         = [self itemDicWith:@"Johnstone App Parts Ordered" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"attach_all_parts_used_to_tiket" APIValues:@[@0, @1]];
     NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"system_running" APIValues:@[@0, @1]];
     NSMutableDictionary *followUpRequired                   = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
+    
+      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Follow Up notes" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
 
 //    if ([callBack[@"accVal"]  isEqual: @"YES"]) {
 //        NSLog(@"YES selected");
@@ -429,7 +450,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
              sentReviewBuzzLink,
              attachAllPartsUsedToTicked,
              thermostatSetAndSystemRunning,
-             followUpRequired];
+             followUpRequired,
+             followUpNotes];
 }
 
 - (NSMutableDictionary *)itemDicWith:(NSString *)title
@@ -526,6 +548,19 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+    
+    switch (section) {
+//        case 0: return 15;
+//            break;
+        case 1: return  [self.hideSection1 boolValue]? 1 : 2;
+            break;
+        case 2: return  [self.hideSection2 boolValue]? 1 : 19;
+            break;
+        case 3: return  [self.hideSection3 boolValue]? 1 : 2;
+            break;
+        default:
+            break;
+    }
     return self.elementsToShow.count;
 }
 
@@ -536,92 +571,131 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     return 42.0f;
 }
 
+-(NSMutableArray *)cellsForTableView:(UITableView *)tableView
+{
+    NSMutableArray *cells = [[NSMutableArray alloc]  init];
+    
+    //Need to total each section
+    for (int i = 0; i < [tableView numberOfSections]; i++)
+    {
+        NSInteger rows =  [tableView numberOfRowsInSection:i];
+        for (int row = 0; row < rows; row++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:i];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+               [cells addObject:cell];
+
+            
+        }
+        
+    }
+    return cells;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DebriefCell *cell = (DebriefCell *)[tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];
-    cell.cellData        = self.elementsToShow[indexPath.row];
+    
+    
+    switch (indexPath.section) {
+        case 0:  cell.cellData  = self.elementsToShow[indexPath.row];
+            break;
+        case 1: cell.cellData  = self.elementsToShow[indexPath.row +15];
+            break;
+        case 2: cell.cellData  = self.elementsToShow[indexPath.row +16];
+            break;
+        case 3: cell.cellData  = self.elementsToShow[indexPath.row +35];
+            break;
+        default:
+            break;
+    }
+   
+
+    
     cell.backgroundColor = [UIColor clearColor];
     if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == drpDownCellAcc) {
         
         [cell setOnDropDownValueChange:^(DebriefCell *aCell) {
             if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
-                self.priceQuotedCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
-                self.priceAppruvedCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+//                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+//                self.tableView.reloadData;
+                
             }
             
             if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
-                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+//                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+//                self.tableView.reloadData;
+//                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
             }
         }];
         
         [cell setOnDropDown:^(DebriefCell *aCell) {
-             if ([self.tableView.subviews containsObject:aCell.txtField.dropDownTableView]) {
-                 [aCell.txtField resignFirstResponder];
-             } else {
-                 [aCell.txtField becomeFirstResponder];
-                 aCell.txtField.dropDownTableView.hidden = NO;
-                 [self.tableView addSubview:aCell.txtField.dropDownTableView];
-
-             }
+            if ([self.tableView.subviews containsObject:aCell.txtField.dropDownTableView]) {
+                [aCell.txtField resignFirstResponder];
+            } else {
+                [aCell.txtField becomeFirstResponder];
+                aCell.txtField.dropDownTableView.hidden = NO;
+                [self.tableView addSubview:aCell.txtField.dropDownTableView];
+                
+            }
             
-           
-
-             CGRect frame = [self.tableView convertRect:aCell.txtField.dropDownTableView.frame fromView:aCell.txtField];
-             aCell.txtField.dropDownTableView.frame = frame;
-
-         }];
+            
+            
+            CGRect frame = [self.tableView convertRect:aCell.txtField.dropDownTableView.frame fromView:aCell.txtField];
+            aCell.txtField.dropDownTableView.frame = frame;
+            
+        }];
     }
     cell.tag = [cell.cellData[@"cellType"] integerValue];
-
+    
     __weak typeof (self) weakSelf = self;
     [cell setOnTextChange:^(DebriefCell *c, NSString *str) {
-         CGFloat sum1 = (c == weakSelf.totalRevenuCell ? str.doubleValue : [weakSelf.totalRevenuCell.txtField.text doubleValue]);
-         CGFloat sum2 = (c == weakSelf.addOnFutureRevenuCell ? str.doubleValue : [weakSelf.addOnFutureRevenuCell.txtField.text doubleValue]);
-         CGFloat totalSum = sum1 + sum2;
-
-         [weakSelf.elementsToShow enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-              if ([obj[@"cellType"] integerValue] == ctCellTotalRevenueGenerated) {
-                  obj[@"accVal"] = [self changeCurrencyFormat:totalSum];
-                  obj[@"APIValues"] = @[[self changeCurrencyFormat:totalSum]];
-                  weakSelf.totalRevenuGeneratedCell.cellData = obj;
-                  *stop = YES;
-              }
-          }];
-     }];
-
+        CGFloat sum1 = (c == weakSelf.totalRevenuCell ? str.doubleValue : [weakSelf.totalRevenuCell.txtField.text doubleValue]);
+        CGFloat sum2 = (c == weakSelf.addOnFutureRevenuCell ? str.doubleValue : [weakSelf.addOnFutureRevenuCell.txtField.text doubleValue]);
+        CGFloat totalSum = sum1 + sum2;
+        
+        [weakSelf.elementsToShow enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj[@"cellType"] integerValue] == ctCellTotalRevenueGenerated) {
+                obj[@"accVal"] = [self changeCurrencyFormat:totalSum];
+                obj[@"APIValues"] = @[[self changeCurrencyFormat:totalSum]];
+                weakSelf.totalRevenuGeneratedCell.cellData = obj;
+                *stop = YES;
+            }
+        }];
+    }];
+    
     switch (cell.tag) {
-    case ctCellTotalRevenue:
-        self.totalRevenuCell = cell;
-        break;
-    case ctCellAddOnSaleFuture:
-        self.addOnFutureRevenuCell = cell;
-        break;
-    case ctCellTotalRevenueGenerated:
-        self.totalRevenuGeneratedCell = cell;
-        break;
-    default:
-        break;
+        case ctCellTotalRevenue:
+            self.totalRevenuCell = cell;
+            break;
+        case ctCellAddOnSaleFuture:
+            self.addOnFutureRevenuCell = cell;
+            break;
+        case ctCellTotalRevenueGenerated:
+            self.totalRevenuGeneratedCell = cell;
+            break;
+        default:
+            break;
     }
-
+    
     
     //*************************************************************
-    if ([cell.lblTitle.text isEqualToString:@"Price Quoted"]) {
-        self.priceQuotedCell  = cell;
-        self.priceQuotedCell.hidden = YES;
-    }
+//    if ([cell.lblTitle.text isEqualToString:@"Price Quoted"]) {
+//        self.priceQuotedCell  = cell;
+//        self.priceQuotedCell.hidden = YES;
+//    }
+//    
+//    if ([cell.lblTitle.text isEqualToString:@"Price Approved"]) {
+//        self.priceAppruvedCell  = cell;
+//        self.priceAppruvedCell.hidden = YES;
+//    }
     
-    if ([cell.lblTitle.text isEqualToString:@"Price Approved"]) {
-          self.priceAppruvedCell  = cell;
-        self.priceAppruvedCell.hidden = YES;
-    }
+//    if ([cell.lblTitle.text isEqualToString:@"Who"]) {
+//        self.whoCell  = cell;
+//        self.whoCell.hidden = YES;
+//    }
     
-    if ([cell.lblTitle.text isEqualToString:@"Who"]) {
-        self.whoCell  = cell;
-        self.whoCell.hidden = YES;
-    }
-   
-  
+    
     return cell;
-
+    
 }
 
 #pragma mark - Currency String
