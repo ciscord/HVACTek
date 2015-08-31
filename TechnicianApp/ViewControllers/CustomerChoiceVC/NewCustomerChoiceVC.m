@@ -139,7 +139,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
    
     
     
-    NSDictionary * dict = @{@"jobID" : job.jobID,
+    NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,
+                            @"userCode" : [DataLoader sharedInstance].currentUser.userCode,
+                            @"userName" : [DataLoader sharedInstance].currentUser.userName,
+                            @"jobID" : job.jobID,
                             @"FirstName" : [customerInfo objectForKeyNotNull:@"FirstName"],
                             @"LastName": [customerInfo objectForKeyNotNull:@"LastName"],
                             @"Address1": [customerInfo objectForKeyNotNull:@"Address1"],
