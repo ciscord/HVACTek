@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *stopView;
 @property (weak, nonatomic) IBOutlet UIView *snapShotView;
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
+@property (strong, nonatomic) IBOutlet UIButton *btnSendByEmail;
 
 
 @end
@@ -102,20 +103,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     for (PricebookItem *p in items1) {
         if (p.itemID != nil) {
         
-//        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
-//        [parDic setObject:p.itemID forKey:@"itemID"];
-//        [parDic setObject:p.itemNumber forKey:@"itemNumber"];
-//        [parDic setObject:p.itemGroup forKey:@"itemGroup"];
-//        [parDic setObject:p.name forKey:@"name"];
-//        [parDic setObject:p.amount forKey:@"amount"];
-//        [parDic setObject:p.amountESA forKey:@"amountESA"];
         
             [selArray addObject:@{@"itemID" :p.itemID,
-                                            @"itemNumber" : p.itemNumber,
-                                            @"itemGroup" :p.itemGroup,
-                                            @"name":p.name,
-                                            @"amount":p.amount,
-                                            @"amountESA": p.amountESA }];
+                                  @"itemNumber" : p.itemNumber,
+                                  @"itemGroup" :p.itemGroup,
+                                  @"name":p.name,
+                                  @"amount":p.amount,
+                                  @"amountESA": p.amountESA }];
         }
     }
     
@@ -124,13 +118,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSMutableArray *items2 =  self.unselectedOptionsArray;
     for (PricebookItem *p in items2) {
       if (p.itemID != nil) {
-//        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
-//        [parDic setObject:p.itemID forKey:@"itemID"];
-//         [parDic setObject:p.itemNumber forKey:@"itemNumber"];
-//         [parDic setObject:p.itemGroup forKey:@"itemGroup"];
-//         [parDic setObject:p.name forKey:@"name"];
-//         [parDic setObject:p.amount forKey:@"amount"];
-//         [parDic setObject:p.amountESA forKey:@"amountESA"];
+
           [unselArray addObject:@{@"itemID" :p.itemID,
                                   @"itemNumber" : p.itemNumber,
                                   @"itemGroup" :p.itemGroup,
@@ -141,21 +129,40 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         
     }
     
-    NSDictionary * dict = @{//@"unselectedServiceOptiunons" : unselArray,
-                            @"selectedServiceOptions" : selArray,
-                            @"totalprice" : self.totalPriceLabel.text
-   //                         @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]]
-                            };
    
- 
+    NSMutableDictionary *customerInfo = [[NSMutableDictionary alloc]initWithDictionary: job.swapiCustomerInfo];
     
+    UIImage *image = [UIImage imageWithData:[DataLoader sharedInstance].currentUser.activeJob.signatureFile];
+    NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if (signature == nil)  //signature was removed
+        signature = @"";
+   
+    
+    
+    NSDictionary * dict = @{@"jobID" : job.jobID,
+                            @"FirstName" : [customerInfo objectForKeyNotNull:@"FirstName"],
+                            @"LastName": [customerInfo objectForKeyNotNull:@"LastName"],
+                            @"Address1": [customerInfo objectForKeyNotNull:@"Address1"],
+                            @"Address2": [customerInfo objectForKeyNotNull:@"Address2"],
+                            @"City": [customerInfo objectForKeyNotNull:@"City"],
+                            @"State": [customerInfo objectForKeyNotNull:@"State"],
+                            @"Zip":[customerInfo objectForKeyNotNull:@"Zip"],
+                            @"AccountEmail" : [customerInfo objectForKeyNotNull:@"AccountEmail"],
+                            @"Phone" :[customerInfo objectForKeyNotNull:@"Phone"],
+                            @"unselectedServiceOptiunons" : unselArray,
+                            @"selectedServiceOptions" : selArray,
+                            @"totalprice" : self.totalPriceLabel.text,
+                            @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]],
+                            @"sendEmail":self.btnSendByEmail.selected ? @"1" : @"0",
+                            @"signature" : signature
+                            };
     
     __weak __typeof(self)weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
  [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
      
  } onError:^(NSError *error) {
       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -168,6 +175,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         button.selected = YES;
     else
         button.selected = NO;
+}
+
+- (IBAction)sendByEmailButton:(id)sender {
+   
+    
+    if (!self.btnSendByEmail.selected)
+        self.btnSendByEmail.selected = YES;
+    else
+        self.btnSendByEmail.selected = NO;
 }
 
 #pragma mark - SignatureView

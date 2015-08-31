@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibri.ttf">
@@ -1362,7 +1362,7 @@ the work you've selected</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="paL-xw-zzX">
-                                        <rect key="frame" x="176" y="876" width="188" height="52"/>
+                                        <rect key="frame" x="176" y="911" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
@@ -1381,7 +1381,7 @@ the work you've selected</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="93D-HU-vXw">
-                                        <rect key="frame" x="404" y="876" width="188" height="52"/>
+                                        <rect key="frame" x="404" y="911" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
@@ -1565,6 +1565,24 @@ the work you've selected</string>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.96470588450000005" blue="0.88627451660000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bCq-jm-aiT">
+                                        <rect key="frame" x="262" y="850" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="summary-findings-checkbox-bg">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="summary-findings-checkmark" backgroundImage="summary-findings-checkbox-bg"/>
+                                        <connections>
+                                            <action selector="sendByEmailButton:" destination="J4s-ud-uAn" eventType="touchUpInside" id="WA5-P8-1R8"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Invoice By Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZCg-cN-sEO">
+                                        <rect key="frame" x="295" y="854" width="392" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </view>
                         </subviews>
@@ -1572,6 +1590,7 @@ the work you've selected</string>
                     </view>
                     <navigationItem key="navigationItem" id="VIp-Oc-E0f"/>
                     <connections>
+                        <outlet property="btnSendByEmail" destination="bCq-jm-aiT" id="yLP-W8-ADi"/>
                         <outlet property="optionsView" destination="gNB-jv-kcf" id="nBA-W2-yvr"/>
                         <outlet property="selectedOptionsTableView" destination="wyb-m8-ikz" id="qUR-ZL-JTg"/>
                         <outlet property="signatureView" destination="jca-Uy-Buc" id="I2c-Ip-fAw"/>
@@ -2798,11 +2817,6 @@ you must debrief from job</string>
         <image name="summary-findings-checkmark" width="19" height="15"/>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Cdo-cC-vmU"/>
     </inferredMetricsTieBreakers>
