@@ -27,6 +27,16 @@ typedef void (^OnPriceSelected)(NSInteger rowIndex, BOOL isDiscounted);
 @property (nonatomic, copy) OnOptionSelected     onOptionSelected;
 @property (nonatomic, copy) OnPriceSelected      onPriceSelected;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray     *serviceOptions;
+@property (weak, nonatomic) IBOutlet UIView      *vSeparator1;
+@property (weak, nonatomic) IBOutlet UIView      *vSeparator2;
+@property (weak, nonatomic) IBOutlet UIView      *vPrice;
+@property (weak, nonatomic) IBOutlet UIButton    *btnPrice1;
+@property (weak, nonatomic) IBOutlet UIButton    *btnPrice2;
+@property (weak, nonatomic) IBOutlet UILabel     *lbESAsaving;
+@property (weak, nonatomic) IBOutlet UILabel     *lb24MonthRates;
+
 //- (void)displayServiceOptions:(NSArray *)options;
 - (void)displayServiceOptions:(NSArray *)options andRemovedServiceOptions:(NSArray *)removedOptions;
 

@@ -36,26 +36,14 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     self.title = @"Customer's Choice";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 
-//    if (self.optionsDisplayType == odtEditing) {
-//        self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
-//                         @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
-//                         @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
-//                         @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
-//                         @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
-//
-//    }
-    
-    
     if (self.optionsDisplayType == odtEditing) {
         self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
-        
+
     }
-    
-    
 
     self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
 
@@ -72,6 +60,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - EnlargeOptionsVC
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
@@ -128,7 +118,12 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 //    if ([segue.destinationViewController isKindOfClass:[EnlargeOptionsVC class]])
 //    {
 //        EnlargeOptionsVC *vc = (EnlargeOptionsVC*)segue.destinationViewController;
-//       
+//        vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)self.selectedOption + 1];
+//        
+////        NSDictionary           *option   = self.options[self.selectedOption];
+////        NSArray                *items    = option[@"items"];
+//        
+//        
 //
 //    }
 }
@@ -263,7 +258,34 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showEnlargeOptions" sender:self];
+
+    NSDictionary           *option   = self.options[indexPath.row];
+    NSArray                *items    = option[@"items"];
+    
+    RecommendationTableViewCell *cell = (RecommendationTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard"
+                                                  bundle:nil];
+
+    EnlargeOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EnlargeOptionsVC"];
+    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.row + 1];
+    vc.enlargeTotalPrice = cell.btnPrice1.titleLabel.text;
+    vc.enlargeESAPrice = cell.btnPrice2.titleLabel.text;
+    vc.enlargeMonthlyPrice = cell.lb24MonthRates.text;
+    vc.enlargeSavings = cell.lbESAsaving.text;
+    vc.enlargeOptionsArray = items;
+    vc.enlargeFullOptionsArray = [self.options[0] objectForKey:@"items"];
+    
+    //[self.navigationController pushViewController:vc animated:YES];
+    
+    [self presentViewController:vc animated:YES completion:nil];
+
 }
+
+
+
+
+
 
 @end

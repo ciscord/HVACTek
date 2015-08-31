@@ -8,13 +8,17 @@
 
 #import "BaseVC.h"
 
-@interface EnlargeOptionsVC : BaseVC
+@interface EnlargeOptionsVC : BaseVC <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate> {
+    
+}
 
 @property (nonatomic, strong) NSArray *enlargeOptionsArray;
+@property (nonatomic, strong) NSArray *enlargeFullOptionsArray;
 @property (nonatomic, strong) NSString *enlargeIndex;
 @property (nonatomic, strong) NSString *enlargeTotalPrice;
 @property (nonatomic, strong) NSString *enlargeESAPrice;
 @property (nonatomic, strong) NSString *enlargeMonthlyPrice;
+@property (nonatomic, strong) NSString *enlargeSavings;
 
 
 @end
