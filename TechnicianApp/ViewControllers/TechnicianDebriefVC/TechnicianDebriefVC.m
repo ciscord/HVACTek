@@ -35,7 +35,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 
 #pragma mark - DebriefCell
 
-@interface DebriefCell : UITableViewCell<CHDropDownTextFieldDelegate, UITextFieldDelegate>
+@interface DebriefCell : UITableViewCell< UITextFieldDelegate>
 @property (nonatomic, assign) TDCellAccType                cellType;
 @property (nonatomic, strong) IBOutlet UILabel             *lblTitle;
 @property (nonatomic, strong) IBOutlet UILabel             *lblSubtitle;
@@ -121,7 +121,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtField.hidden                       = NO;
         self.txtField.dropDownTableVisibleRowCount = MIN(6, [(NSArray *)cellData[@"possVals"] count]);
         self.txtField.dropDownTableTitlesArray     = cellData[@"possVals"];
-        self.txtField.dropDownDelegate                     = self;
+       // self.txtField.dropDownDelegate                     = self;
         break;
     }
     case txtViewCellAcc:
@@ -275,7 +275,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) DebriefCell *totalRevenuGeneratedCell;
 
 
-@property (nonatomic, strong) DebriefCell *whoCell;
+
 @property (nonatomic, strong) NSMutableArray * scheduledDependecesCells;
 @property (nonatomic, strong) NSMutableArray * scheduledDependecesCellsTitles;
 
@@ -543,7 +543,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -552,11 +552,13 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     switch (section) {
 //        case 0: return 15;
 //            break;
-        case 1: return  [self.hideSection1 boolValue]? 1 : 2;
+        case 1: return 1;// [self.hideSection1 boolValue]? 1 : 2;
             break;
-        case 2: return  [self.hideSection2 boolValue]? 1 : 19;
+        case 2: return 0; //[self.hideSection2 boolValue]? 1 : 19;
             break;
-        case 3: return  [self.hideSection3 boolValue]? 1 : 2;
+        case 3: return 0;// [self.hideSection3 boolValue]? 1 : 2;
+            break;
+        case 4 : return 0;
             break;
         default:
             break;
@@ -565,6 +567,10 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1)  {
+        return 90;
+    } else
+    
     if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == txtViewCellAcc) {
         return 90.0f;
     }
@@ -592,8 +598,12 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+     if (indexPath.section == 1)  {
+          UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
+         return cell;
+     } else
+     {
     DebriefCell *cell = (DebriefCell *)[tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];
-    
     
     switch (indexPath.section) {
         case 0:  cell.cellData  = self.elementsToShow[indexPath.row];
@@ -614,17 +624,17 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == drpDownCellAcc) {
         
         [cell setOnDropDownValueChange:^(DebriefCell *aCell) {
-            if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
-//                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-//                self.tableView.reloadData;
-                
-            }
-            
-            if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
-//                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-//                self.tableView.reloadData;
-//                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
-            }
+//            if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
+////                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+////                self.tableView.reloadData;
+//                
+//            }
+//            
+//            if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
+////                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+////                self.tableView.reloadData;
+////                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
+//            }
         }];
         
         [cell setOnDropDown:^(DebriefCell *aCell) {
@@ -693,8 +703,10 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 //        self.whoCell.hidden = YES;
 //    }
     
+          return cell;
+     }
     
-    return cell;
+   
     
 }
 
