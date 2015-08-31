@@ -543,7 +543,7 @@ NSString *const INVOICE          = @"emailInvoice";
 
       self.responseSerializer = [AFJSONResponseSerializer serializer];
       [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
-//    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+///   [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
     [self POST:DEBRIEF
     parameters:@{ @"debrief" : params }
@@ -574,9 +574,11 @@ NSString *const INVOICE          = @"emailInvoice";
     NSLog(@"%@", InvoiceInfo);
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+ 
+    NSDictionary * params = [[NSDictionary alloc]initWithDictionary:InvoiceInfo];
     
     [self POST:INVOICE
-    parameters:@{ @"invoice" : InvoiceInfo }
+    parameters:@{ @"invoice" : params }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {

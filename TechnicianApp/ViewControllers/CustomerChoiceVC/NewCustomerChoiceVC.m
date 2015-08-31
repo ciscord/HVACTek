@@ -102,15 +102,20 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     for (PricebookItem *p in items1) {
         if (p.itemID != nil) {
         
-        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
-        [parDic setObject:p.itemID forKey:@"itemID"];
-        [parDic setObject:p.itemNumber forKey:@"itemNumber"];
-        [parDic setObject:p.itemGroup forKey:@"itemGroup"];
-        [parDic setObject:p.name forKey:@"name"];
-        [parDic setObject:p.amount forKey:@"amount"];
-        [parDic setObject:p.amountESA forKey:@"amountESA"];
+//        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
+//        [parDic setObject:p.itemID forKey:@"itemID"];
+//        [parDic setObject:p.itemNumber forKey:@"itemNumber"];
+//        [parDic setObject:p.itemGroup forKey:@"itemGroup"];
+//        [parDic setObject:p.name forKey:@"name"];
+//        [parDic setObject:p.amount forKey:@"amount"];
+//        [parDic setObject:p.amountESA forKey:@"amountESA"];
         
-        [selArray addObject:parDic];
+            [selArray addObject:@{@"itemID" :p.itemID,
+                                            @"itemNumber" : p.itemNumber,
+                                            @"itemGroup" :p.itemGroup,
+                                            @"name":p.name,
+                                            @"amount":p.amount,
+                                            @"amountESA": p.amountESA }];
         }
     }
     
@@ -119,23 +124,29 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSMutableArray *items2 =  self.unselectedOptionsArray;
     for (PricebookItem *p in items2) {
       if (p.itemID != nil) {
-        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
-        [parDic setObject:p.itemID forKey:@"itemID"];
-         [parDic setObject:p.itemNumber forKey:@"itemNumber"];
-         [parDic setObject:p.itemGroup forKey:@"itemGroup"];
-         [parDic setObject:p.name forKey:@"name"];
-         [parDic setObject:p.amount forKey:@"amount"];
-         [parDic setObject:p.amountESA forKey:@"amountESA"];
-        [unselArray addObject:parDic];
+//        NSMutableDictionary *parDic = [[NSMutableDictionary alloc]init];
+//        [parDic setObject:p.itemID forKey:@"itemID"];
+//         [parDic setObject:p.itemNumber forKey:@"itemNumber"];
+//         [parDic setObject:p.itemGroup forKey:@"itemGroup"];
+//         [parDic setObject:p.name forKey:@"name"];
+//         [parDic setObject:p.amount forKey:@"amount"];
+//         [parDic setObject:p.amountESA forKey:@"amountESA"];
+          [unselArray addObject:@{@"itemID" :p.itemID,
+                                  @"itemNumber" : p.itemNumber,
+                                  @"itemGroup" :p.itemGroup,
+                                  @"name":p.name,
+                                  @"amount":p.amount,
+                                  @"amountESA": p.amountESA }];
       }
         
     }
     
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
-    dict[@"unselectedServiceOptiunons"] = unselArray;
-    dict[@"selectedServiceOptions"] = selArray;
-    dict[@"totalprice"] = self.totalPriceLabel.text;
-    dict[@"serviceLevel"] = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
+    NSDictionary * dict = @{//@"unselectedServiceOptiunons" : unselArray,
+                            @"selectedServiceOptions" : selArray,
+                            @"totalprice" : self.totalPriceLabel.text
+   //                         @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]]
+                            };
+   
  
     
     
@@ -143,8 +154,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
  [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+//     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
      
  } onError:^(NSError *error) {
       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
