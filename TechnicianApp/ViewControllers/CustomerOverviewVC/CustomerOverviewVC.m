@@ -206,15 +206,21 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.serviceHistoryList = [NSMutableArray array];
     self.systemInfoList     = [NSMutableArray array];
 
+    
+   
+  
+    
     Job          *job          = [[[DataLoader sharedInstance] currentUser] activeJob];
-    NSDictionary *customerInfo = job.swapiCustomerInfo;
+    NSDictionary *customerInfo = [job.swapiCustomerInfo objectForKey:@"dsLocationList.dsLocation"];
+    //@"dsLocationList.dsLocation"
+    // NSDictionary *jobInfo = job.swapiJobInfo;
 
-    id historyInfo = [customerInfo valueForKeyPath:@"dsHistoryList.dsHistory"];
+    id historyInfo = [job.swapiCustomerInfo valueForKeyPath:@"dsHistoryList.dsHistory"];
     if ([historyInfo isKindOfClass:[NSDictionary class]]) {
         historyInfo = @[historyInfo];
     }
 
-    id equipmentList = [customerInfo valueForKeyPath:@"dsEquipList.dsEquip"];
+    id equipmentList = [job.swapiCustomerInfo valueForKeyPath:@"dsEquipList.dsEquip"];
     if ([equipmentList isKindOfClass:[NSDictionary class]]) {
         equipmentList = @[equipmentList];
     }
@@ -273,7 +279,7 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     SCustomerInfo *info11 = [SCustomerInfo new];
     info10.label = @"ESA Agreement";
     
-    id agreeList = [customerInfo valueForKeyPath:@"dsAgreeList.dsAgree"];
+    id agreeList = [job.swapiCustomerInfo valueForKeyPath:@"dsAgreeList.dsAgree"];
     NSDictionary *agree = nil;
     if ([agreeList isKindOfClass:[NSArray class]]) {
         agree = [[agreeList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"Status == 'active'"]] firstObject];

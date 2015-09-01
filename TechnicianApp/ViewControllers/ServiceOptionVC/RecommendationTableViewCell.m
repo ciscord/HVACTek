@@ -225,7 +225,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                 [self.btnPrice1 setTitle:[self changeCurrencyFormat:totalPriceESA] forState:UIControlStateNormal];
                 [self.btnPrice2 setTitle:[self changeCurrencyFormat:totalPriceNormal] forState:UIControlStateNormal];
 
-                self.lb24MonthRates.text = (totalPriceESA > 1500 ? [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceESA/24.] : @"");
+                self.lb24MonthRates.text = (totalPriceNormal > 1500 ? [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceNormal/24.] : @"");
             }
         }
     }
