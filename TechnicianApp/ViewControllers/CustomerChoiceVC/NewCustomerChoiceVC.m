@@ -269,6 +269,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                 NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
                 cell.priceLabel.text = priceString;
             }
+        }else{
+            cell.priceLabel.text = @"";
         }
         
         result = cell;

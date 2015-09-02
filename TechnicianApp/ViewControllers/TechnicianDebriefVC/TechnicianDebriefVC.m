@@ -35,7 +35,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 
 #pragma mark - DebriefCell
 
-@interface DebriefCell : UITableViewCell< UITextFieldDelegate>
+@interface DebriefCell : UITableViewCell< UITextFieldDelegate,CHDropDownTextFieldDelegate>
 @property (nonatomic, assign) TDCellAccType                cellType;
 @property (nonatomic, strong) IBOutlet UILabel             *lblTitle;
 @property (nonatomic, strong) IBOutlet UILabel             *lblSubtitle;
@@ -69,6 +69,12 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     [super layoutSubviews];
     self.separatorView.y = self.frame.size.height-1;
 
+}
+- (void) prepareForReuse{
+     self.btnChkBox.hidden = YES;
+    self.lblSubtitle.hidden = YES;
+    self.txtField.hidden    = YES;
+    _cellData = nil;
 }
 
 - (void)setCellData:(NSMutableDictionary *)cellData {
@@ -121,7 +127,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtField.hidden                       = NO;
         self.txtField.dropDownTableVisibleRowCount = MIN(6, [(NSArray *)cellData[@"possVals"] count]);
         self.txtField.dropDownTableTitlesArray     = cellData[@"possVals"];
-       // self.txtField.dropDownDelegate                     = self;
+        self.txtField.dropDownDelegate                     = self;
         break;
     }
     case txtViewCellAcc:
@@ -167,6 +173,106 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     default:
         break;
     }
+}
+
+
+-(void)refreshCell:(NSMutableDictionary *)cellData{
+ // NSMutableDictionary *  cellData               = self.cellData;
+    self.lblSubtitle.hidden = YES;
+    self.txtField.hidden    = YES;
+    
+    self.cellType = [cellData[@"accType"] integerValue];
+    
+    self.lblTitle.text = cellData[@"title"];
+    
+    switch (self.cellType) {
+        case lblCellAcc:
+        {
+            self.lblSubtitle.hidden = NO;
+            self.lblSubtitle.text   = cellData[@"accVal"];
+            break;
+        }
+        case drpDownCellAcc:
+        {
+            self.txtField.text = cellData[@"accVal"];
+            
+            if ([cellData[@"align"] integerValue] == cRight) {
+                self.txtField.frame = self.lblTextFieldPlaceHolder.frame;
+                self.lblTitle.frame = self.lblTitlePlaceHolder.frame;
+                
+            }
+            if (!self.btnRightTextFiled) {
+                self.btnRightTextFiled       = [UIButton buttonWithType:UIButtonTypeCustom];
+                self.btnRightTextFiled.frame = CGRectMake(0, 0, self.txtField.frame.size.width-5, self.txtField.frame.size.width);
+                [self.btnRightTextFiled setImage:[UIImage imageNamed:@"downArrow"] forState:UIControlStateNormal];
+                self.btnRightTextFiled.imageEdgeInsets = UIEdgeInsetsMake(0, self.txtField.frame.size.width-25, 0.0f, 0.0f);
+                self.btnRightTextFiled.titleEdgeInsets = UIEdgeInsetsMake(0, 0.0f, 0, 20);
+                [self.btnRightTextFiled setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                [self.btnRightTextFiled setTitle:self.txtField.text forState:UIControlStateNormal];
+                [self.btnRightTextFiled.titleLabel setFont:self.txtField.font];
+                [self.btnRightTextFiled setTitleColor:self.txtField.textColor forState:UIControlStateNormal];
+                [self.btnRightTextFiled addTarget:self action:@selector(dropDown:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            self.txtField.rightView     = self.btnRightTextFiled;
+            self.txtField.rightViewMode = UITextFieldViewModeAlways;
+            
+            if (!self.paddingView) {
+                self.paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            }
+            self.txtField.leftView                     = self.paddingView;
+            self.txtField.leftViewMode                 = UITextFieldViewModeAlways;
+            self.txtField.layer.borderWidth            = 1;
+            self.txtField.layer.borderColor            = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+            self.txtField.hidden                       = NO;
+            self.txtField.dropDownTableVisibleRowCount = MIN(6, [(NSArray *)cellData[@"possVals"] count]);
+            self.txtField.dropDownTableTitlesArray     = cellData[@"possVals"];
+            self.txtField.dropDownDelegate                     = self;
+            break;
+        }
+        case txtViewCellAcc:
+        {
+            self.txtView.text              = cellData[@"accVal"];
+            self.txtView.hidden            = NO;
+            self.txtView.layer.borderWidth = 1;
+            self.txtView.layer.borderColor = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+            break;
+        }
+        case txtFieldCellAcc:
+        case txtFieldNumericCellAcc:
+        {
+            self.txtField.text = cellData[@"accVal"];
+            
+            if ([cellData[@"align"] integerValue] == cRight) {
+                self.txtField.frame = self.lblTextFieldPlaceHolder.frame;
+                self.lblTitle.frame = self.lblTitlePlaceHolder.frame;
+                
+            }
+            if (!self.paddingView) {
+                self.paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+            }
+            self.txtField.leftView          = self.paddingView;
+            self.txtField.leftViewMode      = UITextFieldViewModeAlways;
+            self.txtField.layer.borderWidth = 1;
+            self.txtField.layer.borderColor = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+            self.txtField.hidden            = NO;
+            if (self.cellType == txtFieldNumericCellAcc) {
+                self.txtField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            }
+            //  self.txtField.delegate = self;
+            break;
+        }
+        case chkBoxCellAcc:
+        {
+            self.btnChkBox.hidden = NO;
+            [self.btnChkBox addTarget:self action:@selector(select:) forControlEvents:UIControlEventTouchUpInside];
+            //            self.btnChkBox.layer.borderWidth=1;
+            //            self.btnChkBox.layer.borderColor=[[UIColor colorWithRed:143./255 green:200./255 blue:73./255 alpha:0.8] CGColor];
+            break;
+        }
+        default:
+            break;
+    }
+
 }
 
 - (NSDictionary *)valueForApi {
@@ -295,26 +401,17 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     self.hideSection2 = [NSNumber numberWithBool:NO];
     self.hideSection3 = [NSNumber numberWithBool:NO];
     
-    self.scheduledDependecesCells = [[NSMutableArray alloc]init];
-    self.scheduledDependecesCellsTitles = [[NSMutableArray alloc] initWithArray:@[@"Price Quoted",
-                                                                                  @"Price Approved",
-                                                                                  @"Ammount Of 50% Deposit Collected",
-                                                                                  @"Parts Ordered By",
-                                                                                  @"Suppler Parts Ordered From",
-                                                                                  @"Time Needed For Repair",
-                                                                                  @"When Is The Repair Scheduled",
-                                                                                  @"Model Of System Needing Repair",
-                                                                                  @"Serial Number Of System Needing Repair",
-                                                                                  @"Location of System Needing Repair",
-                                                                                  @"Special Instructions Or Tools Required"]];
+ 
+
     self.keyboardAvoiding.contentSize = self.tableView.frame.size;
 
     self.jobToDebrief = [[[DataLoader sharedInstance] currentUser] activeJob];
     [self.jobToDebrief.managedObjectContext save];
 
-    self.departments = [[[DataLoader sharedInstance] SWAPIManager] departmentList];
-
-    NSArray        *list            = [[[DataLoader sharedInstance] SWAPIManager] whoList];
+    self.departments = [self.jobToDebrief.swapiJobInfo objectForKey:@"departmentList"];  //[[[DataLoader sharedInstance] SWAPIManager] departmentList];
+   
+    
+    NSArray        *list            = [self.jobToDebrief.swapiJobInfo objectForKey:@"whoList"];//[[[DataLoader sharedInstance] SWAPIManager] whoList];
     NSMutableArray *resultList      = @[].mutableCopy;
     NSMutableArray *resultListCodes = @[].mutableCopy;
     for (NSDictionary *employee in list) {
@@ -543,22 +640,22 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
     switch (section) {
-//        case 0: return 15;
-//            break;
-        case 1: return 1;// [self.hideSection1 boolValue]? 1 : 2;
+        case 0: return 15;
             break;
-        case 2: return 0; //[self.hideSection2 boolValue]? 1 : 19;
+        case 1: return  [self.hideSection1 boolValue]? 1 : 2;
             break;
-        case 3: return 0;// [self.hideSection3 boolValue]? 1 : 2;
+        case 2: return  [self.hideSection2 boolValue]? 1 : 18;
             break;
-        case 4 : return 0;
+        case 3: return  [self.hideSection3 boolValue]? 1 : 2;
+            break;
+        case 4 : return 1;
             break;
         default:
             break;
@@ -567,74 +664,93 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1)  {
+    int sectionIdx = 0 ;
+    switch (indexPath.section) {
+        case 0:
+            sectionIdx=0;
+            break;
+        case 1:
+            sectionIdx=15;
+            break;
+        case 2:
+            sectionIdx =17;
+            break;
+        case 3:
+            sectionIdx = 35;
+        default:
+            break;
+    
+    }
+    
+    if (indexPath.section == 4)  {
         return 90;
     } else
-    
-    if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == txtViewCellAcc) {
+    {
+    if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == txtViewCellAcc) {
         return 90.0f;
-    }
+    
+    }}
+    
     return 42.0f;
 }
 
--(NSMutableArray *)cellsForTableView:(UITableView *)tableView
-{
-    NSMutableArray *cells = [[NSMutableArray alloc]  init];
-    
-    //Need to total each section
-    for (int i = 0; i < [tableView numberOfSections]; i++)
-    {
-        NSInteger rows =  [tableView numberOfRowsInSection:i];
-        for (int row = 0; row < rows; row++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:i];
-            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-               [cells addObject:cell];
-
-            
-        }
-        
-    }
-    return cells;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     if (indexPath.section == 1)  {
+     if (indexPath.section == 4)  {
           UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
          return cell;
-     } else
-     {
-    DebriefCell *cell = (DebriefCell *)[tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];
+     }
     
+    
+    DebriefCell *cell = (DebriefCell *)[tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];
+    cell.cellData = nil;
+         int sectionIdx ;
     switch (indexPath.section) {
-        case 0:  cell.cellData  = self.elementsToShow[indexPath.row];
+        case 0: cell.cellData  = self.elementsToShow[indexPath.row];
+            sectionIdx=0;
             break;
         case 1: cell.cellData  = self.elementsToShow[indexPath.row +15];
+            sectionIdx=15;
             break;
-        case 2: cell.cellData  = self.elementsToShow[indexPath.row +16];
+        case 2: cell.cellData  = self.elementsToShow[indexPath.row +17];
+            sectionIdx =17;
             break;
         case 3: cell.cellData  = self.elementsToShow[indexPath.row +35];
-            break;
+            sectionIdx = 35;
         default:
             break;
     }
-   
-
+   //   NSLog(@"r %ld",(long)indexPath.row);
+     NSLog(@"%ld sectia %ld",(long)indexPath.row + sectionIdx, indexPath.section);
     
     cell.backgroundColor = [UIColor clearColor];
-    if ([self.elementsToShow[indexPath.row][@"accType"] integerValue] == drpDownCellAcc) {
+    if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == drpDownCellAcc) {
         
         [cell setOnDropDownValueChange:^(DebriefCell *aCell) {
-//            if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
-////                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-////                self.tableView.reloadData;
-//                
-//            }
-//            
-//            if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
-////                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-////                self.tableView.reloadData;
-////                self.whoCell.hidden = [aCell.txtField.text isEqualToString:@"NO"];
-//            }
+            
+            
+            if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
+                self.hideSection1 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+              
+                NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
+                [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
+                
+            }
+            
+            if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
+                self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+                NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
+                [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
+                
+            }
+            
+            if ([aCell.lblTitle.text isEqualToString:@"Follow Up Required"]) {
+                self.hideSection3 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
+                NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
+                [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
+                
+            }
+            
         }];
         
         [cell setOnDropDown:^(DebriefCell *aCell) {
@@ -704,10 +820,21 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 //    }
     
           return cell;
-     }
     
-   
-    
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
+
+- (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
+{
+   return [NSString stringWithFormat:@"%li",(long)section];
 }
 
 #pragma mark - Currency String

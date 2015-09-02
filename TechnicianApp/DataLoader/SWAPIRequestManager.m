@@ -159,34 +159,34 @@ NSString *const kResultStatusOK = @"000";
 
 
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
-         id list = result[@"JobQueryData"][@"JobQueryRecord"];
+        id list = result[@"JobQueryData"][@"JobQueryRecord"];
         
         if ([result[@"JobQueryData"][@"_ReturnedRows"] intValue ]==0) {
             NSError * error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : @"Job not find"}];
-           onError(error);
+            onError(error);
         } else
         {
-
-        
-        
-         if ([list isKindOfClass:[NSArray class]]) {
-             weakSelf.currentJob = [User getNextJobFromList:list withJobID:JobID];
-
-         } else {
-
-             weakSelf.currentJob = list;
-         }
-
-         [weakSelf whoListQueryForJobOnSuccess:nil onError:nil];
-         [weakSelf departmentListQueryForJobOnSuccess:nil onError:nil];
-         [weakSelf equipmentListQueryForJobOnSuccess:nil onError:nil];
-       
-//        [weakSelf GetdsLocation:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
-//            //
-//        } onError:^(NSError *error) {
-//            //
-//        }:nil onError:nil];
-        
+            
+            
+            
+            if ([list isKindOfClass:[NSArray class]]) {
+                weakSelf.currentJob = [User getNextJobFromList:list withJobID:JobID];
+                
+            } else {
+                
+                weakSelf.currentJob = list;
+            }
+            
+            [weakSelf whoListQueryForJobOnSuccess:nil onError:nil];
+            [weakSelf departmentListQueryForJobOnSuccess:nil onError:nil];
+            [weakSelf equipmentListQueryForJobOnSuccess:nil onError:nil];
+            
+            //        [weakSelf GetdsLocation:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
+            //            //
+            //        } onError:^(NSError *error) {
+            //            //
+            //        }:nil onError:nil];
+            
             [weakSelf GetdsAgreeListForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
                 [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
                     [weakSelf GetdsEquipForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
@@ -209,21 +209,21 @@ NSString *const kResultStatusOK = @"000";
                 onError(error);
             }];
         }
-//         [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
-//        [weakSelf GetdsEquipForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
-
-//         if (onSuccess) {
-//             onSuccess(nil);
-//         }
-         self.requestsInProgress--;
-         [weakSelf checkAndCloseConnectionAndSession];
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         self.requestsInProgress--;
-         [weakSelf checkAndCloseConnectionAndSession];
-         if (onError) {
-             onError(error);
-         }
-     }];
+        //         [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
+        //        [weakSelf GetdsEquipForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
+        
+        //         if (onSuccess) {
+        //             onSuccess(nil);
+        //         }
+        self.requestsInProgress--;
+        [weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
 }
 
 - (void)GetdsAgreeListForJobWithLocationID:(NSString *)locationID
@@ -393,6 +393,11 @@ NSString *const kResultStatusOK = @"000";
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
 
          weakSelf.equipmentList = result[@"SessionID"];
+        if (weakSelf.equipmentList) {
+            [weakSelf.currentJob setObject:weakSelf.equipmentList forKey:@"equipmentList"];
+        }
+        
+        
          NSLog(@"equipmentListQueryForJobOnSuccess");
          if (onSuccess) {
              onSuccess(nil);
@@ -429,7 +434,9 @@ NSString *const kResultStatusOK = @"000";
                                         return [obj1 compare:obj2];
                                     }];
          NSLog(@"departmentListQueryForJobOnSuccess");
+           [weakSelf.currentJob setObject:weakSelf.departmentList forKey:@"departmentList"];
          if (onSuccess) {
+           
              onSuccess(weakSelf.departmentList);
          }
          self.requestsInProgress--;
@@ -457,6 +464,7 @@ NSString *const kResultStatusOK = @"000";
          NSArray *list = result[@"EmployeeQueryData"][@"EmployeeQueryRecord"];
 
          weakSelf.whoList = list;
+        [weakSelf.currentJob setObject:list forKey:@"whoList"];
          NSLog(@"whoListQueryForJobOnSuccess");
          if (onSuccess) {
              onSuccess(weakSelf.whoList);

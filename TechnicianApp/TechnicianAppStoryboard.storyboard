@@ -499,7 +499,7 @@
                                 <rect key="frame" x="32" y="260" width="704" height="740"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ecz-gi-s8a" userLabel="Button1">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ecz-gi-s8a" userLabel="Button1">
                                         <rect key="frame" x="26" y="30" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -510,7 +510,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="8E0-k7-nZQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uoy-Nu-Tz6" userLabel="Button2">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uoy-Nu-Tz6" userLabel="Button2">
                                         <rect key="frame" x="26" y="100" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -522,7 +522,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="4Qe-Nv-F7Q"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rwb-3s-seA" userLabel="Button3">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rwb-3s-seA" userLabel="Button3">
                                         <rect key="frame" x="26" y="170" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -534,7 +534,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="SlU-IY-COy"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rRi-ok-2sf" userLabel="Button4">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rRi-ok-2sf" userLabel="Button4">
                                         <rect key="frame" x="26" y="240" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -546,7 +546,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="gd1-cX-It3"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vOE-Kf-hGM" userLabel="Button5">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vOE-Kf-hGM" userLabel="Button5">
                                         <rect key="frame" x="26" y="310" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -558,7 +558,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="LC5-9l-VjQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cmc-Bf-Cic" userLabel="Button6">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cmc-Bf-Cic" userLabel="Button6">
                                         <rect key="frame" x="26" y="380" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -570,7 +570,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="lEd-c7-8dN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ajy-N1-dd7" userLabel="Button7">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ajy-N1-dd7" userLabel="Button7">
                                         <rect key="frame" x="26" y="450" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
@@ -582,7 +582,7 @@
                                             <action selector="choiseBtnClicked:" destination="TVt-By-ZRx" eventType="touchUpInside" id="grz-Rv-tjk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wFU-xZ-GRD" userLabel="Button8">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wFU-xZ-GRD" userLabel="Button8">
                                         <rect key="frame" x="26" y="520" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="summary-findings-checkbox-bg">
