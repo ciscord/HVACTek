@@ -335,12 +335,16 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     self.getcArray = [NSNumber numberWithBool:YES];
     
     [self reloadData];
-    self.getcArray = [NSNumber numberWithBool:NO];
-    
    
     
-  //  [self reloadData];
+   
 }
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -762,6 +766,21 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 - (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
 {
    return [NSString stringWithFormat:@"%li",(long)section];
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+        //end of loading
+        //for example [activityIndicator stopAnimating];
+        
+//        if  ([self.getcArray boolValue]){
+//        self.hideSection1 = [NSNumber numberWithBool:YES];
+//        self.hideSection2 = [NSNumber numberWithBool:YES];
+//        self.hideSection3 = [NSNumber numberWithBool:NO];
+//         self.getcArray = [NSNumber numberWithBool:NO];
+//        }
+    }
 }
 
 #pragma mark - Currency String
