@@ -336,7 +336,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
     [self reloadData];
    
-    
+     self.getcArray = [NSNumber numberWithBool:NO];
    
 }
 
@@ -406,7 +406,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *priceApproved                      = [self itemDicWith:@"Price Approved" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cRight APIField:@"price_approved" APIValues:@[@1, @0]];
     NSMutableDictionary *ammountof50PercentDepositCollected = [self itemDicWith:@"Ammount Of 50% Deposit Collected" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"deposit_collected" APIValues:@[]];
     NSMutableDictionary *partsOrderedBy                     = [self itemDicWith:@"Parts Ordered By" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"parts_ordered_by" APIValues:@[]];
-    NSMutableDictionary *supplerPartsOrderedFrom            = [self itemDicWith:@"Suppler Parts Ordered From" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"supplier_parts_ordered_form" APIValues:@[]];
+    NSMutableDictionary *supplerPartsOrderedFrom            = [self itemDicWith:@"Supplier Parts Ordered From" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"supplier_parts_ordered_form" APIValues:@[]];
     NSMutableDictionary *timeNeededForRepair                = [self itemDicWith:@"Time Needed For Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"time_needed_for_repair" APIValues:@[]];
     NSMutableDictionary *whenIsTheRepairScheduled           = [self itemDicWith:@"When Is The Repair Scheduled" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"when_repair_scheduled" APIValues:@[]];
     NSMutableDictionary *modelOfSystemNeedingRepair         = [self itemDicWith:@"Model Of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"model_system_needing_required" APIValues:@[]];
@@ -768,20 +768,20 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
    return [NSString stringWithFormat:@"%li",(long)section];
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-        //end of loading
-        //for example [activityIndicator stopAnimating];
-        
-//        if  ([self.getcArray boolValue]){
-//        self.hideSection1 = [NSNumber numberWithBool:YES];
-//        self.hideSection2 = [NSNumber numberWithBool:YES];
-//        self.hideSection3 = [NSNumber numberWithBool:NO];
-//         self.getcArray = [NSNumber numberWithBool:NO];
-//        }
-    }
-}
+//-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+//        //end of loading
+//        //for example [activityIndicator stopAnimating];
+//        
+////        if  ([self.getcArray boolValue]){
+////        self.hideSection1 = [NSNumber numberWithBool:YES];
+////        self.hideSection2 = [NSNumber numberWithBool:YES];
+////        self.hideSection3 = [NSNumber numberWithBool:NO];
+////         self.getcArray = [NSNumber numberWithBool:NO];
+////        }
+//    }
+//}
 
 #pragma mark - Currency String
 
