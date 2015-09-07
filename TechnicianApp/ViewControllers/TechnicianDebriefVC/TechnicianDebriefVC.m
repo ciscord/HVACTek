@@ -306,6 +306,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     self.hideSection2 = [NSNumber numberWithBool:NO];
     self.hideSection3 = [NSNumber numberWithBool:NO];
     
+    self.title = @"Technical Debrief";
  
 
     self.keyboardAvoiding.contentSize = self.tableView.frame.size;
@@ -361,6 +362,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 
 - (NSArray *)defaultCellsArray {
+
 
     NSDictionary *customerInfo = self.jobToDebrief.swapiCustomerInfo;
     NSDictionary *jobInfo      = self.jobToDebrief.swapiJobInfo;
@@ -421,7 +423,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"system_running" APIValues:@[@0, @1]];
     NSMutableDictionary *followUpRequired                   = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
     
-      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Follow Up notes" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
 
 //    if ([callBack[@"accVal"]  isEqual: @"YES"]) {
 //        NSLog(@"YES selected");
@@ -561,7 +563,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -572,11 +574,13 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             break;
         case 1: return  [self.hideSection1 boolValue]? 1 : 2;
             break;
-        case 2: return  [self.hideSection2 boolValue]? 1 : 18;
+        case 2: return  [self.hideSection2 boolValue]? 1 : 12;
             break;
-        case 3: return  [self.hideSection3 boolValue]? 1 : 2;
+        case 3: return  6;
             break;
-        case 4 : return 1;
+        case 4: return  [self.hideSection3 boolValue]? 1 : 2;
+            break;
+        case 5 : return 1;
             break;
         default:
             break;
@@ -597,13 +601,16 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             sectionIdx =17;
             break;
         case 3:
+            sectionIdx = 29;
+           break;
+        case 4:
             sectionIdx = 35;
         default:
             break;
     
     }
     
-    if (indexPath.section == 4)  {
+    if (indexPath.section == 5)  {
         return 90;
     } else
     {
@@ -617,7 +624,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     if (indexPath.section == 4)  {
+     if (indexPath.section == 5)  {
           UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
          return cell;
      }
@@ -634,6 +641,9 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             sectionIdx =17;
             break;
         case 3:
+            sectionIdx = 29;
+            break;
+        case 4:
             sectionIdx = 35;
         default:
             break;
@@ -760,7 +770,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0;
+    return 0;//50;
 }
 
 - (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
