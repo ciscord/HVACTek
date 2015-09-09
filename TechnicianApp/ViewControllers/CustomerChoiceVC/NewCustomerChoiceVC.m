@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *snapShotView;
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
 @property (strong, nonatomic) IBOutlet UIButton *btnSendByEmail;
+@property (strong, nonatomic) IBOutlet UILabel *lblSavePrice;
 
 
 @end
@@ -66,6 +67,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
         else
             self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
+        
+        self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
     }
 }
 
@@ -259,19 +262,20 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         else
             cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
         
-        if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Discount"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Comfort Club Membership"]) {
-            
-            if (self.isDiscounted) {
-                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
-                cell.priceLabel.text = priceString;
-            }
-            else{
-                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
-                cell.priceLabel.text = priceString;
-            }
-        }else{
-            cell.priceLabel.text = @"";
-        }
+          cell.priceLabel.text = @"";
+//        if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Discount"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Comfort Club Membership"]) {
+//          
+//            if (self.isDiscounted) {
+//                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
+//                cell.priceLabel.text = priceString;
+//            }
+//            else{
+//                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
+//                cell.priceLabel.text = priceString;
+//            }
+//        }else{
+//            cell.priceLabel.text = @"";
+//        }
         
         result = cell;
     }
