@@ -55,6 +55,10 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
         self.allOptions = [[DataLoader sharedInstance] otherOptions];
     }
+    
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,6 +88,13 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     } else {
         self.filteredOptions = [NSMutableArray arrayWithArray: self.allOptions];
     }
+
+    NSSortDescriptor *sortDescriptor =
+    [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                  ascending:YES
+                                   selector:@selector(caseInsensitiveCompare:)];
+  self.filteredOptions = [[NSMutableArray alloc]initWithArray:[self.filteredOptions sortedArrayUsingDescriptors:@[sortDescriptor]]];
+    
     
     [self.collectionView reloadData];
 }

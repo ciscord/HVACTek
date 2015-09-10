@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
 @property (weak, nonatomic) IBOutlet UIButton     *btnContinue;
 @property (strong, nonatomic) NSMutableArray      *options;
+@property (strong, nonatomic) NSMutableArray      *removedOptions;
 @property (strong, nonatomic) NSMutableDictionary *customerSelectedOptions;
 @property (nonatomic, assign) BOOL                isDiscountedPriceSelected;
 @property (nonatomic, assign) BOOL                isDiagnositcOnlyPriceSelected;
@@ -52,6 +53,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     } else {
         [self.tableView reloadData];
     }
+    
+    self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
 
 //    self.btnContinue.hidden = YES;
 }
@@ -141,6 +144,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         self.options = _priceBookAndServiceOptions.mutableCopy;
     }
 
+    
+    
 }
 
 - (void)resetOptions {
@@ -170,8 +175,18 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     //////
     
-    NSMutableArray *allItems  = [self.options[0] objectForKey:@"items"];
-    [items removeObjectAtIndex:[items indexOfObject:allItems[optionIndex]]];
+    id object = [items objectAtIndex:[items indexOfObject:self.removedOptions[optionIndex]]];
+    [self.removedOptions removeObject:object];
+    //[self.removedOptions addObject:object];
+    
+//    if ([self.removedOptions count] == 0)
+//        [self.removedOptions insertObject:object atIndex:[self.removedOptions count]];
+//    else
+        [self.removedOptions insertObject:object atIndex:items.count - 1];
+
+
+    
+    [items removeObject:object];
     
     /////
     
@@ -241,8 +256,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
          [weakSelf resetOptions];
      }];
 
-    ///[cell displayServiceOptions:items];
-    [cell displayServiceOptions:items andRemovedServiceOptions:[self.options[0] objectForKey:@"items"]];
+    ///[cell displayServiceOptions:items andRemovedServiceOptions:[self.options[0] objectForKey:@"items"]];
+    [cell displayServiceOptions:items andRemovedServiceOptions:self.removedOptions];
     [cell setOnOptionSelected:^(NSInteger rowIndex, NSInteger itemIndex){
          [weakSelf didSelectOptionsWithRow:rowIndex withOptionIndex:itemIndex];
      }];
