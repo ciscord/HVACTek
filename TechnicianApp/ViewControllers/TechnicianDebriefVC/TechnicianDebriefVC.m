@@ -293,6 +293,12 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) NSNumber* hideSection1;
 @property (nonatomic, strong) NSNumber* hideSection2;
 @property (nonatomic, strong) NSNumber* hideSection3;
+
+@property (nonatomic, strong) NSNumber* defaulthideSection1;
+@property (nonatomic, strong) NSNumber* defaulthideSection2;
+@property (nonatomic, strong) NSNumber* defaulthideSection3;
+
+@property (nonatomic, strong) NSNumber* loadet;
 @end
 
 @implementation TechnicianDebriefVC
@@ -302,6 +308,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.loadet = [NSNumber numberWithBool:NO];
     self.hideSection1 = [NSNumber numberWithBool:NO];
     self.hideSection2 = [NSNumber numberWithBool:NO];
     self.hideSection3 = [NSNumber numberWithBool:NO];
@@ -423,7 +430,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"system_running" APIValues:@[@0, @1]];
     NSMutableDictionary *followUpRequired                   = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
     
-      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
 
 //    if ([callBack[@"accVal"]  isEqual: @"YES"]) {
 //        NSLog(@"YES selected");
@@ -666,30 +673,41 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     cell.backgroundColor = [UIColor clearColor];
     if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == drpDownCellAcc) {
         
+        
+        if ([cell.lblTitle.text isEqualToString:@"Call Back"]) {
+            self.defaulthideSection1 = [NSNumber numberWithBool:[cell.txtField.text isEqualToString:@"NO"]];
+            
+        }
+        
+        if ([cell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
+            self.defaulthideSection2 = [NSNumber numberWithBool:[cell.txtField.text isEqualToString:@"NO"]];
+            
+        }
+        
+        if ([cell.lblTitle.text isEqualToString:@"Follow Up Required"]) {
+            self.defaulthideSection3 = [NSNumber numberWithBool:[cell.txtField.text isEqualToString:@"NO"]];
+            
+        }
+
+        
         [cell setOnDropDownValueChange:^(DebriefCell *aCell) {
             
             
             if ([aCell.lblTitle.text isEqualToString:@"Call Back"]) {
                 self.hideSection1 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-              
-          //      NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
-         //       [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationBottom];
                 [self.tableView reloadData];
             }
             
             if ([aCell.lblTitle.text isEqualToString:@"Repair Scheduled"]) {
                 self.hideSection2 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
-          //      NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
-//                [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationBottom];
+ 
               [self.tableView reloadData];
             }
             
             if ([aCell.lblTitle.text isEqualToString:@"Follow Up Required"]) {
                 self.hideSection3 = [NSNumber numberWithBool:[aCell.txtField.text isEqualToString:@"NO"]];
                [self.tableView reloadData];
-             //   NSIndexSet *sections = [NSIndexSet indexSetWithIndex:indexPath.section];
-//                [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationBottom];
-                
+             
             }
             
         }];
@@ -778,20 +796,35 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
    return [NSString stringWithFormat:@"%li",(long)section];
 }
 
-//-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-//        //end of loading
-//        //for example [activityIndicator stopAnimating];
-//        
-////        if  ([self.getcArray boolValue]){
-////        self.hideSection1 = [NSNumber numberWithBool:YES];
-////        self.hideSection2 = [NSNumber numberWithBool:YES];
-////        self.hideSection3 = [NSNumber numberWithBool:NO];
-////         self.getcArray = [NSNumber numberWithBool:NO];
-////        }
-//    }
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    // Perform some final layout updates
+    if (section == ([tableView numberOfSections] - 1)) {
+        [self tableViewWillFinishLoading:tableView];
+    }
+    
+    // Return nil, or whatever view you were going to return for the footer
+    return nil;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (void)tableViewWillFinishLoading:(UITableView *)tableView
+{
+    NSLog(@"finished loading");
+    if (![self.loadet boolValue]){
+        self.loadet = [NSNumber numberWithBool:YES];
+        self.hideSection1 =  self.defaulthideSection1;
+        self.hideSection2 =  self.defaulthideSection2;
+        self.hideSection3 =  self.defaulthideSection3;
+        
+        [self.tableView reloadData];
+    }
+}
+
+
 
 #pragma mark - Currency String
 

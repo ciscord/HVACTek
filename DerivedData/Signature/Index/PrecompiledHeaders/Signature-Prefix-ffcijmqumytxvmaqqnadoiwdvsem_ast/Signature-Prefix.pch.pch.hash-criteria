@@ -1,0 +1,72 @@
+-x
+objective-c
+-arch
+x86_64
+-fretain-comments-from-system-headers
+-std=gnu99
+-fobjc-arc
+-fmodules
+-gmodules
+-fmodules-cache-path=/Users/Mihai/Desktop/Projects/EBS Signature/DerivedData/ModuleCache
+-fbuild-session-file=/Users/Mihai/Desktop/Projects/EBS Signature/DerivedData/ModuleCache/Session.modulevalidation
+-fpascal-strings
+-O0
+-DDEBUG=1
+-DCOCOAPODS=1
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.0.sdk
+-fasm-blocks
+-mios-simulator-version-min=7.1
+-g
+-fobjc-abi-version=2
+-fobjc-legacy-dispatch
+-iquote
+-iquote
+-I/Users/Mihai/Desktop/Projects/EBS Signature/DerivedData/Signature/Build/Products/Debug-iphonesimulator/include
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/AFNetworking
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/BCGenieEffect
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/FrameAccessor
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/MBProgressHUD
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/MD5Digest
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SFRoundProgressCounterView
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SSKeychain
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SignatureView
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/TPKeyboardAvoiding
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/TTTAttributedLabel
+-I/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/XMLDictionary
+-F/Users/Mihai/Desktop/Projects/EBS Signature/DerivedData/Signature/Build/Products/Debug-iphonesimulator
+-F/Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries
+-F/Users/Mihai/Desktop/Projects/EBS Signature
+-ferror-limit=10
+-working-directory=/Users/Mihai/Desktop/Projects/EBS Signature
+-Xclang
+-detailed-preprocessing-record
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/AFNetworking
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/BCGenieEffect
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/FrameAccessor
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/MBProgressHUD
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/MD5Digest
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SFRoundProgressCounterView
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SSKeychain
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/SignatureView
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/TPKeyboardAvoiding
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/TTTAttributedLabel
+-isystem
+/Users/Mihai/Desktop/Projects/EBS Signature/Pods/Headers/Public/XMLDictionary
+x86_64-apple-darwin14.5.0
+"4.2.1 Compatible Apple LLVM 7.0.0 (clang-700.0.72)"
+SDK_PRODUCT_BUILD_VERSION=13A340
+13A340

@@ -12,7 +12,7 @@
 #import "ServiceHistoryTableViewCell.h"
 #import "SServiceHistory.h"
 #import "SettingAgendaVC.h"
-
+#import "SummaryOfFindingsOptionsVC.h"
 #pragma mark - DataStructure
 
 @interface SCustomerInfo : NSObject
@@ -385,6 +385,12 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
         SettingAgendaVC *vc = segue.destinationViewController;
         vc.choosenType = self.selectedType;
     }
+    //returnVisit
+    
+    if ([segue.identifier isEqualToString:@"returnVisit"]) {
+        SummaryOfFindingsOptionsVC *vc = segue.destinationViewController;
+           vc.isiPadCommonRepairsOptions = YES;
+    }
     
 }
 
@@ -396,6 +402,11 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.btnCoolingCall.selected = !self.btnHeatingCall.selected;
     self.selectedType            = (self.btnHeatingCall.selected ? qtHeating : qtCooling);
 }
+
+- (IBAction)btnReturnVisit:(id)sender {
+    [self performSegueWithIdentifier:@"returnVisit" sender:self];
+}
+
 
 - (IBAction)beginAppointment:(id)sender {
     
