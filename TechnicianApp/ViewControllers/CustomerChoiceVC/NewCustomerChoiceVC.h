@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSDictionary *selectedServiceOptionsDict;
 @property (nonatomic, assign) BOOL isDiscounted;
 @property (nonatomic, assign) BOOL isOnlyDiagnostic;
+@property (nonatomic, strong) NSString *paymentValue;
+@property (nonatomic, strong) NSString *initialTotal;
 
 
 
