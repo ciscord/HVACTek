@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *unselectedOptionsTableView;
 @property (weak, nonatomic) IBOutlet UITableView *selectedOptionsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *paymentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dueLabel;
 @property (weak, nonatomic) IBOutlet UIView *optionsView;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldInitials;
 @property (weak, nonatomic) IBOutlet UIView *stopView;
@@ -23,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
 @property (strong, nonatomic) IBOutlet UIButton *btnSendByEmail;
 @property (strong, nonatomic) IBOutlet UILabel *lblSavePrice;
+@property (weak, nonatomic) IBOutlet UILabel *lblSavedWithESA;
+
 
 
 @end
@@ -63,14 +67,41 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         }
 
         
-        if (self.isDiscounted)
-            self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
-        else
+        
+        NSNumber *paymentNumber = [NSNumber numberWithFloat:fabsf([[self cutString:self.paymentValue] floatValue])];
+        
+        self.paymentLabel.text = self.paymentValue;
+        if (self.isDiscounted){
+          self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
+            self.dueLabel.text = [self changeCurrencyFormat:totalPriceESA - paymentNumber.floatValue];
+        }
+        else {
             self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
+            self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal - paymentNumber.floatValue];
+        }
+        
+        
+        
+        
         
         self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
+        self.lblSavedWithESA.text = [NSString stringWithFormat:@"You Saved %@ By Being A Member Of Our Comfort Club!",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
     }
 }
+
+- (NSString *)cutString:(NSString*)string {
+    
+    NSString *newText;
+    
+    if (string.length > 1){
+        newText = [string substringFromIndex:1];
+    }else{
+        newText = @"0";
+    }
+    
+    return newText;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -262,20 +293,29 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         else
             cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
         
-          cell.priceLabel.text = @"";
-//        if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Discount"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Comfort Club Membership"]) {
-//          
-//            if (self.isDiscounted) {
-//                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
+          //cell.priceLabel.text = @"";
+        if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name] isEqualToString:@"Payment"]) {
+          
+            if (self.isDiscounted) {
+                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
 //                cell.priceLabel.text = priceString;
-//            }
-//            else{
-//                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
-//                cell.priceLabel.text = priceString;
-//            }
-//        }else{
-//            cell.priceLabel.text = @"";
-//        }
+                cell.priceLabel.text = [self appendSymbolToString:priceString];
+            }
+            else{
+                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
+                //cell.priceLabel.text = priceString;
+                cell.priceLabel.text = [self appendSymbolToString:priceString];
+            }
+        }else{
+            
+             cell.priceLabel.text = @"";
+            
+            if (!self.isOnlyDiagnostic){
+                if (indexPath.row == 0)
+                    cell.priceLabel.text = self.initialTotal;
+                    
+            }
+        }
         
         result = cell;
     }
@@ -312,6 +352,25 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
 }
+
+- (NSString *)appendSymbolToString:(NSString *)string {
+    
+    NSString *returnString = string;
+    
+    if (string.length > 0){
+        NSString * firstLetter = [string substringToIndex:1];
+        if ([firstLetter  isEqual: @"$"]){
+            returnString = [@"+ " stringByAppendingString:returnString];
+        }else if ([firstLetter  isEqual: @"-"]){
+            returnString = [returnString stringByReplacingOccurrencesOfString:@"-$" withString:@"- $"];
+        }
+    }
+    
+    return returnString;
+}
+
+
+
 
 /*
 #pragma mark - Navigation
