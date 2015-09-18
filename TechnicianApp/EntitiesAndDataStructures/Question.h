@@ -18,6 +18,7 @@
 #define  kQuestionQuestionKey   @"question"
 #define  kQuestionAnswerKey     @"answer"
 #define  kQuestionRequiredKey   @"required"
+#define  kQuestionNote          @"note"
 
 @interface Question : BaseEntity
 
@@ -28,6 +29,7 @@
 @property(nonatomic, strong) NSNumber *ord;
 @property(nonatomic, strong) NSString *question;
 @property(nonatomic, strong) NSString *answer;
+@property(nonatomic, assign) BOOL haveNote;
 @property(nonatomic, assign) BOOL required;
 
 @end

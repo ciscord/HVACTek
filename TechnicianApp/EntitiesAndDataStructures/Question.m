@@ -23,6 +23,7 @@
         self.question = dictionaryInfo[kQuestionQuestionKey];
         self.answer = dictionaryInfo[kQuestionAnswerKey];
         self.required = [dictionaryInfo[kQuestionRequiredKey] boolValue];
+        self.haveNote  = [dictionaryInfo[kQuestionNote] isEqualToString:@"0"];
     }
     return self;
 }
@@ -39,7 +40,8 @@
         self.ord = [aDecoder decodeObjectForKey:kQuestionOrdKey];
         self.question = [aDecoder decodeObjectForKey:kQuestionQuestionKey];
         self.answer = [aDecoder decodeObjectForKey:kQuestionAnswerKey];
-        self.required = [aDecoder decodeBoolForKey:kQuestionRequiredKey];;
+        self.required = [aDecoder decodeBoolForKey:kQuestionRequiredKey];
+         self.haveNote  = [aDecoder decodeBoolForKey:kQuestionNote];
     }
     return self;
 }
@@ -56,6 +58,7 @@
     [aCoder encodeObject:self.question forKey:kQuestionQuestionKey];
     [aCoder encodeObject:self.answer forKey:kQuestionAnswerKey];
     [aCoder encodeBool:self.required forKey:kQuestionRequiredKey];
+    [aCoder encodeBool:self.haveNote forKey:kQuestionNote];
 }
 
 -(NSString*)description

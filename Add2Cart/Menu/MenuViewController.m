@@ -364,7 +364,7 @@
             item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
             item.type = itm[@"type"];
             item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
-            item.ord = (itm[@"ord"] == nil)? [NSNumber numberWithInt:[itm[@"ord"] intValue]] : 0;
+            item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
         }
         NSError *error;
         if (![managedObjectContext save:&error]) {

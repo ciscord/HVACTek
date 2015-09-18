@@ -23,6 +23,7 @@
     self.txtQuestion.text = question.question;
     self.txtAnswer.text = question.answer;
     self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
+    self.txtAnswer.hidden = !question.haveNote;
 }
 
 - (IBAction)btnBackTouch:(id)sender

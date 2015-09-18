@@ -325,8 +325,14 @@
         if ( [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeThree"]) {
             itm.include = @(NO);
             [secondOptions addObject:itm];
+            
         }
     }
+    
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+
+     secondOptions = [[NSMutableArray alloc]initWithArray:[secondOptions sortedArrayUsingDescriptors:sortDescriptors]];
 }
 
 #pragma mark - Table view data source
