@@ -7,3 +7,5 @@ Build
 Signature_IOS7_v1.psd
 SignatureApp.zip
 Signature-Info.plist
+.DS_Store
+Info.plist
