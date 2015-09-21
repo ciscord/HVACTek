@@ -430,7 +430,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"system_running" APIValues:@[@0, @1]];
     NSMutableDictionary *followUpRequired                   = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
     
-      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
 
 //    if ([callBack[@"accVal"]  isEqual: @"YES"]) {
 //        NSLog(@"YES selected");
