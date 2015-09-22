@@ -198,31 +198,51 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]].floatValue != 0) {
         PricebookItem *clubMembership = [PricebookItem new];
+       clubMembership.itemID  = @"-1";
         clubMembership.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
         clubMembership.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
         clubMembership.name = @"Comfort Club Membership";
+        clubMembership.itemGroup = @"Additional items";
+        clubMembership.itemNumber = @"-1";
         
         [newArray addObject:clubMembership];
     }
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]].floatValue != 0){
         PricebookItem *deposit = [PricebookItem new];
+       deposit.itemID = @"-2";
         deposit.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
         deposit.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
         deposit.name = @"Payment or 50% Deposit";
-        
+        deposit.itemGroup = @"Additional items";
+        deposit.itemNumber = @"-2";
         [newArray addObject:deposit];
     }
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]].floatValue != 0) {
         PricebookItem *discount = [PricebookItem new];
+        discount.itemID = @"-3";
         discount.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
         discount.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
         discount.name = @"Discounts";
-        
+        discount.itemGroup = @"Additional items";
+        discount.itemNumber = @"-3";
         [newArray addObject:discount];
     }
     
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
+        PricebookItem *payment = [PricebookItem new];
+        payment.itemID = @"-4";
+        payment.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
+        payment.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
+        payment.name = @"Payment";
+        payment.itemGroup = @"Additional items";
+        payment.itemNumber = @"-4";
+        [newArray addObject:payment];
+    }
+
+    
+    /*(total paid, club membership, discount, deposit*/
 //    
 //    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
 //        PricebookItem *discount = [PricebookItem new];
