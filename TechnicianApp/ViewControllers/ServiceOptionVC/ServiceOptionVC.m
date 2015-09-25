@@ -177,7 +177,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     id object = [items objectAtIndex:[items indexOfObject:self.removedOptions[optionIndex]]];
     [self.removedOptions removeObject:object];
-    //[self.removedOptions addObject:object];
     
 //    if ([self.removedOptions count] == 0)
 //        [self.removedOptions insertObject:object atIndex:[self.removedOptions count]];
@@ -193,18 +192,25 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
    // [items removeObjectAtIndex:optionIndex];
     option[@"items"]      = items;
     option[@"isEditable"] = @(NO);
+
     
-    NSArray *editableItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]]; ///items inloc de 0
+    NSMutableArray *editableItems = [[NSMutableArray alloc] initWithArray:[items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]]];
     
-    NSLog(@"editableItems %lu",(unsigned long)editableItems.count);
+   // NSLog(@"editableItems %lu",(unsigned long)editableItems.count);
     
-    if (editableItems.count -1 > 0 && self.options.count > index+1) {   ///.count
+    if (editableItems.count == 1 & items.count == 1){
+        [editableItems removeAllObjects];
+    }
+    
+    
+    
+    if (editableItems.count > 0 && self.options.count > index+1) {
         NSMutableDictionary *nextOption = self.options[index+1];
         nextOption[@"items"]      = items.mutableCopy;
         nextOption[@"isEditable"] = @(items.count > 1);
     }
     
-    self.btnContinue.hidden = ([editableItems count] -1 > 0) && (self.options.lastObject != option);  ///count
+    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
 
     [self.tableView reloadData];
 }

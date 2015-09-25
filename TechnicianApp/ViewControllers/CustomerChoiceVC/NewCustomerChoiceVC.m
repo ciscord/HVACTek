@@ -80,10 +80,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal - paymentNumber.floatValue];
         }
         
-        
-        
-        
-        
+       
         self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
         self.lblSavedWithESA.text = [NSString stringWithFormat:@"You Saved %@ By Being A Member Of Our Comfort Club!",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
     }
@@ -171,7 +168,19 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     if (signature == nil)  //signature was removed
         signature = @"";
    
+    /*(total paid, club membership, discount, deposit*/
+    NSMutableArray *aitems = self.selectedServiceOptionsDict[@"items"];
+    CGFloat totalPriceNormal = 0;
+    CGFloat totalPriceESA = 0;
+    if (aitems.count) {
+     
+        for (PricebookItem *p in aitems) {
+            totalPriceNormal += p.amount.floatValue;
+            totalPriceESA += p.amountESA.floatValue;
+        }
+    }
     
+    CGFloat tprice = self.isDiscounted? totalPriceESA : totalPriceNormal;
     
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,
                             @"userCode" : [DataLoader sharedInstance].currentUser.userCode,
@@ -188,7 +197,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"Phone" :[customerInfo objectForKeyNotNull:@"Phone"],
                             @"unselectedServiceOptiunons" : unselArray,
                             @"selectedServiceOptions" : selArray,
-                            @"totalprice" : self.totalPriceLabel.text,
+                            @"totalprice" : [NSString stringWithFormat:@"%.2f",tprice],
                             @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]],
                             @"sendEmail":self.btnSendByEmail.selected ? @"1" : @"0",
                             @"signature" : signature
