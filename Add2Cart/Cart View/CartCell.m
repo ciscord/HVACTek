@@ -96,7 +96,7 @@
     switch ([self.months intValue]) {
         case 24:
         {
-            finacePay =  (totalAmount - totalSavings)/.915/24;
+            finacePay =  (totalAmount - totalSavings)/24;//.915
             invest = (finacePay*24);
          
             break;
