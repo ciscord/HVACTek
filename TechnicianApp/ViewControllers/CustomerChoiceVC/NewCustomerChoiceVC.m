@@ -72,12 +72,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         
         self.paymentLabel.text = self.paymentValue;
         if (self.isDiscounted){
-          self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
-            self.dueLabel.text = [self changeCurrencyFormat:totalPriceESA - paymentNumber.floatValue];
+            self.totalPriceLabel.text = self.initialTotal;//[self changeCurrencyFormat:totalPriceESA];
+            self.dueLabel.text = [self changeCurrencyFormat:totalPriceESA];
         }
         else {
-            self.totalPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
-            self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal - paymentNumber.floatValue];
+            self.totalPriceLabel.text = self.initialTotal;//[self changeCurrencyFormat:totalPriceNormal];
+            self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal];
         }
         
        
