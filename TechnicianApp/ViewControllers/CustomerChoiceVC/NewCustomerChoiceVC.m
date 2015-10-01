@@ -200,7 +200,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"totalprice" : [NSString stringWithFormat:@"%.2f",tprice],
                             @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]],
                             @"sendEmail":self.btnSendByEmail.selected ? @"1" : @"0",
-                            @"signature" : signature
+                            @"signature" : signature,
+                            @"packageTotal" : [self cutSymbolOfString:self.initialTotal]
                             };
     
     __weak __typeof(self)weakSelf = self;
@@ -402,7 +403,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return returnString;
 }
 
-
+- (NSString *)cutSymbolOfString:(NSString *)string {
+    
+    NSString *returnString = [string stringByReplacingOccurrencesOfString:@"$" withString:@""];
+    
+    return returnString;
+}
 
 
 /*

@@ -191,6 +191,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
 }
 
+
+
+
+
+
 - (NSDictionary *)addDiscountsToDictionary:(NSDictionary *)dictionary {
     
     NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"items"]];
