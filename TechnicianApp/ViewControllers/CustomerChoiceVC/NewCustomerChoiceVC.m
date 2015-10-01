@@ -182,6 +182,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     CGFloat tprice = self.isDiscounted? totalPriceESA : totalPriceNormal;
     
+    
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,
                             @"userCode" : [DataLoader sharedInstance].currentUser.userCode,
                             @"userName" : [DataLoader sharedInstance].currentUser.userName,
