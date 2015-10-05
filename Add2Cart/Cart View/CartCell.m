@@ -151,9 +151,18 @@
     [nf setMinimumFractionDigits:2];
     //[formatter setRoundingMode: NSNumberFormatterRoundUp];
     
+    
+    
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
+    
+    
+    
     //new
-    self.systemRebates.text=[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-    self.investemnt.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:total]]];
+    self.systemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
+    self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     switch ([self.months intValue]) {
         case 84:
             //3.99% Best Rate 84 Months

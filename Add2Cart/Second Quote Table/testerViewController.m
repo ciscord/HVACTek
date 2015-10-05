@@ -1777,8 +1777,17 @@
     [nf setMaximumFractionDigits:2];
     [nf setMinimumFractionDigits:2];
     
-    lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:total]]];
+    
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    [numberFormatter setMaximumFractionDigits:0];
+    [numberFormatter setMinimumFractionDigits:0];
+    
+    
+    
+    
+    lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
+     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
     switch (months) {
         case 84:
