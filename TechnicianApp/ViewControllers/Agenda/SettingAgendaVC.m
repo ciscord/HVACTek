@@ -11,6 +11,13 @@
 
 @interface SettingAgendaVC ()
 
+@property (weak, nonatomic) IBOutlet UILabel *presentationLbl;
+@property (weak, nonatomic) IBOutlet UILabel *thankLbl;
+@property (weak, nonatomic) IBOutlet UILabel *introduceLbl;
+@property (nonatomic, strong) NSString *techName;
+@property (nonatomic, strong) NSString *companyName;
+@property (nonatomic, strong) NSString *costumerName;
+
 
 
 @end
@@ -22,11 +29,46 @@
     // Do any additional setup after loading the view.
     
     self.title = NSLocalizedString(@"Setting The Agenda", nil);
+    
+    [self configureVC];
+    
+    
+    
+    //[[[DataLoader sharedInstance] SWAPIManager] whoList]
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - ConfigureVC
+- (void)configureVC {
+    
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    NSDictionary *jobInfo = job.swapiJobInfo;
+    NSArray *list = [jobInfo objectForKey:@"whoList"];
+    
+    for (NSDictionary *employee in list) {
+        if ([employee[@"EmployeeCode"] isEqualToString:[[[DataLoader sharedInstance] currentUser] userCode]]) {
+            self.techName = [NSString stringWithFormat:@"%@ %@", employee[@"FirstName"], employee[@"LastName"]];
+        }
+    }
+    
+    self.costumerName = [NSString stringWithFormat:@"%@ %@", [jobInfo objectForKey:@"FirstName"], [jobInfo objectForKey:@"LastName"]];
+    self.companyName = [[[DataLoader sharedInstance] SWAPIManager] companyName];
+    
+    [self setLabelsTexts];
+    
+}
+
+
+- (void)setLabelsTexts {
+    self.presentationLbl.text = [NSString stringWithFormat:@"Hello, My name is %@ from %@.", self.techName, self.companyName];
+    self.thankLbl.text = [NSString stringWithFormat:@"I want to thank you for choosing %@ to service you today. I know there are a lot of companies you can choose from, but I want you to know that you made the right choice with us.", self.companyName];
+    self.introduceLbl.text = [NSString stringWithFormat:@"I understand I am here today for %@, is that correct?  Before I get started today I would like to let you know what you can expect from today's call.", self.costumerName];
 }
 
 

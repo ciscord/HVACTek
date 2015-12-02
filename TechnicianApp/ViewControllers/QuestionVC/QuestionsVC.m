@@ -111,13 +111,16 @@
 
 -(void)setQuestions:(NSArray *)questions
 {
-//    NSMutableArray *arr = questions.mutableCopy;
-//    if (self.questionType != qtTechnician)
-//    {
-//        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
-//                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
-//    }
-    _questions = questions;
+    //disable questions
+    NSMutableArray *arr = questions.mutableCopy;
+    if (self.questionType != qtTechnician)
+    {
+        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
+                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
+    }
+    
+    //activate questions
+//    _questions = questions;
 }
 
 -(void)showNextQuestionView:(QuestionView*)currentView moveFromRightToLeft:(BOOL)moveFromRightToLeft
@@ -180,7 +183,8 @@
         if (self.questionType == qtTechnician) {
             job.techObservations = self.questions;
             [job.managedObjectContext save];
-            [self performSegueWithIdentifier:@"selectOptionsIpadRepairsSegue" sender:self];
+            //[self performSegueWithIdentifier:@"selectOptionsIpadRepairsSegue" sender:self];
+            [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
         } else
         {
             job.custumerQuestions = self.questions;
@@ -204,11 +208,11 @@
         [arr removeLastObject];
         vc.questions = arr;
     }
-    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
-    {
-        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
-        vc.isiPadCommonRepairsOptions = YES;
-    }
+//    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
+//    {
+//        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
+//        vc.isiPadCommonRepairsOptions = YES;
+//    }
 }
 
 

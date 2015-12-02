@@ -23,6 +23,9 @@
     // Do any additional setup after loading the view.
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.homeController = self;
+    
+    
+   /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
    
 }
 

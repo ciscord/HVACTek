@@ -19,6 +19,9 @@
 @property(nonatomic, strong) NSArray      *departmentList;
 @property(nonatomic, strong) NSArray      *whoList;
 
+@property(nonatomic, copy)   NSString     *companyName;
+
+
 + (instancetype)sharedInstance;
 
 - (AFHTTPRequestOperation *)requestOperationWithXMLString:(NSString *)XMLString

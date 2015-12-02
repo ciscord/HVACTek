@@ -215,6 +215,18 @@ NSString *const kResultStatusOK = @"000";
         //         if (onSuccess) {
         //             onSuccess(nil);
         //         }
+        
+        
+        [weakSelf getCompanyInfoOnSuccess:^(NSString *company) {
+            if (onSuccess) {
+                onSuccess(nil);
+            }
+        } onError:^(NSError *error) {
+            onError(error);
+        }];
+        
+        
+        
         self.requestsInProgress--;
         [weakSelf checkAndCloseConnectionAndSession];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -479,6 +491,33 @@ NSString *const kResultStatusOK = @"000";
          }
      }];
 }
+
+#pragma mark - Get Company Info
+- (void)getCompanyInfoOnSuccess:(void (^)(NSString *company))onSuccess
+                            onError:(void (^)(NSError *error))onError {
+    self.requestsInProgress++;
+    __weak typeof(self) weakSelf = self;
+    
+    NSString *body = [NSString stringWithFormat:@"<SessionRequest SessionID=\"%@\"><CompanyInfoQuery/></SessionRequest>", self.sessionID];
+    
+    [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
+        
+        weakSelf.companyName = result[@"CompanyInfoQueryData"][@"CompanyInfoQueryRecord"][@"Name"];
+        if (onSuccess) {
+            onSuccess(weakSelf.companyName);
+        }
+
+        self.requestsInProgress--;
+        [weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
+}
+
 
 - (void)checkAndCloseConnectionAndSession {
     if (self.requestsInProgress == 0) {
