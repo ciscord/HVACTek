@@ -14,6 +14,7 @@ typedef void (^OnToggleCheckbox)(BOOL selected);
 
 @property (weak, nonatomic) IBOutlet UILabel *lbValue;
 @property (weak, nonatomic) IBOutlet UIButton *btnCheckbox;
+@property (weak, nonatomic) IBOutlet UITextField *qtyTextField;
 
 @property (nonatomic, copy) OnToggleCheckbox onCheckboxToggle;
 

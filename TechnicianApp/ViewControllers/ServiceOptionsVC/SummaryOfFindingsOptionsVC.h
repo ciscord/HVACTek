@@ -8,7 +8,7 @@
 
 #import "BaseVC.h"
 
-@interface SummaryOfFindingsOptionsVC : BaseVC
+@interface SummaryOfFindingsOptionsVC : BaseVC <UITextFieldDelegate>
 
 @property(nonatomic, assign) BOOL isiPadCommonRepairsOptions;
 

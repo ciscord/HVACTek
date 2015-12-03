@@ -98,6 +98,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
                                                    itemNumber:d[@"itemNumber"]
                                                     itemGroup:d[@"itemGroup"]
                                                          name:d[@"name"]
+                                                     quantity:@""
                                                        amount:d[@"amount"]
                                                  andAmountESA:d[@"amountESA"]];
             [self.priceBookList addObject: p];

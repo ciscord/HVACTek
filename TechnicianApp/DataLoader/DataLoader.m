@@ -81,8 +81,8 @@ NSString *const INVOICE          = @"emailInvoice";
 
 @property (nonatomic, copy) NSDictionary    *userInfo;
 @property (nonatomic, copy) NSDictionary    *inspirationInfo;
-@property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptions;
-@property (nonatomic, strong) NSMutableArray *otherOptions;
+@property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptionsLocal;
+@property (nonatomic, strong) NSMutableArray *otherOptionsLocal;
 @property (nonatomic, strong) PricebookItem *diagnosticOnlyOption;
 
 @end
@@ -456,6 +456,7 @@ NSString *const INVOICE          = @"emailInvoice";
                                                      itemNumber:pricebookInfo[@"ItemNumber"]
                                                       itemGroup:pricebookInfo[@"ItemGroup"]
                                                            name:pricebookInfo[@"Description"]
+                                                       quantity:@""
                                                          amount:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)
                                                    andAmountESA:@([pricebookInfo[@"TaskTotalPrice"] floatValue])];
               

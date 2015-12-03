@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibril.ttf">
@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="270" height="70"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4m8-fb-3II">
-                        <rect key="frame" x="8" y="15" width="39" height="39"/>
+                        <rect key="frame" x="8" y="21" width="28" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" backgroundImage="service-option-item-bg">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -31,12 +31,19 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Option" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zeR-LF-gRB">
-                        <rect key="frame" x="59" y="8" width="203" height="54"/>
+                        <rect key="frame" x="59" y="8" width="148" height="54"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="20"/>
                         <color key="textColor" red="0.45882352941176469" green="0.73725490196078436" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Qty" textAlignment="center" minimumFontSize="17" id="KKp-vL-uKg">
+                        <rect key="frame" x="214" y="15" width="48" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.99607843159999998" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                    </textField>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -44,17 +51,13 @@
             <connections>
                 <outlet property="btnCheckbox" destination="4m8-fb-3II" id="lPb-uY-B1d"/>
                 <outlet property="lbValue" destination="zeR-LF-gRB" id="QdD-U6-TIM"/>
+                <outlet property="qtyTextField" destination="KKp-vL-uKg" id="avC-Uj-Ofm"/>
             </connections>
-            <point key="canvasLocation" x="602" y="481"/>
+            <point key="canvasLocation" x="367" y="517"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="service-option-checkmark.png" width="189" height="36"/>
         <image name="service-option-item-bg" width="39" height="39"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

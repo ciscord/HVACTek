@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *itemNumber;
 @property (nonatomic, strong) NSString *itemGroup;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *quantity;
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSNumber *amountESA;
 @property (nonatomic, assign) BOOL isMain;
@@ -21,6 +22,7 @@
                      itemNumber:(NSString*)itemNumber
                       itemGroup:(NSString*)itemGroup
                            name:(NSString *)name
+                       quantity:(NSString *)quantity
                          amount:(NSNumber *)amount
                    andAmountESA:(NSNumber *)amountESA;
 @end

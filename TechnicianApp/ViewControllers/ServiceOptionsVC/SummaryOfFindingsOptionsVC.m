@@ -38,6 +38,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     imageView.contentMode = UIViewContentModeCenter;
     [imageView setFrame: CGRectMake(0.0, 0.0, 40.0, 30.0)];
     
+
     self.tfSearch.rightView = imageView;
     self.tfSearch.rightViewMode = UITextFieldViewModeAlways;
     
@@ -55,16 +56,14 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
         self.allOptions = [[DataLoader sharedInstance] otherOptions];
     }
-    
-    
-    
-
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark -
 
@@ -124,14 +123,15 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 }
 
 #pragma mark - UICollectionViewDatasource
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.filteredOptions count];
 }
 
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger itemIndex = indexPath.item;
@@ -141,6 +141,10 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     ServiceOptionViewCell             *cell     = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.btnCheckbox.selected = [self.selectedOptions containsObject:item];
     cell.lbValue.text         = item.name;
+    cell.qtyTextField.delegate = self;
+    cell.qtyTextField.text    = item.quantity;
+    cell.qtyTextField.tag = itemIndex;
+    cell.tag = itemIndex;
     [cell setOnCheckboxToggle:^(BOOL selected){
          id selectedItem = weakSelf.filteredOptions[itemIndex];
          if ([self.selectedOptions containsObject:selectedItem]) {
@@ -151,6 +155,8 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
      }];
     return cell;
 }
+
+
 
 #pragma mark - UICollectionViewDelegate
 
@@ -168,14 +174,32 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 }
 
 
-#pragma mark - UITextFieldDelegate
 
+#pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *term = [textField.text stringByReplacingCharactersInRange:range withString: string];
     
-    self.filterTerm = term;
-    
+    if ([textField isEqual:self.tfSearch]) {
+        self.filterTerm = term;
+    }else{
+        NSInteger itemIndex = textField.tag;
+        PricebookItem *item = self.filteredOptions[itemIndex];
+        
+        if (self.isiPadCommonRepairsOptions) {
+            NSUInteger globalIndex = [[[DataLoader sharedInstance] iPadCommonRepairsOptions] indexOfObject:item];
+            item.quantity = term;
+            [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
+            [[[DataLoader sharedInstance] iPadCommonRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
+        }else{
+            NSUInteger globalIndex = [[[DataLoader sharedInstance] otherOptions] indexOfObject:item];
+            item.quantity = term;
+            [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
+            [[[DataLoader sharedInstance] otherOptions] replaceObjectAtIndex:globalIndex withObject:item];
+        }
+        
+    }
+
     return YES;
 }
 
