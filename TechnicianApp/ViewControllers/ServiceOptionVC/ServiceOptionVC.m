@@ -180,12 +180,27 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Next Action
 - (IBAction)nextBtnClicked:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
-    
-//    if (no changes)
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"No options have been changed. Are you sure you wish to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-//    [alert show];
+    if ([self servicesOptionsWereEdited]) {
+        [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"No options have been changed. Are you sure you wish to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        [alert show];
+    }
 }
+
+
+
+- (BOOL)servicesOptionsWereEdited {
+    for (NSInteger i = 0; i < self.options.count; i++) {
+        NSMutableDictionary *option = self.options[i];
+        if ([option[@"items"] count] != [option[@"removedItems"] count]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
