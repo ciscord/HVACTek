@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,16 +15,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="e9P-Ch-g38">
-                        <rect key="frame" x="0.0" y="0.0" width="3200" height="596"/>
+                        <rect key="frame" x="0.0" y="1" width="3200" height="596"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <view contentMode="scaleToFill" id="uvg-7X-5JW">
-                        <rect key="frame" x="472" y="15" width="1" height="580"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
-                    </view>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="MAD-nv-dBi">
-                        <rect key="frame" x="219" y="15" width="245" height="579"/>
+                        <rect key="frame" x="136" y="15" width="328" height="579"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -51,24 +47,41 @@
                             <action selector="didSelectOption:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CWy-Th-fEL"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qRf-AM-2TD" userLabel="Options Button">
+                        <rect key="frame" x="488" y="0.0" width="178" height="52"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
+                        <state key="normal" title="Options">
+                            <color key="titleColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="optionsBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6MN-HD-jX1"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Options To Delete From The List" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dnh-hZ-ydm">
                         <rect key="frame" x="488" y="0.0" width="178" height="113"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="UCr-MS-mG0">
-                        <rect key="frame" x="210" y="15" width="1" height="580"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.46666666865348816" green="0.74117648601531982" blue="0.26274511218070984" alpha="1" colorSpace="deviceRGB"/>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eaz-9M-Gwp">
-                        <rect key="frame" x="8" y="0.0" width="186" height="73"/>
+                        <rect key="frame" x="8" y="0.0" width="105" height="73"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="O8h-9h-gsh">
+                        <rect key="frame" x="0.0" y="0.0" width="113" height="113"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.36862745099999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
                     <view clipsSubviews="YES" contentMode="scaleToFill" id="0vY-lx-8yx">
                         <rect key="frame" x="488" y="8" width="178" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -131,6 +144,8 @@
                 <outlet property="btnPrice1" destination="SzZ-tt-oet" id="mP6-VR-kmp"/>
                 <outlet property="btnPrice2" destination="ttX-yR-kwU" id="m69-cT-ayH"/>
                 <outlet property="btnResetOption" destination="XP9-Si-8xO" id="C3n-DB-Xkb"/>
+                <outlet property="choiceImageView" destination="O8h-9h-gsh" id="9ij-Q8-xf2"/>
+                <outlet property="choiceOptionButton" destination="qRf-AM-2TD" id="0V5-Hb-hLo"/>
                 <outlet property="gradientView" destination="e9P-Ch-g38" id="OJE-GO-IMT"/>
                 <outlet property="lb24MonthRates" destination="T9S-CI-x0P" id="cLC-j4-WF3"/>
                 <outlet property="lbESAsaving" destination="0a3-RO-Y6F" id="LHp-px-GNf"/>
@@ -138,15 +153,8 @@
                 <outlet property="lbSelectOption" destination="Dnh-hZ-ydm" id="aaG-d5-Wr4"/>
                 <outlet property="tableView" destination="MAD-nv-dBi" id="jWp-LP-WB6"/>
                 <outlet property="vPrice" destination="0vY-lx-8yx" id="Wij-dS-NgF"/>
-                <outlet property="vSeparator1" destination="UCr-MS-mG0" id="9i9-iK-zEV"/>
-                <outlet property="vSeparator2" destination="uvg-7X-5JW" id="MjM-xq-dYL"/>
             </connections>
-            <point key="canvasLocation" x="151" y="-345.5"/>
+            <point key="canvasLocation" x="51" y="-239.5"/>
         </tableViewCell>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

@@ -11,6 +11,7 @@
 
 typedef void (^OnOptionSelected)(NSInteger rowIndex, NSInteger itemIndex);
 typedef void (^OnPriceSelected)(NSInteger rowIndex, BOOL isDiscounted);
+typedef void (^optionButtonClicked)(NSInteger rowIndex);
 
 @interface RecommendationTableViewCell : UITableViewCell
 
@@ -26,16 +27,24 @@ typedef void (^OnPriceSelected)(NSInteger rowIndex, BOOL isDiscounted);
 @property (nonatomic, copy) OnOptionSelected     onOptionReset;
 @property (nonatomic, copy) OnOptionSelected     onOptionSelected;
 @property (nonatomic, copy) OnPriceSelected      onPriceSelected;
+@property (nonatomic, copy) optionButtonClicked  optionButtonSelected;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray     *serviceOptions;
-@property (weak, nonatomic) IBOutlet UIView      *vSeparator1;
-@property (weak, nonatomic) IBOutlet UIView      *vSeparator2;
 @property (weak, nonatomic) IBOutlet UIView      *vPrice;
 @property (weak, nonatomic) IBOutlet UIButton    *btnPrice1;
 @property (weak, nonatomic) IBOutlet UIButton    *btnPrice2;
 @property (weak, nonatomic) IBOutlet UILabel     *lbESAsaving;
 @property (weak, nonatomic) IBOutlet UILabel     *lb24MonthRates;
+
+
+///~~~~~~~~~///
+
+@property (weak, nonatomic) IBOutlet UIImageView *choiceImageView;
+@property (weak, nonatomic) IBOutlet UIButton *choiceOptionButton;
+
+
+
 
 //- (void)displayServiceOptions:(NSArray *)options;
 - (void)displayServiceOptions:(NSArray *)options andRemovedServiceOptions:(NSArray *)removedOptions;

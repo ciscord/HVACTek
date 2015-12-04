@@ -15,7 +15,7 @@ typedef NS_ENUM (NSInteger, OptionsDisplayType){
     odtCustomerFinalChoice
 };
 
-@interface ServiceOptionVC : BaseVC
+@interface ServiceOptionVC : BaseVC <UIAlertViewDelegate>
 
 @property (nonatomic, assign) OptionsDisplayType optionsDisplayType;
 @property (nonatomic, strong) NSArray *priceBookAndServiceOptions;

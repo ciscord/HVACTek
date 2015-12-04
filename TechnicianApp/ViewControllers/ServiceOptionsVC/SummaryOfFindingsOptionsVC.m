@@ -10,6 +10,7 @@
 #import "ServiceOptionViewCell.h"
 #import "SummaryOfFindingsVC.h"
 #import "PricebookItem.h"
+#import "ServiceOptionVC.h"
 
 @interface SummaryOfFindingsOptionsVC ()
 
@@ -24,6 +25,7 @@
 @implementation SummaryOfFindingsOptionsVC
 
 static NSString *kCellIdentifier = @"ServiceOptionViewCell";
+static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,29 +100,15 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [self.collectionView reloadData];
 }
 
-#pragma mark - Navigation
 
+#pragma mark - Continue Action
 - (IBAction)btnContinueTouch:(id)sender {
 
     [DataLoader saveOptionsLocal:self.selectedOptions];
-    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"selectPriceBookSegue") sender:self];
+    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"showServiceOptionsDirect") sender:self];
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
-    {
-        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
-        vc.isiPadCommonRepairsOptions = NO;
-        vc.selectedOptions = self.selectedOptions.mutableCopy;
-    }
-    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
-    {
-        SummaryOfFindingsVC *vc = (SummaryOfFindingsVC*)segue.destinationViewController;
-        vc.selectedServiceOptions = self.selectedOptions;
-    }
-}
 
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -208,5 +196,31 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [textField resignFirstResponder];
     return YES;
 }
+
+
+
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
+    {
+        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
+        vc.isiPadCommonRepairsOptions = NO;
+        vc.selectedOptions = self.selectedOptions.mutableCopy;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
+    {
+        //        SummaryOfFindingsVC *vc = (SummaryOfFindingsVC*)segue.destinationViewController;
+        //        vc.selectedServiceOptions = self.selectedOptions;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[ServiceOptionVC class]])
+    {
+        ServiceOptionVC *vc = (ServiceOptionVC*)segue.destinationViewController;
+        vc.optionsDisplayType = odtEditing;
+        vc.priceBookAndServiceOptions = self.selectedOptions;
+    }
+}
+
 
 @end

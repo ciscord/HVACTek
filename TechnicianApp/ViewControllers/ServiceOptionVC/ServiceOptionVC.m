@@ -13,6 +13,8 @@
 #import "PlatinumOptionsVC.h"
 #import "ESABenefitsVC.h"
 #import "EnlargeOptionsVC.h"
+#import "EditServiceOptionsVC.h"
+
 
 @interface ServiceOptionVC ()
 
@@ -38,12 +40,10 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 
     if (self.optionsDisplayType == odtEditing) {
-        self.options = @[@{@"ServiceID": @"0", @"title": @"Recommendation 1", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-platinum"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"1",@"title": @"Recommendation 2", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-gold"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"2",@"title": @"Recommendation 3", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-silver"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"3",@"title": @"Recommendation 4", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-bronze"], @"items" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"4",@"title": @"Recommendation 5", @"isEditable": @(NO), @"backgroundImage" : [UIImage imageNamed:@"bg-basic"], @"items" : @[].mutableCopy}.mutableCopy].mutableCopy;
-
+        self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_immediateRepair"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_systemPrevention"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_cleanAirSolution"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_totalComfortEnhancement"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
     }
 
     self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
@@ -55,82 +55,17 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     
     self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
-
-//    self.btnContinue.hidden = YES;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+
 #pragma mark - EnlargeOptionsVC
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-    ViewOptionsVC *vc = [segue destinationViewController];
-    if ([vc isKindOfClass:[ViewOptionsVC class]]) {
-
-        ViewOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.options;
-
-    } else if ([vc isKindOfClass:[ServiceOptionVC class]]) {
-
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType         = odtReadonlyWithPrice;
-        vc.priceBookAndServiceOptions = self.options;
-
-    } else if ([vc isKindOfClass:[CustomerChoiceVC class]]) {
-
-        CustomerChoiceVC *vc = [segue destinationViewController];
-        vc.fullServiceOptions = self.options.firstObject[@"items"];
-        vc.isDiscounted       = self.isDiscountedPriceSelected;
-        vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
-        
-        if (self.isDiagnositcOnlyPriceSelected) {
-
-            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-
-            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-
-            NSDictionary *d = @{
-                @"items" : @[diagnosticOnlyItemNoTitle],
-                @"title" : @"Diagnostic Only"
-            };
-
-            vc.selectedServiceOptions = d;
-        } else {
-            vc.selectedServiceOptions = self.customerSelectedOptions;
-        }
-    } else if ([vc isKindOfClass:[PlatinumOptionsVC class]]) {
-
-        PlatinumOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.options;
-        
-    }
-    else if ([vc isKindOfClass:[ESABenefitsVC class]]) {
-        ESABenefitsVC *vc = [segue destinationViewController];
-        vc.serviceOptionsPriceBook = self.options;
-    }
-    
-    
-//    if ([segue.destinationViewController isKindOfClass:[EnlargeOptionsVC class]])
-//    {
-//        EnlargeOptionsVC *vc = (EnlargeOptionsVC*)segue.destinationViewController;
-//        vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)self.selectedOption + 1];
-//        
-////        NSDictionary           *option   = self.options[self.selectedOption];
-////        NSArray                *items    = option[@"items"];
-//        
-//        
-//
-//    }
-}
-
 - (void)setPriceBookAndServiceOptions:(NSArray *)priceBookAndServiceOptions {
 
     _priceBookAndServiceOptions = priceBookAndServiceOptions;
@@ -143,10 +78,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     } else {
         self.options = _priceBookAndServiceOptions.mutableCopy;
     }
-
-    
-    
 }
+
 
 - (void)resetOptions {
 
@@ -154,19 +87,26 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
         for (NSInteger i = 0; i < self.options.count; i++) {
             NSMutableDictionary *option = self.options[i];
-            if (i == 0 || (i == 1 && [[self.options[i-1][@"items"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]] count])) {
-                option[@"items"]      = self.priceBookAndServiceOptions.mutableCopy;
-                option[@"isEditable"] = @(i == 1);
-            } else {
-                option[@"items"]      = @[].mutableCopy;
-                option[@"isEditable"] = @(NO);
-            }
-
+//            if (i == 0 || (i == 1 && [[self.options[i-1][@"items"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]] count])) {
+//                option[@"items"]      = self.priceBookAndServiceOptions.mutableCopy;
+//                option[@"isEditable"] = @(i == 1);
+//            } else {
+//                option[@"items"]      = @[].mutableCopy;
+//                option[@"isEditable"] = @(NO);
+//            }
+            
+            option[@"items"]        = self.priceBookAndServiceOptions.mutableCopy;
+            option[@"removedItems"] = self.priceBookAndServiceOptions.mutableCopy;
+            option[@"isEditable"]   = @(i == 1);
+            
+            
+            
         }
-        self.btnContinue.hidden = [self.options[1][@"items"] count] > 1;
+///        self.btnContinue.hidden = [self.options[1][@"items"] count] > 1;
         [self.tableView reloadData];
     }
 }
+
 
 - (void)didSelectOptionsWithRow:(NSInteger)index withOptionIndex:(NSInteger)optionIndex {
 
@@ -210,10 +150,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         nextOption[@"isEditable"] = @(items.count > 1);
     }
     
-    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
+///    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
 
     [self.tableView reloadData];
 }
+
 
 - (IBAction)btnDiagnosticOnlyTouch:(id)sender {
     self.isDiagnositcOnlyPriceSelected = YES;
@@ -221,7 +162,54 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
 }
 
+
+#pragma mark - Options Action
+- (void)selectOptionsToEditAtRow:(NSInteger)index {
+//    NSDictionary *option   = self.options[index];
+//    NSMutableArray *items    = option[@"items"];
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+    EditServiceOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EditServiceOptionsVC"];
+    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    vc.servicesArray = self.options;
+    vc.selectedIndex = index;
+    [self presentViewController:vc animated:YES completion:nil];
+
+}
+
+
+#pragma mark - Next Action
+- (IBAction)nextBtnClicked:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
+    
+//    if (no changes)
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"No options have been changed. Are you sure you wish to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+//    [alert show];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
+    }
+}
+
+
+
 #pragma mark - UITableViewDelegate & DataSource
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *v = [UIView new];
+    [v setBackgroundColor:[UIColor clearColor]];
+    return v;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self.options objectAtIndex:indexPath.section];
@@ -230,9 +218,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.options.count;
 }
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
@@ -240,19 +230,21 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.options.count;
+    return 1;
 
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak ServiceOptionVC *weakSelf = self;
-    NSDictionary           *option   = self.options[indexPath.row];
+    NSDictionary           *option   = self.options[indexPath.section];
     NSArray                *items    = option[@"items"];
 
     RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-    cell.gradientView.image        = option[@"backgroundImage"];
-    cell.lbRecommandationName.text = option[@"title"];
-    cell.rowIndex                  = indexPath.row;
+    cell.choiceImageView.image        = option[@"optionImage"];
+    cell.lbRecommandationName.text    = option[@"title"];
+    cell.rowIndex                     = indexPath.section;
+    
     if (self.optionsDisplayType == odtEditing) {
         cell.isEditable = [option[@"isEditable"] boolValue];
     }
@@ -271,16 +263,27 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [cell setOnPriceSelected:^(NSInteger rowIndex, BOOL isDiscounted) {
          weakSelf.isDiscountedPriceSelected = isDiscounted;
          weakSelf.isDiagnositcOnlyPriceSelected = NO;
-         weakSelf.customerSelectedOptions = self.options[indexPath.row];
+         weakSelf.customerSelectedOptions = self.options[indexPath.section];
          [weakSelf performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
      }];
+    
+    
+    
+    ////////
+    [cell setOptionButtonSelected:^(NSInteger rowIndex){
+        [weakSelf selectOptionsToEditAtRow:rowIndex];
+    }];
+    
+    
+    
+    
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSDictionary           *option   = self.options[indexPath.row];
+    NSDictionary           *option   = self.options[indexPath.section];
     NSArray                *items    = option[@"items"];
     
     RecommendationTableViewCell *cell = (RecommendationTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -290,7 +293,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
     EnlargeOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EnlargeOptionsVC"];
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.row + 1];
+    vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.section + 1];
     vc.enlargeTotalPrice = cell.btnPrice1.titleLabel.text;
     vc.enlargeESAPrice = cell.btnPrice2.titleLabel.text;
     vc.enlargeMonthlyPrice = cell.lb24MonthRates.text;
@@ -304,6 +307,73 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 }
 
+
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    ViewOptionsVC *vc = [segue destinationViewController];
+    if ([vc isKindOfClass:[ViewOptionsVC class]]) {
+        
+        ViewOptionsVC *vc = [segue destinationViewController];
+        vc.priceBookAndServiceOptions = self.options;
+        
+    } else if ([vc isKindOfClass:[ServiceOptionVC class]]) {
+        
+        ServiceOptionVC *vc = [segue destinationViewController];
+        vc.optionsDisplayType         = odtReadonlyWithPrice;
+        vc.priceBookAndServiceOptions = self.options;
+        
+    } else if ([vc isKindOfClass:[CustomerChoiceVC class]]) {
+        
+        CustomerChoiceVC *vc = [segue destinationViewController];
+        vc.fullServiceOptions = self.options.firstObject[@"items"];
+        vc.isDiscounted       = self.isDiscountedPriceSelected;
+        vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
+        
+        if (self.isDiagnositcOnlyPriceSelected) {
+            
+            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
+            
+            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
+            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
+            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
+            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
+            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
+            
+            NSDictionary *d = @{
+                                @"items" : @[diagnosticOnlyItemNoTitle],
+                                @"title" : @"Diagnostic Only"
+                                };
+            
+            vc.selectedServiceOptions = d;
+        } else {
+            vc.selectedServiceOptions = self.customerSelectedOptions;
+        }
+    } else if ([vc isKindOfClass:[PlatinumOptionsVC class]]) {
+        
+        PlatinumOptionsVC *vc = [segue destinationViewController];
+        vc.priceBookAndServiceOptions = self.options;
+        
+    }
+    else if ([vc isKindOfClass:[ESABenefitsVC class]]) {
+        ESABenefitsVC *vc = [segue destinationViewController];
+        vc.serviceOptionsPriceBook = self.options;
+    }
+    
+    
+    //    if ([segue.destinationViewController isKindOfClass:[EnlargeOptionsVC class]])
+    //    {
+    //        EnlargeOptionsVC *vc = (EnlargeOptionsVC*)segue.destinationViewController;
+    //        vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)self.selectedOption + 1];
+    //
+    ////        NSDictionary           *option   = self.options[self.selectedOption];
+    ////        NSArray                *items    = option[@"items"];
+    //        
+    //        
+    //
+    //    }
+}
 
 
 

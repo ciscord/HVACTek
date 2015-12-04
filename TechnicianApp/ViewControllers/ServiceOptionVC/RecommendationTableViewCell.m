@@ -25,16 +25,16 @@ typedef void (^OnDidRemoveOption)(NSInteger rowIndex);
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self && ![self.accessoryView isKindOfClass:[UIButton class]]) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setShowsTouchWhenHighlighted:YES];
-        [button setTitle:@"⊖" forState:UIControlStateNormal];
-//        [button.titleLabel setFont: [UIFont fontWithName:@"Calibri-Light" size: 14]];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setFrame:CGRectMake(0.0, 0.0, 24, 24)];
-        [button addTarget:self action:@selector(didDeleteServiceOption:) forControlEvents:UIControlEventTouchUpInside];
-        self.accessoryView = button;
-    }
+//    if (self && ![self.accessoryView isKindOfClass:[UIButton class]]) {
+//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [button setShowsTouchWhenHighlighted:YES];
+//        [button setTitle:@"⊖" forState:UIControlStateNormal];
+////        [button.titleLabel setFont: [UIFont fontWithName:@"Calibri-Light" size: 14]];
+//        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [button setFrame:CGRectMake(0.0, 0.0, 24, 24)];
+//        [button addTarget:self action:@selector(didDeleteServiceOption:) forControlEvents:UIControlEventTouchUpInside];
+//        self.accessoryView = button;
+//    }
     return self;
 }
 
@@ -78,6 +78,9 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     self.lbESAsaving.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     self.lb24MonthRates.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     
+    self.choiceOptionButton.layer.borderWidth = 1.0f;
+    self.choiceOptionButton.layer.borderColor = self.choiceOptionButton.titleLabel.textColor.CGColor;
+    
     [self.tableView reloadData];
 }
 
@@ -102,8 +105,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = YES;
         self.tableView.hidden      = YES;
-        self.vSeparator1.hidden    = YES;
-        self.vSeparator2.hidden    = YES;
         break;
     }
     case odtReadonlyWithPrice:
@@ -112,8 +113,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = YES;
         self.tableView.hidden      = NO;
-        self.vSeparator1.hidden    = NO;
-        self.vSeparator2.hidden    = NO;
         break;
     }
     case odtCustomerFinalChoice:
@@ -122,8 +121,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.lbSelectOption.hidden = NO;
         self.btnResetOption.hidden = YES;
         self.tableView.hidden      = NO;
-        self.vSeparator1.hidden    = NO;
-        self.vSeparator2.hidden    = NO;
         self.lbSelectOption.font = self.btnPrice1.titleLabel.font;
         break;
     }
@@ -131,10 +128,9 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     {
         self.vPrice.hidden         = YES;
         self.lbSelectOption.hidden = !isEditable;
+        self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = (_rowIndex != 0);
         self.tableView.hidden      = NO;
-        self.vSeparator1.hidden    = NO;
-        self.vSeparator2.hidden    = NO;
         break;
     }
     }
@@ -156,17 +152,10 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.btnResetOption.centerY       = self.contentView.middleY;
         self.lbSelectOption.centerY       = self.contentView.middleY;
 
-
-        [self.vSeparator1 setFrame:CGRectMake(self.vSeparator1.frame.origin.x,
-                                              15.0,
-                                              1.0,
-                                              self.frame.size.height - 30.0)];
-
-        [self.vSeparator2 setFrame:CGRectMake(self.vSeparator2.frame.origin.x,
-                                              15.0,
-                                              1.0,
-                                              self.frame.size.height - 30.0)];
         self.vPrice.centerY = self.contentView.middleY;
+        
+        self.choiceImageView.frame = CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height);
+        self.choiceOptionButton.centerY = self.contentView.middleY;
     }
 }
 
@@ -239,8 +228,17 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 }
 
-#pragma mark - UITableViewDelegate & DataSource
 
+
+#pragma mark - OptionsBtn Action
+- (IBAction)optionsBtnClicked:(UIButton *)sender {
+    if (self.optionButtonSelected) {
+        self.optionButtonSelected(self.rowIndex);
+    }
+}
+
+
+#pragma mark - UITableViewDelegate & DataSource
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
@@ -261,7 +259,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    __weak RecommendationTableViewCell *weakSelf = self;
+    //__weak RecommendationTableViewCell *weakSelf = self;
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     ///PricebookItem                  *p    = self.serviceOptions[indexPath.row+1];
@@ -278,8 +276,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:p.name attributes:attributes];
         cell.textLabel.attributedText = attrText;
         
-        cell.accessoryView.hidden = YES;
-        
     }else{
         if (cell.textLabel.attributedText){
             cell.textLabel.attributedText = nil;
@@ -293,9 +289,11 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     cell.rowIndex             = indexPath.row;
     
     ///cell.rowIndex = [self.serviceOptions indexOfObject:p];
-    [cell setOnRemovedOption:^(NSInteger rowIndex) {
-         [weakSelf didRemoveOptionAtIndex:rowIndex];
-     }];
+//    [cell setOnRemovedOption:^(NSInteger rowIndex) {
+//         [weakSelf didRemoveOptionAtIndex:rowIndex];
+//     }];
+    
+    
     return cell;
 }
 
