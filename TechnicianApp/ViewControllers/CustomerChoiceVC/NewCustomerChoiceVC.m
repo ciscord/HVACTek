@@ -62,8 +62,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         CGFloat totalPriceNormal = 0;
         CGFloat totalPriceESA = 0;
         for (PricebookItem *p in items1) {
-            totalPriceNormal += p.amount.floatValue;
-            totalPriceESA += p.amountESA.floatValue;
+            int totalQuantity = 1;
+            if ([p.quantity intValue] > 1)
+                totalQuantity = [p.quantity intValue];
+            
+            totalPriceNormal += p.amount.floatValue * totalQuantity;
+            totalPriceESA += p.amountESA.floatValue * totalQuantity;
         }
 
         
@@ -136,6 +140,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                                   @"itemNumber" : p.itemNumber,
                                   @"itemGroup" :p.itemGroup,
                                   @"name":p.name,
+                                  @"quantity":p.quantity,
                                   @"amount":p.amount,
                                   @"amountESA": p.amountESA }];
         }
@@ -151,6 +156,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                                   @"itemNumber" : p.itemNumber,
                                   @"itemGroup" :p.itemGroup,
                                   @"name":p.name,
+                                  @"quantity":p.quantity,
                                   @"amount":p.amount,
                                   @"amountESA": p.amountESA }];
       }
@@ -311,17 +317,25 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                 cell.descriptionLabel.text = @"Package Total";
             else
             {
+                PricebookItem *p = [self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] ;
+                NSString * serviceString;
+                if ([p.quantity intValue] > 1) {
+                    serviceString = [NSString stringWithFormat:@"     (%@) ",p.quantity];
+                }else{
+                    serviceString = @"     ";
+                }
+                
                 
                 if ([[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Diagnostic"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comprehensive Precision Tune"]) {
                     
-                    cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name];
+                    cell.descriptionLabel.text = p.name;
                 }else{
-                    cell.descriptionLabel.text = [@"     " stringByAppendingString:[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name]];
+                    cell.descriptionLabel.text = [serviceString stringByAppendingString:p.name];
                 }
                 
             }
         }
-        
+
         
         if (!self.isOnlyDiagnostic){
             if (indexPath.row == 0)

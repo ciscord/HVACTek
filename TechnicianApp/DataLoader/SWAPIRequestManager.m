@@ -191,9 +191,13 @@ NSString *const kResultStatusOK = @"000";
                 [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
                     [weakSelf GetdsEquipForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
                         [weakSelf GetdsLocationInfo:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
-                            if (onSuccess) {
-                                onSuccess(nil);
-                            }
+                            [weakSelf getCompanyInfoOnSuccess:^(NSString *company) {
+                                if (onSuccess) {
+                                    onSuccess(nil);
+                                }
+                            } onError:^(NSError *error) {
+                                onError(error);
+                            }];
                         } onError:^(NSError *error) {
                             onError(error);
                         }];
@@ -217,14 +221,14 @@ NSString *const kResultStatusOK = @"000";
         //         }
         
         
-        [weakSelf getCompanyInfoOnSuccess:^(NSString *company) {
-            if (onSuccess) {
-                onSuccess(nil);
-            }
-        } onError:^(NSError *error) {
-            onError(error);
-        }];
-        
+//        [weakSelf getCompanyInfoOnSuccess:^(NSString *company) {
+//            if (onSuccess) {
+//                onSuccess(nil);
+//            }
+//        } onError:^(NSError *error) {
+//            onError(error);
+//        }];
+//        
         
         
         self.requestsInProgress--;

@@ -197,8 +197,14 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
             CGFloat totalPriceNormal = 0;
             CGFloat totalPriceESA = 0;
             for (PricebookItem *p in removedOptions) {
-                totalPriceNormal += p.amount.floatValue;
-                totalPriceESA += p.amountESA.floatValue;
+                
+                int totalQuantity = 1;
+                if ([p.quantity intValue] > 1)
+                    totalQuantity = [p.quantity intValue];
+                
+                
+                totalPriceNormal += p.amount.floatValue * totalQuantity;
+                totalPriceESA += p.amountESA.floatValue * totalQuantity;
             }
             
             if (_optionsDisplayType == odtCustomerFinalChoice) {
@@ -256,7 +262,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     if ([self.serviceOptions count] == 0){
         return 0;
     }else{
-        NSLog(@"%lu \n\n\n",(unsigned long)self.serviceOptionsRemoved.count);
         return [self.serviceOptionsRemoved count];
     }
 }

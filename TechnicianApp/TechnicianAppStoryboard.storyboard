@@ -1044,11 +1044,11 @@ to be the following:</string>
         <scene sceneID="qB7-8V-oyo">
             <objects>
                 <viewController storyboardIdentifier="CustomerChoiceVC" id="PVm-o9-UYq" customClass="CustomerChoiceVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JxK-g3-aa6">
+                    <view key="view" contentMode="scaleToFill" id="JxK-g3-aa6" customClass="TPKeyboardAvoidingScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="afE-F7-q9x" customClass="TPKeyboardAvoidingScrollView">
+                            <view contentMode="scaleToFill" id="afE-F7-q9x">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1081,7 +1081,7 @@ the work you've selected</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yJz-Sd-kDW">
-                                        <rect key="frame" x="176" y="876" width="188" height="52"/>
+                                        <rect key="frame" x="176" y="911" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
@@ -1099,7 +1099,7 @@ the work you've selected</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="btg-a9-EcW">
-                                        <rect key="frame" x="404" y="876" width="188" height="52"/>
+                                        <rect key="frame" x="404" y="911" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
@@ -1117,7 +1117,7 @@ the work you've selected</string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Tzl-ge-qgF">
-                                        <rect key="frame" x="39" y="192" width="684" height="628"/>
+                                        <rect key="frame" x="39" y="250" width="684" height="628"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="dw8-Uy-EDh">
@@ -1331,6 +1331,8 @@ the work you've selected</string>
                     <navigationItem key="navigationItem" id="9jP-OK-M4Y"/>
                     <connections>
                         <outlet property="descriptionView" destination="dw8-Uy-EDh" id="x9V-IS-HD3"/>
+                        <outlet property="helperView" destination="afE-F7-q9x" id="txL-AK-LPi"/>
+                        <outlet property="keyboardAvoiding" destination="JxK-g3-aa6" id="ngd-sA-uyO"/>
                         <outlet property="signatureView" destination="m6G-Wd-xZi" id="1iK-oe-i4j"/>
                         <outlet property="subtotaPriceLabel" destination="dv1-bb-mI6" id="v5j-CO-sZd"/>
                         <outlet property="textFieldCPT" destination="8Aw-Cu-089" id="e7Y-Jp-ktA"/>
@@ -1399,7 +1401,7 @@ the work you've selected</string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="7df-Ad-LEq">
-                                        <rect key="frame" x="39" y="240" width="684" height="581"/>
+                                        <rect key="frame" x="39" y="250" width="684" height="581"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="gNB-jv-kcf">

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "CustomerChoiceCell.h"
 #import "NewCustomerChoiceVC.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface CustomerChoiceVC ()
 
@@ -29,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPayment;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDiagnostic;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldCPT;
+@property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *keyboardAvoiding;
+@property (weak, nonatomic) IBOutlet UIView *helperView;
 
 @end
 
@@ -36,11 +39,14 @@
 
 static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTableViewCell
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
     self.title = NSLocalizedString(@"Customer's Choice", nil);
+    
+    self.keyboardAvoiding.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
 
     self.vContainer.layer.borderWidth = 1.0;
     self.vContainer.layer.borderColor = [[UIColor colorWithRed:0.471 green:0.741 blue:0.267 alpha:1.000] CGColor];
@@ -84,19 +90,19 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         CGFloat totalPriceNormal = 0;
         CGFloat totalPriceESA = 0;
         for (PricebookItem *p in items1) {
-            totalPriceNormal += p.amount.floatValue;
-            totalPriceESA += p.amountESA.floatValue;
+            int totalQuantity = 1;
+            if ([p.quantity intValue] > 1)
+                totalQuantity = [p.quantity intValue];
+            
+            totalPriceNormal += p.amount.floatValue * totalQuantity;
+            totalPriceESA += p.amountESA.floatValue * totalQuantity;
         }
-        
-        //[self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceESA ] forState:UIControlStateNormal];
-        //[self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.0f", totalPriceNormal] forState:UIControlStateNormal];
 
         
         if (self.isDiscounted)
             self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
         else
             self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
-
         
     }
 }
@@ -342,11 +348,17 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
                 cell.descriptionLabel.text = @"Customer's Choice";
                 cell.priceLabel.text = self.subtotaPriceLabel.text;
             }else {
-                cell.descriptionLabel.text = [@"     " stringByAppendingString:[[self.selectedServiceOptions[@"removedItems"] objectAtIndex:indexPath.row - 1] name]];
+                PricebookItem *p = [self.selectedServiceOptions[@"removedItems"] objectAtIndex:indexPath.row - 1];
+                NSString * serviceString;
+                if ([p.quantity intValue] > 1) {
+                    serviceString = [NSString stringWithFormat:@"     (%@) ",p.quantity];
+                }else{
+                    serviceString = @"     ";
+                }
+                cell.descriptionLabel.text = [serviceString stringByAppendingString:p.name];
                 cell.priceLabel.text = @"";
             }
         }
-        
         
         result = cell;
     }
