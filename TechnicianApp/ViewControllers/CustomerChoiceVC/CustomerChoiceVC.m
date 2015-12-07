@@ -104,15 +104,21 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         else
             self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
         
+    }else{
+        self.subtotaPriceLabel.text = @"$0.00";
     }
 }
+
+
 - (IBAction)btnContinue:(UIButton *)sender {
     [self performSegueWithIdentifier:@"newCustomerChoiceSegue" sender:self];
 }
 
+
 - (IBAction)btnBack:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 - (IBAction)btnSave:(id)sender {
 
@@ -390,7 +396,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     formatterCurrency = [[NSNumberFormatter alloc] init];
     
     formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency setMaximumFractionDigits:2];
     [formatterCurrency stringFromNumber: @(12345.2324565)];
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
@@ -409,9 +415,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
     vc.initialTotal = self.subtotaPriceLabel.text;
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
-        vc.paymentValue = self.textFieldPayment.text;
+        vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] floatValue]];
     }else{
-        vc.paymentValue = @"";
+        vc.paymentValue = @"$0.00";
     }
     
     

@@ -35,6 +35,7 @@
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
+            <string>Calibri-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1477,7 +1478,7 @@ the work you've selected</string>
                                                 <color key="backgroundColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4YE-km-UXy">
-                                                <rect key="frame" x="12" y="290" width="660" height="55"/>
+                                                <rect key="frame" x="12" y="290" width="660" height="102"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1500,15 +1501,26 @@ the work you've selected</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0X3-V1-o3Y">
+                                                <rect key="frame" x="25" y="406" width="20" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" backgroundImage="summary-findings-checkbox-bg">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="summary-findings-checkmark" backgroundImage="summary-findings-checkbox-bg"/>
+                                                <connections>
+                                                    <action selector="agreeBtnClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="POE-gm-nYq"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kZF-Dp-QkI">
-                                                <rect key="frame" x="66" y="381" width="552" height="21"/>
+                                                <rect key="frame" x="66" y="421" width="552" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" id="jIG-l4-gAw">
-                                                <rect key="frame" x="14" y="355" width="658" height="70"/>
+                                                <rect key="frame" x="14" y="400" width="658" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Signature Stop Image" id="6q1-57-53N">
@@ -1546,19 +1558,8 @@ the work you've selected</string>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0X3-V1-o3Y">
-                                                <rect key="frame" x="25" y="406" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" backgroundImage="summary-findings-checkbox-bg">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="selected" image="summary-findings-checkmark" backgroundImage="summary-findings-checkbox-bg"/>
-                                                <connections>
-                                                    <action selector="agreeBtnClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="POE-gm-nYq"/>
-                                                </connections>
-                                            </button>
                                             <view contentMode="scaleToFill" id="jca-Uy-Buc" customClass="SignatureView">
-                                                <rect key="frame" x="14" y="437" width="658" height="100"/>
+                                                <rect key="frame" x="14" y="481" width="658" height="56"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JPo-rW-tiD">
@@ -1573,6 +1574,13 @@ the work you've selected</string>
                                                             <action selector="btnClearSignature:" destination="J4s-ud-uAn" eventType="touchUpInside" id="6wW-DU-7Lg"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorized Signature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nak-d3-ZIf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="132" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -2546,11 +2554,10 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="VmU-RT-fY5">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="VmU-RT-fY5">
                                         <rect key="frame" x="5" y="8" width="680" height="572"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="separatorColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <sections/>
                                         <connections>
@@ -2558,7 +2565,7 @@ you must debrief from job</string>
                                             <outlet property="delegate" destination="8qd-Vt-zmM" id="3Un-kM-PwZ"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s7b-zm-23H">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s7b-zm-23H">
                                         <rect key="frame" x="198" y="685" width="295" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="30"/>
@@ -2582,6 +2589,24 @@ you must debrief from job</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="repairVsReplaceClicked:" destination="8qd-Vt-zmM" eventType="touchUpInside" id="H9o-bW-yGe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GRV-ct-s8T">
+                                        <rect key="frame" x="251" y="685" width="188" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nextClickedWithOutAnyOption:" destination="8qd-Vt-zmM" eventType="touchUpInside" id="cXY-s6-eCD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2739,7 +2764,6 @@ you must debrief from job</string>
                                         <rect key="frame" x="45" y="30" width="600" height="633"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="separatorColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <sections/>
                                         <connections>

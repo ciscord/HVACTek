@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSMutableDictionary *customerSelectedOptions;
 @property (nonatomic, assign) BOOL                isDiscountedPriceSelected;
 @property (nonatomic, assign) BOOL                isDiagnositcOnlyPriceSelected;
+@property (nonatomic, assign) BOOL isEmptyOptionSelected;
 
 @end
 
@@ -55,6 +56,13 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     
     self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.isEmptyOptionSelected = NO;
 }
 
 
@@ -163,10 +171,20 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 }
 
 
+
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
-    
 }
+
+
+
+
+#pragma mark - Clicked Next Without Option
+- (IBAction)nextClickedWithOutAnyOption:(UIButton *)sender {
+    self.isEmptyOptionSelected = YES;
+    [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
+}
+
 
 
 
@@ -354,25 +372,35 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         vc.isDiscounted       = self.isDiscountedPriceSelected;
         vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
         
-        if (self.isDiagnositcOnlyPriceSelected) {
-            
-            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-            
-            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-            
-            NSDictionary *d = @{
-                                @"items" : @[diagnosticOnlyItemNoTitle],
-                                @"title" : @"Diagnostic Only"
-                                };
-            
+        if (self.isEmptyOptionSelected) {
+            NSDictionary *d = @{};
             vc.selectedServiceOptions = d;
-        } else {
+        }else{
             vc.selectedServiceOptions = self.customerSelectedOptions;
         }
+        
+        
+        
+//        if (self.isDiagnositcOnlyPriceSelected) {
+//            
+//            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
+//            
+//            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
+//            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
+//            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
+//            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
+//            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
+//            
+//            NSDictionary *d = @{
+//                                @"items" : @[diagnosticOnlyItemNoTitle],
+//                                @"title" : @"Diagnostic Only"
+//                                };
+//            
+//            vc.selectedServiceOptions = d;
+//        } else {
+//            vc.selectedServiceOptions = self.customerSelectedOptions;
+//        }
+        
     } else if ([vc isKindOfClass:[PlatinumOptionsVC class]]) {
         
         PlatinumOptionsVC *vc = [segue destinationViewController];

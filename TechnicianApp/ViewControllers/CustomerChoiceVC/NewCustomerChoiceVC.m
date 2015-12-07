@@ -84,6 +84,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
        
         self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
         self.lblSavedWithESA.text = [NSString stringWithFormat:@"You Saved %@ By Being A Member Of Our Comfort Club!",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
+    }else{
+        self.paymentLabel.text = self.paymentValue;
+        self.totalPriceLabel.text = self.initialTotal;
+        self.dueLabel.text = @"$0.00";
     }
 }
 
@@ -314,7 +318,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         else
         {
             if (indexPath.row == 0)
-                cell.descriptionLabel.text = @"Package Total";
+                cell.descriptionLabel.text = @"Customer's Choice";
             else
             {
                 PricebookItem *p = [self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] ;
@@ -393,7 +397,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     formatterCurrency = [[NSNumberFormatter alloc] init];
     
     formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency setMaximumFractionDigits:2];
     [formatterCurrency stringFromNumber: @(12345.2324565)];
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
