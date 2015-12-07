@@ -56,7 +56,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 - (void)updateTotalPrice {
-    NSMutableArray *items1 = self.selectedServiceOptionsDict[@"items"];
+    NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
     
     if (items1.count) {
         CGFloat totalPriceNormal = 0;
@@ -66,9 +66,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             totalPriceESA += p.amountESA.floatValue;
         }
 
-        
-        
-        NSNumber *paymentNumber = [NSNumber numberWithFloat:fabsf([[self cutString:self.paymentValue] floatValue])];
         
         self.paymentLabel.text = self.paymentValue;
         if (self.isDiscounted){
@@ -121,14 +118,14 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     job.signatureFile = self.signatureView.signatureData;
     job.unselectedServiceOptiunons = self.unselectedOptionsArray;
-    job.selectedServiceOptions = self.selectedServiceOptionsDict[@"items"];
+    job.selectedServiceOptions = self.selectedServiceOptionsDict[@"removedItems"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
     
     job.jobStatus = @(jstNeedDebrief);
     // job.startTime = [NSDate date];
     [job.managedObjectContext save];
    
-    NSMutableArray *items1 = self.selectedServiceOptionsDict[@"items"];
+    NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
     NSMutableArray * selArray = [[NSMutableArray alloc]init];
     
     for (PricebookItem *p in items1) {
@@ -169,7 +166,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         signature = @"";
    
     /*(total paid, club membership, discount, deposit*/
-    NSMutableArray *aitems = self.selectedServiceOptionsDict[@"items"];
+    NSMutableArray *aitems = self.selectedServiceOptionsDict[@"removedItems"];
     CGFloat totalPriceNormal = 0;
     CGFloat totalPriceESA = 0;
     if (aitems.count) {
@@ -268,9 +265,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     if (tableView == self.selectedOptionsTableView) {
         
         if (self.isOnlyDiagnostic)
-            return [self.selectedServiceOptionsDict[@"items"] count];
+            return [self.selectedServiceOptionsDict[@"removedItems"] count];
         else
-            return [self.selectedServiceOptionsDict[@"items"] count] + 1;
+            return [self.selectedServiceOptionsDict[@"removedItems"] count] + 1;
     }
     
     if (tableView == self.unselectedOptionsTableView) {
@@ -306,7 +303,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             if (indexPath.row == 0)
                 cell.descriptionLabel.text = self.selectedServiceOptionsDict[@"title"];
             else
-                cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row] name];
+                cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row] name];
         }
         else
         {
@@ -315,11 +312,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             else
             {
                 
-                if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"]) {
+                if ([[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Diagnostic"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comprehensive Precision Tune"]) {
                     
-                    cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name];
+                    cell.descriptionLabel.text = [[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name];
                 }else{
-                    cell.descriptionLabel.text = [@"     " stringByAppendingString:[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name]];
+                    cell.descriptionLabel.text = [@"     " stringByAppendingString:[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name]];
                 }
                 
             }
@@ -335,14 +332,14 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         
         if (indexPath.row != 0) {
             
-            if ([[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"]) {
+            if ([[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment or 50% Deposit"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Diagnostic"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comprehensive Precision Tune"]) {
                 
                 if (self.isDiscounted) {
-                    NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] amountESA] floatValue]];
+                    NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] amountESA] floatValue]];
                     cell.priceLabel.text = [self appendSymbolToString:priceString];
                 }
                 else{
-                    NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"items"] objectAtIndex:indexPath.row - 1] amount] floatValue]];
+                    NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] amount] floatValue]];
                     cell.priceLabel.text = [self appendSymbolToString:priceString];
                 }
             }else{

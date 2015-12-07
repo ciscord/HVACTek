@@ -77,6 +77,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     self.btnPrice2.titleLabel.font = [UIFont fontWithName:@"Calibri-Light" size:30];
     self.lbESAsaving.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     self.lb24MonthRates.font = [UIFont fontWithName:@"Calibri-Light" size:14];
+    self.financingLabel.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     
     self.choiceOptionButton.layer.borderWidth = 1.0f;
     self.choiceOptionButton.layer.borderColor = self.choiceOptionButton.titleLabel.textColor.CGColor;
@@ -104,6 +105,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.vPrice.hidden         = YES;
         self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = YES;
+        self.choiceOptionButton.hidden = YES;
         self.tableView.hidden      = YES;
         break;
     }
@@ -112,6 +114,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.vPrice.hidden         = NO;
         self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = YES;
+        self.choiceOptionButton.hidden = YES;
         self.tableView.hidden      = NO;
         break;
     }
@@ -120,6 +123,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.vPrice.hidden         = YES;
         self.lbSelectOption.hidden = NO;
         self.btnResetOption.hidden = YES;
+        self.choiceOptionButton.hidden = YES;
         self.tableView.hidden      = NO;
         self.lbSelectOption.font = self.btnPrice1.titleLabel.font;
         break;
@@ -130,6 +134,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         self.lbSelectOption.hidden = !isEditable;
         self.lbSelectOption.hidden = YES;
         self.btnResetOption.hidden = (_rowIndex != 0);
+        self.choiceOptionButton.hidden = NO;
         self.tableView.hidden      = NO;
         break;
     }
@@ -188,17 +193,17 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
         self.vPrice.hidden = (options.count == 0 || (_optionsDisplayType == odtCustomerFinalChoice));
 
-        if (options.count) {
+        if (removedOptions.count) {
             CGFloat totalPriceNormal = 0;
             CGFloat totalPriceESA = 0;
-            for (PricebookItem *p in options) {
+            for (PricebookItem *p in removedOptions) {
                 totalPriceNormal += p.amount.floatValue;
                 totalPriceESA += p.amountESA.floatValue;
             }
+            
             if (_optionsDisplayType == odtCustomerFinalChoice) {
                 
                 if (self.isDiscounted) {
-//                    CGFloat discountedPrice = totalPrice * 0.85;
                     self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceESA];
                 }
                 else {
@@ -206,15 +211,15 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                 }
 
             } else {
-
-//                CGFloat discountedPrice = totalPrice * 0.85;
-                
-//                [self.btnPrice1 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceNormal] forState:UIControlStateNormal];
-//                [self.btnPrice2 setTitle:[NSString stringWithFormat:@"$%.2f", totalPriceESA] forState:UIControlStateNormal];
                 [self.btnPrice1 setTitle:[self changeCurrencyFormat:totalPriceESA] forState:UIControlStateNormal];
                 [self.btnPrice2 setTitle:[self changeCurrencyFormat:totalPriceNormal] forState:UIControlStateNormal];
-
-                self.lb24MonthRates.text = (totalPriceNormal > 1500 ? [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceNormal/24.] : @"");
+                
+                if (totalPriceESA > 1000) {
+                    self.lb24MonthRates.text = [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceNormal/24.];
+                }else{
+                    self.lb24MonthRates.text = [NSString stringWithFormat:@"For 0%% Financing"];
+                    self.financingLabel.text = [NSString stringWithFormat:@"Does Not Qualify"];
+                }
             }
         }
     }
@@ -248,13 +253,11 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    ///return [self.serviceOptions count] - 1;
-    ///return [self.serviceOptionsUpdated count] - 1;
-    
     if ([self.serviceOptions count] == 0){
         return 0;
     }else{
-        return [self.serviceOptionsRemoved count] - 1;
+        NSLog(@"%lu \n\n\n",(unsigned long)self.serviceOptionsRemoved.count);
+        return [self.serviceOptionsRemoved count];
     }
 }
 
@@ -263,7 +266,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     ///PricebookItem                  *p    = self.serviceOptions[indexPath.row+1];
-    PricebookItem                  *p    = self.serviceOptionsRemoved[indexPath.row+1];
+    PricebookItem                  *p    = self.serviceOptionsRemoved[indexPath.row];
     
     cell.accessoryView.hidden = !self.isEditable || p.isMain;
     
@@ -298,7 +301,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kSERVICE_OPTION_HEIGHT;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -311,7 +314,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectZero];
     headerView.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:titleLabel];
+    //[headerView addSubview:titleLabel];
     return headerView;
 }
 

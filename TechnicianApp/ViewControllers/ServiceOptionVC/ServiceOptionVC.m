@@ -97,7 +97,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
             
             option[@"items"]        = self.priceBookAndServiceOptions.mutableCopy;
             option[@"removedItems"] = self.priceBookAndServiceOptions.mutableCopy;
-            option[@"isEditable"]   = @(i == 1);
+            //option[@"isEditable"]   = @(i == 1);
             
             
             
@@ -147,7 +147,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     if (editableItems.count > 0 && self.options.count > index+1) {
         NSMutableDictionary *nextOption = self.options[index+1];
         nextOption[@"items"]      = items.mutableCopy;
-        nextOption[@"isEditable"] = @(items.count > 1);
+       // nextOption[@"isEditable"] = @(items.count > 1);
     }
     
 ///    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
@@ -161,6 +161,13 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     self.isDiscountedPriceSelected     = NO;
     [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
 }
+
+
+#pragma mark - Repair vs Replace Action
+- (IBAction)repairVsReplaceClicked:(UIButton *)sender {
+    
+}
+
 
 
 #pragma mark - Options Action
@@ -254,6 +261,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     __weak ServiceOptionVC *weakSelf = self;
     NSDictionary           *option   = self.options[indexPath.section];
     NSArray                *items    = option[@"items"];
+    NSArray         *removedItems    = option[@"removedItems"];
 
     RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     cell.choiceImageView.image        = option[@"optionImage"];
@@ -270,7 +278,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
      }];
 
     ///[cell displayServiceOptions:items andRemovedServiceOptions:[self.options[0] objectForKey:@"items"]];
-    [cell displayServiceOptions:items andRemovedServiceOptions:self.removedOptions];
+    [cell displayServiceOptions:items andRemovedServiceOptions:removedItems];
     [cell setOnOptionSelected:^(NSInteger rowIndex, NSInteger itemIndex){
          [weakSelf didSelectOptionsWithRow:rowIndex withOptionIndex:itemIndex];
      }];
@@ -308,7 +316,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
     EnlargeOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EnlargeOptionsVC"];
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)indexPath.section + 1];
+    vc.enlargeOptionName = option[@"title"];
     vc.enlargeTotalPrice = cell.btnPrice1.titleLabel.text;
     vc.enlargeESAPrice = cell.btnPrice2.titleLabel.text;
     vc.enlargeMonthlyPrice = cell.lb24MonthRates.text;

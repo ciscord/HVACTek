@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDisconts;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDeposit;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPayment;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDiagnostic;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldCPT;
 
 @end
 
@@ -62,10 +64,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     self.textFieldDeposit.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
     self.textFieldPayment.layer.borderWidth   = 1.0;
     self.textFieldPayment.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    
+    self.textFieldDiagnostic.layer.borderWidth   = 1.0;
+    self.textFieldDiagnostic.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    self.textFieldCPT.layer.borderWidth   = 1.0;
+    self.textFieldCPT.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
     
     [self refreshSubtotalPrice];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +78,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 }
 
 - (void)refreshSubtotalPrice {
-    NSMutableArray *items1 = self.selectedServiceOptions[@"items"];
+    NSMutableArray *items1 = self.selectedServiceOptions[@"removedItems"];
     
     if (items1.count) {
         CGFloat totalPriceNormal = 0;
@@ -116,7 +120,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     job.signatureFile = self.signatureView.signatureData;
     job.unselectedServiceOptiunons = self.unusedServiceOptions;
-    job.selectedServiceOptions = self.selectedServiceOptions[@"items"];
+    job.selectedServiceOptions = self.selectedServiceOptions[@"removedItems"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptions[@"ServiceID"]intValue]];
     
     job.jobStatus = @(jstNeedDebrief);
@@ -133,7 +137,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 - (void)setSelectedServiceOptions:(NSDictionary *)selectedServiceOptions {
 
     _selectedServiceOptions = selectedServiceOptions;
-    NSArray *selectedItems = _selectedServiceOptions[@"items"];
+    NSArray *selectedItems = _selectedServiceOptions[@"removedItems"];
     self.unusedServiceOptions = @[].mutableCopy;
     for (PricebookItem *p1 in _fullServiceOptions) {
 
@@ -154,51 +158,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-    
-    NewCustomerChoiceVC *vc = [segue destinationViewController];
-    vc.isDiscounted       = self.isDiscounted;
-    vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
-    vc.unselectedOptionsArray = self.unusedServiceOptions;
-    //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
-    vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
-    vc.initialTotal = self.subtotaPriceLabel.text;
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
-        vc.paymentValue = self.textFieldPayment.text;
-    }else{
-        vc.paymentValue = @"";
-    }
-
-    
-    if (self.isOnlyDiagnostic) {
-        
-        PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-        
-        PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-        diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-        diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-        diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-        diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-        
-        NSDictionary *d = @{
-                            @"items" : @[diagnosticOnlyItemNoTitle],
-                            @"title" : @"Diagnostic Only"
-                            };
-        
-        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
-    }
-    
-}
-
-
-
-
-
 
 - (NSDictionary *)addDiscountsToDictionary:(NSDictionary *)dictionary {
     
-    NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"items"]];
+    NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"removedItems"]];
 
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]].floatValue != 0) {
@@ -235,6 +198,28 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         [newArray addObject:discount];
     }
     
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]].floatValue != 0) {
+        PricebookItem *payment = [PricebookItem new];
+        payment.itemID = @"-5";
+        payment.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]];
+        payment.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]];
+        payment.name = @"Diagnostic";
+        payment.itemGroup = @"Additional items";
+        payment.itemNumber = @"-5";
+        [newArray addObject:payment];
+    }
+    
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]].floatValue != 0) {
+        PricebookItem *payment = [PricebookItem new];
+        payment.itemID = @"-6";
+        payment.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]];
+        payment.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]];
+        payment.name = @"Comprehensive Precision Tune";
+        payment.itemGroup = @"Additional items";
+        payment.itemNumber = @"-6";
+        [newArray addObject:payment];
+    }
+    
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
         PricebookItem *payment = [PricebookItem new];
         payment.itemID = @"-4";
@@ -245,26 +230,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.itemNumber = @"-4";
         [newArray addObject:payment];
     }
-
     
-    /*(total paid, club membership, discount, deposit*/
-//    
-//    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
-//        PricebookItem *discount = [PricebookItem new];
-//        discount.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
-//        discount.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
-//        discount.name = @"Payment";
-//        
-//        [newArray addObject:discount];
-//    }
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
     
-    
-    
-    
-    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] initWithDictionary:dictionary]; //self.selectedServiceOptions
-    
-    [newDict removeObjectForKey:@"items"];
-    [newDict setObject:newArray forKey:@"items"];
+    [newDict removeObjectForKey:@"removedItems"];
+    [newDict setObject:newArray forKey:@"removedItems"];
     
     return newDict;
 }
@@ -309,8 +279,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return YES;
 }
 
-#pragma mark - UITableViewDelegate & DataSource
 
+#pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tvMainTable) {
         return 25;
@@ -323,49 +293,36 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return 0;
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.tvMainTable) {
+        return [self.selectedServiceOptions[@"removedItems"] count] + 1;
+    }
+    
+    if (tableView == self.tvUnselectedOptions) {
+        return [self.unusedServiceOptions count];
+    }
+    
+    return 0;
+}
+
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView == self.tvMainTable) {
-        return [self.selectedServiceOptions[@"items"] count];
-    }
-
-    if (tableView == self.tvUnselectedOptions) {
-        return [self.unusedServiceOptions count];
-    }
-
-    return 0;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *result;
     
     if (tableView == self.tvMainTable) {
-
-//        NSMutableArray *items1 = self.selectedServiceOptions[@"items"];
-//
-//        RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-//        cell.gradientView.image        = self.selectedServiceOptions[@"backgroundImage"];
-//        cell.lbRecommandationName.text = self.selectedServiceOptions[@"title"];
-//        cell.rowIndex                  = indexPath.row;
-//        cell.optionsDisplayType        = odtCustomerFinalChoice;
-//        cell.isDiscounted              = self.isDiscounted;
-//        [cell displayServiceOptions:items1];
-//       
-//        //set job price
-//         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-//        job.price = [NSNumber numberWithFloat:[cell.lbSelectOption.text floatValue]];
-//        [job.managedObjectContext save];
-//        result = cell;
-        
-
         
         CustomerChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
         
@@ -379,22 +336,17 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         
         if (self.isOnlyDiagnostic)
             cell.descriptionLabel.text = self.selectedServiceOptions[@"title"];
-        else
-            cell.descriptionLabel.text = [[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] name];
+        else {
+            
+            if (indexPath.row == 0) {
+                cell.descriptionLabel.text = @"Customer's Choice";
+                cell.priceLabel.text = self.subtotaPriceLabel.text;
+            }else {
+                cell.descriptionLabel.text = [@"     " stringByAppendingString:[[self.selectedServiceOptions[@"removedItems"] objectAtIndex:indexPath.row - 1] name]];
+                cell.priceLabel.text = @"";
+            }
+        }
         
-        
-        //display prices
-//        if (self.isDiscounted) {
-//            NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] amountESA] floatValue]];
-//            
-//            cell.priceLabel.text = priceString;
-//        }
-//        else{
-//                NSString * priceString = [self changeCurrencyFormat:[[[self.selectedServiceOptions[@"items"] objectAtIndex:indexPath.row] amount] floatValue]];
-//                cell.priceLabel.text = priceString;
-//            }
-        
-        cell.priceLabel.text = @"";
         
         result = cell;
     }
@@ -431,5 +383,47 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
 }
+
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    
+    NewCustomerChoiceVC *vc = [segue destinationViewController];
+    vc.isDiscounted       = self.isDiscounted;
+    vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
+    vc.unselectedOptionsArray = self.unusedServiceOptions;
+    //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
+    vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
+    vc.initialTotal = self.subtotaPriceLabel.text;
+    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
+        vc.paymentValue = self.textFieldPayment.text;
+    }else{
+        vc.paymentValue = @"";
+    }
+    
+    
+    if (self.isOnlyDiagnostic) {
+        
+        PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
+        
+        PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
+        diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
+        diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
+        diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
+        diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
+        
+        NSDictionary *d = @{
+                            @"items" : @[diagnosticOnlyItemNoTitle],
+                            @"title" : @"Diagnostic Only"
+                            };
+        
+        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
+    }
+    
+}
+
+
+
 
 @end

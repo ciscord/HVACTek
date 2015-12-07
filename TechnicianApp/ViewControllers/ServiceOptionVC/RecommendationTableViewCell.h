@@ -36,6 +36,8 @@ typedef void (^optionButtonClicked)(NSInteger rowIndex);
 @property (weak, nonatomic) IBOutlet UIButton    *btnPrice2;
 @property (weak, nonatomic) IBOutlet UILabel     *lbESAsaving;
 @property (weak, nonatomic) IBOutlet UILabel     *lb24MonthRates;
+@property (weak, nonatomic) IBOutlet UILabel *financingLabel;
+
 
 
 ///~~~~~~~~~///

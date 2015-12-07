@@ -11,11 +11,11 @@
 @interface EnlargeOptionsVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView *enlargeTable;
-@property (weak, nonatomic) IBOutlet UILabel *enlargeIndexLbl;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLbl;
 @property (weak, nonatomic) IBOutlet UILabel *ESAPriceLbl;
 @property (weak, nonatomic) IBOutlet UILabel *monthlyPaymentsLbl;
 @property (weak, nonatomic) IBOutlet UILabel *savingESALbl;
+@property (weak, nonatomic) IBOutlet UILabel *optionNameLabel;
 @end
 
 @implementation EnlargeOptionsVC
@@ -26,7 +26,7 @@
     
     self.title = NSLocalizedString(@"Customer's Choice", nil);
     
-    self.enlargeIndexLbl.text = self.enlargeIndex;
+    self.optionNameLabel.text = self.enlargeOptionName;
     self.totalPriceLbl.text = self.enlargeTotalPrice;
     self.ESAPriceLbl.text = self.enlargeESAPrice;
     self.monthlyPaymentsLbl.text = self.enlargeMonthlyPrice;

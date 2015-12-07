@@ -36,23 +36,9 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([[segue destinationViewController] isKindOfClass:[ViewOptionsVC class]])
-    {
-        ViewOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
-    }
-    
-    if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType = odtReadonlyWithPrice;
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
-    }
-}
+
 
 #pragma mark - UITableViewDelegate & DataSource
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
@@ -76,6 +62,23 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     cell.lbTitle.text = option.name;
 
     return cell;
+}
+
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue destinationViewController] isKindOfClass:[ViewOptionsVC class]])
+    {
+        ViewOptionsVC *vc = [segue destinationViewController];
+        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+    }
+    
+    if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
+        ServiceOptionVC *vc = [segue destinationViewController];
+        vc.optionsDisplayType = odtReadonlyWithPrice;
+        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+    }
 }
 
 @end
