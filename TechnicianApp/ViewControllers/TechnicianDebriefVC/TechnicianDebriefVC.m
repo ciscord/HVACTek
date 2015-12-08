@@ -385,19 +385,25 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     double         totalHoursValue      = ABS(distanceBetweenDates / secondsInAnHour);
 
     NSString *jobNameValue = [NSString stringWithFormat:@"%@ %@", customerInfo[@"FirstName"], customerInfo[@"LastName"]];
+    
+    
+//// section 0 = 13
+    
 
     NSMutableDictionary *jobName                 = [self itemDicWith:@"Job Name" accType:lblCellAcc accVal:jobNameValue possVals:@[] align:cCenter APIField:@"job_name" APIValues:@[jobNameValue]];
     NSMutableDictionary *jobNumber               = [self itemDicWith:@"Job Number" accType:lblCellAcc accVal:self.jobToDebrief.swapiJobInfo[@"JobNo"] possVals:@[] align:cCenter APIField:@"job_number" APIValues:@[self.jobToDebrief.swapiJobInfo[@"JobNo"]]];
-    NSMutableDictionary *department              = [self itemDicWith:@"Department" accType:drpDownCellAcc accVal:@"" possVals:self.departments align:cCenter APIField:@"departament" APIValues:self.departments];
+    ///NSMutableDictionary *department              = [self itemDicWith:@"Department" accType:drpDownCellAcc accVal:@"" possVals:self.departments align:cCenter APIField:@"departament" APIValues:self.departments];
     NSMutableDictionary *dispathTime             = [self itemDicWith:@"Dispath Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.dispatchTime] possVals:@[] align:cCenter APIField:@"dispatch_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.dispatchTime]]];
     NSMutableDictionary *startTime               = [self itemDicWith:@"Start Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.startTime] possVals:@[] align:cCenter APIField:@"start_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.startTime]]];
     NSMutableDictionary *completionTime          = [self itemDicWith:@"Completion Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.completionTime] possVals:@[] align:cCenter APIField:@"completion_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.completionTime]]];
     NSMutableDictionary *totalHours              = [self itemDicWith:@"Total Hours" accType:lblCellAcc accVal:[NSString stringWithFormat:@"%.2f", totalHoursValue] possVals:@[] align:cCenter APIField:@"total_hours" APIValues:@[[NSString stringWithFormat:@"%.2f", totalHoursValue]]];
     NSMutableDictionary *ageOfSystem             = [self itemDicWith:@"Age Of System" accType:txtFieldNumericCellAcc accVal:jobInfo[@"UnitAge"] possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
-    NSMutableDictionary *replacementLeadSheduled = [self itemDicWith:@"Replacement Lead Sheduled" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"replacement_lead_scheduled" APIValues:@[@1, @0]];
-    NSMutableDictionary *newESAOpportunity       = [self itemDicWith:@"New ESA Opportunity" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"new_esa_opportunity" APIValues:@[@1, @0]];
-    NSMutableDictionary *esaRenewallOpportunity  = [self itemDicWith:@"ESA Renewall Opportunity" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"esa_renewal_opportunity" APIValues:@[@1, @0]];
-    NSMutableDictionary *esaSold                 = [self itemDicWith:@"ESA Sold" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"esa_sold" APIValues:@[@1, @0]];
+    NSMutableDictionary *replacementLeadSheduled = [self itemDicWith:@"Replacement Lead Sheduled" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"replacement_lead_scheduled" APIValues:@[@1, @0]];
+    NSMutableDictionary *agreementOpportunity = [self itemDicWith:@"Agreement Opportunity" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"agreement_opportunity" APIValues:@[@1, @0]];
+    NSMutableDictionary *agreementSold = [self itemDicWith:@"Agreement Sold" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"agreement_sold" APIValues:@[@1, @0]];
+//    NSMutableDictionary *newESAOpportunity       = [self itemDicWith:@"New ESA Opportunity" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"new_esa_opportunity" APIValues:@[@1, @0]];
+//    NSMutableDictionary *esaRenewallOpportunity  = [self itemDicWith:@"ESA Renewall Opportunity" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"esa_renewal_opportunity" APIValues:@[@1, @0]];
+//    NSMutableDictionary *esaSold                 = [self itemDicWith:@"ESA Sold" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"esa_sold" APIValues:@[@1, @0]];
     //NSMutableDictionary *workPerformed           = [self itemDicWith:@"Work Performed" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"work_performed" APIValues:@[]];
     //NSMutableDictionary *diagnosticOnlyRevenue   = [self itemDicWith:@"Diagnostic Only Revenue" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"diagnostic_only_revenue" APIValues:@[]];
     //NSMutableDictionary *maintenanceRevenue      = [self itemDicWith:@"Maintenance Revenue" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"maintenance_revenue" APIValues:@[]];
@@ -406,13 +412,19 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     //NSMutableDictionary *totalRevenueGenerated   = [self itemDicWith:@"Total Revenue Generated" accType:lblCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"total_revenua_generated" APIValues:@[@""] cellValueType:ctCellTotalRevenueGenerated];
 //    NSMutableDictionary *billableHours                      = [self itemDicWith:@"Billable Hours" accType:lblCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"billable_hours" APIValues:@[@""]];
 //    NSMutableDictionary *billableHoursEfficiency            = [self itemDicWith:@"Billable Hours Efficiency" accType:lblCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"billable_hours_efficiency" APIValues:@[@""]];
-    NSMutableDictionary *paymentCollected                   = [self itemDicWith:@"Payment Collected" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"payment_collected" APIValues:@[@1, @0]];
+    NSMutableDictionary *paymentCollected                   = [self itemDicWith:@"Payment Collected" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"payment_collected" APIValues:@[@1, @0]];
     NSMutableDictionary *paymentMethod                      = [self itemDicWith:@"Payment Method" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"payment_method" APIValues:@[]];
+    
+//// section 1 = 1/2
+    
     NSMutableDictionary *callBack                           = [self itemDicWith:@"Call Back" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"callback" APIValues:@[@1, @0]];
-    NSMutableDictionary *who                                = [self itemDicWith:@"Who" accType:drpDownCellAcc accVal:self.whoCurrent possVals:self.whoList align:cCenter APIField:@"who" APIValues:self.whoListCodes];
+    NSMutableDictionary *who                                = [self itemDicWith:@"Who" accType:drpDownCellAcc accVal:self.whoCurrent possVals:self.whoList align:cRight APIField:@"who" APIValues:self.whoListCodes];
+    
+//// section 2 = 1/12
+    
     NSMutableDictionary *repairScheduled                    = [self itemDicWith:@"Repair Scheduled" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"repair_scheduled" APIValues:@[@1, @0]];
     NSMutableDictionary *priceQuoted                        = [self itemDicWith:@"Price Quoted" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"price_quoted" APIValues:@[]];
-    NSMutableDictionary *priceApproved                      = [self itemDicWith:@"Price Approved" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cRight APIField:@"price_approved" APIValues:@[@1, @0]];
+    NSMutableDictionary *priceApproved                      = [self itemDicWith:@"Price Approved" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cRight APIField:@"price_approved" APIValues:@[@1, @0]];
     NSMutableDictionary *ammountof50PercentDepositCollected = [self itemDicWith:@"Ammount Of 50% Deposit Collected" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"deposit_collected" APIValues:@[]];
     NSMutableDictionary *partsOrderedBy                     = [self itemDicWith:@"Parts Ordered By" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"parts_ordered_by" APIValues:@[]];
     NSMutableDictionary *supplerPartsOrderedFrom            = [self itemDicWith:@"Supplier Parts Ordered From" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"supplier_parts_ordered_form" APIValues:@[]];
@@ -422,31 +434,50 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *serialNumberOfSystemNeedingRepair  = [self itemDicWith:@"Serial Number Of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"serial_number_system_needing_repair" APIValues:@[]];
     NSMutableDictionary *locationOfSystemNeedingRepair      = [self itemDicWith:@"Location of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"location_system_needing_repair" APIValues:@[]];
     NSMutableDictionary *specialInstructionsOrToolsRequired = [self itemDicWith:@"Special Instructions Or Tools Required" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"special_instructions_or_tools_required" APIValues:@[]];
-    NSMutableDictionary *installAndSignAllStickers          = [self itemDicWith:@"Install And Sign All Stickers" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"sign_all_stickers" APIValues:@[@0, @1]];
-    NSMutableDictionary *allEquipmentInSystem               = [self itemDicWith:@"All Equipment In System" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"all_equipment_in_system" APIValues:@[@0, @1]];
+    
+    
+    
+//// section 3 = 7
+    
+    
+    NSMutableDictionary *installAndSignAllStickers          = [self itemDicWith:@"Install & Sign All Stickers" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"sign_all_stickers" APIValues:@[@0, @1]];
+    NSMutableDictionary *equipmentSwRemote          = [self itemDicWith:@"Equipment Entered In SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"equipment_sw_remote" APIValues:@[@0, @1]];
+        NSMutableDictionary *verifiedEmail          = [self itemDicWith:@"Verified Email Address" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"verified_email" APIValues:@[@0, @1]];
     NSMutableDictionary *sentAnglesListReviewLink           = [self itemDicWith:@"Sent Angie's List Review Link" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"list_review_link" APIValues:@[@1, @0]];
+
+    //NSMutableDictionary *allEquipmentInSystem               = [self itemDicWith:@"All Equipment In System" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"all_equipment_in_system" APIValues:@[@0, @1]];
     NSMutableDictionary *sentReviewBuzzLink                 = [self itemDicWith:@"Sent Review Buzz Link" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"buzz_link" APIValues:@[@1, @0]];
     NSMutableDictionary *attachAllPartsUsedToTicked         = [self itemDicWith:@"Johnstone App Parts Ordered" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"attach_all_parts_used_to_tiket" APIValues:@[@0, @1]];
-    NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:chkBoxCellAcc accVal:@"" possVals:@[@0, @1] align:cRight APIField:@"system_running" APIValues:@[@0, @1]];
-    NSMutableDictionary *followUpRequired                   = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"YES" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
+    NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"system_running" APIValues:@[@0, @1]];
     
-      NSMutableDictionary *followUpNotes             = [self itemDicWith:@"Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+    
+    
+ /////  section 4 = 1/2
+    NSMutableDictionary *followUpRequired         = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
+      NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+ /////  section 5 = 1
+    
+    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Notes Entered in SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
+    
+    
 
 //    if ([callBack[@"accVal"]  isEqual: @"YES"]) {
 //        NSLog(@"YES selected");
 //    }
     return @[jobName,
              jobNumber,
-             department,
+             ///department,
              dispathTime,
              startTime,
              completionTime,
              totalHours,
              ageOfSystem,
              replacementLeadSheduled,
-             newESAOpportunity,
-             esaRenewallOpportunity,
-             esaSold,
+             agreementOpportunity,
+             agreementSold,
+            //// newESAOpportunity,
+            /// esaRenewallOpportunity,
+            /// esaSold,
              //workPerformed,
              //diagnosticOnlyRevenue,
              //maintenanceRevenue,
@@ -472,13 +503,16 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
              locationOfSystemNeedingRepair,
              specialInstructionsOrToolsRequired,
              installAndSignAllStickers,
-             allEquipmentInSystem,
+             equipmentSwRemote,
+             verifiedEmail,
+             ////allEquipmentInSystem,
              sentAnglesListReviewLink,
              sentReviewBuzzLink,
              attachAllPartsUsedToTicked,
              thermostatSetAndSystemRunning,
              followUpRequired,
-             followUpNotes];
+             followUpNotes,
+             notesSwRemote];
 }
 
 - (NSMutableDictionary *)itemDicWith:(NSString *)title
@@ -566,28 +600,31 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 
 
-#pragma mark - Table view data source
 
+
+#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
     switch (section) {
-        case 0: return 15;
+        case 0: return 13;
             break;
         case 1: return  [self.hideSection1 boolValue]? 1 : 2;
             break;
         case 2: return  [self.hideSection2 boolValue]? 1 : 12;
             break;
-        case 3: return  6;
+        case 3: return  7;
             break;
         case 4: return  [self.hideSection3 boolValue]? 1 : 2;
             break;
         case 5 : return 1;
+            break;
+        case 6 : return 1;
             break;
         default:
             break;
@@ -599,25 +636,32 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     int sectionIdx = 0 ;
     switch (indexPath.section) {
         case 0:
-            sectionIdx=0;
+            sectionIdx = 0;
             break;
         case 1:
-            sectionIdx=15;
+            sectionIdx = 13;
             break;
         case 2:
-            sectionIdx =17;
+            sectionIdx = 15;
             break;
         case 3:
-            sectionIdx = 29;
+            sectionIdx = 27;
            break;
         case 4:
-            sectionIdx = 35;
+            sectionIdx = 34;
+            break;
+        case 5:
+            sectionIdx = 36;
+            break;
+        case 6:
+            sectionIdx = 36;
+            break;
         default:
             break;
     
     }
     
-    if (indexPath.section == 5)  {
+    if (indexPath.section == 7)  {
         return 90;
     } else
     {
@@ -631,7 +675,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     if (indexPath.section == 5)  {
+     if (indexPath.section == 6)  {
           UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
          return cell;
      }
@@ -642,19 +686,28 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             sectionIdx=0;
             break;
         case 1:
-            sectionIdx=15;
+            sectionIdx=13;
             break;
         case 2:
-            sectionIdx =17;
+            sectionIdx =15;
             break;
         case 3:
-            sectionIdx = 29;
+            sectionIdx = 27;
             break;
         case 4:
-            sectionIdx = 35;
+            sectionIdx = 34;
+            break;
+        case 5:
+            sectionIdx = 36;
+            break;
+        case 6:
+            sectionIdx = 36;
+            break;
         default:
             break;
     }
+    
+    
     
     
     if (![self.getcArray boolValue] && self.allCellsArray && self.allCellsArray.count == self.elementsToShow.count){
@@ -669,6 +722,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
      DebriefCell *  cell = [tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];
     cell.cellData  = self.elementsToShow[indexPath.row+sectionIdx];
+    
+    //cell.separatorView.y = cell.frame.size.height - 1;
     
     cell.backgroundColor = [UIColor clearColor];
     if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == drpDownCellAcc) {

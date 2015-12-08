@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -53,7 +53,7 @@ technician.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="22"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Answer" minimumFontSize="17" id="fCq-Jz-LAq">
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Answer" minimumFontSize="17" id="fCq-Jz-LAq">
                     <rect key="frame" x="21" y="220" width="326" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,6 +75,16 @@ technician.</string>
                         <action selector="btnNextTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="g1H-s4-xcW"/>
                     </connections>
                 </button>
+                <pickerView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" id="kUJ-66-dex">
+                    <rect key="frame" x="0.0" y="120" width="368" height="156"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="plc-qX-A1f"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="H2h-zn-vLl"/>
+                    </connections>
+                </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -82,17 +92,13 @@ technician.</string>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="answerPickerView" destination="kUJ-66-dex" id="VLt-PZ-oSw"/>
                 <outlet property="btnBack" destination="aof-A3-uBJ" id="LPX-dW-vwM"/>
                 <outlet property="btnNext" destination="cNT-x8-2gD" id="1G9-d5-YIC"/>
                 <outlet property="txtAnswer" destination="fCq-Jz-LAq" id="Z5F-yA-FI7"/>
                 <outlet property="txtQuestion" destination="vgc-qi-osk" id="0Yz-tc-82i"/>
             </connections>
-            <point key="canvasLocation" x="454" y="639.5"/>
+            <point key="canvasLocation" x="547" y="697.5"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
