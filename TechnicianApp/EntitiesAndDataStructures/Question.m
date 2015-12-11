@@ -61,7 +61,7 @@
     [aCoder encodeObject:self.answer forKey:kQuestionAnswerKey];
     [aCoder encodeBool:self.required forKey:kQuestionRequiredKey];
     [aCoder encodeBool:self.haveNote forKey:kQuestionNote];
-    [aCoder encodeBool:self.fieldTypeId forKey:kQuestionFieldTypeId];
+    [aCoder encodeObject:self.fieldTypeId forKey:kQuestionFieldTypeId];
 }
 
 -(NSString*)description

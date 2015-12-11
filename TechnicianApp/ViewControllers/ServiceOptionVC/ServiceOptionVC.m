@@ -16,6 +16,7 @@
 #import "EditServiceOptionsVC.h"
 
 
+
 @interface ServiceOptionVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
@@ -26,6 +27,8 @@
 @property (nonatomic, assign) BOOL                isDiscountedPriceSelected;
 @property (nonatomic, assign) BOOL                isDiagnositcOnlyPriceSelected;
 @property (nonatomic, assign) BOOL isEmptyOptionSelected;
+
+@property (nonatomic, strong) NSString *segueIdentifierToUnwindTo;
 
 @end
 
@@ -59,11 +62,17 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    self.isEmptyOptionSelected = NO;
+    if (_segueIdentifierToUnwindTo) {
+        [self performSegueWithIdentifier:_segueIdentifierToUnwindTo sender:self];
+        self.segueIdentifierToUnwindTo = nil;
+        return;
+    }
 }
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -174,6 +183,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
 }
 
 
@@ -346,6 +356,20 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     [self presentViewController:vc animated:YES completion:nil];
 
+}
+
+
+
+#pragma mark - Unwind Segues
+- (IBAction)unwindToServiceOptionVC:(UIStoryboardSegue *)unwindSegue
+{
+    if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromRRBtn"]){
+        self.segueIdentifierToUnwindTo = @"showRRQuestionsVCAfterUnwind";
+    }
+    if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromInvoiceBtn"]){
+        self.isEmptyOptionSelected = YES;
+        self.segueIdentifierToUnwindTo = @"customerChoiceSegueAfterUnwind";
+    }
 }
 
 

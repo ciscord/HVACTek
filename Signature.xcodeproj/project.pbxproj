@@ -98,9 +98,16 @@
 		521DB6B71C10707A003E40D2 /* EditServiceOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 521DB6B51C10707A003E40D2 /* EditServiceOptionsCell.m */; };
 		521DB6B81C10707A003E40D2 /* EditServiceOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 521DB6B61C10707A003E40D2 /* EditServiceOptionsCell.xib */; };
 		522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */; };
+		5233294D1C1706D9008ABA46 /* RROverviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233294C1C1706D9008ABA46 /* RROverviewVC.m */; };
+		523329511C170871008ABA46 /* RROverviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233294F1C170871008ABA46 /* RROverviewCell.m */; };
+		523329521C170871008ABA46 /* RROverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 523329501C170871008ABA46 /* RROverviewCell.xib */; };
+		523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523329551C17175B008ABA46 /* RRFinalChoiceVC.m */; };
 		5236287C1C0EF33000B04A71 /* UtilityOverpaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5236287B1C0EF33000B04A71 /* UtilityOverpaymentVC.m */; };
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
+		5264C30D1C1977A2009728E0 /* RRQuestionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */; };
+		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
+		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
@@ -288,11 +295,23 @@
 		521DB6B61C10707A003E40D2 /* EditServiceOptionsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditServiceOptionsCell.xib; sourceTree = "<group>"; };
 		522746D01B79FB6A00AC38A5 /* NewCustomerChoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCustomerChoiceVC.h; sourceTree = "<group>"; };
 		522746D11B79FB6A00AC38A5 /* NewCustomerChoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCustomerChoiceVC.m; sourceTree = "<group>"; };
+		5233294B1C1706D9008ABA46 /* RROverviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RROverviewVC.h; sourceTree = "<group>"; };
+		5233294C1C1706D9008ABA46 /* RROverviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RROverviewVC.m; sourceTree = "<group>"; };
+		5233294E1C170871008ABA46 /* RROverviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RROverviewCell.h; sourceTree = "<group>"; };
+		5233294F1C170871008ABA46 /* RROverviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RROverviewCell.m; sourceTree = "<group>"; };
+		523329501C170871008ABA46 /* RROverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RROverviewCell.xib; sourceTree = "<group>"; };
+		523329541C17175B008ABA46 /* RRFinalChoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRFinalChoiceVC.h; sourceTree = "<group>"; };
+		523329551C17175B008ABA46 /* RRFinalChoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRFinalChoiceVC.m; sourceTree = "<group>"; };
 		5236287A1C0EF33000B04A71 /* UtilityOverpaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UtilityOverpaymentVC.h; path = UtilityOverpayment/UtilityOverpaymentVC.h; sourceTree = "<group>"; };
 		5236287B1C0EF33000B04A71 /* UtilityOverpaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UtilityOverpaymentVC.m; path = UtilityOverpayment/UtilityOverpaymentVC.m; sourceTree = "<group>"; };
 		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
 		524FDFF41B79046100480987 /* CustomerChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerChoiceCell.m; sourceTree = "<group>"; };
 		524FDFF51B79046100480987 /* CustomerChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerChoiceCell.xib; sourceTree = "<group>"; };
+		5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRQuestionsView.xib; sourceTree = "<group>"; };
+		5277B1851C16D912008929ED /* RRQuestionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRQuestionsVC.h; path = ../RRQuestionsVC.h; sourceTree = "<group>"; };
+		5277B1861C16D912008929ED /* RRQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRQuestionsVC.m; path = ../RRQuestionsVC.m; sourceTree = "<group>"; };
+		5277B1891C16DC95008929ED /* RRQuestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRQuestionsView.h; sourceTree = "<group>"; };
+		5277B18A1C16DC95008929ED /* RRQuestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRQuestionsView.m; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -656,6 +675,7 @@
 				75D73F1C1A38BFD10051143C /* SummaryOfFindingsVC */,
 				52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */,
 				75D1A8FE1A3B15B5000F6765 /* ServiceOptionVC */,
+				5277B1841C16D8AD008929ED /* RepairVsReplace */,
 				521DB6B01C107050003E40D2 /* EditServiceOptions */,
 				4FF901B81AB8460900D87FAB /* PlatinumOptionsVC */,
 				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
@@ -816,6 +836,18 @@
 			path = EditServiceOptions;
 			sourceTree = "<group>";
 		};
+		523329531C170879008ABA46 /* RROverview */ = {
+			isa = PBXGroup;
+			children = (
+				5233294B1C1706D9008ABA46 /* RROverviewVC.h */,
+				5233294C1C1706D9008ABA46 /* RROverviewVC.m */,
+				5233294E1C170871008ABA46 /* RROverviewCell.h */,
+				5233294F1C170871008ABA46 /* RROverviewCell.m */,
+				523329501C170871008ABA46 /* RROverviewCell.xib */,
+			);
+			name = RROverview;
+			sourceTree = "<group>";
+		};
 		523628791C0EF2EF00B04A71 /* UtilityOverpayment */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +855,29 @@
 				5236287B1C0EF33000B04A71 /* UtilityOverpaymentVC.m */,
 			);
 			name = UtilityOverpayment;
+			sourceTree = "<group>";
+		};
+		5277B1841C16D8AD008929ED /* RepairVsReplace */ = {
+			isa = PBXGroup;
+			children = (
+				5277B1881C16DC33008929ED /* RRQuestionView */,
+				523329531C170879008ABA46 /* RROverview */,
+				523329541C17175B008ABA46 /* RRFinalChoiceVC.h */,
+				523329551C17175B008ABA46 /* RRFinalChoiceVC.m */,
+			);
+			path = RepairVsReplace;
+			sourceTree = "<group>";
+		};
+		5277B1881C16DC33008929ED /* RRQuestionView */ = {
+			isa = PBXGroup;
+			children = (
+				5277B1851C16D912008929ED /* RRQuestionsVC.h */,
+				5277B1861C16D912008929ED /* RRQuestionsVC.m */,
+				5277B1891C16DC95008929ED /* RRQuestionsView.h */,
+				5277B18A1C16DC95008929ED /* RRQuestionsView.m */,
+				5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */,
+			);
+			path = RRQuestionView;
 			sourceTree = "<group>";
 		};
 		52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */ = {
@@ -1055,6 +1110,7 @@
 				4FD2EB771A361A0F0056D4C4 /* produ.png in Resources */,
 				524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */,
 				4FD2EB7A1A361A0F0056D4C4 /* shopping_cart.png in Resources */,
+				523329521C170871008ABA46 /* RROverviewCell.xib in Resources */,
 				4FD2EB981A36231D0056D4C4 /* TechnicianAppStoryboard.storyboard in Resources */,
 				75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */,
 				75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */,
@@ -1076,6 +1132,7 @@
 				4FD2EB951A3622280056D4C4 /* calibril.ttf in Resources */,
 				4FD2EB7E1A361A0F0056D4C4 /* x@2x.png in Resources */,
 				4FD2EB7D1A361A0F0056D4C4 /* x.png in Resources */,
+				5264C30D1C1977A2009728E0 /* RRQuestionsView.xib in Resources */,
 				4FD2EB701A361A0F0056D4C4 /* email.png in Resources */,
 				521DB6B81C10707A003E40D2 /* EditServiceOptionsCell.xib in Resources */,
 				91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */,
@@ -1139,8 +1196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523329511C170871008ABA46 /* RROverviewCell.m in Sources */,
 				4FD2EB681A361A0F0056D4C4 /* MiscAddViewController.m in Sources */,
 				4FD2EB831A361A0F0056D4C4 /* RebateQuoteTableViewCell.m in Sources */,
+				5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */,
 				524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */,
 				4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */,
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
@@ -1160,6 +1219,7 @@
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
 				75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */,
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
+				5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */,
 				4FD2EB671A361A0F0056D4C4 /* aQuoteFirstTableViewController.m in Sources */,
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
@@ -1204,6 +1264,7 @@
 				4F576FB41AC7000A00F0F8FB /* ServiceHistoryTableViewCell.m in Sources */,
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
 				4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */,
+				523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */,
 				4F11D4071AA77579007FC0A8 /* Job+Functional.m in Sources */,
 				91EE85A11B4EBAB100811D39 /* Job.m in Sources */,
 				4FD2EBAF1A384CE00056D4C4 /* RoundCornerView.m in Sources */,
@@ -1211,6 +1272,7 @@
 				4F11D3FC1AA772E4007FC0A8 /* NSManagedObjectContext+Custom.m in Sources */,
 				4F8EC7B71A604FD500999FA1 /* ExploreSummaryVC.m in Sources */,
 				AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */,
+				5233294D1C1706D9008ABA46 /* RROverviewVC.m in Sources */,
 				4F3C50B51A3F0D8C00778972 /* QuestionView.m in Sources */,
 				4FD2EB631A361A0F0056D4C4 /* FirstOption.m in Sources */,
 				5236287C1C0EF33000B04A71 /* UtilityOverpaymentVC.m in Sources */,

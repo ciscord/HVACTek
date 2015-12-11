@@ -42,7 +42,7 @@
 {
     if (textField.text.length  == 0)
     {
-        textField.text = @"$";
+        textField.text = @"$0.00";
     }
 }
 

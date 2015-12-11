@@ -184,18 +184,20 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         clubMembership.name = @"Comfort Club Membership";
         clubMembership.itemGroup = @"Additional items";
         clubMembership.itemNumber = @"-1";
+        clubMembership.quantity = @"";
         
         [newArray addObject:clubMembership];
     }
     
     if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]].floatValue != 0){
         PricebookItem *deposit = [PricebookItem new];
-       deposit.itemID = @"-2";
+        deposit.itemID = @"-2";
         deposit.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
         deposit.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
         deposit.name = @"Payment or 50% Deposit";
         deposit.itemGroup = @"Additional items";
         deposit.itemNumber = @"-2";
+        deposit.quantity = @"";
         [newArray addObject:deposit];
     }
     
@@ -207,6 +209,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         discount.name = @"Discounts";
         discount.itemGroup = @"Additional items";
         discount.itemNumber = @"-3";
+        discount.quantity = @"";
         [newArray addObject:discount];
     }
     
@@ -218,6 +221,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.name = @"Diagnostic";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-5";
+        payment.quantity = @"";
         [newArray addObject:payment];
     }
     
@@ -229,6 +233,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.name = @"Comprehensive Precision Tune";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-6";
+        payment.quantity = @"";
         [newArray addObject:payment];
     }
     
@@ -240,6 +245,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.name = @"Payment";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-4";
+        payment.quantity = @"";
         [newArray addObject:payment];
     }
     
