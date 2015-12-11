@@ -552,11 +552,34 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 - (NSDictionary *)dictionaryWithvaluesForAPI {
 
     NSMutableDictionary *result = @{}.mutableCopy;
-    for (NSInteger i = 0; i < self.elementsToShow.count; i++) {
-
-        DebriefCell *cell = (DebriefCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [result addEntriesFromDictionary:cell.valueForApi];
+    
+    
+    /////
+    
+    NSInteger sect = [self.tableView numberOfSections];
+    
+    for (NSInteger i = 0; i < sect - 1; i++) {
+        NSInteger rows = [self.tableView numberOfRowsInSection:i];
+        for (NSInteger j = 0; j < rows; j++) {
+            DebriefCell *cell = (DebriefCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:j inSection:i]];
+            [result addEntriesFromDictionary:cell.valueForApi];
+        }
     }
+    
+    
+//    for (NSInteger i = 0; i < self.elementsToShow.count; i++) {
+//        DebriefCell *cell = (DebriefCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+//        [result addEntriesFromDictionary:cell.valueForApi];
+//    }
+    
+    
+    
+    
+//    for (NSInteger i = 0; i < self.elementsToShow.count; i++) {
+//
+//        DebriefCell *cell = (DebriefCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+//        [result addEntriesFromDictionary:cell.valueForApi];
+//    }
     [result addEntriesFromDictionary:@{@"user_id" : [[[DataLoader sharedInstance] currentUser] userID]}];
     [result addEntriesFromDictionary:@{@"status" : @(0)}];
 
