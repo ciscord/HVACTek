@@ -34,6 +34,12 @@
 - (void)configureVC {
     self.amountTextField.layer.borderWidth   = 1.0;
     self.amountTextField.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    
+    if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
+        self.amountTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+    }else{
+        [DataLoader sharedInstance].utilityOverpaymentHVAC = self.amountTextField.text;
+    }
 }
 
 
@@ -91,7 +97,7 @@
 
 
 - (IBAction)nextClicked:(UIButton *)sender {
-    
+    [DataLoader sharedInstance].utilityOverpaymentHVAC = self.amountTextField.text;
 }
 
 

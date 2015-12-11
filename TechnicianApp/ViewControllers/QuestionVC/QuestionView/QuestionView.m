@@ -20,8 +20,39 @@
     pickerData = [[NSMutableArray alloc] init];
 }
 
+-(void)setQuestion:(Question *)question
+{
+    _question = question;
+    self.txtQuestion.text = question.question;
+    
+    if ([question.fieldTypeId isEqualToString:@"1"]) {
+        self.txtAnswer.text = question.answer;
+        self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
+        self.txtAnswer.hidden = !question.haveNote;
+        self.answerPickerView.hidden = YES;
+    }else if ([question.fieldTypeId isEqualToString:@"2"]) {
+        [self setUpYesNoPicker];
+        self.answerPickerView.hidden = NO;
+        self.txtAnswer.hidden = YES;
+        if (question.answer) {
+            [self.answerPickerView selectRow:[pickerData indexOfObject:question.answer] inComponent:0 animated:YES];
+        }
+        [self.answerPickerView reloadAllComponents];
+    }else if ([question.fieldTypeId isEqualToString:@"3"]) {
+        [self setUpYearsPicker];
+        self.answerPickerView.hidden = NO;
+        self.txtAnswer.hidden = YES;
+        if (question.answer) {
+            [self.answerPickerView selectRow:[pickerData indexOfObject:question.answer] inComponent:0 animated:YES];
+        }
+    }
+}
 
--(void)getYearsForPicker {
+
+
+#pragma mark - SetUp Picker
+-(void)setUpYearsPicker {
+    [pickerData removeAllObjects];
     for (int i = 1; i < 31; i++) {
         if (i == 30)
             [pickerData addObject:[NSString stringWithFormat:@"%d+  years", i]];
@@ -36,33 +67,18 @@
 }
 
 
-
--(void)setQuestion:(Question *)question
-{
-    _question = question;
-    self.txtQuestion.text = question.question;
-    
-    if ([question.fieldTypeId isEqualToString:@"1"]) {
-        self.txtAnswer.text = question.answer;
-        self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
-        self.txtAnswer.hidden = !question.haveNote;
-        self.answerPickerView.hidden = YES;
-    }else if ([question.fieldTypeId isEqualToString:@"2"]) {
-        self.answerPickerView.hidden = NO;
-        self.txtAnswer.hidden = YES;
-        [pickerData addObject:@"No"];
-        [pickerData addObject:@"Yes"];
-        [self.answerPickerView reloadAllComponents];
-    }else if ([question.fieldTypeId isEqualToString:@"3"]) {
-        [self getYearsForPicker];
-        self.answerPickerView.hidden = NO;
-        self.txtAnswer.hidden = YES;
-    }
+- (void)setUpYesNoPicker {
+    [pickerData removeAllObjects];
+    [pickerData addObject:@"No"];
+    [pickerData addObject:@"Yes"];
 }
 
+
+
+#pragma mark - Buttons Actions
 - (IBAction)btnBackTouch:(id)sender
 {
-    self.question.answer = self.txtAnswer.text;
+    [self setQuestionAnswer];
     if (self.OnBackButtonTouch)
     {
         self.OnBackButtonTouch(self);
@@ -71,20 +87,23 @@
 
 - (IBAction)btnNextTouch:(id)sender
 {
-    if ([self.question.fieldTypeId isEqualToString:@"1"]) {
-        self.question.answer = self.txtAnswer.text;
-    }else if ([self.question.fieldTypeId isEqualToString:@"2"]) {
-        
-    }else if ([self.question.fieldTypeId isEqualToString:@"3"]) {
-        self.question.answer = [pickerData objectAtIndex:[self.answerPickerView selectedRowInComponent:0]];
-    }
-    
-    
+    [self setQuestionAnswer];
     if (self.OnNextButtonTouch)
     {
         self.OnNextButtonTouch(self);
     }
 }
+
+
+- (void)setQuestionAnswer {
+    if ([self.question.fieldTypeId isEqualToString:@"1"]) {
+        self.question.answer = self.txtAnswer.text;
+    }else if ([self.question.fieldTypeId isEqualToString:@"2"] || [self.question.fieldTypeId isEqualToString:@"3"]) {
+        self.question.answer = [pickerData objectAtIndex:[self.answerPickerView selectedRowInComponent:0]];
+    }
+}
+
+
 
 
 #pragma mark - Picker DataSource & Delegate

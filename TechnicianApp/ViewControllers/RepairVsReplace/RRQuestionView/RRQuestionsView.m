@@ -7,6 +7,7 @@
 //
 
 #import "RRQuestionsView.h"
+#import "DataLoader.h"
 
 @implementation RRQuestionsView
 
@@ -58,7 +59,12 @@
 
 - (void)setDefaultAnswersforQuestion:(Question *)question {
     if ([question.name isEqualToString:@"RR5"]) {
-        self.answerTextField.text = @"$125.00";
+        if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
+            self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+        }else{
+            self.answerTextField.text = @"$0.00";
+            [DataLoader sharedInstance].utilityOverpaymentHVAC = self.answerTextField.text;
+        }
     }else if ([question.name isEqualToString:@"RR6"]) {
         self.answerTextField.text = @"$250.00";
     }else if ([question.name isEqualToString:@"RR7"]) {

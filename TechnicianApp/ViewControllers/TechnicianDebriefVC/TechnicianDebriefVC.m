@@ -454,7 +454,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
  /////  section 4 = 1/2
     NSMutableDictionary *followUpRequired         = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
-      NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+      NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"follow_up_notes" APIValues:@[]];
  /////  section 5 = 1
     
     NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Notes Entered in SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];

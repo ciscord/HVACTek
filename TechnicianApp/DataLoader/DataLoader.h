@@ -76,6 +76,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, strong) NSMutableArray *otherOptions;
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;
 
+@property (nonatomic, strong) NSString *utilityOverpaymentHVAC;
+
 
 + (DataLoader *)sharedInstance;
 + (void)        saveOptionsLocal:(NSMutableArray *)selectedOptions;
