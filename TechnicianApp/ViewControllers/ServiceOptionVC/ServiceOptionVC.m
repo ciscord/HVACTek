@@ -312,10 +312,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
      }];
 
     [cell setOnPriceSelected:^(NSInteger rowIndex, BOOL isDiscounted) {
-         weakSelf.isDiscountedPriceSelected = isDiscounted;
-         weakSelf.isDiagnositcOnlyPriceSelected = NO;
-         weakSelf.customerSelectedOptions = self.options[indexPath.section];
-         [weakSelf performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
+        self.isEmptyOptionSelected = NO;
+        weakSelf.isDiscountedPriceSelected = isDiscounted;
+        weakSelf.isDiagnositcOnlyPriceSelected = NO;
+        weakSelf.customerSelectedOptions = self.options[indexPath.section];
+        [weakSelf performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
      }];
     
     
