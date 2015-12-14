@@ -72,7 +72,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 }
 - (void) prepareForReuse{
 
-    NSLog(@"adscads");
+  //  NSLog(@"adscads");
 }
 
 - (void)setCellData:(NSMutableDictionary *)cellData {
@@ -740,7 +740,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
     
    //   NSLog(@"r %ld",(long)indexPath.row);
-     NSLog(@"%ld sectia %ld",(long)indexPath.row + sectionIdx, indexPath.section);
+///     NSLog(@"%ld sectia %ld",(long)indexPath.row + sectionIdx, indexPath.section);
     
     
      DebriefCell *  cell = [tableView dequeueReusableCellWithIdentifier:kDebriefCellIdentifier];

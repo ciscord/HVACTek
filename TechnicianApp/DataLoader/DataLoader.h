@@ -61,6 +61,10 @@ FOUNDATION_EXTERN NSString *const kSWAPIRemoteTC;
 void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewController);
 
 @interface DataLoader : AFHTTPRequestOperationManager
+{
+    @public
+    NSInteger systemLastYears;
+}
 
 @property (nonatomic, strong) SWAPIRequestManager *SWAPIManager;
 @property (nonatomic, strong) User                *currentUser;

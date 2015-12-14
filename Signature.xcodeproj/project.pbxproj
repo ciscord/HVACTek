@@ -109,6 +109,7 @@
 		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
 		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
+		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
 		75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75399F611A39D7FB0013EAC0 /* PriceBookView.xib */; };
@@ -314,6 +315,8 @@
 		5277B18A1C16DC95008929ED /* RRQuestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRQuestionsView.m; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
+		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
+		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75399F591A39CD2E0013EAC0 /* RepairVsServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairVsServiceVC.h; sourceTree = "<group>"; };
 		75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairVsServiceVC.m; sourceTree = "<group>"; };
@@ -710,6 +713,7 @@
 				AAE7D1691A39CFBA00F95495 /* CHDropDownTextField */,
 				4FD2EBB01A384F2A0056D4C4 /* RoundCornerView */,
 				4F7223421ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil */,
+				52F699BE1C1EB2E800CD9274 /* CALayerXibConfig */,
 				4FD2EBA81A376C740056D4C4 /* TODOMacros.h */,
 				4FD2EBBF1A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.h */,
 				4FD2EBC01A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m */,
@@ -887,6 +891,16 @@
 				52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */,
 			);
 			path = EnlargeViewOptions;
+			sourceTree = "<group>";
+		};
+		52F699BE1C1EB2E800CD9274 /* CALayerXibConfig */ = {
+			isa = PBXGroup;
+			children = (
+				52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */,
+				52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */,
+			);
+			name = CALayerXibConfig;
+			path = "NSDictionary+NSNullReplaceWithNil";
 			sourceTree = "<group>";
 		};
 		75399F581A39CD250013EAC0 /* RepairVsServiceVC */ = {
@@ -1224,6 +1238,7 @@
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
+				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
 				4FD2EB811A361A0F0056D4C4 /* ProdAdminTableViewCell.m in Sources */,
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,

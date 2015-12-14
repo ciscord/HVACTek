@@ -60,7 +60,8 @@
 - (void)setDefaultAnswersforQuestion:(Question *)question {
     if ([question.name isEqualToString:@"RR5"]) {
         if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
-            self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+            //self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+            self.answerTextField.text = [self getValueOfUtilityOverpayment];
         }else{
             self.answerTextField.text = @"$0.00";
             [DataLoader sharedInstance].utilityOverpaymentHVAC = self.answerTextField.text;
@@ -72,6 +73,21 @@
     }else{
         self.answerTextField.text = @"$0.00";
     }
+}
+
+
+- (NSString *)getValueOfUtilityOverpayment {
+    NSLocale *local = [NSLocale currentLocale];
+    NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
+    [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [paymentFormatter setLocale:local];
+    [paymentFormatter setGeneratesDecimalNumbers:YES];
+    
+    float uOverpayment = 0.00f;
+    NSNumber *number = [paymentFormatter numberFromString:[[DataLoader sharedInstance] utilityOverpaymentHVAC]];
+    uOverpayment = [number floatValue] * [DataLoader sharedInstance]->systemLastYears;
+    
+    return [paymentFormatter stringFromNumber:[NSNumber numberWithFloat:uOverpayment]];
 }
 
 
@@ -127,12 +143,17 @@
         self.questionRR.answer = self.answerTextField.text;
     }else if ([self.questionRR.fieldTypeId isEqualToString:@"2"] || [self.questionRR.fieldTypeId isEqualToString:@"3"]) {
         self.questionRR.answer = [pickerData objectAtIndex:[self.answerPickerView selectedRowInComponent:0]];
+        [self systemLastTime];
     }
 }
 
 
 
-
+- (void)systemLastTime {
+     if ([self.questionRR.fieldTypeId isEqualToString:@"3"]) {
+         [DataLoader sharedInstance]->systemLastYears = [self.answerPickerView selectedRowInComponent:0] + 1;
+     }
+}
 
 
 #pragma mark - UITextField Delegates

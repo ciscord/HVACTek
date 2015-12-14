@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet RoundCornerView *contentRoundView;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextField *initialTechTextField;
+@property (weak, nonatomic) IBOutlet UIView *customerPriceView;
 @property (weak, nonatomic) IBOutlet UITextField *initialCostumerTextField;
 
 @end
@@ -37,6 +38,9 @@
     self.initialTechTextField.layer.borderColor   = [[UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.] CGColor];
     self.initialCostumerTextField.layer.borderWidth   = .5;
     self.initialCostumerTextField.layer.borderColor   = [[UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.] CGColor];
+    
+    [self.view bringSubviewToFront:self.customerPriceView];
+    self.customerPriceView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
 }
 
 
@@ -49,21 +53,24 @@
 
 - (IBAction)rrBtnClicked:(UIButton *)sender {
     NSLog(@"rrBtnClicked!");
-
     [self performSegueWithIdentifier:@"unwindToServiceOptionsFromRRBtn" sender:self];
-
-    
 }
 
 
 - (IBAction)invoiceBtnClicked:(UIButton *)sender {
     NSLog(@"rrBtnClicked!");
-    
     [self performSegueWithIdentifier:@"unwindToServiceOptionsFromInvoiceBtn" sender:self];
 }
 
 
+#pragma mark - Customer Price Actions
+- (IBAction)customerPriceBtnClicked:(UIButton *)sender {
+    self.customerPriceView.hidden = NO;
+}
 
+- (IBAction)hideCustomerPriceView:(id)sender {
+    self.customerPriceView.hidden = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
