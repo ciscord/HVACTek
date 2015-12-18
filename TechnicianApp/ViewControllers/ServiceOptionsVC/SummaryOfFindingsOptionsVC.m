@@ -52,11 +52,22 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         self.selectedOptions = self.allOptions.mutableCopy;
     }
     else {
-        
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
         self.allOptions = [[DataLoader sharedInstance] otherOptions];
+    }
+}
+
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if (self.isiPadCommonRepairsOptions == NO) {
+        if (self.isMovingFromParentViewController) {
+            [DataLoader saveOptionsLocal:self.selectedOptions];
+        }
     }
 }
 
@@ -207,7 +218,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     {
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = NO;
-        vc.selectedOptions = self.selectedOptions.mutableCopy;
+        vc.selectedOptions = self.selectedOptions;
     }
     else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
     {

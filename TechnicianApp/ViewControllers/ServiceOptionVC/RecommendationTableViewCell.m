@@ -259,10 +259,17 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self.serviceOptions count] == 0){
-        return 0;
+//    if ([self.serviceOptions count] == 0){
+//        return 0;
+//    }else{
+//        return [self.serviceOptionsRemoved count];
+//    }
+    
+    
+    if (self.optionsDisplayType == odtReadonlyWithPrice) {
+        return [self.serviceOptionsRemoved count];;
     }else{
-        return [self.serviceOptionsRemoved count];
+        return [self.serviceOptions count];
     }
 }
 
@@ -270,26 +277,37 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     //__weak RecommendationTableViewCell *weakSelf = self;
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-    ///PricebookItem                  *p    = self.serviceOptions[indexPath.row+1];
-    PricebookItem                  *p    = self.serviceOptionsRemoved[indexPath.row];
+    PricebookItem *pOptions    = self.serviceOptions[indexPath.row];
+  ////  cell.accessoryView.hidden = !self.isEditable || pOptions.isMain;
+
     
-    cell.accessoryView.hidden = !self.isEditable || p.isMain;
-    
-    
-    if (![self.serviceOptions containsObject:p]){
-        
-        NSDictionary* attributes = @{
-                                     NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
-                                     };
-        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:p.name attributes:attributes];
-        cell.textLabel.attributedText = attrText;
-        
-    }else{
+    if (self.optionsDisplayType == odtReadonlyWithPrice) {
+        PricebookItem *pRemoved    = self.serviceOptionsRemoved[indexPath.row];
         if (cell.textLabel.attributedText){
             cell.textLabel.attributedText = nil;
         }
-        cell.textLabel.text = p.name;
+         cell.textLabel.text = pRemoved.name;
+        
+    }else{
+        
+        if (![self.serviceOptionsRemoved containsObject:pOptions]){
+            
+            NSDictionary* attributes = @{
+                                         NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
+                                         };
+            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:pOptions.name attributes:attributes];
+            cell.textLabel.attributedText = attrText;
+            
+        }else{
+            if (cell.textLabel.attributedText){
+                cell.textLabel.attributedText = nil;
+            }
+            cell.textLabel.text = pOptions.name;
+        }
+        
     }
+    
+    
     
     ///cell.textLabel.text = p.name;
     cell.textLabel.font       = [UIFont fontWithName:@"Calibri-Light" size:17];

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1505" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibri.ttf">
-            <string>Calibri</string>
-            <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
@@ -651,17 +649,7 @@
                                 <rect key="frame" x="32" y="260" width="704" height="740"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uVk-H3-LZR">
-                                        <rect key="frame" x="8" y="45" width="670" height="160"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">The average life expectancy of a heating &amp; air conditioning system is between 12-15 years.  There are a number of factors that can influence the life expectancy of any system with routine maintenance being the most important factor.  Maintenance is your best choice for energy savings, equipment reliability, and safety.  It is designed to protect you against costly repairs and inconvenience, while providing you with emergency response if the system breaks down when you least expect it. </string>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="21"/>
-                                        <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="-1" height="-1"/>
-                                        <string key="userLabel">The average life expectancy of a heating &amp; air conditioning system is between 12-15 years.  There are a number of factors that can influence the life expectancy of any system with routine maintenance being the most important factor.  Maintenance is your best choice for energy savings.,</string>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• PRECISION TUNE UPS:  Designed to keep your system running at peak efficiency, saving you money." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DHO-o1-AIr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◼︎ PRECISION TUNE UPS:  Designed to keep your system running at peak efficiency, saving you money." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DHO-o1-AIr">
                                         <rect key="frame" x="32" y="504" width="653" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="21"/>
@@ -689,7 +677,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Membership Benefits:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gBe-TC-gJk">
                                         <rect key="frame" x="135" y="14" width="429" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="26"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="24"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -698,7 +686,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">Here’s What ESA Discount Club Members Receive:
 </string>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="23"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -729,21 +717,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iscount On All Repairs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dVv-D6-hIr">
-                                        <rect key="frame" x="253" y="256" width="194" height="20"/>
+                                        <rect key="frame" x="253" y="255" width="194" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ority Customer Service" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eWJ-ch-VC3">
-                                        <rect key="frame" x="253" y="284" width="194" height="20"/>
+                                        <rect key="frame" x="253" y="283" width="194" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ervice Within 24 Hours Or The Diagnostic is Waived" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wNf-a8-NfQ">
-                                        <rect key="frame" x="253" y="312" width="391" height="20"/>
+                                        <rect key="frame" x="253" y="311" width="391" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -778,7 +766,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never Pay An" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eoG-cc-iid">
-                                        <rect key="frame" x="111" y="368" width="102" height="20"/>
+                                        <rect key="frame" x="103" y="368" width="107" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -833,7 +821,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="• FREE REMINDERS:  Take this off your “to do” list.  We handle everything to keep you on schedule!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XZv-gL-AH6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◼︎ FREE REMINDERS:  Take this off your “to do” list.  We handle everything to keep you on schedule!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XZv-gL-AH6">
                                         <rect key="frame" x="32" y="557" width="664" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="21"/>
@@ -843,10 +831,20 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BxC-dI-Jxp">
                                         <rect key="frame" x="32" y="600" width="653" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">• INCREASED EQUIPMENT LIFE: The #1 reason for system failure is dirt, caused by lack of maintenance.  Properly maintained systems last longer. </string>
+                                        <string key="text">◼︎ INCREASED EQUIPMENT LIFE: The #1 reason for system failure is dirt, caused by lack of maintenance.  Properly maintained systems last longer. </string>
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="21"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uVk-H3-LZR">
+                                        <rect key="frame" x="26" y="50" width="651" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">The average life expectancy of a heating &amp; air conditioning system is between 12-15 years.  There are a number of factors that can influence the life expectancy of any system with routine maintenance being the most important factor.  Maintenance is your best choice for energy savings, equipment reliability, and safety.  It is designed to protect you against costly repairs and inconvenience, while providing you with emergency response if the system breaks down when you least expect it. </string>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="21"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="-1" height="-1"/>
+                                        <string key="userLabel">The average life expectancy of a heating &amp; air conditioning system is between 12-15 years.  There are a number of factors that can influence the life expectancy of any system with routine maintenance being the most important factor.  Maintenance is your best choice for energy savings.,</string>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -2662,7 +2660,7 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zML-XZ-EUZ">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zML-XZ-EUZ">
                                         <rect key="frame" x="0.0" y="97" width="690" height="364"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

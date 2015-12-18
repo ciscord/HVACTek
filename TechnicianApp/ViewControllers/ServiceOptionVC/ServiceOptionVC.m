@@ -71,6 +71,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         self.segueIdentifierToUnwindTo = nil;
         return;
     }
+    
+    [self.tableView reloadData];
 }
 
 
@@ -305,7 +307,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
          [weakSelf resetOptions];
      }];
 
-    ///[cell displayServiceOptions:items andRemovedServiceOptions:[self.options[0] objectForKey:@"items"]];
     [cell displayServiceOptions:items andRemovedServiceOptions:removedItems];
     [cell setOnOptionSelected:^(NSInteger rowIndex, NSInteger itemIndex){
          [weakSelf didSelectOptionsWithRow:rowIndex withOptionIndex:itemIndex];
@@ -351,7 +352,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     vc.enlargeMonthlyPrice = cell.lb24MonthRates.text;
     vc.enlargeSavings = cell.lbESAsaving.text;
     vc.enlargeOptionsArray = items;
-    vc.enlargeFullOptionsArray = [self.options[0] objectForKey:@"items"];
+    vc.enlargeFullOptionsArray = [option objectForKey:@"removedItems"];
     
     //[self.navigationController pushViewController:vc animated:YES];
     

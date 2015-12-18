@@ -130,7 +130,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
     
     job.jobStatus = @(jstNeedDebrief);
-    // job.startTime = [NSDate date];
+    
+    if (!job.startTime) {
+        job.startTime = [NSDate date];
+    }
+    
+    //job.startTime = [NSDate date];
     [job.managedObjectContext save];
    
     NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
