@@ -367,7 +367,7 @@
 		AAE7D16C1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		AAE7D16D1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDropDownTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		D29AD9A819756FF40059565A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		D29F06FB197023CA0020D83C /* Signature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Signature.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D29F06FB197023CA0020D83C /* HvacTek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HvacTek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F06FE197023CA0020D83C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D29F0700197023CA0020D83C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D29F0702197023CA0020D83C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1017,7 +1017,7 @@
 		D29F06FC197023CA0020D83C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D29F06FB197023CA0020D83C /* Signature.app */,
+				D29F06FB197023CA0020D83C /* HvacTek.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1060,9 +1060,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D29F06FA197023CA0020D83C /* Signature */ = {
+		D29F06FA197023CA0020D83C /* HvacTek */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "Signature" */;
+			buildConfigurationList = D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "HvacTek" */;
 			buildPhases = (
 				BFF2E02D615784A6639ED173 /* Check Pods Manifest.lock */,
 				D29F06F7197023CA0020D83C /* Sources */,
@@ -1075,9 +1075,9 @@
 			);
 			dependencies = (
 			);
-			name = Signature;
+			name = HvacTek;
 			productName = "Unifeiyed Quoting";
-			productReference = D29F06FB197023CA0020D83C /* Signature.app */;
+			productReference = D29F06FB197023CA0020D83C /* HvacTek.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1094,7 +1094,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D29F06F6197023CA0020D83C /* Build configuration list for PBXProject "Signature" */;
+			buildConfigurationList = D29F06F6197023CA0020D83C /* Build configuration list for PBXProject "HvacTek" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1106,7 +1106,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D29F06FA197023CA0020D83C /* Signature */,
+				D29F06FA197023CA0020D83C /* HvacTek */,
 			);
 		};
 /* End PBXProject section */
@@ -1393,7 +1393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1405,7 +1405,7 @@
 				INFOPLIST_FILE = "Signature-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
-				PRODUCT_NAME = Signature;
+				PRODUCT_NAME = HvacTek;
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1417,7 +1417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1429,7 +1429,7 @@
 				INFOPLIST_FILE = "Signature-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
-				PRODUCT_NAME = Signature;
+				PRODUCT_NAME = HvacTek;
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1438,7 +1438,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D29F06F6197023CA0020D83C /* Build configuration list for PBXProject "Signature" */ = {
+		D29F06F6197023CA0020D83C /* Build configuration list for PBXProject "HvacTek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D29F072B197023CA0020D83C /* Debug */,
@@ -1447,7 +1447,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "Signature" */ = {
+		D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "HvacTek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D29F072E197023CA0020D83C /* Debug */,
