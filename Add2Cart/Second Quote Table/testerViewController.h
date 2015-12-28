@@ -24,28 +24,30 @@
     NSArray *headers;
    
     NSMutableArray *airCon;
-    int aSDF;
+    int choosedAirCon;
     NSMutableArray *heatPump;
-    int bSDF;
+    int choosedHeatPump;
     NSMutableArray *furn;
-    int cSDF;
+    int choosedFurn;
     NSMutableArray *airH;
-    int dSDF;
+    int choosedAirH;
     NSMutableArray *geo;
-    int e;
+    int choosedGeo;
     NSMutableArray *iaq;
-    int f;
+    int choosedIAQ;
     NSMutableArray *acces;
-    int g;
+    int choosedAcces;
     NSMutableArray *boilers;
-    int h;
+    int choosedBoilers;
     NSMutableArray *hotwater;
-    int ih;
+    int choosedHotWater;
+    
     NSMutableArray *typeFours;
     NSMutableArray *typeThrees;
     //Gestures for swipable cells
-    UISwipeGestureRecognizer* sgr;
-    UISwipeGestureRecognizer* sgl;
+    
+    UISwipeGestureRecognizer* swipeGestureRight;
+    UISwipeGestureRecognizer* swipeGestureLeft;
     
     //Variables needed for collapsable cells.
     BOOL tapped;
@@ -69,7 +71,14 @@
     float monthlyPay;
    
     Item *blank;
-    BOOL last;
+    BOOL isLast;
+    
+    
+    
+    ///
+    
+    int editingCartIndex;
+    
 }
 
 
@@ -94,6 +103,9 @@
 @property (nonatomic, strong)  NSMutableArray *carts;
 @property (nonatomic, strong)  NSMutableArray *savedCarts;
 @property (nonatomic, strong)  NSMutableArray *cartItems;
+
+
+
 - (IBAction)cartButon:(id)sender;
 - (IBAction)rebateButton:(id)sender;
 - (IBAction)monthBut:(id)sender;

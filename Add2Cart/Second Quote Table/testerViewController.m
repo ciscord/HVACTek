@@ -49,16 +49,18 @@
 {
     [super viewDidLoad];
     
+    editingCartIndex = 0;
+    
     //Init the ints ??????
-    aSDF = 0;
-    bSDF = 0;
-    cSDF = 0;
-    dSDF = 0;
-    e = 0;
-    f = 0;
-    g = 0;
-    h = 0;
-    ih = 0;
+    choosedAirCon = 0;
+    choosedHeatPump = 0;
+    choosedFurn = 0;
+    choosedAirH = 0;
+    choosedGeo = 0;
+    choosedIAQ = 0;
+    choosedAcces = 0;
+    choosedBoilers = 0;
+    choosedHotWater = 0;
     
     //Tapped is for collapsable cell
     tapped= FALSE;
@@ -87,14 +89,14 @@
     
     //Set delegate & views
     tableViewX.delegate = self;
-    sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwiped:)];
-    [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
-    sgl = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
-    [sgl setDirection:UISwipeGestureRecognizerDirectionRight];
+    swipeGestureRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwiped:)];
+    [swipeGestureRight setDirection:UISwipeGestureRecognizerDirectionLeft];
+    swipeGestureLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipedLeft:)];
+    [swipeGestureLeft setDirection:UISwipeGestureRecognizerDirectionRight];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(celltapped:)];
     [tableViewX addGestureRecognizer:tap];
-    [tableViewX addGestureRecognizer:sgr];
-    [tableViewX addGestureRecognizer:sgl];
+    [tableViewX addGestureRecognizer:swipeGestureRight];
+    [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
     
 
@@ -954,8 +956,8 @@
     switch (indexPath.section) {
         case 0:{
             //Air Conditioners
-            if (aSDF < airCon.count){
-                itm = airCon[aSDF];
+            if (choosedAirCon < airCon.count){
+                itm = airCon[choosedAirCon];
                 //   [self purchase:itm];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
@@ -973,8 +975,8 @@
         }
         case 2:{
             //heat Pumps
-            if (bSDF < heatPump.count ){
-                itm = heatPump[bSDF];
+            if (choosedHeatPump < heatPump.count ){
+                itm = heatPump[choosedHeatPump];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -990,8 +992,8 @@
         }
         case 1:{
             //furnaces
-            if (cSDF < furn.count){
-                itm = furn[cSDF];
+            if (choosedFurn < furn.count){
+                itm = furn[choosedFurn];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -1008,8 +1010,8 @@
         }
         case 3:{
             //Air Handlers
-            if (dSDF < airH.count){
-                itm = airH[dSDF];
+            if (choosedAirH < airH.count){
+                itm = airH[choosedAirH];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -1025,8 +1027,8 @@
         }
         case 4:{
             //Geothermal
-            if (e < geo.count){
-                itm = geo[e];
+            if (choosedGeo < geo.count){
+                itm = geo[choosedGeo];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -1040,8 +1042,8 @@
         }
         case 6:{
             //IAQ
-            if (f < iaq.count){
-                itm = iaq[f];
+            if (choosedIAQ < iaq.count){
+                itm = iaq[choosedIAQ];
                 cell.buyButton.enabled = YES;
                 cell.buyButton.hidden = NO;
                 cell.removeButton.hidden = NO;
@@ -1057,9 +1059,9 @@
         }
         case 5:{
             //Accessories
-            if (g < acces.count){
+            if (choosedAcces < acces.count){
                 
-                itm = acces[g];
+                itm = acces[choosedAcces];
                 cell.buyButton.enabled = YES;
                 cell.buyButton.hidden = NO;
                 cell.removeButton.hidden = NO;
@@ -1074,9 +1076,9 @@
         }
         case 8:{
             //Boilers
-            if (h < boilers.count){
+            if (choosedBoilers < boilers.count){
                 
-                itm = boilers[h];
+                itm = boilers[choosedBoilers];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -1095,8 +1097,8 @@
         case 7:{
             //Hot Water
            // Item *itm;
-            if (ih < hotwater.count){
-                itm = hotwater[ih];
+            if (choosedHotWater < hotwater.count){
+                itm = hotwater[choosedHotWater];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
@@ -1204,12 +1206,12 @@
     Item *itm;
     if (swipedIndexPath.section == 0) {
         
-        if (airCon.count > 0 && aSDF < airCon.count-1) {
-            itm = airCon[aSDF];
+        if (airCon.count > 0 && choosedAirCon < airCon.count-1) {
+            itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
-            itm=airCon[(aSDF+1)];
+            itm=airCon[(choosedAirCon+1)];
             [self purchase:itm];
-            aSDF++;
+            choosedAirCon++;
             change = YES;
         } else {
             
@@ -1217,13 +1219,13 @@
         
     }
     if (swipedIndexPath.section == 2) {
-        if (heatPump.count > 0 && bSDF < heatPump.count-1) {
-            itm = heatPump[bSDF];
+        if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
+            itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
-            itm=heatPump[(bSDF+1)];
+            itm=heatPump[(choosedHeatPump+1)];
             [self purchase:itm];
 
-            bSDF++;
+            choosedHeatPump++;
             change = YES;
         } else {
             
@@ -1231,13 +1233,13 @@
         
     }
     if (swipedIndexPath.section == 1) {
-        if (furn.count > 0 && cSDF < furn.count-1) {
-            itm = furn[cSDF];
+        if (furn.count > 0 && choosedFurn < furn.count-1) {
+            itm = furn[choosedFurn];
             [self removeTheProd:itm];
-            itm=furn[(cSDF+1)];
+            itm=furn[(choosedFurn+1)];
             [self purchase:itm];
 
-            cSDF++;
+            choosedFurn++;
             change = YES;
         } else {
             
@@ -1245,13 +1247,13 @@
         
     }
     if (swipedIndexPath.section == 3) {
-        if (airH.count >0  && dSDF < airH.count -1) {
-            itm = airH[dSDF];
+        if (airH.count >0  && choosedAirH < airH.count -1) {
+            itm = airH[choosedAirH];
             [self removeTheProd:itm];
-            itm=airH[(dSDF+1)];
+            itm=airH[(choosedAirH+1)];
             [self purchase:itm];
 
-            dSDF++;
+            choosedAirH++;
             change = YES;
         } else {
             
@@ -1260,13 +1262,13 @@
         
     }
     if (swipedIndexPath.section == 4) {
-        if (geo.count > 0 && e < geo.count-1 ) {
-            itm = geo[e];
+        if (geo.count > 0 && choosedGeo < geo.count-1 ) {
+            itm = geo[choosedGeo];
             [self removeTheProd:itm];
-            itm=geo[(e+1)];
+            itm=geo[(choosedGeo+1)];
             [self purchase:itm];
 
-            e++;
+            choosedGeo++;
             change = YES;
         } else {
             
@@ -1276,12 +1278,12 @@
     if (swipedIndexPath.section == 6) {
         
         
-        if (iaq.count > 0 && f < iaq.count-1 ) {
-            itm = iaq[f];
+        if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
+            itm = iaq[choosedIAQ];
            // [self removeTheProd:itm];
-            itm=iaq[(f+1)];
+            itm=iaq[(choosedIAQ+1)];
           //  [self purchase:itm];
-            f++;
+            choosedIAQ++;
             change = YES;
         } else {
             
@@ -1289,8 +1291,8 @@
         
     }
     if (swipedIndexPath.section == 5) {
-        if ( acces.count > 0  && g < acces.count-1) {
-            g++;
+        if ( acces.count > 0  && choosedAcces < acces.count-1) {
+            choosedAcces++;
             change = YES;
         } else {
             
@@ -1299,13 +1301,13 @@
     }
 
     if (swipedIndexPath.section == 8) {
-        if ( boilers.count > 0  && h < boilers.count-1) {
-            itm = boilers[h];
+        if ( boilers.count > 0  && choosedBoilers < boilers.count-1) {
+            itm = boilers[choosedBoilers];
             [self removeTheProd:itm];
-            itm=boilers[(h+1)];
+            itm=boilers[(choosedBoilers+1)];
             [self purchase:itm];
 
-            h++;
+            choosedBoilers++;
             change = YES;
         } else {
             
@@ -1313,13 +1315,13 @@
         
     }
     if (swipedIndexPath.section == 7) {
-        if ( hotwater.count > 0  && ih < hotwater.count-1) {
-            itm = hotwater[ih];
+        if ( hotwater.count > 0  && choosedHotWater < hotwater.count-1) {
+            itm = hotwater[choosedHotWater];
             [self removeTheProd:itm];
-            itm= hotwater[(ih+1)];
+            itm= hotwater[(choosedHotWater+1)];
             [self purchase:itm];
 
-            ih++;
+            choosedHotWater++;
             change = YES;
             
         } else {
@@ -1347,89 +1349,89 @@
     BOOL change = FALSE;
     if (swipedIndexPath.section == 0) {
         
-        if (aSDF > 0) {
-             itm = airCon[aSDF];
+        if (choosedAirCon > 0) {
+             itm = airCon[choosedAirCon];
              [self removeTheProd:itm];
-            itm=airCon[(aSDF-1)];
+            itm=airCon[(choosedAirCon-1)];
             [self purchase:itm];
-             aSDF--;
+             choosedAirCon--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 2) {
-        if (bSDF > 0) {
-            itm = heatPump[bSDF];
+        if (choosedHeatPump > 0) {
+            itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
-            itm=heatPump[(bSDF-1)];
+            itm=heatPump[(choosedHeatPump-1)];
             [self purchase:itm];
-            bSDF--;
+            choosedHeatPump--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 1) {
-        if (cSDF > 0) {
-            itm = furn[cSDF];
+        if (choosedFurn > 0) {
+            itm = furn[choosedFurn];
             [self removeTheProd:itm];
-            itm=furn[(cSDF-1)];
+            itm=furn[(choosedFurn-1)];
             [self purchase:itm];
-            cSDF--;
+            choosedFurn--;
             change = YES;
         } else {
             [self warn];
         };
     }
     if (swipedIndexPath.section == 3) {
-        if (dSDF > 0) {
-            itm = airH[dSDF];
+        if (choosedAirH > 0) {
+            itm = airH[choosedAirH];
             [self removeTheProd:itm];
-            itm=airH[(dSDF-1)];
+            itm=airH[(choosedAirH-1)];
             [self purchase:itm];
-            dSDF--;
+            choosedAirH--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 4) {
-        if (e > 0) {
-            itm = geo[e];
+        if (choosedGeo > 0) {
+            itm = geo[choosedGeo];
             [self removeTheProd:itm];
-            itm=geo[(e-1)];
+            itm=geo[(choosedGeo-1)];
             [self purchase:itm];
-            e--;
+            choosedGeo--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 6) {
-        if (f > 0) {
-            f--;
+        if (choosedIAQ > 0) {
+            choosedIAQ--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 5) {
-        if (g > 0) {
-            g--;
+        if (choosedAcces > 0) {
+            choosedAcces--;
             change = YES;
         } else {
             [self warn];
         }
     }
     if (swipedIndexPath.section == 8) {
-        if ( h > 0) {
-            itm = boilers[h];
+        if ( choosedBoilers > 0) {
+            itm = boilers[choosedBoilers];
             [self removeTheProd:itm];
-            itm=boilers[(h-1)];
+            itm=boilers[(choosedBoilers-1)];
             [self purchase:itm];
             
-            h--;
+            choosedBoilers--;
             change = YES;
         } else {
             
@@ -1437,12 +1439,12 @@
         
     }
     if (swipedIndexPath.section == 7) {
-        if ( ih >0) {
-            itm = hotwater[ih];
+        if ( choosedHotWater >0) {
+            itm = hotwater[choosedHotWater];
             [self removeTheProd:itm];
-            itm= hotwater[(ih-1)];
+            itm= hotwater[(choosedHotWater-1)];
             [self purchase:itm];
-            ih--;
+            choosedHotWater--;
             change = YES;
         } else {
             
@@ -1476,40 +1478,40 @@
     switch (j) {
         case 0:{
             //Air Conditioners
-            itm = airCon[aSDF];
+            itm = airCon[choosedAirCon];
             [self purchase:itm];
             break;
         }
         case 2:{
-            itm = heatPump[bSDF];
+            itm = heatPump[choosedHeatPump];
             [self purchase:itm];
             break;
         }
         case 1:{
-            itm = furn[cSDF];
+            itm = furn[choosedFurn];
             [self purchase:itm];
             break;
         }
         case 3:{
-            itm = airH[dSDF];
+            itm = airH[choosedAirH];
             [self purchase:itm];
             break;
         }
         case 4:{
             //Geothermal
-            itm = geo[e];
+            itm = geo[choosedGeo];
             [self purchase:itm];
             break;
         }
         case 6:{
             //IAQ
-            itm = iaq[f];
+            itm = iaq[choosedIAQ];
             [self purchase:itm];
             break;
         }
         case 5:{
             //Accessories
-            itm = acces [g];
+            itm = acces [choosedAcces];
             [self purchase:itm];
             break;
         }
@@ -1526,45 +1528,45 @@
     switch (j) {
         case 0:{
             //Air Conditioners
-            itm = airCon[aSDF];
+            itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
             break;
         }
         case 2:{
-            itm = heatPump[bSDF];
+            itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
 
             break;
         }
         case 1:{
-            itm = furn[cSDF];
+            itm = furn[choosedFurn];
             [self removeTheProd:itm];
 
             break;
         }
         case 3:{
-            itm = airH[dSDF];
+            itm = airH[choosedAirH];
             [self removeTheProd:itm];
 
             break;
         }
         case 4:{
             //Geothermal
-            itm = geo[e];
+            itm = geo[choosedGeo];
             [self removeTheProd:itm];
 
             break;
         }
         case 6:{
             //IAQ
-            itm = iaq[f];
+            itm = iaq[choosedIAQ];
             [self removeTheProd:itm];
 
             break;
         }
         case 5:{
             //Accessories
-            itm = acces [g];
+            itm = acces [choosedAcces];
             [self removeTheProd:itm];
 
             break;
@@ -1597,7 +1599,7 @@
     
     
    
-    last     = TRUE;
+    isLast     = TRUE;
    [self buildQuote];
    
 }
@@ -1937,7 +1939,7 @@
         CartViewController *cartView = segue.destinationViewController;
         cartView.testerVC = self;
         
-        self.carts = [[NSMutableArray alloc]initWithArray:self.savedCarts];
+        self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
         cartView.carts = self.carts;
         [cartView.cartstableView reloadData];
     }

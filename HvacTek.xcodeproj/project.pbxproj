@@ -580,10 +580,10 @@
 		4FD2EB4F1A361A0F0056D4C4 /* Quote Rebate */ = {
 			isa = PBXGroup;
 			children = (
-				4FD2EB501A361A0F0056D4C4 /* RebateQuoteTableViewCell.h */,
-				4FD2EB511A361A0F0056D4C4 /* RebateQuoteTableViewCell.m */,
 				4FD2EB521A361A0F0056D4C4 /* RebateQuoteTableViewController.h */,
 				4FD2EB531A361A0F0056D4C4 /* RebateQuoteTableViewController.m */,
+				4FD2EB501A361A0F0056D4C4 /* RebateQuoteTableViewCell.h */,
+				4FD2EB511A361A0F0056D4C4 /* RebateQuoteTableViewCell.m */,
 			);
 			path = "Quote Rebate";
 			sourceTree = "<group>";
@@ -602,10 +602,10 @@
 		4FD2EB591A361A0F0056D4C4 /* Second Quote Table */ = {
 			isa = PBXGroup;
 			children = (
-				4FD2EB5A1A361A0F0056D4C4 /* HardTableViewCell.h */,
-				4FD2EB5B1A361A0F0056D4C4 /* HardTableViewCell.m */,
 				4FD2EB5C1A361A0F0056D4C4 /* testerViewController.h */,
 				4FD2EB5D1A361A0F0056D4C4 /* testerViewController.m */,
+				4FD2EB5A1A361A0F0056D4C4 /* HardTableViewCell.h */,
+				4FD2EB5B1A361A0F0056D4C4 /* HardTableViewCell.m */,
 			);
 			path = "Second Quote Table";
 			sourceTree = "<group>";

@@ -159,7 +159,7 @@
     
 }
 
-#pragma marck uialert view delegate
+#pragma mark - UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     [self.navigationController popViewControllerAnimated:YES];
     

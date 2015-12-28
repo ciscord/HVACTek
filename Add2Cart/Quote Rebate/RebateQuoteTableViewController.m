@@ -20,6 +20,7 @@
 @synthesize managedObjectContext;
 @synthesize prodFRC;
 @synthesize purch;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -127,6 +128,8 @@
     return 1;
 }
 
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return selected.count;
@@ -153,6 +156,44 @@
 }
 
 
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    Item * aItem = selected[indexPath.row];
+    if ([aItem.usserAdet intValue]==1) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        Item * aItem = selected[indexPath.row];
+        [managedObjectContext deleteObject:aItem];
+        rebatesToSend = [[NSMutableArray alloc]init];
+        [self fetchData];
+        [tableView reloadData];
+    }
+}
+
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Item * aItem = selected[indexPath.row];
+    if ([aItem.usserAdet intValue]==1) {
+        self.editedItem = aItem;
+        [self performSegueWithIdentifier:@"EditRebate" sender:self];
+    }
+    
+}
+
+
+
 #pragma mark - Custom Switch
 -(void) customSwitch:(id) sender {
     int x = [sender tag];
@@ -173,10 +214,12 @@
     
     
 }
-//ap.managedObjectContext = managedObjectContext;
 
 
+
+#pragma mark - Segue
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender   {
+    
     if ([segue.identifier isEqualToString: @"addEditRebate"]) {
         RebateAddViewController *rb = segue.destinationViewController;
       //  rb.type = prodType;
@@ -193,34 +236,6 @@
 
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return YES if you want the specified item to be editable.
-    Item * aItem = selected[indexPath.row];
-    if ([aItem.usserAdet intValue]==1) {
-        return YES;
-    }
-    
-    return NO;
-}
 
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-         Item * aItem = selected[indexPath.row];
-         [managedObjectContext deleteObject:aItem];
-        rebatesToSend = [[NSMutableArray alloc]init];
-        [self fetchData];
-        [tableView reloadData];
-    }
-}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Item * aItem = selected[indexPath.row];
-    if ([aItem.usserAdet intValue]==1) {
-        self.editedItem = aItem;
-        [self performSegueWithIdentifier:@"EditRebate" sender:self];
-    }
-
-}
 @end

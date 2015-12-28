@@ -211,12 +211,15 @@
     return 5;
 }
 
-#pragma marck cart cell delegate
+
+#pragma mark - CartCell Delegate
 -(void)editCard:(NSMutableDictionary*)cart{
-//     testerViewController * vc =(testerViewController*)self.testerVC;
-//     vc.cartItems = [cart objectForKey:@"cartItems"];
+    // testerViewController * vc =(testerViewController*)self.testerVC;
+     //vc.cartItems = [cart objectForKey:@"cartItems"];
      [self.navigationController popViewControllerAnimated:YES];
 };
+
+
 -(void)save:(NSMutableDictionary*)cart{
     
     testerViewController * vc =(testerViewController*)self.testerVC;
@@ -226,11 +229,11 @@
     [self.navigationController popViewControllerAnimated:YES]; 
     
 };
+
+
 -(void)done{
     [self home];
 };
 
 
 @end
-
-
