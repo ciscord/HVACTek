@@ -41,6 +41,11 @@
     int choosedBoilers;
     NSMutableArray *hotwater;
     int choosedHotWater;
+    NSMutableArray *warranties;
+    int choosedWarranties;
+    NSMutableArray *ductlessMiniSplits;
+    int choosedDuctlessMiniSplits;
+    
     
     NSMutableArray *typeFours;
     NSMutableArray *typeThrees;
@@ -72,12 +77,6 @@
    
     Item *blank;
     BOOL isLast;
-    
-    
-    
-    ///
-    
-    int editingCartIndex;
     
 }
 

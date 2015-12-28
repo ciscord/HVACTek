@@ -49,8 +49,6 @@
 {
     [super viewDidLoad];
     
-    editingCartIndex = 0;
-    
     //Init the ints ??????
     choosedAirCon = 0;
     choosedHeatPump = 0;
@@ -61,6 +59,10 @@
     choosedAcces = 0;
     choosedBoilers = 0;
     choosedHotWater = 0;
+    choosedWarranties = 0;
+    choosedDuctlessMiniSplits = 0;
+    
+    
     
     //Tapped is for collapsable cell
     tapped= FALSE;
@@ -139,8 +141,8 @@
 
 
 -(void) setupArrays {
-    headers = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Furnaces", @"Heat Pumps",@"Air Handlers"
-               ,@"Geothermal" ,@"Controls",@"Indoor Air Quality",@"Hot Water Heaters",@"Boilers",nil]; //@"Rebates"
+    headers = [[NSArray alloc]initWithObjects:@"Controls", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
+               @"Air Handlers", @"Geothermal" , @"Warranties", @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
     airCon = [[NSMutableArray alloc]init];
     furn = [[NSMutableArray alloc]init];
     heatPump = [[NSMutableArray alloc]init];
@@ -153,6 +155,9 @@
     
     boilers=[[NSMutableArray alloc]init];
     hotwater=[[NSMutableArray alloc]init];
+    
+    warranties = [[NSMutableArray alloc] init];
+    ductlessMiniSplits = [[NSMutableArray alloc] init];
 }
 
 
@@ -357,10 +362,12 @@
      //   itm = boilers[0];
       //  [self purchase:itm];
     }
-    if (hotwater.count>0) {
-        [hotwater insertObject:[self loadTheBlank] atIndex:0];
-        //itm = hotwater[0];
-       // [self purchase:itm];
+    if (warranties.count>0) {
+        [warranties insertObject:[self loadTheBlank] atIndex:0];
+    }
+    
+    if (ductlessMiniSplits.count>0) {
+        [ductlessMiniSplits insertObject:[self loadTheBlank] atIndex:0];
     }
     
 }
@@ -401,6 +408,12 @@
     if (iaq.count > 0) {
         iaq = [[iaq sortedArrayUsingDescriptors:sortDec] mutableCopy];
     }
+    if(warranties.count > 0) {
+        warranties = [[warranties sortedArrayUsingDescriptors:sortDec] mutableCopy];
+    }
+    if (ductlessMiniSplits.count > 0) {
+        ductlessMiniSplits = [[ductlessMiniSplits sortedArrayUsingDescriptors:sortDec] mutableCopy];
+    }
 }
 
 
@@ -421,9 +434,6 @@
         itm.finalPrice = [NSNumber numberWithFloat:opty];
        [self fillArrays:itm];
         
-        if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
-            NSLog(@"aaaa");
-        }
 
 //        
 //        if ([itm.optionOne floatValue] != 0) {
@@ -730,6 +740,12 @@
     } else if ([itm.type isEqualToString:@"Accessories"]) {
         [acces addObject:itm];
     }
+    else if ([itm.type isEqualToString:@"Warranties"]) {
+        [warranties addObject:itm];
+    }
+    else if ([itm.type isEqualToString:@"Ductless Mini Splits"]) {
+        [ductlessMiniSplits addObject:itm];
+    }
     
     
 }
@@ -859,64 +875,76 @@
         return 30.0f;
     } else {
     switch (indexPath.section) {
-        case 0:
+        case 2:
             if (airCon.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 2:
+        case 4:
             if (heatPump.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 1:
+        case 3:
             if (furn.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 3:
+        case 5:
             if (airH.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 4:
+        case 6:
             if (geo.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 6:
+        case 1:
             if (iaq.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 5:
+        case 0:
             if (acces.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 8:
+        case 9:
             if (boilers.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 7:
+        case 8:
             if (hotwater .count == 0) {
+                return 30.0f;
+            } else {
+                return 158.0f;
+            }
+        case 7:
+            if (warranties.count == 0) {
+                return 30.0f;
+            } else {
+                return 158.0f;
+            }
+        case 10:
+            if (ductlessMiniSplits.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
@@ -928,6 +956,7 @@
     
     }
     }
+
   
 }
 
@@ -937,7 +966,7 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return headers[section];
+    return [headers[section] uppercaseString];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -954,7 +983,7 @@
     Item *itm = nil;
     
     switch (indexPath.section) {
-        case 0:{
+        case 2:{
             //Air Conditioners
             if (choosedAirCon < airCon.count){
                 itm = airCon[choosedAirCon];
@@ -973,7 +1002,7 @@
             }
             break;
         }
-        case 2:{
+        case 4:{
             //heat Pumps
             if (choosedHeatPump < heatPump.count ){
                 itm = heatPump[choosedHeatPump];
@@ -990,7 +1019,7 @@
             }
             break;
         }
-        case 1:{
+        case 3:{
             //furnaces
             if (choosedFurn < furn.count){
                 itm = furn[choosedFurn];
@@ -1008,7 +1037,7 @@
             
             break;
         }
-        case 3:{
+        case 5:{
             //Air Handlers
             if (choosedAirH < airH.count){
                 itm = airH[choosedAirH];
@@ -1025,13 +1054,14 @@
             }
             break;
         }
-        case 4:{
+        case 6:{
             //Geothermal
             if (choosedGeo < geo.count){
                 itm = geo[choosedGeo];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
+                cell.removeButton.hidden = YES;
             }else {
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
@@ -1040,7 +1070,7 @@
             }
             break;
         }
-        case 6:{
+        case 1:{
             //IAQ
             if (choosedIAQ < iaq.count){
                 itm = iaq[choosedIAQ];
@@ -1057,10 +1087,9 @@
             }
             break;
         }
-        case 5:{
+        case 0:{
             //Accessories
             if (choosedAcces < acces.count){
-                
                 itm = acces[choosedAcces];
                 cell.buyButton.enabled = YES;
                 cell.buyButton.hidden = NO;
@@ -1071,10 +1100,11 @@
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
+                cell.clipsToBounds = YES;
             }
             break;
         }
-        case 8:{
+        case 9:{
             //Boilers
             if (choosedBoilers < boilers.count){
                 
@@ -1094,22 +1124,60 @@
             }
             break;
         }
-        case 7:{
+        case 8:{
             //Hot Water
-           // Item *itm;
             if (choosedHotWater < hotwater.count){
                 itm = hotwater[choosedHotWater];
+                cell.buyButton.enabled = YES;
+                cell.buyButton.hidden = NO;
+                cell.removeButton.hidden = NO;
+                cell.removeButton.enabled = YES;
+            }else {
+                cell.buyButton.hidden = YES;
+                cell.removeButton.enabled = NO;
+                cell.removeButton.hidden = YES;
+                cell.clipsToBounds = YES;
+            }
+            
+            break;
+        }
+        case 7:{
+            //Warranties
+            if (choosedWarranties < warranties.count){
+                
+                itm = warranties[choosedWarranties];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
                 cell.removeButton.hidden = YES;
                 
-                cell.clipsToBounds = YES;
             }else {
+                cell.buyButton.enabled = NO;
+                cell.buyButton.hidden =YES;
+                cell.removeButton.enabled = NO;
+                cell.removeButton.hidden = YES;
+                
+                cell.clipsToBounds = YES;
+            }
+            break;
+        }
+        case 10:{
+            //DuctlessMiniSplits
+            if (choosedDuctlessMiniSplits < ductlessMiniSplits.count){
+                
+                itm = ductlessMiniSplits[choosedDuctlessMiniSplits];
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
                 cell.removeButton.hidden = YES;
+                
+            }else {
+                cell.buyButton.enabled = NO;
+                cell.buyButton.hidden =YES;
+                cell.removeButton.enabled = NO;
+                cell.removeButton.hidden = YES;
+                
+                cell.clipsToBounds = YES;
             }
             break;
         }
@@ -1204,7 +1272,9 @@
  //   HardTableViewCell *swipedCell = (HardTableViewCell*)[tableViewX cellForRowAtIndexPath:swipedIndexPath];
     BOOL change = FALSE;
     Item *itm;
-    if (swipedIndexPath.section == 0) {
+
+    
+    if (swipedIndexPath.section == 2) {
         
         if (airCon.count > 0 && choosedAirCon < airCon.count-1) {
             itm = airCon[choosedAirCon];
@@ -1218,7 +1288,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 2) {
+    if (swipedIndexPath.section == 4) {
         if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1232,7 +1302,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 1) {
+    if (swipedIndexPath.section == 3) {
         if (furn.count > 0 && choosedFurn < furn.count-1) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1246,7 +1316,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 3) {
+    if (swipedIndexPath.section == 5) {
         if (airH.count >0  && choosedAirH < airH.count -1) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1261,7 +1331,7 @@
         
         
     }
-    if (swipedIndexPath.section == 4) {
+    if (swipedIndexPath.section == 6) {
         if (geo.count > 0 && choosedGeo < geo.count-1 ) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1275,14 +1345,14 @@
         }
         
     }
-    if (swipedIndexPath.section == 6) {
+    if (swipedIndexPath.section == 1) {
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
-            itm = iaq[choosedIAQ];
-           // [self removeTheProd:itm];
-            itm=iaq[(choosedIAQ+1)];
-          //  [self purchase:itm];
+//            itm = iaq[choosedIAQ];
+//           // [self removeTheProd:itm];
+//            itm=iaq[(choosedIAQ+1)];
+//          //  [self purchase:itm];
             choosedIAQ++;
             change = YES;
         } else {
@@ -1290,7 +1360,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 5) {
+    if (swipedIndexPath.section == 0) {
         if ( acces.count > 0  && choosedAcces < acces.count-1) {
             choosedAcces++;
             change = YES;
@@ -1300,7 +1370,7 @@
         
     }
 
-    if (swipedIndexPath.section == 8) {
+    if (swipedIndexPath.section == 9) {
         if ( boilers.count > 0  && choosedBoilers < boilers.count-1) {
             itm = boilers[choosedBoilers];
             [self removeTheProd:itm];
@@ -1314,7 +1384,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 7) {
+    if (swipedIndexPath.section == 8) {
         if ( hotwater.count > 0  && choosedHotWater < hotwater.count-1) {
             itm = hotwater[choosedHotWater];
             [self removeTheProd:itm];
@@ -1329,6 +1399,34 @@
         }
         
     }
+    
+    if (swipedIndexPath.section == 7) {
+        if ( warranties.count > 0  && choosedWarranties < warranties.count-1) {
+            itm = warranties[choosedWarranties];
+            [self removeTheProd:itm];
+            itm= warranties[(choosedWarranties+1)];
+            [self purchase:itm];
+            
+            choosedWarranties++;
+            change = YES;
+        }
+    }
+    
+    
+    if (swipedIndexPath.section == 10) {
+        if ( ductlessMiniSplits.count > 0  && choosedDuctlessMiniSplits < ductlessMiniSplits.count-1) {
+            itm = ductlessMiniSplits[choosedDuctlessMiniSplits];
+            [self removeTheProd:itm];
+            itm= ductlessMiniSplits[(choosedDuctlessMiniSplits+1)];
+            [self purchase:itm];
+            
+            choosedDuctlessMiniSplits++;
+            change = YES;
+        }
+    }
+    
+    
+    
     if (change) {
         
         change = NO;
@@ -1341,13 +1439,18 @@
     
 }
 
+
+
+
 -(void) cellSwipedLeft:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
+
+    
     
     Item *itm;
     BOOL change = FALSE;
-    if (swipedIndexPath.section == 0) {
+    if (swipedIndexPath.section == 2) {
         
         if (choosedAirCon > 0) {
              itm = airCon[choosedAirCon];
@@ -1360,7 +1463,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 2) {
+    if (swipedIndexPath.section == 4) {
         if (choosedHeatPump > 0) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1372,7 +1475,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 1) {
+    if (swipedIndexPath.section == 3) {
         if (choosedFurn > 0) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1384,7 +1487,7 @@
             [self warn];
         };
     }
-    if (swipedIndexPath.section == 3) {
+    if (swipedIndexPath.section == 5) {
         if (choosedAirH > 0) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1396,7 +1499,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 4) {
+    if (swipedIndexPath.section == 6) {
         if (choosedGeo > 0) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1408,7 +1511,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 6) {
+    if (swipedIndexPath.section == 1) {
         if (choosedIAQ > 0) {
             choosedIAQ--;
             change = YES;
@@ -1416,7 +1519,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 5) {
+    if (swipedIndexPath.section == 0) {
         if (choosedAcces > 0) {
             choosedAcces--;
             change = YES;
@@ -1424,7 +1527,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 8) {
+    if (swipedIndexPath.section == 9) {
         if ( choosedBoilers > 0) {
             itm = boilers[choosedBoilers];
             [self removeTheProd:itm];
@@ -1438,7 +1541,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 7) {
+    if (swipedIndexPath.section == 8) {
         if ( choosedHotWater >0) {
             itm = hotwater[choosedHotWater];
             [self removeTheProd:itm];
@@ -1449,7 +1552,36 @@
         } else {
             
         }
-    }    if (change) {
+    }
+    
+    
+    if (swipedIndexPath.section == 7) {
+        if ( choosedWarranties >0) {
+            itm = warranties[choosedWarranties];
+            [self removeTheProd:itm];
+            itm= warranties[(choosedWarranties-1)];
+            [self purchase:itm];
+            choosedWarranties--;
+            change = YES;
+        }
+    }
+    
+    
+    
+    if (swipedIndexPath.section == 10) {
+        if ( choosedDuctlessMiniSplits >0) {
+            itm = ductlessMiniSplits[choosedDuctlessMiniSplits];
+            [self removeTheProd:itm];
+            itm= ductlessMiniSplits[(choosedDuctlessMiniSplits-1)];
+            [self purchase:itm];
+            choosedDuctlessMiniSplits--;
+            change = YES;
+        }
+    }
+    
+    
+    
+    if (change) {
         
         change = NO;
         
@@ -1476,42 +1608,66 @@
     
     Item *itm;
     switch (j) {
-        case 0:{
+        case 2:{
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self purchase:itm];
             break;
         }
-        case 2:{
+        case 4:{
             itm = heatPump[choosedHeatPump];
             [self purchase:itm];
             break;
         }
-        case 1:{
+        case 3:{
             itm = furn[choosedFurn];
             [self purchase:itm];
             break;
         }
-        case 3:{
+        case 5:{
             itm = airH[choosedAirH];
             [self purchase:itm];
             break;
         }
-        case 4:{
+        case 6:{
             //Geothermal
             itm = geo[choosedGeo];
             [self purchase:itm];
             break;
         }
-        case 6:{
+        case 1:{
             //IAQ
             itm = iaq[choosedIAQ];
             [self purchase:itm];
             break;
         }
-        case 5:{
+        case 0:{
             //Accessories
             itm = acces [choosedAcces];
+            [self purchase:itm];
+            break;
+        }
+        case 9:{
+            //Boilers
+            itm = boilers [choosedBoilers];
+            [self purchase:itm];
+            break;
+        }
+        case 8:{
+            //hotWater
+            itm = hotwater [choosedHotWater];
+            [self purchase:itm];
+            break;
+        }
+        case 7:{
+            //Warranties
+            itm = warranties [choosedWarranties];
+            [self purchase:itm];
+            break;
+        }
+        case 10:{
+            //DuctlessMiniSplits
+            itm = ductlessMiniSplits [choosedDuctlessMiniSplits];
             [self purchase:itm];
             break;
         }
@@ -1522,55 +1678,82 @@
     
 }
 
+
+
 -(void) remButton:(id)sender {
     int j = [sender tag];
     Item *itm;
     switch (j) {
-        case 0:{
+        case 2:{
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
             break;
         }
-        case 2:{
+        case 4:{
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
 
             break;
         }
-        case 1:{
+        case 3:{
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
 
             break;
         }
-        case 3:{
+        case 5:{
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
 
             break;
         }
-        case 4:{
+        case 6:{
             //Geothermal
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
 
             break;
         }
-        case 6:{
+        case 1:{
             //IAQ
             itm = iaq[choosedIAQ];
             [self removeTheProd:itm];
 
             break;
         }
-        case 5:{
+        case 0:{
             //Accessories
             itm = acces [choosedAcces];
             [self removeTheProd:itm];
 
             break;
         }
+        case 9:{
+            //Boilers
+            itm = boilers [choosedBoilers];
+            [self removeTheProd:itm];
+            break;
+        }
+        case 8:{
+            //hotWater
+            itm = hotwater [choosedHotWater];
+            [self removeTheProd:itm];
+            break;
+        }
+        case 7:{
+            //Warranties
+            itm = warranties [choosedWarranties];
+            [self removeTheProd:itm];
+            break;
+        }
+        case 10:{
+            //DuctlessMiniSplits
+            itm = ductlessMiniSplits [choosedDuctlessMiniSplits];
+            [self removeTheProd:itm];
+            break;
+        }
+
             
         default:
             break;
@@ -1944,6 +2127,34 @@
         [cartView.cartstableView reloadData];
     }
 }
+
+
+
+/*
+ case 2:
+ if (airCon.count == 0) {
+ case 4:
+ if (heatPump.count == 0) {
+ case 3:
+ if (furn.count == 0) {
+ case 5:
+ if (airH.count == 0) {
+ case 6:
+ if (geo.count == 0) {
+ case 1:
+ if (iaq.count == 0) {
+ case 0:
+ if (acces.count == 0) {
+ case 9:
+ if (boilers.count == 0) {
+ case 8:
+ if (hotwater .count == 0) {
+ case 7:
+ if (warranties.count == 0) {
+ case 10:
+ if (ductlessMiniSplits.count == 0) {
+ */
+
 
 
 @end
