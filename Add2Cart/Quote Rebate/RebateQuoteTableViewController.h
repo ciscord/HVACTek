@@ -15,7 +15,7 @@
 
 @end
 
-@interface RebateQuoteTableViewController : UITableViewController {
+@interface RebateQuoteTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
 
     NSArray *allData;
     NSMutableArray *selected;

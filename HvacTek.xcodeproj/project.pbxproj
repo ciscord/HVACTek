@@ -504,14 +504,14 @@
 		4FD2EB221A361A0F0056D4C4 /* Cart View */ = {
 			isa = PBXGroup;
 			children = (
+				4FD2EB231A361A0F0056D4C4 /* CartViewController.h */,
+				4FD2EB241A361A0F0056D4C4 /* CartViewController.m */,
 				91BA9A021B8DE09F005EA4EA /* CartCell.h */,
 				91BA9A031B8DE09F005EA4EA /* CartCell.m */,
 				91BA99FF1B8DDC78005EA4EA /* CartCell.xib */,
 				91BA9A051B8DF034005EA4EA /* ProductCell.h */,
 				91BA9A061B8DF034005EA4EA /* ProductCell.m */,
 				91BA9A071B8DF034005EA4EA /* ProductCell.xib */,
-				4FD2EB231A361A0F0056D4C4 /* CartViewController.h */,
-				4FD2EB241A361A0F0056D4C4 /* CartViewController.m */,
 			);
 			path = "Cart View";
 			sourceTree = "<group>";
@@ -521,16 +521,11 @@
 			children = (
 				4FD2EB261A361A0F0056D4C4 /* aQuoteFirstTableViewController.h */,
 				4FD2EB271A361A0F0056D4C4 /* aQuoteFirstTableViewController.m */,
-				4FD2EB281A361A0F0056D4C4 /* MiscAddViewController.h */,
-				4FD2EB291A361A0F0056D4C4 /* MiscAddViewController.m */,
 				4FD2EB2A1A361A0F0056D4C4 /* QuoteFirstTableViewController.h */,
 				4FD2EB2B1A361A0F0056D4C4 /* QuoteFirstTableViewController.m */,
-				4FD2EB2C1A361A0F0056D4C4 /* TypeOneTableViewCell.h */,
-				4FD2EB2D1A361A0F0056D4C4 /* TypeOneTableViewCell.m */,
-				4FD2EB2E1A361A0F0056D4C4 /* TypeThreeTableViewCell.h */,
-				4FD2EB2F1A361A0F0056D4C4 /* TypeThreeTableViewCell.m */,
-				4FD2EB301A361A0F0056D4C4 /* TypeTwoTableViewCell.h */,
-				4FD2EB311A361A0F0056D4C4 /* TypeTwoTableViewCell.m */,
+				4FD2EB281A361A0F0056D4C4 /* MiscAddViewController.h */,
+				4FD2EB291A361A0F0056D4C4 /* MiscAddViewController.m */,
+				52AE5F6B1C2BE65D003B1C54 /* Cells */,
 			);
 			path = "First Quote Table";
 			sourceTree = "<group>";
@@ -882,6 +877,19 @@
 				5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */,
 			);
 			path = RRQuestionView;
+			sourceTree = "<group>";
+		};
+		52AE5F6B1C2BE65D003B1C54 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4FD2EB2C1A361A0F0056D4C4 /* TypeOneTableViewCell.h */,
+				4FD2EB2D1A361A0F0056D4C4 /* TypeOneTableViewCell.m */,
+				4FD2EB2E1A361A0F0056D4C4 /* TypeThreeTableViewCell.h */,
+				4FD2EB2F1A361A0F0056D4C4 /* TypeThreeTableViewCell.m */,
+				4FD2EB301A361A0F0056D4C4 /* TypeTwoTableViewCell.h */,
+				4FD2EB311A361A0F0056D4C4 /* TypeTwoTableViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */ = {

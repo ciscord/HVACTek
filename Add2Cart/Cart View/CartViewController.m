@@ -162,20 +162,18 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-//cellP
-#pragma marck tableview delegate
 
+
+#pragma mark - Tableview Delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.carts.count;
-
 };
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
+    CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
     acell.delegate = self;
     acell.cart = self.carts[indexPath.row];
     acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];

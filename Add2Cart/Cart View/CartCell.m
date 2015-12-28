@@ -28,15 +28,12 @@
     // Initialization code
 
       [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
-     self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.productList = [[NSMutableArray alloc]init];
+      self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+      self.productList = [[NSMutableArray alloc]init];
    }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-    
 }
 
 
@@ -65,12 +62,11 @@
 
 
 -(void) buildQuote {
-    float totalAmount;
-    float totalSavings;
-    float afterSavings;
-    float finacePay;
-    float monthlyPay;
-    totalAmount = 0.0f;
+    float totalAmount = 0.0f;
+    float totalSavings = 0.0f;
+    float afterSavings = 0.0f;
+    float finacePay = 0.0f;
+    float monthlyPay = 0.0f;
     
     
     for (int jj = 0; jj <self.cartItems.count; jj++) {
@@ -83,8 +79,6 @@
         {
             totalAmount += [itm.finalPrice floatValue];
         }
-        
-        //  totalAmount += [itm.finalPrice floatValue];
     }
     
     for (int jj = 0; jj <self.rebates.count; jj++) {
@@ -99,7 +93,6 @@
             finacePay =  (totalAmount - totalSavings)/24;//.915
             invest = (finacePay*24);
          
-            break;
             break;
         }
             
@@ -138,9 +131,8 @@
     }
     
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
-    //[self updateLabels:totalAmount :totalSavings :afterSavings :finacePay :monthlyPay ];
-    
 }
+
 
 -(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month {
 
@@ -149,8 +141,6 @@
     nf.numberStyle = NSNumberFormatterDecimalStyle;
     [nf setMaximumFractionDigits:2];
     [nf setMinimumFractionDigits:2];
-    //[formatter setRoundingMode: NSNumberFormatterRoundUp];
-    
     
     
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
@@ -165,7 +155,6 @@
     self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     switch ([self.months intValue]) {
         case 84:
-            //3.99% Best Rate 84 Months
             self.financing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months",[self.months intValue]];
             
             break;

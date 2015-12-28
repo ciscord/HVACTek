@@ -121,18 +121,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
+#pragma mark - TableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    // Return the number of rows in the section.
     return selected.count;
 }
 
@@ -156,6 +152,8 @@
     return cell;
 }
 
+
+#pragma mark - Custom Switch
 -(void) customSwitch:(id) sender {
     int x = [sender tag];
     Item *itm = selected[x];
@@ -168,6 +166,8 @@
 
     
 }
+
+
 - (IBAction)btnAddRebate:(id)sender {
     [self performSegueWithIdentifier:@"addEditRebate" sender:self];
     

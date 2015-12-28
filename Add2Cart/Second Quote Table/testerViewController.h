@@ -15,7 +15,7 @@
 
 #import "RebateQuoteTableViewController.h"
 
-@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, NSFetchedResultsControllerDelegate>
 {
     NSArray *allData;
    
