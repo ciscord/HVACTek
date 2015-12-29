@@ -45,6 +45,14 @@
 }
 
 
+//-(void) viewDidDisappear:(BOOL)animated {
+//    NSError *error;
+//    if (![managedObjectContext save:&error]) {
+//        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+//    }
+//}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -124,11 +132,18 @@
     [self fetchData];
     
     
+    
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     afterSavings =0.0f ;
     finacePay = 0.0f;
     monthlyPay = 0.0f;
+    
+    
+    if (isEditing)
+        [self assignChoosedOptionsValues];
+    
+    
     [self buildQuote];
     
     btnCart1.hidden = !(self.savedCarts.count > 0);
@@ -176,11 +191,14 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"type" ascending:YES];
-        NSSortDescriptor *manSort = [[NSSortDescriptor alloc]initWithKey:@"manu" ascending:YES];
+    NSSortDescriptor *manSort = [[NSSortDescriptor alloc]initWithKey:@"manu" ascending:YES];
   //    NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d", [[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"]];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, manSort,  nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:cartPredicate];
+    
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.prodFRC.delegate = self;
     
@@ -449,6 +467,8 @@
 //            item.manu = man;
 //            [self fillArrays:item];
 //        }
+        
+        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
 
         
         
@@ -463,6 +483,7 @@
             item.typeID = [NSNumber numberWithInt:3];
             item.photo = pdata;
             item.manu = man;
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -477,6 +498,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -491,6 +513,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -505,6 +528,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -519,6 +543,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -534,6 +559,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -548,6 +574,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
     }
@@ -576,6 +603,9 @@
         itm.finalPrice = [NSNumber numberWithFloat:opty];
         [self fillArrays:itm];
         
+        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
+        
+        
         if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
             NSLog(@"aaaa");
         }
@@ -591,6 +621,7 @@
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:4];
             item.photo = pdata;
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
 
@@ -606,6 +637,7 @@
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:4];
             item.photo = pdata;
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -620,6 +652,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -634,6 +667,7 @@
             item.photo = pdata;
             item.manu = man;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -647,6 +681,7 @@
             item.type = type;
             item.photo = pdata;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -661,6 +696,7 @@
             item.manu = man;
             item.photo = pdata;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -676,6 +712,7 @@
             item.manu = man;
             item.photo = pdata;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
         
@@ -690,6 +727,7 @@
             item.manu = man;
             item.photo = pdata;
             item.typeID = [NSNumber numberWithInt:4];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
     }
@@ -2082,6 +2120,72 @@
 
 
 
+#pragma mark - CartViewController Delegates
+-(void)editCardSelected {
+    isEditing = YES;
+    
+}
+
+-(void)saveCartSelected {
+    choosedAirCon = 0;
+    choosedHeatPump = 0;
+    choosedFurn = 0;
+    choosedAirH = 0;
+    choosedGeo = 0;
+    choosedIAQ = 0;
+    choosedAcces = 0;
+    choosedBoilers = 0;
+    choosedHotWater = 0;
+    choosedWarranties = 0;
+    choosedDuctlessMiniSplits = 0;
+}
+
+
+-(void)assignChoosedOptionsValues {
+    if (_cartItems.count > 0) {
+        
+        for (Item * itm  in _cartItems) {
+            if ([airCon containsObject:itm]) {
+                choosedAirCon = [airCon indexOfObject:itm];
+            }
+            if ([heatPump containsObject:itm]) {
+                choosedHeatPump = [heatPump indexOfObject:itm];
+            }
+            if ([furn containsObject:itm]) {
+                choosedFurn = [furn indexOfObject:itm];
+            }
+            if ([airH containsObject:itm]) {
+                choosedAirH = [airH indexOfObject:itm];
+            }
+            if ([geo containsObject:itm]) {
+                choosedGeo = [geo indexOfObject:itm];
+            }
+            if ([iaq containsObject:itm]) {
+                choosedIAQ = [iaq indexOfObject:itm];
+            }
+            if ([acces containsObject:itm]) {
+                choosedAcces = [acces indexOfObject:itm];
+            }
+            if ([boilers containsObject:itm]) {
+                choosedBoilers = [boilers indexOfObject:itm];
+            }
+            if ([hotwater containsObject:itm]) {
+                choosedHotWater = [hotwater indexOfObject:itm];
+            }
+            if ([warranties containsObject:itm]) {
+                choosedWarranties = [warranties indexOfObject:itm];
+            }
+            if ([ductlessMiniSplits containsObject:itm]) {
+                choosedDuctlessMiniSplits = [ductlessMiniSplits indexOfObject:itm];
+            }
+        }
+    }
+    
+    isEditing = NO;
+}
+
+
+
 
 #pragma mark - Segue
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -2097,6 +2201,8 @@
     if ([segue.identifier isEqualToString:@"cart"]) {
         
         CartViewController *cartView = segue.destinationViewController;
+        cartView.delegate = self;
+        cartView.managedObjectContext = managedObjectContext;
         NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
         
         for (int jj = 0; jj <additemsB.count; jj++) {
@@ -2120,6 +2226,7 @@
     
     if ([segue.identifier isEqualToString:@"savedCart"]) {
         CartViewController *cartView = segue.destinationViewController;
+        cartView.delegate = self;
         cartView.testerVC = self;
         
         self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];

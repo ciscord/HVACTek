@@ -339,9 +339,8 @@
 }
 
 - (IBAction)newQuote:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
     [self performSegueWithIdentifier:@"quoteFirst" sender:self];
-
-    
 }
 
 
@@ -369,8 +368,6 @@
                 item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
                 item.currentCart = [NSNumber numberWithInt:i];
             }
-            
-        }
         
         
         NSError *error;
@@ -383,8 +380,12 @@
         itemA.finalOption = @"None";
         itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
         itemA.type = @"Blank";
+        itemA.currentCart = [NSNumber numberWithInt:i];
+     
         
+        }
     }
+    
 }
 
 - (IBAction)synCButton:(id)sender {

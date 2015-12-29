@@ -19,6 +19,9 @@
     NSMutableArray *typeOnes;
     NSArray *coolingArray;
     NSArray *heatingArray;
+    NSArray *boilersArray;
+    NSArray *ductlessArray;
+    
     NSMutableArray *rebates;
     NSMutableArray *addedItems;
     FirstOption *firstOption;
@@ -32,9 +35,13 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *coolingSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *heatingSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *boilerSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *ductlessSwitch;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *coolingPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *heatingPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *boilersPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *ductlessPicker;
 
 
 - (IBAction)nextPage:(id)sender;

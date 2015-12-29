@@ -210,12 +210,12 @@
 
 
 - (IBAction)saveCart:(id)sender {
-    [self.delegate save:self.cart];
+    [self.delegate save:self.cart withIndex:[sender tag]];
 }
 
 
 - (IBAction)editCart:(id)sender {
-    [self.delegate editCard:self.cart];
+    [self.delegate editCard:self.cart withIndex:[sender tag]];
 }
 
 

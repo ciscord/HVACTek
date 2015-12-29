@@ -62,9 +62,11 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d", [[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"]];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:cartPredicate];
     
     
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -102,6 +104,9 @@
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
+            
+            
+            
            // itm.include =[NSNumber numberWithBool:0];
             [selected addObject:itm];
                        

@@ -237,6 +237,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="editButton" destination="eFe-EO-x45" id="v84-te-LeG"/>
                 <outlet property="financing" destination="hsZ-sN-FjD" id="rlW-a1-IiW"/>
                 <outlet property="investemnt" destination="YhN-aT-Xjt" id="1vH-VZ-dmP"/>
                 <outlet property="lblCartNumber" destination="RNf-dW-QE3" id="F2o-W2-6PA"/>

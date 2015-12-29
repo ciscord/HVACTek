@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 @class CartCell;
 @protocol CartCellDelegate
--(void)editCard:(NSMutableDictionary*)cart;
--(void)save:(NSMutableDictionary*)cart;
+-(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex;
+-(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex;
 -(void)done;
 @end
 
@@ -24,5 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *financing;
 @property (weak, nonatomic) IBOutlet UILabel *investemnt;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinaincinSum;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 -(void) updateProductList;
 @end

@@ -15,7 +15,7 @@
 
 #import "RebateQuoteTableViewController.h"
 
-@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, NSFetchedResultsControllerDelegate>
+@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, UIPageViewControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     NSArray *allData;
    
@@ -78,6 +78,8 @@
     Item *blank;
     BOOL isLast;
     
+    
+    BOOL isEditing;
 }
 
 

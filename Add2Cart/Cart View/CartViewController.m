@@ -25,6 +25,8 @@
 @synthesize rebates;
 @synthesize yourOrderLabel, afterSavingsLabel, finance, monthlypayment, productsView;
 @synthesize months;
+@synthesize managedObjectContext;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -177,6 +179,7 @@
     acell.delegate = self;
     acell.cart = self.carts[indexPath.row];
     acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];
+    acell.editButton.tag = indexPath.row;
     [acell updateProductList];
        return acell;
 };
@@ -213,20 +216,37 @@
 
 
 #pragma mark - CartCell Delegate
--(void)editCard:(NSMutableDictionary*)cart{
-    // testerViewController * vc =(testerViewController*)self.testerVC;
-     //vc.cartItems = [cart objectForKey:@"cartItems"];
+-(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex{
+     testerViewController * vc =(testerViewController*)self.testerVC;
+    [vc.cartItems removeAllObjects];
+     vc.cartItems = [cart objectForKey:@"cartItems"];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:cartIndex forKey:@"workingCurrentCartIndex"];
      [self.navigationController popViewControllerAnimated:YES];
+    
+    [self.delegate editCardSelected];
 };
 
 
--(void)save:(NSMutableDictionary*)cart{
+-(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex {
     
     testerViewController * vc =(testerViewController*)self.testerVC;
     if (vc.savedCarts.count < 3) {
         [vc.savedCarts addObject:cart];
+        [vc.cartItems removeAllObjects];
+        [[NSUserDefaults standardUserDefaults] setInteger:cartIndex + 1 forKey:@"workingCurrentCartIndex"];
+        
+        [self.delegate saveCartSelected];
+        
+//        NSError *error;
+//        if (![managedObjectContext save:&error]) {
+//            NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+//        }
+        
+        
     }
-    [self.navigationController popViewControllerAnimated:YES]; 
+    [self.navigationController popViewControllerAnimated:YES];
+    
     
 };
 

@@ -11,6 +11,13 @@
 #import "Item.h"
 #import "testerViewController.h"
 
+
+@protocol CartViewControllerDelegate
+-(void)editCardSelected;
+-(void)saveCartSelected;
+@end
+
+
 @interface CartViewController : UIViewController <MFMailComposeViewControllerDelegate>
 {
     NSArray *headers;
@@ -19,6 +26,10 @@
     NSMutableString *products;
     
 }
+@property (nonatomic, retain) id<CartViewControllerDelegate> delegate;
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @property (strong, nonatomic) IBOutlet UITableView *cartstableView;
 @property (weak, nonatomic) IBOutlet UILabel *yourOrderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *afterSavingsLabel;

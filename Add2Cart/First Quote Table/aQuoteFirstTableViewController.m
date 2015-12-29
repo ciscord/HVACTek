@@ -24,6 +24,8 @@
 @synthesize nextButton;
 @synthesize heatingPicker, heatingSwitch;
 @synthesize coolingPicker, coolingSwitch;
+@synthesize boilersPicker, boilerSwitch;
+@synthesize ductlessPicker, ductlessSwitch;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -44,6 +46,8 @@
 
     coolingArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"1.5",@"2",@"2.5",@"3",@"3.5",@"4",@"5",@"6", nil];
     heatingArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"40,000",@"60,000",@"68,000",@"79,000",@"80,000",@"100,000",@"101,000",@"120,000",@"124,000",@"135,000",@"140,000",nil];
+    boilersArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"60,000",@"90,000",@"120,000",@"150,000",@"180,000",@"210,000",@"240,000",@"300,000", nil];
+    ductlessArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"9,000",@"12,000",@"15,000",@"18,000",@"24,000",@"30,000",@"36,000",@"42,000",@"48,000", nil];
     firstOption = [[FirstOption alloc]init];
     
     nextButton.enabled = NO;
@@ -53,6 +57,14 @@
     heatingPicker.tag = 2;
     heatingPicker.delegate = self;
     heatingPicker.hidden = YES;
+    
+    boilersPicker.tag = 3;
+    boilersPicker.delegate = self;
+    boilersPicker.hidden = YES;
+    ductlessPicker.tag = 4;
+    ductlessPicker.delegate = self;
+    ductlessPicker.hidden = YES;
+    
     
     
 }
@@ -109,6 +121,14 @@
             return heatingArray.count;
             break;
         }
+        case 3:{
+            return boilersArray.count;
+            break;
+        }
+        case 4:{
+            return ductlessArray.count;
+            break;
+        }
         default:
             return 0;
             break;
@@ -127,6 +147,14 @@
         }
         case 2:{
             return heatingArray[row];
+            break;
+        }
+        case 3:{
+            return boilersArray[row];
+            break;
+        }
+        case 4:{
+            return ductlessArray[row];
             break;
         }
         
@@ -157,6 +185,8 @@
     [self performSegueWithIdentifier:@"quoteProd" sender:self];
 }
 
+
+#pragma mark - Switch Actions
 - (IBAction)coolingSwitchfire:(id)sender {
     nextButton.enabled = YES;
     
@@ -169,6 +199,7 @@
     }
 }
 
+
 - (IBAction)heatingSwitchFire:(id)sender {
     nextButton.enabled = YES;
     if (heatingSwitch.isOn) {
@@ -180,6 +211,26 @@
     }
 
 }
+
+- (IBAction)boilersSwitchFire:(id)sender {
+    nextButton.enabled = YES;
+    if (boilerSwitch.isOn) {
+        boilersPicker.hidden = NO;
+    }else {
+        boilersPicker.hidden =  YES;
+    }
+}
+
+- (IBAction)ductlessSwitchFire:(id)sender {
+    nextButton.enabled = YES;
+    if (ductlessSwitch.isOn) {
+        ductlessPicker.hidden = NO;
+    }else {
+        ductlessPicker.hidden =  YES;
+    }
+}
+
+
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

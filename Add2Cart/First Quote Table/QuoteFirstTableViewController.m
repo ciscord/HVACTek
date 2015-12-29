@@ -56,6 +56,15 @@
     
 }
 
+
+-(void) viewDidDisappear:(BOOL)animated {
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+    }
+}
+
+
 -(void) home {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -290,9 +299,11 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"]];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:cartPredicate];
     
     
     self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
