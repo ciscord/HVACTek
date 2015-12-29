@@ -11,6 +11,7 @@
 
 @implementation Item
 
+@dynamic currentCart;
 @dynamic finalOption;
 @dynamic finalPrice;
 @dynamic include;

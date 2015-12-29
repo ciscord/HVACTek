@@ -9,6 +9,7 @@
 #define kRebatesURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 #define kProdURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 #define kSystemProdURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+
 #import "MenuViewController.h"
 
 @interface MenuViewController ()
@@ -132,99 +133,88 @@
 -(void) addProducts:(NSArray *)products {
     
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
-   
-     for (int x = 0; x < products.count; x++) {
-         
-                 Item *itm;
-         NSArray *options;
-         //Check to see if we want this profuct.
-         NSString *inc = [products[x] objectForKey:@"included"];
-         int incl = [inc intValue];
-         if (incl == 1) {
-             //Include this product.
-             itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-             itm.modelName = [products[x] objectForKey:@"title"];
-             itm.manu = [products[x] objectForKey:@"manufacture_name"];
-             options = [products[x] objectForKey:@"options"];
-             itm.include = [NSNumber numberWithBool:incl];
-             itm.type = [products[x] objectForKey:@"category_name"];
-             NSString *tID = [products[x] objectForKey:@"types"];
-             itm.typeID = [NSNumber numberWithInt:[tID intValue]];
-             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
-             
-           
-             //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
-             
-             //Options
-        for (int o=0; o<options.count; o++) {
-            NSString *priced = [options[o] objectForKey:@"price"];
-            NSString *name = [options[o] objectForKey:@"name"];
-            if (o == 0) {
-                itm.optionOne = name;
-                itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
-            } else if (o ==1 ){
-                itm.optionTwo = name;
-                itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
-            } else if (o==2){
-                itm.optionThree = name;
-                itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
-            } else if (o==3) {
-                itm.optionFour = name;
-                itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
-            }else if (o==4) {
-                itm.optionFive = name;
-                itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
-            }else if (o==5) {
-                itm.optionSix = name;
-                itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
-            }else if (o==6) {
-                itm.optionSeven = name;
-                itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
-            }else if (o==7) {
-                itm.optionEight = name;
-                itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
+    
+    
+    for (int i = 0; i < 3; i++) {
+        
+        
+        for (int x = 0; x < products.count; x++) {
+            
+            Item *itm;
+            NSArray *options;
+            //Check to see if we want this profuct.
+            NSString *inc = [products[x] objectForKey:@"included"];
+            int incl = [inc intValue];
+            if (incl == 1) {
+                //Include this product.
+                itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+                itm.modelName = [products[x] objectForKey:@"title"];
+                itm.manu = [products[x] objectForKey:@"manufacture_name"];
+                options = [products[x] objectForKey:@"options"];
+                itm.include = [NSNumber numberWithBool:incl];
+                itm.type = [products[x] objectForKey:@"category_name"];
+                NSString *tID = [products[x] objectForKey:@"types"];
+                itm.typeID = [NSNumber numberWithInt:[tID intValue]];
+                itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
+                itm.currentCart = [NSNumber numberWithInt:i];
+                
+                //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
+                
+                //Options
+                for (int o=0; o<options.count; o++) {
+                    NSString *priced = [options[o] objectForKey:@"price"];
+                    NSString *name = [options[o] objectForKey:@"name"];
+                    if (o == 0) {
+                        itm.optionOne = name;
+                        itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    } else if (o ==1 ){
+                        itm.optionTwo = name;
+                        itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    } else if (o==2){
+                        itm.optionThree = name;
+                        itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    } else if (o==3) {
+                        itm.optionFour = name;
+                        itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    }else if (o==4) {
+                        itm.optionFive = name;
+                        itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    }else if (o==5) {
+                        itm.optionSix = name;
+                        itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    }else if (o==6) {
+                        itm.optionSeven = name;
+                        itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    }else if (o==7) {
+                        itm.optionEight = name;
+                        itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    }
+                    
+                } //end of options
+                
+                NSString *urly = [products[x] objectForKey:@"full_url"];
+                NSURL *url = [NSURL URLWithString:urly];
+                NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+                itm.photo = imageData;
+                NSString *type = [products[x] objectForKey:@"category_name"];
+                if ([type isEqualToString:@"AC"]) {
+                    itm.type = @"Air Conditioners";
+                }
+                //Add the new item to new products.
+                [newProd addObject:itm];
+            }// end of if includeded.
+            else {
+                //Not adding this item.
             }
             
-        } //end of options
-         
-       
-             //JB Do we need this now
-             /*
-             if (!itm.optionFour) {
-             itm.optionFour  = @"No Option $ -";
-         }
-         
-         if (!itm.optionOne) {
-             itm.optionOne  = @"No Option $ -";
-         }
-         
-         if (!itm.optionTwo) {
-             itm.optionTwo = @"No Option $ -";
-         }
-         
-         if (!itm.optionThree) {
-            itm.optionThree  = @"No Option $ -";
-         }
-         
-         */
-         
-        NSString *urly = [products[x] objectForKey:@"full_url"];
-        NSURL *url = [NSURL URLWithString:urly];
-        NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-        itm.photo = imageData;
-        NSString *type = [products[x] objectForKey:@"category_name"];
-        if ([type isEqualToString:@"AC"]) {
-            itm.type = @"Air Conditioners";
-        }
-         //Add the new item to new products.
-        [newProd addObject:itm];
-         }// end of if includeded.
-         else {
-             //Not adding this item.
-         }
-     
+            
+        }// end of for loop
+        
+        
+    }
     
-     }// end of for loop
+   
+
     
       NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
@@ -297,26 +287,36 @@
 -(void) addRebates:(NSArray *)rebates {
     
     NSMutableArray *newRebates = [[NSMutableArray alloc]initWithCapacity:rebates.count];
-
-     for (int x = 0; x < rebates.count; x++) {
-         Item *itm;
-        // NSString *inc = [rebates[x] objectForKey:@"included"];
-         //int incl = [inc intValue];
-         
-       //  if (incl == 1) {
-             itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-             itm.modelName = [rebates[x] objectForKey:@"title"];
-             NSString *price = [rebates[x] objectForKey:@"amount"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        
+        for (int x = 0; x < rebates.count; x++) {
+            Item *itm;
+            // NSString *inc = [rebates[x] objectForKey:@"included"];
+            //int incl = [inc intValue];
+            
+            //  if (incl == 1) {
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm.modelName = [rebates[x] objectForKey:@"title"];
+            NSString *price = [rebates[x] objectForKey:@"amount"];
             // itm.include = [NSNumber numberWithBool:0];
-             itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
-             itm.type = @"Rebates";
-             itm.typeID = [NSNumber numberWithInt:99];
-             itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
-             //add the item
-             [newRebates addObject:itm];
-    //}
-         
-     }// end of for loop
+            itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
+            itm.type = @"Rebates";
+            itm.typeID = [NSNumber numberWithInt:99];
+            itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
+            itm.currentCart = [NSNumber numberWithInt:i];
+            
+            //add the item
+            [newRebates addObject:itm];
+            //}
+            
+        }// end of for loop
+        
+    }
+    
+
+
     
      NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
@@ -357,15 +357,22 @@
     if (json) {
         NSArray * list = json[@"list"];
         
-        
-        for (NSDictionary *itm in list) {
-            Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = itm[@"modelName"];
-            item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
-            item.type = itm[@"type"];
-            item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
-            item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
+        for (int i = 0; i < 3; i++) {
+            
+            
+            for (NSDictionary *itm in list) {
+                Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+                item.modelName = itm[@"modelName"];
+                item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
+                item.type = itm[@"type"];
+                item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
+                item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
+                item.currentCart = [NSNumber numberWithInt:i];
+            }
+            
         }
+        
+        
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);

@@ -12,6 +12,7 @@
 
 @interface Item : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * currentCart;
 @property (nonatomic, retain) NSString * finalOption;
 @property (nonatomic, retain) NSNumber * finalPrice;
 @property (nonatomic, retain) NSNumber * include;
