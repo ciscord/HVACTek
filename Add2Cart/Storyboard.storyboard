@@ -451,11 +451,19 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Cart: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8SQ-Lv-QiZ">
+                                                    <rect key="frame" x="113" y="123" width="453" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="buyButton" destination="5Hm-Cm-A56" id="kzd-9f-e8J"/>
+                                            <outlet property="inCartLabel" destination="8SQ-Lv-QiZ" id="kxo-vT-uE2"/>
                                             <outlet property="manufacturerLabel" destination="vyX-fn-FRQ" id="liQ-zC-XKe"/>
                                             <outlet property="modelName" destination="DQB-zr-Smj" id="mo9-By-ahI"/>
                                             <outlet property="optionLabel" destination="6aM-M7-uiK" id="QEF-3w-bQL"/>

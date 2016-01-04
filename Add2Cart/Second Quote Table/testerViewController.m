@@ -1020,6 +1020,10 @@
     HardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Item *itm = nil;
     
+    
+    
+    cell.inCartLabel.hidden = YES;
+    
     switch (indexPath.section) {
         case 2:{
             //Air Conditioners
@@ -1116,12 +1120,29 @@
                 cell.buyButton.hidden = NO;
                 cell.removeButton.hidden = NO;
                 cell.removeButton.enabled = YES;
+                cell.inCartLabel.hidden = NO;
+                
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
+                
+                
             }else {
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
                 cell.removeButton.hidden = YES;
                 cell.clipsToBounds = YES;
+                cell.inCartLabel.hidden = NO;
                 
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
             }
             break;
         }
@@ -1133,12 +1154,28 @@
                 cell.buyButton.hidden = NO;
                 cell.removeButton.hidden = NO;
                 cell.removeButton.enabled = YES;
+                cell.inCartLabel.hidden = NO;
+                
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
                 
             }else {
                 cell.buyButton.enabled = NO;
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
                 cell.clipsToBounds = YES;
+                cell.inCartLabel.hidden = NO;
+                
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
             }
             break;
         }
@@ -1170,11 +1207,27 @@
                 cell.buyButton.hidden = NO;
                 cell.removeButton.hidden = NO;
                 cell.removeButton.enabled = YES;
+                cell.inCartLabel.hidden = NO;
+                
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
             }else {
                 cell.buyButton.hidden = YES;
                 cell.removeButton.enabled = NO;
                 cell.removeButton.hidden = YES;
                 cell.clipsToBounds = YES;
+                cell.inCartLabel.hidden = NO;
+                
+                int occurrences = 0;
+                for(Item *oItem in _cartItems) {
+                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                }
+                
+                cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
             }
             
             break;
@@ -1231,7 +1284,6 @@
     [cell.buyButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchDown];
     [cell.removeButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchDown];
     cell.clipsToBounds = YES;
-    
   
     if (![itm.finalOption isEqualToString:@"None"]) {
 
@@ -1424,10 +1476,10 @@
     }
     if (swipedIndexPath.section == 8) {
         if ( hotwater.count > 0  && choosedHotWater < hotwater.count-1) {
-            itm = hotwater[choosedHotWater];
-            [self removeTheProd:itm];
-            itm= hotwater[(choosedHotWater+1)];
-            [self purchase:itm];
+//            itm = hotwater[choosedHotWater];
+//            [self removeTheProd:itm];
+//            itm= hotwater[(choosedHotWater+1)];
+//            [self purchase:itm];
 
             choosedHotWater++;
             change = YES;
@@ -1581,10 +1633,10 @@
     }
     if (swipedIndexPath.section == 8) {
         if ( choosedHotWater >0) {
-            itm = hotwater[choosedHotWater];
-            [self removeTheProd:itm];
-            itm= hotwater[(choosedHotWater-1)];
-            [self purchase:itm];
+//            itm = hotwater[choosedHotWater];
+//            [self removeTheProd:itm];
+//            itm= hotwater[(choosedHotWater-1)];
+//            [self purchase:itm];
             choosedHotWater--;
             change = YES;
         } else {
@@ -1800,28 +1852,40 @@
 
 
 -(void) purchase:(Item *)itm {
-    if ([itm.finalOption isEqualToString:@"None"]) {
-      /*  UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have chosen an invalid option.\nPlease choose a valid option"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [al show];*/
-
-    } else {
-         [_cartItems addObject:itm];
-        
+    
+    int occurrences = 0;
+    for(Item *oItem in _cartItems) {
+        occurrences += ([oItem isEqual:itm] ? 1 : 0);
     }
-        
-        
-          NSLog(@"Purchased cart has %d items",_cartItems.count);
-        
-        
-        if ([itm.type isEqualToString:@"IAQ"]||[itm.type isEqualToString:@"Accessories"]) {
-        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Item Added" message:[NSString stringWithFormat: @"You have just added %@ to your cart",itm.modelName] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [al show];
+    
+    if (occurrences < 3) {
+        if ([itm.finalOption isEqualToString:@"None"]) {
+            /*  UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have chosen an invalid option.\nPlease choose a valid option"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+             [al show];*/
+            
+        } else {
+            [_cartItems addObject:itm];
+            
         }
+        
+        
+        NSLog(@"Purchased cart has %d items",_cartItems.count);
+        
+//        if ([itm.type isEqualToString:@"IAQ"]||[itm.type isEqualToString:@"Accessories"]||[itm.type isEqualToString:@"Hot Water Heaters"]) {
+//            UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Item Added" message:[NSString stringWithFormat: @"You have just added %@ to your cart",itm.modelName] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//            [al show];
+//        }
+        
+        isLast = TRUE;
+        [self buildQuote];
+        
+    }else {
+        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [al show];
+    }
     
     
-   
-    isLast     = TRUE;
-   [self buildQuote];
+
    
 }
 
@@ -1831,15 +1895,21 @@
     
     Item *del;
     BOOL done = FALSE;
+    
+    NSMutableIndexSet *discardedItems = [NSMutableIndexSet indexSet];
+    
     for (int x = 0; x < _cartItems.count; x ++) {
         Item *itemz = _cartItems[x];
         if ([itemz.modelName isEqualToString:itm.modelName] && !done) {
             del = itemz;
             done = TRUE;
+            [discardedItems addIndex:x];
+            break;
         }
     }
     
-    [_cartItems removeObject:del];
+   // [_cartItems removeObject:del];
+    [_cartItems removeObjectsAtIndexes:discardedItems];
 
     
     if (!done && [itm.typeID intValue] == 3) {

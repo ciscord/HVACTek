@@ -16,6 +16,7 @@
 
  @property (nonatomic, strong)  NSMutableArray *cartItems;
  @property (nonatomic, strong)  NSMutableArray *productList;
+ @property (nonatomic, strong)  NSMutableArray *occurenciesList;
  @property (nonatomic, strong)  NSMutableArray *rebates;
  @property (nonatomic, strong)  NSNumber *months;
 
@@ -30,6 +31,7 @@
       [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
       self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       self.productList = [[NSMutableArray alloc]init];
+        self.occurenciesList = [[NSMutableArray alloc]init];
    }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -50,11 +52,18 @@
             // do nothing
             
         } else {
-            [self.productList addObject:itm.modelName];
+            
+            if ([self.productList containsObject:itm.modelName]){
+                [self.occurenciesList addObject:itm.modelName];
+                
+            }else{
+                [self.productList addObject:itm.modelName];
+            }
         }
         
         
     }
+        [self.occurenciesList addObjectsFromArray:self.productList];
         [self.poductTableView reloadData];
 
     [self buildQuote];
@@ -193,10 +202,24 @@
     
     
     ProductCell *acell = [self.poductTableView dequeueReusableCellWithIdentifier:@"ProductCell"];
-    acell.lblTitle.text = [self.productList objectAtIndex:indexPath.row];
+    NSString * title = [self.productList objectAtIndex:indexPath.row];
+    
+    
+    int occurrences = 0;
+    for(NSString *name in self.occurenciesList) {
+        occurrences += ([name isEqualToString:title] ? 1 : 0);
+    }
+    
+    if (occurrences > 1) {
+        NSString *multiplier = [NSString stringWithFormat:@"(%d) ",occurrences];
+        NSString *finString = [multiplier stringByAppendingString:title];
+        acell.lblTitle.text = finString;
+    }else{
+        acell.lblTitle.text = title;
+    }
+    
 
     return acell;
-    
 };
 
 

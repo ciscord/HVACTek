@@ -199,7 +199,8 @@
             // do nothing
             
         } else {
-            [nsar addObject:itm.modelName];
+            if (![nsar containsObject:itm.modelName])
+                [nsar addObject:itm.modelName];
         }
         
         
