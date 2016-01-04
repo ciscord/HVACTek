@@ -81,6 +81,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;
 
 @property (nonatomic, strong) NSString *utilityOverpaymentHVAC;
+@property (nonatomic, strong) NSString *totalInvestmentsRR;
 
 
 + (DataLoader *)sharedInstance;

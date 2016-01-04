@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSDictionary *selectedServiceOptions;
 @property (nonatomic, assign) BOOL isDiscounted;
 @property (nonatomic, assign) BOOL isOnlyDiagnostic;
+@property (nonatomic, assign) BOOL isComingFromInvoice;
 
 @end

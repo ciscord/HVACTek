@@ -41,24 +41,25 @@
     
     [self.view bringSubviewToFront:self.customerPriceView];
     self.customerPriceView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
+    
+    [DataLoader sharedInstance].totalInvestmentsRR = self.totalInvestment;
 }
 
 
 #pragma mark - Button Actions
 - (IBAction)optionsBtnClicked:(UIButton *)sender {
-    NSLog(@"need to save data!");
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isInstantRRFinal"];
     [self performSegueWithIdentifier:@"unwindToServiceOptionsFromOptionsBtn" sender:self];
 }
 
 
 - (IBAction)rrBtnClicked:(UIButton *)sender {
-    NSLog(@"rrBtnClicked!");
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
     [self performSegueWithIdentifier:@"unwindToServiceOptionsFromRRBtn" sender:self];
 }
 
 
 - (IBAction)invoiceBtnClicked:(UIButton *)sender {
-    NSLog(@"rrBtnClicked!");
     [self performSegueWithIdentifier:@"unwindToServiceOptionsFromInvoiceBtn" sender:self];
 }
 

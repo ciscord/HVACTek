@@ -63,6 +63,8 @@
         else
         {
             weakSelf.currentRRQuestionIndex = 0;
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+    
         }
     };
     

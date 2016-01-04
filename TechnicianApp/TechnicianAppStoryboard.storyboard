@@ -1359,10 +1359,12 @@ the work you've selected</string>
                         <outlet property="tvMainTable" destination="z8m-ss-Z9a" id="j6L-yR-eIq"/>
                         <outlet property="tvUnselectedOptions" destination="h2M-TI-tGZ" id="E7F-vw-UgZ"/>
                         <outlet property="vContainer" destination="6xi-Mu-hGO" id="hzh-TV-wHM"/>
-                        <segue destination="J4s-ud-uAn" kind="push" identifier="newCustomerChoiceSegue" id="x8H-T5-oXt"/>
+                        <segue destination="C7y-Sx-Bgk" kind="unwind" identifier="unwindToServiceOptionsFromCustomersChoice" animates="NO" unwindAction="unwindToServiceOptionVC:" id="Fte-yt-qas"/>
+                        <segue destination="J4s-ud-uAn" kind="push" identifier="newCustomerChoiceSegue" id="Uxc-wx-gFO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKs-OQ-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="C7y-Sx-Bgk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3301" y="3206"/>
         </scene>
@@ -2637,6 +2639,7 @@ you must debrief from job</string>
                         <segue destination="JTd-4K-z8d" kind="push" identifier="showRRQuestionsVC" id="mwd-zf-CaD"/>
                         <segue destination="JTd-4K-z8d" kind="push" identifier="showRRQuestionsVCAfterUnwind" animates="NO" id="XZV-au-UwI"/>
                         <segue destination="PVm-o9-UYq" kind="push" identifier="customerChoiceSegueAfterUnwind" animates="NO" id="8nk-Wv-Mwf"/>
+                        <segue destination="Kkm-8b-zOd" kind="push" identifier="showInstantRRFinalChoiceVC" animates="NO" id="xdW-7q-blD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CJ-XQ-aSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2901,7 +2904,7 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R03-fU-ffh">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R03-fU-ffh">
                                         <rect key="frame" x="7" y="712" width="44" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="summary-findings-rr">
@@ -3927,7 +3930,7 @@ you must debrief from job</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1B-yq-hv3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xhw-dK-8mb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5047" y="4413"/>
+            <point key="canvasLocation" x="2425" y="5554"/>
         </scene>
         <!--Setting AgendaVC-->
         <scene sceneID="LOB-vI-ndJ">
@@ -4079,10 +4082,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cdo-cC-vmU"/>
+        <segue reference="O98-Ps-4c5"/>
         <segue reference="9Oh-pS-m18"/>
-        <segue reference="XZV-au-UwI"/>
-        <segue reference="6og-9q-Y4v"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="6og-9q-Y4v"/>
+        <segue reference="xdW-7q-blD"/>
+        <segue reference="XZV-au-UwI"/>
     </inferredMetricsTieBreakers>
 </document>

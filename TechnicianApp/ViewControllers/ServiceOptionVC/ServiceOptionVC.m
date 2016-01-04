@@ -14,6 +14,7 @@
 #import "ESABenefitsVC.h"
 #import "EnlargeOptionsVC.h"
 #import "EditServiceOptionsVC.h"
+#import "RRFinalChoiceVC.h"
 
 
 
@@ -27,6 +28,7 @@
 @property (nonatomic, assign) BOOL                isDiscountedPriceSelected;
 @property (nonatomic, assign) BOOL                isDiagnositcOnlyPriceSelected;
 @property (nonatomic, assign) BOOL isEmptyOptionSelected;
+@property (nonatomic, assign) BOOL isInvoiceRRSelected;
 
 @property (nonatomic, strong) NSString *segueIdentifierToUnwindTo;
 
@@ -185,7 +187,16 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isInstantRRFinal"])
+        [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
+    else {
+        if (![[[DataLoader sharedInstance] totalInvestmentsRR] isEqualToString:@""] && [[DataLoader sharedInstance] totalInvestmentsRR] != nil) {
+            [self performSegueWithIdentifier:@"showInstantRRFinalChoiceVC" sender:self];
+        }else{
+            [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
+        }
+    }
+    
 }
 
 
@@ -194,7 +205,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 #pragma mark - Clicked Next Without Option
 - (IBAction)nextClickedWithOutAnyOption:(UIButton *)sender {
     self.isEmptyOptionSelected = YES;
-    [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
+        [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
 }
 
 
@@ -370,7 +381,12 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromInvoiceBtn"]){
         self.isEmptyOptionSelected = YES;
+        self.isInvoiceRRSelected = YES;
         self.segueIdentifierToUnwindTo = @"customerChoiceSegueAfterUnwind";
+    }
+    if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromCustomersChoice"]){
+        self.isInvoiceRRSelected  = NO;
+        self.segueIdentifierToUnwindTo = @"showInstantRRFinalChoiceVC";
     }
 }
 
@@ -397,6 +413,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         vc.fullServiceOptions = self.options.firstObject[@"items"];
         vc.isDiscounted       = self.isDiscountedPriceSelected;
         vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
+        vc.isComingFromInvoice = self.isInvoiceRRSelected;
         
         if (self.isEmptyOptionSelected) {
             NSDictionary *d = @{};
@@ -404,6 +421,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         }else{
             vc.selectedServiceOptions = self.customerSelectedOptions;
         }
+        
         
         
         
@@ -436,6 +454,12 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     else if ([vc isKindOfClass:[ESABenefitsVC class]]) {
         ESABenefitsVC *vc = [segue destinationViewController];
         vc.serviceOptionsPriceBook = self.options;
+    }
+    
+    
+    if ([segue.identifier isEqualToString:@"showInstantRRFinalChoiceVC"]) {
+        RRFinalChoiceVC *vc = [segue destinationViewController];
+        vc.totalInvestment = [[DataLoader sharedInstance] totalInvestmentsRR];
     }
     
     

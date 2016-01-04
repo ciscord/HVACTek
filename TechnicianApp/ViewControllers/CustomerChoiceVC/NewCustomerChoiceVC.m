@@ -116,6 +116,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 - (IBAction)clickedSaveBtn:(UIButton *)sender {
     
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
+    
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     
     if (!job.completionTime) {
