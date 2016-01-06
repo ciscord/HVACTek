@@ -83,7 +83,7 @@
     finacePay = 0.0f;
     monthlyPay = 0.0f;
     //Months set to default at 60
-    months = 24;
+    self.months = 24;
     
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
@@ -140,8 +140,7 @@
     monthlyPay = 0.0f;
     
     
-    if (isEditing)
-        [self assignChoosedOptionsValues];
+    [self assignChoosedOptionsValues];
     
     
     [self buildQuote];
@@ -150,7 +149,23 @@
     btnCart2.hidden = !(self.savedCarts.count > 1);
     btnCart3.hidden = !(self.savedCarts.count > 2);
     
-    cartButton.enabled = self.savedCarts.count < 3;
+    if (self.isEditing) {
+        cartButton.enabled = YES;
+        btnCart1.enabled = NO;
+        btnCart2.enabled = NO;
+        btnCart3.enabled = NO;
+        btnCart1.alpha = 0.5;
+        btnCart2.alpha = 0.5;
+        btnCart3.alpha = 0.5;
+    }else{
+        cartButton.enabled = self.savedCarts.count < 3;
+        btnCart1.enabled = YES;
+        btnCart2.enabled = YES;
+        btnCart3.enabled = YES;
+        btnCart1.alpha = 1.0;
+        btnCart2.alpha = 1.0;
+        btnCart3.alpha = 1.0;
+    }
 }
 
 
@@ -1124,7 +1139,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1139,7 +1154,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1158,7 +1173,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1172,7 +1187,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1211,7 +1226,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1224,7 +1239,7 @@
                 
                 int occurrences = 0;
                 for(Item *oItem in _cartItems) {
-                    occurrences += ([oItem isEqual:itm] ? 1 : 0);
+                    occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
                 }
                 
                 cell.inCartLabel.text = [NSString stringWithFormat:@"In Cart: %d", occurrences];
@@ -1439,10 +1454,6 @@
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
-//            itm = iaq[choosedIAQ];
-//           // [self removeTheProd:itm];
-//            itm=iaq[(choosedIAQ+1)];
-//          //  [self purchase:itm];
             choosedIAQ++;
             change = YES;
         } else {
@@ -1855,13 +1866,11 @@
     
     int occurrences = 0;
     for(Item *oItem in _cartItems) {
-        occurrences += ([oItem isEqual:itm] ? 1 : 0);
+        occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
     }
     
     if (occurrences < 3) {
         if ([itm.finalOption isEqualToString:@"None"]) {
-            /*  UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have chosen an invalid option.\nPlease choose a valid option"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-             [al show];*/
             
         } else {
             [_cartItems addObject:itm];
@@ -1871,10 +1880,6 @@
         
         NSLog(@"Purchased cart has %d items",_cartItems.count);
         
-//        if ([itm.type isEqualToString:@"IAQ"]||[itm.type isEqualToString:@"Accessories"]||[itm.type isEqualToString:@"Hot Water Heaters"]) {
-//            UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Item Added" message:[NSString stringWithFormat: @"You have just added %@ to your cart",itm.modelName] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//            [al show];
-//        }
         
         isLast = TRUE;
         [self buildQuote];
@@ -2002,14 +2007,18 @@
     
     for (int jj = 0; jj <additemsB.count; jj++) {
         Item *itm = additemsB[jj];
-        // NSLog(@"%@",itm.finalOption);
-        if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
-        {
-            totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
-        }
-        else
-        {
-            totalAmount += [itm.finalPrice floatValue];
+        
+        
+        if (![_cartItems containsObject:itm]) {    ///object contains additional items prices
+            
+            if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
+            {
+                totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
+            }
+            else
+            {
+                totalAmount += [itm.finalPrice floatValue];
+            }
         }
     }
 
@@ -2022,7 +2031,7 @@
     }
 
     float invest;
-    switch (months) {
+    switch (self.months) {
         case 24:
         {
  
@@ -2098,13 +2107,13 @@
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
      lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
-    switch (months) {
+    switch (self.months) {
         case 84:
             //3.99% Best Rate 84 Months
-             lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",months];
+             lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
             break;
         case 144:
-             lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",months];
+             lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
             break;
         
         case 0:
@@ -2112,7 +2121,7 @@
             break;
 
         default:
-             lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",months];
+             lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
             break;
     }
     
@@ -2147,7 +2156,7 @@
 #pragma mark - Buttons Actions
 - (IBAction)monthBut:(id)sender {
     int mon = [sender tag];
-    months = mon;
+    self.months = mon;
    
     secView.hidden = YES;
     [self buildQuote];
@@ -2179,24 +2188,30 @@
 
 
 - (IBAction)btnCart2:(id)sender {
-      [self performSegueWithIdentifier:@"savedCart" sender:self];
+    [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
 
 
 
 - (IBAction)btnCart3:(id)sender {
-      [self performSegueWithIdentifier:@"savedCart" sender:self];
+    [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
 
 
 
 #pragma mark - CartViewController Delegates
 -(void)editCardSelected {
-    isEditing = YES;
+    self.isEditing = YES;
     
 }
 
 -(void)saveCartSelected {
+    [self restoreChoosedItems];
+}
+
+
+#pragma mark -
+-(void)restoreChoosedItems {
     choosedAirCon = 0;
     choosedHeatPump = 0;
     choosedFurn = 0;
@@ -2211,47 +2226,109 @@
 }
 
 
+
+
+
 -(void)assignChoosedOptionsValues {
     if (_cartItems.count > 0) {
         
+        [self restoreChoosedItems];
         for (Item * itm  in _cartItems) {
-            if ([airCon containsObject:itm]) {
-                choosedAirCon = [airCon indexOfObject:itm];
+            
+            if ([itm.type isEqualToString:@"Air Conditioners"]) {
+                
+                for (Item * objItm  in airCon) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedAirCon = [airCon indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Heat Pumps"]) {
+                
+                for (Item * objItm  in heatPump) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedHeatPump = [heatPump indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Furnaces"]) {
+                
+                for (Item * objItm  in furn) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedFurn = [furn indexOfObject:objItm];
+                    }
+                }
+                
+            }else if ([itm.type isEqualToString:@"Air Handlers"]) {
+                
+                for (Item * objItm  in airH) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedAirH = [airH indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Geothermal"]) {
+                
+                for (Item * objItm  in geo) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedGeo = [geo indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"IAQ"]) {
+                
+                for (Item * objItm  in iaq) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedIAQ = [iaq indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Boilers"]) {
+                
+                for (Item * objItm  in boilers) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedBoilers = [boilers indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
+                
+                for (Item * objItm  in hotwater) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedHotWater = [hotwater indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Accessories"]) {
+                
+                for (Item * objItm  in acces) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedAcces = [acces indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Warranties"]) {
+                
+                for (Item * objItm  in warranties) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedWarranties = [warranties indexOfObject:objItm];
+                    }
+                }
+                
+            } else if ([itm.type isEqualToString:@"Ductless Mini Splits"]) {
+                
+                for (Item * objItm  in ductlessMiniSplits) {
+                    if ([objItm.modelName isEqualToString:itm.modelName]){
+                        choosedDuctlessMiniSplits = [ductlessMiniSplits indexOfObject:objItm];
+                    }
+                }
+                
             }
-            if ([heatPump containsObject:itm]) {
-                choosedHeatPump = [heatPump indexOfObject:itm];
-            }
-            if ([furn containsObject:itm]) {
-                choosedFurn = [furn indexOfObject:itm];
-            }
-            if ([airH containsObject:itm]) {
-                choosedAirH = [airH indexOfObject:itm];
-            }
-            if ([geo containsObject:itm]) {
-                choosedGeo = [geo indexOfObject:itm];
-            }
-            if ([iaq containsObject:itm]) {
-                choosedIAQ = [iaq indexOfObject:itm];
-            }
-            if ([acces containsObject:itm]) {
-                choosedAcces = [acces indexOfObject:itm];
-            }
-            if ([boilers containsObject:itm]) {
-                choosedBoilers = [boilers indexOfObject:itm];
-            }
-            if ([hotwater containsObject:itm]) {
-                choosedHotWater = [hotwater indexOfObject:itm];
-            }
-            if ([warranties containsObject:itm]) {
-                choosedWarranties = [warranties indexOfObject:itm];
-            }
-            if ([ductlessMiniSplits containsObject:itm]) {
-                choosedDuctlessMiniSplits = [ductlessMiniSplits indexOfObject:itm];
-            }
+            
         }
+    }else{
+        [self restoreChoosedItems];
     }
-    
-    isEditing = NO;
 }
 
 
@@ -2278,14 +2355,18 @@
         for (int jj = 0; jj <additemsB.count; jj++) {
             Item *itm = additemsB[jj];
             NSLog(@"item name : %@",itm.modelName);
-            [tt addObject:itm];
+            if (![tt containsObject:itm])
+                [tt addObject:itm];
         }
+        
+
         
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
         [cart setObject:tt forKey:@"cartItems"];
-        [cart setObject:[NSNumber numberWithInt:months] forKey:@"cartMonths"];
+        [cart setObject:[NSNumber numberWithInt:self.months] forKey:@"cartMonths"];
         [cart setObject:rebates forKey:@"cartRebates"];
         cartView.testerVC = self;
+        cartView.isViewingCart = NO;
         
         self.carts = [[NSMutableArray alloc]initWithArray:@[cart]];
         cartView.carts = self.carts;
@@ -2298,6 +2379,9 @@
         CartViewController *cartView = segue.destinationViewController;
         cartView.delegate = self;
         cartView.testerVC = self;
+        cartView.isViewingCart = YES;
+
+        
         
         self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
         cartView.carts = self.carts;

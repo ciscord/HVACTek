@@ -233,12 +233,12 @@
 
 
 - (IBAction)saveCart:(id)sender {
-    [self.delegate save:self.cart withIndex:[sender tag]];
+    [self.delegate save:self.cart withIndex:[sender tag] andMonths:self.months];
 }
 
 
 - (IBAction)editCart:(id)sender {
-    [self.delegate editCard:self.cart withIndex:[sender tag]];
+    [self.delegate editCard:self.cart withIndex:[sender tag] andMonths:self.months];
 }
 
 

@@ -13,10 +13,14 @@
 
 @property (strong, nonatomic) NSMutableArray *productList;
 
+
 @property (strong, nonatomic) IBOutlet UILabel *lblSystemRebate;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingD;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingSum;
 @property (strong, nonatomic) IBOutlet UILabel *lblInvestment;
+
+
+
 
 @end
 
@@ -26,6 +30,8 @@
 @synthesize yourOrderLabel, afterSavingsLabel, finance, monthlypayment, productsView;
 @synthesize months;
 @synthesize managedObjectContext;
+
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -108,8 +114,23 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+
 -(void) back {
+    
+    ///go back with new cart if entered with existent cart
+    if (self.isViewingCart) {
+        testerViewController * vc =(testerViewController*)self.testerVC;
+        if (vc.savedCarts.count < 3) {
+            [vc.cartItems removeAllObjects];
+            [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
+            vc.isEditing = NO;
+            [self.delegate saveCartSelected];
+        }
+    }
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
@@ -217,37 +238,94 @@
 
 
 #pragma mark - CartCell Delegate
--(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex{
+-(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount {
+    
      testerViewController * vc =(testerViewController*)self.testerVC;
-    [vc.cartItems removeAllObjects];
-     vc.cartItems = [cart objectForKey:@"cartItems"];
     
-    [[NSUserDefaults standardUserDefaults] setInteger:cartIndex forKey:@"workingCurrentCartIndex"];
-     [self.navigationController popViewControllerAnimated:YES];
+    int editIndex = 0;
+    if ([vc.savedCarts containsObject:cart]) {
+        editIndex = [vc.savedCarts indexOfObject:cart];
+        
+        [vc.cartItems removeAllObjects];
+        [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
+        
+        vc.months = [monthCount intValue];
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:editIndex forKey:@"workingCurrentCartIndex"];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [self.delegate editCardSelected];
+    }else{
+        [vc.cartItems removeAllObjects];
+        [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
+        
+        vc.months = [monthCount intValue];
+        
+        // isEditing!
+        
+        if (!vc.isEditing) {
+            int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
+            [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        
+      //  [self.delegate saveCartSelected];
+    }
     
-    [self.delegate editCardSelected];
+
 };
 
 
--(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex {
+-(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount {
     
     testerViewController * vc =(testerViewController*)self.testerVC;
-    if (vc.savedCarts.count < 3) {
-        [vc.savedCarts addObject:cart];
-        [vc.cartItems removeAllObjects];
-        [[NSUserDefaults standardUserDefaults] setInteger:cartIndex + 1 forKey:@"workingCurrentCartIndex"];
-        
-        [self.delegate saveCartSelected];
-        
-//        NSError *error;
-//        if (![managedObjectContext save:&error]) {
-//            NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-//        }
-        
-        
-    }
-    [self.navigationController popViewControllerAnimated:YES];
     
+    
+    if (self.isViewingCart) {
+        
+        
+        if ([vc.savedCarts containsObject:cart]) {
+            [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
+            
+            [self.delegate saveCartSelected];
+        }
+        
+        
+    }else {
+        
+        if (vc.isEditing) {
+            
+            int curIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
+            [vc.savedCarts replaceObjectAtIndex:curIndex withObject:cart];
+            
+            [vc.cartItems removeAllObjects];
+            
+            vc.months = [monthCount intValue];
+            
+            if (vc.savedCarts.count < 3)
+                [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
+            
+            [self.delegate saveCartSelected];
+            
+        }else{
+            if (vc.savedCarts.count < 3) {
+                [vc.savedCarts addObject:cart];
+                [vc.cartItems removeAllObjects];
+                
+                vc.months = [monthCount intValue];
+                
+                
+                int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
+                [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
+                
+                [self.delegate saveCartSelected];
+            }
+        }
+
+    }
+    
+    vc.isEditing = NO;
+    [self.navigationController popViewControllerAnimated:YES];
     
 };
 

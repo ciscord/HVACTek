@@ -25,8 +25,10 @@
     float perc;
     NSMutableString *products;
     
+    
 }
 @property (nonatomic, retain) id<CartViewControllerDelegate> delegate;
+@property (nonatomic, assign) BOOL isViewingCart;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
@@ -43,6 +45,8 @@
 @property (nonatomic, strong) NSArray *rebates;
 @property (nonatomic, strong)  NSMutableArray *carts;
 @property (nonatomic, strong) id testerVC;
+
+
 - (IBAction)email:(id)sender;
 - (IBAction)mainMenu:(id)sender;
 

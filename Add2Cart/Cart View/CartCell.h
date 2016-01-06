@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 @class CartCell;
 @protocol CartCellDelegate
--(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex;
--(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex;
+-(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount;
+-(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount;
 -(void)done;
 @end
 

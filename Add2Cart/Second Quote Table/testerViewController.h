@@ -66,7 +66,7 @@
   //  BOOL second;
     
     NSArray *test;
-    int months;
+    
     float perc;
     
     float totalAmount;
@@ -78,10 +78,15 @@
     Item *blank;
     BOOL isLast;
     
+    @public
+    //int months;
     
-    BOOL isEditing;
+    
+///    BOOL isEditing;
 }
 
+@property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, assign) int months;
 
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
