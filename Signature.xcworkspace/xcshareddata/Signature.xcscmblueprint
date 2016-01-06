@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6CF23BE93950F89C5C6D29B812D602131AC9BB7C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6CF23BE93950F89C5C6D29B812D602131AC9BB7C" : 0,
+    "FE411DA12E4CD8E84C2D271D186E9377E48AF6B7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "74D81EC0-2D9F-4465-8153-4E84A680B3C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6CF23BE93950F89C5C6D29B812D602131AC9BB7C" : "EBSSignature",
+    "FE411DA12E4CD8E84C2D271D186E9377E48AF6B7" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Signature",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Signature.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/unifeyed\/signature-app.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6CF23BE93950F89C5C6D29B812D602131AC9BB7C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/tuguimihai\/pubsquare.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FE411DA12E4CD8E84C2D271D186E9377E48AF6B7"
+    }
+  ]
+}

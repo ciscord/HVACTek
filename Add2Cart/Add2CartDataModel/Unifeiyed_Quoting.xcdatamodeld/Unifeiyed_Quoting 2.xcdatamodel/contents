@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="finalOption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="finalPrice" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="include" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="manu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optEightPrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optFivePrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optFourPrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optionEight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionFive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionFour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionOne" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSeven" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionThree" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionTwo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optOnePrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optSevenPrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optSixPrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optThreePrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="optTwoPrice" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeID" optional="YES" attributeType="Integer 64" defaultValueString="100" syncable="YES"/>
+        <attribute name="usserAdet" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Item" positionX="-2565" positionY="-2556" width="128" height="420"/>
+    </elements>
+</model>
