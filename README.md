@@ -2,7 +2,7 @@
 
 This document describes how to find the necessary files to complete this project.
 
-![logo.png](https://bitbucket.org/repo/G9KdBy/images/4233656408-logo.png)
+![HVACTekLogo500.jpg](https://bitbucket.org/repo/LE8zgk/images/1028478546-HVACTekLogo500.jpg)
 
 ### Details ###
 
