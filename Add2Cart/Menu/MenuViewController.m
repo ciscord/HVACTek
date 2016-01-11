@@ -55,16 +55,12 @@
     NSArray* products = [json objectForKey:@"results"];
     
     if (products.count > 0) {
-<<<<<<< HEAD
         
-=======
-   
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-       [self addProducts:products];
-      }
+        [self addProducts:products];
+    }
     
     NSLog(@"Products:%@",products);
-  
+    
 }
 
 -(void) clearEverything {
@@ -91,47 +87,47 @@
     }
     
     NSArray *occP = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
-
+    
     if (![occP count]) {
-            
-        } else  {
-            for (int i = 0; i<occP.count; i++) {
-               Item  *del = occP[i];
-                [managedObjectContext deleteObject:del];
-            }
+        
+    } else  {
+        for (int i = 0; i<occP.count; i++) {
+            Item  *del = occP[i];
+            [managedObjectContext deleteObject:del];
         }
+    }
 }
 
 /*-(void) clearProducts {
-    
-    NSArray *types = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Heat Pumps", @"Furnaces",@"Air Handlers"
-             ,@"Geothermal", @"IAQ",@"Accessories", nil];
-    Item *del;
-    
-    
-    for (int z=0; z<types.count; z++) {
-        
-    NSString *type = types[z];
-    
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
-    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
-    req.sortDescriptors =[NSArray arrayWithObject:sort];
-    
-    NSError *error = nil;
-    NSArray *occP = [managedObjectContext executeFetchRequest:req error:&error];
-    
-    if (![occP count]) {
-     
-    } else  {
-        for (int i = 0; i<occP.count; i++) {
-            del = occP[i];
-            [managedObjectContext deleteObject:del];
-        }
-        }
-    }
-   
-}*/
+ 
+ NSArray *types = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Heat Pumps", @"Furnaces",@"Air Handlers"
+ ,@"Geothermal", @"IAQ",@"Accessories", nil];
+ Item *del;
+ 
+ 
+ for (int z=0; z<types.count; z++) {
+ 
+ NSString *type = types[z];
+ 
+ NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+ req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
+ NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
+ req.sortDescriptors =[NSArray arrayWithObject:sort];
+ 
+ NSError *error = nil;
+ NSArray *occP = [managedObjectContext executeFetchRequest:req error:&error];
+ 
+ if (![occP count]) {
+ 
+ } else  {
+ for (int i = 0; i<occP.count; i++) {
+ del = occP[i];
+ [managedObjectContext deleteObject:del];
+ }
+ }
+ }
+ 
+ }*/
 
 
 -(void) addProducts:(NSArray *)products {
@@ -217,17 +213,17 @@
         
     }
     
-   
-
     
-      NSError *errorz;
+    
+    
+    NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
     
     syncView.hidden = YES;
     [activity stopAnimating];
-    }
+}
 
 - (void)fetchedRebates:(NSData *)responseData {
     //parse out the json data
@@ -239,70 +235,58 @@
                           error:&error];
     
     NSArray* rebates = [json objectForKey:@"results"];
-<<<<<<< HEAD
     
     if (rebates.count > 0) {
         [self addRebates:rebates];
     }
     
     //JB Stick in an nslog here if issue with rebates
- //  NSLog(@"Rebates:%@",rebates);
-  //  [self checkMem:@"Rebates"];
+    //  NSLog(@"Rebates:%@",rebates);
+    //  [self checkMem:@"Rebates"];
     
 }
 
 
 
-=======
-    if (rebates.count > 0) {
-       // [self clearRebates];
-        [self addRebates:rebates];
-    }
-    //JB Stick in an nslog here if issue with rebates
- //  NSLog(@"Rebates:%@",rebates);
-  //  [self checkMem:@"Rebates"];
-}
-
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
 /*-(void) clearRebates {
-    Item *del;
-    NSString *type = @"Rebates";
-
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
-    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
-    req.sortDescriptors =[NSArray arrayWithObject:sort];
-    
-    NSError *error = nil;
-    NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
-    
-    if (![occ count]) {
-    
-    } else  {
-        for (int i = 0; i<occ.count; i++) {
-            del = occ[i];
-            [managedObjectContext deleteObject:del];
-        }
-    
-    }
-}
-    
--(void) checkMem:(NSString *)type {
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
-    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
-    req.sortDescriptors =[NSArray arrayWithObject:sort];
-    
-    NSError *error = nil;
-    NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
-    
-    if (![occ count]) {
-   
-    } else  {
-     
-    }
-    
-}*/
+ Item *del;
+ NSString *type = @"Rebates";
+ 
+ NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+ req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
+ NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
+ req.sortDescriptors =[NSArray arrayWithObject:sort];
+ 
+ NSError *error = nil;
+ NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
+ 
+ if (![occ count]) {
+ 
+ } else  {
+ for (int i = 0; i<occ.count; i++) {
+ del = occ[i];
+ [managedObjectContext deleteObject:del];
+ }
+ 
+ }
+ }
+ 
+ -(void) checkMem:(NSString *)type {
+ NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+ req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
+ NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
+ req.sortDescriptors =[NSArray arrayWithObject:sort];
+ 
+ NSError *error = nil;
+ NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
+ 
+ if (![occ count]) {
+ 
+ } else  {
+ 
+ }
+ 
+ }*/
 
 -(void) addRebates:(NSArray *)rebates {
     
@@ -335,14 +319,14 @@
         
     }
     
-
-
     
-     NSError *errorz;
+    
+    
+    NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
-
+    
     
     
 }
@@ -380,10 +364,7 @@
             
             
             for (NSDictionary *itm in list) {
-<<<<<<< HEAD
                 
-=======
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                 Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
                 item.modelName = itm[@"modelName"];
                 item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
@@ -392,21 +373,21 @@
                 item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
                 item.currentCart = [NSNumber numberWithInt:i];
             }
-        
-        
-        NSError *error;
-        if (![managedObjectContext save:&error]) {
-            NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-        }
-        
-        Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-        itemA.modelName = @"No Product Selected";
-        itemA.finalOption = @"None";
-        itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
-        itemA.type = @"Blank";
-        itemA.currentCart = [NSNumber numberWithInt:i];
-     
-        
+            
+            
+            NSError *error;
+            if (![managedObjectContext save:&error]) {
+                NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+            }
+            
+            Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itemA.modelName = @"No Product Selected";
+            itemA.finalOption = @"None";
+            itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
+            itemA.type = @"Blank";
+            itemA.currentCart = [NSNumber numberWithInt:i];
+            
+            
         }
     }
     
@@ -416,8 +397,8 @@
     // if ([[NSUserDefaults standardUserDefaults]boolForKey:@"newSession"]) {
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
     [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"type3"];
-
-
+    
+    
     [self clearEverything];
     syncView.hidden = NO;
     [activity startAnimating];
@@ -440,7 +421,7 @@
         
         
     });
-
+    
     
     dispatch_async(kBgQueue, ^{
         NSData* data = [NSData dataWithContentsOfURL:
@@ -450,12 +431,12 @@
         
         
     });
-//
+    //
     [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
     
     // } else {
     // }
     
-
+    
 }
 @end

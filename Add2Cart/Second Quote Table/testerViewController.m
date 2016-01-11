@@ -88,7 +88,7 @@
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
     self.carts = [[NSMutableArray alloc]init];
-     self.savedCarts = [[NSMutableArray alloc]init];
+    self.savedCarts = [[NSMutableArray alloc]init];
     
     NSLog(@" The Cart has %d in it just now",_cartItems.count);
     
@@ -109,12 +109,12 @@
     [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
     
-
-   }
+    
+}
 
 
 -(void) home {
-       [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -127,7 +127,7 @@
 
 -(void) viewDidAppear:(BOOL)animated   {
     NSLog(@"called agin");
- 
+    
     //Fetch the data.
     [self fetchData];
     
@@ -171,13 +171,8 @@
 
 
 -(void) setupArrays {
-<<<<<<< HEAD
     headers = [[NSArray alloc]initWithObjects:@"Controls",  @"Warranties", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
                @"Air Handlers", @"Geothermal" , @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
-=======
-    headers = [[NSArray alloc]initWithObjects:@"Controls", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
-               @"Air Handlers", @"Geothermal" , @"Warranties", @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
     airCon = [[NSMutableArray alloc]init];
     furn = [[NSMutableArray alloc]init];
     heatPump = [[NSMutableArray alloc]init];
@@ -212,7 +207,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"type" ascending:YES];
     NSSortDescriptor *manSort = [[NSSortDescriptor alloc]initWithKey:@"manu" ascending:YES];
-  //    NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+    //    NSSortDescriptor *ordSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
     NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d", [[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"]];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, manSort,  nil];
     fetchRequest.sortDescriptors = sortDescriptors;
@@ -234,16 +229,16 @@
     allData = [self.managedObjectContext
                executeFetchRequest:fetchRequest error:&fetchingError];
     
- /* Test how much in memory
-  for (int x = 0; x < allData.count; x++) {
-        Item *itm = allData[x];
-        NSLog(@"%@",itm.type);
-    }*/
-
+    /* Test how much in memory
+     for (int x = 0; x < allData.count; x++) {
+     Item *itm = allData[x];
+     NSLog(@"%@",itm.type);
+     }*/
+    
     
     
     [self setupArrays];
-
+    
     //Need to call sort here
     [self sortData];
 }
@@ -251,7 +246,7 @@
 
 
 -(void) sortData {
-
+    
     int cool = 0;
     int heat = 0;
     if (firstOption.heating)
@@ -260,15 +255,15 @@
         cool = 1;
     NSMutableArray *coolProds = [[NSMutableArray alloc]init];
     NSMutableArray *heatProds = [[NSMutableArray alloc]init];
-  
-
+    
+    
     NSLog(@"Heating is %d and cooling is %d",heat ,cool);
-   
+    
     
     //Need to itterate through all of the items for included items.  Once we have an included item check if it matches type 1 or 2. Then check its price and add to final
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
-    //    NSLog(@"%@",itm.TitleText);
+        //    NSLog(@"%@",itm.TitleText);
         
         int tID = [itm.typeID intValue];
         if (tID == cool && (![coolProds containsObject:itm])) {
@@ -278,15 +273,15 @@
             [heatProds addObject:itm];
         }
         if ((tID == 3)&& (![typeThrees containsObject:itm])) {
-          //  itm.finalOption = itm.optionOne;
-          //  itm.finalPrice = itm.optOnePrice;
+            //  itm.finalOption = itm.optionOne;
+            //  itm.finalPrice = itm.optOnePrice;
             NSLog(@"type is %@",itm.type);
-           /* if ([itm.type isEqualToString:@"IAQ"]) {
-                [iaq addObject:itm];
-                NSLog(@"type is %@",itm.type);
-            } else {
-                [acces addObject:itm];
-            }*/
+            /* if ([itm.type isEqualToString:@"IAQ"]) {
+             [iaq addObject:itm];
+             NSLog(@"type is %@",itm.type);
+             } else {
+             [acces addObject:itm];
+             }*/
             [typeThrees addObject:itm];
         }// end of 3's
         
@@ -295,8 +290,8 @@
             
             [typeFours addObject:itm];
             
-            }
-
+        }
+        
         
         
     } //end of iteration
@@ -318,7 +313,7 @@
         //if false run the db
         [self sortTypeThrees];
         [self sortTypeFours];
-    
+        
     }
     
     
@@ -333,7 +328,7 @@
     }
     
     NSLog(@"rebates has %d",rebates.count);
-
+    
     
     
     
@@ -366,39 +361,39 @@
     
     
     [self arraySort];
-            
+    
     //call the blanks here
-  
- //   Item *itm;
+    
+    //   Item *itm;
     if (airCon.count>0) {
-      [airCon insertObject:[self loadTheBlank] atIndex:0];
-       // itm = airCon[0];
-      //  [self purchase:itm];
+        [airCon insertObject:[self loadTheBlank] atIndex:0];
+        // itm = airCon[0];
+        //  [self purchase:itm];
     }
     if (heatPump.count>0) {
-       [heatPump insertObject:[self loadTheBlank] atIndex:0];
-      //  itm = heatPump[0];
-       // [self purchase:itm];
+        [heatPump insertObject:[self loadTheBlank] atIndex:0];
+        //  itm = heatPump[0];
+        // [self purchase:itm];
     }
     if (furn.count>0) {
         [furn insertObject:[self loadTheBlank] atIndex:0];
-     //   itm = furn[0];
+        //   itm = furn[0];
         //[self purchase:itm];
     }
     if (airH.count>0) {
         [airH insertObject:[self loadTheBlank] atIndex:0];
-      //  itm = airH[0];
-       // [self purchase:itm];
+        //  itm = airH[0];
+        // [self purchase:itm];
     }
     if (geo.count>0) {
         [geo insertObject:[self loadTheBlank] atIndex:0];
-     //   itm = geo[0];
-      //  [self purchase:itm];
+        //   itm = geo[0];
+        //  [self purchase:itm];
     }
     if (boilers.count>0) {
         [boilers insertObject:[self loadTheBlank] atIndex:0];
-     //   itm = boilers[0];
-      //  [self purchase:itm];
+        //   itm = boilers[0];
+        //  [self purchase:itm];
     }
     if (warranties.count>0) {
         [warranties insertObject:[self loadTheBlank] atIndex:0];
@@ -413,8 +408,8 @@
 
 -(void) arraySort {
     
-   // NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"ord" ascending:YES];
-   NSSortDescriptor *manSort = [NSSortDescriptor sortDescriptorWithKey :@"manu" ascending:YES];
+    // NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"ord" ascending:YES];
+    NSSortDescriptor *manSort = [NSSortDescriptor sortDescriptorWithKey :@"manu" ascending:YES];
     NSSortDescriptor *sortA = [NSSortDescriptor sortDescriptorWithKey:@"finalPrice" ascending:NO];
     
     NSArray *sortDec = @[manSort,sortA];
@@ -470,26 +465,26 @@
         float opty = [itm.optOnePrice floatValue] ;
         itm.finalOption = opt;
         itm.finalPrice = [NSNumber numberWithFloat:opty];
-       [self fillArrays:itm];
+        [self fillArrays:itm];
         
-
-//        
-//        if ([itm.optionOne floatValue] != 0) {
-//            NSString *option = itm.optionOne;
-//            float optionPrice = [itm.optOnePrice floatValue] ;
-//            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-//            item.modelName = name;
-//            item.finalOption = option;
-//            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-//            item.type = type;
-//            item.typeID = [NSNumber numberWithInt:3];
-//            item.photo = pdata;
-//            item.manu = man;
-//            [self fillArrays:item];
-//        }
+        
+        //
+        //        if ([itm.optionOne floatValue] != 0) {
+        //            NSString *option = itm.optionOne;
+        //            float optionPrice = [itm.optOnePrice floatValue] ;
+        //            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+        //            item.modelName = name;
+        //            item.finalOption = option;
+        //            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+        //            item.type = type;
+        //            item.typeID = [NSNumber numberWithInt:3];
+        //            item.photo = pdata;
+        //            item.manu = man;
+        //            [self fillArrays:item];
+        //        }
         
         int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
-
+        
         
         
         if ([itm.optTwoPrice floatValue] != 0) {
@@ -644,7 +639,7 @@
             item.currentCart = [NSNumber numberWithInt:currCartInd];
             [self fillArrays:item];
         }
-
+        
         
         if ([itm.optTwoPrice floatValue] != 0) {
             NSString *option = itm.optionTwo;
@@ -779,31 +774,31 @@
                 }
             }
             if (![iaq containsObject:itm]&& c==0) {
-            [iaq addObject:itm];
-        }
-    }
-        else if ([itm.type isEqualToString:@"Boilers"]) {
-        [boilers addObject:itm];
-    } else if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
-        int c =0;
-        for (Item * ii in hotwater) {
-            if ([ii.modelName isEqualToString:itm.modelName]) {
-                c++;
+                [iaq addObject:itm];
             }
         }
-        if (c==0) {
-        [hotwater addObject:itm];
+        else if ([itm.type isEqualToString:@"Boilers"]) {
+            [boilers addObject:itm];
+        } else if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
+            int c =0;
+            for (Item * ii in hotwater) {
+                if ([ii.modelName isEqualToString:itm.modelName]) {
+                    c++;
+                }
+            }
+            if (c==0) {
+                [hotwater addObject:itm];
+            }
+            
+        } else if ([itm.type isEqualToString:@"Accessories"]) {
+            [acces addObject:itm];
         }
-        
-    } else if ([itm.type isEqualToString:@"Accessories"]) {
-        [acces addObject:itm];
-    }
-    else if ([itm.type isEqualToString:@"Warranties"]) {
-        [warranties addObject:itm];
-    }
-    else if ([itm.type isEqualToString:@"Ductless Mini Splits"]) {
-        [ductlessMiniSplits addObject:itm];
-    }
+        else if ([itm.type isEqualToString:@"Warranties"]) {
+            [warranties addObject:itm];
+        }
+        else if ([itm.type isEqualToString:@"Ductless Mini Splits"]) {
+            [ductlessMiniSplits addObject:itm];
+        }
     
     
 }
@@ -816,9 +811,9 @@
         if ([itm.type isEqualToString:@"Blank"]) {
             blank = itm;
         }
-                            
+        
     }
-
+    
     
     return blank;
 }
@@ -830,7 +825,7 @@
     if ([itm.optionOne isEqualToString:firstOption.coolingValue]) {
         return [itm.optOnePrice floatValue];
     } else if ([itm.optionTwo isEqualToString:firstOption.coolingValue]) {
-       return [itm.optTwoPrice floatValue];
+        return [itm.optTwoPrice floatValue];
     } else if ([itm.optionThree isEqualToString:firstOption.coolingValue]) {
         return [itm.optThreePrice floatValue];
     } else if ([itm.optionFour isEqualToString:firstOption.coolingValue]) {
@@ -856,7 +851,7 @@
     } else if ([itm.optionTwo isEqualToString:firstOption.coolingValue]) {
         return itm.optionTwo;
     } else if ([itm.optionThree isEqualToString:firstOption.coolingValue]) {
-       return itm.optionThree;
+        return itm.optionThree;
     } else if ([itm.optionFour isEqualToString:firstOption.coolingValue]) {
         return itm.optionFour;
     }else if ([itm.optionFive isEqualToString:firstOption.coolingValue]) {
@@ -892,7 +887,7 @@
     }else if ([itm.optionEight isEqualToString:firstOption.heatingValue]) {
         return [itm.optEightPrice floatValue];
     }
-
+    
     return 0.0f;
 }
 
@@ -928,122 +923,94 @@
         tapped = FALSE;
         [sections addObject:[NSNumber numberWithInt:tappedSection]];
     }
-  
+    
     if ([sections containsObject:[NSNumber numberWithInt:indexPath.section]]) {
         return 30.0f;
     } else {
-    switch (indexPath.section) {
-<<<<<<< HEAD
-        case 3:
-=======
-        case 2:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (airCon.count == 0) {
-                return 30.0f;
-            } else {
+        switch (indexPath.section) {
+            case 3:
+                if (airCon.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 5:
+                if (heatPump.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 4:
+                if (furn.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 6:
+                if (airH.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 7:
+                if (geo.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 2:
+                if (iaq.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 0:
+                if (acces.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 9:
+                if (boilers.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            case 8:
+                if (hotwater .count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+            case 1:
+                if (warranties.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+            case 10:
+                if (ductlessMiniSplits.count == 0) {
+                    return 30.0f;
+                } else {
+                    return 158.0f;
+                }
+                break;
+            default:
                 return 158.0f;
-            }
-            break;
-<<<<<<< HEAD
-        case 5:
-=======
-        case 4:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (heatPump.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-<<<<<<< HEAD
-        case 4:
-=======
-        case 3:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (furn.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-<<<<<<< HEAD
-        case 6:
-=======
-        case 5:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (airH.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-<<<<<<< HEAD
-        case 7:
-=======
-        case 6:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (geo.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-<<<<<<< HEAD
-        case 2:
-=======
-        case 1:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (iaq.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-        case 0:
-            if (acces.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-        case 9:
-            if (boilers.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-        case 8:
-            if (hotwater .count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-<<<<<<< HEAD
-        case 1:
-=======
-        case 7:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-            if (warranties.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-        case 10:
-            if (ductlessMiniSplits.count == 0) {
-                return 30.0f;
-            } else {
-                return 158.0f;
-            }
-            break;
-        default:
-            return 158.0f;
-        break;
+                break;
+                
+        }
+    }
     
-    }
-    }
-
-  
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1073,11 +1040,7 @@
     cell.inCartLabel.hidden = YES;
     
     switch (indexPath.section) {
-<<<<<<< HEAD
         case 3:{
-=======
-        case 2:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             if (choosedAirCon < airCon.count){
                 itm = airCon[choosedAirCon];
@@ -1096,11 +1059,7 @@
             }
             break;
         }
-<<<<<<< HEAD
         case 5:{
-=======
-        case 4:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //heat Pumps
             if (choosedHeatPump < heatPump.count ){
                 itm = heatPump[choosedHeatPump];
@@ -1117,11 +1076,7 @@
             }
             break;
         }
-<<<<<<< HEAD
         case 4:{
-=======
-        case 3:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //furnaces
             if (choosedFurn < furn.count){
                 itm = furn[choosedFurn];
@@ -1139,11 +1094,7 @@
             
             break;
         }
-<<<<<<< HEAD
         case 6:{
-=======
-        case 5:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Handlers
             if (choosedAirH < airH.count){
                 itm = airH[choosedAirH];
@@ -1160,11 +1111,7 @@
             }
             break;
         }
-<<<<<<< HEAD
         case 7:{
-=======
-        case 6:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             if (choosedGeo < geo.count){
                 itm = geo[choosedGeo];
@@ -1180,11 +1127,7 @@
             }
             break;
         }
-<<<<<<< HEAD
         case 2:{
-=======
-        case 1:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             if (choosedIAQ < iaq.count){
                 itm = iaq[choosedIAQ];
@@ -1304,11 +1247,7 @@
             
             break;
         }
-<<<<<<< HEAD
         case 1:{
-=======
-        case 7:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             if (choosedWarranties < warranties.count){
                 
@@ -1360,19 +1299,19 @@
     [cell.buyButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchDown];
     [cell.removeButton removeTarget:self action:NULL forControlEvents:UIControlEventTouchDown];
     cell.clipsToBounds = YES;
-  
+    
     if (![itm.finalOption isEqualToString:@"None"]) {
-
+        
         cell.photo.image = [UIImage imageWithData:itm.photo];
         cell.manufacturerLabel.text = itm.manu;
         cell.priceLabel.text = [NSString stringWithFormat:@"$%@", itm.finalPrice];
         cell.buyButton.tag = indexPath.section;
         cell.removeButton.tag = indexPath.section;
-
+        
         [cell.buyButton addTarget:self action:@selector(buyButton:) forControlEvents:UIControlEventTouchDown];
         [cell.removeButton addTarget:self action:@selector(remButton:) forControlEvents:UIControlEventTouchDown];
     }
-
+    
     return cell;
 }
 
@@ -1381,47 +1320,43 @@
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
     HardTableViewCell *swipedCell = [tableViewX cellForRowAtIndexPath:swipedIndexPath];
     
-   // NSLog(@"section %d",swipedIndexPath.section);
+    // NSLog(@"section %d",swipedIndexPath.section);
     if (!swipedCell.tapped) {
         swipedCell.tapped = TRUE;
-       // swipedCell.photo.hidden = YES;
-       // swipedCell.buyButton.hidden = YES;
-     
+        // swipedCell.photo.hidden = YES;
+        // swipedCell.buyButton.hidden = YES;
+        
         //  swipedCell.removeButton.hidden = YES;
-      
+        
         //swipedCell.pickerView.hidden = YES;
-       // swipedCell.modelName.hidden = YES;
-       // swipedCell.hidden = YES;
+        // swipedCell.modelName.hidden = YES;
+        // swipedCell.hidden = YES;
         tapped = TRUE;
         tappedSection = swipedIndexPath.section;
         [tableViewX reloadData];
-
-          } else {
-         [sections removeObject:[NSNumber numberWithInt:tappedSection]];
+        
+    } else {
+        [sections removeObject:[NSNumber numberWithInt:tappedSection]];
         swipedCell.tapped = FALSE;
-              
-               [tableViewX reloadData];
-<<<<<<< HEAD
+        
+        [tableViewX reloadData];
         if (swipedIndexPath.section != 6 || swipedIndexPath.section != 7) {
-=======
-        if (swipedIndexPath.section != 6 || swipedIndexPath.section != 5) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             swipedCell.photo.hidden = NO;
-          
+            
             swipedCell.modelName.hidden = NO;
         } else {
             swipedCell.photo.hidden = NO;
-           
+            
             swipedCell.modelName.hidden = NO;
-
+            
             swipedCell.buyButton.hidden = NO;
             swipedCell.removeButton.hidden = NO;
             [swipedCell bringSubviewToFront:swipedCell.buyButton];
         }
-     
-       NSLog(@"sections has ** %d",sections.count);
-              
-
+        
+        NSLog(@"sections has ** %d",sections.count);
+        
+        
     }
     
     
@@ -1439,16 +1374,12 @@
 -(void) cellSwiped:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
- //   HardTableViewCell *swipedCell = (HardTableViewCell*)[tableViewX cellForRowAtIndexPath:swipedIndexPath];
+    //   HardTableViewCell *swipedCell = (HardTableViewCell*)[tableViewX cellForRowAtIndexPath:swipedIndexPath];
     BOOL change = FALSE;
     Item *itm;
-
     
-<<<<<<< HEAD
+    
     if (swipedIndexPath.section == 3) {
-=======
-    if (swipedIndexPath.section == 2) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         if (airCon.count > 0 && choosedAirCon < airCon.count-1) {
             itm = airCon[choosedAirCon];
@@ -1462,17 +1393,13 @@
         }
         
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 5) {
-=======
-    if (swipedIndexPath.section == 4) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
             itm=heatPump[(choosedHeatPump+1)];
             [self purchase:itm];
-
+            
             choosedHeatPump++;
             change = YES;
         } else {
@@ -1480,17 +1407,13 @@
         }
         
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 4) {
-=======
-    if (swipedIndexPath.section == 3) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (furn.count > 0 && choosedFurn < furn.count-1) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
             itm=furn[(choosedFurn+1)];
             [self purchase:itm];
-
+            
             choosedFurn++;
             change = YES;
         } else {
@@ -1498,17 +1421,13 @@
         }
         
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 6) {
-=======
-    if (swipedIndexPath.section == 5) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (airH.count >0  && choosedAirH < airH.count -1) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
             itm=airH[(choosedAirH+1)];
             [self purchase:itm];
-
+            
             choosedAirH++;
             change = YES;
         } else {
@@ -1517,17 +1436,13 @@
         
         
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 7) {
-=======
-    if (swipedIndexPath.section == 6) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (geo.count > 0 && choosedGeo < geo.count-1 ) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
             itm=geo[(choosedGeo+1)];
             [self purchase:itm];
-
+            
             choosedGeo++;
             change = YES;
         } else {
@@ -1535,11 +1450,7 @@
         }
         
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 2) {
-=======
-    if (swipedIndexPath.section == 1) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
@@ -1559,14 +1470,14 @@
         }
         
     }
-
+    
     if (swipedIndexPath.section == 9) {
         if ( boilers.count > 0  && choosedBoilers < boilers.count-1) {
             itm = boilers[choosedBoilers];
             [self removeTheProd:itm];
             itm=boilers[(choosedBoilers+1)];
             [self purchase:itm];
-
+            
             choosedBoilers++;
             change = YES;
         } else {
@@ -1576,11 +1487,11 @@
     }
     if (swipedIndexPath.section == 8) {
         if ( hotwater.count > 0  && choosedHotWater < hotwater.count-1) {
-//            itm = hotwater[choosedHotWater];
-//            [self removeTheProd:itm];
-//            itm= hotwater[(choosedHotWater+1)];
-//            [self purchase:itm];
-
+            //            itm = hotwater[choosedHotWater];
+            //            [self removeTheProd:itm];
+            //            itm= hotwater[(choosedHotWater+1)];
+            //            [self purchase:itm];
+            
             choosedHotWater++;
             change = YES;
             
@@ -1590,11 +1501,7 @@
         
     }
     
-<<<<<<< HEAD
     if (swipedIndexPath.section == 1) {
-=======
-    if (swipedIndexPath.section == 7) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if ( warranties.count > 0  && choosedWarranties < warranties.count-1) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1639,33 +1546,25 @@
 -(void) cellSwipedLeft:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
-
+    
     
     
     Item *itm;
     BOOL change = FALSE;
-<<<<<<< HEAD
     if (swipedIndexPath.section == 3) {
-=======
-    if (swipedIndexPath.section == 2) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         if (choosedAirCon > 0) {
-             itm = airCon[choosedAirCon];
-             [self removeTheProd:itm];
+            itm = airCon[choosedAirCon];
+            [self removeTheProd:itm];
             itm=airCon[(choosedAirCon-1)];
             [self purchase:itm];
-             choosedAirCon--;
+            choosedAirCon--;
             change = YES;
         } else {
             [self warn];
         }
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 5) {
-=======
-    if (swipedIndexPath.section == 4) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedHeatPump > 0) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1677,11 +1576,7 @@
             [self warn];
         }
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 4) {
-=======
-    if (swipedIndexPath.section == 3) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedFurn > 0) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1693,11 +1588,7 @@
             [self warn];
         };
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 6) {
-=======
-    if (swipedIndexPath.section == 5) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedAirH > 0) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1709,11 +1600,7 @@
             [self warn];
         }
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 7) {
-=======
-    if (swipedIndexPath.section == 6) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedGeo > 0) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1725,11 +1612,7 @@
             [self warn];
         }
     }
-<<<<<<< HEAD
     if (swipedIndexPath.section == 2) {
-=======
-    if (swipedIndexPath.section == 1) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedIAQ > 0) {
             choosedIAQ--;
             change = YES;
@@ -1761,10 +1644,10 @@
     }
     if (swipedIndexPath.section == 8) {
         if ( choosedHotWater >0) {
-//            itm = hotwater[choosedHotWater];
-//            [self removeTheProd:itm];
-//            itm= hotwater[(choosedHotWater-1)];
-//            [self purchase:itm];
+            //            itm = hotwater[choosedHotWater];
+            //            [self removeTheProd:itm];
+            //            itm= hotwater[(choosedHotWater-1)];
+            //            [self purchase:itm];
             choosedHotWater--;
             change = YES;
         } else {
@@ -1773,11 +1656,7 @@
     }
     
     
-<<<<<<< HEAD
     if (swipedIndexPath.section == 1) {
-=======
-    if (swipedIndexPath.section == 7) {
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if ( choosedWarranties >0) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1810,7 +1689,7 @@
         NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:swipedIndexPath.row inSection:swipedIndexPath.section];
         NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
         [tableViewX reloadRowsAtIndexPaths:rowsToReload withRowAnimation:YES];
-      //  [self buildQuote];
+        //  [self buildQuote];
     } else {
         // [self warn];
     }
@@ -1830,58 +1709,34 @@
     
     Item *itm;
     switch (j) {
-<<<<<<< HEAD
         case 3:{
-=======
-        case 2:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 5:{
-=======
-        case 4:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = heatPump[choosedHeatPump];
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 4:{
-=======
-        case 3:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = furn[choosedFurn];
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 6:{
-=======
-        case 5:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = airH[choosedAirH];
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 7:{
-=======
-        case 6:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             itm = geo[choosedGeo];
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 2:{
-=======
-        case 1:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             itm = iaq[choosedIAQ];
             [self purchase:itm];
@@ -1905,11 +1760,7 @@
             [self purchase:itm];
             break;
         }
-<<<<<<< HEAD
         case 1:{
-=======
-        case 7:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             itm = warranties [choosedWarranties];
             [self purchase:itm];
@@ -1934,73 +1785,49 @@
     int j = [sender tag];
     Item *itm;
     switch (j) {
-<<<<<<< HEAD
         case 3:{
-=======
-        case 2:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
             break;
         }
-<<<<<<< HEAD
         case 5:{
-=======
-        case 4:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
-
+            
             break;
         }
-<<<<<<< HEAD
         case 4:{
-=======
-        case 3:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
-
+            
             break;
         }
-<<<<<<< HEAD
         case 6:{
-=======
-        case 5:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
-
+            
             break;
         }
-<<<<<<< HEAD
         case 7:{
-=======
-        case 6:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
-
+            
             break;
         }
-<<<<<<< HEAD
         case 2:{
-=======
-        case 1:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             itm = iaq[choosedIAQ];
             [self removeTheProd:itm];
-
+            
             break;
         }
         case 0:{
             //Accessories
             itm = acces [choosedAcces];
             [self removeTheProd:itm];
-
+            
             break;
         }
         case 9:{
@@ -2015,11 +1842,7 @@
             [self removeTheProd:itm];
             break;
         }
-<<<<<<< HEAD
         case 1:{
-=======
-        case 7:{
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             itm = warranties [choosedWarranties];
             [self removeTheProd:itm];
@@ -2031,7 +1854,7 @@
             [self removeTheProd:itm];
             break;
         }
-
+            
             
         default:
             break;
@@ -2045,8 +1868,7 @@
     for(Item *oItem in _cartItems) {
         occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
     }
-<<<<<<< HEAD
-
+    
     
     if ([itm.finalOption isEqualToString:@"None"]) {
         
@@ -2063,41 +1885,17 @@
     [self buildQuote];
     
     
-//    if (occurrences < 3) {
-//
-//
-//    }else {
-//        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [al show];
-//    }
+    //    if (occurrences < 3) {
+    //
+    //
+    //    }else {
+    //        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    //        [al show];
+    //    }
     
     
-=======
-    
-    if (occurrences < 3) {
-        if ([itm.finalOption isEqualToString:@"None"]) {
-            
-        } else {
-            [_cartItems addObject:itm];
-            
-        }
-        
-        
-        NSLog(@"Purchased cart has %d items",_cartItems.count);
-        
-        
-        isLast = TRUE;
-        [self buildQuote];
-        
-    }else {
-        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [al show];
-    }
     
     
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
-
-   
 }
 
 
@@ -2119,12 +1917,12 @@
         }
     }
     
-   // [_cartItems removeObject:del];
+    // [_cartItems removeObject:del];
     [_cartItems removeObjectsAtIndexes:discardedItems];
-
+    
     
     if (!done && [itm.typeID intValue] == 3) {
-            UIAlertView *alx = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You need to add %@ before you can remove it!",itm.modelName] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *alx = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You need to add %@ before you can remove it!",itm.modelName] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alx show];
     }
     
@@ -2134,8 +1932,8 @@
 
 
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
-
-  //  rebates = [[NSArray alloc]initWithArray:theRebateData];
+    
+    //  rebates = [[NSArray alloc]initWithArray:theRebateData];
     if (_cartItems.count == 0) {
         [_cartItems addObjectsFromArray:purchData];
     }
@@ -2149,26 +1947,26 @@
     strip = [string componentsSeparatedByString:@"$"];
     
     if (strip.count > 1) {
-
-    NSString *stringy = strip[1];
-//    NSLog(@"Strip holds %d the first is %@ and second %@",strip.count, strip[0], strip[1]);
-    
-    
-    NSMutableString *strippedString = [NSMutableString stringWithCapacity:stringy.length];
-    
-    NSScanner *scanner = [NSScanner scannerWithString:stringy];
-    NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-    while ([scanner isAtEnd] == NO) {
-        NSString *buffer;
-        if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
-            [strippedString appendString:buffer];
-        } else {
-            [scanner setScanLocation:([scanner scanLocation] + 1)];
+        
+        NSString *stringy = strip[1];
+        //    NSLog(@"Strip holds %d the first is %@ and second %@",strip.count, strip[0], strip[1]);
+        
+        
+        NSMutableString *strippedString = [NSMutableString stringWithCapacity:stringy.length];
+        
+        NSScanner *scanner = [NSScanner scannerWithString:stringy];
+        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+        while ([scanner isAtEnd] == NO) {
+            NSString *buffer;
+            if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
+                [strippedString appendString:buffer];
+            } else {
+                [scanner setScanLocation:([scanner scanLocation] + 1)];
+            }
         }
-    }
-   // NSLog(@"%@", strippedString); // "123123123"
-
-    return [strippedString floatValue];
+        // NSLog(@"%@", strippedString); // "123123123"
+        
+        return [strippedString floatValue];
     } else {
         return [string floatValue];;
     }
@@ -2182,7 +1980,7 @@
     
     if (strip.count > 0) {
         
-              return strip[0];
+        return strip[0];
     } else {
         return @"";
     }
@@ -2193,21 +1991,21 @@
 #pragma mark - Update Labels
 -(void) buildQuote {
     
-      // new formula;
+    // new formula;
     
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     
     for (int jj = 0; jj <_cartItems.count; jj++) {
         Item *itm = _cartItems[jj];
-       // NSLog(@"%@",itm.finalOption);
+        // NSLog(@"%@",itm.finalOption);
         if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
         {
-          totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
+            totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
         }
         else
         {
-        totalAmount += [itm.finalPrice floatValue];
+            totalAmount += [itm.finalPrice floatValue];
         }
     }
     
@@ -2227,7 +2025,7 @@
             }
         }
     }
-
+    
     
     
     
@@ -2235,12 +2033,12 @@
         Item *itm = rebates[jj];
         totalSavings += [itm.finalPrice floatValue];
     }
-
+    
     float invest;
     switch (self.months) {
         case 24:
         {
- 
+            
             finacePay =  (totalAmount - totalSavings)/24;//.915
             invest = (finacePay*24);
             NSLog(@"sdsd = %f, asdasd= %f",totalAmount, totalSavings);
@@ -2250,17 +2048,17 @@
         case 36:
         {
             finacePay = (totalAmount - totalSavings)/.88/36;
-              invest = (finacePay*36);
+            invest = (finacePay*36);
             break;
         }
         case 48:{
             finacePay = (totalAmount - totalSavings)/.865/48;
-              invest = (finacePay*48);
+            invest = (finacePay*48);
             break;
         }
         case 60:{
             finacePay = (totalAmount - totalSavings)/.85/60;
-              invest = (finacePay*60);
+            invest = (finacePay*60);
             break;
         }
             //(((C4 / .8975) * 0.0144)*84)
@@ -2311,29 +2109,29 @@
     
     
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
+    lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
     switch (self.months) {
         case 84:
             //3.99% Best Rate 84 Months
-             lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
+            lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
             break;
         case 144:
-             lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
+            lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
             break;
-        
+            
         case 0:
             lblFinancing.text =[NSString stringWithFormat:@""];
             break;
-
+            
         default:
-             lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
+            lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
             break;
     }
     
-   
+    
     NSMutableAttributedString *TitleText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",lblFinancing.text,lblFinancingValue.text]];
-   // NSArray *aStrings=[btnTitleText.string componentsSeparatedByString:separator];
+    // NSArray *aStrings=[btnTitleText.string componentsSeparatedByString:separator];
     
     NSMutableAttributedString *chargeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",lblFinancing.text]];
     NSDictionary *chargeAttr=@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:15]};
@@ -2343,8 +2141,8 @@
     [TitleText setAttributes:moneyAttr range:NSMakeRange([chargeStr length],[TitleText length]-[chargeStr length])];
     [lblFinancing setAttributedText:TitleText];
     
-   
-      [tableViewX reloadData];
+    
+    [tableViewX reloadData];
 }
 
 
@@ -2363,7 +2161,7 @@
 - (IBAction)monthBut:(id)sender {
     int mon = [sender tag];
     self.months = mon;
-   
+    
     secView.hidden = YES;
     [self buildQuote];
 }
@@ -2565,7 +2363,7 @@
                 [tt addObject:itm];
         }
         
-
+        
         
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
         [cart setObject:tt forKey:@"cartItems"];
@@ -2586,7 +2384,7 @@
         cartView.delegate = self;
         cartView.testerVC = self;
         cartView.isViewingCart = YES;
-
+        
         
         
         self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
@@ -2598,7 +2396,6 @@
 
 
 /*
-<<<<<<< HEAD
  case 3:
  if (airCon.count == 0) {
  case 5:
@@ -2610,19 +2407,6 @@
  case 6:
  if (geo.count == 0) {
  case 2:
-=======
- case 2:
- if (airCon.count == 0) {
- case 4:
- if (heatPump.count == 0) {
- case 3:
- if (furn.count == 0) {
- case 5:
- if (airH.count == 0) {
- case 6:
- if (geo.count == 0) {
- case 1:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
  if (iaq.count == 0) {
  case 0:
  if (acces.count == 0) {
@@ -2630,11 +2414,7 @@
  if (boilers.count == 0) {
  case 8:
  if (hotwater .count == 0) {
-<<<<<<< HEAD
  case 1:
-=======
- case 7:
->>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
  if (warranties.count == 0) {
  case 10:
  if (ductlessMiniSplits.count == 0) {
