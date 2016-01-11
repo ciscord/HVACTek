@@ -171,8 +171,8 @@
 
 
 -(void) setupArrays {
-    headers = [[NSArray alloc]initWithObjects:@"Controls", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
-               @"Air Handlers", @"Geothermal" , @"Warranties", @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
+    headers = [[NSArray alloc]initWithObjects:@"Controls",  @"Warranties", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
+               @"Air Handlers", @"Geothermal" , @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
     airCon = [[NSMutableArray alloc]init];
     furn = [[NSMutableArray alloc]init];
     heatPump = [[NSMutableArray alloc]init];
@@ -928,42 +928,42 @@
         return 30.0f;
     } else {
     switch (indexPath.section) {
-        case 2:
+        case 3:
             if (airCon.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 4:
+        case 5:
             if (heatPump.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 3:
+        case 4:
             if (furn.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 5:
+        case 6:
             if (airH.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 6:
+        case 7:
             if (geo.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
-        case 1:
+        case 2:
             if (iaq.count == 0) {
                 return 30.0f;
             } else {
@@ -990,7 +990,7 @@
             } else {
                 return 158.0f;
             }
-        case 7:
+        case 1:
             if (warranties.count == 0) {
                 return 30.0f;
             } else {
@@ -1040,7 +1040,7 @@
     cell.inCartLabel.hidden = YES;
     
     switch (indexPath.section) {
-        case 2:{
+        case 3:{
             //Air Conditioners
             if (choosedAirCon < airCon.count){
                 itm = airCon[choosedAirCon];
@@ -1059,7 +1059,7 @@
             }
             break;
         }
-        case 4:{
+        case 5:{
             //heat Pumps
             if (choosedHeatPump < heatPump.count ){
                 itm = heatPump[choosedHeatPump];
@@ -1076,7 +1076,7 @@
             }
             break;
         }
-        case 3:{
+        case 4:{
             //furnaces
             if (choosedFurn < furn.count){
                 itm = furn[choosedFurn];
@@ -1094,7 +1094,7 @@
             
             break;
         }
-        case 5:{
+        case 6:{
             //Air Handlers
             if (choosedAirH < airH.count){
                 itm = airH[choosedAirH];
@@ -1111,7 +1111,7 @@
             }
             break;
         }
-        case 6:{
+        case 7:{
             //Geothermal
             if (choosedGeo < geo.count){
                 itm = geo[choosedGeo];
@@ -1127,7 +1127,7 @@
             }
             break;
         }
-        case 1:{
+        case 2:{
             //IAQ
             if (choosedIAQ < iaq.count){
                 itm = iaq[choosedIAQ];
@@ -1247,7 +1247,7 @@
             
             break;
         }
-        case 7:{
+        case 1:{
             //Warranties
             if (choosedWarranties < warranties.count){
                 
@@ -1340,7 +1340,7 @@
         swipedCell.tapped = FALSE;
               
                [tableViewX reloadData];
-        if (swipedIndexPath.section != 6 || swipedIndexPath.section != 5) {
+        if (swipedIndexPath.section != 6 || swipedIndexPath.section != 7) {
             swipedCell.photo.hidden = NO;
           
             swipedCell.modelName.hidden = NO;
@@ -1379,7 +1379,7 @@
     Item *itm;
 
     
-    if (swipedIndexPath.section == 2) {
+    if (swipedIndexPath.section == 3) {
         
         if (airCon.count > 0 && choosedAirCon < airCon.count-1) {
             itm = airCon[choosedAirCon];
@@ -1393,7 +1393,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 4) {
+    if (swipedIndexPath.section == 5) {
         if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1407,7 +1407,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 3) {
+    if (swipedIndexPath.section == 4) {
         if (furn.count > 0 && choosedFurn < furn.count-1) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1421,7 +1421,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 5) {
+    if (swipedIndexPath.section == 6) {
         if (airH.count >0  && choosedAirH < airH.count -1) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1436,7 +1436,7 @@
         
         
     }
-    if (swipedIndexPath.section == 6) {
+    if (swipedIndexPath.section == 7) {
         if (geo.count > 0 && choosedGeo < geo.count-1 ) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1450,7 +1450,7 @@
         }
         
     }
-    if (swipedIndexPath.section == 1) {
+    if (swipedIndexPath.section == 2) {
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
@@ -1501,7 +1501,7 @@
         
     }
     
-    if (swipedIndexPath.section == 7) {
+    if (swipedIndexPath.section == 1) {
         if ( warranties.count > 0  && choosedWarranties < warranties.count-1) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1551,7 +1551,7 @@
     
     Item *itm;
     BOOL change = FALSE;
-    if (swipedIndexPath.section == 2) {
+    if (swipedIndexPath.section == 3) {
         
         if (choosedAirCon > 0) {
              itm = airCon[choosedAirCon];
@@ -1564,7 +1564,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 4) {
+    if (swipedIndexPath.section == 5) {
         if (choosedHeatPump > 0) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1576,7 +1576,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 3) {
+    if (swipedIndexPath.section == 4) {
         if (choosedFurn > 0) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1588,7 +1588,7 @@
             [self warn];
         };
     }
-    if (swipedIndexPath.section == 5) {
+    if (swipedIndexPath.section == 6) {
         if (choosedAirH > 0) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1600,7 +1600,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 6) {
+    if (swipedIndexPath.section == 7) {
         if (choosedGeo > 0) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1612,7 +1612,7 @@
             [self warn];
         }
     }
-    if (swipedIndexPath.section == 1) {
+    if (swipedIndexPath.section == 2) {
         if (choosedIAQ > 0) {
             choosedIAQ--;
             change = YES;
@@ -1656,7 +1656,7 @@
     }
     
     
-    if (swipedIndexPath.section == 7) {
+    if (swipedIndexPath.section == 1) {
         if ( choosedWarranties >0) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1709,34 +1709,34 @@
     
     Item *itm;
     switch (j) {
-        case 2:{
+        case 3:{
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self purchase:itm];
             break;
         }
-        case 4:{
+        case 5:{
             itm = heatPump[choosedHeatPump];
             [self purchase:itm];
             break;
         }
-        case 3:{
+        case 4:{
             itm = furn[choosedFurn];
             [self purchase:itm];
             break;
         }
-        case 5:{
+        case 6:{
             itm = airH[choosedAirH];
             [self purchase:itm];
             break;
         }
-        case 6:{
+        case 7:{
             //Geothermal
             itm = geo[choosedGeo];
             [self purchase:itm];
             break;
         }
-        case 1:{
+        case 2:{
             //IAQ
             itm = iaq[choosedIAQ];
             [self purchase:itm];
@@ -1760,7 +1760,7 @@
             [self purchase:itm];
             break;
         }
-        case 7:{
+        case 1:{
             //Warranties
             itm = warranties [choosedWarranties];
             [self purchase:itm];
@@ -1785,38 +1785,38 @@
     int j = [sender tag];
     Item *itm;
     switch (j) {
-        case 2:{
+        case 3:{
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
             break;
         }
-        case 4:{
+        case 5:{
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
 
             break;
         }
-        case 3:{
+        case 4:{
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
 
             break;
         }
-        case 5:{
+        case 6:{
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
 
             break;
         }
-        case 6:{
+        case 7:{
             //Geothermal
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
 
             break;
         }
-        case 1:{
+        case 2:{
             //IAQ
             itm = iaq[choosedIAQ];
             [self removeTheProd:itm];
@@ -1842,7 +1842,7 @@
             [self removeTheProd:itm];
             break;
         }
-        case 7:{
+        case 1:{
             //Warranties
             itm = warranties [choosedWarranties];
             [self removeTheProd:itm];
@@ -1868,26 +1868,30 @@
     for(Item *oItem in _cartItems) {
         occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
     }
+
     
-    if (occurrences < 3) {
-        if ([itm.finalOption isEqualToString:@"None"]) {
-            
-        } else {
-            [_cartItems addObject:itm];
-            
-        }
+    if ([itm.finalOption isEqualToString:@"None"]) {
         
+    } else {
+        [_cartItems addObject:itm];
         
-        NSLog(@"Purchased cart has %d items",_cartItems.count);
-        
-        
-        isLast = TRUE;
-        [self buildQuote];
-        
-    }else {
-        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [al show];
     }
+    
+    
+    NSLog(@"Purchased cart has %d items",_cartItems.count);
+    
+    
+    isLast = TRUE;
+    [self buildQuote];
+    
+    
+//    if (occurrences < 3) {
+//
+//
+//    }else {
+//        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//        [al show];
+//    }
     
     
 
@@ -2392,17 +2396,17 @@
 
 
 /*
- case 2:
- if (airCon.count == 0) {
- case 4:
- if (heatPump.count == 0) {
  case 3:
- if (furn.count == 0) {
+ if (airCon.count == 0) {
  case 5:
+ if (heatPump.count == 0) {
+ case 4:
+ if (furn.count == 0) {
+ case 7:
  if (airH.count == 0) {
  case 6:
  if (geo.count == 0) {
- case 1:
+ case 2:
  if (iaq.count == 0) {
  case 0:
  if (acces.count == 0) {
@@ -2410,7 +2414,7 @@
  if (boilers.count == 0) {
  case 8:
  if (hotwater .count == 0) {
- case 7:
+ case 1:
  if (warranties.count == 0) {
  case 10:
  if (ductlessMiniSplits.count == 0) {

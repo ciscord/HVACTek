@@ -55,7 +55,7 @@
     NSArray* products = [json objectForKey:@"results"];
     
     if (products.count > 0) {
-   
+        
        [self addProducts:products];
       }
     
@@ -235,14 +235,18 @@
                           error:&error];
     
     NSArray* rebates = [json objectForKey:@"results"];
+    
     if (rebates.count > 0) {
-       // [self clearRebates];
         [self addRebates:rebates];
     }
+    
     //JB Stick in an nslog here if issue with rebates
  //  NSLog(@"Rebates:%@",rebates);
   //  [self checkMem:@"Rebates"];
+    
 }
+
+
 
 /*-(void) clearRebates {
     Item *del;
@@ -360,6 +364,7 @@
             
             
             for (NSDictionary *itm in list) {
+                
                 Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
                 item.modelName = itm[@"modelName"];
                 item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
