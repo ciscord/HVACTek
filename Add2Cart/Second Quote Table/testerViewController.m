@@ -171,8 +171,13 @@
 
 
 -(void) setupArrays {
+<<<<<<< HEAD
     headers = [[NSArray alloc]initWithObjects:@"Controls",  @"Warranties", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
                @"Air Handlers", @"Geothermal" , @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
+=======
+    headers = [[NSArray alloc]initWithObjects:@"Controls", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
+               @"Air Handlers", @"Geothermal" , @"Warranties", @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
     airCon = [[NSMutableArray alloc]init];
     furn = [[NSMutableArray alloc]init];
     heatPump = [[NSMutableArray alloc]init];
@@ -928,42 +933,66 @@
         return 30.0f;
     } else {
     switch (indexPath.section) {
+<<<<<<< HEAD
         case 3:
+=======
+        case 2:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (airCon.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
+<<<<<<< HEAD
         case 5:
+=======
+        case 4:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (heatPump.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
+<<<<<<< HEAD
         case 4:
+=======
+        case 3:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (furn.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
+<<<<<<< HEAD
         case 6:
+=======
+        case 5:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (airH.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
+<<<<<<< HEAD
         case 7:
+=======
+        case 6:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (geo.count == 0) {
                 return 30.0f;
             } else {
                 return 158.0f;
             }
             break;
+<<<<<<< HEAD
         case 2:
+=======
+        case 1:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (iaq.count == 0) {
                 return 30.0f;
             } else {
@@ -990,7 +1019,11 @@
             } else {
                 return 158.0f;
             }
+<<<<<<< HEAD
         case 1:
+=======
+        case 7:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             if (warranties.count == 0) {
                 return 30.0f;
             } else {
@@ -1040,7 +1073,11 @@
     cell.inCartLabel.hidden = YES;
     
     switch (indexPath.section) {
+<<<<<<< HEAD
         case 3:{
+=======
+        case 2:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             if (choosedAirCon < airCon.count){
                 itm = airCon[choosedAirCon];
@@ -1059,7 +1096,11 @@
             }
             break;
         }
+<<<<<<< HEAD
         case 5:{
+=======
+        case 4:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //heat Pumps
             if (choosedHeatPump < heatPump.count ){
                 itm = heatPump[choosedHeatPump];
@@ -1076,7 +1117,11 @@
             }
             break;
         }
+<<<<<<< HEAD
         case 4:{
+=======
+        case 3:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //furnaces
             if (choosedFurn < furn.count){
                 itm = furn[choosedFurn];
@@ -1094,7 +1139,11 @@
             
             break;
         }
+<<<<<<< HEAD
         case 6:{
+=======
+        case 5:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Handlers
             if (choosedAirH < airH.count){
                 itm = airH[choosedAirH];
@@ -1111,7 +1160,11 @@
             }
             break;
         }
+<<<<<<< HEAD
         case 7:{
+=======
+        case 6:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             if (choosedGeo < geo.count){
                 itm = geo[choosedGeo];
@@ -1127,7 +1180,11 @@
             }
             break;
         }
+<<<<<<< HEAD
         case 2:{
+=======
+        case 1:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             if (choosedIAQ < iaq.count){
                 itm = iaq[choosedIAQ];
@@ -1247,7 +1304,11 @@
             
             break;
         }
+<<<<<<< HEAD
         case 1:{
+=======
+        case 7:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             if (choosedWarranties < warranties.count){
                 
@@ -1340,7 +1401,11 @@
         swipedCell.tapped = FALSE;
               
                [tableViewX reloadData];
+<<<<<<< HEAD
         if (swipedIndexPath.section != 6 || swipedIndexPath.section != 7) {
+=======
+        if (swipedIndexPath.section != 6 || swipedIndexPath.section != 5) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             swipedCell.photo.hidden = NO;
           
             swipedCell.modelName.hidden = NO;
@@ -1379,7 +1444,11 @@
     Item *itm;
 
     
+<<<<<<< HEAD
     if (swipedIndexPath.section == 3) {
+=======
+    if (swipedIndexPath.section == 2) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         if (airCon.count > 0 && choosedAirCon < airCon.count-1) {
             itm = airCon[choosedAirCon];
@@ -1393,7 +1462,11 @@
         }
         
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 5) {
+=======
+    if (swipedIndexPath.section == 4) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1407,7 +1480,11 @@
         }
         
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 4) {
+=======
+    if (swipedIndexPath.section == 3) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (furn.count > 0 && choosedFurn < furn.count-1) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1421,7 +1498,11 @@
         }
         
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 6) {
+=======
+    if (swipedIndexPath.section == 5) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (airH.count >0  && choosedAirH < airH.count -1) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1436,7 +1517,11 @@
         
         
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 7) {
+=======
+    if (swipedIndexPath.section == 6) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (geo.count > 0 && choosedGeo < geo.count-1 ) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1450,7 +1535,11 @@
         }
         
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 2) {
+=======
+    if (swipedIndexPath.section == 1) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
@@ -1501,7 +1590,11 @@
         
     }
     
+<<<<<<< HEAD
     if (swipedIndexPath.section == 1) {
+=======
+    if (swipedIndexPath.section == 7) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if ( warranties.count > 0  && choosedWarranties < warranties.count-1) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1551,7 +1644,11 @@
     
     Item *itm;
     BOOL change = FALSE;
+<<<<<<< HEAD
     if (swipedIndexPath.section == 3) {
+=======
+    if (swipedIndexPath.section == 2) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         
         if (choosedAirCon > 0) {
              itm = airCon[choosedAirCon];
@@ -1564,7 +1661,11 @@
             [self warn];
         }
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 5) {
+=======
+    if (swipedIndexPath.section == 4) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedHeatPump > 0) {
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
@@ -1576,7 +1677,11 @@
             [self warn];
         }
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 4) {
+=======
+    if (swipedIndexPath.section == 3) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedFurn > 0) {
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
@@ -1588,7 +1693,11 @@
             [self warn];
         };
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 6) {
+=======
+    if (swipedIndexPath.section == 5) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedAirH > 0) {
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
@@ -1600,7 +1709,11 @@
             [self warn];
         }
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 7) {
+=======
+    if (swipedIndexPath.section == 6) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedGeo > 0) {
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
@@ -1612,7 +1725,11 @@
             [self warn];
         }
     }
+<<<<<<< HEAD
     if (swipedIndexPath.section == 2) {
+=======
+    if (swipedIndexPath.section == 1) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if (choosedIAQ > 0) {
             choosedIAQ--;
             change = YES;
@@ -1656,7 +1773,11 @@
     }
     
     
+<<<<<<< HEAD
     if (swipedIndexPath.section == 1) {
+=======
+    if (swipedIndexPath.section == 7) {
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
         if ( choosedWarranties >0) {
             itm = warranties[choosedWarranties];
             [self removeTheProd:itm];
@@ -1709,34 +1830,58 @@
     
     Item *itm;
     switch (j) {
+<<<<<<< HEAD
         case 3:{
+=======
+        case 2:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 5:{
+=======
+        case 4:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = heatPump[choosedHeatPump];
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 4:{
+=======
+        case 3:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = furn[choosedFurn];
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 6:{
+=======
+        case 5:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = airH[choosedAirH];
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 7:{
+=======
+        case 6:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             itm = geo[choosedGeo];
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 2:{
+=======
+        case 1:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             itm = iaq[choosedIAQ];
             [self purchase:itm];
@@ -1760,7 +1905,11 @@
             [self purchase:itm];
             break;
         }
+<<<<<<< HEAD
         case 1:{
+=======
+        case 7:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             itm = warranties [choosedWarranties];
             [self purchase:itm];
@@ -1785,38 +1934,62 @@
     int j = [sender tag];
     Item *itm;
     switch (j) {
+<<<<<<< HEAD
         case 3:{
+=======
+        case 2:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Air Conditioners
             itm = airCon[choosedAirCon];
             [self removeTheProd:itm];
             break;
         }
+<<<<<<< HEAD
         case 5:{
+=======
+        case 4:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = heatPump[choosedHeatPump];
             [self removeTheProd:itm];
 
             break;
         }
+<<<<<<< HEAD
         case 4:{
+=======
+        case 3:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = furn[choosedFurn];
             [self removeTheProd:itm];
 
             break;
         }
+<<<<<<< HEAD
         case 6:{
+=======
+        case 5:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             itm = airH[choosedAirH];
             [self removeTheProd:itm];
 
             break;
         }
+<<<<<<< HEAD
         case 7:{
+=======
+        case 6:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Geothermal
             itm = geo[choosedGeo];
             [self removeTheProd:itm];
 
             break;
         }
+<<<<<<< HEAD
         case 2:{
+=======
+        case 1:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //IAQ
             itm = iaq[choosedIAQ];
             [self removeTheProd:itm];
@@ -1842,7 +2015,11 @@
             [self removeTheProd:itm];
             break;
         }
+<<<<<<< HEAD
         case 1:{
+=======
+        case 7:{
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
             //Warranties
             itm = warranties [choosedWarranties];
             [self removeTheProd:itm];
@@ -1868,6 +2045,7 @@
     for(Item *oItem in _cartItems) {
         occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
     }
+<<<<<<< HEAD
 
     
     if ([itm.finalOption isEqualToString:@"None"]) {
@@ -1894,6 +2072,30 @@
 //    }
     
     
+=======
+    
+    if (occurrences < 3) {
+        if ([itm.finalOption isEqualToString:@"None"]) {
+            
+        } else {
+            [_cartItems addObject:itm];
+            
+        }
+        
+        
+        NSLog(@"Purchased cart has %d items",_cartItems.count);
+        
+        
+        isLast = TRUE;
+        [self buildQuote];
+        
+    }else {
+        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [al show];
+    }
+    
+    
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
 
    
 }
@@ -2396,6 +2598,7 @@
 
 
 /*
+<<<<<<< HEAD
  case 3:
  if (airCon.count == 0) {
  case 5:
@@ -2407,6 +2610,19 @@
  case 6:
  if (geo.count == 0) {
  case 2:
+=======
+ case 2:
+ if (airCon.count == 0) {
+ case 4:
+ if (heatPump.count == 0) {
+ case 3:
+ if (furn.count == 0) {
+ case 5:
+ if (airH.count == 0) {
+ case 6:
+ if (geo.count == 0) {
+ case 1:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
  if (iaq.count == 0) {
  case 0:
  if (acces.count == 0) {
@@ -2414,7 +2630,11 @@
  if (boilers.count == 0) {
  case 8:
  if (hotwater .count == 0) {
+<<<<<<< HEAD
  case 1:
+=======
+ case 7:
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
  if (warranties.count == 0) {
  case 10:
  if (ductlessMiniSplits.count == 0) {

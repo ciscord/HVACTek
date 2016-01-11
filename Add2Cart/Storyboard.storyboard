@@ -1377,7 +1377,11 @@ $</string>
         <scene sceneID="s9g-Aj-4XK">
             <objects>
                 <tableViewController id="V1C-pU-ltr" customClass="aQuoteFirstTableViewController" sceneMemberID="viewController">
+<<<<<<< HEAD
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lr8-hw-74O">
+=======
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lr8-hw-74O">
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1401,6 +1405,7 @@ $</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="215" id="DLx-Gt-hc3" customClass="TypeOneTableViewCell">
                                         <rect key="frame" x="0.0" y="120" width="768" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1410,24 +1415,47 @@ $</string>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual J Cooling Load in Tons" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d72-tg-3Lm">
                                                     <rect key="frame" x="13" y="97" width="264" height="21"/>
+=======
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="240" id="DLx-Gt-hc3" customClass="TypeOneTableViewCell">
+                                        <rect key="frame" x="0.0" y="120" width="768" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DLx-Gt-hc3" id="EiP-vc-6ee">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual J Cooling Load in Tons" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d72-tg-3Lm">
+                                                    <rect key="frame" x="13" y="109" width="264" height="21"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" id="WBE-Ca-zNm">
+<<<<<<< HEAD
                                                     <rect key="frame" x="384" y="9" width="384" height="196"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7SS-So-lXy">
                                                     <rect key="frame" x="308" y="92" width="51" height="31"/>
+=======
+                                                    <rect key="frame" x="384" y="12" width="384" height="216"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7SS-So-lXy">
+                                                    <rect key="frame" x="308" y="104" width="51" height="31"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="coolingSwitchfire:" destination="V1C-pU-ltr" eventType="valueChanged" id="FlR-C0-dj0"/>
                                                     </connections>
                                                 </switch>
                                                 <view alpha="0.69999999999999996" contentMode="scaleToFill" id="7EH-JU-DBf">
+<<<<<<< HEAD
                                                     <rect key="frame" x="0.0" y="214" width="768" height="1"/>
+=======
+                                                    <rect key="frame" x="0.0" y="239" width="768" height="1"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -1445,6 +1473,7 @@ $</string>
                                             <outlet property="picker" destination="WBE-Ca-zNm" id="DsN-sw-9RE"/>
                                         </connections>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="215" id="btq-Ee-Ta2" customClass="TypeOneTableViewCell">
                                         <rect key="frame" x="0.0" y="335" width="768" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1458,12 +1487,35 @@ $</string>
                                                 </pickerView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="YxB-A6-VqI">
                                                     <rect key="frame" x="306" y="92" width="51" height="31"/>
+=======
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="240" id="btq-Ee-Ta2" customClass="TypeOneTableViewCell">
+                                        <rect key="frame" x="0.0" y="360" width="768" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="btq-Ee-Ta2" id="D69-PX-udE">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual J Heating Load in BTUs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jIx-Fy-GXv">
+                                                    <rect key="frame" x="13" y="109" width="256" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="scaleToFill" id="1ZG-q6-LqO">
+                                                    <rect key="frame" x="379" y="12" width="389" height="216"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="YxB-A6-VqI">
+                                                    <rect key="frame" x="306" y="104" width="51" height="31"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="heatingSwitchFire:" destination="V1C-pU-ltr" eventType="valueChanged" id="yk3-9p-1m6"/>
                                                     </connections>
                                                 </switch>
                                                 <view alpha="0.69999998807907104" contentMode="scaleToFill" id="nk9-Rs-c9g">
+<<<<<<< HEAD
                                                     <rect key="frame" x="0.0" y="214" width="768" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1475,6 +1527,12 @@ $</string>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+=======
+                                                    <rect key="frame" x="0.0" y="239" width="768" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
@@ -1484,6 +1542,7 @@ $</string>
                                             <outlet property="picker" destination="1ZG-q6-LqO" id="Qj6-XF-MUZ"/>
                                         </connections>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="215" id="ek5-fl-cMX" customClass="TypeOneTableViewCell">
                                         <rect key="frame" x="0.0" y="550" width="768" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1493,22 +1552,45 @@ $</string>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boilers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZiK-kM-wRU">
                                                     <rect key="frame" x="13" y="97" width="256" height="21"/>
+=======
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="240" id="ek5-fl-cMX" customClass="TypeOneTableViewCell">
+                                        <rect key="frame" x="0.0" y="600" width="768" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ek5-fl-cMX" id="mVG-G3-t60">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boilers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZiK-kM-wRU">
+                                                    <rect key="frame" x="13" y="109" width="256" height="21"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" id="n0a-CO-1R7">
+<<<<<<< HEAD
                                                     <rect key="frame" x="379" y="9" width="389" height="196"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                                 <view alpha="0.69999998807907104" contentMode="scaleToFill" id="c6i-7Z-a1d">
                                                     <rect key="frame" x="0.0" y="214" width="768" height="1"/>
+=======
+                                                    <rect key="frame" x="379" y="12" width="389" height="216"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                                <view alpha="0.69999998807907104" contentMode="scaleToFill" id="c6i-7Z-a1d">
+                                                    <rect key="frame" x="0.0" y="239" width="768" height="1"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="LeQ-Hl-WR7">
+<<<<<<< HEAD
                                                     <rect key="frame" x="306" y="92" width="51" height="31"/>
+=======
+                                                    <rect key="frame" x="306" y="104" width="51" height="31"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="boilersSwitchFire:" destination="V1C-pU-ltr" eventType="valueChanged" id="EOx-3L-LDL"/>
@@ -1523,6 +1605,7 @@ $</string>
                                             <outlet property="picker" destination="n0a-CO-1R7" id="UnB-pb-vKd"/>
                                         </connections>
                                     </tableViewCell>
+<<<<<<< HEAD
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="215" id="4hb-pM-Lv3" customClass="TypeOneTableViewCell">
                                         <rect key="frame" x="0.0" y="765" width="768" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1532,17 +1615,36 @@ $</string>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ductless Mini Splits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5L8-p6-OpU">
                                                     <rect key="frame" x="13" y="98" width="256" height="21"/>
+=======
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeOne" rowHeight="240" id="4hb-pM-Lv3" customClass="TypeOneTableViewCell">
+                                        <rect key="frame" x="0.0" y="840" width="768" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4hb-pM-Lv3" id="JxP-8w-JaG">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ductless Mini Splits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5L8-p6-OpU">
+                                                    <rect key="frame" x="13" y="109" width="256" height="21"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" id="klF-zm-RyC">
+<<<<<<< HEAD
                                                     <rect key="frame" x="379" y="9" width="389" height="196"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Yg9-KX-uM3">
                                                     <rect key="frame" x="306" y="92" width="51" height="31"/>
+=======
+                                                    <rect key="frame" x="379" y="12" width="389" height="216"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Yg9-KX-uM3">
+                                                    <rect key="frame" x="306" y="104" width="51" height="31"/>
+>>>>>>> c27be64473c995081f86b5c8a5b2cdf185c0b5c5
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="ductlessSwitchFire:" destination="V1C-pU-ltr" eventType="valueChanged" id="1mQ-dy-EoA"/>
