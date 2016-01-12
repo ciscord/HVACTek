@@ -30,8 +30,7 @@
 
       [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
       self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-      self.productList = [[NSMutableArray alloc]init];
-        self.occurenciesList = [[NSMutableArray alloc]init];
+
    }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -44,6 +43,9 @@
     self.months = [self.cart objectForKey:@"cartMonths"];
     self.rebates = [self.cart objectForKey:@"cartRebates"];
 
+    self.productList = [[NSMutableArray alloc]init];
+    self.occurenciesList = [[NSMutableArray alloc]init];
+    
     
     for (int x = 0; x < self.cartItems.count; x++){
         Item *itm = self.cartItems[x];
@@ -189,8 +191,6 @@
 #pragma marck tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    
     
     return self.productList.count;
 
