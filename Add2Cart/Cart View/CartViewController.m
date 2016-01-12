@@ -200,7 +200,21 @@
     CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
     acell.delegate = self;
     acell.cart = self.carts[indexPath.row];
-    acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];
+    if (self.carts.count <= 1) {
+        testerViewController * vc =(testerViewController*)self.testerVC;
+        if (vc.isEditing) {
+            acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %u",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"] + 1];
+        }else{
+            if(self.isViewingCart) {
+                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart 1"];
+            }else{
+                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %u",vc.savedCarts.count + 1];
+            }
+        }
+    }else{
+        acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];
+
+    }
     acell.editButton.tag = indexPath.row;
     [acell updateProductList];
        return acell;
