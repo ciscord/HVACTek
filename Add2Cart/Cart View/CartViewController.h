@@ -18,13 +18,13 @@
 @end
 
 
-@interface CartViewController : UIViewController <MFMailComposeViewControllerDelegate>
+@interface CartViewController : UIViewController <MFMailComposeViewControllerDelegate, NSFetchedResultsControllerDelegate>
 {
     NSArray *headers;
     int months;
     float perc;
     NSMutableString *products;
-    
+    NSArray *allData;
     
 }
 @property (nonatomic, retain) id<CartViewControllerDelegate> delegate;
@@ -45,6 +45,10 @@
 @property (nonatomic, strong) NSArray *rebates;
 @property (nonatomic, strong)  NSMutableArray *carts;
 @property (nonatomic, strong) id testerVC;
+
+
+@property (nonatomic, strong) NSFetchedResultsController *prodFRC;
+
 
 
 - (IBAction)email:(id)sender;

@@ -59,7 +59,7 @@
         [self addProducts:products];
     }
     
-    NSLog(@"Products:%@",products);
+ ///   NSLog(@"Products:%@",products);
     
 }
 
@@ -132,98 +132,16 @@
 
 -(void) addProducts:(NSArray *)products {
     
-    NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
-    
-    
-    for (int i = 0; i < 3; i++) {
-        
-        
-        for (int x = 0; x < products.count; x++) {
-            
-            Item *itm;
-            NSArray *options;
-            //Check to see if we want this profuct.
-            NSString *inc = [products[x] objectForKey:@"included"];
-            int incl = [inc intValue];
-            if (incl == 1) {
-                //Include this product.
-                itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-                itm.modelName = [products[x] objectForKey:@"title"];
-                itm.manu = [products[x] objectForKey:@"manufacture_name"];
-                options = [products[x] objectForKey:@"options"];
-                itm.include = [NSNumber numberWithBool:incl];
-                itm.type = [products[x] objectForKey:@"category_name"];
-                NSString *tID = [products[x] objectForKey:@"types"];
-                itm.typeID = [NSNumber numberWithInt:[tID intValue]];
-                itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
-                itm.currentCart = [NSNumber numberWithInt:i];
-                
-                //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
-                
-                //Options
-                for (int o=0; o<options.count; o++) {
-                    NSString *priced = [options[o] objectForKey:@"price"];
-                    NSString *name = [options[o] objectForKey:@"name"];
-                    if (o == 0) {
-                        itm.optionOne = name;
-                        itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    } else if (o ==1 ){
-                        itm.optionTwo = name;
-                        itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    } else if (o==2){
-                        itm.optionThree = name;
-                        itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    } else if (o==3) {
-                        itm.optionFour = name;
-                        itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    }else if (o==4) {
-                        itm.optionFive = name;
-                        itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    }else if (o==5) {
-                        itm.optionSix = name;
-                        itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    }else if (o==6) {
-                        itm.optionSeven = name;
-                        itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    }else if (o==7) {
-                        itm.optionEight = name;
-                        itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    }
-                    
-                } //end of options
-                
-                NSString *urly = [products[x] objectForKey:@"full_url"];
-                NSURL *url = [NSURL URLWithString:urly];
-                NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-                itm.photo = imageData;
-                NSString *type = [products[x] objectForKey:@"category_name"];
-                if ([type isEqualToString:@"AC"]) {
-                    itm.type = @"Air Conditioners";
-                }
-                //Add the new item to new products.
-                [newProd addObject:itm];
-            }// end of if includeded.
-            else {
-                //Not adding this item.
-            }
-            
-            
-        }// end of for loop
-        
-        
-    }
-    
-    
-    
-    
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-    }
+    [self addProductsCartOne:products];
+    [self addProductsCartTwo:products];
+    [self addProductsCartThree:products];
     
     syncView.hidden = YES;
     [activity stopAnimating];
 }
+
+
+
 
 - (void)fetchedRebates:(NSData *)responseData {
     //parse out the json data
@@ -396,7 +314,7 @@
 - (IBAction)synCButton:(id)sender {
     // if ([[NSUserDefaults standardUserDefaults]boolForKey:@"newSession"]) {
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
-    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"type3"];
+////    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"type3"];
     
     
     [self clearEverything];
@@ -439,4 +357,281 @@
     
     
 }
+
+
+
+
+#pragma mark - add products for carts
+
+
+
+
+- (void)addProductsCartOne:(NSArray *)products {
+    NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
+    
+    for (int x = 0; x < products.count; x++) {
+        
+        Item *itm;
+        NSArray *options;
+        //Check to see if we want this profuct.
+        NSString *inc = [products[x] objectForKey:@"included"];
+        int incl = [inc intValue];
+        if (incl == 1) {
+            //Include this product.
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm.modelName = [products[x] objectForKey:@"title"];
+            itm.manu = [products[x] objectForKey:@"manufacture_name"];
+            options = [products[x] objectForKey:@"options"];
+            itm.include = [NSNumber numberWithBool:incl];
+            itm.type = [products[x] objectForKey:@"category_name"];
+            NSString *tID = [products[x] objectForKey:@"types"];
+            itm.typeID = [NSNumber numberWithInt:[tID intValue]];
+            itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
+            itm.currentCart = [NSNumber numberWithInt:0];
+            
+            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
+            
+            //Options
+            for (int o=0; o<options.count; o++) {
+                NSString *priced = [options[o] objectForKey:@"price"];
+                NSString *name = [options[o] objectForKey:@"name"];
+                if (o == 0) {
+                    
+                    itm.optionOne = name;
+                    itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    
+                } else if (o ==1 ){
+                    itm.optionTwo = name;
+                    itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==2){
+                    itm.optionThree = name;
+                    itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==3) {
+                    itm.optionFour = name;
+                    itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==4) {
+                    itm.optionFive = name;
+                    itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==5) {
+                    itm.optionSix = name;
+                    itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==6) {
+                    itm.optionSeven = name;
+                    itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==7) {
+                    itm.optionEight = name;
+                    itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }
+                
+            } //end of options
+            
+            NSString *urly = [products[x] objectForKey:@"full_url"];
+            NSURL *url = [NSURL URLWithString:urly];
+            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+            itm.photo = imageData;
+            NSString *type = [products[x] objectForKey:@"category_name"];
+            if ([type isEqualToString:@"AC"]) {
+                itm.type = @"Air Conditioners";
+            }
+            //Add the new item to new products.
+            [newProd addObject:itm];
+        }// end of if includeded.
+        else {
+            //Not adding this item.
+        }
+        
+        
+    }// end of for loop
+    
+    
+    
+    
+    NSError *errorz;
+    if (![managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+    
+
+}
+
+- (void)addProductsCartTwo:(NSArray *)products {
+    NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
+    
+    for (int x = 0; x < products.count; x++) {
+        
+        Item *itm;
+        NSArray *options;
+        //Check to see if we want this profuct.
+        NSString *inc = [products[x] objectForKey:@"included"];
+        int incl = [inc intValue];
+        if (incl == 1) {
+            //Include this product.
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm.modelName = [products[x] objectForKey:@"title"];
+            itm.manu = [products[x] objectForKey:@"manufacture_name"];
+            options = [products[x] objectForKey:@"options"];
+            itm.include = [NSNumber numberWithBool:incl];
+            itm.type = [products[x] objectForKey:@"category_name"];
+            NSString *tID = [products[x] objectForKey:@"types"];
+            itm.typeID = [NSNumber numberWithInt:[tID intValue]];
+            itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
+            itm.currentCart = [NSNumber numberWithInt:1];
+            
+            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
+            
+            //Options
+            for (int o=0; o<options.count; o++) {
+                NSString *priced = [options[o] objectForKey:@"price"];
+                NSString *name = [options[o] objectForKey:@"name"];
+                if (o == 0) {
+                    
+                    itm.optionOne = name;
+                    itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    
+                } else if (o ==1 ){
+                    itm.optionTwo = name;
+                    itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==2){
+                    itm.optionThree = name;
+                    itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==3) {
+                    itm.optionFour = name;
+                    itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==4) {
+                    itm.optionFive = name;
+                    itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==5) {
+                    itm.optionSix = name;
+                    itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==6) {
+                    itm.optionSeven = name;
+                    itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==7) {
+                    itm.optionEight = name;
+                    itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }
+                
+            } //end of options
+            
+            NSString *urly = [products[x] objectForKey:@"full_url"];
+            NSURL *url = [NSURL URLWithString:urly];
+            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+            itm.photo = imageData;
+            NSString *type = [products[x] objectForKey:@"category_name"];
+            if ([type isEqualToString:@"AC"]) {
+                itm.type = @"Air Conditioners";
+            }
+            //Add the new item to new products.
+            [newProd addObject:itm];
+        }// end of if includeded.
+        else {
+            //Not adding this item.
+        }
+        
+        
+    }// end of for loop
+    
+    
+    
+    
+    NSError *errorz;
+    if (![managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+}
+
+- (void)addProductsCartThree:(NSArray *)products {
+    NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
+    
+    for (int x = 0; x < products.count; x++) {
+        
+        Item *itm;
+        NSArray *options;
+        //Check to see if we want this profuct.
+        NSString *inc = [products[x] objectForKey:@"included"];
+        int incl = [inc intValue];
+        if (incl == 1) {
+            //Include this product.
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm.modelName = [products[x] objectForKey:@"title"];
+            itm.manu = [products[x] objectForKey:@"manufacture_name"];
+            options = [products[x] objectForKey:@"options"];
+            itm.include = [NSNumber numberWithBool:incl];
+            itm.type = [products[x] objectForKey:@"category_name"];
+            NSString *tID = [products[x] objectForKey:@"types"];
+            itm.typeID = [NSNumber numberWithInt:[tID intValue]];
+            itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
+            itm.currentCart = [NSNumber numberWithInt:2];
+            
+            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
+            
+            //Options
+            for (int o=0; o<options.count; o++) {
+                NSString *priced = [options[o] objectForKey:@"price"];
+                NSString *name = [options[o] objectForKey:@"name"];
+                if (o == 0) {
+                    
+                    itm.optionOne = name;
+                    itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                    
+                } else if (o ==1 ){
+                    itm.optionTwo = name;
+                    itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==2){
+                    itm.optionThree = name;
+                    itm.optThreePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                } else if (o==3) {
+                    itm.optionFour = name;
+                    itm.optFourPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==4) {
+                    itm.optionFive = name;
+                    itm.optFivePrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==5) {
+                    itm.optionSix = name;
+                    itm.optSixPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==6) {
+                    itm.optionSeven = name;
+                    itm.optSevenPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }else if (o==7) {
+                    itm.optionEight = name;
+                    itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
+                }
+                
+            } //end of options
+            
+            NSString *urly = [products[x] objectForKey:@"full_url"];
+            NSURL *url = [NSURL URLWithString:urly];
+            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+            itm.photo = imageData;
+            NSString *type = [products[x] objectForKey:@"category_name"];
+            if ([type isEqualToString:@"AC"]) {
+                itm.type = @"Air Conditioners";
+            }
+            //Add the new item to new products.
+            [newProd addObject:itm];
+        }// end of if includeded.
+        else {
+            //Not adding this item.
+        }
+        
+        
+    }// end of for loop
+    
+    
+    
+    
+    NSError *errorz;
+    if (![managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+}
+
+
+
+
+
+
+
+
+
 @end

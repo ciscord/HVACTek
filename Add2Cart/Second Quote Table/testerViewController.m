@@ -114,6 +114,8 @@
 
 
 -(void) home {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -125,9 +127,17 @@
 
 
 
+
+
+
 -(void) viewDidAppear:(BOOL)animated   {
-    NSLog(@"called agin");
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud showWhileExecuting:@selector(resetCartData) onTarget:self withObject:nil animated:YES];
+
+}
+
+- (void)resetCartData {
     //Fetch the data.
     [self fetchData];
     
@@ -167,6 +177,8 @@
         btnCart3.alpha = 1.0;
     }
 }
+
+
 
 
 
@@ -296,25 +308,30 @@
         
     } //end of iteration
     
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"type3"]) {
-        for (int ab = 0; ab <typeThrees.count; ab++) {
-            Item *itm = typeThrees[ab];
-            [self fillArrays:itm];
-        }
-        
-        for (int ab = 0; ab <typeFours.count; ab++) {
-            Item *itm = typeFours[ab];
-            [self fillArrays:itm];
-        }
-        
-    }
-    else
-    {
-        //if false run the db
-        [self sortTypeThrees];
-        [self sortTypeFours];
-        
-    }
+//    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"type3"]) {
+//        for (int ab = 0; ab <typeThrees.count; ab++) {
+//            Item *itm = typeThrees[ab];
+//            [self fillArrays:itm];
+//        }
+//        
+//        for (int ab = 0; ab <typeFours.count; ab++) {
+//            Item *itm = typeFours[ab];
+//            [self fillArrays:itm];
+//        }
+//        
+//    }
+//    else
+//    {
+//        //if false run the db
+//        [self sortTypeThrees];
+//        [self sortTypeFours];
+//        
+//    }
+    
+    
+    [self sortTypeThrees];
+    [self sortTypeFours];
+    
     
     
     rebates = [[NSMutableArray alloc]init];
@@ -340,6 +357,7 @@
         Item *itm = coolProds[x];
         itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsCoolPrice:itm]];
         itm.finalOption = [self checkOptionsCoolOpt:itm];
+        
         if ([itm.finalOption isEqualToString:@"None"]) {
             //do nothing
         } else {
@@ -352,6 +370,7 @@
         Item *itm = heatProds[x];
         itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsHeatPrice:itm]];
         itm.finalOption = [self checkOptionsHeatOpt:itm];
+        
         if ([itm.finalOption isEqualToString:@"None"]) {
             //don nothing
         } else {
@@ -452,7 +471,7 @@
 
 
 -(void) sortTypeThrees {
-    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
+////    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
     Item *itm;
     NSLog(@"type 3 has %d",typeThrees.count);
     for (int xj = 0; xj < typeThrees.count; xj++) {
@@ -603,7 +622,7 @@
 
 
 -(void) sortTypeFours {
-    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
+ ////   [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
     Item *itm;
     NSLog(@"type 4 has %d",typeFours.count);
     for (int xj = 0; xj < typeFours.count; xj++) {
@@ -621,9 +640,9 @@
         int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
         
         
-        if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
-            NSLog(@"aaaa");
-        }
+//        if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
+//            NSLog(@"aaaa");
+//        }
         
         if ([itm.optionOne floatValue] != 0) {
             NSString *option = itm.optionOne;
@@ -791,6 +810,7 @@
             }
             
         } else if ([itm.type isEqualToString:@"Accessories"]) {
+            
             [acces addObject:itm];
         }
         else if ([itm.type isEqualToString:@"Warranties"]) {
@@ -799,8 +819,6 @@
         else if ([itm.type isEqualToString:@"Ductless Mini Splits"]) {
             [ductlessMiniSplits addObject:itm];
         }
-    
-    
 }
 
 
@@ -863,7 +881,7 @@
     }else if ([itm.optionEight isEqualToString:firstOption.coolingValue]) {
         return itm.optionEight;
     }
-    return@"None";
+    return @"None";
 }
 
 
@@ -893,7 +911,6 @@
 
 
 -(NSString *) checkOptionsHeatOpt:(Item *)itm {
-    
     if ([itm.optionOne isEqualToString:firstOption.heatingValue]) {
         return itm.optionOne;
     } else if ([itm.optionTwo isEqualToString:firstOption.heatingValue]) {
@@ -911,7 +928,7 @@
     }else if ([itm.optionEight isEqualToString:firstOption.heatingValue]) {
         return itm.optionEight;
     }
-    return@"None";
+    return @"None";
 }
 
 
@@ -2041,7 +2058,7 @@
             
             finacePay =  (totalAmount - totalSavings)/24;//.915
             invest = (finacePay*24);
-            NSLog(@"sdsd = %f, asdasd= %f",totalAmount, totalSavings);
+           
             break;
         }
             
@@ -2358,7 +2375,6 @@
         
         for (int jj = 0; jj <additemsB.count; jj++) {
             Item *itm = additemsB[jj];
-            NSLog(@"item name : %@",itm.modelName);
             if (![tt containsObject:itm])
                 [tt addObject:itm];
         }
@@ -2392,6 +2408,60 @@
         [cartView.cartstableView reloadData];
     }
 }
+
+
+
+#pragma mark - Reset Rebates on Home
+
+-(void)resetRebatesOnHome {
+    for (int i = 0; i < 3; i++) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
+        NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+        NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d", i];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+        fetchRequest.sortDescriptors = sortDescriptors;
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:cartPredicate];
+        
+        
+        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        self.prodFRC.delegate = self;
+        
+        NSError *fetchingError = nil;
+        if ([self.prodFRC performFetch:&fetchingError]) {
+            NSLog(@"Successfully fetched ");
+            
+        } else {
+            NSLog(@"Failed to get the result");
+        }
+        
+        allData = [[NSArray alloc]init];
+        allData = [self.managedObjectContext
+                   executeFetchRequest:fetchRequest error:&fetchingError];
+        
+        [self resetAllRebates];
+    }
+}
+
+
+
+-(void)resetAllRebates {
+    for (int j = 0; j  < allData.count; j++){
+        Item *itm = allData[j];
+        if ([itm.type isEqualToString:@"Rebates"]) {
+            itm.include = NO;
+        }
+    }
+    
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+    }
+}
+
+
 
 
 

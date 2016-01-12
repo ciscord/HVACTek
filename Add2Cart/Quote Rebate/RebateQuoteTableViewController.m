@@ -106,9 +106,6 @@
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
             
-            
-            
-           // itm.include =[NSNumber numberWithBool:0];
             [selected addObject:itm];
                        
         }

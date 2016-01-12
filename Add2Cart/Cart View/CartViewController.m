@@ -30,7 +30,7 @@
 @synthesize yourOrderLabel, afterSavingsLabel, finance, monthlypayment, productsView;
 @synthesize months;
 @synthesize managedObjectContext;
-
+@synthesize prodFRC;
 
 
 
@@ -110,7 +110,8 @@
 }
 
 -(void) home {
-  
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -333,6 +334,59 @@
 -(void)done{
     [self home];
 };
+
+
+
+#pragma mark - Reset Rebates on Home
+
+-(void)resetRebatesOnHome {
+    for (int i = 0; i < 3; i++) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
+        NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"ord" ascending:YES];
+        NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"currentCart = %d", i];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+        fetchRequest.sortDescriptors = sortDescriptors;
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:cartPredicate];
+        
+        
+        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        self.prodFRC.delegate = self;
+        
+        NSError *fetchingError = nil;
+        if ([self.prodFRC performFetch:&fetchingError]) {
+            NSLog(@"Successfully fetched ");
+            
+        } else {
+            NSLog(@"Failed to get the result");
+        }
+        
+        allData = [[NSArray alloc]init];
+        allData = [self.managedObjectContext
+                   executeFetchRequest:fetchRequest error:&fetchingError];
+        
+        [self resetAllRebates];
+    }
+}
+
+
+
+-(void)resetAllRebates {
+    for (int j = 0; j  < allData.count; j++){
+        Item *itm = allData[j];
+        if ([itm.type isEqualToString:@"Rebates"]) {
+            itm.include = NO;
+        }
+    }
+    
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+    }
+}
+
 
 
 @end
