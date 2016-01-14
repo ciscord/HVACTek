@@ -59,7 +59,14 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
 
     PricebookItem *option = self.priceBookAndServiceOptions.firstObject[@"items"][indexPath.row];
     PlatinumOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:s_PlatinumOptionCellID];
-    cell.lbTitle.text = option.name;
+    NSString * serviceString;
+    if ([option.quantity intValue] > 1) {
+        serviceString = [NSString stringWithFormat:@"(%@) ",option.quantity];
+    }else{
+        serviceString = @"";
+    }
+    NSString * nameString = [serviceString stringByAppendingString:option.name];
+    cell.lbTitle.text = nameString;
 
     return cell;
 }

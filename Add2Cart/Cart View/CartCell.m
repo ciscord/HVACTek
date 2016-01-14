@@ -82,7 +82,7 @@
     
     for (int jj = 0; jj <self.cartItems.count; jj++) {
         Item *itm = self.cartItems[jj];
-        if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
+        if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0)
         {
             totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
         }

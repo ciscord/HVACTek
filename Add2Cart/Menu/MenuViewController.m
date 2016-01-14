@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 unifeiyed. All rights reserved.
 //
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-#define kRebatesURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kProdURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kSystemProdURL [NSURL URLWithString:@"http://www.api.signaturehvac.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kRebatesURL [NSURL URLWithString:@"http://www.hvactek.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kSystemProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+
+//http://www.hvactek.com/
+//http://www.api.signaturehvac.com
 
 #import "MenuViewController.h"
 

@@ -343,7 +343,7 @@
                                         <rect key="frame" x="177" y="334" width="413" height="114"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tech ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kit-7i-TX0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kit-7i-TX0">
                                                 <rect key="frame" x="21" y="19" width="58" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1657,7 +1657,7 @@ the work you've selected</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aP3-oN-TjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4200" y="3206"/>
+            <point key="canvasLocation" x="4288" y="3206"/>
         </scene>
         <!--Repair Vs ServiceVC-->
         <scene sceneID="0Nm-56-97n">
@@ -2971,7 +2971,7 @@ you must debrief from job</string>
                                                     <segue destination="imt-n8-7xy" kind="push" identifier="selectOptionsIpadRepairsSegue" id="9Oh-pS-m18"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$0.00" borderStyle="line" textAlignment="center" minimumFontSize="17" id="eqY-tH-LJL">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$0" borderStyle="line" textAlignment="center" minimumFontSize="17" id="eqY-tH-LJL">
                                                 <rect key="frame" x="20" y="131" width="349" height="45"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.99607843159999998" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -4082,11 +4082,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O98-Ps-4c5"/>
         <segue reference="9Oh-pS-m18"/>
-        <segue reference="DnI-yT-bKf"/>
+        <segue reference="O98-Ps-4c5"/>
         <segue reference="6og-9q-Y4v"/>
         <segue reference="xdW-7q-blD"/>
+        <segue reference="DnI-yT-bKf"/>
         <segue reference="XZV-au-UwI"/>
     </inferredMetricsTieBreakers>
 </document>

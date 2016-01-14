@@ -385,7 +385,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         PricebookItem *p = self.unselectedOptionsArray[indexPath.row];
-        cell.textLabel.text          = p.name;
+        
+        NSString * serviceString;
+        if ([p.quantity intValue] > 1) {
+            serviceString = [NSString stringWithFormat:@"(%@) ",p.quantity];
+        }else{
+            serviceString = @"";
+        }
+        NSString * nameString = [serviceString stringByAppendingString:p.name];
+        
+        cell.textLabel.text          = nameString;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
         cell.textLabel.textColor     = [UIColor darkGrayColor];

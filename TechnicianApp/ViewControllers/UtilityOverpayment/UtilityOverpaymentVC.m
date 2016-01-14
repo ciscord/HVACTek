@@ -48,7 +48,7 @@
 {
     if (textField.text.length  == 0)
     {
-        textField.text = @"$0.00";
+        textField.text = @"$0";
     }
 }
 
@@ -62,7 +62,8 @@
     NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
     [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [paymentFormatter setLocale:local];
-    [paymentFormatter setGeneratesDecimalNumbers:YES];
+    [paymentFormatter setGeneratesDecimalNumbers:NO];
+    [paymentFormatter setMaximumFractionDigits:0];
     
     if ([mutableString length] == 0) {
         [mutableString setString:[local objectForKey:NSLocaleCurrencySymbol]];
@@ -81,10 +82,13 @@
                               [local objectForKey:NSLocaleCurrencySymbol] withString:@""]
                              stringByReplacingOccurrencesOfString:
                              [local objectForKey:NSLocaleGroupingSeparator] withString:@""];
+
+//    NSDecimalNumber *paymentPence = [NSDecimalNumber decimalNumberWithString:penceString];
+//    [textField setText:[paymentFormatter stringFromNumber:[paymentPence decimalNumberByMultiplyingByPowerOf10:0]]];
     
-    NSDecimalNumber *paymentPence = [NSDecimalNumber decimalNumberWithString:penceString];
+    NSNumber *someAmount = [NSNumber numberWithDouble:[penceString doubleValue]];
+    [textField setText:[paymentFormatter stringFromNumber:someAmount]];
     
-    [textField setText:[paymentFormatter stringFromNumber:[paymentPence decimalNumberByMultiplyingByPowerOf10:-2]]];
     
     return NO;
 }

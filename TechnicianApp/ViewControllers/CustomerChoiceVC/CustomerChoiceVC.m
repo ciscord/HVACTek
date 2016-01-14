@@ -388,7 +388,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         PricebookItem *p = self.unusedServiceOptions[indexPath.row];
-        cell.textLabel.text          = p.name;
+        
+        NSString * serviceString;
+        if ([p.quantity intValue] > 1) {
+            serviceString = [NSString stringWithFormat:@"(%@) ",p.quantity];
+        }else{
+            serviceString = @"";
+        }
+        NSString * nameString = [serviceString stringByAppendingString:p.name];
+        
+        cell.textLabel.text          = nameString;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
         cell.textLabel.textColor     = [UIColor darkGrayColor];
@@ -417,7 +426,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"showInstantRRFinalChoiceVC"]) {
+    if ([segue.identifier isEqualToString:@"newCustomerChoiceSegue"]) {
         NewCustomerChoiceVC *vc = [segue destinationViewController];
         vc.isDiscounted       = self.isDiscounted;
         vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;

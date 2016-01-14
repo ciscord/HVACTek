@@ -86,12 +86,20 @@
     
     PricebookItem *p = self.enlargeFullOptionsArray[indexPath.row];
     
+    NSString * serviceString;
+    if ([p.quantity intValue] > 1) {
+        serviceString = [NSString stringWithFormat:@"(%@) ",p.quantity];
+    }else{
+        serviceString = @"";
+    }
+    NSString * nameString = [serviceString stringByAppendingString:p.name];
+    
     if (![self.enlargeOptionsArray containsObject:p]){
         
         NSDictionary* attributes = @{
                                      NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                      };
-        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:p.name attributes:attributes];
+        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
         cell.textLabel.attributedText = attrText;
         
         
@@ -99,7 +107,7 @@
         if (cell.textLabel.attributedText){
             cell.textLabel.attributedText = nil;
         }
-        cell.textLabel.text = p.name;
+        cell.textLabel.text = nameString;
     }
     
     

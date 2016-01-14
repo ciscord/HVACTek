@@ -30,6 +30,13 @@
         self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
         self.txtAnswer.hidden = !question.haveNote;
         self.answerPickerView.hidden = YES;
+        
+        /////
+
+        
+        
+        /////
+        
     }else if ([question.fieldTypeId isEqualToString:@"2"]) {
         [self setUpYesNoPicker];
         self.answerPickerView.hidden = NO;

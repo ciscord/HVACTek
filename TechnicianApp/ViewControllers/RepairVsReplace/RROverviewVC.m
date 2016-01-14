@@ -69,14 +69,15 @@
     NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
     [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [paymentFormatter setLocale:local];
-    [paymentFormatter setGeneratesDecimalNumbers:YES];
+    [paymentFormatter setGeneratesDecimalNumbers:NO];
+    [paymentFormatter setMaximumFractionDigits:0];
     
-    float total = 0.00f;
+    int total = 0;
     for (Question *q in self.tableArray) {
         NSNumber *number = [paymentFormatter numberFromString:q.answer];
         total += [number floatValue];
     }
-    self.totalString = [paymentFormatter stringFromNumber:[NSNumber numberWithFloat:total]];
+    self.totalString = [paymentFormatter stringFromNumber:[NSNumber numberWithInt:total]];
 }
 
 

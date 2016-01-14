@@ -2016,7 +2016,7 @@
     for (int jj = 0; jj <_cartItems.count; jj++) {
         Item *itm = _cartItems[jj];
         // NSLog(@"%@",itm.finalOption);
-        if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
+        if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0)
         {
             totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
         }
@@ -2032,7 +2032,7 @@
         
         if (![_cartItems containsObject:itm]) {    ///object contains additional items prices
             
-            if ([itm.type isEqualToString:@"TypeThree"]&&[itm.optionOne floatValue]!=0)
+            if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0)
             {
                 totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
             }

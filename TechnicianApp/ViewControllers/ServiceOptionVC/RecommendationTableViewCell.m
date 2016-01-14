@@ -273,6 +273,22 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 }
 
+
+/*
+ 
+ PricebookItem *p = [self.selectedServiceOptions[@"removedItems"] objectAtIndex:indexPath.row - 1];
+ NSString * serviceString;
+ if ([p.quantity intValue] > 1) {
+ serviceString = [NSString stringWithFormat:@"     (%@) ",p.quantity];
+ }else{
+ serviceString = @"     ";
+ }
+ cell.descriptionLabel.text = [serviceString stringByAppendingString:p.name];
+ cell.priceLabel.text = @"";
+ 
+ */
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //__weak RecommendationTableViewCell *weakSelf = self;
 
@@ -286,23 +302,40 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         if (cell.textLabel.attributedText){
             cell.textLabel.attributedText = nil;
         }
-         cell.textLabel.text = pRemoved.name;
+        
+        NSString * serviceString;
+        if ([pRemoved.quantity intValue] > 1) {
+            serviceString = [NSString stringWithFormat:@"(%@) ",pRemoved.quantity];
+        }else{
+            serviceString = @"";
+        }
+        cell.textLabel.text = [serviceString stringByAppendingString:pRemoved.name];
+        
         
     }else{
+        
+        NSString * serviceString;
+        if ([pOptions.quantity intValue] > 1) {
+            serviceString = [NSString stringWithFormat:@"(%@) ",pOptions.quantity];
+        }else{
+            serviceString = @"";
+        }
+        NSString * nameString = [serviceString stringByAppendingString:pOptions.name];
+        
         
         if (![self.serviceOptionsRemoved containsObject:pOptions]){
             
             NSDictionary* attributes = @{
                                          NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                          };
-            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:pOptions.name attributes:attributes];
+            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
             cell.textLabel.attributedText = attrText;
             
         }else{
             if (cell.textLabel.attributedText){
                 cell.textLabel.attributedText = nil;
             }
-            cell.textLabel.text = pOptions.name;
+            cell.textLabel.text = nameString;
         }
         
     }

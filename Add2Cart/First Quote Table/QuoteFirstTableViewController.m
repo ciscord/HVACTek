@@ -333,7 +333,11 @@
     secondOptions = [[NSMutableArray alloc]init];
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
-        if ( [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeThree"]) {
+        
+        NSLog(@"itm name: %@",itm.modelName);
+        NSLog(@"itm type: %@",itm.type);
+        
+        if ( [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeOne"]) {
             itm.include = @(NO);
             [secondOptions addObject:itm];
             
@@ -383,7 +387,7 @@
 {
      Item *itm = secondOptions[indexPath.row];
    
-    if ([itm.type isEqualToString:@"TypeTwo"]){
+    if ([itm.type isEqualToString:@"TypeOne"]){
         TypeTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"typeTwo" forIndexPath:indexPath];
         cell.nameLabel.text = itm.modelName;
         cell.priceLabel.text = [NSString stringWithFormat:@"$%@",itm.finalPrice];
@@ -397,7 +401,7 @@
 //        itm.include = [NSNumber numberWithBool:NO];
         return cell;
     
-    } else if ([itm.type isEqualToString:@"TypeThree"]){
+    } else if ([itm.type isEqualToString:@"TypeTwo"]){
         TypeThreeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"typeThree" forIndexPath:indexPath];
         cell.nameLabel.text = itm.modelName;
         cell.priceLabel.text = [NSString stringWithFormat:@"$%@",itm.finalPrice];

@@ -41,6 +41,7 @@
     
     NSDictionary *option   = self.servicesArray[self.selectedIndex];
     self.changedServicesArray = [option[@"removedItems"] mutableCopy];
+    self.serviceNameLabel.text = option[@"title"];
 }
 
 
@@ -93,11 +94,20 @@
     NSMutableArray *items    = option[@"items"];
     PricebookItem *p = items[indexPath.section];
     
+    NSString * serviceString;
+    if ([p.quantity intValue] > 1) {
+        serviceString = [NSString stringWithFormat:@"(%@) ",p.quantity];
+    }else{
+        serviceString = @"";
+    }
+    NSString * nameString = [serviceString stringByAppendingString:p.name];
+    
+    
     if ([self.changedServicesArray containsObject:p]){
         if (cell.serviceNameLabel.attributedText){
             cell.serviceNameLabel.attributedText = nil;
         }
-        cell.serviceNameLabel.text = p.name;
+        cell.serviceNameLabel.text = nameString;
         
         cell.changeStatusButton.backgroundColor = [UIColor colorWithRed:120/255.0f green:191/255.0f blue:68/255.0f alpha:1.0f];
         [cell.changeStatusButton setTitle:@"x" forState:UIControlStateNormal];
@@ -106,7 +116,7 @@
         NSDictionary* attributes = @{
                                      NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                      };
-        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:p.name attributes:attributes];
+        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
         cell.serviceNameLabel.attributedText = attrText;
         
         cell.changeStatusButton.backgroundColor = [UIColor colorWithRed:239/255.0f green:64/255.0f blue:55/255.0f alpha:1.0f];

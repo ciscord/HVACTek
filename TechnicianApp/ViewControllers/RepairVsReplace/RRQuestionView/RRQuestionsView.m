@@ -60,18 +60,18 @@
 - (void)setDefaultAnswersforQuestion:(Question *)question {
     if ([question.name isEqualToString:@"RR5"]) {
         if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
-            //self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
-            self.answerTextField.text = [self getValueOfUtilityOverpayment];
+            self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+            //self.answerTextField.text = [self getValueOfUtilityOverpayment];  //multiplying by number of years
         }else{
-            self.answerTextField.text = @"$0.00";
+            self.answerTextField.text = @"$0";
             [DataLoader sharedInstance].utilityOverpaymentHVAC = self.answerTextField.text;
         }
     }else if ([question.name isEqualToString:@"RR6"]) {
-        self.answerTextField.text = @"$250.00";
+        self.answerTextField.text = @"$250";
     }else if ([question.name isEqualToString:@"RR7"]) {
-        self.answerTextField.text = @"$500.00";
+        self.answerTextField.text = @"$500";
     }else{
-        self.answerTextField.text = @"$0.00";
+        self.answerTextField.text = @"$0";
     }
 }
 
@@ -81,13 +81,14 @@
     NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
     [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [paymentFormatter setLocale:local];
-    [paymentFormatter setGeneratesDecimalNumbers:YES];
+    [paymentFormatter setGeneratesDecimalNumbers:NO];
+    [paymentFormatter setMaximumFractionDigits:0];
     
-    float uOverpayment = 0.00f;
+    int uOverpayment = 0;
     NSNumber *number = [paymentFormatter numberFromString:[[DataLoader sharedInstance] utilityOverpaymentHVAC]];
     uOverpayment = [number floatValue] * [DataLoader sharedInstance]->systemLastYears;
     
-    return [paymentFormatter stringFromNumber:[NSNumber numberWithFloat:uOverpayment]];
+    return [paymentFormatter stringFromNumber:[NSNumber numberWithInt:uOverpayment]];
 }
 
 
@@ -162,7 +163,7 @@
     if ([self isDefaultPriceAnswers]) {
         if (textField.text.length  == 0)
         {
-            textField.text = @"$0.00";
+            textField.text = @"$0";
         }
     }
 }
@@ -178,7 +179,8 @@
         NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
         [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         [paymentFormatter setLocale:local];
-        [paymentFormatter setGeneratesDecimalNumbers:YES];
+        [paymentFormatter setGeneratesDecimalNumbers:NO];
+        [paymentFormatter setMaximumFractionDigits:0];
         
         if ([mutableString length] == 0) {
             [mutableString setString:[local objectForKey:NSLocaleCurrencySymbol]];
@@ -198,9 +200,12 @@
                                  stringByReplacingOccurrencesOfString:
                                  [local objectForKey:NSLocaleGroupingSeparator] withString:@""];
         
-        NSDecimalNumber *paymentPence = [NSDecimalNumber decimalNumberWithString:penceString];
+//        NSDecimalNumber *paymentPence = [NSDecimalNumber decimalNumberWithString:penceString];
+//        [textField setText:[paymentFormatter stringFromNumber:[paymentPence decimalNumberByMultiplyingByPowerOf10:-2]]];
         
-        [textField setText:[paymentFormatter stringFromNumber:[paymentPence decimalNumberByMultiplyingByPowerOf10:-2]]];
+        NSNumber *someAmount = [NSNumber numberWithDouble:[penceString doubleValue]];
+        [textField setText:[paymentFormatter stringFromNumber:someAmount]];
+        
         
         return NO;
     }else{

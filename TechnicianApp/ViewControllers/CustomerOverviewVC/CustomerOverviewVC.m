@@ -197,8 +197,6 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-
-
 }
 
 - (void)configureData {
@@ -206,9 +204,6 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.serviceHistoryList = [NSMutableArray array];
     self.systemInfoList     = [NSMutableArray array];
 
-    
-   
-  
     
     Job          *job          = [[[DataLoader sharedInstance] currentUser] activeJob];
     NSDictionary *customerInfo = [job.swapiCustomerInfo objectForKey:@"dsLocationList.dsLocation"];
@@ -277,7 +272,7 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     [self.customerInfoList addObject:info10];
     
     SCustomerInfo *info11 = [SCustomerInfo new];
-    info10.label = @"ESA Agreement";
+    info11.label = @"ESA Agreement";
     
     id agreeList = [job.swapiCustomerInfo valueForKeyPath:@"dsAgreeList.dsAgree"];
     NSDictionary *agree = nil;
@@ -287,7 +282,7 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     else {
         agree = agreeList;
     }
-    info10.value = ([agree[@"Status"] isEqualToString:@"active"]) ? @"Yes" :@"No";
+    info11.value = ([agree[@"Status"] isEqualToString:@"active"]) ? @"Yes" :@"No";
     [self.customerInfoList addObject:info11];
     
     
