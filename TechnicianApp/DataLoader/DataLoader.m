@@ -49,7 +49,7 @@ NSString *const kSWAPIRemoteTC      = @"0";
 
 #else // production
 
-#define BASE_URL                    @"∫http://www.hvactek.com/api/"  //   http://www.hvactek.com/    //   http://api.signaturehvac.com/api/
+#define BASE_URL                    @"http://www.hvactek.com/api/"  //   http://www.hvactek.com/    //   http://api.signaturehvac.com/api/
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
