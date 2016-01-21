@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UITextField *txtUser;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet UITextField *txtAPI;
 
 -(void)login;
 @end
@@ -25,15 +26,17 @@
     self.isTitleViewHidden = YES;
     self.mainContentView.layer.borderWidth = 1;
     self.mainContentView.layer.borderColor = [[UIColor colorWithRed:143./255 green:200./255 blue:73./255 alpha:0.8] CGColor];
-    
-    NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
-    if ([userPassword valueForKey:@"us"]&&[userPassword valueForKey:@"pw"]) {
-        self.txtUser.text = [userPassword valueForKey:@"us"];
-        self.txtPassword.text = [userPassword valueForKey:@"pw"];
-        [self performSelector:@selector(login) withObject:self afterDelay:0.2];
-    }
-  
+
+//    NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
+//    if ([userPassword valueForKey:@"us"]&&[userPassword valueForKey:@"pw"] && [userPassword valueForKey:@"companyAPI"]) {
+//        self.txtUser.text = [userPassword valueForKey:@"us"];
+//        self.txtPassword.text = [userPassword valueForKey:@"pw"];
+//        self.txtAPI.text = [userPassword valueForKey:@"companyAPI"];
+//        [self performSelector:@selector(login) withObject:self afterDelay:0.2];
+//    }
+ 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -63,11 +66,13 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof (self) weakSelf = self;
     [[DataLoader sharedInstance] loginWithUsername:self.txtUser.text
-                                       andPassword:self.txtPassword.text
+                                          password:self.txtPassword.text
+                                     andCompanyKey:@""
                                          onSuccess:^(NSString *successMessage) {
                                                NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
                                              [userPassword setObject:weakSelf.txtUser.text forKey:@"us"];
                                              [userPassword setObject:weakSelf.txtPassword.text forKey:@"pw"];
+                                             [userPassword setObject:weakSelf.txtAPI.text forKey:@"companyAPI"];
                                              [userPassword synchronize];
                                              
                                              [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

@@ -38,7 +38,7 @@
     addedItems = [[NSMutableArray alloc]init];
  //   NSLog(@"added items has %d and passed were %d",addedItems.count,passed.count);
     
-    NSLog(@"First option is heat value is %@ cool value is %@ ",firstOption.heatingValue,firstOption.coolingValue);
+    NSLog(@"First option is heat value is %@ cool value is %@ boilers value is %@ ductless value is %@ ",firstOption.heatingValue, firstOption.coolingValue, firstOption.boilersValue, firstOption.ductlessValue);
 
     
     first = [[NSUserDefaults standardUserDefaults]boolForKey:@"newSession"];
@@ -334,8 +334,8 @@
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
         
-        NSLog(@"itm name: %@",itm.modelName);
-        NSLog(@"itm type: %@",itm.type);
+//        NSLog(@"itm name: %@",itm.modelName);
+//        NSLog(@"itm type: %@",itm.type);
         
         if ( [itm.type isEqualToString:@"TypeTwo"] || [itm.type isEqualToString:@"TypeOne"]) {
             itm.include = @(NO);

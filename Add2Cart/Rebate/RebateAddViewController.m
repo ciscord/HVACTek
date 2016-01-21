@@ -49,6 +49,9 @@
     //self.type = @"Air Conditioners";
     // Do any additional setup after loading the view.
     save.enabled = NO;
+    save.alpha = 0.5;
+    
+    
     self.nameField.delegate = self;
     self.priceField.delegate = self;
     if (itemz) {
@@ -101,12 +104,34 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    save.enabled = YES;
+    if (self.nameField.text.length > 0 && self.priceField.text.length > 0) {
+        save.alpha = 1.0;
+        save.enabled = YES;
+    }else{
+        save.alpha = 0.5;
+        save.enabled = NO;
+    }
     return YES;
-    
 }
 
+
+
 - (IBAction)saveButton:(id)sender {
+    
+    [[DataLoader sharedInstance] addRebatesToPortal:self.nameField.text
+                      amount:100.0
+                    included:@"1"
+                   onSuccess:^(NSString *successMessage) {
+                       NSLog(@"SUCCES %@",successMessage);
+
+                   }onError:^(NSError *error) {
+                       //ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                       NSLog(@"ERROR");
+                   }];
+    
+    
+    
+    ///////////////////    if succes
     
    Item *item;
     

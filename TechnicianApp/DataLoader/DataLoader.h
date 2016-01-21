@@ -93,9 +93,18 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 //------------------------------------------------------------------------------------------
 
 - (void)loginWithUsername:(NSString *)username
-              andPassword:(NSString *)password
+                 password:(NSString *)password
+            andCompanyKey:(NSString *)companyKey
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError;
+
+
+-(void)addRebatesToPortal:(NSString *)title
+                   amount:(CGFloat)amount
+                 included:(NSString *)included
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError;
+
 
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
                                  onSuccess:(void (^)(NSString *successMessage))onSuccess

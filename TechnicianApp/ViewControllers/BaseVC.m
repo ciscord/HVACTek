@@ -13,19 +13,22 @@
 @property(nonatomic, strong) UIImageView *imgTopBar;
 @property(nonatomic, strong) UIView *titleView;
 @property(nonatomic, strong) UILabel *lbTitle;
+@property(nonatomic, strong) UIView *upperArcView;
+@property(nonatomic, strong) UIView *bottomArcView;
 
 @end
 
 @implementation BaseVC
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:172./255 green:213./255 blue:122./255 alpha:1.];
     
     self.imgTopBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 99)];
     self.imgTopBar.image = [UIImage imageNamed:@"bg-top-bar"];
-//    self.imgTopBar.frame = CGRectMake(0, 0, self.view.width, 148);
     [self.view addSubview:self.imgTopBar];
     
     self.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, self.imgTopBar.bottom + 20, self.view.width, 53)];
@@ -42,22 +45,21 @@
     
     self.lbTitle.text = self.title;
     
+    
+    CAShapeLayer * maskLayer = [CAShapeLayer layer];
+    CGPoint center = CGPointMake(self.view.width/2, 20);
+    
+    maskLayer.path = (__bridge CGPathRef _Nullable)([UIBezierPath bezierPathWithArcCenter:center radius:0.5 startAngle:20.0 endAngle:20.0 clockwise:YES]);
+    
+    
+    self.upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 184, self.view.width, 50)];
+    self.upperArcView.backgroundColor = [UIColor redColor];
+ //   self.upperArcView.layer.mask = maskLayer;
+    [self.view addSubview:self.upperArcView];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void)setTitle:(NSString *)title
 {
@@ -65,16 +67,24 @@
     self.lbTitle.text = title;
 }
 
+
+
 -(void)setIsTitleViewHidden:(BOOL)isTitleViewHidden
 {
     self.titleView.hidden = isTitleViewHidden;
 }
+
+
 
 -(BOOL)isTitleViewHidden
 {
     return self.titleView.hidden;
 }
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 
 @end

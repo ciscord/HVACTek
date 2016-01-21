@@ -261,12 +261,22 @@
     
     int cool = 0;
     int heat = 0;
+    int boilersInt = 0;
+    int ductlessInt = 0;
+    
     if (firstOption.heating)
         heat = 2;
     if (firstOption.cooling)
         cool = 1;
-    NSMutableArray *coolProds = [[NSMutableArray alloc]init];
-    NSMutableArray *heatProds = [[NSMutableArray alloc]init];
+    if (firstOption.boilers)
+        boilersInt = 5;
+    if (firstOption.ductless)
+        ductlessInt = 6;
+    
+    NSMutableArray *coolProds = [[NSMutableArray alloc] init];
+    NSMutableArray *heatProds = [[NSMutableArray alloc] init];
+    NSMutableArray *boilersProds = [[NSMutableArray alloc] init];
+    NSMutableArray *ductlessProds = [[NSMutableArray alloc] init];
     
     
     NSLog(@"Heating is %d and cooling is %d",heat ,cool);
@@ -284,6 +294,14 @@
         if (tID == heat && (![heatProds containsObject:itm])) {
             [heatProds addObject:itm];
         }
+        if (tID == boilersInt && (![boilersProds containsObject:itm])) {
+            [boilersProds addObject:itm];
+        }
+        if (tID == ductlessInt && (![ductlessProds containsObject:itm])) {
+            [ductlessProds addObject:itm];
+        }
+        
+        
         if ((tID == 3)&& (![typeThrees containsObject:itm])) {
             //  itm.finalOption = itm.optionOne;
             //  itm.finalPrice = itm.optOnePrice;
@@ -377,6 +395,34 @@
             [self fillArrays:itm];
         }
     }
+    
+    
+    for (int x = 0; x < boilersProds.count; x++) {
+        Item *itm = boilersProds[x];
+        itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsBoilersPrice:itm]];
+        itm.finalOption = [self checkOptionsBoilersOpt:itm];
+        
+        if ([itm.finalOption isEqualToString:@"None"]) {
+        } else {
+            [self fillArrays:itm];
+        }
+    }
+    
+    
+    
+    for (int x = 0; x < ductlessProds.count; x++) {
+        Item *itm = ductlessProds[x];
+        itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsDuctlessPrice:itm]];
+        itm.finalOption = [self checkOptionsDuctlessOpt:itm];
+        
+        if ([itm.finalOption isEqualToString:@"None"]) {
+            //don nothing
+        } else {
+            [self fillArrays:itm];
+        }
+    }
+    
+    
     
     
     [self arraySort];
@@ -930,6 +976,100 @@
     }
     return @"None";
 }
+
+
+
+-(float) checkOptionsBoilersPrice:(Item *)itm {
+    
+    if ([itm.optionOne isEqualToString:firstOption.boilersValue]) {
+        return [itm.optOnePrice floatValue];
+    } else if ([itm.optionTwo isEqualToString:firstOption.boilersValue]) {
+        return [itm.optTwoPrice floatValue];
+    } else if ([itm.optionThree isEqualToString:firstOption.boilersValue]) {
+        return [itm.optThreePrice floatValue];
+    } else if ([itm.optionFour isEqualToString:firstOption.boilersValue]) {
+        return [itm.optFourPrice floatValue];
+    }else if ([itm.optionFive isEqualToString:firstOption.boilersValue]) {
+        return [itm.optFivePrice floatValue];
+    }else if ([itm.optionSix isEqualToString:firstOption.boilersValue]) {
+        return [itm.optSixPrice floatValue];
+    }else if ([itm.optionSeven isEqualToString:firstOption.boilersValue]) {
+        return [itm.optSevenPrice floatValue];
+    }else if ([itm.optionEight isEqualToString:firstOption.boilersValue]) {
+        return [itm.optEightPrice floatValue];
+    }
+    
+    return 0.0f;
+}
+
+
+-(NSString *) checkOptionsBoilersOpt:(Item *)itm {
+    if ([itm.optionOne isEqualToString:firstOption.boilersValue]) {
+        return itm.optionOne;
+    } else if ([itm.optionTwo isEqualToString:firstOption.boilersValue]) {
+        return itm.optionTwo;
+    } else if ([itm.optionThree isEqualToString:firstOption.boilersValue]) {
+        return itm.optionThree;
+    } else if ([itm.optionFour isEqualToString:firstOption.boilersValue]) {
+        return itm.optionFour;
+    }else if ([itm.optionFive isEqualToString:firstOption.boilersValue]) {
+        return itm.optionFive;
+    }else if ([itm.optionSix isEqualToString:firstOption.boilersValue]) {
+        return itm.optionSix;
+    }else if ([itm.optionSeven isEqualToString:firstOption.boilersValue]) {
+        return itm.optionSeven;
+    }else if ([itm.optionEight isEqualToString:firstOption.boilersValue]) {
+        return itm.optionEight;
+    }
+    return @"None";
+}
+
+
+-(float) checkOptionsDuctlessPrice:(Item *)itm {
+    
+    if ([itm.optionOne isEqualToString:firstOption.boilersValue]) {
+        return [itm.optOnePrice floatValue];
+    } else if ([itm.optionTwo isEqualToString:firstOption.boilersValue]) {
+        return [itm.optTwoPrice floatValue];
+    } else if ([itm.optionThree isEqualToString:firstOption.boilersValue]) {
+        return [itm.optThreePrice floatValue];
+    } else if ([itm.optionFour isEqualToString:firstOption.boilersValue]) {
+        return [itm.optFourPrice floatValue];
+    }else if ([itm.optionFive isEqualToString:firstOption.boilersValue]) {
+        return [itm.optFivePrice floatValue];
+    }else if ([itm.optionSix isEqualToString:firstOption.boilersValue]) {
+        return [itm.optSixPrice floatValue];
+    }else if ([itm.optionSeven isEqualToString:firstOption.boilersValue]) {
+        return [itm.optSevenPrice floatValue];
+    }else if ([itm.optionEight isEqualToString:firstOption.boilersValue]) {
+        return [itm.optEightPrice floatValue];
+    }
+    
+    return 0.0f;
+}
+
+
+-(NSString *) checkOptionsDuctlessOpt:(Item *)itm {
+    if ([itm.optionOne isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionOne;
+    } else if ([itm.optionTwo isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionTwo;
+    } else if ([itm.optionThree isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionThree;
+    } else if ([itm.optionFour isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionFour;
+    }else if ([itm.optionFive isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionFive;
+    }else if ([itm.optionSix isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionSix;
+    }else if ([itm.optionSeven isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionSeven;
+    }else if ([itm.optionEight isEqualToString:firstOption.ductlessValue]) {
+        return itm.optionEight;
+    }
+    return @"None";
+}
+
 
 
 #pragma mark - Table view data source

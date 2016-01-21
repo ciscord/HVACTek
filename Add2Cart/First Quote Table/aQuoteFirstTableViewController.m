@@ -175,6 +175,12 @@
         case 2:
             firstOption.heatingValue = heatingArray[row];
             break;
+        case 3:
+            firstOption.boilersValue = boilersArray[row];
+            break;
+        case 4:
+            firstOption.ductlessValue = ductlessArray[row];
+            break;
         default:
             break;
     }
@@ -215,8 +221,10 @@
 - (IBAction)boilersSwitchFire:(id)sender {
     nextButton.enabled = YES;
     if (boilerSwitch.isOn) {
+        firstOption.boilers = YES;
         boilersPicker.hidden = NO;
     }else {
+        firstOption.boilers = NO;
         boilersPicker.hidden =  YES;
     }
 }
@@ -224,8 +232,10 @@
 - (IBAction)ductlessSwitchFire:(id)sender {
     nextButton.enabled = YES;
     if (ductlessSwitch.isOn) {
+        firstOption.ductless = YES;
         ductlessPicker.hidden = NO;
     }else {
+        firstOption.ductless = NO;
         ductlessPicker.hidden =  YES;
     }
 }

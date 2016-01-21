@@ -74,6 +74,7 @@ NSString *const PRICEBOOK        = @"pricebook";
 NSString *const DEBRIEF          = @"addDebrief";
 NSString *const SURVEY           = @"saveSurvey";
 NSString *const INVOICE          = @"emailInvoice";
+NSString *const ADD_REBATES      = @"addRebate";
 
 #define kStatusOK 1
 
@@ -269,9 +270,11 @@ NSString *const INVOICE          = @"emailInvoice";
 //------------------------------------------------------------------------------------------
 
 - (void)loginWithUsername:(NSString *)username
-              andPassword:(NSString *)password
+                 password:(NSString *)password
+            andCompanyKey:(NSString *)companyKey
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError {
+    
     NSString        *md5String         = [[username stringByAppendingString:password] MD5Digest];
     NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
     [dateTimeFormatter setDateFormat:@"yyyy-MM-dd HH"];
@@ -286,7 +289,7 @@ NSString *const INVOICE          = @"emailInvoice";
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     [self POST:USER_LOGIN
-    parameters:@{ @"email":username, @"signature":signature }
+    parameters:@{ @"email":username, @"password":password, @"signature":signature }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];
@@ -607,6 +610,42 @@ NSString *const INVOICE          = @"emailInvoice";
 
     
 }
+
+
+#pragma mark - Add Rebates
+-(void)addRebatesToPortal:(NSString *)title
+                   amount:(CGFloat)amount
+                 included:(NSString *)included
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:ADD_REBATES
+    parameters:@{ @"title":title, @"amount":[NSNumber numberWithFloat:amount], @"included":included }
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               //[weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
+               onSuccess(@"OK");
+               
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+
+    
+    
+}
+
+
 
 - (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
 {
