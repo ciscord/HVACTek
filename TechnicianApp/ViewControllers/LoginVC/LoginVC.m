@@ -25,15 +25,15 @@
     // Do any additional setup after loading the view.
     self.isTitleViewHidden = YES;
     self.mainContentView.layer.borderWidth = 1;
-    self.mainContentView.layer.borderColor = [[UIColor colorWithRed:143./255 green:200./255 blue:73./255 alpha:0.8] CGColor];
+    self.mainContentView.layer.borderColor = [[UIColor colorWithRed:44./255 green:121./255 blue:185./255 alpha:1.0] CGColor];
 
-//    NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
-//    if ([userPassword valueForKey:@"us"]&&[userPassword valueForKey:@"pw"] && [userPassword valueForKey:@"companyAPI"]) {
-//        self.txtUser.text = [userPassword valueForKey:@"us"];
-//        self.txtPassword.text = [userPassword valueForKey:@"pw"];
-//        self.txtAPI.text = [userPassword valueForKey:@"companyAPI"];
-//        [self performSelector:@selector(login) withObject:self afterDelay:0.2];
-//    }
+    NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
+    if ([userPassword valueForKey:@"us"]&&[userPassword valueForKey:@"pw"] && [userPassword valueForKey:@"companyAPI"]) {
+        self.txtUser.text = [userPassword valueForKey:@"us"];
+        self.txtPassword.text = [userPassword valueForKey:@"pw"];
+        self.txtAPI.text = [userPassword valueForKey:@"companyAPI"];
+        [self performSelector:@selector(login) withObject:self afterDelay:0.2];
+    }
  
 }
 

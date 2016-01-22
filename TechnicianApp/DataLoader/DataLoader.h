@@ -15,6 +15,7 @@
 #import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 #import "Job+Functional.h"
 #import "User+Functional.h"
+#import "CompanyItem.h"
 
 //#define NSLog(...)
 
@@ -82,6 +83,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 @property (nonatomic, strong) NSString *utilityOverpaymentHVAC;
 @property (nonatomic, strong) NSString *totalInvestmentsRR;
+
+@property (nonatomic, readonly) CompanyItem *currentCompany;
 
 
 + (DataLoader *)sharedInstance;

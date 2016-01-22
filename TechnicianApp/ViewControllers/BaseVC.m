@@ -8,6 +8,8 @@
 
 #import "BaseVC.h"
 
+
+
 @interface BaseVC ()
 
 @property(nonatomic, strong) UIImageView *imgTopBar;
@@ -23,13 +25,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithRed:172./255 green:213./255 blue:122./255 alpha:1.];
-    
+
+    [self configureBackgroundColor];
+    [self configureLogoImage];
+    [self configureTitle];
+}
+
+
+
+#pragma mark - BackgroundColors
+- (void)configureBackgroundColor {
+    NSString *hexColor = [[[DataLoader sharedInstance] currentCompany] primary_color];
+    if (hexColor.length > 0){
+        self.view.backgroundColor = [UIColor hx_colorWithHexString:[[[DataLoader sharedInstance] currentCompany] primary_color]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithRed:102./255 green:143./255 blue:203./255 alpha:1.];
+    }
+}
+
+
+
+#pragma mark - Logo
+- (void)configureLogoImage {
     self.imgTopBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 99)];
-    self.imgTopBar.image = [UIImage imageNamed:@"bg-top-bar"];
+    
+    __weak UIImageView *weakImageView = self.imgTopBar;
+    [self.imgTopBar setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                          placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       
+                                       UIImageView *strongImageView = weakImageView;
+                                       if (!strongImageView) return;
+                                       
+                                       strongImageView.image = image;
+                                   }
+                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                       //
+                                   }];
+    
     [self.view addSubview:self.imgTopBar];
+}
+
+
+
+#pragma mark - Title
+- (void)configureTitle{
     
     self.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, self.imgTopBar.bottom + 20, self.view.width, 53)];
     [self.view addSubview:self.titleView];
@@ -37,6 +77,7 @@
     UIImageView *imgTitleBar = [[UIImageView alloc] initWithFrame:self.titleView.bounds];
     imgTitleBar.image = [UIImage imageNamed:@"bg-title"];
     [self.titleView addSubview:imgTitleBar];
+    
     self.lbTitle = [[UILabel alloc] initWithFrame:self.titleView.bounds];
     self.lbTitle.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:44];
     self.lbTitle.textColor = [UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.];
@@ -54,19 +95,17 @@
     
     self.upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 184, self.view.width, 50)];
     self.upperArcView.backgroundColor = [UIColor redColor];
- //   self.upperArcView.layer.mask = maskLayer;
-    [self.view addSubview:self.upperArcView];
-
+    //   self.upperArcView.layer.mask = maskLayer;
+    //[self.view addSubview:self.upperArcView];
 }
 
 
-
+#pragma mark
 -(void)setTitle:(NSString *)title
 {
     [super setTitle:title];
     self.lbTitle.text = title;
 }
-
 
 
 -(void)setIsTitleViewHidden:(BOOL)isTitleViewHidden
@@ -75,16 +114,55 @@
 }
 
 
-
 -(BOOL)isTitleViewHidden
 {
     return self.titleView.hidden;
 }
 
 
+#pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+
+/*
+ - (UIColor *)lighterColorForColor:(UIColor *)c
+ {
+ CGFloat r, g, b, a;
+ if ([c getRed:&r green:&g blue:&b alpha:&a])
+ return [UIColor colorWithRed:MIN(r + 0.2, 1.0)
+ green:MIN(g + 0.2, 1.0)
+ blue:MIN(b + 0.2, 1.0)
+ alpha:a];
+ return nil;
+ }
+ 
+ - (UIColor *)darkerColorForColor:(UIColor *)c
+ {
+ CGFloat r, g, b, a;
+ if ([c getRed:&r green:&g blue:&b alpha:&a])
+ return [UIColor colorWithRed:MAX(r - 0.2, 0.0)
+ green:MAX(g - 0.2, 0.0)
+ blue:MAX(b - 0.2, 0.0)
+ alpha:a];
+ return nil;
+ }
+ 
+ 
+ 
+ 
+ UIColor *baseColor = [UIColor hx_colorWithHexString:[[[DataLoader sharedInstance] currentCompany] primary_color]];
+ UIColor *lighterColor = [self lighterColorForColor:baseColor];
+ UIColor *darkerColor = [self darkerColorForColor:baseColor];
+ 
+ 
+ self.view.backgroundColor = lighterColor;
+ 
+ */
+ 
+
+
 
 
 @end

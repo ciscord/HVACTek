@@ -106,6 +106,8 @@
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
 		5264C30D1C1977A2009728E0 /* RRQuestionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */; };
+		52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 52755F961C52109E00A0E5E5 /* CompanyItem.m */; };
+		52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 52755F991C522F9B00A0E5E5 /* HexColors.m */; };
 		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
 		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
@@ -309,6 +311,10 @@
 		524FDFF41B79046100480987 /* CustomerChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerChoiceCell.m; sourceTree = "<group>"; };
 		524FDFF51B79046100480987 /* CustomerChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerChoiceCell.xib; sourceTree = "<group>"; };
 		5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRQuestionsView.xib; sourceTree = "<group>"; };
+		52755F951C52109E00A0E5E5 /* CompanyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyItem.h; sourceTree = "<group>"; };
+		52755F961C52109E00A0E5E5 /* CompanyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyItem.m; sourceTree = "<group>"; };
+		52755F981C522F9B00A0E5E5 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColors.h; sourceTree = "<group>"; };
+		52755F991C522F9B00A0E5E5 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColors.m; sourceTree = "<group>"; };
 		5277B1851C16D912008929ED /* RRQuestionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRQuestionsVC.h; path = ../RRQuestionsVC.h; sourceTree = "<group>"; };
 		5277B1861C16D912008929ED /* RRQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRQuestionsVC.m; path = ../RRQuestionsVC.m; sourceTree = "<group>"; };
 		5277B1891C16DC95008929ED /* RRQuestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRQuestionsView.h; sourceTree = "<group>"; };
@@ -775,8 +781,12 @@
 				4FD2EBD61A3B462E0056D4C4 /* Question.m */,
 				4F11D3DE1AA6034D007FC0A8 /* PricebookItem.h */,
 				4F11D3DF1AA6034D007FC0A8 /* PricebookItem.m */,
+				52755F951C52109E00A0E5E5 /* CompanyItem.h */,
+				52755F961C52109E00A0E5E5 /* CompanyItem.m */,
 				4F576FB61AC70E1500F0F8FB /* SServiceHistory.h */,
 				4F576FB71AC70E1500F0F8FB /* SServiceHistory.m */,
+				52755F981C522F9B00A0E5E5 /* HexColors.h */,
+				52755F991C522F9B00A0E5E5 /* HexColors.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1265,6 +1275,7 @@
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
+				52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */,
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
 				4FD2EB811A361A0F0056D4C4 /* ProdAdminTableViewCell.m in Sources */,
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
@@ -1275,6 +1286,7 @@
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
 				75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */,
 				AAE7D16E1A39CFBA00F95495 /* CHDropDownTextField.m in Sources */,
+				52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */,
 				4FD2EB801A361A0F0056D4C4 /* HeaderTableViewCell.m in Sources */,
 				75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */,
 				4F11D3FB1AA772E4007FC0A8 /* NSManagedObject+CoreDataCustom.m in Sources */,

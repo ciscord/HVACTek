@@ -17,7 +17,7 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 
@@ -49,7 +49,7 @@ NSString *const kSWAPIRemoteTC      = @"0";
 
 #else // production
 
-#define BASE_URL                    @"http://www.hvactek.com/api/"  //   http://www.hvactek.com/    //   http://api.signaturehvac.com/api/
+#define BASE_URL                    @"http://www.hvactek.com/api/"  //   http://www.hvactek.com/
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
@@ -85,6 +85,7 @@ NSString *const ADD_REBATES      = @"addRebate";
 @property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptionsLocal;
 @property (nonatomic, strong) NSMutableArray *otherOptionsLocal;
 @property (nonatomic, strong) PricebookItem *diagnosticOnlyOption;
+@property (nonatomic, strong) CompanyItem   *currentCompany;
 
 @end
 
@@ -293,7 +294,28 @@ NSString *const ADD_REBATES      = @"addRebate";
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];
-               weakSelf.currentUser = [User userWithName:weakSelf.userInfo[@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
+               
+               NSLog(@"weakSelf.userInfo: %@",weakSelf.userInfo);
+               NSDictionary *companyDict = [[weakSelf.userInfo objectForKey:@"business"] lastObject];
+               
+               self.currentCompany = [CompanyItem companyItemWithID:companyDict[@"id"]
+                                                           address1:companyDict[@"address1"]
+                                                           address2:companyDict[@"address2"]
+                                                      business_name:companyDict[@"business_name"]
+                                                               city:companyDict[@"city"]
+                                                     contact_f_name:companyDict[@"contact_f_name"]
+                                                     contact_l_name:companyDict[@"contact_l_name"]
+                                                      contact_phone:companyDict[@"contact_phone"]
+                                                               logo:companyDict[@"logo"]
+                                                      primary_color:companyDict[@"primary_color"]
+                                                    secondary_color:companyDict[@"secondary_color"]
+                                                              state:companyDict[@"state"]
+                                                                zip:companyDict[@"zip"]];
+               
+               NSArray *swapiArr = weakSelf.userInfo[@"swapi"];
+//               weakSelf.currentUser = [User userWithName:weakSelf.userInfo[@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
+               
+               weakSelf.currentUser = [User userWithName:[[swapiArr lastObject] objectForKey:@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
                weakSelf.currentUser.tech = [NSNumber numberWithBool:([weakSelf.userInfo[@"tech"] intValue]==1)];
                weakSelf.currentUser.password = password;

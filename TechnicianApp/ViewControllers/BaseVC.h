@@ -12,6 +12,8 @@
 #import "RoundCornerView.h"
 #import "DataLoader.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "UIImageView+AFNetworking.h"
+#import "HexColors.h"
 
 @interface BaseVC : UIViewController
 
