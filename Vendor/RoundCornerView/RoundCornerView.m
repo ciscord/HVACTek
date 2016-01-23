@@ -32,10 +32,10 @@
 
 -(void)setup
 {
-    self.backgroundColor = [UIColor colorWithRed:239./255. green:246./255. blue:226./255. alpha:1.];
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     self.layer.cornerRadius = 12;
     self.layer.borderWidth = 1.;
-    self.layer.borderColor = [[UIColor colorWithRed:0.496 green:0.754 blue:0.224 alpha:1.000] CGColor];
+    self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
     self.layer.masksToBounds = YES;
 }
 

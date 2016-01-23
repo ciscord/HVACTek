@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseVC.h"
 
 @interface RoundCornerView : UIView
 

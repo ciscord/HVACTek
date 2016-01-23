@@ -13,6 +13,15 @@
 @interface TechnicianHomeVC ()
 @property (weak, nonatomic) IBOutlet UIView *vwDebrief;
 @property (strong, nonatomic) IBOutlet UITextField *edtJobId;
+@property (weak, nonatomic) IBOutlet UILabel *selectTaskLabel;
+@property (weak, nonatomic) IBOutlet UILabel *jobIdLabel;
+@property (weak, nonatomic) IBOutlet UILabel *finishJobLabel;
+@property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
+@property (weak, nonatomic) IBOutlet UIButton *goButton;
+@property (weak, nonatomic) IBOutlet UIButton *debriefButton;
+@property (weak, nonatomic) IBOutlet UIView *separator1View;
+@property (weak, nonatomic) IBOutlet UIView *separator2View;
+@property (weak, nonatomic) IBOutlet UIView *separator3View;
 
 @end
 
@@ -26,8 +35,27 @@
     
     
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
-   
+    [self configureColorScheme];
 }
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.layer1View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
+    self.separator1View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator2View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator3View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.goButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.debriefButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.selectTaskLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.jobIdLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.finishJobLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.edtJobId.layer.borderWidth = 1.0;
+    self.edtJobId.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -38,10 +66,6 @@
     
     [super viewWillAppear:animated];
     [self checkJobStatus];
-    
-    self.edtJobId.layer.borderWidth = 0.5;
-    self.edtJobId.layer.borderColor = [[UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.] CGColor];
-
 }
 
 - (void)getNextJob {

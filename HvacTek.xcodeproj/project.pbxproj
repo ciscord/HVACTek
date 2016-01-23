@@ -110,6 +110,7 @@
 		52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 52755F991C522F9B00A0E5E5 /* HexColors.m */; };
 		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
 		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
+		5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
@@ -319,6 +320,8 @@
 		5277B1861C16D912008929ED /* RRQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRQuestionsVC.m; path = ../RRQuestionsVC.m; sourceTree = "<group>"; };
 		5277B1891C16DC95008929ED /* RRQuestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRQuestionsView.h; sourceTree = "<group>"; };
 		5277B18A1C16DC95008929ED /* RRQuestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRQuestionsView.m; sourceTree = "<group>"; };
+		5280CE571C538FF2000FE8F8 /* HvakTekColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HvakTekColorScheme.h; sourceTree = "<group>"; };
+		5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HvakTekColorScheme.m; sourceTree = "<group>"; };
 		528530031C326A1900168AC2 /* Unifeiyed_Quoting 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 5.xcdatamodel"; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HvacTekConstants.h; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
@@ -787,6 +790,8 @@
 				4F576FB71AC70E1500F0F8FB /* SServiceHistory.m */,
 				52755F981C522F9B00A0E5E5 /* HexColors.h */,
 				52755F991C522F9B00A0E5E5 /* HexColors.m */,
+				5280CE571C538FF2000FE8F8 /* HvakTekColorScheme.h */,
+				5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1328,6 +1333,7 @@
 				AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */,
 				5233294D1C1706D9008ABA46 /* RROverviewVC.m in Sources */,
 				4F3C50B51A3F0D8C00778972 /* QuestionView.m in Sources */,
+				5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */,
 				4FD2EB631A361A0F0056D4C4 /* FirstOption.m in Sources */,
 				5236287C1C0EF33000B04A71 /* UtilityOverpaymentVC.m in Sources */,
 				4FD2EBCE1A3B40770056D4C4 /* BaseEntity.m in Sources */,

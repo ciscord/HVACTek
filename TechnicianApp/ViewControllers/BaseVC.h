@@ -13,7 +13,8 @@
 #import "DataLoader.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "UIImageView+AFNetworking.h"
-#import "HexColors.h"
+#import "HvakTekColorScheme.h"
+
 
 @interface BaseVC : UIViewController
 

@@ -2094,7 +2094,16 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                     </view>
                     <navigationItem key="navigationItem" id="OtV-1F-t96"/>
                     <connections>
+                        <outlet property="debriefButton" destination="QSq-gl-aHA" id="crk-aJ-MoA"/>
                         <outlet property="edtJobId" destination="G0O-9d-X3J" id="VoF-sy-o6k"/>
+                        <outlet property="finishJobLabel" destination="cwr-Z1-Xvn" id="BMk-1m-dNy"/>
+                        <outlet property="goButton" destination="t8Q-DR-ylF" id="7vJ-MD-N2K"/>
+                        <outlet property="jobIdLabel" destination="UQs-wr-i7a" id="PMh-2s-EWv"/>
+                        <outlet property="layer1View" destination="6r9-z2-AfO" id="Lpv-KF-30c"/>
+                        <outlet property="selectTaskLabel" destination="7Qk-rB-DYN" id="g1j-bJ-FrI"/>
+                        <outlet property="separator1View" destination="ECG-EX-zzR" id="hTf-fY-0FL"/>
+                        <outlet property="separator2View" destination="AkS-CV-U8a" id="v4a-9e-hgz"/>
+                        <outlet property="separator3View" destination="oVP-Cn-wJx" id="dBc-Qb-yTM"/>
                         <outlet property="vwDebrief" destination="kHA-VZ-5eT" id="OUz-Eb-9tT"/>
                         <segue destination="fcD-GZ-KOy" kind="push" identifier="dispatchSegue" id="7i0-vF-WnP"/>
                         <segue destination="D0O-5O-ETb" kind="push" identifier="debriefRminderSegue" id="K3d-67-gxK"/>
@@ -4102,11 +4111,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Oh-pS-m18"/>
-        <segue reference="O98-Ps-4c5"/>
-        <segue reference="6og-9q-Y4v"/>
-        <segue reference="xdW-7q-blD"/>
-        <segue reference="DnI-yT-bKf"/>
         <segue reference="XZV-au-UwI"/>
+        <segue reference="6og-9q-Y4v"/>
+        <segue reference="DnI-yT-bKf"/>
+        <segue reference="xdW-7q-blD"/>
+        <segue reference="9Oh-pS-m18"/>
+        <segue reference="Cdo-cC-vmU"/>
     </inferredMetricsTieBreakers>
 </document>
