@@ -18,6 +18,15 @@
 @property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *costumerName;
 
+@property (weak, nonatomic) IBOutlet UIButton *continuBtn;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
+@property (weak, nonatomic) IBOutlet UILabel *label5;
+@property (weak, nonatomic) IBOutlet UILabel *label6;
+@property (weak, nonatomic) IBOutlet UILabel *label7;
+@property (weak, nonatomic) IBOutlet UILabel *label8;
 
 
 @end
@@ -27,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configureColorScheme];
     
     self.title = NSLocalizedString(@"Setting The Agenda", nil);
     
@@ -36,6 +46,25 @@
     
     //[[[DataLoader sharedInstance] SWAPIManager] whoList]
 }
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.continuBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label4.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label5.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label6.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label7.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label8.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.presentationLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.thankLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.introduceLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

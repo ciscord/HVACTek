@@ -8,14 +8,32 @@
 
 #import "QuestionView.h"
 
+@interface QuestionView ()
+
+@property (weak, nonatomic) IBOutlet UIView *separatorView1;
+@property (weak, nonatomic) IBOutlet UIView *separatorView2;
+
+@end
+
+
 @implementation QuestionView
 
 -(void)setup
 {
     [super setup];
     self.layer.cornerRadius = 8;
-    self.backgroundColor = [UIColor colorWithRed:239./255. green:246./255. blue:226./255. alpha:1.];
+    self.layer.borderWidth = 1.0;
+    self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
     
+    self.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    [self.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+//    [self.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    
+    
+    self.separatorView1.backgroundColor = [UIColor blackColor];
     
     pickerData = [[NSMutableArray alloc] init];
 }

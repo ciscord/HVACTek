@@ -11,7 +11,13 @@
 
 @interface UtilityOverpaymentVC ()
 
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet RoundCornerView *overpaimentRoundV;
+@property (weak, nonatomic) IBOutlet UIButton *visitBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
+@property (weak, nonatomic) IBOutlet UILabel *hvacLabel;
+@property (weak, nonatomic) IBOutlet UILabel *overpaymentLabel;
 @end
 
 @implementation UtilityOverpaymentVC
@@ -20,9 +26,27 @@
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureColorScheme];
     
     self.title = NSLocalizedString(@"Utility Overpayment", nil);
     [self configureVC];
+}
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.overpaimentRoundV.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.overpaimentRoundV.layer.borderWidth   = 1.0;
+    self.overpaimentRoundV.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.visitBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.hvacLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.overpaymentLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.amountTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.amountTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.amountTextField.layer.borderWidth   = 1.0;
+    self.amountTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,8 +56,6 @@
 
 
 - (void)configureVC {
-    self.amountTextField.layer.borderWidth   = 1.0;
-    self.amountTextField.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
     
     if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
         self.amountTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];

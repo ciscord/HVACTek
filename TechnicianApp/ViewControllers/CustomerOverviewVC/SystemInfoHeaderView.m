@@ -10,6 +10,7 @@
 
 @interface SystemInfoHeaderView ()
 
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *btnCollapse;
 
 @end

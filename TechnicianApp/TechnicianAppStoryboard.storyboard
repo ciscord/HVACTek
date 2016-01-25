@@ -247,6 +247,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="Wsm-rc-wk8"/>
                     <connections>
+                        <outlet property="agendaView" destination="itM-zR-uI8" id="b8d-UM-4Cb"/>
+                        <outlet property="continueBtn" destination="jI4-Lf-Owa" id="tmm-X8-ytd"/>
+                        <outlet property="label1" destination="nzc-k9-tcl" id="a1R-XT-MCx"/>
+                        <outlet property="label2" destination="QOw-4t-rHT" id="9TZ-Bm-S0c"/>
+                        <outlet property="label3" destination="j4J-Tb-3sz" id="bVU-sr-AoF"/>
+                        <outlet property="label4" destination="DWu-Zh-xcD" id="yor-En-b34"/>
+                        <outlet property="label5" destination="BY5-Rc-OyF" id="P8p-iV-enO"/>
+                        <outlet property="label6" destination="dBh-Uh-i5I" id="uI0-fG-YPD"/>
+                        <outlet property="view1" destination="MOp-KK-cQd" id="T48-2e-TcF"/>
                         <segue destination="Iub-ad-ALt" kind="push" identifier="customerQuestionsSegue" id="Ut1-e1-ITg"/>
                     </connections>
                 </viewController>
@@ -648,7 +657,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="cTQ-6k-QHm"/>
                     <connections>
+                        <outlet property="continuBtn" destination="rt1-Th-ncC" id="Fda-HQ-KTf"/>
                         <outlet property="introduceLbl" destination="bZe-ed-axi" id="f9C-eL-cs4"/>
+                        <outlet property="label1" destination="C2N-CM-F2s" id="huW-l3-P8e"/>
+                        <outlet property="label2" destination="GGJ-PA-orJ" id="dYo-Mp-vQm"/>
+                        <outlet property="label3" destination="vWd-SK-he5" id="cc9-sn-8Ey"/>
+                        <outlet property="label4" destination="Mo2-TX-LC6" id="rH6-uM-EVf"/>
+                        <outlet property="label5" destination="vAZ-hj-wrK" id="N7r-RF-YJv"/>
+                        <outlet property="label6" destination="tmc-hH-KBg" id="BdB-KQ-qDr"/>
+                        <outlet property="label7" destination="yNY-gy-PqQ" id="2jR-pb-lf8"/>
+                        <outlet property="label8" destination="OnD-Rw-G67" id="tcc-Je-54U"/>
                         <outlet property="presentationLbl" destination="XNN-f5-qz3" id="9bU-tu-Pew"/>
                         <outlet property="thankLbl" destination="cZE-xF-l7z" id="PkS-tg-P77"/>
                     </connections>
@@ -1980,7 +1998,9 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                     </view>
                     <navigationItem key="navigationItem" id="Y6N-pm-97m"/>
                     <connections>
+                        <outlet property="continueBtn" destination="ZVU-x8-3Jb" id="piO-6i-sCo"/>
                         <outlet property="tableView" destination="EMi-p3-b0c" id="4ps-a9-6c2"/>
+                        <outlet property="titleLabel" destination="buC-Y6-BwU" id="3ug-0o-lQ6"/>
                         <segue destination="gRq-ku-OmV" kind="push" identifier="technicianQuestionsSegue" id="KOD-QF-Gvk"/>
                     </connections>
                 </viewController>
@@ -2189,10 +2209,6 @@ Troy, PA 16947</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dgQ-nw-avB">
-                                        <rect key="frame" x="58" y="21" width="653" height="517"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RRz-Vr-e8o">
                                         <rect key="frame" x="97" y="85" width="575" height="389"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2207,6 +2223,10 @@ Troy, PA 16947</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dgQ-nw-avB">
+                                        <rect key="frame" x="58" y="21" width="653" height="517"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -2215,6 +2235,7 @@ Troy, PA 16947</string>
                     </view>
                     <navigationItem key="navigationItem" id="yqb-ak-E3G"/>
                     <connections>
+                        <outlet property="beginBtn" destination="DT0-xz-w87" id="ZFi-Q9-ZFn"/>
                         <outlet property="imgInspiration" destination="dgQ-nw-avB" id="ngM-BR-4eT"/>
                         <outlet property="lbCustomerInfo" destination="OM7-Ln-HVO" id="6SM-yl-HfV"/>
                         <outlet property="lbInspirationSentence" destination="RRz-Vr-e8o" id="2yD-pC-1Jj"/>
@@ -2481,15 +2502,16 @@ you must debrief from job</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.67843137254901964" green="0.83137254901960778" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="wAl-KP-w8J"/>
                     <connections>
+                        <outlet property="beginBtn" destination="l80-Vb-6qo" id="Bun-3z-BZl"/>
                         <outlet property="btnCoolingCall" destination="qwp-c6-GZw" id="k4p-a4-Tkd"/>
                         <outlet property="btnHeatingCall" destination="Yji-dL-bDC" id="FRA-wL-FHY"/>
                         <outlet property="lbCustomerInfoTitle" destination="Etv-lI-FL3" id="tfS-3D-axE"/>
                         <outlet property="lbServiceHistoryInfoTitle" destination="ahk-TP-42Q" id="d3T-m4-O31"/>
                         <outlet property="lbSystemInfoTitle" destination="dP3-FZ-aEi" id="Hly-7j-X1N"/>
+                        <outlet property="returnBtn" destination="RLx-Bw-0Oz" id="sAA-tc-U8m"/>
                         <outlet property="tvCustomerInfo" destination="6aM-lX-nrg" id="ryy-h7-zQs"/>
                         <outlet property="tvServiceHistory" destination="Lnz-uQ-1qY" id="3p0-F5-2Li"/>
                         <outlet property="tvSystemInfo" destination="A2R-5U-fKy" id="CiW-gk-7LK"/>
@@ -3026,6 +3048,12 @@ you must debrief from job</string>
                     <navigationItem key="navigationItem" id="M1c-aO-sJJ"/>
                     <connections>
                         <outlet property="amountTextField" destination="eqY-tH-LJL" id="m89-L7-zS1"/>
+                        <outlet property="hvacLabel" destination="sD2-nt-hnT" id="8lY-YT-VFa"/>
+                        <outlet property="nextBtn" destination="THd-ST-5Md" id="KMh-M0-jRe"/>
+                        <outlet property="overpaimentRoundV" destination="F59-tm-NAw" id="kUg-Ek-6C9"/>
+                        <outlet property="overpaymentLabel" destination="7hY-ny-cGN" id="Enz-EC-Vn4"/>
+                        <outlet property="separatorView" destination="OER-1S-L75" id="oVO-O3-IAX"/>
+                        <outlet property="visitBtn" destination="Kj7-6c-KT9" id="gdl-6u-qjg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VhB-Yo-BtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4111,11 +4139,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XZV-au-UwI"/>
         <segue reference="6og-9q-Y4v"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="XZV-au-UwI"/>
         <segue reference="xdW-7q-blD"/>
-        <segue reference="9Oh-pS-m18"/>
         <segue reference="Cdo-cC-vmU"/>
+        <segue reference="9Oh-pS-m18"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,6 +23,6 @@
 
 @interface HvTekColor (HvTekColorAddition)
 
-+ (nullable UIColor *)cs_getColorWithProperty:(float)percent;
++ (nullable UIColor *)cs_getColorWithProperty:(csColors)percent;
 
 @end

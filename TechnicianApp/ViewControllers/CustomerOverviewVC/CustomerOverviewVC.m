@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSString *label;
 @property (nonatomic, strong) NSString *value;
 
+
 @end
 
 @implementation SCustomerInfo
@@ -159,6 +160,13 @@
 
 @property (nonatomic, strong) NSArray *questions;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *beginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *returnBtn;
+
+
+
+
 @end
 
 @implementation CustomerOverviewVC
@@ -171,14 +179,15 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self configureColorScheme];
 
     self.lbCustomerInfoTitle.font       = [UIFont fontWithName:@"Calibri" size:16];
     self.lbServiceHistoryInfoTitle.font = self.lbCustomerInfoTitle.font;
     self.lbSystemInfoTitle.font         = self.lbCustomerInfoTitle.font;
 
     self.isTitleViewHidden            = YES;
-    self.view.backgroundColor         = [UIColor colorWithRed:0.622 green:0.807 blue:0.404 alpha:1.000];
-    self.vContainer.layer.borderColor = [[UIColor colorWithRed:0.379 green:0.694 blue:0.227 alpha:1.000] CGColor];
+    
     [self.tvCustomerInfo registerClass:[CustomerInfoTableViewCell class] forCellReuseIdentifier:kCustomerInfoCellIdentifier];
 
     [self.tvSystemInfo registerNib:[UINib nibWithNibName:kSystemInfoHeaderView bundle:nil] forHeaderFooterViewReuseIdentifier:kSystemInfoHeaderView];
@@ -189,6 +198,19 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.selectedType = qtHeating;
     [self performSelector:@selector(configureData) withObject:nil afterDelay:0.1];
 }
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.returnBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+   // self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.vContainer.layer.borderColor = [[UIColor colorWithRed:0.379 green:0.694 blue:0.227 alpha:1.000] CGColor];
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

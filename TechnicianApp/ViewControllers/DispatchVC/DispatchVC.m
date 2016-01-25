@@ -13,6 +13,7 @@
 
 @interface DispatchVC () <SFRoundProgressCounterViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *beginBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *imgInspiration;
 @property (weak, nonatomic) IBOutlet UILabel *lbInspirationSentence;
 @property (weak, nonatomic) IBOutlet SFRoundProgressCounterView *vwCounter;
@@ -28,22 +29,33 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    [self configureColorScheme];
+    
 	self.isTitleViewHidden = YES;
 
 	self.vwCounter.delegate = self;
 	NSNumber *interval = [NSNumber numberWithLong:5000.0];
 	self.vwCounter.intervals = @[interval];
-	self.vwCounter.outerProgressColor = [UIColor colorWithRed:76. / 255. green:67. / 255. blue:45. / 255. alpha:1.];
-	self.vwCounter.outerTrackColor = [UIColor colorWithRed:187. / 255. green:178. / 255. blue:174. / 255. alpha:1.];
+	self.vwCounter.outerProgressColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+	self.vwCounter.outerTrackColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.vwCounter.labelColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 	self.vwCounter.innerCircleView.backgroundColor = self.view.backgroundColor;
 	self.vwCounter.outerCircleView.backgroundColor = [UIColor clearColor];
 	self.vwCounter.hideFraction = YES;
 	self.vwInspiration.backgroundColor = self.view.backgroundColor;
 	[self.imgInspiration setImageWithURL:[NSURL URLWithString:[[DataLoader sharedInstance] inspirationImagePath]] placeholderImage:nil];
-
-	[self setInspirationText:[[DataLoader sharedInstance] inspirationSentence]];
 }
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbCustomerInfo.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbInspirationSentence.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
+
 
 - (void)setInspirationText:(NSString *)text {
 	UIFont *font = [UIFont fontWithName:@"Arial-BoldMT" size:77];

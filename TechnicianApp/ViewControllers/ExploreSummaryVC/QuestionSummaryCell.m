@@ -16,6 +16,10 @@
     
     self.backgroundColor = [UIColor clearColor];
     self.selectedBackgroundView = [UIView new];
+    
+    self.lbAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbQuestion.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
     // Initialization code
 //    self.backgroundColor                = [UIColor clearColor];
 //    self.backgroundView.backgroundColor = [UIColor clearColor];
@@ -24,8 +28,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

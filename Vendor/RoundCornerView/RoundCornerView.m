@@ -34,8 +34,8 @@
 {
     self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     self.layer.cornerRadius = 12;
-    self.layer.borderWidth = 1.;
-    self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    //self.layer.borderWidth = 1.;
+    //self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
     self.layer.masksToBounds = YES;
 }
 
