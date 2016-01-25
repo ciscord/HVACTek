@@ -11,6 +11,13 @@
 
 @interface ESABenefitsVC ()
 
+@property (weak, nonatomic) IBOutlet UIButton *continueBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label0;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *esaLabel;
 @end
 
 @implementation ESABenefitsVC
@@ -26,6 +33,20 @@
     
     self.discountView.layer.borderColor = [UIColor blackColor].CGColor;
     
+    [self configureColorScheme];
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label0.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+   // self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 - (void)didReceiveMemoryWarning {

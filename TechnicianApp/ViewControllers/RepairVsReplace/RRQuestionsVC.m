@@ -17,6 +17,7 @@
 @property(nonatomic, assign) NSInteger currentRRQuestionIndex;
 @property(nonatomic, strong) RRQuestionsView *currentRRQuestionView;
 @property(nonatomic, strong) RRQuestionsView *nextRRQuestionView;
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
 
 @end
 
@@ -28,10 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self configureColorScheme];
     self.title = @"Customer's Choice";
     [self loadQuestionsData];
 }
 
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.titleView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
 
 
 #pragma mark - Load Questions

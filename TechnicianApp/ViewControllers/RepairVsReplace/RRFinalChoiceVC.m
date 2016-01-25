@@ -17,6 +17,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *initialTechTextField;
 @property (weak, nonatomic) IBOutlet UIView *customerPriceView;
 @property (weak, nonatomic) IBOutlet UITextField *initialCostumerTextField;
+@property (weak, nonatomic) IBOutlet UIButton *invoiceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rvsrBtn;
+@property (weak, nonatomic) IBOutlet UIButton *optionsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *currencyBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UIButton *hideBtn;
+@property (weak, nonatomic) IBOutlet RoundCornerView *hideRoundView;
 
 @end
 
@@ -27,20 +36,44 @@
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureColorScheme];
     [self configureVC];
+}
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.initialTechTextField.layer.borderWidth   = .5;
+    self.initialTechTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.initialTechTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.initialTechTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.initialCostumerTextField.layer.borderWidth   = .5;
+    self.initialCostumerTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.initialCostumerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.initialCostumerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.customerPriceView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
+    
+    self.hideBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.invoiceBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.optionsBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currencyBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.rvsrBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.hideRoundView.layer.borderWidth   = 3.0;
+    self.hideRoundView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    
 }
 
 
 - (void)configureVC {
     self.title = @"Customer's Choice";
     self.descriptionLabel.text = [NSString stringWithFormat:@"Over the next 5 years it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.totalInvestment];
-    self.initialTechTextField.layer.borderWidth   = .5;
-    self.initialTechTextField.layer.borderColor   = [[UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.] CGColor];
-    self.initialCostumerTextField.layer.borderWidth   = .5;
-    self.initialCostumerTextField.layer.borderColor   = [[UIColor colorWithRed:118./255 green:189./255 blue:29./255 alpha:1.] CGColor];
     
     [self.view bringSubviewToFront:self.customerPriceView];
-    self.customerPriceView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
     
     [DataLoader sharedInstance].totalInvestmentsRR = self.totalInvestment;
 }

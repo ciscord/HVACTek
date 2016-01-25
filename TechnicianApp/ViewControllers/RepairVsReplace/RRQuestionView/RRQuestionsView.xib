@@ -93,6 +93,8 @@ technician.</string>
                 <outlet property="btnBack" destination="klJ-2A-dvn" id="Mzr-0f-QGh"/>
                 <outlet property="btnNext" destination="ptI-zd-oq1" id="lNv-c3-vMR"/>
                 <outlet property="questionTextView" destination="5BH-zo-7CQ" id="uq9-xh-zOD"/>
+                <outlet property="separatorView1" destination="1MO-vr-r6K" id="JZp-XI-P12"/>
+                <outlet property="separatorView2" destination="ibU-tX-BGJ" id="9Vn-WP-aAi"/>
             </connections>
             <point key="canvasLocation" x="418" y="405.5"/>
         </view>

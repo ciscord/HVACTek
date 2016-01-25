@@ -11,7 +11,9 @@
 @implementation RROverviewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.nameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.priceLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

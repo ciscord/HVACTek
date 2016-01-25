@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HvakTekColorScheme.h"
 
 @interface RROverviewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @end

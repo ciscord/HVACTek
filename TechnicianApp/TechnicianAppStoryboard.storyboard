@@ -526,7 +526,9 @@
                     <navigationItem key="navigationItem" id="ZzS-2Y-UhD"/>
                     <connections>
                         <outlet property="collectionView" destination="2Qs-dR-lyc" id="1FG-QI-kgH"/>
+                        <outlet property="continueBtn" destination="H8y-H2-hiN" id="QVD-D2-raL"/>
                         <outlet property="tfSearch" destination="yKx-FC-3M9" id="aF7-Af-xES"/>
+                        <outlet property="titleLabel" destination="4HD-Lk-bOY" id="YDP-qF-1MO"/>
                         <segue destination="fbm-eM-mve" kind="push" identifier="selectOptionsSegue" id="b12-G0-Wq2"/>
                     </connections>
                 </viewController>
@@ -892,8 +894,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="3Sc-yf-kJM"/>
                     <connections>
+                        <outlet property="continueBtn" destination="9yt-Kl-HsA" id="7NU-cr-CSa"/>
                         <outlet property="discountLabel" destination="d0B-Hc-PsT" id="lZN-bn-eer"/>
                         <outlet property="discountView" destination="xmc-FJ-3Rd" id="1XL-qZ-1MM"/>
+                        <outlet property="esaLabel" destination="fQm-3C-H6m" id="kl5-uz-gxN"/>
+                        <outlet property="label0" destination="uVk-H3-LZR" id="i2g-QU-3ub"/>
+                        <outlet property="label1" destination="DHO-o1-AIr" id="TPp-Ln-w8a"/>
+                        <outlet property="label2" destination="XZv-gL-AH6" id="hmk-F6-n4r"/>
+                        <outlet property="label3" destination="BxC-dI-Jxp" id="FZT-gx-9zd"/>
+                        <outlet property="titleLabel" destination="gBe-TC-gJk" id="5j2-gm-ZoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QA1-hS-O1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -949,6 +958,10 @@ recommendations to review with you.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Aue-RX-XgD"/>
+                    <connections>
+                        <outlet property="continueBtn" destination="B2X-58-wxO" id="geE-iA-ElH"/>
+                        <outlet property="titleLabel" destination="9Qa-PR-lgh" id="KJT-ba-E1S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQN-Vf-qPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1383,9 +1396,25 @@ the work you've selected</string>
                     </view>
                     <navigationItem key="navigationItem" id="9jP-OK-M4Y"/>
                     <connections>
+                        <outlet property="backBtn" destination="yJz-Sd-kDW" id="QpT-HP-zdk"/>
+                        <outlet property="continueBtn" destination="btg-a9-EcW" id="YBS-y0-hiP"/>
                         <outlet property="descriptionView" destination="dw8-Uy-EDh" id="x9V-IS-HD3"/>
+                        <outlet property="helpView1" destination="bxg-h3-V9F" id="MMa-1J-Ltj"/>
+                        <outlet property="helpView2" destination="CTj-Ei-j0o" id="KTY-nu-wka"/>
+                        <outlet property="helpView3" destination="aN8-RM-dBT" id="rzi-7G-TPC"/>
                         <outlet property="helperView" destination="afE-F7-q9x" id="txL-AK-LPi"/>
                         <outlet property="keyboardAvoiding" destination="JxK-g3-aa6" id="ngd-sA-uyO"/>
+                        <outlet property="label1" destination="cf1-r3-HUC" id="V0q-yG-3ba"/>
+                        <outlet property="label2" destination="gnR-m7-PP8" id="ENB-OJ-lyu"/>
+                        <outlet property="label3" destination="YDA-hw-C49" id="V2f-cs-eO7"/>
+                        <outlet property="label4" destination="Tub-LQ-RvK" id="xCt-ng-3xF"/>
+                        <outlet property="label5" destination="Kur-EQ-fST" id="cZM-1b-GrU"/>
+                        <outlet property="label6" destination="5Cv-7k-0hw" id="Ixf-nr-xqu"/>
+                        <outlet property="label7" destination="Ot7-KH-39y" id="Ag6-Xl-92R"/>
+                        <outlet property="label8" destination="AcS-cw-4eP" id="QMf-QX-sMB"/>
+                        <outlet property="mainDescriptLabel" destination="lOE-ZF-tBJ" id="goS-S1-84r"/>
+                        <outlet property="mainView" destination="Tzl-ge-qgF" id="wVy-RO-RNe"/>
+                        <outlet property="separator1" destination="793-hU-fdP" id="5cI-Rp-DGu"/>
                         <outlet property="signatureView" destination="m6G-Wd-xZi" id="1iK-oe-i4j"/>
                         <outlet property="subtotaPriceLabel" destination="dv1-bb-mI6" id="v5j-CO-sZd"/>
                         <outlet property="textFieldCPT" destination="8Aw-Cu-089" id="e7Y-Jp-ktA"/>
@@ -1629,7 +1658,7 @@ the work you've selected</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorized Signature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nak-d3-ZIf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="132" height="21"/>
+                                                        <rect key="frame" x="4" y="0.0" width="132" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="14"/>
                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1656,10 +1685,10 @@ the work you've selected</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bCq-jm-aiT">
                                         <rect key="frame" x="262" y="850" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="summary-findings-checkbox-bg">
+                                        <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="summary-findings-checkmark" backgroundImage="summary-findings-checkbox-bg"/>
+                                        <state key="selected" image="summary-findings-checkmark"/>
                                         <connections>
                                             <action selector="sendByEmailButton:" destination="J4s-ud-uAn" eventType="touchUpInside" id="WA5-P8-1R8"/>
                                         </connections>
@@ -1678,13 +1707,29 @@ the work you've selected</string>
                     </view>
                     <navigationItem key="navigationItem" id="VIp-Oc-E0f"/>
                     <connections>
+                        <outlet property="backBtn" destination="paL-xw-zzX" id="ThX-ie-Ohq"/>
                         <outlet property="btnSendByEmail" destination="bCq-jm-aiT" id="yLP-W8-ADi"/>
                         <outlet property="dueLabel" destination="vXg-vp-jJr" id="oiE-9d-BvQ"/>
+                        <outlet property="label1" destination="Uwm-Wl-apM" id="TAg-q1-UAH"/>
+                        <outlet property="label10" destination="8NM-7n-VGu" id="fX4-tc-nzG"/>
+                        <outlet property="label11" destination="dMJ-Jd-mhw" id="PDb-69-XIl"/>
+                        <outlet property="label2" destination="QJH-Pa-YL9" id="7CX-hq-Urk"/>
+                        <outlet property="label3" destination="frm-Pg-XD8" id="WZf-Hl-dbJ"/>
+                        <outlet property="label4" destination="Cys-dT-aua" id="wSV-PX-ezO"/>
+                        <outlet property="label5" destination="H58-le-lpv" id="o0P-o7-pAq"/>
+                        <outlet property="label6" destination="mMe-o3-YfK" id="cyI-dI-F4j"/>
+                        <outlet property="label7" destination="r6V-Rg-c3M" id="UyT-XL-uKZ"/>
+                        <outlet property="label8" destination="ZCg-cN-sEO" id="WwE-9a-hbI"/>
+                        <outlet property="label9" destination="nak-d3-ZIf" id="Dop-qD-h9e"/>
                         <outlet property="lblSavePrice" destination="3xn-9H-4cQ" id="7fN-Jd-94n"/>
                         <outlet property="lblSavedWithESA" destination="kZF-Dp-QkI" id="rDw-J6-NUq"/>
+                        <outlet property="mainView" destination="7df-Ad-LEq" id="xTm-Rq-oVq"/>
                         <outlet property="optionsView" destination="gNB-jv-kcf" id="nBA-W2-yvr"/>
                         <outlet property="paymentLabel" destination="LFp-6K-b6M" id="uKh-uX-I0U"/>
+                        <outlet property="saveBtn" destination="93D-HU-vXw" id="QYm-4f-7TC"/>
                         <outlet property="selectedOptionsTableView" destination="wyb-m8-ikz" id="qUR-ZL-JTg"/>
+                        <outlet property="separator1" destination="t76-R6-o9h" id="95g-yu-SnC"/>
+                        <outlet property="separator2" destination="ekI-Us-pYk" id="Hri-9F-avr"/>
                         <outlet property="signatureView" destination="jca-Uy-Buc" id="I2c-Ip-fAw"/>
                         <outlet property="snapShotView" destination="wWf-yg-uG2" id="kIs-id-NNI"/>
                         <outlet property="stopView" destination="jIG-l4-gAw" id="Omg-6e-ATD"/>
@@ -2536,11 +2581,11 @@ you must debrief from job</string>
                                 <rect key="frame" x="34" y="275" width="700" height="586"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="OZT-M3-SFp">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="OZT-M3-SFp">
                                         <rect key="frame" x="10" y="8" width="680" height="566"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="separatorColor" red="0.46666666870000001" green="0.74117648599999997" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <sections/>
                                         <connections>
@@ -2684,6 +2729,7 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="eZ1-VQ-Eex"/>
                     <connections>
+                        <outlet property="btnContinue" destination="GRV-ct-s8T" id="Xel-na-f0N"/>
                         <outlet property="tableView" destination="VmU-RT-fY5" id="tqT-H1-oIK"/>
                         <segue destination="PVm-o9-UYq" kind="push" identifier="customerChoiceSegue" id="DnI-yT-bKf"/>
                         <segue destination="sFe-4S-ONH" kind="modal" identifier="showEnlargeOptions" modalTransitionStyle="crossDissolve" id="Gis-yL-ftw"/>
@@ -2794,6 +2840,9 @@ you must debrief from job</string>
                         <outlet property="monthlyPaymentsLbl" destination="M5j-0Q-Vsu" id="bD6-fj-kMr"/>
                         <outlet property="optionNameLabel" destination="Epg-Pd-ap1" id="qrc-wv-k3z"/>
                         <outlet property="savingESALbl" destination="RpC-X2-z59" id="07q-Ut-M6T"/>
+                        <outlet property="separatorView1" destination="g2g-fV-8K7" id="6Me-UW-mGa"/>
+                        <outlet property="separatorView2" destination="fdh-gn-XOY" id="yE4-FU-SVn"/>
+                        <outlet property="separatorView3" destination="6ez-g6-dAw" id="Zmy-Zo-nEi"/>
                         <outlet property="totalPriceLbl" destination="ULf-mc-uBH" id="vjz-Va-bWc"/>
                     </connections>
                 </viewController>
@@ -2935,7 +2984,9 @@ you must debrief from job</string>
                     <navigationItem key="navigationItem" id="eaO-Qk-bTb"/>
                     <connections>
                         <outlet property="collectionView" destination="icO-kP-jrW" id="lAJ-k5-wM4"/>
+                        <outlet property="continueBtn" destination="kXj-BX-A7n" id="Jnq-lU-wlM"/>
                         <outlet property="tfSearch" destination="Xxp-tb-n7a" id="ksH-fD-eer"/>
+                        <outlet property="titleLabel" destination="KSl-e9-Es8" id="Emh-EY-YFM"/>
                         <segue destination="R8j-ML-5Px" kind="push" identifier="showServiceOptionsDirect" id="Njq-Pc-taE"/>
                     </connections>
                 </viewController>
@@ -3135,6 +3186,8 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="khL-1A-pSU"/>
                     <connections>
+                        <outlet property="bacBtn" destination="7h7-7d-DIE" id="QMp-4g-yRt"/>
+                        <outlet property="saveBtn" destination="oxn-Az-OMt" id="Paq-q1-Ott"/>
                         <outlet property="serviceNameLabel" destination="4Td-5b-0p3" id="6lq-Qw-lHr"/>
                         <outlet property="serviceTableView" destination="y0D-Kg-JkI" id="AKu-M7-MUE"/>
                     </connections>
@@ -3170,6 +3223,7 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="6vn-IZ-Ucc"/>
                     <connections>
+                        <outlet property="titleView" destination="k8x-Ox-hq3" id="KtV-sx-mDU"/>
                         <outlet property="vwContent" destination="kNb-jp-Jcf" id="QwJ-yC-r9L"/>
                         <segue destination="fUc-wK-QD8" kind="push" identifier="showRROverviewVC" id="ZD2-Gh-xI8"/>
                     </connections>
@@ -3236,7 +3290,9 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="HPV-Op-PSB"/>
                     <connections>
+                        <outlet property="nextBtn" destination="mpz-qn-CJb" id="JGr-Bf-jnO"/>
                         <outlet property="overviewTable" destination="SbK-Hr-ljN" id="6cr-tc-YNJ"/>
+                        <outlet property="titleLabel" destination="EHd-Fv-fgB" id="oiH-dS-rOJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCg-Ms-67X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3943,11 +3999,6 @@ you must debrief from job</string>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qpM-Hx-8xm">
                                         <rect key="frame" x="623" y="252" width="30" height="30"/>
@@ -3975,10 +4026,19 @@ you must debrief from job</string>
                     <navigationItem key="navigationItem" id="7xU-ZT-mZ5"/>
                     <connections>
                         <outlet property="contentRoundView" destination="sHJ-Xy-bHL" id="8DZ-fr-wRI"/>
+                        <outlet property="currencyBtn" destination="hcn-uU-xAc" id="ive-wY-w3h"/>
                         <outlet property="customerPriceView" destination="Wll-3A-R2o" id="KOF-Rp-1hc"/>
                         <outlet property="descriptionLabel" destination="QsN-gC-SzO" id="Fdn-oa-gJg"/>
+                        <outlet property="hideBtn" destination="qpM-Hx-8xm" id="Bac-F5-w49"/>
+                        <outlet property="hideRoundView" destination="0JP-Cz-fDm" id="las-R6-9Zj"/>
                         <outlet property="initialCostumerTextField" destination="x9D-2T-4CO" id="YY6-6S-jZq"/>
                         <outlet property="initialTechTextField" destination="03h-39-vab" id="0IG-r0-w2X"/>
+                        <outlet property="invoiceBtn" destination="l4I-Lh-SkD" id="fOy-0z-kiz"/>
+                        <outlet property="label1" destination="81x-rU-qWW" id="Te1-JJ-cfp"/>
+                        <outlet property="label2" destination="zyZ-lh-NlS" id="WpR-bQ-wjv"/>
+                        <outlet property="optionsBtn" destination="0W9-8d-Wol" id="Uqp-gn-eLz"/>
+                        <outlet property="rvsrBtn" destination="9L4-3c-jhw" id="Rzf-XZ-rfW"/>
+                        <outlet property="titleLabel" destination="E9s-a9-6Cf" id="Ppw-Mr-m4V"/>
                         <segue destination="xhw-dK-8mb" kind="unwind" identifier="unwindToServiceOptionsFromOptionsBtn" unwindAction="unwindToServiceOptionVC:" id="8KF-it-VlE"/>
                         <segue destination="xhw-dK-8mb" kind="unwind" identifier="unwindToServiceOptionsFromRRBtn" animates="NO" unwindAction="unwindToServiceOptionVC:" id="fF8-oC-95U"/>
                         <segue destination="xhw-dK-8mb" kind="unwind" identifier="unwindToServiceOptionsFromInvoiceBtn" animates="NO" unwindAction="unwindToServiceOptionVC:" id="zqq-4v-ZYg"/>
@@ -4139,11 +4199,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6og-9q-Y4v"/>
+        <segue reference="Cdo-cC-vmU"/>
+        <segue reference="9Oh-pS-m18"/>
+        <segue reference="Njq-Pc-taE"/>
         <segue reference="DnI-yT-bKf"/>
         <segue reference="XZV-au-UwI"/>
         <segue reference="xdW-7q-blD"/>
-        <segue reference="Cdo-cC-vmU"/>
-        <segue reference="9Oh-pS-m18"/>
     </inferredMetricsTieBreakers>
 </document>

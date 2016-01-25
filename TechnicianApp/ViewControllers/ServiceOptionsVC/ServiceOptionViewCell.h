@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HvakTekColorScheme.h"
 
 typedef void (^OnToggleCheckbox)(BOOL selected);
 

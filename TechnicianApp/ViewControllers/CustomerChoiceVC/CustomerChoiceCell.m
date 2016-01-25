@@ -11,7 +11,9 @@
 @implementation CustomerChoiceCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.priceLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibril.ttf">
@@ -21,11 +21,10 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4m8-fb-3II">
                         <rect key="frame" x="8" y="21" width="28" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" backgroundImage="service-option-item-bg">
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <state key="selected" image="service-option-checkmark.png"/>
-                        <state key="highlighted" image="service-option-checkmark.png"/>
                         <connections>
                             <action selector="checkboxTouchUp:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hLT-yN-0go"/>
                         </connections>
@@ -58,6 +57,5 @@
     </objects>
     <resources>
         <image name="service-option-checkmark.png" width="189" height="36"/>
-        <image name="service-option-item-bg" width="39" height="39"/>
     </resources>
 </document>

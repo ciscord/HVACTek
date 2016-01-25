@@ -14,6 +14,7 @@
 
 @property(nonatomic, strong) UIImageView *imgTopBar;
 @property(nonatomic, strong) UIView *titleView;
+@property(nonatomic, strong) UIView *logoView;
 @property(nonatomic, strong) UILabel *lbTitle;
 @property(nonatomic, strong) UIView *upperArcView;
 @property(nonatomic, strong) UIView *bottomArcView;
@@ -56,7 +57,11 @@
 
 #pragma mark - Logo
 - (void)configureLogoImage {
-    self.imgTopBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 99)];
+    self.logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 100)];
+    [self.logoView setBackgroundColor:[UIColor cs_getColorWithProperty:kColorSecondary0]];
+    [self.view addSubview:self.logoView];
+    
+    self.imgTopBar = [[UIImageView alloc] initWithFrame:CGRectMake(159, 64, 450, 100)];
     
     __weak UIImageView *weakImageView = self.imgTopBar;
     [self.imgTopBar setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]

@@ -16,8 +16,8 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    
+    self.lbTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 @end

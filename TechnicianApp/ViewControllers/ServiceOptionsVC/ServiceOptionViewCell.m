@@ -14,7 +14,11 @@
     // Initialization code
     
     self.qtyTextField.layer.borderWidth   = 1.0;
-    self.qtyTextField.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    self.qtyTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.qtyTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbValue.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.btnCheckbox.layer.borderWidth   = 1.0;
+    self.btnCheckbox.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
 
 - (IBAction)checkboxTouchUp:(UIButton *)sender {

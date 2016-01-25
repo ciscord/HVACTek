@@ -9,6 +9,14 @@
 #import "RRQuestionsView.h"
 #import "DataLoader.h"
 
+@interface RRQuestionsView ()
+
+@property (weak, nonatomic) IBOutlet UIView *separatorView1;
+@property (weak, nonatomic) IBOutlet UIView *separatorView2;
+
+@end
+
+
 @implementation RRQuestionsView
 
 
@@ -16,12 +24,28 @@
 -(void)setup
 {
     [super setup];
-    self.layer.cornerRadius = 8;
-    self.backgroundColor = [UIColor colorWithRed:239./255. green:246./255. blue:226./255. alpha:1.];
+    [self configureColorScheme];
     
     pickerData = [[NSMutableArray alloc] init];
 }
 
+
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.layer.cornerRadius = 8;
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
 
 
 -(void)setQuestionRR:(Question *)questionRR

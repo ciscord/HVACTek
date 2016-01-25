@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *serviceNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *serviceTableView;
+@property (weak, nonatomic) IBOutlet UIButton *bacBtn;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 
 
@@ -39,9 +41,20 @@
     self.title = @"Customer's Choice";
     [self.serviceTableView registerNib:[UINib nibWithNibName:@"EditServiceOptionsCell" bundle:nil] forCellReuseIdentifier:@"EditServiceOptionsCell"];
     
+    [self configureColorScheme];
+    
     NSDictionary *option   = self.servicesArray[self.selectedIndex];
     self.changedServicesArray = [option[@"removedItems"] mutableCopy];
     self.serviceNameLabel.text = option[@"title"];
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.bacBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.saveBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.serviceNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 

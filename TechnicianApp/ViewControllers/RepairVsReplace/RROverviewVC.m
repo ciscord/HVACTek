@@ -14,6 +14,8 @@
 @interface RROverviewVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView *overviewTable;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property(nonatomic, strong) NSMutableArray *tableArray;
 @property(nonatomic, strong) NSString *totalString;
 
@@ -28,7 +30,16 @@
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureColorScheme];
     [self configureVC];
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.nextBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 

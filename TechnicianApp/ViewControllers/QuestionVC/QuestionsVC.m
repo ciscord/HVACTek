@@ -112,15 +112,15 @@
 -(void)setQuestions:(NSArray *)questions
 {
     //disable questions
-    NSMutableArray *arr = questions.mutableCopy;
-    if (self.questionType != qtTechnician)
-    {
-        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
-                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
-    }
+//    NSMutableArray *arr = questions.mutableCopy;
+//    if (self.questionType != qtTechnician)
+//    {
+//        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
+//                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
+//    }
     
     //activate questions
-//    _questions = questions;
+    _questions = questions;
 }
 
 -(void)showNextQuestionView:(QuestionView*)currentView moveFromRightToLeft:(BOOL)moveFromRightToLeft

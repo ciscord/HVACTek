@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray        *filteredOptions;
 @property (nonatomic, strong) NSMutableArray        *selectedOptions;
 @property (weak, nonatomic) IBOutlet UITextField    *tfSearch;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *continueBtn;
 @end
 
 @implementation SummaryOfFindingsOptionsVC
@@ -30,6 +32,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = (self.isiPadCommonRepairsOptions ? @"Common Repairs" : @"Specialized Repairs");
+    
+    [self configureColorScheme];
     
     self.filteredOptions = @[].mutableCopy;
     
@@ -57,6 +61,19 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         }
         self.allOptions = [[DataLoader sharedInstance] otherOptions];
     }
+}
+
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.tfSearch.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.tfSearch.layer.borderWidth   = 1.0;
+    self.tfSearch.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
 
 

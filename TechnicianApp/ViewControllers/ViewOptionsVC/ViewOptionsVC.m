@@ -11,6 +11,8 @@
 #import "PlatinumOptionsVC.h"
 
 @interface ViewOptionsVC ()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *continueBtn;
 
 @end
 
@@ -21,6 +23,8 @@
     // Do any additional setup after loading the view.
     
     self.title = @"Customer's Choice";
+    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
 }
 

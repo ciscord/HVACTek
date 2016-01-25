@@ -44,6 +44,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
     self.title = @"Customer's Choice";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
+    
+    self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
     if (self.optionsDisplayType == odtEditing) {
         self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_immediateRepair"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
@@ -288,7 +290,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell setBackgroundColor:[UIColor clearColor]];
+    //[cell setBackgroundColor:[UIColor clearColor]];
+    cell.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

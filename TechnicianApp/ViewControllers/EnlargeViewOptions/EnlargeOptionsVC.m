@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthlyPaymentsLbl;
 @property (weak, nonatomic) IBOutlet UILabel *savingESALbl;
 @property (weak, nonatomic) IBOutlet UILabel *optionNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *separatorView1;
+@property (weak, nonatomic) IBOutlet UIView *separatorView2;
+@property (weak, nonatomic) IBOutlet UIView *separatorView3;
 @end
 
 @implementation EnlargeOptionsVC
@@ -25,6 +28,7 @@
     // Do any additional setup after loading the view.
     
     self.title = NSLocalizedString(@"Customer's Choice", nil);
+    [self configureColorScheme];
     
     self.optionNameLabel.text = self.enlargeOptionName;
     self.totalPriceLbl.text = self.enlargeTotalPrice;
@@ -38,6 +42,19 @@
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
 }
+
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView3.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.optionNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
+
 
 - (void)viewWasTapped {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -113,7 +130,7 @@
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
-    cell.textLabel.textColor     = [UIColor blackColor];
+    cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     return cell;
 }

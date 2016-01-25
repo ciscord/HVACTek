@@ -79,10 +79,25 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     self.lb24MonthRates.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     self.financingLabel.font = [UIFont fontWithName:@"Calibri-Light" size:14];
     
-    self.choiceOptionButton.layer.borderWidth = 1.0f;
-    self.choiceOptionButton.layer.borderColor = self.choiceOptionButton.titleLabel.textColor.CGColor;
+    [self configureColorScheme];
+
     
     [self.tableView reloadData];
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    
+    //    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    //    self.choiceOptionButton.layer.borderWidth = 1.0f;
+    //    self.choiceOptionButton.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    //    [self.choiceOptionButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    self.choiceOptionButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.choiceOptionButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateNormal];
+    
+    self.gradientView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -251,7 +266,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
 #pragma mark - UITableViewDelegate & DataSource
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor cs_getColorWithProperty:kColorSecondary10]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -294,6 +309,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     PricebookItem *pOptions    = self.serviceOptions[indexPath.row];
+    cell.textLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
   ////  cell.accessoryView.hidden = !self.isEditable || pOptions.isMain;
 
     

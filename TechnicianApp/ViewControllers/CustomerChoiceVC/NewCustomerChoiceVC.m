@@ -27,7 +27,24 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblSavePrice;
 @property (weak, nonatomic) IBOutlet UILabel *lblSavedWithESA;
 
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
 
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
+@property (weak, nonatomic) IBOutlet UILabel *label5;
+@property (weak, nonatomic) IBOutlet UILabel *label6;
+@property (weak, nonatomic) IBOutlet UILabel *label7;
+@property (weak, nonatomic) IBOutlet UILabel *label8;
+@property (weak, nonatomic) IBOutlet UILabel *label9;
+@property (weak, nonatomic) IBOutlet UILabel *label10;
+@property (weak, nonatomic) IBOutlet UILabel *label11;
+
+@property (weak, nonatomic) IBOutlet UIView *separator1;
+@property (weak, nonatomic) IBOutlet UIView *separator2;
 
 @end
 
@@ -40,9 +57,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     // Do any additional setup after loading the view.
     
     self.title = NSLocalizedString(@"Customer's Choice", nil);
-    
-    self.textFieldInitials.layer.borderWidth   = 1.0;
-    self.textFieldInitials.layer.borderColor   = [[UIColor grayColor] CGColor];
+    [self configureColorScheme];
+
     
     [self.selectedOptionsTableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
     [self.selectedOptionsTableView reloadData];
@@ -53,6 +69,60 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     [self updateTotalPrice];
 }
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.textFieldInitials.layer.borderWidth   = 1.0;
+    self.textFieldInitials.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldInitials.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldInitials.textColor   = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.btnSendByEmail.layer.borderWidth = 1.0;
+    self.btnSendByEmail.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    
+    self.optionsView.layer.borderWidth   = 1.5;
+    self.optionsView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    self.optionsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
+    
+    self.signatureView.layer.borderWidth   = 1.0;
+    self.signatureView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.signatureView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.signatureView.foregroundLineColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.stopView.layer.borderWidth   = 1.0;
+    self.stopView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.stopView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    
+    self.mainView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
+    self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label4.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label5.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label6.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label7.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label8.textColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.label9.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label10.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label11.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.totalPriceLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.paymentLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.dueLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.lblSavedWithESA.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lblSavePrice.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    
+    self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.saveBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
+
 
 
 - (void)updateTotalPrice {
@@ -312,7 +382,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         {
             cell.contentView.backgroundColor = [UIColor clearColor];
         }else {
-            cell.contentView.backgroundColor = [UIColor colorWithRed:239/255.0f green:246/255.0f blue:225/255.0f alpha:1.0f];
+            cell.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
         }
         
         if (self.isOnlyDiagnostic)
@@ -397,7 +467,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         cell.textLabel.text          = nameString;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
-        cell.textLabel.textColor     = [UIColor darkGrayColor];
+        cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
         
         result = cell;
     }

@@ -32,6 +32,22 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldCPT;
 @property (strong, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *keyboardAvoiding;
 @property (weak, nonatomic) IBOutlet UIView *helperView;
+@property (weak, nonatomic) IBOutlet UIButton *continueBtn;
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UILabel *mainDescriptLabel;
+@property (weak, nonatomic) IBOutlet UIView *separator1;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UIView *helpView1;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UIView *helpView2;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
+@property (weak, nonatomic) IBOutlet UILabel *label5;
+@property (weak, nonatomic) IBOutlet UILabel *label6;
+@property (weak, nonatomic) IBOutlet UILabel *label7;
+@property (weak, nonatomic) IBOutlet UIView *helpView3;
+@property (weak, nonatomic) IBOutlet UILabel *label8;
 
 @end
 
@@ -48,35 +64,81 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     self.keyboardAvoiding.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
 
-    self.vContainer.layer.borderWidth = 1.0;
-    self.vContainer.layer.borderColor = [[UIColor colorWithRed:0.471 green:0.741 blue:0.267 alpha:1.000] CGColor];
+    [self configureColorScheme];
+    
+
 
     [self.tvMainTable registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
 //    [self.tvMainTable reloadData];
 
     
+    [self refreshSubtotalPrice];
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.vContainer.layer.borderWidth = 1.0;
+    self.vContainer.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    
     self.descriptionView.layer.borderWidth   = 1.5;
-    self.descriptionView.layer.borderColor   = [[UIColor lightGrayColor] CGColor];
+    self.descriptionView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
+    self.descriptionView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     
     self.signatureView.layer.borderWidth   = 1.5;
     self.signatureView.layer.borderColor   = [[UIColor darkGrayColor] CGColor];
     self.signatureView.foregroundLineColor = [UIColor colorWithRed:0.000 green:0.250 blue:0.702 alpha:1.000];
     
-    self.textFieldComfortClub.layer.borderWidth   = 1.0;
-    self.textFieldComfortClub.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    self.textFieldDisconts.layer.borderWidth   = 1.0;
-    self.textFieldDisconts.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    self.textFieldDeposit.layer.borderWidth   = 1.0;
-    self.textFieldDeposit.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    self.textFieldPayment.layer.borderWidth   = 1.0;
-    self.textFieldPayment.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    self.textFieldDiagnostic.layer.borderWidth   = 1.0;
-    self.textFieldDiagnostic.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
-    self.textFieldCPT.layer.borderWidth   = 1.0;
-    self.textFieldCPT.layer.borderColor   = [[UIColor colorWithRed:119/255.0f green:189/255.0f blue:67/255.0f alpha:1.0f] CGColor];
+    self.textFieldComfortClub.layer.borderWidth = 1.0;
+    self.textFieldComfortClub.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldComfortClub.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldComfortClub.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldDisconts.layer.borderWidth = 1.0;
+    self.textFieldDisconts.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldDisconts.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldDisconts.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldDeposit.layer.borderWidth = 1.0;
+    self.textFieldDeposit.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldDeposit.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldDeposit.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldPayment.layer.borderWidth = 1.0;
+    self.textFieldPayment.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldPayment.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldPayment.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldDiagnostic.layer.borderWidth = 1.0;
+    self.textFieldDiagnostic.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldDiagnostic.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldDiagnostic.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldCPT.layer.borderWidth = 1.0;
+    self.textFieldCPT.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.textFieldCPT.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.textFieldCPT.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
     
-    [self refreshSubtotalPrice];
+    
+    self.helperView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.mainView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
+    self.helpView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.helpView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.helpView3.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label4.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label5.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label6.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label7.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label8.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.mainDescriptLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.subtotaPriceLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    
+    self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -354,7 +416,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         {
             cell.contentView.backgroundColor = [UIColor clearColor];
         }else {
-            cell.contentView.backgroundColor = [UIColor colorWithRed:239/255.0f green:246/255.0f blue:225/255.0f alpha:1.0f];
+            cell.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
         }
         
         if (self.isOnlyDiagnostic)
@@ -400,7 +462,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         cell.textLabel.text          = nameString;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
-        cell.textLabel.textColor     = [UIColor darkGrayColor];
+        cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
 
         result = cell;
     }
