@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIPickerView *answerPickerView;
 @property (weak, nonatomic) Question *question;
+@property (weak, nonatomic) IBOutlet UIView *separator1;
+@property (weak, nonatomic) IBOutlet UIView *separator2;
 
 
 

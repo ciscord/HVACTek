@@ -71,12 +71,12 @@
         }
 
         self.textLabel.font      = s_CalibriLight13;
-        self.textLabel.textColor = [UIColor blackColor];
+        self.textLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
         self.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.detailTextLabel.font          = s_Calibri14;
-        self.detailTextLabel.textColor     = [UIColor blackColor];
+        self.detailTextLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
     }
     return self;
 }
@@ -119,12 +119,12 @@
         }
 
         self.textLabel.font      = s_CalibriLight14;
-        self.textLabel.textColor = [UIColor blackColor];
+        self.textLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
         self.detailTextLabel.textAlignment = NSTextAlignmentRight;
         self.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.detailTextLabel.font          = self.textLabel.font;
-        self.detailTextLabel.textColor     = self.textLabel.textColor;
+        self.detailTextLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
     }
     return self;
 }
@@ -163,8 +163,13 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *beginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *returnBtn;
-
-
+@property (weak, nonatomic) IBOutlet UIView *view1;
+@property (weak, nonatomic) IBOutlet UIView *view2;
+@property (weak, nonatomic) IBOutlet UIView *view3;
+@property (weak, nonatomic) IBOutlet UIView *separator1;
+@property (weak, nonatomic) IBOutlet UIView *separator2;
+@property (weak, nonatomic) IBOutlet UIView *separator3;
+@property (weak, nonatomic) IBOutlet UIView *separator4;
 
 
 @end
@@ -205,8 +210,41 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 - (void)configureColorScheme {
     self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.returnBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-   // self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.vContainer.layer.borderColor = [[UIColor colorWithRed:0.379 green:0.694 blue:0.227 alpha:1.000] CGColor];
+    
+    self.view1.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.view2.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.view3.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    
+    self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator3.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separator4.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.lbCustomerInfoTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbServiceHistoryInfoTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbSystemInfoTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    self.btnHeatingCall.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.btnHeatingCall setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.btnHeatingCall setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    
+    self.btnCoolingCall.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    [self.btnCoolingCall setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.btnCoolingCall setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    
+
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.btnHeatingCall.bounds byRoundingCorners:UIRectCornerTopLeft| UIRectCornerBottomLeft                                                         cornerRadii:CGSizeMake(25.0, 25.0)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.btnHeatingCall.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.btnHeatingCall.layer.mask = maskLayer;
+    
+    UIBezierPath *maskPath2 = [UIBezierPath bezierPathWithRoundedRect:self.btnCoolingCall.bounds byRoundingCorners:UIRectCornerTopRight| UIRectCornerBottomRight                                                        cornerRadii:CGSizeMake(25.0, 25.0)];
+    CAShapeLayer *maskLayer2 = [CAShapeLayer layer];
+    maskLayer2.frame = self.btnCoolingCall.bounds;
+    maskLayer2.path = maskPath2.CGPath;
+    self.btnCoolingCall.layer.mask = maskLayer2;
 }
 
 
@@ -418,6 +456,14 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.btnHeatingCall.selected = (sender == self.btnHeatingCall);
     self.btnCoolingCall.selected = !self.btnHeatingCall.selected;
     self.selectedType            = (self.btnHeatingCall.selected ? qtHeating : qtCooling);
+    
+    if (self.btnHeatingCall.selected) {
+        self.btnHeatingCall.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        self.btnCoolingCall.backgroundColor = [UIColor whiteColor];
+    }else{
+        self.btnHeatingCall.backgroundColor = [UIColor whiteColor];
+        self.btnCoolingCall.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    }
 }
 
 - (IBAction)btnReturnVisit:(id)sender {
@@ -487,12 +533,14 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
         CustomerInfoTableViewCell *cell = (CustomerInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kCustomerInfoCellIdentifier];
         cell.textLabel.text       = info.label;
         cell.detailTextLabel.text = info.value;
+        tableView.separatorColor = [UIColor cs_getColorWithProperty:kColorPrimary];
         return cell;
     } else if (tableView == self.tvServiceHistory) {
         SServiceHistory *history = self.serviceHistoryList[indexPath.row];
 
         ServiceHistoryTableViewCell *cell = (ServiceHistoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kServiceHistoryCellIdentifier];
         [cell displayData:history];
+        tableView.separatorColor = [UIColor cs_getColorWithProperty:kColorPrimary];
         return cell;
     } else if (tableView == self.tvSystemInfo) {
         SSystemInfo             *systemInfo = self.systemInfoList[indexPath.section];
@@ -500,6 +548,7 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
         SystemInfoTableViewCell *cell       = (SystemInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kSystemInfoCellIdentifier];
         cell.textLabel.text       = info.label;
         cell.detailTextLabel.text = info.value;
+        tableView.separatorColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 //        cell.textLabel.text = systemInfo.properties[indexPath.row + 1];
         return cell;
     }

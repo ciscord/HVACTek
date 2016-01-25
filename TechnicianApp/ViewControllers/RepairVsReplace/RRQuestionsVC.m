@@ -17,7 +17,7 @@
 @property(nonatomic, assign) NSInteger currentRRQuestionIndex;
 @property(nonatomic, strong) RRQuestionsView *currentRRQuestionView;
 @property(nonatomic, strong) RRQuestionsView *nextRRQuestionView;
-@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet UILabel *repVSrepLabel;
 
 @end
 
@@ -29,16 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configureColorScheme];
+    self.repVSrepLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    
     self.title = @"Customer's Choice";
     [self loadQuestionsData];
 }
 
-
-#pragma mark - Color Scheme
-- (void)configureColorScheme {
-    self.titleView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-}
 
 
 #pragma mark - Load Questions
@@ -106,6 +103,8 @@
     [self.nextRRQuestionView setOnBackButtonTouch:onBackButtonTouch];
     [self.nextRRQuestionView setOnNextButtonTouch:onNextButtonTouch];
     
+    [self configureBackgroundColor];
+    
     [self.vwContent addSubview:self.nextRRQuestionView];
     [self.vwContent addSubview:self.currentRRQuestionView];
     
@@ -117,6 +116,34 @@
                                               completion:^{
                                                   weakSelf.nextRRQuestionView.hidden = NO;
                                               }];
+}
+
+
+#pragma mark - BackgroundColors
+- (void)configureBackgroundColor {
+    self.currentRRQuestionView.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.currentRRQuestionView.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentRRQuestionView.answerTextField.layer.borderWidth = 1.0;
+    self.currentRRQuestionView.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.currentRRQuestionView.sep1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentRRQuestionView.sep2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.currentRRQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.currentRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.currentRRQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    [self.currentRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    
+    self.nextRRQuestionView.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.nextRRQuestionView.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextRRQuestionView.answerTextField.layer.borderWidth = 1.0;
+    self.nextRRQuestionView.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.nextRRQuestionView.sep1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextRRQuestionView.sep2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.nextRRQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.nextRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.nextRRQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    [self.nextRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
 }
 
 

@@ -11,8 +11,6 @@
 
 @interface RRQuestionsView ()
 
-@property (weak, nonatomic) IBOutlet UIView *separatorView1;
-@property (weak, nonatomic) IBOutlet UIView *separatorView2;
 
 @end
 
@@ -38,13 +36,6 @@
     self.layer.cornerRadius = 8;
     self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
     self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -266,6 +257,15 @@
     return pickerData[row];
 }
 
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = pickerData[row];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor cs_getColorWithProperty:kColorPrimary]}];
+    
+    return attString;
+    
+}
 
 
 /*

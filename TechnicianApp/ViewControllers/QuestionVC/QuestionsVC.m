@@ -37,6 +37,8 @@
                                           } onError:^(NSError *error) {
                                               
                                           }];
+    
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
 }
 
 -(void)prepareQuestionToDisplay
@@ -86,6 +88,8 @@
     [self.nextQuestionView setOnBackButtonTouch:onBackButtonTouch];
     [self.nextQuestionView setOnNextButtonTouch:onNextButtonTouch];
     
+    [self configureBackgroundColor];
+    
     [self.vwContent addSubview:self.nextQuestionView];
     [self.vwContent addSubview:self.currentQuestionView];
     
@@ -97,12 +101,43 @@
                                               completion:^{
                                                   weakSelf.nextQuestionView.hidden = NO;
                                               }];
+    
 }
 
 -(CGFloat)questionY
 {
     return self.vwContent.middleY - (self.view.middleY - self.vwContent.middleY) + 50;
 }
+
+
+#pragma mark - BackgroundColors
+- (void)configureBackgroundColor {
+    self.currentQuestionView.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.currentQuestionView.txtQuestion.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentQuestionView.txtAnswer.layer.borderWidth = 1.0;
+    self.currentQuestionView.txtAnswer.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.currentQuestionView.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.currentQuestionView.separator2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.currentQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.currentQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.currentQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    [self.currentQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    
+    self.nextQuestionView.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.nextQuestionView.txtQuestion.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextQuestionView.txtAnswer.layer.borderWidth = 1.0;
+    self.nextQuestionView.txtAnswer.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.nextQuestionView.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.nextQuestionView.separator2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.nextQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.nextQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.nextQuestionView.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+    [self.nextQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

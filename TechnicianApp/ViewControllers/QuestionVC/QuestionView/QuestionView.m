@@ -10,8 +10,6 @@
 
 @interface QuestionView ()
 
-@property (weak, nonatomic) IBOutlet UIView *separatorView1;
-@property (weak, nonatomic) IBOutlet UIView *separatorView2;
 
 @end
 
@@ -25,15 +23,6 @@
     self.layer.borderWidth = 1.0;
     self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    
-    self.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    [self.btnBack setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
-//    [self.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
-    
-    
-    self.separatorView1.backgroundColor = [UIColor blackColor];
     
     pickerData = [[NSMutableArray alloc] init];
 }
@@ -142,6 +131,16 @@
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return pickerData[row];
+}
+
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = pickerData[row];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor cs_getColorWithProperty:kColorPrimary]}];
+    
+    return attString;
+    
 }
 
 @end

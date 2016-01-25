@@ -95,8 +95,8 @@ technician.</string>
                 <outlet property="answerPickerView" destination="kUJ-66-dex" id="VLt-PZ-oSw"/>
                 <outlet property="btnBack" destination="aof-A3-uBJ" id="LPX-dW-vwM"/>
                 <outlet property="btnNext" destination="cNT-x8-2gD" id="1G9-d5-YIC"/>
-                <outlet property="separatorView1" destination="w9s-ZJ-zcS" id="WtJ-6X-mAb"/>
-                <outlet property="separatorView2" destination="TwO-kq-zFK" id="P02-on-4TY"/>
+                <outlet property="separator1" destination="w9s-ZJ-zcS" id="6XZ-nI-Bpy"/>
+                <outlet property="separator2" destination="TwO-kq-zFK" id="xfH-YX-0tp"/>
                 <outlet property="txtAnswer" destination="fCq-Jz-LAq" id="Z5F-yA-FI7"/>
                 <outlet property="txtQuestion" destination="vgc-qi-osk" id="0Yz-tc-82i"/>
             </connections>

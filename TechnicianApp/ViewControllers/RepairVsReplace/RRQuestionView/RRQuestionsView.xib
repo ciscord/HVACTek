@@ -90,11 +90,11 @@ technician.</string>
             <connections>
                 <outlet property="answerPickerView" destination="cEV-DW-GaZ" id="tsF-y4-cwa"/>
                 <outlet property="answerTextField" destination="HVe-tx-lPU" id="mOe-g5-Tl9"/>
-                <outlet property="btnBack" destination="klJ-2A-dvn" id="Mzr-0f-QGh"/>
-                <outlet property="btnNext" destination="ptI-zd-oq1" id="lNv-c3-vMR"/>
+                <outlet property="btnBack" destination="klJ-2A-dvn" id="zfY-F0-XM2"/>
+                <outlet property="btnNext" destination="ptI-zd-oq1" id="yTe-AC-hfI"/>
                 <outlet property="questionTextView" destination="5BH-zo-7CQ" id="uq9-xh-zOD"/>
-                <outlet property="separatorView1" destination="1MO-vr-r6K" id="JZp-XI-P12"/>
-                <outlet property="separatorView2" destination="ibU-tX-BGJ" id="9Vn-WP-aAi"/>
+                <outlet property="sep1" destination="1MO-vr-r6K" id="wqT-tT-pzz"/>
+                <outlet property="sep2" destination="ibU-tX-BGJ" id="mqv-ga-mj1"/>
             </connections>
             <point key="canvasLocation" x="418" y="405.5"/>
         </view>

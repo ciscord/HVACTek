@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIPickerView *answerPickerView;
 @property (weak, nonatomic) Question *questionRR;
+@property (weak, nonatomic) IBOutlet UIView *sep1;
+@property (weak, nonatomic) IBOutlet UIView *sep2;
 
 
 @property (copy, nonatomic) void (^OnBackButtonTouch)(RRQuestionsView *sender);

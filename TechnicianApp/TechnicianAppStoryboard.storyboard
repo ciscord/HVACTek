@@ -48,8 +48,6 @@
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
-            <string>Calibri-Light</string>
-            <string>Calibri-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2375,41 +2373,31 @@ you must debrief from job</string>
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Yji-dL-bDC">
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yji-dL-bDC">
                                 <rect key="frame" x="195" y="256" width="189" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="21"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Heating Call" backgroundImage="customer-overview-seg-default-state-left">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Heating Call">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" backgroundImage="customer-overview-seg-selected-state-left">
-                                    <color key="titleColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="customer-overview-seg-selected-state-left">
-                                    <color key="titleColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="callTypeTouchUp:" destination="dBc-mz-UYT" eventType="touchUpInside" id="3hU-6e-xpi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qwp-c6-GZw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qwp-c6-GZw">
                                 <rect key="frame" x="384" y="256" width="189" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="21"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Cooling Call" backgroundImage="customer-overview-seg-default-state-right">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Cooling Call">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" backgroundImage="customer-overview-seg-selected-state-right">
-                                    <color key="titleColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="selected">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="customer-overview-seg-selected-state-right">
-                                    <color key="titleColor" red="0.47058823529411764" green="0.73725490196078436" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="callTypeTouchUp:" destination="dBc-mz-UYT" eventType="touchUpInside" id="sRk-8g-csk"/>
@@ -2423,6 +2411,18 @@ you must debrief from job</string>
                                         <rect key="frame" x="8" y="8" width="254" height="352"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" id="jO7-w8-h7K">
+                                                <rect key="frame" x="0.0" y="0.0" width="254" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" id="Ecd-5H-Mvy">
+                                                        <rect key="frame" x="0.0" y="29" width="254" height="1"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6aM-lX-nrg">
                                                 <rect key="frame" x="0.0" y="30" width="254" height="322"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2433,10 +2433,6 @@ you must debrief from job</string>
                                                     <outlet property="delegate" destination="dBc-mz-UYT" id="UgW-M0-gxk"/>
                                                 </connections>
                                             </tableView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customer-overview-header-bg" id="zW4-Qj-6f5">
-                                                <rect key="frame" x="0.0" y="0.0" width="254" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Etv-lI-FL3">
                                                 <rect key="frame" x="8" y="4" width="211" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2461,10 +2457,18 @@ you must debrief from job</string>
                                                     <outlet property="delegate" destination="dBc-mz-UYT" id="BpG-58-YKA"/>
                                                 </connections>
                                             </tableView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customer-overview-header-bg" id="h3U-js-WF7">
+                                            <view contentMode="scaleToFill" id="kRj-s9-OuP">
                                                 <rect key="frame" x="0.0" y="0.0" width="254" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" id="UdZ-Db-7XM">
+                                                        <rect key="frame" x="0.0" y="29" width="254" height="1"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dP3-FZ-aEi">
                                                 <rect key="frame" x="8" y="4" width="211" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2495,10 +2499,18 @@ you must debrief from job</string>
                                                     <outlet property="delegate" destination="dBc-mz-UYT" id="HhD-Jf-EGc"/>
                                                 </connections>
                                             </tableView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customer-overview-header-bg" id="Fca-4d-u7d">
+                                            <view contentMode="scaleToFill" id="d42-40-3Tf">
                                                 <rect key="frame" x="0.0" y="0.0" width="431" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" id="hdu-fK-hYp">
+                                                        <rect key="frame" x="0.0" y="29" width="431" height="1"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ahk-TP-42Q">
                                                 <rect key="frame" x="8" y="4" width="386" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2557,10 +2569,17 @@ you must debrief from job</string>
                         <outlet property="lbServiceHistoryInfoTitle" destination="ahk-TP-42Q" id="d3T-m4-O31"/>
                         <outlet property="lbSystemInfoTitle" destination="dP3-FZ-aEi" id="Hly-7j-X1N"/>
                         <outlet property="returnBtn" destination="RLx-Bw-0Oz" id="sAA-tc-U8m"/>
+                        <outlet property="separator1" destination="Ecd-5H-Mvy" id="wmS-UY-FGI"/>
+                        <outlet property="separator2" destination="UdZ-Db-7XM" id="fF6-N7-pAf"/>
+                        <outlet property="separator3" destination="tes-Vo-rpO" id="nN5-Fy-iLc"/>
+                        <outlet property="separator4" destination="hdu-fK-hYp" id="5TT-ux-Puy"/>
                         <outlet property="tvCustomerInfo" destination="6aM-lX-nrg" id="ryy-h7-zQs"/>
                         <outlet property="tvServiceHistory" destination="Lnz-uQ-1qY" id="3p0-F5-2Li"/>
                         <outlet property="tvSystemInfo" destination="A2R-5U-fKy" id="CiW-gk-7LK"/>
                         <outlet property="vContainer" destination="3t6-Qb-pEI" id="xyc-na-G3n"/>
+                        <outlet property="view1" destination="jO7-w8-h7K" id="OwQ-oY-Nuq"/>
+                        <outlet property="view2" destination="kRj-s9-OuP" id="yLF-ZE-eMH"/>
+                        <outlet property="view3" destination="d42-40-3Tf" id="EjW-tx-Aov"/>
                         <segue destination="TVt-By-ZRx" kind="push" identifier="goSettingAgenda" id="3fc-So-pFP"/>
                         <segue destination="imt-n8-7xy" kind="push" identifier="returnVisit" id="5VJ-cj-s1Y"/>
                     </connections>
@@ -3212,7 +3231,7 @@ you must debrief from job</string>
                                         <rect key="frame" x="61" y="30" width="583" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="32"/>
-                                        <color key="textColor" red="0.93725490196078431" green="0.31372549019607843" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -3223,7 +3242,7 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="6vn-IZ-Ucc"/>
                     <connections>
-                        <outlet property="titleView" destination="k8x-Ox-hq3" id="KtV-sx-mDU"/>
+                        <outlet property="repVSrepLabel" destination="k8x-Ox-hq3" id="oZe-uI-Z3A"/>
                         <outlet property="vwContent" destination="kNb-jp-Jcf" id="QwJ-yC-r9L"/>
                         <segue destination="fUc-wK-QD8" kind="push" identifier="showRROverviewVC" id="ZD2-Gh-xI8"/>
                     </connections>
@@ -4186,11 +4205,6 @@ you must debrief from job</string>
         <image name="agenda-optionsIcon" width="59" height="83"/>
         <image name="agenda-todayIcon" width="142" height="84"/>
         <image name="btn_repairVsReplace" width="500" height="64"/>
-        <image name="customer-overview-header-bg" width="254" height="30"/>
-        <image name="customer-overview-seg-default-state-left" width="189" height="36"/>
-        <image name="customer-overview-seg-default-state-right" width="189" height="36"/>
-        <image name="customer-overview-seg-selected-state-left" width="188" height="36"/>
-        <image name="customer-overview-seg-selected-state-right" width="188" height="36"/>
         <image name="destersMyCell-1" width="697" height="81"/>
         <image name="service-option-checkmark.png" width="39" height="39"/>
         <image name="service-option-item-bg" width="39" height="39"/>
@@ -4199,11 +4213,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cdo-cC-vmU"/>
-        <segue reference="9Oh-pS-m18"/>
-        <segue reference="Njq-Pc-taE"/>
-        <segue reference="DnI-yT-bKf"/>
         <segue reference="XZV-au-UwI"/>
-        <segue reference="xdW-7q-blD"/>
+        <segue reference="Njq-Pc-taE"/>
+        <segue reference="5VJ-cj-s1Y"/>
+        <segue reference="Cdo-cC-vmU"/>
+        <segue reference="DnI-yT-bKf"/>
+        <segue reference="LGL-C3-uSa"/>
     </inferredMetricsTieBreakers>
 </document>

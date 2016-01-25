@@ -89,11 +89,27 @@ static UIFont *boldSystemFont;
     
     self.lbDate.font = boldSystemFont;
     self.lbAmount.font = boldSystemFont;
+    
+    [self configureColorScheme];
+    
+    
 //    self.lbDateValue.font = s_Calibri14;
 //    self.lbAmountValue.font = s_Calibri14;
 //    self.lbJobInstructions.font = s_Calibri14;
 //    self.lbWorkDone.font = s_Calibri14;
 }
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.lbDate.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbAmount.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbDateValue.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbAmountValue.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbJobInstructions.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbWorkDone.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
