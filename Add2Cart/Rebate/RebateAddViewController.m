@@ -29,11 +29,13 @@
     return self;
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
     
 }
+
 
 - (void)viewDidLoad
 {
@@ -63,10 +65,12 @@
             }
 }
 
+
 -(void) home {
   
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 -(void) back {
     [self.navigationController popViewControllerAnimated:YES];
@@ -88,19 +92,16 @@
         
     } else  {
         editt = [occ lastObject];
-       
-
     }
-    
-    
-    
   }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -118,70 +119,79 @@
 
 - (IBAction)saveButton:(id)sender {
     
-    [[DataLoader sharedInstance] addRebatesToPortal:self.nameField.text
-                      amount:100.0
-                    included:@"1"
-                   onSuccess:^(NSString *successMessage) {
-                       NSLog(@"SUCCES %@",successMessage);
+    float priceAmount = [self.priceField.text floatValue];
+    
+    if (priceAmount > 0) {
+        [[DataLoader sharedInstance] addRebatesToPortal:self.nameField.text
+                                                 amount:100.0
+                                               included:@"1"
+                                              onSuccess:^(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd) {
+                                                  NSLog(@"SUCCES %@ :%@",successMessage, rebateID);
+                                                  [self addLocalRebateWithId:rebateID andOrd:rebateOrd];
+                                                  
+                                              }onError:^(NSError *error) {
+                                                  ShowOkAlertWithTitle(error.localizedDescription, self);
+                                                  NSLog(@"ERROR");
+                                              }];
+    }else{
+        ShowOkAlertWithTitle(@"Please introduce a valid price amount.", self);
+    }
+    
 
-                   }onError:^(NSError *error) {
-                       //ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
-                       NSLog(@"ERROR");
-                   }];
     
     
     
     ///////////////////    if succes
     
-   Item *item;
+
+    
+}
+
+
+#pragma mark - Add New Rebate
+-(void)addLocalRebateWithId:(NSNumber *)rebID andOrd:(NSNumber *)ordID {
+    Item *item;
     
     if (!edit) {
-     
-    item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-       item.modelName = nameField.text;
-    float p = [priceField.text floatValue];
-    item.finalPrice = [NSNumber numberWithFloat:p];
-    item.type = @"Rebates";
+        
+        item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+        item.modelName = nameField.text;
+        float p = [priceField.text floatValue];
+        item.finalPrice = [NSNumber numberWithFloat:p];
+        item.type = @"Rebates";
         item.usserAdet =[NSNumber numberWithInt:1];
+        item.ord = ordID;
+       // item.
         //itm.type = @"Rebates";
-   } else {
-       
-       NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-       req.predicate = [NSPredicate predicateWithFormat:@"modelName = %@",itemz.modelName];
-       NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"modelName" ascending:YES];
-       req.sortDescriptors =[NSArray arrayWithObject:sort];
-       
-       NSError *error = nil;
-       NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
-       
-       if (![occ count]) {
-           
-       } else  {
-         item = [occ lastObject];
-           item.modelName = nameField.text;
-           float p = [priceField.text floatValue];
-           item.finalPrice = [NSNumber numberWithFloat:p];
-           item.type = type;
-           
-       }
-       
-       
-
-
-  }
+    } else {
+        
+        NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+        req.predicate = [NSPredicate predicateWithFormat:@"modelName = %@",itemz.modelName];
+        NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"modelName" ascending:YES];
+        req.sortDescriptors =[NSArray arrayWithObject:sort];
+        
+        NSError *error = nil;
+        NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
+        
+        if (![occ count]) {
+            
+        } else  {
+            item = [occ lastObject];
+            item.modelName = nameField.text;
+            float p = [priceField.text floatValue];
+            item.finalPrice = [NSNumber numberWithFloat:p];
+            item.type = type;
+            
+        }
+    }
     
     NSError *error;
     if (![managedObjectContext save:&error]) {
         NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
     }
-
+    
     UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Succesfully Saved" message:[NSString stringWithFormat:@"You have saved a new %@",type] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [al show];
-   
-    
- //   [self dismissViewControllerAnimated:YES completion:nil];
- //   [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 #pragma mark - UIAlertView delegate

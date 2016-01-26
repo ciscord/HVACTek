@@ -34,7 +34,7 @@
 @property (nonatomic, retain) NSNumber * optSixPrice;
 @property (nonatomic, retain) NSNumber * optThreePrice;
 @property (nonatomic, retain) NSNumber * optTwoPrice;
-@property (nonatomic, retain) NSData * photo;
+@property (nonatomic, retain) NSData   * photo;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSNumber * typeID;
 @property (nonatomic, retain) NSNumber * usserAdet;

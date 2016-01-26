@@ -11,6 +11,9 @@
 @interface DebriefReminderVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *lbLastJopInfo;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UIButton *debriefBtn;
 
 @end
 
@@ -18,12 +21,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self configureColorScheme];
 
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     NSDictionary *jobInfo = job.swapiJobInfo;
     NSDictionary *customerInfo = job.swapiCustomerInfo;
     self.lbLastJopInfo.text = [NSString stringWithFormat:@"%@ - %@ %@\n%@\n%@, %@ %@", jobInfo[@"JobNo"], [customerInfo objectForKeyNotNull:@"FirstName"], [customerInfo objectForKeyNotNull:@"LastName"], [customerInfo objectForKeyNotNull:@"Address1"], [customerInfo objectForKeyNotNull:@"City"], [customerInfo objectForKeyNotNull:@"State"], [customerInfo objectForKeyNotNull:@"Zip"]];
+}
+
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.debriefBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbLastJopInfo.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 - (void)didReceiveMemoryWarning {

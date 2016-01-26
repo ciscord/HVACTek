@@ -350,7 +350,7 @@
                                         <rect key="frame" x="177" y="324" width="413" height="171"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kit-7i-TX0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kit-7i-TX0">
                                                 <rect key="frame" x="21" y="19" width="77" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -395,7 +395,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.17254901959999999" green="0.47450980390000003" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="YMEh7TbTlVWjgcj2nrSLOJwTr48f/vC1Zzg6Tb90LsA=" minimumFontSize="17" id="Oqf-ed-uK0">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="789678910" minimumFontSize="17" id="Oqf-ed-uK0">
                                                 <rect key="frame" x="127" y="130" width="273" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.17254901960784313" green="0.47450980392156861" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
@@ -1932,9 +1932,12 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </tableViewCellContentView>
-                                                        <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <connections>
+                                                            <outlet property="finalizeButton" destination="bD5-hc-Hgl" id="x4I-i9-2gW"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                                 <connections>
@@ -2358,7 +2361,10 @@ you must debrief from job</string>
                     </view>
                     <navigationItem key="navigationItem" id="Dqr-Lw-jlm"/>
                     <connections>
+                        <outlet property="debriefBtn" destination="dSE-jR-Cob" id="3T8-vp-lh9"/>
+                        <outlet property="label1" destination="bUn-E6-72g" id="85R-zI-pS5"/>
                         <outlet property="lbLastJopInfo" destination="a4b-Vo-cCs" id="hRj-yS-F5n"/>
+                        <outlet property="titleLabel" destination="l9k-83-A0Z" id="d9N-nP-wav"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HY-MG-qdz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3231,7 +3237,7 @@ you must debrief from job</string>
                                         <rect key="frame" x="61" y="30" width="583" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="32"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -4213,11 +4219,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XZV-au-UwI"/>
         <segue reference="Njq-Pc-taE"/>
         <segue reference="5VJ-cj-s1Y"/>
-        <segue reference="Cdo-cC-vmU"/>
+        <segue reference="O98-Ps-4c5"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="XZV-au-UwI"/>
         <segue reference="LGL-C3-uSa"/>
     </inferredMetricsTieBreakers>
 </document>

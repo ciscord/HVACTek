@@ -10,13 +10,13 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 // ==================== API URLs =====================
-#define kRebatesURL [NSURL URLWithString:@"http://www.hvactek.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kSystemProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kRebatesURL [NSURL URLWithString:@"http://hvactek.devebs.net/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kProdURL [NSURL URLWithString:@"http://hvactek.devebs.net/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kSystemProdURL [NSURL URLWithString:@"http://hvactek.devebs.net/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 
 
 //http://www.hvactek.com/
-//http://signature.devebs.net/
+//http://hvactek.devebs.net/
 
 #import "MenuViewController.h"
 
@@ -156,9 +156,10 @@
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:responseData
-                          
                           options:kNilOptions
                           error:&error];
+    
+    NSLog(@"responseData %@",responseData);
     
     NSArray* rebates = [json objectForKey:@"results"];
     
@@ -331,8 +332,16 @@
     
     
     dispatch_async(kBgQueue, ^{
+        
+        NSString *asd = [kRebatesURL absoluteString];
+        NSString *asd2 = [NSString stringWithFormat:@"&token=%@",[[[DataLoader sharedInstance] currentUser] userToken]];
+        asd = [asd stringByAppendingString:asd2];
+        
         NSData* data = [NSData dataWithContentsOfURL:
-                        kRebatesURL];
+                        [NSURL URLWithString:asd2]];
+
+        
+        
         [self performSelectorOnMainThread:@selector(fetchedRebates:)
                                withObject:data waitUntilDone:YES];
         

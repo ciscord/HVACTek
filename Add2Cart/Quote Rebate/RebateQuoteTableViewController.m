@@ -105,7 +105,9 @@
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
-            
+            NSLog(@"name: %@",itm.modelName);
+            NSLog(@"asdasd: %@",itm.ord);
+            NSLog(@"asdasd2: %@",itm.typeID);
             [selected addObject:itm];
                        
         }

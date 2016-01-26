@@ -21,7 +21,7 @@
 
 #ifdef DEVELOPMENT // development
 
-#define BASE_URL                    @"http://signature.devebs.net/api/"
+#define BASE_URL                    @"http://hvactek.devebs.net/api/"
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
@@ -296,29 +296,32 @@ NSString *const ADD_REBATES      = @"addRebate";
                weakSelf.userInfo = responseObject[@"results"];
                
                NSLog(@"weakSelf.userInfo: %@",weakSelf.userInfo);
-               NSDictionary *companyDict = [[weakSelf.userInfo objectForKey:@"business"] lastObject];
+               NSDictionary *companyDict = [weakSelf.userInfo objectForKey:@"business"];
                
                self.currentCompany = [CompanyItem companyItemWithID:companyDict[@"id"]
                                                            address1:companyDict[@"address1"]
                                                            address2:companyDict[@"address2"]
+                                                           admin_id:companyDict[@"admin_id"]
                                                       business_name:companyDict[@"business_name"]
                                                                city:companyDict[@"city"]
                                                      contact_f_name:companyDict[@"contact_f_name"]
                                                      contact_l_name:companyDict[@"contact_l_name"]
                                                       contact_phone:companyDict[@"contact_phone"]
+                                                            deleted:companyDict[@"deleted"]
                                                                logo:companyDict[@"logo"]
                                                       primary_color:companyDict[@"primary_color"]
                                                     secondary_color:companyDict[@"secondary_color"]
                                                               state:companyDict[@"state"]
+                                                           swapi_id:companyDict[@"swapi_id"]
                                                                 zip:companyDict[@"zip"]];
                
-               NSArray *swapiArr = weakSelf.userInfo[@"swapi"];
-//               weakSelf.currentUser = [User userWithName:weakSelf.userInfo[@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
+               NSDictionary *swapiDict = weakSelf.userInfo[@"swapi"];
                
-               weakSelf.currentUser = [User userWithName:[[swapiArr lastObject] objectForKey:@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
+               weakSelf.currentUser = [User userWithName:[swapiDict objectForKey:@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
                weakSelf.currentUser.tech = [NSNumber numberWithBool:([weakSelf.userInfo[@"tech"] intValue]==1)];
                weakSelf.currentUser.password = password;
+               weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
                [weakSelf.currentUser.managedObjectContext save];
                
                [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
@@ -566,14 +569,20 @@ NSString *const ADD_REBATES      = @"addRebate";
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
     
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&err];
+    NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
 
       self.responseSerializer = [AFJSONResponseSerializer serializer];
       [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
-///   [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //[self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
     [self POST:DEBRIEF
-    parameters:@{ @"debrief" : params }
+    parameters:@{ @"debrief" : myString }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"responseObject %@",responseObject);
+           
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {
                    onSuccess(nil);
@@ -633,12 +642,12 @@ NSString *const ADD_REBATES      = @"addRebate";
     
 }
 
-
-#pragma mark - Add Rebates
+//Success:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
+#pragma mark - Rebates Requests
 -(void)addRebatesToPortal:(NSString *)title
                    amount:(CGFloat)amount
                  included:(NSString *)included
-                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                onSuccess:(void (^)(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd))onSuccess
                   onError:(void (^)(NSError *error))onError {
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -648,9 +657,16 @@ NSString *const ADD_REBATES      = @"addRebate";
     parameters:@{ @"title":title, @"amount":[NSNumber numberWithFloat:amount], @"included":included }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            
+           NSLog(@"responseObject: %@",responseObject);
+           
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
-               //[weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
-               onSuccess(@"OK");
+               
+               NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+               f.numberStyle = NSNumberFormatterNoStyle;
+               NSNumber *idNumb = [f numberFromString:[responseObject[@"results"] objectForKey:@"id"]];
+               NSNumber *ordNumb = [f numberFromString:[responseObject[@"results"] objectForKey:@"ord"]];
+               
+               onSuccess(@"OK", idNumb, ordNumb);
                
            } else if (onError) {
                NSLog(@"%@", responseObject[@"message"]);
@@ -666,6 +682,42 @@ NSString *const ADD_REBATES      = @"addRebate";
     
     
 }
+
+/*
+ -(void)addRebatesToPortal:(NSString *)title
+ amount:(CGFloat)amount
+ included:(NSString *)included
+ onSuccess:(void (^)(NSString *successMessage))onSuccess
+ onError:(void (^)(NSError *error))onError {
+ 
+ self.responseSerializer = [AFJSONResponseSerializer serializer];
+ [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+ 
+ [self POST:ADD_REBATES
+ parameters:@{ @"title":title, @"amount":[NSNumber numberWithFloat:amount], @"included":included }
+ success:^(AFHTTPRequestOperation *operation, id responseObject) {
+ 
+ NSLog(@"responseObject: %@",responseObject);
+ 
+ if ([responseObject[@"status"] integerValue] == kStatusOK) {
+ //[weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
+ onSuccess(@"OK");
+ 
+ } else if (onError) {
+ NSLog(@"%@", responseObject[@"message"]);
+ onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+ }
+ }
+ failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+ if (onError) {
+ onError(error);
+ }
+ }];
+ 
+ 
+ 
+ }
+*/
 
 
 

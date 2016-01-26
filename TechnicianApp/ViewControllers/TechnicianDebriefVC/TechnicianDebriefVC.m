@@ -52,6 +52,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, copy) void (^onTextChange)(DebriefCell *cell, NSString *str);
 @property (nonatomic, strong) NSMutableDictionary *cellData;
 @property (nonatomic, readonly) NSDictionary      *valueForApi;
+@property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
 
 @end
 
@@ -80,7 +81,6 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     self.lblSubtitle.hidden = YES;
     self.txtField.hidden    = YES;
     self.btnChkBox.hidden = YES;
-
     
     self.cellType = [_cellData[@"accType"] integerValue];
 
@@ -111,7 +111,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
             [self.btnRightTextFiled setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
             [self.btnRightTextFiled setTitle:self.txtField.text forState:UIControlStateNormal];
             [self.btnRightTextFiled.titleLabel setFont:self.txtField.font];
-            [self.btnRightTextFiled setTitleColor:self.txtField.textColor forState:UIControlStateNormal];
+            [self.btnRightTextFiled setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
             [self.btnRightTextFiled addTarget:self action:@selector(dropDown:) forControlEvents:UIControlEventTouchUpInside];
         }
         self.txtField.rightView     = self.btnRightTextFiled;
@@ -123,7 +123,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtField.leftView                     = self.paddingView;
         self.txtField.leftViewMode                 = UITextFieldViewModeAlways;
         self.txtField.layer.borderWidth            = 1;
-        self.txtField.layer.borderColor            = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+        self.txtField.layer.borderColor            = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
         self.txtField.hidden                       = NO;
         self.txtField.dropDownTableVisibleRowCount = MIN(6, [(NSArray *)cellData[@"possVals"] count]);
         self.txtField.dropDownTableTitlesArray     = cellData[@"possVals"];
@@ -135,7 +135,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtView.text              = cellData[@"accVal"];
         self.txtView.hidden            = NO;
         self.txtView.layer.borderWidth = 1;
-        self.txtView.layer.borderColor = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+        self.txtView.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
         break;
     }
     case txtFieldCellAcc:
@@ -154,7 +154,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
         self.txtField.leftView          = self.paddingView;
         self.txtField.leftViewMode      = UITextFieldViewModeAlways;
         self.txtField.layer.borderWidth = 1;
-        self.txtField.layer.borderColor = [[UIColor colorWithWhite:0.960 alpha:1.000] CGColor];
+        self.txtField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
         self.txtField.hidden            = NO;
         if (self.cellType == txtFieldNumericCellAcc) {
             self.txtField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
@@ -299,6 +299,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) NSNumber* defaulthideSection3;
 
 @property (nonatomic, strong) NSNumber* loadet;
+@property (weak, nonatomic) IBOutlet UIButton *finalizeBtn;
 @end
 
 @implementation TechnicianDebriefVC
@@ -314,6 +315,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     self.hideSection3 = [NSNumber numberWithBool:NO];
     
     self.title = @"Technical Debrief";
+    [self configureColorScheme];
  
 
     self.keyboardAvoiding.contentSize = self.tableView.frame.size;
@@ -346,6 +348,14 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
    
      self.getcArray = [NSNumber numberWithBool:NO];
    
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.finalizeBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    //self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -700,7 +710,9 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      if (indexPath.section == 6)  {
-          UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
+         DebriefCell *cell = [tableView dequeueReusableCellWithIdentifier:@"savecell"];
+         cell.finalizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+         cell.backgroundColor = [UIColor clearColor];
          return cell;
      }
     
@@ -749,7 +761,12 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
     //cell.separatorView.y = cell.frame.size.height - 1;
     
+    cell.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    cell.lblTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    cell.lblSubtitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    cell.txtField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     cell.backgroundColor = [UIColor clearColor];
+    
     if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == drpDownCellAcc) {
         
         

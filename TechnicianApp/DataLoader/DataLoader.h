@@ -106,7 +106,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 -(void)addRebatesToPortal:(NSString *)title
                    amount:(CGFloat)amount
                  included:(NSString *)included
-                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                onSuccess:(void (^)(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd))onSuccess
                   onError:(void (^)(NSError *error))onError;
 
 
