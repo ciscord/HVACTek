@@ -25,7 +25,7 @@
     // Do any additional setup after loading the view.
     self.isTitleViewHidden = YES;
     
-    //self.btnAdd2CardApp.hidden = !([[DataLoader sharedInstance].currentUser.add2cart boolValue]);
+    self.btnAdd2CardApp.hidden = !([[DataLoader sharedInstance].currentUser.add2cart boolValue]);
     self.btnTechApp.hidden = !([[DataLoader sharedInstance].currentUser.tech boolValue]);
     self.btnTechApp.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.btnAdd2CardApp.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

@@ -159,8 +159,6 @@
                           options:kNilOptions
                           error:&error];
     
-    NSLog(@"responseData %@",responseData);
-    
     NSArray* rebates = [json objectForKey:@"results"];
     
     if (rebates.count > 0) {
@@ -234,7 +232,7 @@
             // itm.include = [NSNumber numberWithBool:0];
             itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
             itm.type = @"Rebates";
-            itm.typeID = [NSNumber numberWithInt:99];
+            itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue]];//[NSNumber numberWithInt:99];
             itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:i];
             
@@ -330,42 +328,97 @@
     syncView.hidden = NO;
     [activity startAnimating];
     
-    
-    dispatch_async(kBgQueue, ^{
-        
-        NSString *asd = [kRebatesURL absoluteString];
-        NSString *asd2 = [NSString stringWithFormat:@"&token=%@",[[[DataLoader sharedInstance] currentUser] userToken]];
-        asd = [asd stringByAppendingString:asd2];
-        
-        NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString:asd2]];
 
-        
-        
-        [self performSelectorOnMainThread:@selector(fetchedRebates:)
-                               withObject:data waitUntilDone:YES];
-        
-        
-    });
+    NSString *token =[[DataLoader sharedInstance] token];
     
-    dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        kProdURL];
-        [self performSelectorOnMainThread:@selector(fetchedProducts:)
-                               withObject:data waitUntilDone:YES];
-        
-        
-    });
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kRebatesURL];
+    [request setTimeoutInterval: 10.0];
+    [request setValue:token forHTTPHeaderField:@"TOKEN"];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               
+                               if (data != nil && error == nil)
+                               {
+                                   [self performSelectorOnMainThread:@selector(fetchedRebates:)
+                                                          withObject:data waitUntilDone:YES];
+                               }
+                               else
+                               {
+                                   // There was an error, alert the user
+                               }
+                               
+                           }];
+    
+    NSMutableURLRequest *request2 = [NSMutableURLRequest requestWithURL:kProdURL];
+    [request2 setTimeoutInterval: 10.0];
+    [request2 setValue:token forHTTPHeaderField:@"TOKEN"];
+    [NSURLConnection sendAsynchronousRequest:request2
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               
+                               if (data != nil && error == nil)
+                               {
+                                    [self performSelectorOnMainThread:@selector(fetchedProducts:)
+                                                           withObject:data waitUntilDone:YES];
+                               }
+                               else
+                               {
+                                   // There was an error, alert the user
+                               }
+                               
+                           }];
     
     
-    dispatch_async(kBgQueue, ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        kSystemProdURL];
-        [self performSelectorOnMainThread:@selector(fetchSystemProducts:)
-                               withObject:data waitUntilDone:YES];
-        
-        
-    });
+    NSMutableURLRequest *request3 = [NSMutableURLRequest requestWithURL:kSystemProdURL];
+    [request3 setTimeoutInterval: 10.0];
+    [request3 setValue:token forHTTPHeaderField:@"TOKEN"];
+    [NSURLConnection sendAsynchronousRequest:request3
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               
+                               if (data != nil && error == nil)
+                               {
+                                   [self performSelectorOnMainThread:@selector(fetchSystemProducts:)
+                                                          withObject:data waitUntilDone:YES];
+                               }
+                               else
+                               {
+                                   // There was an error, alert the user
+                               }
+                               
+                           }];
+    
+    
+//    dispatch_async(kBgQueue, ^{
+//        
+//        NSData* data = [NSData dataWithContentsOfURL:
+//                        kRebatesURL];
+//        
+//        [self performSelectorOnMainThread:@selector(fetchedRebates:)
+//                               withObject:data waitUntilDone:YES];
+//        
+//        
+//    });
+    
+//    dispatch_async(kBgQueue, ^{
+//        NSData* data = [NSData dataWithContentsOfURL:
+//                        kProdURL];
+//        [self performSelectorOnMainThread:@selector(fetchedProducts:)
+//                               withObject:data waitUntilDone:YES];
+//        
+//        
+//    });
+//    
+//    
+//    dispatch_async(kBgQueue, ^{
+//        NSData* data = [NSData dataWithContentsOfURL:
+//                        kSystemProdURL];
+//        [self performSelectorOnMainThread:@selector(fetchSystemProducts:)
+//                               withObject:data waitUntilDone:YES];
+//        
+//        
+//    });
     //
     [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
     

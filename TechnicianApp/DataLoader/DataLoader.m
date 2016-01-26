@@ -75,6 +75,8 @@ NSString *const DEBRIEF          = @"addDebrief";
 NSString *const SURVEY           = @"saveSurvey";
 NSString *const INVOICE          = @"emailInvoice";
 NSString *const ADD_REBATES      = @"addRebate";
+NSString *const DELETE_REBATES   = @"deleteRebate";
+NSString *const UPDATE_REBATES   = @"updateRebate";
 
 #define kStatusOK 1
 
@@ -321,11 +323,10 @@ NSString *const ADD_REBATES      = @"addRebate";
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
                weakSelf.currentUser.tech = [NSNumber numberWithBool:([weakSelf.userInfo[@"tech"] intValue]==1)];
                weakSelf.currentUser.password = password;
-               weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
+          //     weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
                [weakSelf.currentUser.managedObjectContext save];
                
-               [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
-               
+               [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];               
                
                onSuccess(@"OK");
                
@@ -678,10 +679,92 @@ NSString *const ADD_REBATES      = @"addRebate";
                onError(error);
            }
        }];
-
-    
     
 }
+
+
+
+-(void)updateRebatesToPortal:(NSString *)title
+                      amount:(CGFloat)amount
+                    included:(NSString *)included
+                   rebate_id:(NSString *)rebate_id
+                   onSuccess:(void (^)(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd))onSuccess
+                     onError:(void (^)(NSError *error))onError {
+    
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:UPDATE_REBATES
+    parameters:@{ @"title":title, @"amount":[NSNumber numberWithFloat:amount], @"included":included, @"id":rebate_id }
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               
+               NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+               f.numberStyle = NSNumberFormatterNoStyle;
+               NSNumber *idNumb = [f numberFromString:[responseObject[@"results"] objectForKey:@"id"]];
+               NSNumber *ordNumb = [f numberFromString:[responseObject[@"results"] objectForKey:@"ord"]];
+               
+               onSuccess(@"OK", idNumb, ordNumb);
+               
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+    
+}
+
+
+
+-(void)deleteRebatesFromPortalWithId:(NSString *)rebate_id
+                     onSuccess:(void (^)(NSString *successMessage))onSuccess
+                       onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:DELETE_REBATES
+    parameters:@{ @"id":[NSNumber numberWithInt:47] }
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               
+               onSuccess(@"OK");
+               
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  -(void)addRebatesToPortal:(NSString *)title

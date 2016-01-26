@@ -179,10 +179,22 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
         Item * aItem = selected[indexPath.row];
-        [managedObjectContext deleteObject:aItem];
-        rebatesToSend = [[NSMutableArray alloc]init];
-        [self fetchData];
-        [tableView reloadData];
+        
+        NSString *strID = [aItem.typeID stringValue];
+        
+        [[DataLoader sharedInstance] deleteRebatesFromPortalWithId:strID
+                                                         onSuccess:^(NSString *successMessage) {
+                                                             NSLog(@"SUCCES %@",successMessage);
+                                                             
+                                                             [managedObjectContext deleteObject:aItem];
+                                                             rebatesToSend = [[NSMutableArray alloc]init];
+                                                             [self fetchData];
+                                                             [tableView reloadData];
+                                                             
+                                                         }onError:^(NSError *error) {
+                                                             ShowOkAlertWithTitle(error.localizedDescription, self);
+                                                             NSLog(@"ERROR");
+                                                         }];
     }
 }
 

@@ -109,6 +109,17 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                 onSuccess:(void (^)(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd))onSuccess
                   onError:(void (^)(NSError *error))onError;
 
+-(void)updateRebatesToPortal:(NSString *)title
+                   amount:(CGFloat)amount
+                 included:(NSString *)included
+                rebate_id:(NSString *)rebate_id
+                onSuccess:(void (^)(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd))onSuccess
+                  onError:(void (^)(NSError *error))onError;
+
+-(void)deleteRebatesFromPortalWithId:(NSString *)rebate_id
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError;
+
 
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
                                  onSuccess:(void (^)(NSString *successMessage))onSuccess

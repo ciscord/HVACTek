@@ -119,32 +119,44 @@
 
 - (IBAction)saveButton:(id)sender {
     
-    float priceAmount = [self.priceField.text floatValue];
-    
-    if (priceAmount > 0) {
-        [[DataLoader sharedInstance] addRebatesToPortal:self.nameField.text
-                                                 amount:100.0
-                                               included:@"1"
-                                              onSuccess:^(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd) {
-                                                  NSLog(@"SUCCES %@ :%@",successMessage, rebateID);
-                                                  [self addLocalRebateWithId:rebateID andOrd:rebateOrd];
-                                                  
-                                              }onError:^(NSError *error) {
-                                                  ShowOkAlertWithTitle(error.localizedDescription, self);
-                                                  NSLog(@"ERROR");
-                                              }];
+    if (edit) {
+        float priceAmount = [self.priceField.text floatValue];
+        
+        if (priceAmount > 0) {
+            [[DataLoader sharedInstance] updateRebatesToPortal:self.nameField.text
+                                                        amount:priceAmount
+                                                      included:@"1"
+                                                     rebate_id:[itemz.typeID stringValue]
+                                                     onSuccess:^(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd) {
+                                                         NSLog(@"SUCCES %@ :%@",successMessage, rebateID);
+                                                         [self addLocalRebateWithId:rebateID andOrd:rebateOrd];
+                                                      
+                                                  }onError:^(NSError *error) {
+                                                      ShowOkAlertWithTitle(error.localizedDescription, self);
+                                                      NSLog(@"ERROR");
+                                                  }];
+        }else{
+            ShowOkAlertWithTitle(@"Please introduce a valid price amount.", self);
+        }
     }else{
-        ShowOkAlertWithTitle(@"Please introduce a valid price amount.", self);
+        float priceAmount = [self.priceField.text floatValue];
+        
+        if (priceAmount > 0) {
+            [[DataLoader sharedInstance] addRebatesToPortal:self.nameField.text
+                                                     amount:priceAmount
+                                                   included:@"1"
+                                                  onSuccess:^(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd) {
+                                                      NSLog(@"SUCCES %@ :%@",successMessage, rebateID);
+                                                      [self addLocalRebateWithId:rebateID andOrd:rebateOrd];
+                                                      
+                                                  }onError:^(NSError *error) {
+                                                      ShowOkAlertWithTitle(error.localizedDescription, self);
+                                                      NSLog(@"ERROR");
+                                                  }];
+        }else{
+            ShowOkAlertWithTitle(@"Please introduce a valid price amount.", self);
+        }
     }
-    
-
-    
-    
-    
-    ///////////////////    if succes
-    
-
-    
 }
 
 
@@ -161,6 +173,7 @@
         item.type = @"Rebates";
         item.usserAdet =[NSNumber numberWithInt:1];
         item.ord = ordID;
+        item.typeID = rebID;
        // item.
         //itm.type = @"Rebates";
     } else {
