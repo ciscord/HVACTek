@@ -2540,8 +2540,7 @@
         cartView.delegate = self;
         cartView.testerVC = self;
         cartView.isViewingCart = YES;
-        
-        
+        cartView.managedObjectContext = managedObjectContext;        
         
         self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
         cartView.carts = self.carts;
