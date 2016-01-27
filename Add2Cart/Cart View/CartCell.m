@@ -128,9 +128,9 @@
             invest = (totalAmount - totalSavings)/.8975;
             break;
         }
-        case 144:{
-            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
-            invest = (totalAmount - totalSavings)/.909;
+        case 72:{
+            finacePay =  (totalAmount - totalSavings)/72;
+            invest = (finacePay*72);
             break;
         }
         default:
@@ -140,6 +140,15 @@
             break;
         }
     }
+    
+    /*
+     case 144:{
+     finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
+     invest = (totalAmount - totalSavings)/.909;
+     break;
+     }
+     */
+    
     
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
 }
@@ -169,10 +178,6 @@
             self.financing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months",[self.months intValue]];
             
             break;
-        case 144:
-            self.financing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months",[self.months intValue]];
-            break;
-            
         case 0:
             self.financing.text =[NSString stringWithFormat:@"Cash /Check /Credit Card"];
             break;
@@ -181,6 +186,12 @@
             self.financing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments",[self.months intValue]];
             break;
     }
+    
+    /*
+     case 144:
+     self.financing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months",[self.months intValue]];
+     break;
+     */
     
    self.lblFinaincinSum.text =[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:financeP]]];
     

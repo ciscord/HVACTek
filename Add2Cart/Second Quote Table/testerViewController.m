@@ -2224,9 +2224,9 @@
             invest = (totalAmount - totalSavings)/.8975;
             break;
         }
-        case 144:{
-            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
-            invest = (totalAmount - totalSavings)/.909;
+        case 72:{
+            finacePay =  (totalAmount - totalSavings)/72;
+            invest = (finacePay*72);
             break;
         }
         default:
@@ -2236,6 +2236,12 @@
             break;
         }
     }
+    
+    //        case 144:{
+    //            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
+    //            invest = (totalAmount - totalSavings)/.909;
+    //            break;
+    //        }
     
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
 }
@@ -2273,10 +2279,6 @@
             //3.99% Best Rate 84 Months
             lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
             break;
-        case 144:
-            lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
-            break;
-            
         case 0:
             lblFinancing.text =[NSString stringWithFormat:@""];
             break;
@@ -2286,6 +2288,11 @@
             break;
     }
     
+    /*
+     case 144:
+     lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
+     break;
+     */
     
     NSMutableAttributedString *TitleText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",lblFinancing.text,lblFinancingValue.text]];
     // NSArray *aStrings=[btnTitleText.string componentsSeparatedByString:separator];
