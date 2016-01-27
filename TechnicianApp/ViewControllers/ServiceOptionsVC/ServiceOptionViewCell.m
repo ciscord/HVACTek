@@ -19,6 +19,7 @@
     self.lbValue.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.btnCheckbox.layer.borderWidth   = 1.0;
     self.btnCheckbox.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+    self.btnCheckbox.backgroundColor     = [UIColor whiteColor];
 }
 
 - (IBAction)checkboxTouchUp:(UIButton *)sender {
