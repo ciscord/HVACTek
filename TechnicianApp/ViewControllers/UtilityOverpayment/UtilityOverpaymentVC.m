@@ -44,7 +44,7 @@
     self.hvacLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.overpaymentLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.amountTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.amountTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.amountTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.amountTextField.layer.borderWidth   = 1.0;
     self.amountTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }

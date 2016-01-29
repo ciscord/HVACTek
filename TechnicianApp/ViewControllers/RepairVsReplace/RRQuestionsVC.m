@@ -122,7 +122,7 @@
 #pragma mark - BackgroundColors
 - (void)configureBackgroundColor {
     self.currentRRQuestionView.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.currentRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.currentRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.currentRRQuestionView.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.currentRRQuestionView.answerTextField.layer.borderWidth = 1.0;
     self.currentRRQuestionView.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
@@ -134,7 +134,7 @@
     [self.currentRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
     
     self.nextRRQuestionView.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.nextRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.nextRRQuestionView.answerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.nextRRQuestionView.questionTextView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.nextRRQuestionView.answerTextField.layer.borderWidth = 1.0;
     self.nextRRQuestionView.answerTextField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;

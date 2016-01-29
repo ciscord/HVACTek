@@ -70,7 +70,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.tfSearch.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.tfSearch.layer.borderWidth   = 1.0;
     self.tfSearch.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;

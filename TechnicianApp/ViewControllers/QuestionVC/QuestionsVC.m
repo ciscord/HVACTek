@@ -113,7 +113,7 @@
 #pragma mark - BackgroundColors
 - (void)configureBackgroundColor {
     self.currentQuestionView.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.currentQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.currentQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.currentQuestionView.txtQuestion.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.currentQuestionView.txtAnswer.layer.borderWidth = 1.0;
     self.currentQuestionView.txtAnswer.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
@@ -125,7 +125,7 @@
     [self.currentQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
     
     self.nextQuestionView.txtAnswer.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.nextQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.nextQuestionView.txtAnswer.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.nextQuestionView.txtQuestion.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.nextQuestionView.txtAnswer.layer.borderWidth = 1.0;
     self.nextQuestionView.txtAnswer.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;

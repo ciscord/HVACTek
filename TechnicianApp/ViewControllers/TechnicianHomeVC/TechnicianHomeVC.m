@@ -53,7 +53,7 @@
     
     self.edtJobId.layer.borderWidth = 1.0;
     self.edtJobId.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
 }
 
 

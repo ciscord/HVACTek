@@ -17,7 +17,7 @@
 
 
 
-#define DEVELOPMENT
+//#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 
@@ -311,8 +311,8 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
                                                       contact_phone:companyDict[@"contact_phone"]
                                                             deleted:companyDict[@"deleted"]
                                                                logo:companyDict[@"logo"]
-                                                      primary_color:companyDict[@"primary_color"]
-                                                    secondary_color:companyDict[@"secondary_color"]
+                                                      primary_color:@"#4690CD"                            //companyDict[@"primary_color"]
+                                                    secondary_color:@"#EE4236"                            //companyDict[@"secondary_color"]
                                                               state:companyDict[@"state"]
                                                            swapi_id:companyDict[@"swapi_id"]
                                                                 zip:companyDict[@"zip"]];

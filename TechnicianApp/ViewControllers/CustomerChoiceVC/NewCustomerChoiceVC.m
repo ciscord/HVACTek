@@ -76,7 +76,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 - (void)configureColorScheme {
     self.textFieldInitials.layer.borderWidth   = 1.0;
     self.textFieldInitials.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.textFieldInitials.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.textFieldInitials.backgroundColor   = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.textFieldInitials.textColor   = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     self.btnSendByEmail.layer.borderWidth = 1.0;

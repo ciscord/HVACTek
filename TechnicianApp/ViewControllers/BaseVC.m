@@ -109,7 +109,7 @@
     self.upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 184, self.view.width, 50)];
     self.upperArcView.backgroundColor = [UIColor redColor];
     self.upperArcView.layer.mask = maskLayer;
-    //[self.view addSubview:self.upperArcView];
+    //[self.titleView addSubview:self.upperArcView];
     
 }
 

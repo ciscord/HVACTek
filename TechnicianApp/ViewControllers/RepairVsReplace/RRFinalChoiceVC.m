@@ -45,11 +45,11 @@
 - (void)configureColorScheme {
     self.initialTechTextField.layer.borderWidth   = .5;
     self.initialTechTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.initialTechTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.initialTechTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.initialTechTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.initialCostumerTextField.layer.borderWidth   = .5;
     self.initialCostumerTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.initialCostumerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.initialCostumerTextField.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.initialCostumerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.customerPriceView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
     
