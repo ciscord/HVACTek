@@ -67,7 +67,7 @@
     __weak typeof (self) weakSelf = self;
     [[DataLoader sharedInstance] loginWithUsername:self.txtUser.text
                                           password:self.txtPassword.text
-                                     andCompanyKey:@""
+                                     andCompanyKey:self.txtAPI.text
                                          onSuccess:^(NSString *successMessage) {
                                                NSUserDefaults * userPassword = [NSUserDefaults standardUserDefaults];
                                              [userPassword setObject:weakSelf.txtUser.text forKey:@"us"];

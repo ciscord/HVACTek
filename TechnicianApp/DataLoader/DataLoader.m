@@ -292,7 +292,7 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     [self POST:USER_LOGIN
-    parameters:@{ @"email":username, @"password":password, @"signature":signature }
+    parameters:@{ @"email":username, @"password":password, @"signature":signature, @"portal_key":companyKey }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];

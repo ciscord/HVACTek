@@ -179,12 +179,22 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Button Actions
 - (IBAction)clickedBackBtn:(UIButton *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)clickedSaveBtn:(UIButton *)sender {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
+    
+    [self saveInvoiceToApp];
+    
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
     
@@ -290,7 +300,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             };
     
     __weak __typeof(self)weakSelf = self;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
  [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
      AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -317,6 +327,32 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     else
         self.btnSendByEmail.selected = NO;
 }
+
+
+#pragma mark - Save to App
+-(void)saveInvoiceToApp {
+    
+    NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
+    NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
+    
+    for (PricebookItem *p in selectedItems) {
+        if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
+            NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
+            
+            [selectedArray addObject:@{@"sku" : p.itemNumber,
+                                       @"qty" : [NSNumber numberWithInt:[p.quantity integerValue]],
+                                     @"price" : price,
+                                   @"taxable" : @false}];
+        }
+    }
+    
+    NSDictionary * dict = @{ @"items" : selectedArray };
+    
+    //post invoice
+    NSLog(@"dictionary: %@", dict.description);
+}
+
+
 
 #pragma mark - SignatureView
 
