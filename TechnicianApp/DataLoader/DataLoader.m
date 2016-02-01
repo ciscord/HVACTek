@@ -288,6 +288,10 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     
     __weak typeof(self) weakSelf = self;
     
+//    NSDictionary * tralalal = @{ @"email":username, @"password":password, @"signature":signature, @"portal_key":companyKey };
+    
+    
+    
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
@@ -311,8 +315,8 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
                                                       contact_phone:companyDict[@"contact_phone"]
                                                             deleted:companyDict[@"deleted"]
                                                                logo:companyDict[@"logo"]
-                                                      primary_color:@"#4690CD"                            //companyDict[@"primary_color"]
-                                                    secondary_color:@"#EE4236"                            //companyDict[@"secondary_color"]
+                                                      primary_color:companyDict[@"primary_color"]                           //companyDict[@"primary_color"]   @"#4690CD"
+                                                    secondary_color:companyDict[@"secondary_color"]                           //companyDict[@"secondary_color"]  @"#EE4236"
                                                               state:companyDict[@"state"]
                                                            swapi_id:companyDict[@"swapi_id"]
                                                                 zip:companyDict[@"zip"]];
@@ -732,8 +736,12 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterNoStyle;
+    NSNumber *myNumber = [f numberFromString:rebate_id];
+    
     [self POST:DELETE_REBATES
-    parameters:@{ @"id":[NSNumber numberWithInt:47] }
+    parameters:@{ @"id":myNumber}
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            
            NSLog(@"responseObject: %@",responseObject);
@@ -752,7 +760,6 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
                onError(error);
            }
        }];
-    
 }
 
 

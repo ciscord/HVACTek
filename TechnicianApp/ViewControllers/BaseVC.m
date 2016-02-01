@@ -46,6 +46,10 @@
     [self configureTitle];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 
 
 #pragma mark - BackgroundColors
@@ -100,18 +104,65 @@
     self.lbTitle.text = self.title;
     
     
-    CAShapeLayer * maskLayer = [CAShapeLayer layer];
-    CGPoint center = CGPointMake(self.view.width/2, 20);
-    
-    maskLayer.path = (__bridge CGPathRef _Nullable)([UIBezierPath bezierPathWithArcCenter:center radius:0.5 startAngle:20.0 endAngle:20.0 clockwise:YES]);
-    
-    
-    self.upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 184, self.view.width, 50)];
-    self.upperArcView.backgroundColor = [UIColor redColor];
-    self.upperArcView.layer.mask = maskLayer;
-    //[self.titleView addSubview:self.upperArcView];
-    
+    /// arch Views
+    [self configureUpperView];
+    [self configureBottomView];
 }
+
+
+- (void)configureUpperView {
+    CGFloat round = 20;
+    self.upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 164, self.view.width, 20)];
+    self.upperArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = self.upperArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x,startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = self.upperArcView.bounds;
+    layer.path = aPath.CGPath;
+    self.upperArcView.layer.mask = layer;
+    
+    [self.view addSubview:self.upperArcView];
+}
+
+
+- (void)configureBottomView {
+    CGFloat round = 20;
+    self.bottomArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 1004, self.view.width, 20)];
+    self.bottomArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.bottomArcView.layer.affineTransform = CGAffineTransformMakeScale(1, -1);
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = self.bottomArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x, startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = self.bottomArcView.bounds;
+    layer.path = aPath.CGPath;
+    self.bottomArcView.layer.mask = layer;
+    
+    
+    [self.view addSubview:self.bottomArcView];
+}
+
 
 
 #pragma mark

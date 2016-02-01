@@ -279,7 +279,7 @@
     NSMutableArray *ductlessProds = [[NSMutableArray alloc] init];
     
     
-    NSLog(@"Heating is %d and cooling is %d",heat ,cool);
+///    NSLog(@"Heating is %d and cooling is %d",heat ,cool);
     
     
     //Need to itterate through all of the items for included items.  Once we have an included item check if it matches type 1 or 2. Then check its price and add to final
@@ -305,7 +305,7 @@
         if ((tID == 3)&& (![typeThrees containsObject:itm])) {
             //  itm.finalOption = itm.optionOne;
             //  itm.finalPrice = itm.optOnePrice;
-            NSLog(@"type is %@",itm.type);
+  ///          NSLog(@"type is %@",itm.type);
             /* if ([itm.type isEqualToString:@"IAQ"]) {
              [iaq addObject:itm];
              NSLog(@"type is %@",itm.type);

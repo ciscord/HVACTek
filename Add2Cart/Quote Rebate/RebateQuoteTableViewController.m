@@ -186,6 +186,9 @@
                                                          onSuccess:^(NSString *successMessage) {
                                                              NSLog(@"SUCCES %@",successMessage);
                                                              
+                                                             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Succesfully Deleted" message:[NSString stringWithFormat:@"You have succesfully deleted a rebate"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                                                             [al show];
+                                                             
                                                              [managedObjectContext deleteObject:aItem];
                                                              rebatesToSend = [[NSMutableArray alloc]init];
                                                              [self fetchData];
