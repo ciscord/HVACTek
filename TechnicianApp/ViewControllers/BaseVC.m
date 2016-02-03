@@ -66,6 +66,7 @@
     [self.view addSubview:self.logoView];
     
     self.imgTopBar = [[UIImageView alloc] initWithFrame:CGRectMake(159, 64, 450, 100)];
+    self.imgTopBar.contentMode = UIViewContentModeScaleAspectFit;
     
     __weak UIImageView *weakImageView = self.imgTopBar;
     [self.imgTopBar setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]

@@ -98,7 +98,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
-            andCompanyKey:(NSString *)companyKey
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError;
 

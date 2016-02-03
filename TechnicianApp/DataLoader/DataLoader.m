@@ -274,7 +274,6 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
 
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
-            andCompanyKey:(NSString *)companyKey
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError {
     
@@ -288,15 +287,12 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     
     __weak typeof(self) weakSelf = self;
     
-//    NSDictionary * tralalal = @{ @"email":username, @"password":password, @"signature":signature, @"portal_key":companyKey };
-    
-    
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     [self POST:USER_LOGIN
-    parameters:@{ @"email":username, @"password":password, @"signature":signature, @"portal_key":companyKey }
+    parameters:@{ @"email":username, @"password":password, @"signature":signature }    //, @"portal_key":companyKey
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];

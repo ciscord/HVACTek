@@ -1027,21 +1027,21 @@
 
 -(float) checkOptionsDuctlessPrice:(Item *)itm {
     
-    if ([itm.optionOne isEqualToString:firstOption.boilersValue]) {
+    if ([itm.optionOne isEqualToString:firstOption.ductlessValue]) {
         return [itm.optOnePrice floatValue];
-    } else if ([itm.optionTwo isEqualToString:firstOption.boilersValue]) {
+    } else if ([itm.optionTwo isEqualToString:firstOption.ductlessValue]) {
         return [itm.optTwoPrice floatValue];
-    } else if ([itm.optionThree isEqualToString:firstOption.boilersValue]) {
+    } else if ([itm.optionThree isEqualToString:firstOption.ductlessValue]) {
         return [itm.optThreePrice floatValue];
-    } else if ([itm.optionFour isEqualToString:firstOption.boilersValue]) {
+    } else if ([itm.optionFour isEqualToString:firstOption.ductlessValue]) {
         return [itm.optFourPrice floatValue];
-    }else if ([itm.optionFive isEqualToString:firstOption.boilersValue]) {
+    }else if ([itm.optionFive isEqualToString:firstOption.ductlessValue]) {
         return [itm.optFivePrice floatValue];
-    }else if ([itm.optionSix isEqualToString:firstOption.boilersValue]) {
+    }else if ([itm.optionSix isEqualToString:firstOption.ductlessValue]) {
         return [itm.optSixPrice floatValue];
-    }else if ([itm.optionSeven isEqualToString:firstOption.boilersValue]) {
+    }else if ([itm.optionSeven isEqualToString:firstOption.ductlessValue]) {
         return [itm.optSevenPrice floatValue];
-    }else if ([itm.optionEight isEqualToString:firstOption.boilersValue]) {
+    }else if ([itm.optionEight isEqualToString:firstOption.ductlessValue]) {
         return [itm.optEightPrice floatValue];
     }
     
@@ -2163,6 +2163,7 @@
         else
         {
             totalAmount += [itm.finalPrice floatValue];
+            NSLog(@"itm.finalPrice:  %@", itm.finalPrice );
         }
     }
     
