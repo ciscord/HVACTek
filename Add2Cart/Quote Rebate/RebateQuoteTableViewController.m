@@ -106,8 +106,8 @@
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
             NSLog(@"name: %@",itm.modelName);
-            NSLog(@"asdasd: %@",itm.ord);
-            NSLog(@"asdasd2: %@",itm.typeID);
+            NSLog(@"price: %@",itm.finalPrice);
+
             [selected addObject:itm];
                        
         }

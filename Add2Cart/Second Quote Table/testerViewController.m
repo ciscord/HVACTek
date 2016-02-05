@@ -2163,7 +2163,7 @@
         else
         {
             totalAmount += [itm.finalPrice floatValue];
-            NSLog(@"itm.finalPrice:  %@", itm.finalPrice );
+         ///   NSLog(@"itm.finalPrice:  %@", itm.finalPrice );
         }
     }
     

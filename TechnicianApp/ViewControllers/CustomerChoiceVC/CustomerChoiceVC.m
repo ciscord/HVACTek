@@ -118,9 +118,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     self.helperView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     self.mainView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
-    self.helpView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.helpView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.helpView3.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.helpView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary0];
+    self.helpView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary0];
+    self.helpView3.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary0];
     self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -149,15 +149,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     NSMutableArray *items1 = self.selectedServiceOptions[@"removedItems"];
     
     if (items1.count) {
-        CGFloat totalPriceNormal = 0;
-        CGFloat totalPriceESA = 0;
+        int totalPriceNormal = 0;
+        int totalPriceESA = 0;
         for (PricebookItem *p in items1) {
             int totalQuantity = 1;
             if ([p.quantity intValue] > 1)
                 totalQuantity = [p.quantity intValue];
             
-            totalPriceNormal += p.amount.floatValue * totalQuantity;
-            totalPriceESA += p.amountESA.floatValue * totalQuantity;
+            totalPriceNormal += p.amount.intValue * totalQuantity;
+            totalPriceESA += p.amountESA.intValue * totalQuantity;
         }
 
         
@@ -167,7 +167,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
             self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
         
     }else{
-        self.subtotaPriceLabel.text = @"$0.00";
+        self.subtotaPriceLabel.text = @"$0";
     }
 }
 
@@ -241,13 +241,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 - (NSDictionary *)addDiscountsToDictionary:(NSDictionary *)dictionary {
     
     NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:self.selectedServiceOptions[@"removedItems"]];
-
-    
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]].floatValue != 0) {
+  
+  if ([NSNumber numberWithInt:[[self cutString:self.textFieldComfortClub.text] intValue]].intValue != 0) {
         PricebookItem *clubMembership = [PricebookItem new];
        clubMembership.itemID  = @"-1";
-        clubMembership.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
-        clubMembership.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldComfortClub.text] floatValue]];
+        clubMembership.amount     = [NSNumber numberWithInt:[[self cutString:self.textFieldComfortClub.text] intValue]];
+        clubMembership.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldComfortClub.text] intValue]];
         clubMembership.name = @"Comfort Club Membership";
         clubMembership.itemGroup = @"Additional items";
         clubMembership.itemNumber = @"-1";
@@ -256,23 +255,23 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         [newArray addObject:clubMembership];
     }
     
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDeposit.text] floatValue]].floatValue != 0){
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldDeposit.text] intValue]].intValue != 0){
         PricebookItem *deposit = [PricebookItem new];
         deposit.itemID = @"-2";
-        deposit.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
-        deposit.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDeposit.text] floatValue])];
-        deposit.name = @"Payment or 50% Deposit";
+        deposit.amount     = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDeposit.text] intValue])];
+        deposit.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDeposit.text] intValue])];
+        deposit.name = @"50% Deposit";
         deposit.itemGroup = @"Additional items";
         deposit.itemNumber = @"-2";
         deposit.quantity = @"";
         [newArray addObject:deposit];
     }
     
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDisconts.text] floatValue]].floatValue != 0) {
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldDisconts.text] intValue]].intValue != 0) {
         PricebookItem *discount = [PricebookItem new];
         discount.itemID = @"-3";
-        discount.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
-        discount.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldDisconts.text] floatValue])];
+        discount.amount     = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDisconts.text] intValue])];
+        discount.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDisconts.text] intValue])];
         discount.name = @"Discounts";
         discount.itemGroup = @"Additional items";
         discount.itemNumber = @"-3";
@@ -280,11 +279,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         [newArray addObject:discount];
     }
     
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]].floatValue != 0) {
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldDiagnostic.text] intValue]].intValue != 0) {
         PricebookItem *payment = [PricebookItem new];
         payment.itemID = @"-5";
-        payment.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]];
-        payment.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldDiagnostic.text] floatValue]];
+        payment.amount     = [NSNumber numberWithInt:[[self cutString:self.textFieldDiagnostic.text] intValue]];
+        payment.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldDiagnostic.text] intValue]];
         payment.name = @"Diagnostic";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-5";
@@ -292,23 +291,23 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         [newArray addObject:payment];
     }
     
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]].floatValue != 0) {
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldCPT.text] intValue]].intValue != 0) {
         PricebookItem *payment = [PricebookItem new];
         payment.itemID = @"-6";
-        payment.amount     = [NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]];
-        payment.amountESA = [NSNumber numberWithFloat:[[self cutString:self.textFieldCPT.text] floatValue]];
-        payment.name = @"Comprehensive Precision Tune";
+        payment.amount     = [NSNumber numberWithInt:[[self cutString:self.textFieldCPT.text] intValue]];
+        payment.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldCPT.text] intValue]];
+        payment.name = @"Comprehensive Precision Tune Up";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-6";
         payment.quantity = @"";
         [newArray addObject:payment];
     }
     
-    if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
         PricebookItem *payment = [PricebookItem new];
         payment.itemID = @"-4";
-        payment.amount     = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
-        payment.amountESA = [NSNumber numberWithFloat:-fabsf([[self cutString:self.textFieldPayment.text] floatValue])];
+        payment.amount     = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldPayment.text] intValue])];
+        payment.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldPayment.text] intValue])];
         payment.name = @"Payment";
         payment.itemGroup = @"Additional items";
         payment.itemNumber = @"-4";
@@ -416,7 +415,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         {
             cell.contentView.backgroundColor = [UIColor clearColor];
         }else {
-            cell.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+            cell.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary0];
         }
         
         if (self.isOnlyDiagnostic)
@@ -472,16 +471,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
 #pragma mark - Currency String
 
-- (NSString *)changeCurrencyFormat:(float)number {
+- (NSString *)changeCurrencyFormat:(int)number {
     
     NSNumberFormatter *formatterCurrency;
     formatterCurrency = [[NSNumberFormatter alloc] init];
     
     formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-    [formatterCurrency setMaximumFractionDigits:2];
+    [formatterCurrency setMaximumFractionDigits:0];
     [formatterCurrency stringFromNumber: @(12345.2324565)];
     
-    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
 
 
@@ -496,10 +495,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
         vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
         vc.initialTotal = self.subtotaPriceLabel.text;
-        if ([NSNumber numberWithFloat:[[self cutString:self.textFieldPayment.text] floatValue]].floatValue != 0) {
-            vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] floatValue]];
+        if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
+            vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
         }else{
-            vc.paymentValue = @"$0.00";
+            vc.paymentValue = @"$0";
         }
         
         

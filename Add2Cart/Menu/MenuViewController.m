@@ -235,7 +235,7 @@
             itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue]];//[NSNumber numberWithInt:99];
             itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:i];
-            
+          
             //add the item
             [newRebates addObject:itm];
             //}
@@ -459,11 +459,6 @@
             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:0];
             
-            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
-            
-//            NSLog(@"asdasdhjkashdjkasdjkasdjk %@",[products[x] objectForKey:@"title"]);
-//            NSLog(@"asdasdhjkashdjkasdjkasdjk %@",[products[x] objectForKey:@"full_url"]);
-            
             //Options
             for (int o=0; o<options.count; o++) {
                 NSString *priced = [options[o] objectForKey:@"price"];
@@ -549,9 +544,7 @@
             itm.typeID = [NSNumber numberWithInt:[tID intValue]];
             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:1];
-            
-            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
-            
+          
             //Options
             for (int o=0; o<options.count; o++) {
                 NSString *priced = [options[o] objectForKey:@"price"];

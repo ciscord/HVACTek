@@ -33,7 +33,7 @@
     
     [self configureColorScheme];
     
-    self.title = NSLocalizedString(@"Agenda Picture", nil);
+    self.title = NSLocalizedString(@"Expectations", nil);
 }
 
 
