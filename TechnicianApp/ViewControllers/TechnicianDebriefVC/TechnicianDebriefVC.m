@@ -418,7 +418,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     //NSMutableDictionary *workPerformed           = [self itemDicWith:@"Work Performed" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"work_performed" APIValues:@[]];
     //NSMutableDictionary *diagnosticOnlyRevenue   = [self itemDicWith:@"Diagnostic Only Revenue" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"diagnostic_only_revenue" APIValues:@[]];
     //NSMutableDictionary *maintenanceRevenue      = [self itemDicWith:@"Maintenance Revenue" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"maintenance_revenue" APIValues:@[]];
-    NSMutableDictionary *totalRevenue            = [self itemDicWith:@"Total Revenue Today" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"total_revenue" APIValues:@[] cellValueType:ctCellTotalRevenue];
+    NSMutableDictionary *totalRevenue            = [self itemDicWith:@"Total Revenue On This Ticket" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"total_revenue" APIValues:@[] cellValueType:ctCellTotalRevenue];
     //NSMutableDictionary *addOnSaleFuture         = [self itemDicWith:@"Add On Sale Future" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"add_on_sale_future" APIValues:@[] cellValueType:ctCellAddOnSaleFuture];
     //NSMutableDictionary *totalRevenueGenerated   = [self itemDicWith:@"Total Revenue Generated" accType:lblCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"total_revenua_generated" APIValues:@[@""] cellValueType:ctCellTotalRevenueGenerated];
 //    NSMutableDictionary *billableHours                      = [self itemDicWith:@"Billable Hours" accType:lblCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"billable_hours" APIValues:@[@""]];
@@ -436,7 +436,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     NSMutableDictionary *repairScheduled                    = [self itemDicWith:@"Repair Scheduled" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"repair_scheduled" APIValues:@[@1, @0]];
     NSMutableDictionary *priceQuoted                        = [self itemDicWith:@"Price Quoted" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"price_quoted" APIValues:@[]];
     NSMutableDictionary *priceApproved                      = [self itemDicWith:@"Price Approved" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cRight APIField:@"price_approved" APIValues:@[@1, @0]];
-    NSMutableDictionary *ammountof50PercentDepositCollected = [self itemDicWith:@"Ammount Of 50% Deposit Collected" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"deposit_collected" APIValues:@[]];
+    NSMutableDictionary *amountof50PercentDepositCollected = [self itemDicWith:@"Amount Of 50% Deposit Collected" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"deposit_collected" APIValues:@[]];
     NSMutableDictionary *partsOrderedBy                     = [self itemDicWith:@"Parts Ordered By" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"parts_ordered_by" APIValues:@[]];
     NSMutableDictionary *supplerPartsOrderedFrom            = [self itemDicWith:@"Supplier Parts Ordered From" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"supplier_parts_ordered_form" APIValues:@[]];
     NSMutableDictionary *timeNeededForRepair                = [self itemDicWith:@"Time Needed For Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"time_needed_for_repair" APIValues:@[]];
@@ -468,7 +468,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
       NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"follow_up_notes" APIValues:@[]];
  /////  section 5 = 1
     
-    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Notes Entered in SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
+    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Work Performed Notes Entered In SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
     
     
 
@@ -504,7 +504,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
              repairScheduled,
              priceQuoted,
              priceApproved,
-             ammountof50PercentDepositCollected,
+             amountof50PercentDepositCollected,
              partsOrderedBy,
              supplerPartsOrderedFrom,
              timeNeededForRepair,

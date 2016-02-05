@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibri.ttf">
@@ -16,7 +16,6 @@
             <string>Calibri</string>
         </mutableArray>
         <mutableArray key="calibril.ttf">
-            <string>Calibri-Light</string>
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
             <string>Calibri-Light</string>
@@ -919,20 +918,16 @@
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Qa-PR-lgh">
-                                        <rect key="frame" x="54" y="85" width="583" height="249"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="10" adjustsFontSizeToFit="NO" id="9Qa-PR-lgh">
+                                        <rect key="frame" x="45" y="83" width="600" height="294"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <string key="text">Based on our conversation and what I have
-
-found here today, I have put together a list of
-
-recommendations to review with you.</string>
-                                        <fontDescription key="fontDescription" name="Calibri-Light" family="Calibri" pointSize="26"/>
+                                        <string key="text">Based on our conversation earlier and my thorough evaluation of your entire system I have put together four different solutions for YOU to choose from.   We'll discuss everything from addressing the bare minimum to taking care of it all for you today, but first I would like to start by just reviewing all of my findings with you. Fair Enough?</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B2X-58-wxO">
-                                        <rect key="frame" x="251" y="359" width="188" height="52"/>
+                                        <rect key="frame" x="251" y="452" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
@@ -1865,13 +1860,6 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
-                                                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tR2-fA-M5T">
-                                                                    <rect key="frame" x="340" y="5" width="259" height="80"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                                </textView>
                                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="viE-ov-dtb">
                                                                     <rect key="frame" x="340" y="5" width="30" height="30"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1893,6 +1881,13 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <color key="backgroundColor" red="0.8862745098" green="0.94117647059999998" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </view>
+                                                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tR2-fA-M5T">
+                                                                    <rect key="frame" x="340" y="5" width="259" height="80"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
                                                             </subviews>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" red="0.18823531269999999" green="0.6784313917" blue="0.38823533059999998" alpha="1" colorSpace="deviceRGB"/>
@@ -2819,13 +2814,6 @@ you must debrief from job</string>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Equal Payments Of $254" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M5j-0Q-Vsu">
-                                        <rect key="frame" x="0.0" y="635" width="690" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% Savings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RpC-X2-z59">
                                         <rect key="frame" x="0.0" y="594" width="690" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2851,6 +2839,13 @@ you must debrief from job</string>
                                         <rect key="frame" x="98" y="25" width="495" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Equal Payments Of $XXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M5j-0Q-Vsu">
+                                        <rect key="frame" x="0.0" y="635" width="690" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -4220,11 +4215,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O98-Ps-4c5"/>
+        <segue reference="Cdo-cC-vmU"/>
         <segue reference="9Oh-pS-m18"/>
         <segue reference="Njq-Pc-taE"/>
         <segue reference="XZV-au-UwI"/>
         <segue reference="DnI-yT-bKf"/>
-        <segue reference="LGL-C3-uSa"/>
+        <segue reference="xdW-7q-blD"/>
     </inferredMetricsTieBreakers>
 </document>
