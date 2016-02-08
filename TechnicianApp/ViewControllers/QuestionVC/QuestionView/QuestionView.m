@@ -22,7 +22,7 @@
     self.layer.cornerRadius = 8;
     self.layer.borderWidth = 1.0;
     self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     
     pickerData = [[NSMutableArray alloc] init];
 }

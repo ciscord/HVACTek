@@ -97,7 +97,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     self.choiceOptionButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     [self.choiceOptionButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateNormal];
     
-    self.gradientView.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.gradientView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -266,7 +266,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
 #pragma mark - UITableViewDelegate & DataSource
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell setBackgroundColor:[UIColor cs_getColorWithProperty:kColorSecondary10]];
+    [cell setBackgroundColor:[UIColor cs_getColorWithProperty:kColorPrimary0]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -17,7 +17,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.serviceNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
     // Configure the view for the selected state

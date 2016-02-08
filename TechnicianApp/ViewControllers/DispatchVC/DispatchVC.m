@@ -45,6 +45,7 @@
 	self.vwCounter.hideFraction = YES;
 	self.vwInspiration.backgroundColor = self.view.backgroundColor;
 	[self.imgInspiration setImageWithURL:[NSURL URLWithString:[[DataLoader sharedInstance] inspirationImagePath]] placeholderImage:nil];
+  [self setCustomerInfo];
 }
 
 
@@ -56,9 +57,21 @@
 }
 
 
+- (void)setCustomerInfo {
+  Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+  
+  NSDictionary *jobInfo = job.swapiJobInfo;
+  NSDictionary *customerInfo = job.swapiCustomerInfo;
+  
+  self.lbCustomerInfo.text = [NSString stringWithFormat:@"%@ %@\n%@\n%@, %@ %@", [customerInfo objectForKeyNotNull:@"FirstName"], [customerInfo objectForKeyNotNull:@"LastName"], [customerInfo objectForKeyNotNull:@"Address1"],
+                              [customerInfo objectForKeyNotNull:@"City"], [customerInfo objectForKeyNotNull:@"State"], [customerInfo objectForKeyNotNull:@"Zip"]];
+  self.txtClientProblems.text = [[jobInfo objectForKeyNotNull:@"Instructions"] stringByReplacingOccurrencesOfString:@">" withString:@""];
+}
+
+
 
 - (void)setInspirationText:(NSString *)text {
-	UIFont *font = [UIFont fontWithName:@"Arial-BoldMT" size:77];
+	//UIFont *font = [UIFont fontWithName:@"Arial-BoldMT" size:77];
 
 	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -74,7 +87,7 @@
 
 //	self.lbInspirationSentence.attributedText = string;
     self.lbInspirationSentence.text = @"";
-    
+   
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
 
     NSDictionary *jobInfo = job.swapiJobInfo;

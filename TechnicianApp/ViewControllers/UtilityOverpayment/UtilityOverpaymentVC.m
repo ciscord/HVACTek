@@ -36,7 +36,7 @@
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.overpaimentRoundV.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.overpaimentRoundV.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.overpaimentRoundV.layer.borderWidth   = 1.0;
     self.overpaimentRoundV.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.visitBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

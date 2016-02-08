@@ -88,12 +88,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     self.signatureView.layer.borderWidth   = 1.0;
     self.signatureView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.signatureView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.signatureView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.signatureView.foregroundLineColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     self.stopView.layer.borderWidth   = 1.0;
     self.stopView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-    self.stopView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.stopView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorPrimary0];
     
     self.mainView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

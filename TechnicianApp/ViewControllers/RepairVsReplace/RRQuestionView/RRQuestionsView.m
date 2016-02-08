@@ -34,7 +34,7 @@
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.layer.cornerRadius = 8;
-    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
 

@@ -123,10 +123,13 @@
         float priceAmount = [self.priceField.text floatValue];
         
         if (priceAmount > 0) {
+            int id_rebate = [itemz.typeID intValue] - 999;
+            NSString *strID = [NSString stringWithFormat:@"%d",id_rebate];
+          
             [[DataLoader sharedInstance] updateRebatesToPortal:self.nameField.text
                                                         amount:priceAmount
                                                       included:@"1"
-                                                     rebate_id:[itemz.typeID stringValue]
+                                                     rebate_id:strID
                                                      onSuccess:^(NSString *successMessage, NSNumber *rebateID, NSNumber *rebateOrd) {
                                                          NSLog(@"SUCCES %@ :%@",successMessage, rebateID);
                                                          [self addLocalRebateWithId:rebateID andOrd:rebateOrd];
@@ -173,9 +176,8 @@
         item.type = @"Rebates";
         item.usserAdet =[NSNumber numberWithInt:1];
         item.ord = ordID;
-        item.typeID = rebID;
-       // item.
-        //itm.type = @"Rebates";
+        int id_rebate = [rebID intValue] + 999;
+        item.typeID = [NSNumber numberWithInt:id_rebate];
     } else {
         
         NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];

@@ -291,7 +291,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //[cell setBackgroundColor:[UIColor clearColor]];
-    cell.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    cell.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

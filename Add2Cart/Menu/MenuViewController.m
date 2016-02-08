@@ -232,7 +232,7 @@
             // itm.include = [NSNumber numberWithBool:0];
             itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
             itm.type = @"Rebates";
-            itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue]];//[NSNumber numberWithInt:99];
+            itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue] + 999];//[NSNumber numberWithInt:99];
             itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:i];
           

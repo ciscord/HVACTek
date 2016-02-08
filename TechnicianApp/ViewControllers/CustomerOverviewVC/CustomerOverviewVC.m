@@ -211,9 +211,9 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.returnBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    self.view1.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.view2.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    self.view3.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
+    self.view1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.view2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.view3.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     
     self.separator1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.separator2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

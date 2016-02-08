@@ -179,8 +179,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
         Item * aItem = selected[indexPath.row];
-        
-        NSString *strID = [aItem.typeID stringValue];
+      
+        int id_rebate = [aItem.typeID intValue] - 999;
+        NSString *strID = [NSString stringWithFormat:@"%d",id_rebate];
         
         [[DataLoader sharedInstance] deleteRebatesFromPortalWithId:strID
                                                          onSuccess:^(NSString *successMessage) {
