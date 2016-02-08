@@ -448,7 +448,7 @@
         int incl = [inc intValue];
         if (incl == 1) {
             //Include this product.
-            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+          itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
             itm.modelName = [products[x] objectForKey:@"title"];
             itm.manu = [products[x] objectForKey:@"manufacture_name"];
             options = [products[x] objectForKey:@"options"];
@@ -458,7 +458,10 @@
             itm.typeID = [NSNumber numberWithInt:[tID intValue]];
             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:0];
-            
+          
+          
+          NSLog(@"title: %@",[products[x] objectForKey:@"title"]);
+          
             //Options
             for (int o=0; o<options.count; o++) {
                 NSString *priced = [options[o] objectForKey:@"price"];
@@ -503,6 +506,11 @@
             }
             //Add the new item to new products.
             [newProd addObject:itm];
+          
+          
+          
+          
+          
         }// end of if includeded.
         else {
             //Not adding this item.
@@ -518,7 +526,7 @@
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
-    
+  
 
 }
 

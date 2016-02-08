@@ -111,6 +111,8 @@
 		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
 		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
 		5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */; };
+		529B97691C68CB4200C901E9 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B97661C68CB4200C901E9 /* Item+CoreDataProperties.m */; };
+		529B976A1C68CB4200C901E9 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B97681C68CB4200C901E9 /* Item.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
@@ -127,7 +129,6 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
-		91159A421B344F4C00F7899C /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 91159A411B344F4C00F7899C /* Item.m */; };
 		91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA99FF1B8DDC78005EA4EA /* CartCell.xib */; };
 		91BA9A041B8DE09F005EA4EA /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A031B8DE09F005EA4EA /* CartCell.m */; };
 		91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A061B8DF034005EA4EA /* ProductCell.m */; };
@@ -324,6 +325,10 @@
 		5280CE571C538FF2000FE8F8 /* HvakTekColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HvakTekColorScheme.h; sourceTree = "<group>"; };
 		5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HvakTekColorScheme.m; sourceTree = "<group>"; };
 		528530031C326A1900168AC2 /* Unifeiyed_Quoting 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 5.xcdatamodel"; sourceTree = "<group>"; };
+		529B97651C68CB4200C901E9 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
+		529B97661C68CB4200C901E9 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
+		529B97671C68CB4200C901E9 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		529B97681C68CB4200C901E9 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
@@ -357,8 +362,6 @@
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 4.xcdatamodel"; sourceTree = "<group>"; };
-		91159A401B344F4C00F7899C /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		91159A411B344F4C00F7899C /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 5.xcdatamodel"; sourceTree = "<group>"; };
 		918BEF261AD556ED001DFAD6 /* SignatureModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		91BA99FF1B8DDC78005EA4EA /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
@@ -505,10 +508,12 @@
 			isa = PBXGroup;
 			children = (
 				4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */,
-				91159A401B344F4C00F7899C /* Item.h */,
-				91159A411B344F4C00F7899C /* Item.m */,
 				4FD2EB1C1A361A0F0056D4C4 /* FirstOption.h */,
 				4FD2EB1D1A361A0F0056D4C4 /* FirstOption.m */,
+				529B97651C68CB4200C901E9 /* Item+CoreDataProperties.h */,
+				529B97661C68CB4200C901E9 /* Item+CoreDataProperties.m */,
+				529B97671C68CB4200C901E9 /* Item.h */,
+				529B97681C68CB4200C901E9 /* Item.m */,
 			);
 			path = Add2CartDataModel;
 			sourceTree = "<group>";
@@ -1310,7 +1315,6 @@
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
-				91159A421B344F4C00F7899C /* Item.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				4FD2EB6A1A361A0F0056D4C4 /* TypeOneTableViewCell.m in Sources */,
@@ -1322,9 +1326,11 @@
 				75D73F161A38A9E30051143C /* SummaryOfFindingsOptionsVC.m in Sources */,
 				91CA5EFC1ADFF86B00D871FD /* User.m in Sources */,
 				4F576FB41AC7000A00F0F8FB /* ServiceHistoryTableViewCell.m in Sources */,
+				529B976A1C68CB4200C901E9 /* Item.m in Sources */,
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
 				4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */,
 				523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */,
+				529B97691C68CB4200C901E9 /* Item+CoreDataProperties.m in Sources */,
 				4F11D4071AA77579007FC0A8 /* Job+Functional.m in Sources */,
 				91EE85A11B4EBAB100811D39 /* Job.m in Sources */,
 				4FD2EBAF1A384CE00056D4C4 /* RoundCornerView.m in Sources */,

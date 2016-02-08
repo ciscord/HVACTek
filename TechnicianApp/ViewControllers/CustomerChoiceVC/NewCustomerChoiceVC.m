@@ -354,7 +354,22 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSDictionary * dict = @{ @"items" : selectedArray };
     
     //post invoice
-    NSLog(@"dictionary: %@", dict.description);
+   // NSLog(@"dictionary: %@", dict.description);
+  
+  NSError * err;
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
+  NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@",passedString];
+  
+  NSURL *url = [NSURL URLWithString:urlString];
+  if ([[UIApplication sharedApplication] canOpenURL:url])
+  {
+    [[UIApplication sharedApplication] openURL:url];
+  } else {
+    NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
+  }
+  
+  
 }
 
 

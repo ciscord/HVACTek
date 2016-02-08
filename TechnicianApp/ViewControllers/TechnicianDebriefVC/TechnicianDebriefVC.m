@@ -465,10 +465,11 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     
  /////  section 4 = 1/2
     NSMutableDictionary *followUpRequired         = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
-      NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"follow_up_notes" APIValues:@[]];
+     //// NSMutableDictionary *followUpNotes          = [self itemDicWith:@"Follow Up Notes" accType:txtViewCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"follow_up_notes" APIValues:@[]];
  /////  section 5 = 1
     
-    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Work Performed Notes Entered In SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
+    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Work Performed Notes Entered in SWR" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
+    NSMutableDictionary *suggestedNotesSwRemote        = [self itemDicWith:@"Work Suggested Notes Entered In SWR" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_suggested_sw_remote" APIValues:@[@1, @0]];
     
     
 
@@ -522,8 +523,9 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
              attachAllPartsUsedToTicked,
              thermostatSetAndSystemRunning,
              followUpRequired,
-             followUpNotes,
-             notesSwRemote];
+             ////followUpNotes,
+             notesSwRemote,
+             suggestedNotesSwRemote];
 }
 
 - (NSMutableDictionary *)itemDicWith:(NSString *)title
@@ -654,9 +656,9 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             break;
         case 3: return  7;
             break;
-        case 4: return  [self.hideSection3 boolValue]? 1 : 2;
+        case 4: return  1; //[self.hideSection3 boolValue]? 1 : 2;
             break;
-        case 5 : return 1;
+        case 5 : return 2;
             break;
         case 6 : return 1;
             break;
@@ -685,7 +687,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             sectionIdx = 34;
             break;
         case 5:
-            sectionIdx = 36;
+            sectionIdx = 35;
             break;
         case 6:
             sectionIdx = 36;
@@ -734,7 +736,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             sectionIdx = 34;
             break;
         case 5:
-            sectionIdx = 36;
+            sectionIdx = 35;
             break;
         case 6:
             sectionIdx = 36;
