@@ -345,7 +345,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
             
             [selectedArray addObject:@{@"sku" : p.itemNumber,
-                                       @"qty" : [NSNumber numberWithInt:[p.quantity integerValue]],
+                                       @"qty" : [NSNumber numberWithInt:[p.quantity intValue]],
                                      @"price" : price,
                                    @"taxable" : @false}];
         }
