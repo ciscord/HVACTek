@@ -129,15 +129,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
     
     if (items1.count) {
-        int totalPriceNormal = 0;
-        int totalPriceESA = 0;
+        CGFloat totalPriceNormal = 0;
+        CGFloat totalPriceESA = 0;
         for (PricebookItem *p in items1) {
             int totalQuantity = 1;
             if ([p.quantity intValue] > 1)
                 totalQuantity = [p.quantity intValue];
             
-            totalPriceNormal += p.amount.intValue * totalQuantity;
-            totalPriceESA += p.amountESA.intValue * totalQuantity;
+            totalPriceNormal += p.amount.floatValue * totalQuantity;
+            totalPriceESA += p.amountESA.floatValue * totalQuantity;
         }
 
         
@@ -150,8 +150,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             self.totalPriceLabel.text = self.initialTotal;//[self changeCurrencyFormat:totalPriceNormal];
             self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal];
         }
-        
-       
+      
         self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
         self.lblSavedWithESA.text = [NSString stringWithFormat:@"You Saved %@ By Being A Member Of Our Comfort Club!",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
     }else{
@@ -264,8 +263,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
    
     /*(total paid, club membership, discount, deposit*/
     NSMutableArray *aitems = self.selectedServiceOptionsDict[@"removedItems"];
-    int totalPriceNormal = 0;
-    int totalPriceESA = 0;
+    CGFloat totalPriceNormal = 0;
+    CGFloat totalPriceESA = 0;
     if (aitems.count) {
      
         for (PricebookItem *p in aitems) {
@@ -273,13 +272,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             if ([p.quantity intValue] > 1)
               totalQuantity = [p.quantity intValue];
           
-            totalPriceNormal += p.amount.intValue* totalQuantity;
-            totalPriceESA += p.amountESA.intValue* totalQuantity;
+            totalPriceNormal += p.amount.floatValue* totalQuantity;
+            totalPriceESA += p.amountESA.floatValue* totalQuantity;
         }
     }
 
   
-    int tprice = self.isDiscounted? totalPriceESA : totalPriceNormal;
+    int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
     
     
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,

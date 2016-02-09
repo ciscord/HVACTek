@@ -149,15 +149,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     NSMutableArray *items1 = self.selectedServiceOptions[@"removedItems"];
     
     if (items1.count) {
-        int totalPriceNormal = 0;
-        int totalPriceESA = 0;
+        CGFloat totalPriceNormal = 0;
+        CGFloat totalPriceESA = 0;
         for (PricebookItem *p in items1) {
             int totalQuantity = 1;
             if ([p.quantity intValue] > 1)
                 totalQuantity = [p.quantity intValue];
             
-            totalPriceNormal += p.amount.intValue * totalQuantity;
-            totalPriceESA += p.amountESA.intValue * totalQuantity;
+            totalPriceNormal += p.amount.floatValue * totalQuantity;
+            totalPriceESA += p.amountESA.floatValue * totalQuantity;
         }
 
         
