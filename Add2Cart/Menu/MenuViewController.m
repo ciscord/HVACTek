@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 unifeiyed. All rights reserved.
 //
 
-
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 // ==================== API URLs =====================
@@ -19,7 +18,7 @@
 //http://hvactek.devebs.net/
 
 #import "MenuViewController.h"
-
+#import "Photos.h"
 @interface MenuViewController ()
 
 @end
@@ -82,18 +81,18 @@
     [fetchRequest setEntity:entity];
     
     
-    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    self.prodFRC.delegate = self;
-    
+//    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//    
+//    self.prodFRC.delegate = self;
+  
     NSError *fetchingError = nil;
-    if ([self.prodFRC performFetch:&fetchingError]) {
-        NSLog(@"Successfully fetched ");
-        
-    } else {
-        NSLog(@"Failed to get the result");
-    }
-    
+//    if ([self.prodFRC performFetch:&fetchingError]) {
+//        NSLog(@"Successfully fetched ");
+//        
+//    } else {
+//        NSLog(@"Failed to get the result");
+//    }
+  
     NSArray *occP = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
     
     if (![occP count]) {
@@ -430,12 +429,7 @@
 
 
 
-
 #pragma mark - add products for carts
-
-
-
-
 - (void)addProductsCartOne:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
     
@@ -458,9 +452,6 @@
             itm.typeID = [NSNumber numberWithInt:[tID intValue]];
             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:0];
-          
-          
-          NSLog(@"title: %@",[products[x] objectForKey:@"title"]);
           
             //Options
             for (int o=0; o<options.count; o++) {
@@ -495,11 +486,12 @@
                 }
                 
             } //end of options
-            
-            NSString *urly = [products[x] objectForKey:@"full_url"];
-            NSURL *url = [NSURL URLWithString:urly];
-            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-            itm.photo = imageData;
+          
+          
+          
+          NSString *urly = [products[x] objectForKey:@"full_url"];
+          itm.image = [self insertPhotosToDataBaseWithPath:urly];
+
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
@@ -508,18 +500,13 @@
             [newProd addObject:itm];
           
           
-          
-          
-          
         }// end of if includeded.
         else {
             //Not adding this item.
         }
-        
-        
+      
     }// end of for loop
-    
-    
+  
     
     
     NSError *errorz;
@@ -588,9 +575,8 @@
             } //end of options
             
             NSString *urly = [products[x] objectForKey:@"full_url"];
-            NSURL *url = [NSURL URLWithString:urly];
-            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-            itm.photo = imageData;
+          itm.image = [self insertPhotosToDataBaseWithPath:urly];
+          
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
@@ -673,10 +659,9 @@
                 
             } //end of options
             
-            NSString *urly = [products[x] objectForKey:@"full_url"];
-            NSURL *url = [NSURL URLWithString:urly];
-            NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-            itm.photo = imageData;
+          NSString *urly = [products[x] objectForKey:@"full_url"];
+          itm.image = [self insertPhotosToDataBaseWithPath:urly];
+          
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
@@ -687,12 +672,8 @@
         else {
             //Not adding this item.
         }
-        
-        
-    }// end of for loop
-    
-    
-    
+    }
+  
     
     NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
@@ -702,10 +683,33 @@
 
 
 
-
-
-
-
-
+#pragma mark - Insert Photo in Core Data
+- (Photos *)insertPhotosToDataBaseWithPath:(NSString *)stringPath {
+  
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:managedObjectContext];
+  NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"url = %@",stringPath];
+  
+  [fetchRequest setEntity:entity];
+  [fetchRequest setPredicate:cartPredicate];
+  
+  NSError *fetchingError = nil;
+  
+  NSArray * productImages = [[NSArray alloc]init];
+  productImages = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+  
+  if ([productImages count] == 0) {
+    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:managedObjectContext];
+    
+    NSURL *url = [NSURL URLWithString:stringPath];
+    NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+    pf.photoData = imageData;
+    pf.url = stringPath;
+    
+    return pf;
+  }else {
+    return productImages.firstObject;
+  }
+}
 
 @end

@@ -1,9 +1,9 @@
 //
 //  Item+CoreDataProperties.h
-//  
+//  HvacTek
 //
-//  Created by Dorin on 2/8/16.
-//
+//  Created by Dorin on 2/9/16.
+//  Copyright © 2016 Unifeyed. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *type;
 @property (nullable, nonatomic, retain) NSNumber *typeID;
 @property (nullable, nonatomic, retain) NSNumber *usserAdet;
+@property (nullable, nonatomic, retain) NSManagedObject *image;
 
 @end
 

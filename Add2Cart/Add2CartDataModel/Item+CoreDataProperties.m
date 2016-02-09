@@ -1,9 +1,9 @@
 //
 //  Item+CoreDataProperties.m
-//  
+//  HvacTek
 //
-//  Created by Dorin on 2/8/16.
-//
+//  Created by Dorin on 2/9/16.
+//  Copyright © 2016 Unifeyed. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -40,5 +40,6 @@
 @dynamic type;
 @dynamic typeID;
 @dynamic usserAdet;
+@dynamic image;
 
 @end

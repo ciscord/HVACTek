@@ -1458,8 +1458,9 @@
     cell.clipsToBounds = YES;
     
     if (![itm.finalOption isEqualToString:@"None"]) {
-        
-        cell.photo.image = [UIImage imageWithData:itm.photo];
+      
+        Photos *photoObj = (Photos *)itm.image;
+        cell.photo.image = [UIImage imageWithData:photoObj.photoData];
         cell.manufacturerLabel.text = itm.manu;
         cell.priceLabel.text = [NSString stringWithFormat:@"$%@", itm.finalPrice];
         cell.buyButton.tag = indexPath.section;

@@ -1,5 +1,5 @@
 //
-//  Item.h
+//  Photos.h
 //  HvacTek
 //
 //  Created by Dorin on 2/9/16.
@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Item;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Item : NSManagedObject
+@interface Photos : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Item+CoreDataProperties.h"
+#import "Photos+CoreDataProperties.h"

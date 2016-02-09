@@ -70,18 +70,18 @@
     [fetchRequest setPredicate:cartPredicate];
     
     
-    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    self.prodFRC.delegate = self;
-    
+//    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//    
+//    self.prodFRC.delegate = self;
+  
     NSError *fetchingError = nil;
-    if ([self.prodFRC performFetch:&fetchingError]) {
-        NSLog(@"Successfully fetched ");
-        
-    } else {
-        NSLog(@"Failed to get the result");
-    }
-    
+//    if ([self.prodFRC performFetch:&fetchingError]) {
+//        NSLog(@"Successfully fetched ");
+//        
+//    } else {
+//        NSLog(@"Failed to get the result");
+//    }
+  
     allData = [[NSArray alloc]init];
     allData = [self.managedObjectContext
                executeFetchRequest:fetchRequest error:&fetchingError];

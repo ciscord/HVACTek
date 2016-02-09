@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "Item.h"
+#import "Photos.h"
 #import "CartViewController.h"
 #import "HardTableViewCell.h"
 #import "FirstOption.h"
