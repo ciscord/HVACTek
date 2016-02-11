@@ -72,12 +72,12 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     // Initialization code
     [self.tableView registerClass:[ServiceOptionTableViewCell class] forCellReuseIdentifier:kCELL_IDENTIFIER];
     
-    self.lbSelectOption.font = [UIFont fontWithName:@"Calibri-Light" size:22];
-    self.btnPrice1.titleLabel.font = [UIFont fontWithName:@"Calibri-Light" size:30];
-    self.btnPrice2.titleLabel.font = [UIFont fontWithName:@"Calibri-Light" size:30];
-    self.lbESAsaving.font = [UIFont fontWithName:@"Calibri-Light" size:14];
-    self.lb24MonthRates.font = [UIFont fontWithName:@"Calibri-Light" size:14];
-    self.financingLabel.font = [UIFont fontWithName:@"Calibri-Light" size:14];
+    self.lbSelectOption.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+    self.btnPrice1.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:30];
+    self.btnPrice2.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:30];
+    self.lbESAsaving.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
+    self.lb24MonthRates.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
+    self.financingLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
     
     [self configureColorScheme];
 
@@ -359,7 +359,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     
     
     ///cell.textLabel.text = p.name;
-    cell.textLabel.font       = [UIFont fontWithName:@"Calibri-Light" size:17];
+    cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     ///cell.accessoryView.hidden = !self.isEditable || p.isMain;
     cell.rowIndex             = indexPath.row;
     
@@ -380,7 +380,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     PricebookItem *p          = self.serviceOptions.firstObject;
     UILabel   *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(14.0, 0.0, 0.0, 0.0)];
     titleLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    titleLabel.font             = [UIFont fontWithName:@"Calibri-Light" size:17];
+    titleLabel.font             = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     titleLabel.text             = p.name;
 
 

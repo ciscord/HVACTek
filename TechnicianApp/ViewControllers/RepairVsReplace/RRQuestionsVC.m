@@ -29,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.repVSrepLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
     self.title = @"Customer's Choice";

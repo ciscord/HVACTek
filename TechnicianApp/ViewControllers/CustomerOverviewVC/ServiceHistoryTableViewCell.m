@@ -76,7 +76,7 @@ static UIFont *boldSystemFont;
 - (void)awakeFromNib {
     // Initialization code
     if (!s_CalibriLight13) {
-        s_CalibriLight13 = [UIFont fontWithName:@"Calibri-Light" size:13];
+        s_CalibriLight13 = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
     }
     
     if (!s_Calibri14) {

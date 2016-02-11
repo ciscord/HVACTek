@@ -58,8 +58,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     self.tfSearch.rightViewMode = UITextFieldViewModeAlways;
     
     self.tfSearch.font = [UIFont fontWithName:@"Calibri" size:18];
-    self.lbProblemTitle.font = [UIFont fontWithName:@"Calibri-Light" size:28];
-    self.btnAdd.titleLabel.font = [UIFont fontWithName:@"Calibri-Light" size:24];
+    self.lbProblemTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28];
+    self.btnAdd.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
     self.btnBack.titleLabel.font = self.btnAdd.titleLabel.font;
     self.btnNext.titleLabel.font = self.btnAdd.titleLabel.font;
     

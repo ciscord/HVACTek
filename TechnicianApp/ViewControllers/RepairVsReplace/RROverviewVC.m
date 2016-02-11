@@ -39,7 +39,6 @@
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.nextBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 

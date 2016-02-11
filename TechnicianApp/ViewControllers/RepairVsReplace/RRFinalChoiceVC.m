@@ -9,6 +9,7 @@
 #import "RRFinalChoiceVC.h"
 #import "CustomerChoiceVC.h"
 #import "ServiceOptionVC.h"
+#import "NSMutableAttributedString+Color.h"
 
 @interface RRFinalChoiceVC ()
 
@@ -61,7 +62,6 @@
     self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     self.hideRoundView.layer.borderWidth   = 3.0;
     self.hideRoundView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
@@ -71,8 +71,15 @@
 
 - (void)configureVC {
     self.title = @"Customer's Choice";
-    self.descriptionLabel.text = [NSString stringWithFormat:@"Over the next 5 years it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.totalInvestment];
-    
+
+  NSString * initialText = [NSString stringWithFormat:@"Over the next 5 years it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.totalInvestment];
+//    self.descriptionLabel.text = [NSString stringWithFormat:@"Over the next 5 years it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.totalInvestment];
+  
+  NSMutableAttributedString *atrString = [[NSMutableAttributedString alloc] initWithString:initialText];
+  [atrString setColorForText:self.totalInvestment withColor:[UIColor redColor]];
+  self.descriptionLabel.attributedText = atrString;
+  
+  
     [self.view bringSubviewToFront:self.customerPriceView];
     
     [DataLoader sharedInstance].totalInvestmentsRR = self.totalInvestment;

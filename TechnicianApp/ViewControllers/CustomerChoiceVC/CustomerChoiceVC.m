@@ -460,7 +460,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         
         cell.textLabel.text          = nameString;
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
-        cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
+        cell.textLabel.font          = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
         cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
 
         result = cell;

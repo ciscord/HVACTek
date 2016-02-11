@@ -63,7 +63,7 @@
     if (self) {
 
         if (!s_CalibriLight13) {
-            s_CalibriLight13 = [UIFont fontWithName:@"Calibri-Light" size:13];
+            s_CalibriLight13 = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
         }
 
         if (!s_Calibri14) {
@@ -115,7 +115,7 @@
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
         if (!s_CalibriLight14) {
-            s_CalibriLight14 = [UIFont fontWithName:@"Calibri-Light" size:14];
+            s_CalibriLight14 = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
         }
 
         self.textLabel.font      = s_CalibriLight14;

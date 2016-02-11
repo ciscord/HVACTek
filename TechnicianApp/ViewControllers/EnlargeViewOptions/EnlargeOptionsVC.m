@@ -129,7 +129,7 @@
     
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.font          = [UIFont fontWithName:@"Calibri-Light" size:17];
+    cell.textLabel.font          = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     return cell;

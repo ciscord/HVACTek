@@ -118,6 +118,7 @@
 		528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AC1C6B1EF2003F91C2 /* SortFindingsVC.m */; };
 		528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */; };
 		528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */; };
+		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
@@ -343,6 +344,8 @@
 		528698AE1C6B2BE9003F91C2 /* SortFindinsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortFindinsCell.h; sourceTree = "<group>"; };
 		528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortFindinsCell.m; sourceTree = "<group>"; };
 		528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortFindinsCell.xib; sourceTree = "<group>"; };
+		52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Color.h"; sourceTree = "<group>"; };
+		52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Color.m"; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
@@ -817,6 +820,8 @@
 				5280CE571C538FF2000FE8F8 /* HvakTekColorScheme.h */,
 				5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */,
 				52BBCCD81C50C52100577CBA /* HvacTekConstants.h */,
+				52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */,
+				52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1340,6 +1345,7 @@
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
+				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
 				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,

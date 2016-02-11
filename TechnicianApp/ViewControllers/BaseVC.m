@@ -97,7 +97,7 @@
     [self.view addSubview:self.titleView];
     
     self.lbTitle = [[UILabel alloc] initWithFrame:self.titleView.bounds];
-    self.lbTitle.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:44];
+    self.lbTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:44];
     self.lbTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.lbTitle.textAlignment = NSTextAlignmentCenter;
     [self.titleView addSubview:self.lbTitle];
