@@ -115,6 +115,9 @@
 		5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B1861C16D912008929ED /* RRQuestionsVC.m */; };
 		5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277B18A1C16DC95008929ED /* RRQuestionsView.m */; };
 		5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */; };
+		528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AC1C6B1EF2003F91C2 /* SortFindingsVC.m */; };
+		528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */; };
+		528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
@@ -335,6 +338,11 @@
 		5280CE571C538FF2000FE8F8 /* HvakTekColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HvakTekColorScheme.h; sourceTree = "<group>"; };
 		5280CE581C538FF2000FE8F8 /* HvakTekColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HvakTekColorScheme.m; sourceTree = "<group>"; };
 		528530031C326A1900168AC2 /* Unifeiyed_Quoting 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 5.xcdatamodel"; sourceTree = "<group>"; };
+		528698AB1C6B1EF2003F91C2 /* SortFindingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortFindingsVC.h; sourceTree = "<group>"; };
+		528698AC1C6B1EF2003F91C2 /* SortFindingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortFindingsVC.m; sourceTree = "<group>"; };
+		528698AE1C6B2BE9003F91C2 /* SortFindinsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortFindinsCell.h; sourceTree = "<group>"; };
+		528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortFindinsCell.m; sourceTree = "<group>"; };
+		528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortFindinsCell.xib; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
@@ -696,6 +704,7 @@
 				523628791C0EF2EF00B04A71 /* UtilityOverpayment */,
 				4F8EC7B81A604FDA00999FA1 /* ExploreSummaryVC */,
 				75D73F131A38A9D20051143C /* SummaryOfFindingsOptionsVC */,
+				528698AA1C6B1EB0003F91C2 /* SortFindings */,
 				75399F581A39CD250013EAC0 /* RepairVsServiceVC */,
 				75D73F1C1A38BFD10051143C /* SummaryOfFindingsVC */,
 				52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */,
@@ -911,6 +920,18 @@
 				5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */,
 			);
 			path = RRQuestionView;
+			sourceTree = "<group>";
+		};
+		528698AA1C6B1EB0003F91C2 /* SortFindings */ = {
+			isa = PBXGroup;
+			children = (
+				528698AB1C6B1EF2003F91C2 /* SortFindingsVC.h */,
+				528698AC1C6B1EF2003F91C2 /* SortFindingsVC.m */,
+				528698AE1C6B2BE9003F91C2 /* SortFindinsCell.h */,
+				528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */,
+				528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */,
+			);
+			path = SortFindings;
 			sourceTree = "<group>";
 		};
 		52AE5F6B1C2BE65D003B1C54 /* Cells */ = {
@@ -1168,6 +1189,7 @@
 				524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */,
 				4FD2EB7A1A361A0F0056D4C4 /* shopping_cart.png in Resources */,
 				523329521C170871008ABA46 /* RROverviewCell.xib in Resources */,
+				528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */,
 				4FD2EB981A36231D0056D4C4 /* TechnicianAppStoryboard.storyboard in Resources */,
 				75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */,
 				75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */,
@@ -1331,6 +1353,7 @@
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				5265782F1C6A0A2500EC1AA5 /* Photos.m in Sources */,
 				4FD2EB6A1A361A0F0056D4C4 /* TypeOneTableViewCell.m in Sources */,
+				528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */,
 				4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */,
 				4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */,
 				7569FBC91A373BFC00D9EC94 /* CustomerOverviewVC.m in Sources */,
@@ -1341,6 +1364,7 @@
 				4F576FB41AC7000A00F0F8FB /* ServiceHistoryTableViewCell.m in Sources */,
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
 				4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */,
+				528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */,
 				523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */,
 				4F11D4071AA77579007FC0A8 /* Job+Functional.m in Sources */,
 				91EE85A11B4EBAB100811D39 /* Job.m in Sources */,

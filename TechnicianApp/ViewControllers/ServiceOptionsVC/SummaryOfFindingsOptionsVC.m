@@ -10,7 +10,8 @@
 #import "ServiceOptionViewCell.h"
 #import "SummaryOfFindingsVC.h"
 #import "PricebookItem.h"
-#import "ServiceOptionVC.h"
+#import "SortFindingsVC.h"
+
 
 @interface SummaryOfFindingsOptionsVC ()
 
@@ -133,7 +134,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (IBAction)btnContinueTouch:(id)sender {
 
     [DataLoader saveOptionsLocal:self.selectedOptions];
-    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"showServiceOptionsDirect") sender:self];
+    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];  //showServiceOptionsDirect
 }
 
 
@@ -242,12 +243,17 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         //        SummaryOfFindingsVC *vc = (SummaryOfFindingsVC*)segue.destinationViewController;
         //        vc.selectedServiceOptions = self.selectedOptions;
     }
-    else if ([segue.destinationViewController isKindOfClass:[ServiceOptionVC class]])
+    else if ([segue.destinationViewController isKindOfClass:[SortFindingsVC class]])
     {
-        ServiceOptionVC *vc = (ServiceOptionVC*)segue.destinationViewController;
-        vc.optionsDisplayType = odtEditing;
-        vc.priceBookAndServiceOptions = self.selectedOptions;
+        SortFindingsVC *vc = (SortFindingsVC*)segue.destinationViewController;
+        vc.findingsArray = self.selectedOptions;
     }
+//    else if ([segue.destinationViewController isKindOfClass:[ServiceOptionVC class]])
+//    {
+//      ServiceOptionVC *vc = (ServiceOptionVC*)segue.destinationViewController;
+//      vc.optionsDisplayType = odtEditing;
+//      vc.priceBookAndServiceOptions = self.selectedOptions;
+//    }
 }
 
 

@@ -26,10 +26,10 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     self.title = @"Summary of Findings";
     [self.tableView registerNib:[UINib nibWithNibName:s_PlatinumOptionCellID bundle:nil] forCellReuseIdentifier:s_PlatinumOptionCellID];
     
-    NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"amount" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
-    self.priceBookAndServiceOptions.firstObject[@"items"] = [self.priceBookAndServiceOptions.firstObject[@"items"] sortedArrayUsingDescriptors:sortDescriptors];
-    
+//    NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"amount" ascending:YES];
+//    NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
+//    self.priceBookAndServiceOptions.firstObject[@"items"] = [self.priceBookAndServiceOptions.firstObject[@"items"] sortedArrayUsingDescriptors:sortDescriptors];
+  
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 

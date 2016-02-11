@@ -1098,7 +1098,7 @@ to be the following:</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4238" y="2008"/>
+            <point key="canvasLocation" x="5178" y="2002"/>
         </scene>
         <!--Customer ChoiceVC-->
         <scene sceneID="qB7-8V-oyo">
@@ -1798,7 +1798,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5q-zv-j5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5147" y="2002"/>
+            <point key="canvasLocation" x="6079" y="2002"/>
         </scene>
         <!--Technician DebriefVC-->
         <scene sceneID="uV7-qw-2IX">
@@ -2648,7 +2648,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oXI-Bu-6Y9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2416" y="2002"/>
+            <point key="canvasLocation" x="3315" y="2002"/>
         </scene>
         <!--QuestionsVC-->
         <scene sceneID="Wkn-jy-YWJ">
@@ -2927,7 +2927,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfh-TC-yZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560" y="3214"/>
+            <point key="canvasLocation" x="1540" y="3206"/>
         </scene>
         <!--Summary Of Findings OptionsVC-->
         <scene sceneID="Rlq-Yp-tu5">
@@ -3009,7 +3009,7 @@ you must debrief from job</string>
                         <outlet property="continueBtn" destination="kXj-BX-A7n" id="Jnq-lU-wlM"/>
                         <outlet property="tfSearch" destination="Xxp-tb-n7a" id="ksH-fD-eer"/>
                         <outlet property="titleLabel" destination="KSl-e9-Es8" id="Emh-EY-YFM"/>
-                        <segue destination="R8j-ML-5Px" kind="push" identifier="showServiceOptionsDirect" id="Njq-Pc-taE"/>
+                        <segue destination="i4C-Qf-Qys" kind="push" identifier="goSortingFindings" id="Lur-lH-80j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXv-X5-v8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3216,7 +3216,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82V-ud-xaR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3315" y="2002"/>
+            <point key="canvasLocation" x="4238" y="2002"/>
         </scene>
         <!--RRQuestionsVC-->
         <scene sceneID="5aW-6d-rBo">
@@ -4200,6 +4200,63 @@ you must debrief from job</string>
             </objects>
             <point key="canvasLocation" x="4268" y="-474"/>
         </scene>
+        <!--Sort FindingsVC-->
+        <scene sceneID="rrS-pk-wCJ">
+            <objects>
+                <viewController storyboardIdentifier="SortFindingsVC" automaticallyAdjustsScrollViewInsets="NO" id="i4C-Qf-Qys" customClass="SortFindingsVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ark-mq-VOG">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="3Xa-YY-5sZ" customClass="RoundCornerView">
+                                <rect key="frame" x="39" y="247" width="690" height="757"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f2p-8D-OSI">
+                                        <rect key="frame" x="251" y="685" width="188" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="R8j-ML-5Px" kind="push" identifier="showServiceOptionsFromSort" id="jvv-2R-Bdt"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="lMW-JZ-Z9V">
+                                        <rect key="frame" x="45" y="30" width="600" height="633"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="i4C-Qf-Qys" id="EnZ-vP-8AC"/>
+                                            <outlet property="delegate" destination="i4C-Qf-Qys" id="r7C-ZU-7Sg"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9wZ-ji-rmd"/>
+                    <connections>
+                        <outlet property="continueButton" destination="f2p-8D-OSI" id="kHE-ZH-Jua"/>
+                        <outlet property="findingsTable" destination="lMW-JZ-Z9V" id="Ypx-3x-elV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xyP-0c-TXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2416" y="2002"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Signature Stop Image" width="60" height="60"/>
@@ -4218,9 +4275,9 @@ you must debrief from job</string>
     <inferredMetricsTieBreakers>
         <segue reference="O98-Ps-4c5"/>
         <segue reference="9Oh-pS-m18"/>
-        <segue reference="XZV-au-UwI"/>
-        <segue reference="6og-9q-Y4v"/>
+        <segue reference="jvv-2R-Bdt"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="XZV-au-UwI"/>
         <segue reference="LGL-C3-uSa"/>
     </inferredMetricsTieBreakers>
 </document>
