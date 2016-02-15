@@ -249,7 +249,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         clubMembership.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldComfortClub.text] intValue]];
         clubMembership.name = @"Comfort Club Membership";
         clubMembership.itemGroup = @"Additional items";
-        clubMembership.itemNumber = @"-1";
+        clubMembership.itemNumber = @"CCM";
         clubMembership.quantity = @"";
         
         [newArray addObject:clubMembership];
@@ -262,7 +262,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         deposit.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDeposit.text] intValue])];
         deposit.name = @"50% Deposit";
         deposit.itemGroup = @"Additional items";
-        deposit.itemNumber = @"-2";
+        deposit.itemNumber = @"DEPOSIT";
         deposit.quantity = @"";
         [newArray addObject:deposit];
     }
@@ -274,7 +274,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         discount.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldDisconts.text] intValue])];
         discount.name = @"Discounts";
         discount.itemGroup = @"Additional items";
-        discount.itemNumber = @"-3";
+        discount.itemNumber = @"DISCOUNT";
         discount.quantity = @"";
         [newArray addObject:discount];
     }
@@ -286,7 +286,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldDiagnostic.text] intValue]];
         payment.name = @"Diagnostic";
         payment.itemGroup = @"Additional items";
-        payment.itemNumber = @"-5";
+        payment.itemNumber = @"1003001";
         payment.quantity = @"";
         [newArray addObject:payment];
     }
@@ -298,7 +298,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.amountESA = [NSNumber numberWithInt:[[self cutString:self.textFieldCPT.text] intValue]];
         payment.name = @"Comprehensive Precision Tune Up";
         payment.itemGroup = @"Additional items";
-        payment.itemNumber = @"-6";
+        payment.itemNumber = @"PPTU";
         payment.quantity = @"";
         [newArray addObject:payment];
     }

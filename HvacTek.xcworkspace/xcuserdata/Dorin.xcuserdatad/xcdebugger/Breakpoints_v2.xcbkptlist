@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TechnicianApp/ViewControllers/CustomerChoiceVC/NewCustomerChoiceVC.m"
-            timestampString = "476868935.286703"
+            filePath = "Add2Cart/Menu/MenuViewController.m"
+            timestampString = "477234166.337511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
-            landmarkName = "-saveInvoiceToApp"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-fetchedAdd2CartItems:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

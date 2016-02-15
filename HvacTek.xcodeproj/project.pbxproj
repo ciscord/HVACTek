@@ -119,6 +119,7 @@
 		528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */; };
 		528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */; };
 		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
+		52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C787261C6DCA2C007EC77C /* THProgressView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
@@ -347,6 +348,8 @@
 		52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Color.h"; sourceTree = "<group>"; };
 		52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Color.m"; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
+		52C787251C6DCA2C007EC77C /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
+		52C787261C6DCA2C007EC77C /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				52BBCCD81C50C52100577CBA /* HvacTekConstants.h */,
 				52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */,
 				52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */,
+				52C787251C6DCA2C007EC77C /* THProgressView.h */,
+				52C787261C6DCA2C007EC77C /* THProgressView.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1159,7 +1164,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 8WY55993RN;
+						DevelopmentTeam = KX6W3449EJ;
 					};
 				};
 			};
@@ -1366,6 +1371,7 @@
 				75D1A9011A3B15B5000F6765 /* ServiceOptionVC.m in Sources */,
 				75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */,
 				75D73F161A38A9E30051143C /* SummaryOfFindingsOptionsVC.m in Sources */,
+				52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */,
 				91CA5EFC1ADFF86B00D871FD /* User.m in Sources */,
 				4F576FB41AC7000A00F0F8FB /* ServiceHistoryTableViewCell.m in Sources */,
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
@@ -1500,7 +1506,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1524,7 +1530,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

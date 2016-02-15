@@ -814,10 +814,12 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             if ([self.tableView.subviews containsObject:aCell.txtField.dropDownTableView]) {
                 [aCell.txtField resignFirstResponder];
             } else {
-                [aCell.txtField becomeFirstResponder];
+              [aCell.txtField becomeFirstResponder];
+              if ([aCell.cellData[@"accType"] integerValue] == 1) {
+                [aCell.txtField resignFirstResponder];
+              }
                 aCell.txtField.dropDownTableView.hidden = NO;
                 [self.tableView addSubview:aCell.txtField.dropDownTableView];
-                
             }
             
             

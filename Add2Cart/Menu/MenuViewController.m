@@ -12,6 +12,8 @@
 #define kRebatesURL [NSURL URLWithString:@"http://www.hvactek.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 #define kProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 #define kSystemProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kadd2CartURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+
 
 
 //http://www.hvactek.com/
@@ -19,7 +21,13 @@
 
 #import "MenuViewController.h"
 #import "Photos.h"
+#import "THProgressView.h"
+
+static const CGSize progressViewSize = { 300.0f, 25.0f };
+
 @interface MenuViewController ()
+
+@property (nonatomic, strong) THProgressView *progressBar;
 
 @end
 
@@ -48,61 +56,227 @@
     
     syncView.hidden = YES;
     [activity stopAnimating];
+  
+  
+  [self testProgressBar];
 }
 
-- (void)fetchedProducts:(NSData *)responseData {
-    //parse out the json data
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          
-                          options:kNilOptions
-                          error:&error];
+
+#pragma mark - ProgressBar
+- (void)testProgressBar {
+  self.progressBar = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.frame) - progressViewSize.width / 2.0f,
+                                                                                     CGRectGetMidY(self.view.frame) - progressViewSize.height / 2.0f,
+                                                                                     progressViewSize.width,
+                                                                                     progressViewSize.height)];
+  self.progressBar.borderTintColor = [UIColor whiteColor];
+  self.progressBar.progressTintColor = [UIColor whiteColor];
+  self.progressBar.progressBackgroundColor = [UIColor redColor];
+  [self.view addSubview:self.progressBar];
+  
+}
+
+
+- (void)updateProgressForValue:(float)newValue
+{
+  NSLog(@"newValue %f",newValue);
+  [self.progressBar setProgress:0.3 animated:YES];
+  
+  
+//  self.progress += 0.20f;
+//  if (self.progress > 1.0f) {
+//    self.progress = 0;
+//  }
+//  
+//  [self.progressViews enumerateObjectsUsingBlock:^(THProgressView *progressView, NSUInteger idx, BOOL *stop) {
+//    [progressView setProgress:self.progress animated:YES];
+//  }];
+}
+
+
+
+#pragma mark - Fetched ADD2CART Items
+- (void)fetchedAdd2CartItems:(NSData *)responseData {
+  
+  NSError* error;
+  NSDictionary* json = [NSJSONSerialization
+                        JSONObjectWithData:responseData
+                        options:kNilOptions
+                        error:&error];
+  
+  NSDictionary* itemsDict = [json objectForKey:@"results"];
+  NSArray* rebates = [itemsDict objectForKey:@"rebates"];
+  NSArray* products = [itemsDict objectForKey:@"products"];
+  NSArray* systProducts = [itemsDict objectForKey:@"system_products"];
+  
+  if (rebates.count > 0) {
+    [self addRebates:rebates];
+  }
+  
+  if (systProducts.count > 0) {
+    [self addSystemProducts:systProducts];
+  }
+  
+  if (products.count > 0) {
+    [self addProducts:products];
+  }
+}
+
+
+
+
+#pragma mark - Add Products
+-(void) addProducts:(NSArray *)products {
+  
+  [self addProductsCartOne:products];
+  [self addProductsCartTwo:products];
+  [self addProductsCartThree:products];
+  
+  syncView.hidden = YES;
+  [activity stopAnimating];
+  NSLog(@"sync finished test");
+}
+
+
+
+
+#pragma mark - Fetch System Products
+-(void)addSystemProducts:(NSArray *)systemProd {
+  
+  for (int i = 0; i < 3; i++) {
     
-    NSArray* products = [json objectForKey:@"results"];
-    
-    if (products.count > 0) {
-        
-        [self addProducts:products];
+    for (NSDictionary *itm in systemProd) {
+      
+      Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+      item.modelName = itm[@"modelName"];
+      item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
+      item.type = itm[@"type"];
+      item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
+      item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
+      item.currentCart = [NSNumber numberWithInt:i];
     }
     
- ///   NSLog(@"Products:%@",products);
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+      NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+    }
     
+    Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+    itemA.modelName = @"No Product Selected";
+    itemA.finalOption = @"None";
+    itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
+    itemA.type = @"Blank";
+    itemA.currentCart = [NSNumber numberWithInt:i];
+  }
 }
 
+
+
+
+#pragma mark - Add Rebates
+-(void) addRebates:(NSArray *)rebates {
+    NSMutableArray *newRebates = [[NSMutableArray alloc]initWithCapacity:rebates.count];
+  
+    for (int i = 0; i < 3; i++) {
+      
+      
+        for (int x = 0; x < rebates.count; x++) {
+            Item *itm;
+            // NSString *inc = [rebates[x] objectForKey:@"included"];
+            //int incl = [inc intValue];
+            
+            //  if (incl == 1) {
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm.modelName = [rebates[x] objectForKey:@"title"];
+            NSString *price = [rebates[x] objectForKey:@"amount"];
+            // itm.include = [NSNumber numberWithBool:0];
+            itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
+            itm.type = @"Rebates";
+            itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue] + 999];//[NSNumber numberWithInt:99];
+            itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
+            itm.currentCart = [NSNumber numberWithInt:i];
+          
+            //add the item
+            [newRebates addObject:itm];
+            //}
+            
+        }// end of for loop
+        
+    }
+  
+    NSError *errorz;
+    if (![managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+}
+
+
+
+
+#pragma mark - Segues
+- (IBAction)productAdmin:(id)sender {
+    [self performSegueWithIdentifier:@"prodAdmin" sender:self];
+}
+
+- (IBAction)newQuote:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
+    [self performSegueWithIdentifier:@"quoteFirst" sender:self];
+}
+
+
+
+#pragma mark - Sync Button Clicked
+- (IBAction)synCButton:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
+  NSLog(@"sync start test");
+    [self clearEverything];
+    syncView.hidden = NO;
+    [activity startAnimating];
+  
+  NSString *token =[[DataLoader sharedInstance] token];
+  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kadd2CartURL];
+  [request setTimeoutInterval: 10.0];
+  [request setValue:token forHTTPHeaderField:@"TOKEN"];
+  [NSURLConnection sendAsynchronousRequest:request
+                                     queue:[NSOperationQueue currentQueue]
+                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                           
+                           if (data != nil && error == nil)
+                           {
+                             [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:data waitUntilDone:NO];
+                           }
+                           else
+                           {
+                             NSLog(@"add2Cart sync error: %@",error);
+                           }
+                         }];
+  
+  [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
+}
+
+
+
+#pragma mark - Clear Everything
 -(void) clearEverything {
-    
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
-    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"modelName" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
-    fetchRequest.sortDescriptors = sortDescriptors;
-    [fetchRequest setEntity:entity];
-    
-    
-//    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-//    
-//    self.prodFRC.delegate = self;
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
+  NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"modelName" ascending:YES];
+  NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+  fetchRequest.sortDescriptors = sortDescriptors;
+  [fetchRequest setEntity:entity];
   
-    NSError *fetchingError = nil;
-//    if ([self.prodFRC performFetch:&fetchingError]) {
-//        NSLog(@"Successfully fetched ");
-//        
-//    } else {
-//        NSLog(@"Failed to get the result");
-//    }
+  NSError *fetchingError = nil;
   
-    NSArray *occP = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+  NSArray *occP = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+  
+  if (![occP count]) {
     
-    if (![occP count]) {
-        
-    } else  {
-        for (int i = 0; i<occP.count; i++) {
-            Item  *del = occP[i];
-            [managedObjectContext deleteObject:del];
-        }
+  } else  {
+    for (int i = 0; i<occP.count; i++) {
+      Item  *del = occP[i];
+      [managedObjectContext deleteObject:del];
     }
+  }
 }
 
 /*-(void) clearProducts {
@@ -135,41 +309,6 @@
  }
  
  }*/
-
-
--(void) addProducts:(NSArray *)products {
-    
-    [self addProductsCartOne:products];
-    [self addProductsCartTwo:products];
-    [self addProductsCartThree:products];
-    
-    syncView.hidden = YES;
-    [activity stopAnimating];
-}
-
-
-
-
-- (void)fetchedRebates:(NSData *)responseData {
-    //parse out the json data
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          options:kNilOptions
-                          error:&error];
-    
-    NSArray* rebates = [json objectForKey:@"results"];
-    
-    if (rebates.count > 0) {
-        [self addRebates:rebates];
-    }
-    
-    //JB Stick in an nslog here if issue with rebates
-    //  NSLog(@"Rebates:%@",rebates);
-    //  [self checkMem:@"Rebates"];
-    
-}
-
 
 
 /*-(void) clearRebates {
@@ -212,229 +351,19 @@
  
  }*/
 
--(void) addRebates:(NSArray *)rebates {
-    
-    NSMutableArray *newRebates = [[NSMutableArray alloc]initWithCapacity:rebates.count];
-    
-    for (int i = 0; i < 3; i++) {
-        
-        
-        for (int x = 0; x < rebates.count; x++) {
-            Item *itm;
-            // NSString *inc = [rebates[x] objectForKey:@"included"];
-            //int incl = [inc intValue];
-            
-            //  if (incl == 1) {
-            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            itm.modelName = [rebates[x] objectForKey:@"title"];
-            NSString *price = [rebates[x] objectForKey:@"amount"];
-            // itm.include = [NSNumber numberWithBool:0];
-            itm.finalPrice = [NSNumber numberWithFloat:[price floatValue]];
-            itm.type = @"Rebates";
-            itm.typeID = [NSNumber numberWithInt:[rebates[x][@"id"] intValue] + 999];//[NSNumber numberWithInt:99];
-            itm.ord = [NSNumber numberWithInt:[rebates[x][@"ord"] intValue]];
-            itm.currentCart = [NSNumber numberWithInt:i];
-          
-            //add the item
-            [newRebates addObject:itm];
-            //}
-            
-        }// end of for loop
-        
-    }
-    
-    
-    
-    
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-    }
-    
-    
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (IBAction)productAdmin:(id)sender {
-    [self performSegueWithIdentifier:@"prodAdmin" sender:self];
-}
-
-- (IBAction)newQuote:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
-    [self performSegueWithIdentifier:@"quoteFirst" sender:self];
-}
-
-
--(void)fetchSystemProducts:(NSData *)responseData{
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          
-                          options:kNilOptions
-                          error:&error];
-    
-    
-    if (json) {
-        NSArray * list = json[@"list"];
-        
-        for (int i = 0; i < 3; i++) {
-            
-            
-            for (NSDictionary *itm in list) {
-                
-                Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-                item.modelName = itm[@"modelName"];
-                item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
-                item.type = itm[@"type"];
-                item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
-                item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
-                item.currentCart = [NSNumber numberWithInt:i];
-            }
-            
-            
-            NSError *error;
-            if (![managedObjectContext save:&error]) {
-                NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-            }
-            
-            Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            itemA.modelName = @"No Product Selected";
-            itemA.finalOption = @"None";
-            itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
-            itemA.type = @"Blank";
-            itemA.currentCart = [NSNumber numberWithInt:i];
-            
-            
-        }
-    }
-    
-}
-
-- (IBAction)synCButton:(id)sender {
-    // if ([[NSUserDefaults standardUserDefaults]boolForKey:@"newSession"]) {
-    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
-////    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"type3"];
-    
-    
-    [self clearEverything];
-    syncView.hidden = NO;
-    [activity startAnimating];
-    
-
-    NSString *token =[[DataLoader sharedInstance] token];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kRebatesURL];
-    [request setTimeoutInterval: 10.0];
-    [request setValue:token forHTTPHeaderField:@"TOKEN"];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue currentQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               
-                               if (data != nil && error == nil)
-                               {
-                                   [self performSelectorOnMainThread:@selector(fetchedRebates:)
-                                                          withObject:data waitUntilDone:YES];
-                               }
-                               else
-                               {
-                                   // There was an error, alert the user
-                               }
-                               
-                           }];
-    
-    NSMutableURLRequest *request2 = [NSMutableURLRequest requestWithURL:kProdURL];
-    [request2 setTimeoutInterval: 10.0];
-    [request2 setValue:token forHTTPHeaderField:@"TOKEN"];
-    [NSURLConnection sendAsynchronousRequest:request2
-                                       queue:[NSOperationQueue currentQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               
-                               if (data != nil && error == nil)
-                               {
-                                    [self performSelectorOnMainThread:@selector(fetchedProducts:)
-                                                           withObject:data waitUntilDone:YES];
-                               }
-                               else
-                               {
-                                   // There was an error, alert the user
-                               }
-                               
-                           }];
-    
-    
-    NSMutableURLRequest *request3 = [NSMutableURLRequest requestWithURL:kSystemProdURL];
-    [request3 setTimeoutInterval: 10.0];
-    [request3 setValue:token forHTTPHeaderField:@"TOKEN"];
-    [NSURLConnection sendAsynchronousRequest:request3
-                                       queue:[NSOperationQueue currentQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               
-                               if (data != nil && error == nil)
-                               {
-                                   [self performSelectorOnMainThread:@selector(fetchSystemProducts:)
-                                                          withObject:data waitUntilDone:YES];
-                               }
-                               else
-                               {
-                                   // There was an error, alert the user
-                               }
-                               
-                           }];
-    
-    
-//    dispatch_async(kBgQueue, ^{
-//        
-//        NSData* data = [NSData dataWithContentsOfURL:
-//                        kRebatesURL];
-//        
-//        [self performSelectorOnMainThread:@selector(fetchedRebates:)
-//                               withObject:data waitUntilDone:YES];
-//        
-//        
-//    });
-    
-//    dispatch_async(kBgQueue, ^{
-//        NSData* data = [NSData dataWithContentsOfURL:
-//                        kProdURL];
-//        [self performSelectorOnMainThread:@selector(fetchedProducts:)
-//                               withObject:data waitUntilDone:YES];
-//        
-//        
-//    });
-//    
-//    
-//    dispatch_async(kBgQueue, ^{
-//        NSData* data = [NSData dataWithContentsOfURL:
-//                        kSystemProdURL];
-//        [self performSelectorOnMainThread:@selector(fetchSystemProducts:)
-//                               withObject:data waitUntilDone:YES];
-//        
-//        
-//    });
-    //
-    [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
-    
-    // } else {
-    // }
-    
-    
-}
 
 
 
 #pragma mark - add products for carts
 - (void)addProductsCartOne:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
-    
+ // [self updateProgressForValue:0.8];
+  
+
+  
+  
     for (int x = 0; x < products.count; x++) {
-        
+      
         Item *itm;
         NSArray *options;
         //Check to see if we want this profuct.
@@ -488,7 +417,6 @@
             } //end of options
           
           
-          
           NSString *urly = [products[x] objectForKey:@"full_url"];
           itm.image = [self insertPhotosToDataBaseWithPath:urly];
 
@@ -498,24 +426,22 @@
             }
             //Add the new item to new products.
             [newProd addObject:itm];
-          
-          
-        }// end of if includeded.
-        else {
-            //Not adding this item.
         }
       
-    }// end of for loop
+      float value = x / 100.00;
+      
+     /// [self updateProgressForValue:value];
+      
+    }
   
-    
-    
     NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
-  
-
 }
+
+
+
 
 - (void)addProductsCartTwo:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
@@ -583,22 +509,17 @@
             }
             //Add the new item to new products.
             [newProd addObject:itm];
-        }// end of if includeded.
-        else {
-            //Not adding this item.
         }
-        
-        
-    }// end of for loop
-    
-    
-    
+    }
+  
     
     NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
 }
+
+
 
 - (void)addProductsCartThree:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
@@ -656,8 +577,7 @@
                     itm.optionEight = name;
                     itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
                 }
-                
-            } //end of options
+            }
             
           NSString *urly = [products[x] objectForKey:@"full_url"];
           itm.image = [self insertPhotosToDataBaseWithPath:urly];
@@ -666,20 +586,16 @@
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
             }
-            //Add the new item to new products.
             [newProd addObject:itm];
-        }// end of if includeded.
-        else {
-            //Not adding this item.
         }
     }
   
-    
     NSError *errorz;
     if (![managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
 }
+
 
 
 
@@ -711,5 +627,13 @@
     return productImages.firstObject;
   }
 }
+
+
+#pragma mark - Memory Warning
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
 
 @end

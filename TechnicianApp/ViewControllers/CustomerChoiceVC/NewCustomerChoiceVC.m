@@ -29,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UIButton *swrButton;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 
 @property (weak, nonatomic) IBOutlet UILabel *label1;
@@ -120,6 +121,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.saveBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.swrButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -191,8 +193,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
 //    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 //    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
-    
-    [self saveInvoiceToApp];
     
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
@@ -333,32 +333,35 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 }
 
 
-#pragma mark - Save to App
--(void)saveInvoiceToApp {
+#pragma mark - SWR Button
+- (IBAction)swrButtonClicked:(id)sender {
+  
+  NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
+  NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
+  
+  for (PricebookItem *p in selectedItems) {
+//    if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
+//        }
+
+    NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
     
-    NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
-    NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
-    
-    for (PricebookItem *p in selectedItems) {
-        if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
-            NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
-            
-            [selectedArray addObject:@{@"sku" : p.itemNumber,
-                                       @"qty" : [NSNumber numberWithInt:[p.quantity intValue]],
-                                     @"price" : price,
-                                   @"taxable" : @false}];
-        }
-    }
-    
-    NSDictionary * dict = @{ @"items" : selectedArray };
-    
-    //post invoice
-   // NSLog(@"dictionary: %@", dict.description);
+    [selectedArray addObject:@{@"sku" : p.itemNumber,
+                               @"qty" : [NSNumber numberWithInt:[p.quantity intValue]],
+                               @"price" : price,
+                               @"taxable" : @false}];
+  }
+
+  
+  
+  NSDictionary * dict = @{ @"items" : selectedArray };
+  
+  //post invoice
+  // NSLog(@"dictionary: %@", dict.description);
   
   NSError * err;
   NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
   NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@",passedString];
+  NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
   
   NSURL *url = [NSURL URLWithString:urlString];
   if ([[UIApplication sharedApplication] canOpenURL:url])
@@ -367,8 +370,18 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
   } else {
     NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
   }
-  
-  
+}
+
+
+- (NSString *)urlEncode:(NSString *)rawStr {
+  NSString *encodedStr = (NSString *)CFBridgingRelease(
+                                                       CFURLCreateStringByAddingPercentEscapes(
+                                                                                               NULL,
+                                                                                               (__bridge CFStringRef)rawStr,
+                                                                                               NULL,
+                                                                                               (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                               kCFStringEncodingUTF8));
+  return encodedStr;
 }
 
 

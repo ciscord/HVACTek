@@ -408,7 +408,9 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
                   UIImageView *img = [[UIImageView alloc] init];
                   [img setImageWithURL:[NSURL URLWithString:info[@"filename"]]];
               }
-              
+            
+            NSLog(@"getInspirationInfoOnSuccess: %@",info.description);
+            
               weakSelf.inspirationInfo = info;
               [[[UIImageView alloc] init] setImageWithURL:[NSURL URLWithString:[weakSelf inspirationImagePath]] placeholderImage:nil];
               if (onSuccess) {

@@ -20,8 +20,6 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>28</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -33,6 +31,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>28</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>swremote</string>
@@ -50,6 +50,8 @@
 		<string>framd.ttf</string>
 		<string>calibri.ttf</string>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>TechnicianAppStoryboard</string>
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>TechnicianAppStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -58,6 +60,10 @@
 	</array>
 	<key>UIRequiresFullScreen</key>
 	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
