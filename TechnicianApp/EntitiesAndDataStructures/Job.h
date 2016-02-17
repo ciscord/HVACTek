@@ -1,9 +1,9 @@
 //
 //  Job.h
-//  Signature
+//  HvacTek
 //
-//  Created by Mihai Tugui on 7/9/15.
-//  Copyright (c) 2015 Unifeyed. All rights reserved.
+//  Created by Dorin on 2/17/16.
+//  Copyright © 2016 Unifeyed. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,24 +11,14 @@
 
 @class User;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Job : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * amount;
-@property (nonatomic, retain) NSDate * completionTime;
-@property (nonatomic, retain) id custumerQuestions;
-@property (nonatomic, retain) NSDate * dispatchTime;
-@property (nonatomic, retain) NSDate * endTimeQuestions;
-@property (nonatomic, retain) NSString * jobID;
-@property (nonatomic, retain) NSNumber * jobStatus;
-@property (nonatomic, retain) NSData * signatureFile;
-@property (nonatomic, retain) NSDate * startTime;
-@property (nonatomic, retain) NSDate * startTimeQuestions;
-@property (nonatomic, retain) id swapiJobInfo;
-@property (nonatomic, retain) id techObservations;
-@property (nonatomic, retain) id selectedServiceOptions;
-@property (nonatomic, retain) id unselectedServiceOptiunons;
-@property (nonatomic, retain) NSNumber * price;
-@property (nonatomic, retain) NSNumber * serviceLevel;
-@property (nonatomic, retain) User *user;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Job+CoreDataProperties.h"

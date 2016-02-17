@@ -118,6 +118,8 @@
 		528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AC1C6B1EF2003F91C2 /* SortFindingsVC.m */; };
 		528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */; };
 		528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */; };
+		52955A9C1C745F4C0009F7FF /* Job+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52955A991C745F4C0009F7FF /* Job+CoreDataProperties.m */; };
+		52955A9D1C745F4C0009F7FF /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 52955A9B1C745F4C0009F7FF /* Job.m */; };
 		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
 		52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C787261C6DCA2C007EC77C /* THProgressView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
@@ -141,7 +143,6 @@
 		91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A061B8DF034005EA4EA /* ProductCell.m */; };
 		91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA9A071B8DF034005EA4EA /* ProductCell.xib */; };
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
-		91EE85A11B4EBAB100811D39 /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 91EE85A01B4EBAB100811D39 /* Job.m */; };
 		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
 		AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */; };
 		AAE7D16E1A39CFBA00F95495 /* CHDropDownTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7D16B1A39CFBA00F95495 /* CHDropDownTextField.m */; };
@@ -345,8 +346,14 @@
 		528698AE1C6B2BE9003F91C2 /* SortFindinsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortFindinsCell.h; sourceTree = "<group>"; };
 		528698AF1C6B2BE9003F91C2 /* SortFindinsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortFindinsCell.m; sourceTree = "<group>"; };
 		528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortFindinsCell.xib; sourceTree = "<group>"; };
+		52955A911C745E570009F7FF /* SignatureModel 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 8.xcdatamodel"; sourceTree = "<group>"; };
+		52955A981C745F4C0009F7FF /* Job+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Job+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52955A991C745F4C0009F7FF /* Job+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Job+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52955A9A1C745F4C0009F7FF /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		52955A9B1C745F4C0009F7FF /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Color.h"; sourceTree = "<group>"; };
 		52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Color.m"; sourceTree = "<group>"; };
+		52B2524A1C7364D5005E8824 /* SignatureModel 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 7.xcdatamodel"; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
 		52C787251C6DCA2C007EC77C /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
 		52C787261C6DCA2C007EC77C /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
@@ -393,8 +400,6 @@
 		91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		91CA5EFA1ADFF86B00D871FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		91EE859F1B4EBAB100811D39 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
-		91EE85A01B4EBAB100811D39 /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		AA23D6471A379B4B00703952 /* TechnicianDebriefVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnicianDebriefVC.h; sourceTree = "<group>"; };
 		AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnicianDebriefVC.m; sourceTree = "<group>"; };
 		AAE7D16A1A39CFBA00F95495 /* CHDropDownTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextField.h; sourceTree = "<group>"; };
@@ -798,8 +803,10 @@
 			isa = PBXGroup;
 			children = (
 				4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */,
-				91EE859F1B4EBAB100811D39 /* Job.h */,
-				91EE85A01B4EBAB100811D39 /* Job.m */,
+				52955A981C745F4C0009F7FF /* Job+CoreDataProperties.h */,
+				52955A991C745F4C0009F7FF /* Job+CoreDataProperties.m */,
+				52955A9A1C745F4C0009F7FF /* Job.h */,
+				52955A9B1C745F4C0009F7FF /* Job.m */,
 				91CA5EFA1ADFF86B00D871FD /* User.h */,
 				91CA5EFB1ADFF86B00D871FD /* User.m */,
 				4F11D4021AA77417007FC0A8 /* User+Functional.h */,
@@ -1305,6 +1312,7 @@
 				4FD2EB831A361A0F0056D4C4 /* RebateQuoteTableViewCell.m in Sources */,
 				5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */,
 				524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */,
+				52955A9C1C745F4C0009F7FF /* Job+CoreDataProperties.m in Sources */,
 				4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */,
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
@@ -1332,6 +1340,7 @@
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
 				4FD2EB811A361A0F0056D4C4 /* ProdAdminTableViewCell.m in Sources */,
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
+				52955A9D1C745F4C0009F7FF /* Job.m in Sources */,
 				5265782D1C6A0A2500EC1AA5 /* Item.m in Sources */,
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
@@ -1379,7 +1388,6 @@
 				528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */,
 				523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */,
 				4F11D4071AA77579007FC0A8 /* Job+Functional.m in Sources */,
-				91EE85A11B4EBAB100811D39 /* Job.m in Sources */,
 				4FD2EBAF1A384CE00056D4C4 /* RoundCornerView.m in Sources */,
 				4F11D3DD1AA1F7F1007FC0A8 /* SWAPIRequestManager.m in Sources */,
 				4F11D3FC1AA772E4007FC0A8 /* NSManagedObjectContext+Custom.m in Sources */,
@@ -1506,7 +1514,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1530,7 +1538,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1576,6 +1584,8 @@
 		4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				52955A911C745E570009F7FF /* SignatureModel 8.xcdatamodel */,
+				52B2524A1C7364D5005E8824 /* SignatureModel 7.xcdatamodel */,
 				52125DA91C57BD2500A0190F /* SignatureModel 6.xcdatamodel */,
 				9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */,
 				91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */,
@@ -1583,7 +1593,7 @@
 				91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */,
 				4F11D3E61AA76FA7007FC0A8 /* SignatureModel.xcdatamodel */,
 			);
-			currentVersion = 9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */;
+			currentVersion = 52955A911C745E570009F7FF /* SignatureModel 8.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

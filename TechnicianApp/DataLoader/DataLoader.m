@@ -77,6 +77,9 @@ NSString *const INVOICE          = @"emailInvoice";
 NSString *const ADD_REBATES      = @"addRebate";
 NSString *const DELETE_REBATES   = @"deleteRebate";
 NSString *const UPDATE_REBATES   = @"updateRebate";
+NSString *const ADD2CART_ITEMS   = @"add2cart";
+
+
 
 #define kStatusOK 1
 
@@ -536,8 +539,14 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     for (Question *q in questions) {
         [techObservations addObject:@{[NSString stringWithFormat:@"%i",[q.ID intValue]]: q.answer}];
     }
+  
+    questions = self.currentUser.activeJob.rrQuestions;
+    NSMutableArray * rrObservations = [[NSMutableArray alloc]init];
+    for (Question *q in questions) {
+        [rrObservations addObject:@{[NSString stringWithFormat:@"%i",[q.ID intValue]]: q.answer}];
+    }
     
-    [temp setObject:@{@"1" : custumerQuestions, @"2" : techObservations} forKey:@"questions"];
+    [temp setObject:@{@"1" : custumerQuestions, @"2" : techObservations, @"3" : rrObservations} forKey:@"questions"];
     
     
     
@@ -559,6 +568,22 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     [temp setObject:unselectedServiceOptiunons forKey:@"not_selected"];
     
     
+    ////
+    
+    if (self.currentUser.activeJob.initialCostumerRR == nil)
+        self.currentUser.activeJob.initialCostumerRR = @"";
+    
+    if (self.currentUser.activeJob.initialTechRR == nil)
+        self.currentUser.activeJob.initialTechRR = @"";
+    
+    if (self.currentUser.activeJob.totalInvestmentsRR == nil)
+        self.currentUser.activeJob.totalInvestmentsRR = @"";
+    
+    [temp setObject:self.currentUser.activeJob.initialCostumerRR forKey:@"customerInitial"];
+    [temp setObject:self.currentUser.activeJob.initialTechRR forKey:@"technicianInitial"];
+    [temp setObject:self.currentUser.activeJob.totalInvestmentsRR forKey:@"totalRR"];
+    
+    
     UIImage *image = [UIImage imageWithData:self.currentUser.activeJob.signatureFile];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (signature == nil)  //signature was removed
@@ -571,6 +596,9 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
+    
+
+    
     
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&err];
@@ -645,7 +673,33 @@ NSString *const UPDATE_REBATES   = @"updateRebate";
     
 }
 
-//Success:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
+
+
+#pragma mark - Add2Cart Products
+-(void)getAdd2CartProducts:(NSURL *)reqUrl
+                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                   onError:(void (^)(NSError *error))onError {
+  
+  self.responseSerializer = [AFJSONResponseSerializer serializer];
+  [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+  
+  [self GET:ADD2CART_ITEMS
+ parameters:@{}
+    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      if ([responseObject[@"status"] integerValue] == kStatusOK) {
+        NSDictionary *dict = responseObject[@"results"];
+        onSuccess(@"OK", dict);
+      }
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      if (onError) {
+        onError(error);
+      }
+    }];
+}
+
+
+
 #pragma mark - Rebates Requests
 -(void)addRebatesToPortal:(NSString *)title
                    amount:(CGFloat)amount

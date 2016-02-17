@@ -197,32 +197,17 @@
     }
     else
     {
-        self.currentRRQuestionIndex--;
-        [self performSegueWithIdentifier:@"showRROverviewVC" sender:self];
-        
-        
-        
-//        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-//        if (self.questionType!=qtTechnician) {
-//            
-//            if (!job.endTimeQuestions) {
-//                job.endTimeQuestions = [NSDate date];
-//                [job.managedObjectContext save];
-//            }
-//        }
-//        
-//        
-//        if (self.questionType == qtTechnician) {
-//            job.techObservations = self.questionsArray;
-//            [job.managedObjectContext save];
-//            [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
-//        } else
-//        {
-//            job.custumerQuestions = self.questionsArray;
-//            [job.managedObjectContext save];
-//            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
-//        }
-        
+//        self.currentRRQuestionIndex--;
+//        [self performSegueWithIdentifier:@"showRROverviewVC" sender:self];
+      
+      self.currentRRQuestionIndex--;
+      ////////
+        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+        if (self.questionType == qRepairVsReplace) {
+            job.rrQuestions = self.questionsArray;
+            [job.managedObjectContext save];
+            [self performSegueWithIdentifier:@"showRROverviewVC" sender:self];
+        }      
     }
 }
 

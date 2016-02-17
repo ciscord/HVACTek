@@ -30,27 +30,52 @@ static const CGFloat kBorderWidth = 2.0f;
 
 - (void)drawInContext:(CGContextRef)context
 {
-    CGRect rect = CGRectInset(self.bounds, kBorderWidth, kBorderWidth);
-    CGFloat radius = CGRectGetHeight(rect) / 2.0f;
-    CGContextSetLineWidth(context, kBorderWidth);
-    CGContextSetStrokeColorWithColor(context, self.borderTintColor.CGColor);
-    [self drawRectangleInContext:context inRect:rect withRadius:radius];
-    CGContextStrokePath(context);
-    
-    CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
-    CGRect progressRect = CGRectInset(rect, 2 * kBorderWidth, 2 * kBorderWidth);
-    CGFloat progressRadius = CGRectGetHeight(progressRect) / 2.0f;
-    progressRect.size.width = fmaxf(self.progress * progressRect.size.width, 2.0f * progressRadius);
-    [self drawRectangleInContext:context inRect:progressRect withRadius:progressRadius];
-    CGContextFillPath(context);
-    
-    CGContextSetFillColorWithColor(context, self.progressBackgroundColor.CGColor);
-    CGRect progressBackgroundRect = progressRect;
-    progressBackgroundRect.size.width = rect.size.width - 4 * kBorderWidth - progressRect.size.width;
-    progressBackgroundRect.origin.x = progressRect.origin.x + progressRect.size.width;
-    [self drawProgressBackgroundRectangleInContext:context inRect:progressBackgroundRect withRadius:progressRadius];
-    CGContextFillPath(context);
+  CGRect rect = CGRectInset(self.bounds, kBorderWidth, kBorderWidth);
+  CGFloat radius = CGRectGetHeight(rect) / 2.0f;
+  CGContextSetLineWidth(context, kBorderWidth);
+  CGContextSetStrokeColorWithColor(context, self.borderTintColor.CGColor);
+  
+  CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
+  CGRect progressRect = CGRectInset(rect, 0, 0);
+  CGFloat progressRadius = CGRectGetHeight(progressRect) / 2.0f;
+  progressRect.size.width = fmaxf(self.progress * progressRect.size.width, 2.0f * progressRadius);
+  [self drawRectangleInContext:context inRect:progressRect withRadius:progressRadius];
+  CGContextFillPath(context);
+  
+  CGContextSetFillColorWithColor(context, self.progressBackgroundColor.CGColor);
+  CGRect progressBackgroundRect = progressRect;
+  progressBackgroundRect.size.width = rect.size.width - 1 * kBorderWidth - progressRect.size.width;
+  progressBackgroundRect.origin.x = progressRect.origin.x + progressRect.size.width;
+  [self drawProgressBackgroundRectangleInContext:context inRect:progressBackgroundRect withRadius:progressRadius];
+  CGContextFillPath(context);
+  
+  [self drawRectangleInContext:context inRect:rect withRadius:radius];
+  CGContextStrokePath(context);
 }
+
+//- (void)drawInContext:(CGContextRef)context
+//{
+//    CGRect rect = CGRectInset(self.bounds, kBorderWidth, kBorderWidth);
+//    CGFloat radius = CGRectGetHeight(rect) / 2.0f;
+//    CGContextSetLineWidth(context, kBorderWidth);
+//    CGContextSetStrokeColorWithColor(context, self.borderTintColor.CGColor);
+//    [self drawRectangleInContext:context inRect:rect withRadius:radius];
+//    CGContextStrokePath(context);
+//    
+//    CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
+//    CGRect progressRect = CGRectInset(rect, 2 * kBorderWidth, 2 * kBorderWidth);
+//    CGFloat progressRadius = CGRectGetHeight(progressRect) / 2.0f;
+//    progressRect.size.width = fmaxf(self.progress * progressRect.size.width, 2.0f * progressRadius);
+//    [self drawRectangleInContext:context inRect:progressRect withRadius:progressRadius];
+//    CGContextFillPath(context);
+//    
+//    CGContextSetFillColorWithColor(context, self.progressBackgroundColor.CGColor);
+//    CGRect progressBackgroundRect = progressRect;
+//    progressBackgroundRect.size.width = rect.size.width - 4 * kBorderWidth - progressRect.size.width;
+//    progressBackgroundRect.origin.x = progressRect.origin.x + progressRect.size.width;
+//    [self drawProgressBackgroundRectangleInContext:context inRect:progressBackgroundRect withRadius:progressRadius];
+//    CGContextFillPath(context);
+//}
 
 - (void)drawRectangleInContext:(CGContextRef)context inRect:(CGRect)rect withRadius:(CGFloat)radius
 {

@@ -79,10 +79,11 @@
   [atrString setColorForText:self.totalInvestment withColor:[UIColor redColor]];
   self.descriptionLabel.attributedText = atrString;
   
-  
     [self.view bringSubviewToFront:self.customerPriceView];
     
-    [DataLoader sharedInstance].totalInvestmentsRR = self.totalInvestment;
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    job.totalInvestmentsRR = self.totalInvestment;
+    [job.managedObjectContext save];
 }
 
 
@@ -112,6 +113,23 @@
 - (IBAction)hideCustomerPriceView:(id)sender {
     self.customerPriceView.hidden = YES;
 }
+
+
+
+#pragma mark - TextField
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+
+    if (textField == self.initialTechTextField) {
+        job.initialTechRR = self.initialTechTextField.text;
+        [job.managedObjectContext save];
+    }else if (textField == self.initialCostumerTextField) {
+        job.initialCostumerRR = self.initialCostumerTextField.text;
+        [job.managedObjectContext save];
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

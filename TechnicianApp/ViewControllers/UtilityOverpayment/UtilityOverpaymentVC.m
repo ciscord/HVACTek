@@ -56,11 +56,12 @@
 
 
 - (void)configureVC {
-    
-    if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
-        self.amountTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    if (job.utilityOverpaymentHVAC) {
+        self.amountTextField.text = job.utilityOverpaymentHVAC;
     }else{
-        [DataLoader sharedInstance].utilityOverpaymentHVAC = self.amountTextField.text;
+        job.utilityOverpaymentHVAC = self.amountTextField.text;
+        [job.managedObjectContext save];
     }
 }
 
@@ -123,7 +124,9 @@
 
 
 - (IBAction)nextClicked:(UIButton *)sender {
-    [DataLoader sharedInstance].utilityOverpaymentHVAC = self.amountTextField.text;
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    job.utilityOverpaymentHVAC = self.amountTextField.text;
+    [job.managedObjectContext save];
 }
 
 

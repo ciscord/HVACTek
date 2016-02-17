@@ -82,9 +82,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, strong) NSMutableArray *otherOptions;
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;
 
-@property (nonatomic, strong) NSString *utilityOverpaymentHVAC;
-@property (nonatomic, strong) NSString *totalInvestmentsRR;
-
 @property (nonatomic, readonly) CompanyItem *currentCompany;
 
 
@@ -118,6 +115,11 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 -(void)deleteRebatesFromPortalWithId:(NSString *)rebate_id
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError;
+
+
+-(void)getAdd2CartProducts:(NSURL *)reqUrl
+                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                   onError:(void (^)(NSError *error))onError;
 
 
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID

@@ -9,11 +9,8 @@
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 // ==================== API URLs =====================
-#define kRebatesURL [NSURL URLWithString:@"http://www.hvactek.com/api/rebates/?id=&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kSystemProdURL [NSURL URLWithString:@"http://www.hvactek.com/api/system_products/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kadd2CartURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-
+#define kAdd2CartURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+#define kAdd2CartSyncURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart_sync/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 
 
 //http://www.hvactek.com/
@@ -22,20 +19,26 @@
 #import "MenuViewController.h"
 #import "Photos.h"
 #import "THProgressView.h"
+#import "DataLoader.h"
 
-static const CGSize progressViewSize = { 300.0f, 25.0f };
+static const CGSize progressViewSize = { 300.0f, 20.0f };
+
+typedef void(^myCompletion)(BOOL);
 
 @interface MenuViewController ()
 
 @property (nonatomic, strong) THProgressView *progressBar;
+@property (weak, nonatomic) IBOutlet UILabel *lastSyncLabel;
+@property (weak, nonatomic) IBOutlet UILabel *syncStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *syncProgressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *syncButton;
+@property (weak, nonatomic) IBOutlet UIButton *add2cartButton;
 
 @end
 
 @implementation MenuViewController
 @synthesize managedObjectContext;
 @synthesize prodFRC;
-@synthesize syncView;
-@synthesize activity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,67 +49,122 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
     return self;
 }
 
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    managedObjectContext = apDel.managedObjectContext;
-    
-    syncView.hidden = YES;
-    [activity stopAnimating];
+  [super viewDidLoad];
   
+  AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+  managedObjectContext = apDel.managedObjectContext;
   
-  [self testProgressBar];
+  [self checkSyncStatus];
+  [self initializeProgressBar];
+}
+
+
+-(void)syncLabelStatus:(BOOL)status {
+  self.syncStatusLabel.hidden = !status;
+}
+
+
+-(void)syncDateLabel:(NSString *)sync_date {
+  
+  NSDateFormatter *dateFormatter = [NSDateFormatter new];
+  [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+  [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+  [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+  NSDate *syncDate = [dateFormatter dateFromString:sync_date];
+  [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+  NSString *syncString = [dateFormatter stringFromDate:syncDate];
+  
+  NSString *lastSync = [NSString stringWithFormat:@"Last Sync Date: %@", syncString];
+  self.lastSyncLabel.text = lastSync;
+}
+
+
+- (void)startSyncing:(BOOL)starting {
+  if (starting == YES) {
+    self.add2cartButton.hidden = YES;
+    self.syncProgressLabel.hidden = NO;
+    self.progressBar.hidden = NO;
+    [self.syncButton setHidden:YES];
+    [self.syncStatusLabel setHidden:YES];
+    [self.lastSyncLabel setHidden:YES];
+  }else{
+    self.add2cartButton.hidden = NO;
+    self.syncProgressLabel.hidden = YES;
+    self.progressBar.hidden = YES;
+    //[self.syncButton setHidden:NO];
+    [self.lastSyncLabel setHidden:NO];
+    [self.progressBar setProgress:0.0];
+    [self.syncProgressLabel setText:@"Sync In Progress - 0%"];
+  }
 }
 
 
 #pragma mark - ProgressBar
-- (void)testProgressBar {
+- (void)initializeProgressBar {
   self.progressBar = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.frame) - progressViewSize.width / 2.0f,
                                                                                      CGRectGetMidY(self.view.frame) - progressViewSize.height / 2.0f,
                                                                                      progressViewSize.width,
                                                                                      progressViewSize.height)];
-  self.progressBar.borderTintColor = [UIColor whiteColor];
-  self.progressBar.progressTintColor = [UIColor whiteColor];
-  self.progressBar.progressBackgroundColor = [UIColor redColor];
+  self.progressBar.borderTintColor = [UIColor colorWithRed:118.0/255.0 green:189.0/255.0 blue:29.0/255.0 alpha:1.0];
+  self.progressBar.progressTintColor = [UIColor colorWithRed:118.0/255.0 green:189.0/255.0 blue:29.0/255.0 alpha:1.0];
+  self.progressBar.progressBackgroundColor = [UIColor whiteColor];
+  self.progressBar.hidden = YES;
   [self.view addSubview:self.progressBar];
-  
 }
 
 
-- (void)updateProgressForValue:(float)newValue
+- (void)updateProgressForValue:(NSNumber *)newValue
 {
-  NSLog(@"newValue %f",newValue);
-  [self.progressBar setProgress:0.3 animated:YES];
-  
-  
-//  self.progress += 0.20f;
-//  if (self.progress > 1.0f) {
-//    self.progress = 0;
-//  }
-//  
-//  [self.progressViews enumerateObjectsUsingBlock:^(THProgressView *progressView, NSUInteger idx, BOOL *stop) {
-//    [progressView setProgress:self.progress animated:YES];
-//  }];
+  [self.progressBar setProgress:[newValue floatValue] animated:YES];
 }
 
 
+#pragma mark - Check For Sync
+- (void)checkSyncStatus {
+  NSString *token =[[DataLoader sharedInstance] token];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
+  [request setTimeoutInterval: 10.0];
+  [request setValue:token forHTTPHeaderField:@"TOKEN"];
+  [NSURLConnection sendAsynchronousRequest:request
+                                     queue:[NSOperationQueue currentQueue]
+                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                           
+                           if (data != nil && error == nil) {
+                             [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
+                           }
+                           else {
+                             NSLog(@"add2CartSyncStatus error: %@",error);
+                           }
+                         }];
+}
 
-#pragma mark - Fetched ADD2CART Items
-- (void)fetchedAdd2CartItems:(NSData *)responseData {
-  
+
+- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
   NSError* error;
   NSDictionary* json = [NSJSONSerialization
                         JSONObjectWithData:responseData
                         options:kNilOptions
                         error:&error];
   
-  NSDictionary* itemsDict = [json objectForKey:@"results"];
-  NSArray* rebates = [itemsDict objectForKey:@"rebates"];
-  NSArray* products = [itemsDict objectForKey:@"products"];
-  NSArray* systProducts = [itemsDict objectForKey:@"system_products"];
+  if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
+    NSDictionary* itemsDict = [json objectForKey:@"results"];
+    BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
+    [self syncLabelStatus:syncStatus];
+    [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
+  }
+}
+
+
+
+#pragma mark - Fetched ADD2CART Items
+- (void)fetchedAdd2CartItems:(NSDictionary *)responseData {
+  
+  NSArray* rebates = [responseData objectForKey:@"rebates"];
+  NSArray* products = [responseData objectForKey:@"products"];
+  NSArray* systProducts = [responseData objectForKey:@"system_products"];
   
   if (rebates.count > 0) {
     [self addRebates:rebates];
@@ -126,14 +184,17 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
 
 #pragma mark - Add Products
 -(void) addProducts:(NSArray *)products {
-  
   [self addProductsCartOne:products];
   [self addProductsCartTwo:products];
   [self addProductsCartThree:products];
   
-  syncView.hidden = YES;
-  [activity stopAnimating];
-  NSLog(@"sync finished test");
+  self.lastSyncLabel.text = @"Last Sync Date: Now";
+  [self startSyncing:NO];
+    
+    NSError *errorz;
+    if (![managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
 }
 
 
@@ -155,10 +216,6 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
       item.currentCart = [NSNumber numberWithInt:i];
     }
     
-    NSError *error;
-    if (![managedObjectContext save:&error]) {
-      NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-    }
     
     Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
     itemA.modelName = @"No Product Selected";
@@ -202,11 +259,6 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
         }// end of for loop
         
     }
-  
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-    }
 }
 
 
@@ -217,7 +269,13 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
     [self performSegueWithIdentifier:@"prodAdmin" sender:self];
 }
 
+
 - (IBAction)newQuote:(id)sender {
+//  NSError *errorz;
+//  if (![managedObjectContext save:&errorz]) {
+//    NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+//  }
+  
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
     [self performSegueWithIdentifier:@"quoteFirst" sender:self];
 }
@@ -226,33 +284,54 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
 
 #pragma mark - Sync Button Clicked
 - (IBAction)synCButton:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
-  NSLog(@"sync start test");
-    [self clearEverything];
-    syncView.hidden = NO;
-    [activity startAnimating];
+  [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
+
+  [self startSyncing:YES];
+  [self clearEverything];
+
+  [[DataLoader sharedInstance] getAdd2CartProducts:kAdd2CartURL
+                                         onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                           //[self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
+                                           
+                                            [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];
+                                             //[self fetchedAdd2CartItems:reciveData];
+                                         }onError:^(NSError *error) {
+                                           ShowOkAlertWithTitle(error.localizedDescription, self);
+                                         }];
   
-  NSString *token =[[DataLoader sharedInstance] token];
   
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kadd2CartURL];
+  
+  
+  /*
+  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartURL];
   [request setTimeoutInterval: 10.0];
   [request setValue:token forHTTPHeaderField:@"TOKEN"];
   [NSURLConnection sendAsynchronousRequest:request
-                                     queue:[NSOperationQueue currentQueue]
+                                     queue:[NSOperationQueue mainQueue]
                          completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                            
                            if (data != nil && error == nil)
                            {
-                             [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:data waitUntilDone:NO];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                               self.syncProgressLabel.text = @"asdasdasd";
+                               [self fetchedAdd2CartItems:data];
+                             });
+                             
+                             
+                            // [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:data waitUntilDone:NO];
                            }
                            else
                            {
                              NSLog(@"add2Cart sync error: %@",error);
+                             [self startSyncing:NO];
                            }
                          }];
+  */
   
   [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
 }
+
 
 
 
@@ -357,10 +436,6 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
 #pragma mark - add products for carts
 - (void)addProductsCartOne:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
- // [self updateProgressForValue:0.8];
-  
-
-  
   
     for (int x = 0; x < products.count; x++) {
       
@@ -428,15 +503,11 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
             [newProd addObject:itm];
         }
       
-      float value = x / 100.00;
-      
-     /// [self updateProgressForValue:value];
-      
-    }
-  
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+      float value = (float)x / (float)products.count;
+      int percent = value * 100;
+      NSString *str = [NSString stringWithFormat:@"Sync In Progress - %d%%", percent];
+      [self.syncProgressLabel performSelectorOnMainThread:@selector(setText:) withObject:str waitUntilDone:YES];
+      [self performSelectorOnMainThread:@selector(updateProgressForValue:) withObject:[NSNumber numberWithFloat:value] waitUntilDone:YES];
     }
 }
 
@@ -511,12 +582,6 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
             [newProd addObject:itm];
         }
     }
-  
-    
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-    }
 }
 
 
@@ -550,6 +615,7 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
             for (int o=0; o<options.count; o++) {
                 NSString *priced = [options[o] objectForKey:@"price"];
                 NSString *name = [options[o] objectForKey:@"name"];
+                
                 if (o == 0) {
                     
                     itm.optionOne = name;
@@ -589,11 +655,6 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
             [newProd addObject:itm];
         }
     }
-  
-    NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-    }
 }
 
 
@@ -609,18 +670,25 @@ static const CGSize progressViewSize = { 300.0f, 25.0f };
   [fetchRequest setEntity:entity];
   [fetchRequest setPredicate:cartPredicate];
   
+//  NSError *errorz;
+//  if (![managedObjectContext save:&errorz]) {
+//    NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+//  }
+  
   NSError *fetchingError = nil;
   
   NSArray * productImages = [[NSArray alloc]init];
   productImages = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+    
   
   if ([productImages count] == 0) {
-    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:managedObjectContext];
+    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:self.managedObjectContext];
     
     NSURL *url = [NSURL URLWithString:stringPath];
     NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
     pf.photoData = imageData;
     pf.url = stringPath;
+    
     
     return pf;
   }else {

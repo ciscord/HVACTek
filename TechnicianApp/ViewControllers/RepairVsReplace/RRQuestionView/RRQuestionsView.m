@@ -73,13 +73,16 @@
 
 
 - (void)setDefaultAnswersforQuestion:(Question *)question {
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
     if ([question.name isEqualToString:@"RR5"]) {
-        if ([[DataLoader sharedInstance] utilityOverpaymentHVAC]) {
-            self.answerTextField.text = [[DataLoader sharedInstance] utilityOverpaymentHVAC];
+        if (job.utilityOverpaymentHVAC) {
+            self.answerTextField.text = job.utilityOverpaymentHVAC;
             //self.answerTextField.text = [self getValueOfUtilityOverpayment];  //multiplying by number of years
         }else{
             self.answerTextField.text = @"$0";
-            [DataLoader sharedInstance].utilityOverpaymentHVAC = self.answerTextField.text;
+            job.utilityOverpaymentHVAC = self.answerTextField.text;
+            [job.managedObjectContext save];
         }
     }else if ([question.name isEqualToString:@"RR6"]) {
         self.answerTextField.text = @"$250";
@@ -99,8 +102,10 @@
     [paymentFormatter setGeneratesDecimalNumbers:NO];
     [paymentFormatter setMaximumFractionDigits:0];
     
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
     int uOverpayment = 0;
-    NSNumber *number = [paymentFormatter numberFromString:[[DataLoader sharedInstance] utilityOverpaymentHVAC]];
+    NSNumber *number = [paymentFormatter numberFromString:job.utilityOverpaymentHVAC];
     uOverpayment = [number floatValue] * [DataLoader sharedInstance]->systemLastYears;
     
     return [paymentFormatter stringFromNumber:[NSNumber numberWithInt:uOverpayment]];

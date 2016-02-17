@@ -189,10 +189,12 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isInstantRRFinal"])
         [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
     else {
-        if (![[[DataLoader sharedInstance] totalInvestmentsRR] isEqualToString:@""] && [[DataLoader sharedInstance] totalInvestmentsRR] != nil) {
+        if (![job.totalInvestmentsRR isEqualToString:@""] && job.totalInvestmentsRR != nil) {
             [self performSegueWithIdentifier:@"showInstantRRFinalChoiceVC" sender:self];
         }else{
             [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
@@ -462,7 +464,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     if ([segue.identifier isEqualToString:@"showInstantRRFinalChoiceVC"]) {
         RRFinalChoiceVC *vc = [segue destinationViewController];
-        vc.totalInvestment = [[DataLoader sharedInstance] totalInvestmentsRR];
+        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+        vc.totalInvestment = job.totalInvestmentsRR;
     }
     
     
