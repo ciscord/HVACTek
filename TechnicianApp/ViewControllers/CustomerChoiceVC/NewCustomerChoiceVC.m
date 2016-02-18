@@ -178,8 +178,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Button Actions
 - (IBAction)clickedBackBtn:(UIButton *)sender
@@ -187,13 +187,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 - (IBAction)clickedSaveBtn:(UIButton *)sender {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
-    
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
     
@@ -314,6 +311,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
  }];
 }
+
+
 - (IBAction)agreeBtnClicked:(id)sender {
     UIButton *button = sender;
     
@@ -323,8 +322,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         button.selected = NO;
 }
 
+
 - (IBAction)sendByEmailButton:(id)sender {
-   
     
     if (!self.btnSendByEmail.selected)
         self.btnSendByEmail.selected = YES;
@@ -387,13 +386,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 #pragma mark - SignatureView
-
 - (IBAction)btnClearSignature:(id)sender {
     [self.signatureView clear];
 }
 
-#pragma mark - UITableViewDelegate & DataSource
 
+#pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (tableView == self.selectedOptionsTableView) {
@@ -407,13 +405,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return 0;
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -422,13 +423,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         if (self.isOnlyDiagnostic)
             return [self.selectedServiceOptionsDict[@"removedItems"] count];
         else
-            return [self.selectedServiceOptionsDict[@"removedItems"] count] + 1;
+            return [self.selectedServiceOptionsDict[@"removedItems"] count];
     }
     
     if (tableView == self.unselectedOptionsTableView) {
         return [self.unselectedOptionsArray count];
     }
-    
     
     return 0;
 }
@@ -441,10 +441,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     UITableViewCell *result;
     
     if (tableView == self.selectedOptionsTableView) {
-
         
         CustomerChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-        
         
         if (indexPath.row % 2)
         {

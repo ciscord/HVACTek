@@ -104,8 +104,6 @@
     
     self.lbTitle.text = self.title;
     
-    
-    /// arch Views
     [self configureUpperView];
     [self configureBottomView];
 }
@@ -159,7 +157,6 @@
     layer.frame = self.bottomArcView.bounds;
     layer.path = aPath.CGPath;
     self.bottomArcView.layer.mask = layer;
-    
     
     [self.view addSubview:self.bottomArcView];
 }
