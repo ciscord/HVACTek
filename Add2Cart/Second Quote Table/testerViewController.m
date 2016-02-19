@@ -7,7 +7,6 @@
 //
 
 #import "testerViewController.h"
-//#undef NSLog
 
 @interface testerViewController (){
     
@@ -45,17 +44,19 @@
 }
 
 
-//-(void) viewDidDisappear:(BOOL)animated {
-//    NSError *error;
-//    if (![managedObjectContext save:&error]) {
-//        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-//    }
-//}
+-(void) viewDidDisappear:(BOOL)animated {
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
+    }
+}
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    allData = [[NSMutableArray alloc] init];
     
     //Init the ints ??????
     choosedAirCon = 0;
@@ -89,8 +90,6 @@
     _cartItems = [[NSMutableArray alloc]init];
     self.carts = [[NSMutableArray alloc]init];
     self.savedCarts = [[NSMutableArray alloc]init];
-    
-    NSLog(@" The Cart has %d in it just now",_cartItems.count);
     
     //Setup the navbar.
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
@@ -226,31 +225,13 @@
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:cartPredicate];
     
-    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    self.prodFRC.delegate = self;
-    
     NSError *fetchingError = nil;
-    if ([self.prodFRC performFetch:&fetchingError]) {
-        NSLog(@"Successfully fetched in second quote ");
-        
-    } else {
-        NSLog(@"Failed to get the result");
-    }
     
-    allData = [[NSArray alloc]init];
-    allData = [self.managedObjectContext
-               executeFetchRequest:fetchRequest error:&fetchingError];
-    
-    /* Test how much in memory
-     for (int x = 0; x < allData.count; x++) {
-     Item *itm = allData[x];
-     NSLog(@"%@",itm.type);
-     }*/
-    
-    
+    [allData removeAllObjects];
+    [allData addObjectsFromArray:[self.managedObjectContext
+                                  executeFetchRequest:fetchRequest error:&fetchingError]];
     
     [self setupArrays];
-    
     //Need to call sort here
     [self sortData];
 }
@@ -279,13 +260,9 @@
     NSMutableArray *ductlessProds = [[NSMutableArray alloc] init];
     
     
-///    NSLog(@"Heating is %d and cooling is %d",heat ,cool);
-    
-    
     //Need to itterate through all of the items for included items.  Once we have an included item check if it matches type 1 or 2. Then check its price and add to final
     for (int x = 0; x < allData.count; x++) {
         Item *itm = allData[x];
-        //    NSLog(@"%@",itm.TitleText);
         
         int tID = [itm.typeID intValue];
         if (tID == cool && (![coolProds containsObject:itm])) {
@@ -303,54 +280,18 @@
         
         
         if ((tID == 3)&& (![typeThrees containsObject:itm])) {
-            //  itm.finalOption = itm.optionOne;
-            //  itm.finalPrice = itm.optOnePrice;
-  ///          NSLog(@"type is %@",itm.type);
-            /* if ([itm.type isEqualToString:@"IAQ"]) {
-             [iaq addObject:itm];
-             NSLog(@"type is %@",itm.type);
-             } else {
-             [acces addObject:itm];
-             }*/
             [typeThrees addObject:itm];
         }// end of 3's
-        
         if ((tID == 4)&& (![typeFours containsObject:itm])) {
-            // This item is added no matter what.
-            
             [typeFours addObject:itm];
-            
         }
         
         
         
     } //end of iteration
     
-//    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"type3"]) {
-//        for (int ab = 0; ab <typeThrees.count; ab++) {
-//            Item *itm = typeThrees[ab];
-//            [self fillArrays:itm];
-//        }
-//        
-//        for (int ab = 0; ab <typeFours.count; ab++) {
-//            Item *itm = typeFours[ab];
-//            [self fillArrays:itm];
-//        }
-//        
-//    }
-//    else
-//    {
-//        //if false run the db
-//        [self sortTypeThrees];
-//        [self sortTypeFours];
-//        
-//    }
-    
-    
     [self sortTypeThrees];
     [self sortTypeFours];
-    
-    
     
     rebates = [[NSMutableArray alloc]init];
     
@@ -362,15 +303,7 @@
         }
     }
     
-    NSLog(@"rebates has %d",rebates.count);
-    
-    
-    
-    
-    NSLog(@"all data has %d and there are %d cool %d heat products and %d accesories",allData.count,coolProds.count, heatProds.count, acces.count);
-    
     //So have the products now... Check the values of the heat and cool now.
-    
     for (int x = 0; x < coolProds.count; x++) {
         Item *itm = coolProds[x];
         itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsCoolPrice:itm]];
@@ -432,33 +365,21 @@
     //   Item *itm;
     if (airCon.count>0) {
         [airCon insertObject:[self loadTheBlank] atIndex:0];
-        // itm = airCon[0];
-        //  [self purchase:itm];
     }
     if (heatPump.count>0) {
         [heatPump insertObject:[self loadTheBlank] atIndex:0];
-        //  itm = heatPump[0];
-        // [self purchase:itm];
     }
     if (furn.count>0) {
         [furn insertObject:[self loadTheBlank] atIndex:0];
-        //   itm = furn[0];
-        //[self purchase:itm];
     }
     if (airH.count>0) {
         [airH insertObject:[self loadTheBlank] atIndex:0];
-        //  itm = airH[0];
-        // [self purchase:itm];
     }
     if (geo.count>0) {
         [geo insertObject:[self loadTheBlank] atIndex:0];
-        //   itm = geo[0];
-        //  [self purchase:itm];
     }
     if (boilers.count>0) {
         [boilers insertObject:[self loadTheBlank] atIndex:0];
-        //   itm = boilers[0];
-        //  [self purchase:itm];
     }
     if (warranties.count>0) {
         [warranties insertObject:[self loadTheBlank] atIndex:0];
@@ -517,303 +438,30 @@
 
 
 -(void) sortTypeThrees {
-////    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
     Item *itm;
-    NSLog(@"type 3 has %d",typeThrees.count);
+    
     for (int xj = 0; xj < typeThrees.count; xj++) {
         itm = typeThrees[xj];
-        NSString *name = itm.modelName;
-        NSData *pdata = itm.photo;
-        NSString *type = itm.type;
         NSString *opt = itm.optionOne;
-        NSString *man = itm.manu;
         float opty = [itm.optOnePrice floatValue] ;
         itm.finalOption = opt;
         itm.finalPrice = [NSNumber numberWithFloat:opty];
         [self fillArrays:itm];
-        
-        
-        //
-        //        if ([itm.optionOne floatValue] != 0) {
-        //            NSString *option = itm.optionOne;
-        //            float optionPrice = [itm.optOnePrice floatValue] ;
-        //            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-        //            item.modelName = name;
-        //            item.finalOption = option;
-        //            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-        //            item.type = type;
-        //            item.typeID = [NSNumber numberWithInt:3];
-        //            item.photo = pdata;
-        //            item.manu = man;
-        //            [self fillArrays:item];
-        //        }
-        
-        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
-        
-        
-        
-        if ([itm.optTwoPrice floatValue] != 0) {
-            NSString *option = itm.optionTwo;
-            float optionPrice = [itm.optTwoPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.photo = pdata;
-            item.manu = man;
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optThreePrice floatValue] != 0) {
-            NSString *option = itm.optionThree;
-            float optionPrice = [itm.optThreePrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optFourPrice floatValue] != 0) {
-            NSString *option = itm.optionFour;
-            float optionPrice = [itm.optFourPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optFivePrice floatValue] != 0) {
-            NSString *option = itm.optionFive;
-            float optionPrice = [itm.optFivePrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optSixPrice floatValue] != 0) {
-            NSString *option = itm.optionSix;
-            float optionPrice = [itm.optSixPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optSevenPrice floatValue] != 0) {
-            NSString *option = itm.optionSeven;
-            float optionPrice = [itm.optSevenPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optEightPrice floatValue] != 0) {
-            NSString *option = itm.optionEight;
-            float optionPrice = [itm.optEightPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
     }
-    
-    NSError *error;
-    if (![managedObjectContext save:&error]) {
-        NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
-    }
-    
 }
 
 
 -(void) sortTypeFours {
- ////   [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"type3"];
+
     Item *itm;
-    NSLog(@"type 4 has %d",typeFours.count);
     for (int xj = 0; xj < typeFours.count; xj++) {
         itm = typeFours[xj];
-        NSString *name = itm.modelName;
-        NSData *pdata = itm.photo;
-        NSString *type = itm.type;
         NSString *opt = itm.optionOne;
-        NSString *man = itm.manu;
-        float opty = [itm.optOnePrice floatValue] ;
+        float opty = [itm.optOnePrice floatValue];
         itm.finalOption = opt;
         itm.finalPrice = [NSNumber numberWithFloat:opty];
         [self fillArrays:itm];
-        
-        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
-        
-        
-//        if ([itm.type isEqualToString:@"Hot Water Heaters"]) {
-//            NSLog(@"aaaa");
-//        }
-        
-        if ([itm.optionOne floatValue] != 0) {
-            NSString *option = itm.optionOne;
-            float optionPrice = [itm.optOnePrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.photo = pdata;
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optTwoPrice floatValue] != 0) {
-            NSString *option = itm.optionTwo;
-            float optionPrice = [itm.optTwoPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.photo = pdata;
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optThreePrice floatValue] != 0) {
-            NSString *option = itm.optionThree;
-            float optionPrice = [itm.optThreePrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optFourPrice floatValue] != 0) {
-            NSString *option = itm.optionFour;
-            float optionPrice = [itm.optFourPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optFivePrice floatValue] != 0) {
-            NSString *option = itm.optionFive;
-            float optionPrice = [itm.optFivePrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optSixPrice floatValue] != 0) {
-            NSString *option = itm.optionSix;
-            float optionPrice = [itm.optSixPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.manu = man;
-            item.photo = pdata;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optSevenPrice floatValue] != 0) {
-            NSString *option = itm.optionSeven;
-            float optionPrice = [itm.optSevenPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.manu = man;
-            item.photo = pdata;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optEightPrice floatValue] != 0) {
-            NSString *option = itm.optionEight;
-            float optionPrice = [itm.optEightPrice floatValue] ;
-            Item *item = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.manu = man;
-            item.photo = pdata;
-            item.typeID = [NSNumber numberWithInt:4];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
     }
-    
-    
-    
 }
 
 
@@ -927,6 +575,7 @@
     }else if ([itm.optionEight isEqualToString:firstOption.coolingValue]) {
         return itm.optionEight;
     }
+    
     return @"None";
 }
 
@@ -1478,17 +1127,8 @@
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
     HardTableViewCell *swipedCell = [tableViewX cellForRowAtIndexPath:swipedIndexPath];
     
-    // NSLog(@"section %d",swipedIndexPath.section);
     if (!swipedCell.tapped) {
         swipedCell.tapped = TRUE;
-        // swipedCell.photo.hidden = YES;
-        // swipedCell.buyButton.hidden = YES;
-        
-        //  swipedCell.removeButton.hidden = YES;
-        
-        //swipedCell.pickerView.hidden = YES;
-        // swipedCell.modelName.hidden = YES;
-        // swipedCell.hidden = YES;
         tapped = TRUE;
         tappedSection = swipedIndexPath.section;
         [tableViewX reloadData];
@@ -1511,13 +1151,7 @@
             swipedCell.removeButton.hidden = NO;
             [swipedCell bringSubviewToFront:swipedCell.buyButton];
         }
-        
-        NSLog(@"sections has ** %d",sections.count);
-        
-        
     }
-    
-    
 }
 
 
@@ -1546,11 +1180,9 @@
             [self purchase:itm];
             choosedAirCon++;
             change = YES;
-        } else {
-            
         }
-        
     }
+    
     if (swipedIndexPath.section == 5) {
         if (heatPump.count > 0 && choosedHeatPump < heatPump.count-1) {
             itm = heatPump[choosedHeatPump];
@@ -1560,11 +1192,9 @@
             
             choosedHeatPump++;
             change = YES;
-        } else {
-            
         }
-        
     }
+    
     if (swipedIndexPath.section == 4) {
         if (furn.count > 0 && choosedFurn < furn.count-1) {
             itm = furn[choosedFurn];
@@ -1574,11 +1204,9 @@
             
             choosedFurn++;
             change = YES;
-        } else {
-            
         }
-        
     }
+    
     if (swipedIndexPath.section == 6) {
         if (airH.count >0  && choosedAirH < airH.count -1) {
             itm = airH[choosedAirH];
@@ -1588,12 +1216,9 @@
             
             choosedAirH++;
             change = YES;
-        } else {
-            
         }
-        
-        
     }
+    
     if (swipedIndexPath.section == 7) {
         if (geo.count > 0 && choosedGeo < geo.count-1 ) {
             itm = geo[choosedGeo];
@@ -1603,30 +1228,23 @@
             
             choosedGeo++;
             change = YES;
-        } else {
-            
         }
-        
     }
+    
     if (swipedIndexPath.section == 2) {
         
         
         if (iaq.count > 0 && choosedIAQ < iaq.count-1 ) {
             choosedIAQ++;
             change = YES;
-        } else {
-            
         }
-        
     }
+    
     if (swipedIndexPath.section == 0) {
         if ( acces.count > 0  && choosedAcces < acces.count-1) {
             choosedAcces++;
             change = YES;
-        } else {
-            
         }
-        
     }
     
     if (swipedIndexPath.section == 9) {
@@ -1638,25 +1256,14 @@
             
             choosedBoilers++;
             change = YES;
-        } else {
-            
         }
-        
     }
     if (swipedIndexPath.section == 8) {
         if ( hotwater.count > 0  && choosedHotWater < hotwater.count-1) {
-            //            itm = hotwater[choosedHotWater];
-            //            [self removeTheProd:itm];
-            //            itm= hotwater[(choosedHotWater+1)];
-            //            [self purchase:itm];
-            
             choosedHotWater++;
             change = YES;
             
-        } else {
-            
         }
-        
     }
     
     if (swipedIndexPath.section == 1) {
@@ -2027,33 +1634,14 @@
         occurrences += ([oItem.modelName isEqual:itm.modelName] ? 1 : 0);
     }
     
-    
     if ([itm.finalOption isEqualToString:@"None"]) {
         
     } else {
         [_cartItems addObject:itm];
-        
     }
-    
-    
-    NSLog(@"Purchased cart has %d items",_cartItems.count);
-    
     
     isLast = TRUE;
     [self buildQuote];
-    
-    
-    //    if (occurrences < 3) {
-    //
-    //
-    //    }else {
-    //        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat: @"You have reached the maximum of 3 items that can be added to a cart."] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    //        [al show];
-    //    }
-    
-    
-    
-    
 }
 
 
@@ -2085,18 +1673,13 @@
     }
     
     [self buildQuote];
-    NSLog(@"** removed ** cart has %d items",_cartItems.count);
 }
 
 
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
-    
-    //  rebates = [[NSArray alloc]initWithArray:theRebateData];
     if (_cartItems.count == 0) {
         [_cartItems addObjectsFromArray:purchData];
     }
-    NSLog(@"Cart has %lu items",(unsigned long)_cartItems.count);
-    
 }
 
 
@@ -2107,9 +1690,6 @@
     if (strip.count > 1) {
         
         NSString *stringy = strip[1];
-        //    NSLog(@"Strip holds %d the first is %@ and second %@",strip.count, strip[0], strip[1]);
-        
-        
         NSMutableString *strippedString = [NSMutableString stringWithCapacity:stringy.length];
         
         NSScanner *scanner = [NSScanner scannerWithString:stringy];
@@ -2122,7 +1702,6 @@
                 [scanner setScanLocation:([scanner scanLocation] + 1)];
             }
         }
-        // NSLog(@"%@", strippedString); // "123123123"
         
         return [strippedString floatValue];
     } else {
@@ -2148,23 +1727,16 @@
 
 #pragma mark - Update Labels
 -(void) buildQuote {
-    
-    // new formula;
-    
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     
     for (int jj = 0; jj <_cartItems.count; jj++) {
         Item *itm = _cartItems[jj];
-        // NSLog(@"%@",itm.finalOption);
-        if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0)
-        {
+        if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0) {
             totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
         }
-        else
-        {
+        else {
             totalAmount += [itm.finalPrice floatValue];
-         ///   NSLog(@"itm.finalPrice:  %@", itm.finalPrice );
         }
     }
     
@@ -2185,9 +1757,6 @@
         }
     }
     
-    
-    
-    
     for (int jj = 0; jj <rebates.count; jj++) {
         Item *itm = rebates[jj];
         totalSavings += [itm.finalPrice floatValue];
@@ -2197,13 +1766,10 @@
     switch (self.months) {
         case 24:
         {
-            
             finacePay =  (totalAmount - totalSavings)/24;//.915
             invest = (finacePay*24);
-           
             break;
         }
-            
         case 36:
         {
             finacePay = (totalAmount - totalSavings)/.88/36;
@@ -2257,21 +1823,15 @@
     financeMonthLabel.text = [NSString stringWithFormat:@"0%% Financing\nMonthlyPayment\n$%.0f",financeP];
     monthlyPayment.text = [NSString stringWithFormat:@"Monthly Payment\n$%.0f",month];
     
-    //new
-    
     NSNumberFormatter *nf = [NSNumberFormatter new];
     nf.numberStyle = NSNumberFormatterDecimalStyle;
     [nf setMaximumFractionDigits:2];
     [nf setMinimumFractionDigits:2];
     
-    
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
-    
-    
-    
     
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
@@ -2306,7 +1866,6 @@
     [TitleText setAttributes:chargeAttr range:NSMakeRange(0,[chargeStr length])];
     [TitleText setAttributes:moneyAttr range:NSMakeRange([chargeStr length],[TitleText length]-[chargeStr length])];
     [lblFinancing setAttributedText:TitleText];
-    
     
     [tableViewX reloadData];
 }
@@ -2572,22 +2131,11 @@
         [fetchRequest setEntity:entity];
         [fetchRequest setPredicate:cartPredicate];
         
-        
-        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        
-        self.prodFRC.delegate = self;
-        
         NSError *fetchingError = nil;
-        if ([self.prodFRC performFetch:&fetchingError]) {
-            NSLog(@"Successfully fetched ");
-            
-        } else {
-            NSLog(@"Failed to get the result");
-        }
         
-        allData = [[NSArray alloc]init];
-        allData = [self.managedObjectContext
-                   executeFetchRequest:fetchRequest error:&fetchingError];
+        allData = [[NSMutableArray alloc] init];
+        [allData addObjectsFromArray:[self.managedObjectContext
+                                      executeFetchRequest:fetchRequest error:&fetchingError]];
         
         [self resetAllRebates];
     }

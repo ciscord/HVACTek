@@ -18,8 +18,9 @@
 
 @interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, UIPageViewControllerDelegate, NSFetchedResultsControllerDelegate>
 {
-    NSArray *allData;
-   
+    //NSArray *allData;
+   NSMutableArray *allData;
+    
     NSMutableArray *types;
    
     NSArray *headers;

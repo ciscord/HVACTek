@@ -56,6 +56,9 @@ typedef void(^myCompletion)(BOOL);
   
   AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
   managedObjectContext = apDel.managedObjectContext;
+    
+    self.backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    self.backgroundContext.parentContext = managedObjectContext;
   
   [self checkSyncStatus];
   [self initializeProgressBar];
@@ -192,7 +195,7 @@ typedef void(^myCompletion)(BOOL);
   [self startSyncing:NO];
     
     NSError *errorz;
-    if (![managedObjectContext save:&errorz]) {
+    if (![self.backgroundContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
 }
@@ -206,8 +209,7 @@ typedef void(^myCompletion)(BOOL);
   for (int i = 0; i < 3; i++) {
     
     for (NSDictionary *itm in systemProd) {
-      
-      Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+      Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
       item.modelName = itm[@"modelName"];
       item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
       item.type = itm[@"type"];
@@ -216,8 +218,8 @@ typedef void(^myCompletion)(BOOL);
       item.currentCart = [NSNumber numberWithInt:i];
     }
     
-    
-    Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+      
+    Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
     itemA.modelName = @"No Product Selected";
     itemA.finalOption = @"None";
     itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
@@ -238,11 +240,7 @@ typedef void(^myCompletion)(BOOL);
       
         for (int x = 0; x < rebates.count; x++) {
             Item *itm;
-            // NSString *inc = [rebates[x] objectForKey:@"included"];
-            //int incl = [inc intValue];
-            
-            //  if (incl == 1) {
-            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
             itm.modelName = [rebates[x] objectForKey:@"title"];
             NSString *price = [rebates[x] objectForKey:@"amount"];
             // itm.include = [NSNumber numberWithBool:0];
@@ -271,11 +269,6 @@ typedef void(^myCompletion)(BOOL);
 
 
 - (IBAction)newQuote:(id)sender {
-//  NSError *errorz;
-//  if (![managedObjectContext save:&errorz]) {
-//    NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-//  }
-  
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
     [self performSegueWithIdentifier:@"quoteFirst" sender:self];
 }
@@ -291,44 +284,12 @@ typedef void(^myCompletion)(BOOL);
 
   [[DataLoader sharedInstance] getAdd2CartProducts:kAdd2CartURL
                                          onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
-                                           //[self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
-                                           
-                                            [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];
-                                             //[self fetchedAdd2CartItems:reciveData];
+                                           [self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
+                                            //[self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];
                                          }onError:^(NSError *error) {
                                            ShowOkAlertWithTitle(error.localizedDescription, self);
                                          }];
-  
-  
-  
-  
-  /*
-  
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartURL];
-  [request setTimeoutInterval: 10.0];
-  [request setValue:token forHTTPHeaderField:@"TOKEN"];
-  [NSURLConnection sendAsynchronousRequest:request
-                                     queue:[NSOperationQueue mainQueue]
-                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                           
-                           if (data != nil && error == nil)
-                           {
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                               self.syncProgressLabel.text = @"asdasdasd";
-                               [self fetchedAdd2CartItems:data];
-                             });
-                             
-                             
-                            // [self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:data waitUntilDone:NO];
-                           }
-                           else
-                           {
-                             NSLog(@"add2Cart sync error: %@",error);
-                             [self startSyncing:NO];
-                           }
-                         }];
-  */
-  
+    
   [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
 }
 
@@ -338,7 +299,7 @@ typedef void(^myCompletion)(BOOL);
 #pragma mark - Clear Everything
 -(void) clearEverything {
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:managedObjectContext];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.backgroundContext];
   NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"modelName" ascending:YES];
   NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
   fetchRequest.sortDescriptors = sortDescriptors;
@@ -346,91 +307,17 @@ typedef void(^myCompletion)(BOOL);
   
   NSError *fetchingError = nil;
   
-  NSArray *occP = [managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+  NSArray *occP = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
   
   if (![occP count]) {
     
   } else  {
     for (int i = 0; i<occP.count; i++) {
       Item  *del = occP[i];
-      [managedObjectContext deleteObject:del];
+      [self.backgroundContext deleteObject:del];
     }
   }
 }
-
-/*-(void) clearProducts {
- 
- NSArray *types = [[NSArray alloc]initWithObjects:@"Air Conditioners",@"Heat Pumps", @"Furnaces",@"Air Handlers"
- ,@"Geothermal", @"IAQ",@"Accessories", nil];
- Item *del;
- 
- 
- for (int z=0; z<types.count; z++) {
- 
- NSString *type = types[z];
- 
- NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
- req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
- NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
- req.sortDescriptors =[NSArray arrayWithObject:sort];
- 
- NSError *error = nil;
- NSArray *occP = [managedObjectContext executeFetchRequest:req error:&error];
- 
- if (![occP count]) {
- 
- } else  {
- for (int i = 0; i<occP.count; i++) {
- del = occP[i];
- [managedObjectContext deleteObject:del];
- }
- }
- }
- 
- }*/
-
-
-/*-(void) clearRebates {
- Item *del;
- NSString *type = @"Rebates";
- 
- NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
- req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
- NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
- req.sortDescriptors =[NSArray arrayWithObject:sort];
- 
- NSError *error = nil;
- NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
- 
- if (![occ count]) {
- 
- } else  {
- for (int i = 0; i<occ.count; i++) {
- del = occ[i];
- [managedObjectContext deleteObject:del];
- }
- 
- }
- }
- 
- -(void) checkMem:(NSString *)type {
- NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
- req.predicate = [NSPredicate predicateWithFormat:@"type = %@",type];
- NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
- req.sortDescriptors =[NSArray arrayWithObject:sort];
- 
- NSError *error = nil;
- NSArray *occ = [managedObjectContext executeFetchRequest:req error:&error];
- 
- if (![occ count]) {
- 
- } else  {
- 
- }
- 
- }*/
-
-
 
 
 #pragma mark - add products for carts
@@ -446,7 +333,7 @@ typedef void(^myCompletion)(BOOL);
         int incl = [inc intValue];
         if (incl == 1) {
             //Include this product.
-          itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+          itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
             itm.modelName = [products[x] objectForKey:@"title"];
             itm.manu = [products[x] objectForKey:@"manufacture_name"];
             options = [products[x] objectForKey:@"options"];
@@ -462,10 +349,8 @@ typedef void(^myCompletion)(BOOL);
                 NSString *priced = [options[o] objectForKey:@"price"];
                 NSString *name = [options[o] objectForKey:@"name"];
                 if (o == 0) {
-                    
                     itm.optionOne = name;
                     itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    
                 } else if (o ==1 ){
                     itm.optionTwo = name;
                     itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
@@ -488,9 +373,7 @@ typedef void(^myCompletion)(BOOL);
                     itm.optionEight = name;
                     itm.optEightPrice =[NSNumber numberWithFloat: [priced floatValue]];
                 }
-                
             } //end of options
-          
           
           NSString *urly = [products[x] objectForKey:@"full_url"];
           itm.image = [self insertPhotosToDataBaseWithPath:urly];
@@ -526,7 +409,7 @@ typedef void(^myCompletion)(BOOL);
         int incl = [inc intValue];
         if (incl == 1) {
             //Include this product.
-            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
             itm.modelName = [products[x] objectForKey:@"title"];
             itm.manu = [products[x] objectForKey:@"manufacture_name"];
             options = [products[x] objectForKey:@"options"];
@@ -541,11 +424,10 @@ typedef void(^myCompletion)(BOOL);
             for (int o=0; o<options.count; o++) {
                 NSString *priced = [options[o] objectForKey:@"price"];
                 NSString *name = [options[o] objectForKey:@"name"];
+                
                 if (o == 0) {
-                    
                     itm.optionOne = name;
                     itm.optOnePrice =[NSNumber numberWithFloat: [priced floatValue]];
-                    
                 } else if (o ==1 ){
                     itm.optionTwo = name;
                     itm.optTwoPrice =[NSNumber numberWithFloat: [priced floatValue]];
@@ -598,7 +480,7 @@ typedef void(^myCompletion)(BOOL);
         int incl = [inc intValue];
         if (incl == 1) {
             //Include this product.
-            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+            itm = (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
             itm.modelName = [products[x] objectForKey:@"title"];
             itm.manu = [products[x] objectForKey:@"manufacture_name"];
             options = [products[x] objectForKey:@"options"];
@@ -608,8 +490,6 @@ typedef void(^myCompletion)(BOOL);
             itm.typeID = [NSNumber numberWithInt:[tID intValue]];
             itm.ord = [NSNumber numberWithInt:[products[x][@"ord"] intValue]];
             itm.currentCart = [NSNumber numberWithInt:2];
-            
-            //   NSLog(@"Iten is %@ type and include is %@",itm.type,itm.include);
             
             //Options
             for (int o=0; o<options.count; o++) {
@@ -664,25 +544,20 @@ typedef void(^myCompletion)(BOOL);
 - (Photos *)insertPhotosToDataBaseWithPath:(NSString *)stringPath {
   
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:managedObjectContext];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
   NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"url = %@",stringPath];
   
   [fetchRequest setEntity:entity];
   [fetchRequest setPredicate:cartPredicate];
   
-//  NSError *errorz;
-//  if (![managedObjectContext save:&errorz]) {
-//    NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
-//  }
-  
   NSError *fetchingError = nil;
   
   NSArray * productImages = [[NSArray alloc]init];
-  productImages = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+  productImages = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
     
   
   if ([productImages count] == 0) {
-    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:self.managedObjectContext];
+    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
     
     NSURL *url = [NSURL URLWithString:stringPath];
     NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];

@@ -12,6 +12,7 @@
 
 @interface MenuViewController : UIViewController
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, nonatomic) NSManagedObjectContext* backgroundContext;
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 
 - (IBAction)newQuote:(id)sender;
