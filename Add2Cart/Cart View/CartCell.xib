@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -132,14 +132,14 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRm-ww-Qec">
                         <rect key="frame" x="140" y="172" width="504" height="2"/>
-                        <color key="backgroundColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="DrQ-Ke-4gd"/>
                         </constraints>
                     </view>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7f6-iV-T67">
                         <rect key="frame" x="141" y="174" width="504" height="205"/>
-                        <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="504" id="jFF-eb-Aue"/>
                         </constraints>
@@ -188,7 +188,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="qDt-i6-iNi"/>
                         </constraints>
@@ -237,13 +237,20 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="doneButton" destination="Jgy-Ya-l5c" id="kKP-W3-q5J"/>
                 <outlet property="editButton" destination="eFe-EO-x45" id="v84-te-LeG"/>
                 <outlet property="financing" destination="hsZ-sN-FjD" id="rlW-a1-IiW"/>
+                <outlet property="financingButton" destination="nHy-fE-vKC" id="64j-Yu-3lV"/>
                 <outlet property="investemnt" destination="YhN-aT-Xjt" id="1vH-VZ-dmP"/>
+                <outlet property="investmentButton" destination="3vU-1B-BDg" id="buf-48-g4A"/>
                 <outlet property="lblCartNumber" destination="RNf-dW-QE3" id="F2o-W2-6PA"/>
                 <outlet property="lblFinaincinSum" destination="gfV-8P-1ps" id="Vci-yQ-ZdW"/>
                 <outlet property="poductTableView" destination="7f6-iV-T67" id="6gp-gf-fvL"/>
+                <outlet property="saveButton" destination="nXK-sT-6zq" id="8l8-X6-RMN"/>
+                <outlet property="separatorView" destination="VRm-ww-Qec" id="Faj-b3-Swm"/>
+                <outlet property="sysRebatesButton" destination="yEV-mI-i6n" id="CbZ-dY-mRJ"/>
                 <outlet property="systemRebates" destination="NnD-7a-ucI" id="uC1-Tw-N00"/>
+                <outlet property="titleView" destination="2JS-N3-02R" id="ZAY-9z-bL1"/>
             </connections>
             <point key="canvasLocation" x="461" y="327.5"/>
         </tableViewCell>

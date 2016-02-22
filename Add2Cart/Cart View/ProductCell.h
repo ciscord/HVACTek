@@ -10,5 +10,6 @@
 
 @interface ProductCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end

@@ -13,6 +13,7 @@
 @interface RebateQuoteTableViewController ()
     @property (nonatomic, strong) Item *editedItem;
 
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 
@@ -34,6 +35,7 @@
 {
     [super viewDidLoad];
     
+    [self configureColorScheme];
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
@@ -56,6 +58,39 @@
         }
     [self.delegate receiveData:rebatesToSend:purch];
 }
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+//    self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+//    secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+//    cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months60Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months70Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.months84Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+//    self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                         placeholderImage:nil
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                      
+                                      UIImageView *strongImageView = weakImageView;
+                                      if (!strongImageView) return;
+                                      
+                                      strongImageView.image = image;
+                                  }
+                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                      //
+                                  }];
+}
+
+
+
 
 -(void) fetchData {
     

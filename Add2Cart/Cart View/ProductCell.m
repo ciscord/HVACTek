@@ -7,6 +7,7 @@
 //
 
 #import "ProductCell.h"
+#import "HvakTekColorScheme.h"
 
 @implementation ProductCell
 
@@ -17,6 +18,8 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    _separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     // Configure the view for the selected state
 }
 

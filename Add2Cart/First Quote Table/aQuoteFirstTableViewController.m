@@ -7,14 +7,12 @@
 //
 
 #import "aQuoteFirstTableViewController.h"
+#import "HvakTekColorScheme.h"
 
 
 
 @interface aQuoteFirstTableViewController ()
-
-{
-
-}
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 
@@ -43,6 +41,7 @@
     AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     managedObjectContext = apDel.managedObjectContext;
     
+    [self configureColorScheme];
 
     coolingArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"1.5",@"2",@"2.5",@"3",@"3.5",@"4",@"5",@"6", nil];
     heatingArray = [[NSArray alloc]initWithObjects:@"Please Select an Option",@"40,000",@"60,000",@"68,000",@"79,000",@"80,000",@"100,000",@"101,000",@"120,000",@"124,000",@"135,000",@"140,000",nil];
@@ -64,13 +63,27 @@
     ductlessPicker.tag = 4;
     ductlessPicker.delegate = self;
     ductlessPicker.hidden = YES;
-    
-    
-    
 }
 
--(void)viewDidAppear:(BOOL)animated {
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           UIImageView *strongImageView = weakImageView;
+                                           if (!strongImageView) return;
+                                           
+                                           strongImageView.image = image;
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           //
+                                       }];
 }
 
 

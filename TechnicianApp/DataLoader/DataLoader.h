@@ -17,6 +17,7 @@
 #import "User+Functional.h"
 #import "CompanyItem.h"
 #import "HvacTekConstants.h"
+#import "UIImageView+AFNetworking.h"
 
 //#define NSLog(...)
 

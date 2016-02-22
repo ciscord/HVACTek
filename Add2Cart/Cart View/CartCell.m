@@ -9,6 +9,7 @@
 #import "CartCell.h"
 #import "ProductCell.h"
 #import "Item.h"
+#import "HvakTekColorScheme.h"
 
 
 
@@ -20,6 +21,13 @@
  @property (nonatomic, strong)  NSMutableArray *rebates;
  @property (nonatomic, strong)  NSNumber *months;
 
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
+@property (weak, nonatomic) IBOutlet UIButton *investmentButton;
+@property (weak, nonatomic) IBOutlet UIButton *financingButton;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIView *titleView;
 @end
 
 
@@ -27,11 +35,26 @@
 
 - (void)awakeFromNib {
     // Initialization code
-
+    [self configureColorScheme];
       [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
       self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-   }
+}
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.sysRebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.doneButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.saveButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.editButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

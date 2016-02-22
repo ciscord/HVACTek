@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataLoader.h"
 
 @interface HeaderTableViewCell : UITableViewCell
 - (IBAction)segController:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segController;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+
 @end

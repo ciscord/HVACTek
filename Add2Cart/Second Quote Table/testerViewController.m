@@ -20,7 +20,17 @@
     IBOutlet UIButton *btnCart2;
     IBOutlet UIButton *btnCart3;
     __weak IBOutlet UIButton *cartButton;
+    __weak IBOutlet UIImageView *logoImageView;
 }
+@property (weak, nonatomic) IBOutlet UIView *detailsView;
+@property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
+@property (weak, nonatomic) IBOutlet UIButton *investmentButton;
+@property (weak, nonatomic) IBOutlet UIButton *months24Button;
+@property (weak, nonatomic) IBOutlet UIButton *months36Button;
+@property (weak, nonatomic) IBOutlet UIButton *months48Button;
+@property (weak, nonatomic) IBOutlet UIButton *months60Button;
+@property (weak, nonatomic) IBOutlet UIButton *months70Button;
+@property (weak, nonatomic) IBOutlet UIButton *months84Button;
 
 @end
 
@@ -56,6 +66,8 @@
 {
     [super viewDidLoad];
     
+    [self configureColorScheme];
+    [self configureUpperView];
     allData = [[NSMutableArray alloc] init];
     
     //Init the ints ??????
@@ -107,8 +119,6 @@
     [tableViewX addGestureRecognizer:swipeGestureRight];
     [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
-    
-    
 }
 
 
@@ -127,14 +137,72 @@
 
 
 
-
-
 -(void) viewDidAppear:(BOOL)animated   {
-    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud showWhileExecuting:@selector(resetCartData) onTarget:self withObject:nil animated:YES];
-
 }
+
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months60Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months70Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.months84Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    __weak UIImageView *weakImageView = logoImageView;
+    [logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           UIImageView *strongImageView = weakImageView;
+                                           if (!strongImageView) return;
+                                           
+                                           strongImageView.image = image;
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           //
+                                       }];
+}
+
+
+#pragma mark - Upper View
+- (void)configureUpperView {
+    CGFloat round = 20;
+    UIView *upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.detailsView.width, 20)];
+    upperArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = upperArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x,startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = upperArcView.bounds;
+    layer.path = aPath.CGPath;
+    upperArcView.layer.mask = layer;
+    
+    [self.detailsView addSubview:upperArcView];
+}
+
+
+
 
 - (void)resetCartData {
     //Fetch the data.
@@ -443,16 +511,157 @@
     for (int xj = 0; xj < typeThrees.count; xj++) {
         itm = typeThrees[xj];
         NSString *opt = itm.optionOne;
-        float opty = [itm.optOnePrice floatValue] ;
+        float opty = [itm.optOnePrice floatValue];
         itm.finalOption = opt;
         itm.finalPrice = [NSNumber numberWithFloat:opty];
         [self fillArrays:itm];
     }
+    
+    
+ /*
+    for (int xj = 0; xj < typeThrees.count; xj++) {
+        itm = typeThrees[xj];
+        NSString *name = itm.modelName;
+        NSData *pdata = itm.photo;
+        NSString *type = itm.type;
+        NSString *opt = itm.optionOne;
+        NSString *man = itm.manu;
+        float opty = [itm.optOnePrice floatValue] ;
+        itm.finalOption = opt;
+        itm.finalPrice = [NSNumber numberWithFloat:opty];
+        [self fillArrays:itm];
+
+        
+        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
+        
+        if ([itm.optionOne floatValue] != 0) {
+            NSString *option = itm.optionOne;
+            float optionPrice = [itm.optOnePrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.photo = pdata;
+            item.manu = man;
+            [self fillArrays:item];
+        }
+        
+        
+        if ([itm.optTwoPrice floatValue] != 0) {
+            NSString *option = itm.optionTwo;
+            float optionPrice = [itm.optTwoPrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.photo = pdata;
+            item.manu = man;
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        if ([itm.optThreePrice floatValue] != 0) {
+            NSString *option = itm.optionThree;
+            float optionPrice = [itm.optThreePrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        
+        if ([itm.optFourPrice floatValue] != 0) {
+            NSString *option = itm.optionFour;
+            float optionPrice = [itm.optFourPrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        if ([itm.optFivePrice floatValue] != 0) {
+            NSString *option = itm.optionFive;
+            float optionPrice = [itm.optFivePrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        
+        
+        if ([itm.optSixPrice floatValue] != 0) {
+            NSString *option = itm.optionSix;
+            float optionPrice = [itm.optSixPrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        
+        if ([itm.optSevenPrice floatValue] != 0) {
+            NSString *option = itm.optionSeven;
+            float optionPrice = [itm.optSevenPrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+        
+        if ([itm.optEightPrice floatValue] != 0) {
+            NSString *option = itm.optionEight;
+            float optionPrice = [itm.optEightPrice floatValue] ;
+            Item *item;
+            item.modelName = name;
+            item.finalOption = option;
+            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
+            item.type = type;
+            item.photo = pdata;
+            item.manu = man;
+            item.typeID = [NSNumber numberWithInt:3];
+            item.currentCart = [NSNumber numberWithInt:currCartInd];
+            [self fillArrays:item];
+        }
+    } */
 }
 
 
 -(void) sortTypeFours {
-
     Item *itm;
     for (int xj = 0; xj < typeFours.count; xj++) {
         itm = typeFours[xj];
@@ -839,6 +1048,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.buyButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     Item *itm = nil;
     
     

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingD;
 @property (strong, nonatomic) IBOutlet UILabel *lblFinancingSum;
 @property (strong, nonatomic) IBOutlet UILabel *lblInvestment;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 
 
@@ -47,6 +48,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configureUpperView];
+    [self configureColorScheme];
     [self configureVC];
   }
 
@@ -64,6 +67,60 @@
     [self.btnEmail setHidden:YES];
 
 }
+
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.cartstableView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           UIImageView *strongImageView = weakImageView;
+                                           if (!strongImageView) return;
+                                           
+                                           strongImageView.image = image;
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           //
+                                       }];
+}
+
+
+
+
+#pragma mark - Upper View
+- (void)configureUpperView {
+    CGFloat round = 20;
+    UIView *upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 174, self.view.width, 20)];
+    upperArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = upperArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x,startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = upperArcView.bounds;
+    layer.path = aPath.CGPath;
+    upperArcView.layer.mask = layer;
+    
+    [self.view addSubview:upperArcView];
+}
+
+
+
 
 -(void)configureVC{
     [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell"];
@@ -356,7 +413,6 @@
 
 
 #pragma mark - Reset Rebates on Home
-
 -(void)resetRebatesOnHome {
     for (int i = 0; i < 3; i++) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -369,17 +425,17 @@
         [fetchRequest setPredicate:cartPredicate];
         
         
-        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        
-        self.prodFRC.delegate = self;
+//        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//        
+//        self.prodFRC.delegate = self;
         
         NSError *fetchingError = nil;
-        if ([self.prodFRC performFetch:&fetchingError]) {
-            NSLog(@"Successfully fetched ");
-            
-        } else {
-            NSLog(@"Failed to get the result");
-        }
+//        if ([self.prodFRC performFetch:&fetchingError]) {
+//            NSLog(@"Successfully fetched ");
+//            
+//        } else {
+//            NSLog(@"Failed to get the result");
+//        }
         
         allData = [[NSArray alloc]init];
         allData = [self.managedObjectContext

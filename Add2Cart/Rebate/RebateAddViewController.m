@@ -7,11 +7,13 @@
 //
 
 #import "RebateAddViewController.h"
+#import "HvakTekColorScheme.h"
 
 @interface RebateAddViewController ()<UIAlertViewDelegate>
 {
     BOOL edit;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
 @end
 
@@ -40,6 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureColorScheme];
+    [self configureUpperView];
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
@@ -64,6 +69,57 @@
          priceField.text = [NSString stringWithFormat:@"%.0f",p];
             }
 }
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.save.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           UIImageView *strongImageView = weakImageView;
+                                           if (!strongImageView) return;
+                                           
+                                           strongImageView.image = image;
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           //
+                                       }];
+}
+
+
+
+
+#pragma mark - Upper View
+- (void)configureUpperView {
+    CGFloat round = 20;
+    UIView *upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 174, self.view.frame.size.width, 20)];
+    upperArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = upperArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x,startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = upperArcView.bounds;
+    layer.path = aPath.CGPath;
+    upperArcView.layer.mask = layer;
+    
+    [self.view addSubview:upperArcView];
+}
+
 
 
 -(void) home {

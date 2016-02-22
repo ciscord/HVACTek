@@ -9,7 +9,6 @@
 #import "DataLoader.h"
 #import <CommonCrypto/CommonHMAC.h>
 #import <MD5Digest/NSString+MD5.h>
-#import "UIImageView+AFNetworking.h"
 #import "Question.h"
 #import <XMLDictionary/XMLDictionary.h>
 

@@ -20,6 +20,7 @@
 #import "Photos.h"
 #import "THProgressView.h"
 #import "DataLoader.h"
+#import "HvacTekConstants.h"
 
 static const CGSize progressViewSize = { 300.0f, 20.0f };
 
@@ -33,6 +34,12 @@ typedef void(^myCompletion)(BOOL);
 @property (weak, nonatomic) IBOutlet UILabel *syncProgressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *syncButton;
 @property (weak, nonatomic) IBOutlet UIButton *add2cartButton;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *add2CartLabel;
+
+
+
+
 
 @end
 
@@ -53,6 +60,9 @@ typedef void(^myCompletion)(BOOL);
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+    
+    [self configureColorScheme];
+    [self configureUpperView];
   
   AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
   managedObjectContext = apDel.managedObjectContext;
@@ -62,9 +72,70 @@ typedef void(^myCompletion)(BOOL);
   
   [self checkSyncStatus];
   [self initializeProgressBar];
+    
+    
 }
 
 
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.add2CartLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.syncButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.syncButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateNormal];
+    self.add2cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.syncProgressLabel.textColor = [UIColor blackColor];
+    self.syncStatusLabel.textColor = [UIColor blackColor];
+    self.lastSyncLabel.textColor = [UIColor blackColor];
+    
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                          placeholderImage:nil
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       
+                                       UIImageView *strongImageView = weakImageView;
+                                       if (!strongImageView) return;
+                                       
+                                       strongImageView.image = image;
+                                   }
+                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                       //
+                                   }];
+}
+
+
+
+
+#pragma mark - Upper View
+- (void)configureUpperView {
+    CGFloat round = 20;
+    UIView *upperArcView = [[UIView alloc] initWithFrame:CGRectMake(0, 164, self.view.width, 20)];
+    upperArcView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    
+    CGSize viewSize = upperArcView.bounds.size;
+    CGPoint startPoint = CGPointZero;
+    
+    [aPath moveToPoint:startPoint];
+    
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y)];
+    [aPath addLineToPoint:CGPointMake(startPoint.x+viewSize.width, startPoint.y+viewSize.height-round)];
+    [aPath addQuadCurveToPoint:CGPointMake(startPoint.x,startPoint.y+viewSize.height-round) controlPoint:CGPointMake(startPoint.x+(viewSize.width/2), 20)];
+    [aPath closePath];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = upperArcView.bounds;
+    layer.path = aPath.CGPath;
+    upperArcView.layer.mask = layer;
+    
+    [self.view addSubview:upperArcView];
+}
+
+
+
+#pragma mark -
 -(void)syncLabelStatus:(BOOL)status {
   self.syncStatusLabel.hidden = !status;
 }
@@ -111,8 +182,8 @@ typedef void(^myCompletion)(BOOL);
                                                                                      CGRectGetMidY(self.view.frame) - progressViewSize.height / 2.0f,
                                                                                      progressViewSize.width,
                                                                                      progressViewSize.height)];
-  self.progressBar.borderTintColor = [UIColor colorWithRed:118.0/255.0 green:189.0/255.0 blue:29.0/255.0 alpha:1.0];
-  self.progressBar.progressTintColor = [UIColor colorWithRed:118.0/255.0 green:189.0/255.0 blue:29.0/255.0 alpha:1.0];
+  self.progressBar.borderTintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+  self.progressBar.progressTintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
   self.progressBar.progressBackgroundColor = [UIColor whiteColor];
   self.progressBar.hidden = YES;
   [self.view addSubview:self.progressBar];

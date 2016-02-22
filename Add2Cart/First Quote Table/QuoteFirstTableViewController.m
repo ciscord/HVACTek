@@ -10,6 +10,7 @@
 #import "testerViewController.h"
 
 @interface QuoteFirstTableViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (retain, nonatomic) testerViewController *testerVC;
 @end
 

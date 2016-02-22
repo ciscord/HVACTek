@@ -8,8 +8,10 @@
 
 #import "HeaderTableViewCell.h"
 
+
 @implementation HeaderTableViewCell
 @synthesize segController;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,19 +22,33 @@
     return self;
 }
 
+
 - (void)awakeFromNib
 {
-    // Initialization code
-    }
+    __weak UIImageView *weakImageView = self.logoImageView;
+    [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                           
+                                           UIImageView *strongImageView = weakImageView;
+                                           if (!strongImageView) return;
+                                           
+                                           strongImageView.image = image;
+                                       }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                           //
+                                       }];
+    
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
     
     segController.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults]integerForKey:@"seg"];
 }
+
 
 - (IBAction)segController:(id)sender {
     
