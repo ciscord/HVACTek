@@ -7,9 +7,12 @@
 //
 
 #import "QuestionView.h"
+#import "NAPickerView.h"
 
-@interface QuestionView ()
+@interface QuestionView ()  <NAPickerViewDelegate>
 
+@property (strong, nonatomic) NAPickerView *customPicker;
+@property (nonatomic) NSInteger currentIndex;
 
 @end
 
@@ -25,7 +28,20 @@
     self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     
     pickerData = [[NSMutableArray alloc] init];
+
+    self.currentIndex = 0;
 }
+
+
+-(void)instantiatePicker {
+    self.customPicker = [[NAPickerView alloc] initWithFrame:CGRectMake(0.f, 120.f, 368.f, 156.f)
+                                                   andItems:pickerData
+                                                andDelegate:self];
+    self.customPicker.backgroundColor = [UIColor whiteColor];
+    self.customPicker.showOverlay = YES;
+    [self addSubview:self.customPicker];
+}
+
 
 -(void)setQuestion:(Question *)question
 {
@@ -36,22 +52,22 @@
         self.txtAnswer.text = question.answer;
         self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
         self.txtAnswer.hidden = !question.haveNote;
-        self.answerPickerView.hidden = YES;
-        
+        self.customPicker.hidden = YES;
     }else if ([question.fieldTypeId isEqualToString:@"2"]) {
         [self setUpYesNoPicker];
-        self.answerPickerView.hidden = NO;
+        [self instantiatePicker];
+        self.customPicker.hidden = NO;
         self.txtAnswer.hidden = YES;
         if (question.answer) {
-            [self.answerPickerView selectRow:[pickerData indexOfObject:question.answer] inComponent:0 animated:YES];
+            [self.customPicker setIndex:[pickerData indexOfObject:question.answer]];
         }
-        [self.answerPickerView reloadAllComponents];
     }else if ([question.fieldTypeId isEqualToString:@"3"]) {
         [self setUpYearsPicker];
-        self.answerPickerView.hidden = NO;
+        [self instantiatePicker];
+        self.customPicker.hidden = NO;
         self.txtAnswer.hidden = YES;
         if (question.answer) {
-            [self.answerPickerView selectRow:[pickerData indexOfObject:question.answer] inComponent:0 animated:YES];
+            [self.customPicker setIndex:[pickerData indexOfObject:question.answer]];
         }
     }
 }
@@ -71,7 +87,6 @@
                 [pickerData addObject:[NSString stringWithFormat:@"%d  years", i]];
         }
     }
-    [self.answerPickerView reloadAllComponents];
 }
 
 
@@ -107,40 +122,22 @@
     if ([self.question.fieldTypeId isEqualToString:@"1"]) {
         self.question.answer = self.txtAnswer.text;
     }else if ([self.question.fieldTypeId isEqualToString:@"2"] || [self.question.fieldTypeId isEqualToString:@"3"]) {
-        self.question.answer = [pickerData objectAtIndex:[self.answerPickerView selectedRowInComponent:0]];
+        self.question.answer = [pickerData objectAtIndex:self.customPicker.selectedIndex];
     }
-}
-
-
-
-
-#pragma mark - Picker DataSource & Delegate
-// The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return pickerData.count;
-}
-
-// The data to return for the row and component (column) that's being passed in
-- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return pickerData[row];
-}
-
-
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSString *title = pickerData[row];
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor cs_getColorWithProperty:kColorPrimary]}];
     
-    return attString;
-    
+    [self.customPicker removeFromSuperview];
+    self.customPicker.delegate = nil;
+    self.customPicker = nil;
 }
+
+
+
+#pragma mark - NAPicker Delegate
+- (void)didSelectedAtIndexDel:(NSInteger)index
+{
+    self.currentIndex = index;
+}
+
+
 
 @end

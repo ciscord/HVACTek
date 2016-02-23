@@ -123,6 +123,9 @@
 		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
 		52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C787261C6DCA2C007EC77C /* THProgressView.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
+		52EB803A1C7C617600D09222 /* NALabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80351C7C617600D09222 /* NALabelCell.m */; };
+		52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80371C7C617600D09222 /* NAPickerCell.m */; };
+		52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80391C7C617600D09222 /* NAPickerView.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
@@ -359,6 +362,12 @@
 		52C787261C6DCA2C007EC77C /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
+		52EB80341C7C617600D09222 /* NALabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NALabelCell.h; sourceTree = "<group>"; };
+		52EB80351C7C617600D09222 /* NALabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NALabelCell.m; sourceTree = "<group>"; };
+		52EB80361C7C617600D09222 /* NAPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAPickerCell.h; sourceTree = "<group>"; };
+		52EB80371C7C617600D09222 /* NAPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAPickerCell.m; sourceTree = "<group>"; };
+		52EB80381C7C617600D09222 /* NAPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAPickerView.h; sourceTree = "<group>"; };
+		52EB80391C7C617600D09222 /* NAPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAPickerView.m; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -834,6 +843,12 @@
 				52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */,
 				52C787251C6DCA2C007EC77C /* THProgressView.h */,
 				52C787261C6DCA2C007EC77C /* THProgressView.m */,
+				52EB80341C7C617600D09222 /* NALabelCell.h */,
+				52EB80351C7C617600D09222 /* NALabelCell.m */,
+				52EB80361C7C617600D09222 /* NAPickerCell.h */,
+				52EB80371C7C617600D09222 /* NAPickerCell.m */,
+				52EB80381C7C617600D09222 /* NAPickerView.h */,
+				52EB80391C7C617600D09222 /* NAPickerView.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1319,6 +1334,7 @@
 				521DB6B31C107063003E40D2 /* EditServiceOptionsVC.m in Sources */,
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
+				52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */,
 				75D73F101A387DCD0051143C /* SystemInfoHeaderView.m in Sources */,
 				4F11D4041AA77417007FC0A8 /* User+Functional.m in Sources */,
 				4F11D3FD1AA772E4007FC0A8 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
@@ -1369,6 +1385,7 @@
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
+				52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				5265782F1C6A0A2500EC1AA5 /* Photos.m in Sources */,
@@ -1378,6 +1395,7 @@
 				4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */,
 				7569FBC91A373BFC00D9EC94 /* CustomerOverviewVC.m in Sources */,
 				75D1A9011A3B15B5000F6765 /* ServiceOptionVC.m in Sources */,
+				52EB803A1C7C617600D09222 /* NALabelCell.m in Sources */,
 				75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */,
 				75D73F161A38A9E30051143C /* SummaryOfFindingsOptionsVC.m in Sources */,
 				52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */,

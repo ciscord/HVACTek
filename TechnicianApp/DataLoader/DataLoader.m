@@ -346,6 +346,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
        }];
 }
 
+
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
                                  onSuccess:(void (^)(NSString *successMessage))onSuccess
                                    onError:(void (^)(NSError *error))onError {
@@ -358,9 +359,12 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                                                 withJobID:JobID
                                                     onSuccess:^(NSString *successMessage) {
                                                         
-                                                        if (self.SWAPIManager.currentJob && !self.currentUser.activeJob) {
-                                                            [Job jobWithDictionnary:self.SWAPIManager.currentJob forUser:self.currentUser];
-                                                        }
+//                                                        if (self.SWAPIManager.currentJob && !self.currentUser.activeJob) {
+//                                                            [Job jobWithDictionnary:self.SWAPIManager.currentJob forUser:self.currentUser];
+//                                                        }
+                                                        
+                                                        [Job jobWithDictionnary:self.SWAPIManager.currentJob forUser:self.currentUser];
+
                                                         
                                                         [self getInspirationInfoOnSuccess:^(NSString *successMessage) {
                                                         } onError:^(NSError *error) {
@@ -392,6 +396,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
         }
     }];
 }
+
 
 - (void)getInspirationInfoOnSuccess:(void (^)(NSString *successMessage))onSuccess
                             onError:(void (^)(NSError *error))onError {

@@ -8,9 +8,11 @@
 
 #import "RRQuestionsView.h"
 #import "DataLoader.h"
+#import "NAPickerView.h"
 
-@interface RRQuestionsView ()
+@interface RRQuestionsView () <NAPickerViewDelegate>
 
+@property (strong, nonatomic) NAPickerView *customPicker;
 
 @end
 
@@ -28,7 +30,14 @@
 }
 
 
-
+-(void)instantiatePicker {
+    self.customPicker = [[NAPickerView alloc] initWithFrame:CGRectMake(0.f, 120.f, 368.f, 156.f)
+                                                   andItems:pickerData
+                                                andDelegate:self];
+    self.customPicker.backgroundColor = [UIColor whiteColor];
+    self.customPicker.showOverlay = YES;
+    [self addSubview:self.customPicker];
+}
 
 
 #pragma mark - Color Scheme
@@ -52,21 +61,21 @@
         }
         self.answerTextField.hidden = questionRR.type.integerValue == kNoAnswerQuestion;
         self.answerTextField.hidden = !questionRR.haveNote;
-        self.answerPickerView.hidden = YES;
     }else if ([questionRR.fieldTypeId isEqualToString:@"2"]) {
         [self setUpYesNoPicker];
-        self.answerPickerView.hidden = NO;
+        [self instantiatePicker];
+        self.customPicker.hidden = NO;
         self.answerTextField.hidden = YES;
         if (questionRR.answer) {
-           [self.answerPickerView selectRow:[pickerData indexOfObject:questionRR.answer] inComponent:0 animated:YES];
+            [self.customPicker setIndex:[pickerData indexOfObject:questionRR.answer]];
         }
-        [self.answerPickerView reloadAllComponents];
     }else if ([questionRR.fieldTypeId isEqualToString:@"3"]) {
         [self setUpYearsPicker];
-        self.answerPickerView.hidden = NO;
+        [self instantiatePicker];
+        self.customPicker.hidden = NO;
         self.answerTextField.hidden = YES;
         if (questionRR.answer) {
-            [self.answerPickerView selectRow:[pickerData indexOfObject:questionRR.answer] inComponent:0 animated:YES];
+            [self.customPicker setIndex:[pickerData indexOfObject:questionRR.answer]];
         }
     }
 }
@@ -127,7 +136,6 @@
                 [pickerData addObject:[NSString stringWithFormat:@"%d  years", i]];
         }
     }
-    [self.answerPickerView reloadAllComponents];
 }
 
 
@@ -163,16 +171,21 @@
     if ([self.questionRR.fieldTypeId isEqualToString:@"1"]) {
         self.questionRR.answer = self.answerTextField.text;
     }else if ([self.questionRR.fieldTypeId isEqualToString:@"2"] || [self.questionRR.fieldTypeId isEqualToString:@"3"]) {
-        self.questionRR.answer = [pickerData objectAtIndex:[self.answerPickerView selectedRowInComponent:0]];
+        self.questionRR.answer = [pickerData objectAtIndex:[self.customPicker selectedIndex]];
         [self systemLastTime];
     }
+    
+    [self.customPicker removeFromSuperview];
+    self.customPicker.delegate = nil;
+    self.customPicker = nil;
 }
 
 
 
 - (void)systemLastTime {
      if ([self.questionRR.fieldTypeId isEqualToString:@"3"]) {
-         [DataLoader sharedInstance]->systemLastYears = [self.answerPickerView selectedRowInComponent:0] + 1;
+////         [DataLoader sharedInstance]->systemLastYears = [self.answerPickerView selectedRowInComponent:0] + 1;\
+         [DataLoader sharedInstance]->systemLastYears = [self.customPicker selectedIndex] + 1;
      }
 }
 
@@ -242,34 +255,10 @@
 }
 
 
-
-#pragma mark - Picker DataSource & Delegate
-// The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+#pragma mark - NAPicker Delegate
+- (void)didSelectedAtIndexDel:(NSInteger)index
 {
-    return 1;
-}
-
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return pickerData.count;
-}
-
-// The data to return for the row and component (column) that's being passed in
-- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return pickerData[row];
-}
-
-
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSString *title = pickerData[row];
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor cs_getColorWithProperty:kColorPrimary]}];
-    
-    return attString;
-    
+    //self.currentIndex = index;
 }
 
 

@@ -9,7 +9,7 @@
 #import "RoundCornerView.h"
 #import "Question.h"
 
-@interface RRQuestionsView : RoundCornerView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
+@interface RRQuestionsView : RoundCornerView <UITextFieldDelegate>
 {
     NSMutableArray *pickerData;
 }
@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *answerTextField;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
-@property (weak, nonatomic) IBOutlet UIPickerView *answerPickerView;
 @property (weak, nonatomic) Question *questionRR;
 @property (weak, nonatomic) IBOutlet UIView *sep1;
 @property (weak, nonatomic) IBOutlet UIView *sep2;

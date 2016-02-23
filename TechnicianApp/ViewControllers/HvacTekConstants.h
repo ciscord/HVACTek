@@ -19,6 +19,7 @@
 #define qColorPrimary0     1.0
 #define qColorPrimary20    0.8
 #define qColorPrimary30    0.7
+#define qColorPrimary35    0.65
 #define qColorPrimary50    0.5
 #define qColorSecondary    0.0
 #define qColorSecondary0   1.0
@@ -30,6 +31,7 @@ typedef NS_ENUM (NSInteger, csColors){
     kColorPrimary0,
     kColorPrimary20,
     kColorPrimary30,
+    kColorPrimary35,
     kColorPrimary50,
     kColorSecondary,
     kColorSecondary0,

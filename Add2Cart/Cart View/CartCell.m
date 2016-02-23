@@ -48,6 +48,7 @@
     self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     self.sysRebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.financingButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
     self.doneButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.saveButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.editButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

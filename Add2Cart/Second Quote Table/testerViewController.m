@@ -158,6 +158,7 @@
     self.months84Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
     
     __weak UIImageView *weakImageView = logoImageView;
     [logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]

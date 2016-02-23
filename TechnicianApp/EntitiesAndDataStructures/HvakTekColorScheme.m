@@ -32,6 +32,10 @@
             hexColor = [[[DataLoader sharedInstance] currentCompany] primary_color];
             currentPercent = qColorPrimary30;
             break;
+        case kColorPrimary35:
+            hexColor = [[[DataLoader sharedInstance] currentCompany] primary_color];
+            currentPercent = qColorPrimary35;
+            break;
         case kColorPrimary50:
             hexColor = [[[DataLoader sharedInstance] currentCompany] primary_color];
             currentPercent = qColorPrimary50;
