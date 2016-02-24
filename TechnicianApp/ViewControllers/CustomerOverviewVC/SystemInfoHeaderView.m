@@ -10,9 +10,6 @@
 
 @interface SystemInfoHeaderView ()
 
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
-@property (weak, nonatomic) IBOutlet UIButton *btnCollapse;
-
 @end
 
 @implementation SystemInfoHeaderView
@@ -21,8 +18,11 @@
 {
     _collapsed = collapsed;
     
-    NSString *imageName = collapsed ? @"customer-overview-arrow-colapsed" : @"customer-overview-arrow-expanded";
-    [self.btnCollapse setImage:[UIImage imageNamed: imageName] forState: UIControlStateNormal];
+    NSString *buttonTitle = collapsed ? @"◀︎": @"▼";
+    
+    //NSString *imageName = collapsed ? @"customer-overview-arrow-colapsed" : @"customer-overview-arrow-expanded";
+    [self.btnCollapse setTitle:buttonTitle forState:UIControlStateNormal];
+    //[self.btnCollapse setImage:[UIImage imageNamed: imageName] forState: UIControlStateNormal];
 }
 
 - (IBAction)didTapStateToggleBtn:(id)sender {

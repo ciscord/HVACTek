@@ -49,12 +49,12 @@ static UIFont *s_Calibri13      = nil;
 static UIFont *s_Calibri14      = nil;
 
 
-FOUNDATION_EXTERN NSString *const kSWAPI_BASE_URL;
-FOUNDATION_EXTERN NSString *const kSWAPIAgentName;
-FOUNDATION_EXTERN NSString *const kSWAPIAgentPassword;
-FOUNDATION_EXTERN NSString *const kSWAPIMasterID;
-FOUNDATION_EXTERN NSString *const kSWAPIMode;
-FOUNDATION_EXTERN NSString *const kSWAPICompanyNo;
+FOUNDATION_EXTERN NSString *kSWAPI_BASE_URL;
+FOUNDATION_EXTERN NSString *kSWAPIAgentName;
+FOUNDATION_EXTERN NSString *kSWAPIAgentPassword;
+FOUNDATION_EXTERN NSString *kSWAPIMasterID;
+FOUNDATION_EXTERN NSString *kSWAPIMode;
+FOUNDATION_EXTERN NSString *kSWAPICompanyNo;
 FOUNDATION_EXTERN NSString *const kSWAPIUsername;
 FOUNDATION_EXTERN NSString *const kSWAPIUserPassword;
 FOUNDATION_EXTERN NSString *const kSWAPITerminal;

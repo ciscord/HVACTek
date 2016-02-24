@@ -15,6 +15,9 @@ typedef void (^OnTogglePressed)(SystemInfoHeaderView *headerView);
 @interface SystemInfoHeaderView : UITableViewHeaderFooterView
 @property (weak, nonatomic) IBOutlet UILabel   *lbTitle;
 @property (weak, nonatomic) IBOutlet UILabel   *lbName;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UIButton *btnCollapse;
+
 @property (nonatomic      ) BOOL                collapsed;
 @property (nonatomic, copy) OnTogglePressed     onToggle;
 

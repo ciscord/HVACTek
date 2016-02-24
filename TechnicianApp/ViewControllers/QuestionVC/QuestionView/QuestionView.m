@@ -34,7 +34,7 @@
 
 
 -(void)instantiatePicker {
-    self.customPicker = [[NAPickerView alloc] initWithFrame:CGRectMake(0.f, 120.f, 368.f, 156.f)
+    self.customPicker = [[NAPickerView alloc] initWithFrame:CGRectMake(0.f, 135.f, 368.f, 132.f)
                                                    andItems:pickerData
                                                 andDelegate:self];
     self.customPicker.backgroundColor = [UIColor whiteColor];

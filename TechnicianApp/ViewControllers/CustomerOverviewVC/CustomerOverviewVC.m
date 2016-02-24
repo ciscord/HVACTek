@@ -567,6 +567,11 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
         SSystemInfo               *systemInfo = self.systemInfoList[section];
         if (!systemInfo.headerView) {
             systemInfo.headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kSystemInfoHeaderView];
+            systemInfo.headerView.lbName.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+            systemInfo.headerView.lbTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+            systemInfo.headerView.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+            [systemInfo.headerView.btnCollapse setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+            
             [systemInfo.headerView setOnToggle:^(SystemInfoHeaderView *headerView){
                  [weakSelf toggleSectionVisibility:headerView.tag];
              }];

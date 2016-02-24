@@ -24,23 +24,12 @@
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
-//NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
-//NSString *const kSWAPIAgentName     = @"SIG01";
-//NSString *const kSWAPIAgentPassword = @"Signature01";
-//NSString *const kSWAPIMasterID      = @"02364";
-//NSString *const kSWAPIMode          = @"tutorial";
-//NSString *const kSWAPICompanyNo     = @"1001";
-//NSString *const kSWAPIUsername      = @"SIG01";
-//NSString *const kSWAPIUserPassword  = @"Signature01";
-//NSString *const kSWAPITerminal      = @"0";
-//NSString *const kSWAPIRemoteTC      = @"0";
-
-NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
-NSString *const kSWAPIAgentName     = @"SIG01";
-NSString *const kSWAPIAgentPassword = @"Signature01";
-NSString *const kSWAPIMasterID      = @"02364";
-NSString *const kSWAPIMode          = @"tutorial";
-NSString *const kSWAPICompanyNo     = @"1001";
+NSString *kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
+NSString *kSWAPIAgentName     = @"SIG01";
+NSString *kSWAPIAgentPassword = @"Signature01";
+NSString *kSWAPIMasterID      = @"02364";
+NSString *kSWAPIMode          = @"tutorial";
+NSString *kSWAPICompanyNo     = @"1001";
 //    NSString *const kSWAPIUsername      = @"agt_SIG01";
 //    NSString *const kSWAPIUserPassword  = @"Signature01";
 NSString *const kSWAPITerminal      = @"0";
@@ -48,16 +37,16 @@ NSString *const kSWAPIRemoteTC      = @"0";
 
 #else // production
 
-#define BASE_URL                    @"http://www.hvactek.com/api/"  //   http://www.hvactek.com/
+#define BASE_URL                    @"http://www.hvactek.com/api/"
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
-NSString *const kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
-NSString *const kSWAPIAgentName     = @"SIG01";
-NSString *const kSWAPIAgentPassword = @"Signature01";
-NSString *const kSWAPIMasterID      = @"02364";
-NSString *const kSWAPIMode          = @"live";
-NSString *const kSWAPICompanyNo     = @"1001";
+NSString *kSWAPI_BASE_URL     = @"https://swapidev.successware21.com:2143";
+NSString *kSWAPIAgentName     = @"SIG01";
+NSString *kSWAPIAgentPassword = @"Signature01";
+NSString *kSWAPIMasterID      = @"02364";
+NSString *kSWAPIMode          = @"live";
+NSString *kSWAPICompanyNo     = @"1001";
 //    NSString *const kSWAPIUsername      = @"agt_SIG01";
 //    NSString *const kSWAPIUserPassword  = @"Signature01";
 NSString *const kSWAPITerminal      = @"0";
@@ -81,6 +70,8 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
 
 
 #define kStatusOK 1
+
+
 
 @interface DataLoader ()
 
@@ -294,7 +285,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     [self POST:USER_LOGIN
-    parameters:@{ @"email":username, @"password":password, @"signature":signature }    //, @"portal_key":companyKey
+    parameters:@{ @"email":username, @"password":password, @"signature":signature }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];
@@ -328,7 +319,17 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
           //     weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
                [weakSelf.currentUser.managedObjectContext save];
                
-               [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];               
+               [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
+               
+               NSString *port = [swapiDict objectForKey:@"port"];
+               NSString *urlString = [swapiDict objectForKey:@"url"];
+               NSString *baseString =  [NSString stringWithFormat:@"%@:%@",urlString, port];
+               
+               kSWAPI_BASE_URL     = baseString;
+               kSWAPIAgentName     = [swapiDict objectForKey:@"agent_name"];
+               kSWAPIAgentPassword = [swapiDict objectForKey:@"agent_password"];
+               kSWAPIMasterID      = [swapiDict objectForKey:@"masterID"];
+               kSWAPICompanyNo     = [swapiDict objectForKey:@"company_number"];
                
                onSuccess(@"OK");
                
