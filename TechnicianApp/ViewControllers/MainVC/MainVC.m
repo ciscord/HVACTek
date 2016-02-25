@@ -11,6 +11,7 @@
 #import "SummaryOfFindingsOptionsVC.h"
 #import "SummaryOfFindingsVC.h"
 #import "CustomerChoiceVC.h"
+#import "AppDelegate.h"
 
 @interface MainVC ()
 @property (strong, nonatomic) IBOutlet UIButton *btnTechApp;
@@ -23,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.mainVController = self;
+    
     self.isTitleViewHidden = YES;
     
     self.btnAdd2CardApp.hidden = !([[DataLoader sharedInstance].currentUser.add2cart boolValue]);

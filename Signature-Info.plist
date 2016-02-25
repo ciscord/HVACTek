@@ -27,7 +27,7 @@
 			<string>com.unifeyed.HvacTek</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>HvacTek</string>
+				<string>hvactek</string>
 			</array>
 		</dict>
 	</array>

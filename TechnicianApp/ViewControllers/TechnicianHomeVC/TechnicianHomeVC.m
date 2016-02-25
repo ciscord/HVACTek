@@ -33,7 +33,6 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.homeController = self;
     
-    
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
 }
@@ -54,6 +53,13 @@
     self.edtJobId.layer.borderWidth = 1.0;
     self.edtJobId.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveJobIDFromSWR:) name:@"NotifReciveJobIDFromSWR" object:nil];
+}
+
+
+- (void)didReciveJobIDFromSWR:(NSNotification *)info {
+    [self checkJobStatus];
 }
 
 
@@ -67,6 +73,7 @@
     [super viewWillAppear:animated];
     [self checkJobStatus];
 }
+
 
 - (void)getNextJob {
     
@@ -88,6 +95,7 @@
     }
 }
 
+
 -(void)checkJobStatus {
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] != jstNeedDebrief) {
         self.vwDebrief.hidden = YES;
@@ -99,8 +107,14 @@
       self.vwDebrief.hidden = NO;
     }
     
-   
+    if ([[DataLoader sharedInstance] recivedSWRJobID].length > 0) {
+        self.edtJobId.text = [[DataLoader sharedInstance] recivedSWRJobID];
+        [DataLoader sharedInstance].recivedSWRJobID = @"";
+        [self btnCutomerlookupTouch:self];
+    }
 }
+
+
 
 /*
 #pragma mark - Navigation
@@ -114,27 +128,31 @@
 
 - (IBAction)btnCutomerlookupTouch:(id)sender
 {
-   
-    if (!self.edtJobId.hasText) {
-        ShowOkAlertWithTitle(@"Enter Job ID", self);
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] == jstNeedDebrief) {
+        [self custumerlookup];
+    }else{
+        if (!self.edtJobId.hasText) {
+            ShowOkAlertWithTitle(@"Enter Job ID", self);
+        }
+        else
+        {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            __weak typeof (self) weakSelf = self;
+            [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
+                                                                   onSuccess:^(NSString *successMessage) {
+                                                                       [weakSelf checkJobStatus];
+                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                       [weakSelf custumerlookup];
+                                                                   } onError:^(NSError *error) {
+                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                       ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                                                   }];
+            
+            
+        }
     }
-    else
-    {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        __weak typeof (self) weakSelf = self;
-        [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
-                                                               onSuccess:^(NSString *successMessage) {
-                                                                   [weakSelf checkJobStatus];
-                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                                   [weakSelf custumerlookup];
-                                                               } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                                   ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
-                                                               }];
-
-    
-  }
 }
+
 
 -(void)custumerlookup{
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] == jstNeedDebrief)

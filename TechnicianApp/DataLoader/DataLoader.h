@@ -79,6 +79,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, readonly) NSString *inspirationImagePath;
 @property (nonatomic, readonly) NSString *inspirationSentence;
 
+@property (nonatomic, strong) NSString *recivedSWRJobID;
+
 @property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptions;
 @property (nonatomic, strong) NSMutableArray *otherOptions;
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;

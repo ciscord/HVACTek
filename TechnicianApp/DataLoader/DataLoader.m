@@ -104,9 +104,13 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
         //s_dl_instance.responseSerializer = [AFJSONResponseSerializer serializer];
         //[s_dl_instance.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
 //        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
         [self.requestSerializer setValue:API_KEY forHTTPHeaderField:@"API-KEY"];
         
-        self.SWAPIManager = [SWAPIRequestManager sharedInstance];
+      ///  self.SWAPIManager = [SWAPIRequestManager sharedInstance];
+        
+        
+        
 //        [self.SWAPIManager connectOnSuccess:^(NSString *successMessage) {
 //            
 //        } onError:^(NSError *error) {
@@ -315,7 +319,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                weakSelf.currentUser = [User userWithName:[swapiDict objectForKey:@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
                weakSelf.currentUser.tech = [NSNumber numberWithBool:([weakSelf.userInfo[@"tech"] intValue]==1)];
-               weakSelf.currentUser.password = password;
+               weakSelf.currentUser.password = swapiDict[@"password"];
           //     weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
                [weakSelf.currentUser.managedObjectContext save];
                
@@ -330,6 +334,8 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                kSWAPIAgentPassword = [swapiDict objectForKey:@"agent_password"];
                kSWAPIMasterID      = [swapiDict objectForKey:@"masterID"];
                kSWAPICompanyNo     = [swapiDict objectForKey:@"company_number"];
+               
+               self.SWAPIManager = [SWAPIRequestManager sharedInstance];
                
                onSuccess(@"OK");
                

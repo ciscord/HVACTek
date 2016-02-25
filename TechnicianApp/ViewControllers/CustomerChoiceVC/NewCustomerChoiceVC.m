@@ -305,6 +305,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
  [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
      AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+     [self swrButtonClicked:self];
      [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
      
  } onError:^(NSError *error) {

@@ -34,6 +34,63 @@
 }
 
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [self handleURL:url];
+}
+
+
+#pragma mark - Handle Custom URLScheme
+- (BOOL)handleURL:(NSURL *)url {
+    //hvactek  hvactek://?jobID=jobNumber  hvactek://?jobID=123456
+    NSString *urlString = [NSString stringWithFormat:@"%@",url];
+    
+    if ([urlString hasPrefix:@"hvactek://"]) {
+        urlString = [urlString substringFromIndex:[@"hvactek://?" length]];
+        
+        if ([urlString hasPrefix:@"jobID="]) {
+            urlString = [urlString substringFromIndex:[@"jobID=" length]];
+            //[self handleResponseForString:urlString];
+            [self performSelector:@selector(handleResponseForString:) withObject:urlString afterDelay:0.5];
+        }
+    }
+    
+    return YES;
+}
+
+
+
+#pragma mark - Handle Custom URLScheme
+- (void)handleResponseForString:(NSString *)jobString {
+    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+    
+    if ([[DataLoader sharedInstance] currentUser] == nil) {
+        ShowOkAlertWithTitle(@"In order to start a new job, please Sign In.", [navController visibleViewController]);
+    }else{
+        
+        NSMutableArray *allControllers = [[NSMutableArray alloc] initWithArray:navController.viewControllers];
+        [DataLoader sharedInstance].recivedSWRJobID = jobString;
+        
+        if ([allControllers containsObject:self.homeController]) {
+            if (navController.topViewController == self.homeController) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NotifReciveJobIDFromSWR" object:nil];
+            }else{
+                [navController popToViewController:self.homeController animated:YES];
+            }
+        }else{
+            if ([allControllers containsObject:self.mainVController]) {
+                [navController popToViewController:self.mainVController animated:NO];
+                [self.mainVController performSegueWithIdentifier:@"tehnicianHome" sender:self.mainVController];
+            }else{
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+                TechnicianHomeVC *vc = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
+                [navController setViewControllers:@[vc] animated:YES];
+            }
+        }
+    }
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

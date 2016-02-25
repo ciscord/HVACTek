@@ -90,7 +90,7 @@ NSString *const kResultStatusOK = @"000";
                       @"<Connect><AgentName>%@</AgentName><AgentPassword>%@</AgentPassword><MasterID>%@</MasterID>\
                       <Mode>%@</Mode></Connect>",
                       kSWAPIAgentName, kSWAPIAgentPassword, kSWAPIMasterID, kSWAPIMode];
-
+    
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
 
          weakSelf.connectionID = result[@"ConnectionID"];

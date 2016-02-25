@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TechnicianHomeVC.h"
+#import "MainVC.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,6 +18,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, strong) TechnicianHomeVC *homeController;
+@property (nonatomic, strong) MainVC *mainVController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

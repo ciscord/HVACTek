@@ -140,8 +140,8 @@
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
-            NSLog(@"name: %@",itm.modelName);
-            NSLog(@"price: %@",itm.finalPrice);
+           // NSLog(@"name: %@",itm.modelName);
+           // NSLog(@"price: %@",itm.finalPrice);
 
             [selected addObject:itm];
                        
