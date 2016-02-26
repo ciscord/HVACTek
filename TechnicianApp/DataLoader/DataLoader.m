@@ -30,6 +30,7 @@ NSString *kSWAPIAgentPassword = @"Signature01";
 NSString *kSWAPIMasterID      = @"02364";
 NSString *kSWAPIMode          = @"tutorial";
 NSString *kSWAPICompanyNo     = @"1001";
+NSString *kPricebookGroup     = @"SERVICE APP";
 //    NSString *const kSWAPIUsername      = @"agt_SIG01";
 //    NSString *const kSWAPIUserPassword  = @"Signature01";
 NSString *const kSWAPITerminal      = @"0";
@@ -47,6 +48,7 @@ NSString *kSWAPIAgentPassword = @"Signature01";
 NSString *kSWAPIMasterID      = @"02364";
 NSString *kSWAPIMode          = @"live";
 NSString *kSWAPICompanyNo     = @"1001";
+NSString *kPricebookGroup     = @"SERVICE APP";
 //    NSString *const kSWAPIUsername      = @"agt_SIG01";
 //    NSString *const kSWAPIUserPassword  = @"Signature01";
 NSString *const kSWAPITerminal      = @"0";
@@ -334,6 +336,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                kSWAPIAgentPassword = [swapiDict objectForKey:@"agent_password"];
                kSWAPIMasterID      = [swapiDict objectForKey:@"masterID"];
                kSWAPICompanyNo     = [swapiDict objectForKey:@"company_number"];
+               kPricebookGroup     = [swapiDict objectForKey:@"pricebook_group"];
                
                self.SWAPIManager = [SWAPIRequestManager sharedInstance];
                
@@ -505,7 +508,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                                                          amount:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)
                                                    andAmountESA:@([pricebookInfo[@"TaskTotalPrice"] floatValue])];
               
-              if ([p.itemGroup isEqualToString:@"SERVICE APP"]) {
+              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
                   [iPadCommonRepairsOptions addObject:p];
               }
               else {
