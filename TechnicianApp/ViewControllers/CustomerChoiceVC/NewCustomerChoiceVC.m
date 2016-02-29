@@ -301,11 +301,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             };
     
     __weak __typeof(self)weakSelf = self;
-    
+  
  [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
      AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-     [self swrButtonClicked:self];
+     [self sendInvoiceToSWR];
      [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
      
  } onError:^(NSError *error) {
@@ -334,43 +334,87 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 #pragma mark - SWR Button
-- (IBAction)swrButtonClicked:(id)sender {
-  
-  NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
-  NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
-  
-  for (PricebookItem *p in selectedItems) {
-//    if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
-//        }
-
-    NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
+- (void)sendInvoiceToSWR {
+    NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
+    NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
     
-    [selectedArray addObject:@{@"sku" : p.itemNumber,
-                               @"qty" : [NSNumber numberWithInt:[p.quantity intValue]],
-                               @"price" : price,
-                               @"taxable" : @false}];
-  }
-
-  
-  
-  NSDictionary * dict = @{ @"items" : selectedArray };
-  
-  //post invoice
-  // NSLog(@"dictionary: %@", dict.description);
-  
-  NSError * err;
-  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
-  NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
-  
-  NSURL *url = [NSURL URLWithString:urlString];
-  if ([[UIApplication sharedApplication] canOpenURL:url])
-  {
-    [[UIApplication sharedApplication] openURL:url];
-  } else {
-    NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
-  }
+    for (PricebookItem *p in selectedItems) {
+        //    if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
+        //        }
+        
+        NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
+        
+        NSNumberFormatter *form  = [[NSNumberFormatter alloc] init];
+        [form setNumberStyle:NSNumberFormatterDecimalStyle];
+        [form setAllowsFloats:YES];
+        [form setMaximumFractionDigits:2];
+        NSString *formattedOutput = [form stringFromNumber:price];
+        
+        NSDecimalNumber *t2 = [NSDecimalNumber decimalNumberWithString:formattedOutput];
+        
+        NSNumber *quantityNumb;
+        if ([p.quantity isEqualToString:@""] || [p.quantity isEqualToString:@"0"])
+            quantityNumb = [NSNumber numberWithInt:1];
+            else
+            quantityNumb = [NSNumber numberWithInt:[p.quantity intValue]];
+                
+        [selectedArray addObject:@{@"sku" : p.itemNumber,
+                                   @"qty" : quantityNumb,
+                                   @"price" : t2,
+                                   @"taxable" : @false}];
+    }
+    
+    
+    
+    NSDictionary * dict = @{ @"items" : selectedArray };
+    
+    //post invoice
+    // NSLog(@"dictionary: %@", dict.description);
+    
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
+    NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
+    }
 }
+
+
+#pragma mark - SWR Button
+- (IBAction)swrButtonClicked:(id)sender {
+    NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
+    [selectedArray addObject:@{@"sku" : @"1003001",
+                               @"qty" : [NSNumber numberWithInt:1],
+                               @"price" : [NSNumber numberWithFloat:1.00],
+                               @"taxable" : @false}];
+    
+    [selectedArray addObject:@{@"sku" : @"PPTU",
+                               @"qty" : [NSNumber numberWithInt:1],
+                               @"price" : [NSNumber numberWithFloat:2.00],
+                               @"taxable" : @false}];
+    
+    NSDictionary * dict = @{ @"items" : selectedArray };
+    
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
+    NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
+    }
+}
+
 
 
 - (NSString *)urlEncode:(NSString *)rawStr {
