@@ -18,7 +18,7 @@ This document describes how to find the necessary files to complete this project
 
 * __Developed Using:__ 
 * __Programming Language:__ 
-* __Prototype:__ Adobe Illustrator CC, Adobe Photoshop CC, Invisionapp.com
+* __Prototype:__ Adobe Illustrator CC, Invisionapp.com
 
 ### Assets ###
 
