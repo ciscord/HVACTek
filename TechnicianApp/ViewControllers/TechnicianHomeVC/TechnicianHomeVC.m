@@ -140,7 +140,7 @@
             __weak typeof (self) weakSelf = self;
             [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                    onSuccess:^(NSString *successMessage) {
-                                                                       [weakSelf checkJobStatus];
+                                                                       //[weakSelf checkJobStatus];
                                                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                        [weakSelf custumerlookup];
                                                                    } onError:^(NSError *error) {
