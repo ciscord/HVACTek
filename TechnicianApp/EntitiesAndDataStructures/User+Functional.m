@@ -16,19 +16,20 @@
 
 + (instancetype)userWithName:(NSString*)userName userID:(NSNumber*)userID andCode:(NSString*)userCode {
 
-    User *user = [User findFirstByAttribute:@"userName" withValue:userName createNewIfNotExists:YES];
-    user.userCode = userCode;
+    User *user = [User findFirstByAttribute:@"userCode" withValue:userCode createNewIfNotExists:YES];
+    user.userName = userName;
     user.userID = userID;
     [user.managedObjectContext save];
     
     return user;
 }
 
+
 -(Job*)activeJob
 {
-    
     return [[self.jobs filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"jobStatus != %i", jstDone]] anyObject];
 }
+
 
 +(NSMutableDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID {
     
