@@ -378,6 +378,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
     
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = urlString;
+    ShowOkAlertWithTitle(@"SWR invoice URL was copied to clipboard.", self);
+    
     NSURL *url = [NSURL URLWithString:urlString];
     if ([[UIApplication sharedApplication] canOpenURL:url])
     {
@@ -407,6 +411,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
     NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = urlString;
+    ShowOkAlertWithTitle(@"SWR test URL was copied to clipboard.", self);
     
     NSURL *url = [NSURL URLWithString:urlString];
     if ([[UIApplication sharedApplication] canOpenURL:url])
