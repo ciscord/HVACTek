@@ -604,9 +604,8 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
         signature = @"";
     [temp setObject:signature forKey:@"signature"];
     
-    
     [temp setObject:[NSString stringWithFormat:@"%i",[self.currentUser.activeJob.serviceLevel intValue]] forKey:@"service_level"];
-    [temp setObject:[NSString stringWithFormat:@"%.0f",[self.currentUser.activeJob.price floatValue]] forKey:@"price"];
+    [temp setObject:self.currentUser.activeJob.price forKey:@"price"];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
