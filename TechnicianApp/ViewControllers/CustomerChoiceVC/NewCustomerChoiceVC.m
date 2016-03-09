@@ -363,7 +363,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [selectedArray addObject:@{@"sku" : p.itemNumber,
                                    @"qty" : quantityNumb,
                                    @"price" : t2,
-                                   @"taxable" : @false}];
+                                   @"taxable" : [NSNumber numberWithBool:false]}];
     }
     
     
@@ -378,9 +378,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
     
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = urlString;
-    ShowOkAlertWithTitle(@"SWR invoice URL was copied to clipboard.", self);
+//    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+//    pasteboard.string = urlString;
+//    ShowOkAlertWithTitle(@"SWR invoice URL was copied to clipboard.", self);
     
     NSURL *url = [NSURL URLWithString:urlString];
     if ([[UIApplication sharedApplication] canOpenURL:url])
@@ -394,18 +394,21 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 #pragma mark - SWR Button
 - (IBAction)swrButtonClicked:(id)sender {
+    
     NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
+    
     [selectedArray addObject:@{@"sku" : @"1003001",
                                @"qty" : [NSNumber numberWithInt:1],
-                               @"price" : [NSNumber numberWithFloat:1.00],
+                               @"price" : [NSNumber numberWithFloat:1.01],
                                @"taxable" : [NSNumber numberWithBool:false]}];
     
     [selectedArray addObject:@{@"sku" : @"PPTU",
                                @"qty" : [NSNumber numberWithInt:1],
-                               @"price" : [NSNumber numberWithFloat:2.00],
+                               @"price" : [NSNumber numberWithFloat:2.01],
                                @"taxable" : [NSNumber numberWithBool:false]}];
     
     NSDictionary * dict = @{ @"items" : selectedArray };
+    
     
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
