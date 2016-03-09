@@ -398,12 +398,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [selectedArray addObject:@{@"sku" : @"1003001",
                                @"qty" : [NSNumber numberWithInt:1],
                                @"price" : [NSNumber numberWithFloat:1.00],
-                               @"taxable" : @false}];
+                               @"taxable" : [NSNumber numberWithBool:false]}];
     
     [selectedArray addObject:@{@"sku" : @"PPTU",
                                @"qty" : [NSNumber numberWithInt:1],
                                @"price" : [NSNumber numberWithFloat:2.00],
-                               @"taxable" : @false}];
+                               @"taxable" : [NSNumber numberWithBool:false]}];
     
     NSDictionary * dict = @{ @"items" : selectedArray };
     
