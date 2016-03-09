@@ -191,7 +191,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 - (IBAction)clickedSaveBtn:(UIButton *)sender {
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
@@ -350,9 +349,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [form setNumberStyle:NSNumberFormatterDecimalStyle];
         [form setAllowsFloats:YES];
         [form setMaximumFractionDigits:2];
+        [form setMinimumFractionDigits:2];
         NSString *formattedOutput = [form stringFromNumber:price];
-        
-        NSDecimalNumber *t2 = [NSDecimalNumber decimalNumberWithString:formattedOutput];
+//        NSLog(@"%@",formattedOutput);
+//        
+//        NSNumber *t2 = [form numberFromString:formattedOutput];
+//        //NSDecimalNumber *t2 = [NSDecimalNumber decimalNumberWithString:formattedOutput];
         
         NSNumber *quantityNumb;
         if ([p.quantity isEqualToString:@""] || [p.quantity isEqualToString:@"0"])
@@ -362,7 +364,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                 
         [selectedArray addObject:@{@"sku" : p.itemNumber,
                                    @"qty" : quantityNumb,
-                                   @"price" : t2,
+                                   @"price" : formattedOutput,
                                    @"taxable" : [NSNumber numberWithBool:false]}];
     }
     
