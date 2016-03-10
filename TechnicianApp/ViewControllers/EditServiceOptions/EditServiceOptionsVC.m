@@ -66,10 +66,25 @@
 
 
 - (IBAction)saveButtonClicked:(UIButton *)sender {
-    NSMutableDictionary *option   = self.servicesArray[self.selectedIndex];
-    option[@"removedItems"] = self.changedServicesArray;
+    NSMutableDictionary *option = self.servicesArray[self.selectedIndex];
+    //option[@"removedItems"] = self.changedServicesArray;
+  ///  [self dismissViewControllerAnimated:YES completion:nil];
+
+    //keep same order as items
+    NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
+    NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
+    itemsArray = [option[@"items"] mutableCopy];
+    
+    for (id object in itemsArray) {
+        if ([self.changedServicesArray containsObject:object]) {
+            [filteredArray addObject:object];
+        }
+    }
+    
+    option[@"removedItems"] = filteredArray;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 
 #pragma mark - UITableViewDelegate & DataSource
