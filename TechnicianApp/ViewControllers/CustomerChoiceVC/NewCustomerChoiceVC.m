@@ -147,12 +147,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         if (self.isDiscounted){
             self.totalPriceLabel.text = self.initialTotal;//[self changeCurrencyFormat:totalPriceESA];
             self.dueLabel.text = [self changeCurrencyFormat:totalPriceESA];
-            [DataLoader sharedInstance].currentUser.activeJob.price = [NSNumber numberWithFloat:totalPriceESA];
+            [DataLoader sharedInstance].currentUser.activeJob.price = [NSNumber numberWithInt:(int)totalPriceESA];
         }
         else {
             self.totalPriceLabel.text = self.initialTotal;//[self changeCurrencyFormat:totalPriceNormal];
             self.dueLabel.text = [self changeCurrencyFormat:totalPriceNormal];
-            [DataLoader sharedInstance].currentUser.activeJob.price = [NSNumber numberWithFloat:totalPriceNormal];
+            [DataLoader sharedInstance].currentUser.activeJob.price = [NSNumber numberWithInt:(int)totalPriceNormal];
         }
       
         self.lblSavePrice.text = [NSString stringWithFormat:@"If You Were A Member Of Our Comfort Club Program You Would Save %@",[self changeCurrencyFormat:(totalPriceESA - totalPriceNormal)]];
