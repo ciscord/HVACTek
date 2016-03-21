@@ -310,7 +310,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         payment.amountESA = [NSNumber numberWithInt:-abs([[self cutString:self.textFieldPayment.text] intValue])];
         payment.name = @"Payment";
         payment.itemGroup = @"Additional items";
-        payment.itemNumber = @"-4";
+        payment.itemNumber = @"DEPOSIT";
         payment.quantity = @"";
         [newArray addObject:payment];
     }
