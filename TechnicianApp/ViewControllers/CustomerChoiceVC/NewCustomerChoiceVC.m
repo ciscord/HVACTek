@@ -349,7 +349,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [form setAllowsFloats:YES];
         [form setMaximumFractionDigits:2];
         [form setMinimumFractionDigits:2];
-        NSString *formattedOutput = [form stringFromNumber:price];
+        NSString *formattedOutput = [form stringFromNumber:[self roundNumber:price]];
 //        NSLog(@"%@",formattedOutput);
 //        
 //        NSNumber *t2 = [form numberFromString:formattedOutput];
@@ -388,6 +388,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
     }
 }
+
+
+- (NSNumber *)roundNumber:(NSNumber *)number {
+    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
+    return roundedNumber;
+}
+
 
 
 #pragma mark - SWR Button
