@@ -416,7 +416,19 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     [formatterCurrency setMaximumFractionDigits:0];
     [formatterCurrency stringFromNumber: @(12345.2324565)];
     
-    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
+
+/*
+ NSNumberFormatter *formatterCurrency;
+ formatterCurrency = [[NSNumberFormatter alloc] init];
+ 
+ formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+ [formatterCurrency setMaximumFractionDigits:0];
+ [formatterCurrency stringFromNumber: @(12345.2324565)];
+ 
+ return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
+ 
+ */
 
 @end
