@@ -469,19 +469,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return result;
 }
 
-#pragma mark - Currency String
-
-- (NSString *)changeCurrencyFormat:(int)number {
-    
-    NSNumberFormatter *formatterCurrency;
-    formatterCurrency = [[NSNumberFormatter alloc] init];
-    
-    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-    [formatterCurrency setMaximumFractionDigits:0];
-    [formatterCurrency stringFromNumber: @(12345.2324565)];
-    
-    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
-}
 
 
 #pragma mark - Navigation

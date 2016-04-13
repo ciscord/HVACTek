@@ -102,6 +102,10 @@
         if ([[[DataLoader sharedInstance] currentUser] activeJob]) {
             self.edtJobId.text =[[[DataLoader sharedInstance] currentUser] activeJob].jobID;
         }
+        else
+        {
+            self.edtJobId.text = @"";
+        }
     }else
     {
       self.vwDebrief.hidden = NO;

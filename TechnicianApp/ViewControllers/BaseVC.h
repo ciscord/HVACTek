@@ -19,5 +19,5 @@
 @interface BaseVC : UIViewController
 
 @property (nonatomic, assign) BOOL isTitleViewHidden;
-
+- (NSString *)changeCurrencyFormat:(float)number;
 @end

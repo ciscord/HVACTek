@@ -405,7 +405,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     return MAX(130.0, height);
 }
 
-#pragma mark - Currency String
+
 
 - (NSString *)changeCurrencyFormat:(float)number {
     
@@ -418,6 +418,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
+
 
 /*
  NSNumberFormatter *formatterCurrency;

@@ -481,9 +481,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     if (tableView == self.selectedOptionsTableView) {
         
         if (self.isOnlyDiagnostic)
-            return [self.selectedServiceOptionsDict[@"removedItems"] count];
+            return [self.selectedServiceOptionsDict[@"removedItems"] count]+1;
         else
-            return [self.selectedServiceOptionsDict[@"removedItems"] count];
+            return [self.selectedServiceOptionsDict[@"removedItems"] count]+1;
     }
     
     if (tableView == self.unselectedOptionsTableView) {
@@ -601,19 +601,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return result;
 }
 
-#pragma mark - Currency String
 
-- (NSString *)changeCurrencyFormat:(int)number {
-    
-    NSNumberFormatter *formatterCurrency;
-    formatterCurrency = [[NSNumberFormatter alloc] init];
-    
-    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-    [formatterCurrency setMaximumFractionDigits:0];
-    [formatterCurrency stringFromNumber: @(12345.2324565)];
-    
-    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
-}
+
 
 - (NSString *)appendSymbolToString:(NSString *)string {
     
