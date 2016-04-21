@@ -101,6 +101,7 @@
         self.vwDebrief.hidden = YES;
         if ([[[DataLoader sharedInstance] currentUser] activeJob]) {
             self.edtJobId.text =[[[DataLoader sharedInstance] currentUser] activeJob].jobID;
+            [[DataLoader sharedInstance] currentUser].deleteActiveJob;
         }
         else
         {

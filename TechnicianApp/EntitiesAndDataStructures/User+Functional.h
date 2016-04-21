@@ -15,5 +15,5 @@
 +(NSMutableDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID ;
 
 @property(nonatomic, readonly) Job *activeJob;
-
+-(void) deleteActiveJob;
 @end

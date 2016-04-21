@@ -30,6 +30,11 @@
     return [[self.jobs filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"jobStatus != %i", jstDone]] anyObject];
 }
 
+-(void) deleteActiveJob {
+    Job* j = self.activeJob;
+    [j.managedObjectContext deleteObject:j];
+    [[j managedObjectContext]save];
+}
 
 +(NSMutableDictionary*)getNextJobFromList:(NSArray*)jobslist withJobID:(NSString *)JobID {
     
