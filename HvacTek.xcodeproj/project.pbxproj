@@ -85,7 +85,6 @@
 		4FD2EBCE1A3B40770056D4C4 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EBCD1A3B40770056D4C4 /* BaseEntity.m */; };
 		4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EBD01A3B45F80056D4C4 /* Customer.m */; };
 		4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2EBD61A3B462E0056D4C4 /* Question.m */; };
-		4FD6166F1AF11B2D0025AB99 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD6166E1AF11B2D0025AB99 /* Crashlytics.framework */; };
 		4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE495931A38E7BA00E09FD7 /* QuestionsVC.m */; };
 		4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901B61AB845F500D87FAB /* PlatinumOptionsVC.m */; };
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
@@ -288,7 +287,6 @@
 		4FD2EBD01A3B45F80056D4C4 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		4FD2EBD51A3B462E0056D4C4 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		4FD2EBD61A3B462E0056D4C4 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
-		4FD6166E1AF11B2D0025AB99 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4FE495921A38E7BA00E09FD7 /* QuestionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuestionsVC.h; path = QuestionVC/QuestionsVC.h; sourceTree = "<group>"; };
 		4FE495931A38E7BA00E09FD7 /* QuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuestionsVC.m; path = QuestionVC/QuestionsVC.m; sourceTree = "<group>"; };
 		4FF901B51AB845F500D87FAB /* PlatinumOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatinumOptionsVC.h; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionsVC.h; sourceTree = SOURCE_ROOT; };
@@ -370,7 +368,7 @@
 		52EB80391C7C617600D09222 /* NAPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAPickerView.m; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
-		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = "/Users/Unifeyed/Library/Developer/Xcode/DerivedData/HvacTek-gtpbmiynijcmdadlgdhieoepbqlz/Build/Products/Debug-iphoneos/libPods.a"; sourceTree = "<absolute>"; };
 		75399F591A39CD2E0013EAC0 /* RepairVsServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairVsServiceVC.h; sourceTree = "<group>"; };
 		75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairVsServiceVC.m; sourceTree = "<group>"; };
 		75399F5C1A39D4130013EAC0 /* PriceBookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceBookView.h; sourceTree = "<group>"; };
@@ -438,7 +436,6 @@
 				D29F0703197023CA0020D83C /* UIKit.framework in Frameworks */,
 				D29F06FF197023CA0020D83C /* Foundation.framework in Frameworks */,
 				982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */,
-				4FD6166F1AF11B2D0025AB99 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,7 +1112,8 @@
 				D29F06FB197023CA0020D83C /* HvacTek.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
+			path = "/Applications/Xcode.app/Contents/Developer/../../../../Users/Unifeyed/Repositories/hvactek-app";
+			sourceTree = "<absolute>";
 		};
 		D29F06FD197023CA0020D83C /* Frameworks */ = {
 			isa = PBXGroup;
@@ -1125,7 +1123,6 @@
 				D29F0700197023CA0020D83C /* CoreGraphics.framework */,
 				D29F0702197023CA0020D83C /* UIKit.framework */,
 				D29F0704197023CA0020D83C /* CoreData.framework */,
-				4FD6166E1AF11B2D0025AB99 /* Crashlytics.framework */,
 				D29F071C197023CA0020D83C /* XCTest.framework */,
 				58C60E5FF5C4D649D9A154A1 /* libPods.a */,
 			);
@@ -1186,7 +1183,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = KX6W3449EJ;
+						DevelopmentTeam = 8WY55993RN;
 					};
 				};
 			};
@@ -1268,7 +1265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Crashlytics.framework/run fc62541ac0b1cf9e884084965cf833ff17d9d545 f7ebbff3c5f0bc85c518a27f5d2661a48ea1c2d47d4573b3c76a3ba706286342";
+			shellScript = "    ";
 		};
 		BCB325831DDF30BC44FE7509 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

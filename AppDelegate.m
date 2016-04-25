@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DataLoader.h"
-#import <Crashlytics/Crashlytics.h>
+// #import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Crashlytics startWithAPIKey:@"fc62541ac0b1cf9e884084965cf833ff17d9d545"];
+   // [Crashlytics startWithAPIKey:@"fc62541ac0b1cf9e884084965cf833ff17d9d545"];
     
     [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"seg"];
     
