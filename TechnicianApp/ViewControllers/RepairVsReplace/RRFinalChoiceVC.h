@@ -11,5 +11,6 @@
 @interface RRFinalChoiceVC : BaseVC
 
 @property(nonatomic, strong) NSString *totalInvestment;
+@property(nonatomic, strong) NSString *systemYearsToLast;
 
 @end

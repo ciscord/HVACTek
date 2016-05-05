@@ -67,7 +67,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @interface DataLoader : AFHTTPRequestOperationManager
 {
     @public
-    NSInteger systemLastYears;
 }
 
 @property (nonatomic, strong) SWAPIRequestManager *SWAPIManager;

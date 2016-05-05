@@ -96,7 +96,7 @@
 
 - (void)setLabelsTexts {
     self.presentationLbl.text = [NSString stringWithFormat:@"Hello, My name is %@ from %@.", self.techName, self.companyName];
-    self.thankLbl.text = [NSString stringWithFormat:@"I want to thank you for choosing %@ to service you today. I know there are a lot of companies you can choose from, but I want you to know that you made the right choice with us.", self.companyName];
+    self.thankLbl.text = [NSString stringWithFormat:@"I want to thank you for choosing %@ to service you today.", self.companyName];
     self.introduceLbl.text = [NSString stringWithFormat:@"I understand I am here today for (........................), is that correct?  Before I get started today I would like to let you know what you can expect from today's call."];   //self.costumerName
 }
 

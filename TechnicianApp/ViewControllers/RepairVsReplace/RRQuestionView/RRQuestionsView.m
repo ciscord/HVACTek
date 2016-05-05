@@ -52,6 +52,14 @@
 {
     _questionRR = questionRR;
     self.questionTextView.text = questionRR.question;
+    if ([questionRR.name isEqualToString:@"RR5"]) {
+        NSString *yearString = questionRR.question;
+        yearString = [yearString stringByReplacingOccurrencesOfString:@"5 Years"
+                                             withString:self.systemLastPeriod];
+        self.questionTextView.text = yearString;
+    }
+    
+    
     
     if ([questionRR.fieldTypeId isEqualToString:@"1"]) {
         if (questionRR.answer) {
@@ -86,8 +94,8 @@
     
     if ([question.name isEqualToString:@"RR5"]) {
         if (job.utilityOverpaymentHVAC) {
-            self.answerTextField.text = job.utilityOverpaymentHVAC;
-            //self.answerTextField.text = [self getValueOfUtilityOverpayment];  //multiplying by number of years
+           // self.answerTextField.text = job.utilityOverpaymentHVAC;
+            self.answerTextField.text = [self getValueOfUtilityOverpayment];  //multiplying by number of years
         }else{
             self.answerTextField.text = @"$0";
             job.utilityOverpaymentHVAC = self.answerTextField.text;
@@ -115,7 +123,7 @@
     
     int uOverpayment = 0;
     NSNumber *number = [paymentFormatter numberFromString:job.utilityOverpaymentHVAC];
-    uOverpayment = [number floatValue] * [DataLoader sharedInstance]->systemLastYears;
+    uOverpayment = [number intValue] / 5  * self.systemLastPeriod.intValue;
     
     return [paymentFormatter stringFromNumber:[NSNumber numberWithInt:uOverpayment]];
 }
@@ -128,12 +136,12 @@
     [pickerData removeAllObjects];
     for (int i = 1; i < 31; i++) {
         if (i == 30)
-            [pickerData addObject:[NSString stringWithFormat:@"%d+  years", i]];
+            [pickerData addObject:[NSString stringWithFormat:@"%d+ Years", i]];
         else{
             if (i == 1)
-                [pickerData addObject:[NSString stringWithFormat:@"%d  year", i]];
+                [pickerData addObject:[NSString stringWithFormat:@"%d Year", i]];
             else
-                [pickerData addObject:[NSString stringWithFormat:@"%d  years", i]];
+                [pickerData addObject:[NSString stringWithFormat:@"%d Years", i]];
         }
     }
 }
@@ -172,7 +180,6 @@
         self.questionRR.answer = self.answerTextField.text;
     }else if ([self.questionRR.fieldTypeId isEqualToString:@"2"] || [self.questionRR.fieldTypeId isEqualToString:@"3"]) {
         self.questionRR.answer = [pickerData objectAtIndex:[self.customPicker selectedIndex]];
-        [self systemLastTime];
     }
     
     [self.customPicker removeFromSuperview];
@@ -182,12 +189,7 @@
 
 
 
-- (void)systemLastTime {
-     if ([self.questionRR.fieldTypeId isEqualToString:@"3"]) {
-////         [DataLoader sharedInstance]->systemLastYears = [self.answerPickerView selectedRowInComponent:0] + 1;\
-         [DataLoader sharedInstance]->systemLastYears = [self.customPicker selectedIndex] + 1;
-     }
-}
+
 
 
 #pragma mark - UITextField Delegates

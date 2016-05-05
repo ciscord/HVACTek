@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) Question *questionRR;
+@property (weak, nonatomic) NSString *systemLastPeriod;
 @property (weak, nonatomic) IBOutlet UIView *sep1;
 @property (weak, nonatomic) IBOutlet UIView *sep2;
 

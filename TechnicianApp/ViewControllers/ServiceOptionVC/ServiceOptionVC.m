@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
 @property (weak, nonatomic) IBOutlet UIButton     *btnContinue;
+@property (weak, nonatomic) IBOutlet UIButton *btnZeroPercent;
 @property (strong, nonatomic) NSMutableArray      *options;
 @property (strong, nonatomic) NSMutableArray      *removedOptions;
 @property (strong, nonatomic) NSMutableDictionary *customerSelectedOptions;
@@ -46,6 +47,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
     
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.btnZeroPercent.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
     if (self.optionsDisplayType == odtEditing) {
         self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_immediateRepair"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
@@ -229,6 +231,16 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 }
 
+#pragma mark - ZeroPercent Button
+- (IBAction)zeroPercentButtonClicked:(UIButton *)sender {
+    NSURL *url = [NSURL URLWithString:@"http://www.greenskycredit.com/Consumer/"];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        NSLog(@"Can't open url");
+    }
+}
 
 #pragma mark - Next Action
 - (IBAction)nextBtnClicked:(UIButton *)sender {

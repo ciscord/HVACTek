@@ -10,7 +10,8 @@
 
 @interface RROverviewVC : BaseVC
 
-@property(nonatomic, strong) NSArray *overviewArray;
+@property (nonatomic, strong) NSArray *overviewArray;
+@property (weak, nonatomic) NSString *systemYears;
 
 
 @end

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="calibri.ttf">
@@ -513,7 +513,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C2N-CM-F2s">
-                                        <rect key="frame" x="60" y="98" width="259" height="28"/>
+                                        <rect key="frame" x="60" y="120" width="259" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">Am I ok where I am parked?
 </string>
@@ -522,7 +522,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bZe-ed-axi">
-                                        <rect key="frame" x="60" y="209" width="610" height="91"/>
+                                        <rect key="frame" x="60" y="192" width="610" height="91"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">I understand I am here today for &lt;CustomerName&gt;, is that correct?  Before I get started today I would like to let you know what you can expect from today's call.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
@@ -530,14 +530,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First, I am going to ask you some questions to help me do my job better." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GGJ-PA-orJ">
-                                        <rect key="frame" x="60" y="293" width="610" height="46"/>
+                                        <rect key="frame" x="60" y="277" width="610" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vWd-SK-he5">
-                                        <rect key="frame" x="60" y="472" width="620" height="28"/>
+                                        <rect key="frame" x="60" y="457" width="620" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">Rest assured I will not do any work without your approval.
 </string>
@@ -546,14 +546,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If there are any issues that need attention, I will do whatever I can to get them taken care of for you today while I'm here." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mo2-TX-LC6">
-                                        <rect key="frame" x="60" y="510" width="620" height="48"/>
+                                        <rect key="frame" x="60" y="495" width="620" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vAZ-hj-wrK">
-                                        <rect key="frame" x="60" y="571" width="272" height="28"/>
+                                        <rect key="frame" x="60" y="554" width="272" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">Does that sound OK with you?
 </string>
@@ -580,36 +580,36 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next, I am going to do a thorough evaluation of your entire system." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tmc-hH-KBg">
-                                        <rect key="frame" x="60" y="365" width="620" height="42"/>
+                                        <rect key="frame" x="60" y="348" width="620" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cZE-xF-l7z">
-                                        <rect key="frame" x="60" y="126" width="610" height="91"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to thank you for choosing &lt;CompanyName&gt; to service you today." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cZE-xF-l7z">
+                                        <rect key="frame" x="60" y="151" width="610" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">I want to thank you for choosing &lt;CompanyName&gt; to service you today. I know there are a lot of companies you can choose from, but I want you to know that you made the right choice with us.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If I should happen to notice anything that may cause you problems would you  like me to bring it to your attention?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yNY-gy-PqQ">
-                                        <rect key="frame" x="60" y="414" width="620" height="49"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yNY-gy-PqQ">
+                                        <rect key="frame" x="60" y="397" width="620" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">If I should happen to notice anything that may cause you problems in the future, would you  like me to bring it to your attention?</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, My name is &lt;TechName&gt; from &lt;CompanyName&gt;." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XNN-f5-qz3">
-                                        <rect key="frame" x="60" y="53" width="620" height="46"/>
+                                        <rect key="frame" x="60" y="73" width="620" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I will also answer any questions you may have." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OnD-Rw-G67">
-                                        <rect key="frame" x="60" y="329" width="610" height="39"/>
+                                        <rect key="frame" x="60" y="313" width="610" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.73725490199999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1663,10 +1663,10 @@ the work you've selected</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ixa-Vu-J63">
-                                        <rect key="frame" x="39" y="911" width="90" height="52"/>
+                                        <rect key="frame" x="20" y="911" width="57" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <state key="normal" title="SWR">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1680,7 +1680,90 @@ the work you've selected</string>
                                             <action selector="swrButtonClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="Jvj-6Y-cG7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TFq-sQ-W0l">
+                                        <rect key="frame" x="95" y="911" width="57" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                        <state key="normal" title="URL">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="urlButtonClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="hkL-0A-20j"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" id="grE-aP-Gff">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="CLc-6Y-XHU" customClass="RoundCornerView">
+                                        <rect key="frame" x="123" y="260" width="522" height="500"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Json encoded URL sended to SWR:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PE6-6E-Gqt">
+                                                <rect key="frame" x="97" y="16" width="326" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vLv-T5-T6x">
+                                                <rect key="frame" x="50" y="451" width="170" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="Copy URL">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="copyURLButtonClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="ZSz-9T-ToV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KjZ-ly-eVR">
+                                                <rect key="frame" x="302" y="451" width="170" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="Close">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="closeURLButtonClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="twU-DU-Ku3"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" id="orN-h2-qxV">
+                                                <rect key="frame" x="20" y="441" width="481" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" id="hdi-YC-Poe">
+                                                <rect key="frame" x="260" y="444" width="1" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="KSE-Dt-it0">
+                                                <rect key="frame" x="21" y="69" width="480" height="337"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1690,6 +1773,8 @@ the work you've selected</string>
                         <outlet property="backBtn" destination="paL-xw-zzX" id="ThX-ie-Ohq"/>
                         <outlet property="btnSendByEmail" destination="bCq-jm-aiT" id="yLP-W8-ADi"/>
                         <outlet property="dueLabel" destination="vXg-vp-jJr" id="oiE-9d-BvQ"/>
+                        <outlet property="hiddenURLTextView" destination="KSE-Dt-it0" id="cTc-tx-F97"/>
+                        <outlet property="hiddenURLView" destination="grE-aP-Gff" id="whJ-Ny-f89"/>
                         <outlet property="label1" destination="Uwm-Wl-apM" id="TAg-q1-UAH"/>
                         <outlet property="label10" destination="8NM-7n-VGu" id="fX4-tc-nzG"/>
                         <outlet property="label11" destination="dMJ-Jd-mhw" id="PDb-69-XIl"/>
@@ -1706,6 +1791,7 @@ the work you've selected</string>
                         <outlet property="mainView" destination="7df-Ad-LEq" id="xTm-Rq-oVq"/>
                         <outlet property="optionsView" destination="gNB-jv-kcf" id="nBA-W2-yvr"/>
                         <outlet property="paymentLabel" destination="LFp-6K-b6M" id="uKh-uX-I0U"/>
+                        <outlet property="roundedURLView" destination="CLc-6Y-XHU" id="qnG-Bl-Xx8"/>
                         <outlet property="saveBtn" destination="93D-HU-vXw" id="QYm-4f-7TC"/>
                         <outlet property="selectedOptionsTableView" destination="wyb-m8-ikz" id="qUR-ZL-JTg"/>
                         <outlet property="separator1" destination="t76-R6-o9h" id="95g-yu-SnC"/>
@@ -1714,6 +1800,7 @@ the work you've selected</string>
                         <outlet property="snapShotView" destination="wWf-yg-uG2" id="kIs-id-NNI"/>
                         <outlet property="stopView" destination="jIG-l4-gAw" id="Omg-6e-ATD"/>
                         <outlet property="swrButton" destination="Ixa-Vu-J63" id="65z-79-hbs"/>
+                        <outlet property="testURLButton" destination="TFq-sQ-W0l" id="gWY-nC-9Bg"/>
                         <outlet property="textFieldInitials" destination="LVe-Wc-Bo1" id="rlQ-G7-0x7"/>
                         <outlet property="totalPriceLabel" destination="Nhz-PM-u5v" id="TtQ-9J-lux"/>
                         <outlet property="unselectedOptionsTableView" destination="4YE-km-UXy" id="GzS-ed-RkV"/>
@@ -2729,6 +2816,24 @@ you must debrief from job</string>
                                             <action selector="nextClickedWithOutAnyOption:" destination="8qd-Vt-zmM" eventType="touchUpInside" id="cXY-s6-eCD"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6Ni-p9-5tt">
+                                        <rect key="frame" x="633" y="685" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="28"/>
+                                        <state key="normal" title="0%">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="26"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="zeroPercentButtonClicked:" destination="8qd-Vt-zmM" eventType="touchUpInside" id="n64-6q-A0A"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -2738,6 +2843,7 @@ you must debrief from job</string>
                     <navigationItem key="navigationItem" id="eZ1-VQ-Eex"/>
                     <connections>
                         <outlet property="btnContinue" destination="GRV-ct-s8T" id="Xel-na-f0N"/>
+                        <outlet property="btnZeroPercent" destination="6Ni-p9-5tt" id="XKX-l0-f15"/>
                         <outlet property="tableView" destination="VmU-RT-fY5" id="tqT-H1-oIK"/>
                         <segue destination="PVm-o9-UYq" kind="push" identifier="customerChoiceSegue" id="DnI-yT-bKf"/>
                         <segue destination="sFe-4S-ONH" kind="modal" identifier="showEnlargeOptions" modalTransitionStyle="crossDissolve" id="Gis-yL-ftw"/>
@@ -2870,8 +2976,35 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="c8P-WC-s5v">
+                                        <rect key="frame" x="45" y="30" width="600" height="485"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EPT-2t-ogo" id="TOe-qv-Wvn"/>
+                                            <outlet property="delegate" destination="EPT-2t-ogo" id="3JQ-Du-xOy"/>
+                                        </connections>
+                                    </tableView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_immediateRepair" id="sb1-eO-4dJ">
+                                        <rect key="frame" x="45" y="612" width="125" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_systemPrevention" id="Fas-Rg-6aD">
+                                        <rect key="frame" x="203" y="612" width="125" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_totalComfortEnhancement" id="fNw-mR-VC9">
+                                        <rect key="frame" x="520" y="612" width="125" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_cleanAirSolution" id="5v7-vh-hkc">
+                                        <rect key="frame" x="361" y="612" width="125" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rbs-3Y-MNw">
-                                        <rect key="frame" x="251" y="685" width="188" height="52"/>
+                                        <rect key="frame" x="251" y="537" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
@@ -2888,17 +3021,6 @@ you must debrief from job</string>
                                             <segue destination="8qd-Vt-zmM" kind="push" id="2dB-gR-Mnj"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="c8P-WC-s5v">
-                                        <rect key="frame" x="45" y="30" width="600" height="633"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <sections/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="EPT-2t-ogo" id="TOe-qv-Wvn"/>
-                                            <outlet property="delegate" destination="EPT-2t-ogo" id="3JQ-Du-xOy"/>
-                                        </connections>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -4256,7 +4378,11 @@ you must debrief from job</string>
         <image name="agenda-exploreIcon" width="130" height="132"/>
         <image name="agenda-optionsIcon" width="59" height="83"/>
         <image name="agenda-todayIcon" width="142" height="84"/>
-        <image name="btn_repairVsReplace" width="500" height="64"/>
+        <image name="btn_cleanAirSolution" width="125" height="125"/>
+        <image name="btn_immediateRepair" width="125" height="125"/>
+        <image name="btn_repairVsReplace" width="900" height="109"/>
+        <image name="btn_systemPrevention" width="125" height="125"/>
+        <image name="btn_totalComfortEnhancement" width="125" height="125"/>
         <image name="destersMyCell-1" width="697" height="81"/>
         <image name="service-option-checkmark.png" width="39" height="39"/>
         <image name="service-option-item-bg" width="39" height="39"/>
@@ -4265,11 +4391,11 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cdo-cC-vmU"/>
-        <segue reference="9Oh-pS-m18"/>
         <segue reference="jvv-2R-Bdt"/>
-        <segue reference="DnI-yT-bKf"/>
+        <segue reference="9Oh-pS-m18"/>
+        <segue reference="Cdo-cC-vmU"/>
         <segue reference="XZV-au-UwI"/>
-        <segue reference="LGL-C3-uSa"/>
+        <segue reference="DnI-yT-bKf"/>
+        <segue reference="xdW-7q-blD"/>
     </inferredMetricsTieBreakers>
 </document>

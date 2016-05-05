@@ -48,6 +48,7 @@
     self.tableArray = self.overviewArray.mutableCopy;
     for (Question *q in self.overviewArray) {
         if ([q.name isEqualToString:@"RR1"] || [q.name isEqualToString:@"RR2"]) {
+            [self getSystemYears:q];
             [self.tableArray removeObject:q];
         }
     }
@@ -64,7 +65,8 @@
         }else if ([q.name isEqualToString:@"RR4"]) {
             q.question = @"Additional Investment In Current System:";
         }else if ([q.name isEqualToString:@"RR5"]) {
-            q.question = @"Utility Overpayment Over The Next 5 Years:";
+            NSString *updatedText = [NSString stringWithFormat:@"Utility Overpayment Over The Next %@:", self.systemYears];
+            q.question = updatedText;
         }else if ([q.name isEqualToString:@"RR6"]) {
             q.question = @"Cost Of Inflation Over The Next 5 Years:";
         }else if ([q.name isEqualToString:@"RR7"]) {
@@ -72,6 +74,16 @@
         }
     }
 }
+
+
+- (void)getSystemYears:(Question *)question {
+    if ([question.name isEqualToString:@"RR2"]){
+        if (question.answer != nil && ![question.answer isEqualToString:@""]){
+            self.systemYears = question.answer;
+        }
+    }
+}
+
 
 - (void)calculateTotalInvestments {
     
@@ -155,6 +167,7 @@
     if ([segue.identifier isEqualToString:@"showRRFinalChoiceVC"]) {
         RRFinalChoiceVC *vc = [segue destinationViewController];
         vc.totalInvestment = self.totalString;
+        vc.systemYearsToLast = self.systemYears;
     }
 }
 

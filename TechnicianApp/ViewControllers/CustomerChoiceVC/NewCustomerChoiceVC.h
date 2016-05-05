@@ -19,6 +19,9 @@
 @property (nonatomic, assign) BOOL isOnlyDiagnostic;
 @property (nonatomic, strong) NSString *paymentValue;
 @property (nonatomic, strong) NSString *initialTotal;
+@property (weak, nonatomic) IBOutlet UIView *hiddenURLView;
+@property (weak, nonatomic) IBOutlet RoundCornerView *roundedURLView;
+@property (weak, nonatomic) IBOutlet UITextView *hiddenURLTextView;
 
 
 

@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "btn_repairVsReplace.png",
+      "filename" : "Total-Cost-Of-Ownership.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "btn_repairVsReplace@2x.png",
+      "filename" : "Total-Cost-Of-Ownership@2x.png",
       "scale" : "2x"
     },
     {

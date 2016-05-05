@@ -162,7 +162,19 @@
     if (self.currentRRQuestionIndex>=0 && self.currentRRQuestionIndex<self.questionsArray.count)
     {
         __weak typeof(self) weakSelf = self;
+        
+        if ([[weakSelf.questionsArray[weakSelf.currentRRQuestionIndex] name] isEqualToString:@"RR5"]){
+          
+            for (Question *object in weakSelf.questionsArray) {
+                if ([object.name isEqualToString:@"RR2"]){
+                    if (object.answer != nil && ![object.answer isEqualToString:@""]){
+                        nextView.systemLastPeriod = object.answer;
+                    }
+                }
+            }
+        }
         nextView.questionRR = weakSelf.questionsArray[weakSelf.currentRRQuestionIndex];
+        
         if (moveFromRightToLeft)
         {
             CGRect endRect = CGRectMake(0, weakSelf.questionViewPositionY, -50, 60);

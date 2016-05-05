@@ -11,6 +11,6 @@
 @interface RRQuestionsVC : BaseVC
 
 @property (nonatomic, assign) QuestionType  questionType;
-@property(nonatomic, strong) NSArray *questionsArray;
+@property(nonatomic, strong) NSMutableArray *questionsArray;
 
 @end

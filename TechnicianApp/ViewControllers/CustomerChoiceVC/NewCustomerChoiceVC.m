@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UIButton *swrButton;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UIButton *testURLButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -122,6 +123,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.saveBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.swrButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.testURLButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    
+    
+    self.hiddenURLView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
+    self.roundedURLView.layer.borderWidth   = 3.0;
+    self.roundedURLView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
 }
 
 
@@ -334,14 +342,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 #pragma mark - SWR Button
-- (void)sendInvoiceToSWR {
+- (void)sendInvoiceToSWRForTest:(BOOL)testing {
     NSMutableArray *selectedItems = self.selectedServiceOptionsDict[@"removedItems"];
     NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
     
     for (PricebookItem *p in selectedItems) {
-        //    if (p.itemID != nil && ![p.itemID isEqual:@"-1"] && ![p.itemID isEqual:@"-2"] && ![p.itemID isEqual:@"-3"] && ![p.itemID isEqual:@"-4"] && ![p.itemID isEqual:@"-5"] && ![p.itemID isEqual:@"-6"]) {
-        //        }
-        
         NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
         
         NSNumberFormatter *form  = [[NSNumberFormatter alloc] init];
@@ -350,10 +355,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [form setMaximumFractionDigits:2];
         [form setMinimumFractionDigits:2];
         NSString *formattedOutput = [form stringFromNumber:[self roundNumber:price]];
-//        NSLog(@"%@",formattedOutput);
-//        
-//        NSNumber *t2 = [form numberFromString:formattedOutput];
-//        //NSDecimalNumber *t2 = [NSDecimalNumber decimalNumberWithString:formattedOutput];
         
         NSNumber *quantityNumb;
         if ([p.quantity isEqualToString:@""] || [p.quantity isEqualToString:@"0"])
@@ -379,13 +380,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
 
-    
-    NSURL *url = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL:url])
-    {
-        [[UIApplication sharedApplication] openURL:url];
-    } else {
-        NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
+    if (testing) {
+        self.hiddenURLTextView.text = urlString;
+    }else{
+        NSURL *url = [NSURL URLWithString:urlString];
+        if ([[UIApplication sharedApplication] canOpenURL:url])
+        {
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
+        }
     }
 }
 
@@ -427,7 +431,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 //    } else {
 //        NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
 //    }
-    [self sendInvoiceToSWR];
+    [self sendInvoiceToSWRForTest:NO];
 }
 
 
@@ -441,6 +445,28 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                                kCFStringEncodingUTF8));
   return encodedStr;
+}
+
+
+
+#pragma mark - URL Button
+- (IBAction)urlButtonClicked:(UIButton *)sender {
+    [self sendInvoiceToSWRForTest:YES];
+    self.hiddenURLView.hidden = NO;
+}
+
+
+- (IBAction)copyURLButtonClicked:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.hiddenURLTextView.text;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Json encoded URL successfully copied to clipboard." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+
+- (IBAction)closeURLButtonClicked:(id)sender {
+    self.hiddenURLView.hidden = YES;
 }
 
 
