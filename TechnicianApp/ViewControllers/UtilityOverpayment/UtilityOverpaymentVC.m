@@ -7,7 +7,8 @@
 //
 
 #import "UtilityOverpaymentVC.h"
-#import "SummaryOfFindingsOptionsVC.h"
+//#import "SummaryOfFindingsOptionsVC.h"
+#import "ExploreSummaryVC.h"
 
 @interface UtilityOverpaymentVC ()
 
@@ -132,11 +133,11 @@
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
-    {
-        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
-        vc.isiPadCommonRepairsOptions = YES;
-    }
+//    if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
+//    {
+//        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
+//        vc.isiPadCommonRepairsOptions = YES;
+//    }
 }
 
 @end

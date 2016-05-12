@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Epd-XR-kxb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2052,7 +2052,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                     <navigationItem key="navigationItem" id="LCK-Sx-uBG"/>
                     <connections>
                         <outlet property="vwContent" destination="jRQ-25-ZqA" id="dth-cT-dPC"/>
-                        <segue destination="p6L-YA-vAr" kind="push" identifier="exploreSummarySegue" id="q0W-AH-0Ny"/>
+                        <segue destination="gRq-ku-OmV" kind="push" identifier="technicianQuestionsSegue" id="XBy-5R-nRs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxi-Ql-8m9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2117,12 +2117,12 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                         <outlet property="continueBtn" destination="ZVU-x8-3Jb" id="piO-6i-sCo"/>
                         <outlet property="tableView" destination="EMi-p3-b0c" id="4ps-a9-6c2"/>
                         <outlet property="titleLabel" destination="buC-Y6-BwU" id="3ug-0o-lQ6"/>
-                        <segue destination="gRq-ku-OmV" kind="push" identifier="technicianQuestionsSegue" id="KOD-QF-Gvk"/>
+                        <segue destination="imt-n8-7xy" kind="push" identifier="selectOptionsIpadRepairsSegue" id="SE9-0n-Nc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nT-KF-s98" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3315" y="734"/>
+            <point key="canvasLocation" x="5292" y="734"/>
         </scene>
         <!--Technician Home-->
         <scene sceneID="Zpf-C3-Vu6">
@@ -2747,7 +2747,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QOU-iH-RoC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4238" y="734"/>
+            <point key="canvasLocation" x="3315" y="734"/>
         </scene>
         <!--Service OptionVC-->
         <scene sceneID="pBq-eR-wyw">
@@ -3200,7 +3200,7 @@ you must debrief from job</string>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="nextClicked:" destination="rTZ-Tj-552" eventType="touchUpInside" id="ksa-Qu-vrc"/>
-                                                    <segue destination="imt-n8-7xy" kind="push" identifier="selectOptionsIpadRepairsSegue" id="9Oh-pS-m18"/>
+                                                    <segue destination="p6L-YA-vAr" kind="push" identifier="exploreSummarySegue" id="vi3-cy-xAM"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$0" borderStyle="line" textAlignment="center" minimumFontSize="17" id="eqY-tH-LJL">
@@ -3240,7 +3240,7 @@ you must debrief from job</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VhB-Yo-BtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="7CH-bu-5f6"/>
             </objects>
-            <point key="canvasLocation" x="-243" y="2002"/>
+            <point key="canvasLocation" x="4268" y="734"/>
         </scene>
         <!--Edit Service OptionsVC-->
         <scene sceneID="MtW-KW-hT7">
@@ -3338,7 +3338,7 @@ you must debrief from job</string>
                                 <rect key="frame" x="32" y="260" width="704" height="740"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repair vs Replace" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k8x-Ox-hq3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Cost of Ownership" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k8x-Ox-hq3">
                                         <rect key="frame" x="61" y="30" width="583" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
@@ -3386,7 +3386,7 @@ you must debrief from job</string>
                                             <outlet property="delegate" destination="fUc-wK-QD8" id="RCz-5L-xzt"/>
                                         </connections>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repair vs Replace Overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EHd-Fv-fgB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Cost of Ownership Overview" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EHd-Fv-fgB">
                                         <rect key="frame" x="54" y="20" width="583" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
@@ -3442,10 +3442,10 @@ you must debrief from job</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l4I-Lh-SkD">
-                                        <rect key="frame" x="486" y="667" width="143" height="45"/>
+                                        <rect key="frame" x="496" y="667" width="143" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <state key="normal" title="Invoice">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -3460,11 +3460,11 @@ you must debrief from job</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9L4-3c-jhw">
-                                        <rect key="frame" x="249" y="667" width="207" height="45"/>
+                                        <rect key="frame" x="229" y="667" width="247" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
-                                        <state key="normal" title="Repair vs Replace">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                                        <state key="normal" title="Total Cost of Ownership">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -3524,7 +3524,7 @@ you must debrief from job</string>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repair vs Replace" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E9s-a9-6Cf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Cost of Ownership" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E9s-a9-6Cf">
                                         <rect key="frame" x="74" y="20" width="583" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
@@ -3532,7 +3532,7 @@ you must debrief from job</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0W9-8d-Wol">
-                                        <rect key="frame" x="76" y="667" width="143" height="45"/>
+                                        <rect key="frame" x="66" y="667" width="143" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
@@ -4391,10 +4391,10 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jvv-2R-Bdt"/>
-        <segue reference="9Oh-pS-m18"/>
-        <segue reference="Cdo-cC-vmU"/>
         <segue reference="XZV-au-UwI"/>
+        <segue reference="jvv-2R-Bdt"/>
+        <segue reference="SE9-0n-Nc6"/>
+        <segue reference="Cdo-cC-vmU"/>
         <segue reference="DnI-yT-bKf"/>
         <segue reference="xdW-7q-blD"/>
     </inferredMetricsTieBreakers>

@@ -8,7 +8,8 @@
 
 #import "QuestionsVC.h"
 #import "QuestionView.h"
-#import "ExploreSummaryVC.h"
+//#import "ExploreSummaryVC.h"
+#import "UtilityOverpaymentVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
 #import <BCGenieEffect/UIView+Genie.h>
 
@@ -28,18 +29,38 @@
     // Do any additional setup after loading the view.
     self.title = (self.questionType == qtTechnician ? @"Tech Observations" : @"Explore Summary");
     
-    __weak typeof(self) weakSelf = self;
-    [[DataLoader sharedInstance] getQuestionsOfType:self.questionType
-                                          onSuccess:^(NSArray *resultQuestions) {
-                                              
-                                              weakSelf.questions = resultQuestions;
-                                              [weakSelf prepareQuestionToDisplay];
-                                          } onError:^(NSError *error) {
-                                              
-                                          }];
+    ////
+    //tech intrebari se scot mereu de pe portal
+    /////
+    
+    
+    
+    NSArray *questionsArray;
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    if (self.questionType == qtTechnician) {
+        questionsArray = job.techObservations;
+    }else{
+        questionsArray = job.custumerQuestions;
+    }
+    
+    if (!questionsArray.count) {
+        __weak typeof(self) weakSelf = self;
+        [[DataLoader sharedInstance] getQuestionsOfType:self.questionType
+                                              onSuccess:^(NSArray *resultQuestions) {
+                                                  
+                                                  weakSelf.questions = resultQuestions;
+                                                  [weakSelf prepareQuestionToDisplay];
+                                              } onError:^(NSError *error) {
+                                                  
+                                              }];
+    }else{
+        self.questions = questionsArray;
+        [self prepareQuestionToDisplay];
+    }
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
 }
+
 
 -(void)prepareQuestionToDisplay
 {
@@ -222,9 +243,12 @@
             [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
         } else
         {
+//            job.custumerQuestions = self.questions;
+//            [job.managedObjectContext save];
+//            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
             job.custumerQuestions = self.questions;
             [job.managedObjectContext save];
-            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
+            [self performSegueWithIdentifier:@"technicianQuestionsSegue" sender:self];
         }
         
     }
@@ -236,18 +260,28 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.destinationViewController isKindOfClass:[ExploreSummaryVC class]])
-    {
-        ExploreSummaryVC *vc = (ExploreSummaryVC*)segue.destinationViewController;
-        NSMutableArray *arr = _questions.mutableCopy;
-        [arr removeLastObject];
-        vc.questions = arr;
-    }
+//    if ([segue.destinationViewController isKindOfClass:[ExploreSummaryVC class]])
+//    {
+//        ExploreSummaryVC *vc = (ExploreSummaryVC*)segue.destinationViewController;
+//        NSMutableArray *arr = _questions.mutableCopy;
+//        [arr removeLastObject];
+//        vc.questions = arr;
+//    }
 //    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
 //    {
 //        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
 //        vc.isiPadCommonRepairsOptions = YES;
 //    }
+    
+    
+    if ([segue.identifier isEqualToString:@"technicianQuestionsSegue"]) {
+        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
+      ///  NSMutableArray *arr = _questions.mutableCopy;
+        vc.questionType = qtTechnician;
+       /// vc.questions    = arr;
+    }
+    
+    
 }
 
 

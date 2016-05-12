@@ -121,15 +121,17 @@
     
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     
-    int uOverpayment = 0;
     NSNumber *number = [paymentFormatter numberFromString:job.utilityOverpaymentHVAC];
-    uOverpayment = [number intValue] / 5  * self.systemLastPeriod.intValue;
+    NSNumber *devideNumber = [NSNumber numberWithFloat:number.floatValue / 5 * self.systemLastPeriod.intValue];
     
-    return [paymentFormatter stringFromNumber:[NSNumber numberWithInt:uOverpayment]];
+    return [paymentFormatter stringFromNumber:[self roundNumber:devideNumber]];
 }
 
 
-
+- (NSNumber *)roundNumber:(NSNumber *)number {
+    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
+    return roundedNumber;
+}
 
 #pragma mark - SetUp Picker
 -(void)setUpYearsPicker {

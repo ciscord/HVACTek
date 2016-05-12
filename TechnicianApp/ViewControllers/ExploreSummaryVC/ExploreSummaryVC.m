@@ -7,9 +7,11 @@
 //
 
 #import "ExploreSummaryVC.h"
-#import "QuestionsVC.h"
+///#import "QuestionsVC.h"
 #import "QuestionSummaryCell.h"
 #import "Question.h"
+#import "SummaryOfFindingsOptionsVC.h"
+#import "DataLoader.h"
 
 @interface ExploreSummaryVC ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -34,6 +36,11 @@
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    NSMutableArray * questionsCustomer = [[[[[DataLoader sharedInstance] currentUser] activeJob] custumerQuestions] mutableCopy];
+    NSArray * questionsTech = [[[[[DataLoader sharedInstance] currentUser] activeJob] techObservations] mutableCopy];
+    [questionsCustomer addObjectsFromArray:questionsTech];
+    self.questions = [[NSArray alloc] initWithArray:questionsCustomer];
 }
 
 
@@ -43,7 +50,8 @@
 }
 
 - (IBAction)btnContinueTouch:(id)sender {
-    [self performSegueWithIdentifier:@"technicianQuestionsSegue" sender:self];
+    //[self performSegueWithIdentifier:@"technicianQuestionsSegue" sender:self];
+    [self performSegueWithIdentifier:@"selectOptionsIpadRepairsSegue" sender:self];
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
@@ -74,11 +82,19 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.destinationViewController isKindOfClass:[QuestionsVC class]]) {
-        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
-        NSMutableArray *arr = _questions.mutableCopy;
-        vc.questionType = qtTechnician;
-        vc.questions    = arr;
+//    if ([segue.destinationViewController isKindOfClass:[QuestionsVC class]]) {
+//        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
+//        NSMutableArray *arr = _questions.mutableCopy;
+//        vc.questionType = qtTechnician;
+//        vc.questions    = arr;
+//    }
+    
+    
+    
+    if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
+    {
+        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
+        vc.isiPadCommonRepairsOptions = YES;
     }
 }
 
