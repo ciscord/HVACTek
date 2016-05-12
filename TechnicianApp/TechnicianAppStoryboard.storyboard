@@ -2951,6 +2951,7 @@ you must debrief from job</string>
                     <connections>
                         <outlet property="ESAPriceLbl" destination="kZO-RB-cgq" id="Z7u-Pv-GZY"/>
                         <outlet property="enlargeTable" destination="zML-XZ-EUZ" id="AGf-Mc-36f"/>
+                        <outlet property="midleLabel" destination="Pdw-L1-pOp" id="58C-vn-OSz"/>
                         <outlet property="monthlyPaymentsLbl" destination="M5j-0Q-Vsu" id="bD6-fj-kMr"/>
                         <outlet property="optionNameLabel" destination="Epg-Pd-ap1" id="qrc-wv-k3z"/>
                         <outlet property="savingESALbl" destination="RpC-X2-z59" id="07q-Ut-M6T"/>

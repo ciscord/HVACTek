@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *enlargeESAPrice;
 @property (nonatomic, strong) NSString *enlargeMonthlyPrice;
 @property (nonatomic, strong) NSString *enlargeSavings;
+@property (nonatomic, strong) NSString *enlargeMidleLabelString;
 
 
 @end

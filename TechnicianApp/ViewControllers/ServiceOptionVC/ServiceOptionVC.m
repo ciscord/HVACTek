@@ -379,6 +379,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     vc.enlargeESAPrice = cell.btnPrice2.titleLabel.text;
     vc.enlargeMonthlyPrice = cell.lb24MonthRates.text;
     vc.enlargeSavings = cell.lbESAsaving.text;
+    vc.enlargeMidleLabelString = cell.financingLabel.text;
     vc.enlargeOptionsArray = items;
     vc.enlargeFullOptionsArray = [option objectForKey:@"removedItems"];
     

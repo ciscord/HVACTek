@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthlyPaymentsLbl;
 @property (weak, nonatomic) IBOutlet UILabel *savingESALbl;
 @property (weak, nonatomic) IBOutlet UILabel *optionNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *midleLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView1;
 @property (weak, nonatomic) IBOutlet UIView *separatorView2;
 @property (weak, nonatomic) IBOutlet UIView *separatorView3;
@@ -35,6 +36,7 @@
     self.ESAPriceLbl.text = self.enlargeESAPrice;
     self.monthlyPaymentsLbl.text = self.enlargeMonthlyPrice;
     self.savingESALbl.text = self.enlargeSavings;
+    self.midleLabel.text = self.enlargeMidleLabelString;
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
