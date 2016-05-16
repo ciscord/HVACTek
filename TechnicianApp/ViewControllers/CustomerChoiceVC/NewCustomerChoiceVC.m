@@ -369,7 +369,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                 
         [selectedArray addObject:@{@"sku" : p.itemNumber,
                                    @"qty" : quantityNumb,
-                                   @"price" : formattedOutput,
+                                   @"price" : resultNumber,
                                    @"taxable" : [NSNumber numberWithBool:false]}];
     }
     
