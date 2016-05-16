@@ -354,7 +354,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [form setAllowsFloats:YES];
         [form setMaximumFractionDigits:2];
         [form setMinimumFractionDigits:2];
+        
+        NSLocale *locale = [NSLocale currentLocale];
+        NSString *thousandSeparator = [locale objectForKey:NSLocaleGroupingSeparator];
         NSString *formattedOutput = [form stringFromNumber:[self roundNumber:price]];
+        NSString *resultNumber = [formattedOutput stringByReplacingOccurrencesOfString:thousandSeparator withString:@""];
+
         
         NSNumber *quantityNumb;
         if ([p.quantity isEqualToString:@""] || [p.quantity isEqualToString:@"0"])
