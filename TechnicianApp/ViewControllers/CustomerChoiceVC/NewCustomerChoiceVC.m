@@ -474,6 +474,36 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 #pragma mark - SignatureView
 - (IBAction)btnClearSignature:(id)sender {
     [self.signatureView clear];
+    
+ /*
+    
+    self.signatureView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
+    
+    
+    [UIView animateWithDuration:0.3/1.5 animations:^{
+        self.signatureView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3/2 animations:^{
+            self.signatureView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3/2 animations:^{
+                self.signatureView.transform = CGAffineTransformIdentity;
+            }  completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.signatureView.frame = CGRectMake(0, 0, 684, 611);
+                }];
+            }];
+        }];
+    }];
+    
+    
+    
+  
+     [UIView animateWithDuration:0.5 animations:^{
+     self.signatureView.frame = CGRectMake(0, 0, 684, 611);
+     } completion:^(BOOL finished) {
+     }];
+     */
 }
 
 

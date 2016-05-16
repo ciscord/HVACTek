@@ -54,7 +54,11 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     if (self.isiPadCommonRepairsOptions) {
         self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
-        self.selectedOptions = self.allOptions.mutableCopy;
+        if ([[DataLoader sharedInstance] selectedRepairTemporarOptions].count > 0){
+            self.selectedOptions = [[DataLoader sharedInstance] selectedRepairTemporarOptions].mutableCopy;
+        }else{
+            self.selectedOptions = self.allOptions.mutableCopy;
+        }
     }
     else {
         if (!self.selectedOptions) {
@@ -82,11 +86,15 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    if (self.isiPadCommonRepairsOptions == NO) {
-        if (self.isMovingFromParentViewController) {
-            [DataLoader saveOptionsLocal:self.selectedOptions];
-        }
+//    if (self.isiPadCommonRepairsOptions == NO) {
+//        if (self.isMovingFromParentViewController) {
+//            [DataLoader saveOptionsLocal:self.selectedOptions];
+//        }
+//    }
+    if (self.isMovingFromParentViewController) {
+        [DataLoader sharedInstance].selectedRepairTemporarOptions = self.selectedOptions.mutableCopy;
     }
+    
 }
 
 
