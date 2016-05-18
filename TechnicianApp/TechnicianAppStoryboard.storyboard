@@ -14,6 +14,8 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -412,6 +414,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a88-T8-RUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="655" y="-474"/>
+        </scene>
+        <!--Add Custom RepairVC-->
+        <scene sceneID="Gr1-NG-8cq">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="Tm5-Ei-sz5" customClass="AddCustomRepairVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="enu-Q2-MXx">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="mRL-aw-yrG" customClass="RoundCornerView">
+                                <rect key="frame" x="131" y="287" width="522" height="304"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Repair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xwG-Fh-cMf">
+                                        <rect key="frame" x="97" y="16" width="326" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" id="Yl4-fS-NGH">
+                                        <rect key="frame" x="20" y="241" width="481" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="iTe-96-UGX">
+                                        <rect key="frame" x="260" y="248" width="1" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="VfS-uw-YtM">
+                                        <rect key="frame" x="20" y="65" width="481" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z6M-DC-dL6">
+                                        <rect key="frame" x="63" y="251" width="170" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveClicked:" destination="Tm5-Ei-sz5" eventType="touchUpInside" id="Dn0-ku-S7v"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaC-pn-u32">
+                                        <rect key="frame" x="281" y="103" width="185" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uW0-zv-tKh">
+                                        <rect key="frame" x="56" y="103" width="185" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="Ct0-K2-BXa">
+                                        <rect key="frame" x="56" y="138" width="185" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Tm5-Ei-sz5" id="cfB-Xg-d1l"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$" textAlignment="center" minimumFontSize="17" id="ICf-T2-BzN">
+                                        <rect key="frame" x="281" y="138" width="185" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Tm5-Ei-sz5" id="iUH-i4-27f"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8qp-uH-maO">
+                                        <rect key="frame" x="289" y="250" width="170" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelClicked:" destination="Tm5-Ei-sz5" eventType="touchUpInside" id="NLI-lD-KLM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                    </view>
+                    <navigationItem key="navigationItem" id="Urh-1U-8wP"/>
+                    <connections>
+                        <outlet property="priceTextField" destination="ICf-T2-BzN" id="pRZ-yf-eGR"/>
+                        <outlet property="roundedView" destination="mRL-aw-yrG" id="1aC-aJ-pg5"/>
+                        <outlet property="titleTextField" destination="Ct0-K2-BXa" id="IOI-l3-TIX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcE-GS-yHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-233" y="2002"/>
         </scene>
         <!--Summary Of Findings OptionsVC-->
         <scene sceneID="cg4-P7-Euz">
@@ -1432,7 +1543,7 @@ the work you've selected</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Save">
+                                        <state key="normal" title="Preview">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1614,29 +1725,27 @@ the work you've selected</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" id="jca-Uy-Buc" customClass="SignatureView">
-                                                <rect key="frame" x="14" y="473" width="658" height="97"/>
+                                            <view contentMode="scaleToFill" id="qlQ-B0-6SS">
+                                                <rect key="frame" x="13" y="473" width="658" height="97"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JPo-rW-tiD">
-                                                        <rect key="frame" x="619" y="0.0" width="39" height="33"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hjl-EN-a6u">
+                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="97"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                        <state key="normal" title="X">
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TMd-eb-BBM">
+                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="97"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                        <inset key="contentEdgeInsets" minX="-520" minY="-70" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" title="Authorized Signature">
                                                             <color key="titleColor" red="0.85970908720000005" green="0.25061677630000001" blue="0.022383840459999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="btnClearSignature:" destination="J4s-ud-uAn" eventType="touchUpInside" id="6wW-DU-7Lg"/>
+                                                            <action selector="authorizeSignatureClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="zl6-Co-upL"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorized Signature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nak-d3-ZIf">
-                                                        <rect key="frame" x="4" y="0.0" width="132" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -1699,6 +1808,63 @@ the work you've selected</string>
                                         </connections>
                                     </button>
                                 </subviews>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" id="oIi-De-pWI">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="jca-Uy-Buc" customClass="SignatureView">
+                                        <rect key="frame" x="39" y="250" width="684" height="611"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorized Signature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nak-d3-ZIf">
+                                                <rect key="frame" x="4" y="0.0" width="150" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3H3-z4-CAR">
+                                                <rect key="frame" x="137" y="545" width="188" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                                <state key="normal" title="Clear">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="authorizeSignatureClearClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="pAV-Ez-5nt"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="API-NO-5yw">
+                                                <rect key="frame" x="367" y="545" width="188" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="authorizeSignatureDoneClicked:" destination="J4s-ud-uAn" eventType="touchUpInside" id="CsZ-kJ-fan"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" id="grE-aP-Gff">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
@@ -1770,9 +1936,14 @@ the work you've selected</string>
                     </view>
                     <navigationItem key="navigationItem" id="VIp-Oc-E0f"/>
                     <connections>
+                        <outlet property="authorizeSignatureButton" destination="TMd-eb-BBM" id="xqB-nG-CP4"/>
+                        <outlet property="authorizeSignatureClearButton" destination="3H3-z4-CAR" id="l4d-z9-Azq"/>
+                        <outlet property="authorizeSignatureDoneButton" destination="API-NO-5yw" id="PWf-gx-x1T"/>
+                        <outlet property="authorizeSignatureImageView" destination="hjl-EN-a6u" id="73P-oD-T9U"/>
                         <outlet property="backBtn" destination="paL-xw-zzX" id="ThX-ie-Ohq"/>
                         <outlet property="btnSendByEmail" destination="bCq-jm-aiT" id="yLP-W8-ADi"/>
                         <outlet property="dueLabel" destination="vXg-vp-jJr" id="oiE-9d-BvQ"/>
+                        <outlet property="hiddenAuthorizeView" destination="oIi-De-pWI" id="myN-6Q-hUu"/>
                         <outlet property="hiddenURLTextView" destination="KSE-Dt-it0" id="cTc-tx-F97"/>
                         <outlet property="hiddenURLView" destination="grE-aP-Gff" id="whJ-Ny-f89"/>
                         <outlet property="label1" destination="Uwm-Wl-apM" id="TAg-q1-UAH"/>
@@ -1804,11 +1975,79 @@ the work you've selected</string>
                         <outlet property="textFieldInitials" destination="LVe-Wc-Bo1" id="rlQ-G7-0x7"/>
                         <outlet property="totalPriceLabel" destination="Nhz-PM-u5v" id="TtQ-9J-lux"/>
                         <outlet property="unselectedOptionsTableView" destination="4YE-km-UXy" id="GzS-ed-RkV"/>
+                        <segue destination="gIA-L4-epI" kind="push" identifier="showInvoicePreviewVC" id="SYV-Rr-Adr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aP3-oN-TjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4288" y="3206"/>
+        </scene>
+        <!--Invoice PreviewVC-->
+        <scene sceneID="TXM-sf-rZC">
+            <objects>
+                <viewController id="gIA-L4-epI" customClass="InvoicePreviewVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uZf-1t-FRh">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="oEn-yq-KqP">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="880"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gIA-L4-epI" id="DrQ-9Z-bdU"/>
+                                </connections>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AO2-Wr-XCR">
+                                <rect key="frame" x="176" y="911" width="188" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="cancelClicked:" destination="gIA-L4-epI" eventType="touchUpInside" id="nOc-E9-nEc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lmi-1h-df8">
+                                <rect key="frame" x="404" y="911" width="188" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendClicked:" destination="gIA-L4-epI" eventType="touchUpInside" id="4au-FK-QgD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XUo-ie-AVJ"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="AO2-Wr-XCR" id="yNF-Do-w73"/>
+                        <outlet property="invoiceWebView" destination="oEn-yq-KqP" id="Z1O-BU-Lbt"/>
+                        <outlet property="sendButton" destination="lmi-1h-df8" id="1hu-Hz-WbO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FyQ-yn-RKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5178" y="3206"/>
         </scene>
         <!--Repair Vs ServiceVC-->
         <scene sceneID="0Nm-56-97n">
@@ -3041,7 +3280,7 @@ you must debrief from job</string>
         <!--Summary Of Findings OptionsVC-->
         <scene sceneID="Rlq-Yp-tu5">
             <objects>
-                <viewController storyboardIdentifier="SummaryOfFindingsOptionsVC2" automaticallyAdjustsScrollViewInsets="NO" id="fbm-eM-mve" customClass="SummaryOfFindingsOptionsVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SummaryOfFindingsOptionsVC2" automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" id="fbm-eM-mve" customClass="SummaryOfFindingsOptionsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bNZ-sC-trB">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3066,12 +3305,12 @@ you must debrief from job</string>
                                             <outlet property="delegate" destination="fbm-eM-mve" id="lM4-Bk-2GN"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kXj-BX-A7n">
-                                        <rect key="frame" x="251" y="685" width="188" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WUS-mo-ulG">
+                                        <rect key="frame" x="365" y="686" width="200" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Continue">
+                                        <state key="normal" title="Custom Repair">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -3081,7 +3320,8 @@ you must debrief from job</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="btnContinueTouch:" destination="fbm-eM-mve" eventType="touchUpInside" id="Z8e-Cd-hbC"/>
+                                            <action selector="customRepairClicked:" destination="fbm-eM-mve" eventType="touchUpInside" id="7Qh-mz-osN"/>
+                                            <segue destination="Tm5-Ei-sz5" kind="modal" id="LDL-7a-lwC"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select options from the choices below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KSl-e9-Es8">
@@ -3106,6 +3346,24 @@ you must debrief from job</string>
                                             <outlet property="delegate" destination="fbm-eM-mve" id="8bi-ZG-GCh"/>
                                         </connections>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kXj-BX-A7n">
+                                        <rect key="frame" x="125" y="686" width="200" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnContinueTouch:" destination="fbm-eM-mve" eventType="touchUpInside" id="Z8e-Cd-hbC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -3116,6 +3374,7 @@ you must debrief from job</string>
                     <connections>
                         <outlet property="collectionView" destination="icO-kP-jrW" id="lAJ-k5-wM4"/>
                         <outlet property="continueBtn" destination="kXj-BX-A7n" id="Jnq-lU-wlM"/>
+                        <outlet property="customRepairButton" destination="WUS-mo-ulG" id="xXg-i1-bgH"/>
                         <outlet property="tfSearch" destination="Xxp-tb-n7a" id="ksH-fD-eer"/>
                         <outlet property="titleLabel" destination="KSl-e9-Es8" id="Emh-EY-YFM"/>
                         <segue destination="i4C-Qf-Qys" kind="push" identifier="goSortingFindings" id="Lur-lH-80j"/>

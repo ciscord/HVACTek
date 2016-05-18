@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField    *tfSearch;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
+@property (weak, nonatomic) IBOutlet UIButton *customRepairButton;
 @end
 
 @implementation SummaryOfFindingsOptionsVC
@@ -64,16 +65,33 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
-        self.allOptions = [[DataLoader sharedInstance] otherOptions];
+       /// self.allOptions = [[DataLoader sharedInstance] otherOptions];
+        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
+        if ([[DataLoader sharedInstance] addedCustomRepairsOptions].count > 0){
+            [allOptionsArray addObjectsFromArray:[[DataLoader sharedInstance] addedCustomRepairsOptions]];
+        }
+        self.allOptions = allOptionsArray.mutableCopy;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
     }
 }
 
+
+- (void)customRepairOtionAdded:(NSNotification *)info {
+    self.allOptions = nil;
+    NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
+    if ([[DataLoader sharedInstance] addedCustomRepairsOptions].count > 0){
+        [allOptionsArray addObjectsFromArray:[[DataLoader sharedInstance] addedCustomRepairsOptions]];
+    }
+    self.allOptions = allOptionsArray.mutableCopy;
+}
 
 
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.customRepairButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.tfSearch.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -96,6 +114,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     }
     
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -143,6 +163,12 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 
     [DataLoader saveOptionsLocal:self.selectedOptions];
     [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];  //showServiceOptionsDirect
+}
+
+
+#pragma mark - Custom Repair Button
+- (IBAction)customRepairClicked:(id)sender {
+
 }
 
 
@@ -217,14 +243,24 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
             [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
             [[[DataLoader sharedInstance] iPadCommonRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
         }else{
-            NSUInteger globalIndex = [[[DataLoader sharedInstance] otherOptions] indexOfObject:item];
+            NSUInteger globalIndex;
+            BOOL isCustomAdded = [[[DataLoader sharedInstance] addedCustomRepairsOptions] containsObject:item];
+            if (isCustomAdded) {
+                globalIndex = [[[DataLoader sharedInstance] addedCustomRepairsOptions] indexOfObject:item];
+            }else{
+                globalIndex = [[[DataLoader sharedInstance] otherOptions] indexOfObject:item];
+            }
+            
             item.quantity = term;
             [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
-            [[[DataLoader sharedInstance] otherOptions] replaceObjectAtIndex:globalIndex withObject:item];
+            
+            if (isCustomAdded) {
+                [[[DataLoader sharedInstance] addedCustomRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
+            }else{
+                [[[DataLoader sharedInstance] otherOptions] replaceObjectAtIndex:globalIndex withObject:item];
+            }
         }
-        
     }
-
     return YES;
 }
 

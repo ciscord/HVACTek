@@ -10,8 +10,12 @@
 #import "CustomerChoiceCell.h"
 #import "AppDelegate.h"
 #import <SignatureView.h>
+#import "InvoicePreviewVC.h"
 
 @interface NewCustomerChoiceVC ()
+
+@property (nonatomic, strong) NSString *invoicePreviewString;
+@property (nonatomic, strong) NSDictionary *invoiceData;
 
 @property (weak, nonatomic) IBOutlet UITableView *unselectedOptionsTableView;
 @property (weak, nonatomic) IBOutlet UITableView *selectedOptionsTableView;
@@ -48,6 +52,11 @@
 @property (weak, nonatomic) IBOutlet UIView *separator1;
 @property (weak, nonatomic) IBOutlet UIView *separator2;
 
+@property (weak, nonatomic) IBOutlet UIView *hiddenAuthorizeView;
+@property (weak, nonatomic) IBOutlet UIButton *authorizeSignatureButton;
+@property (weak, nonatomic) IBOutlet UIButton *authorizeSignatureClearButton;
+@property (weak, nonatomic) IBOutlet UIButton *authorizeSignatureDoneButton;
+@property (weak, nonatomic) IBOutlet UIImageView *authorizeSignatureImageView;
 @end
 
 @implementation NewCustomerChoiceVC
@@ -124,8 +133,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     self.saveBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.swrButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.testURLButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
-    
+    [self.authorizeSignatureButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.authorizeSignatureButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary50] forState:UIControlStateHighlighted];
+    self.authorizeSignatureClearButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.authorizeSignatureDoneButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.hiddenAuthorizeView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
+    [[self.authorizeSignatureButton imageView] setContentMode: UIViewContentModeScaleAspectFit];
+
     
     self.hiddenURLView.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
     self.roundedURLView.layer.borderWidth   = 3.0;
@@ -216,7 +230,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     job.selectedServiceOptions = self.selectedServiceOptionsDict[@"removedItems"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
     
-    job.jobStatus = @(jstNeedDebrief);
+  ///  job.jobStatus = @(jstNeedDebrief);
     
     if (!job.startTime) {
         job.startTime = [NSDate date];
@@ -310,11 +324,16 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             };
     
     __weak __typeof(self)weakSelf = self;
+    
+    weakSelf.invoiceData = dict;
   
- [[DataLoader sharedInstance] postInvoice:dict onSuccess:^(NSString *message) {
+ [[DataLoader sharedInstance] postInvoice:dict requestingPreview:1 onSuccess:^(NSString *message) {
      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-     [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+ ///    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+ ///    [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+     
+     self.invoicePreviewString = message;
+     [self performSegueWithIdentifier:@"showInvoicePreviewVC" sender:self];
      
  } onError:^(NSError *error) {
       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -475,13 +494,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 }
 
 
-
-#pragma mark - SignatureView
-- (IBAction)btnClearSignature:(id)sender {
-    [self.signatureView clear];
-    
- /*
-    
+#pragma mark - Authorize Signature
+- (IBAction)authorizeSignatureClicked:(UIButton *)sender {
+    self.hiddenAuthorizeView.hidden = NO;
     self.signatureView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
     
     
@@ -493,22 +508,27 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3/2 animations:^{
                 self.signatureView.transform = CGAffineTransformIdentity;
-            }  completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    self.signatureView.frame = CGRectMake(0, 0, 684, 611);
-                }];
             }];
         }];
     }];
     
     
-    
-  
+    /*
+     
      [UIView animateWithDuration:0.5 animations:^{
      self.signatureView.frame = CGRectMake(0, 0, 684, 611);
      } completion:^(BOOL finished) {
      }];
      */
+}
+
+- (IBAction)authorizeSignatureClearClicked:(id)sender {
+    [self.signatureView clear];
+}
+
+- (IBAction)authorizeSignatureDoneClicked:(id)sender {
+    self.hiddenAuthorizeView.hidden = YES;
+    [self.authorizeSignatureImageView setImage:self.signatureView.image];
 }
 
 
@@ -689,14 +709,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showInvoicePreviewVC"]) {
+        InvoicePreviewVC *vc = [segue destinationViewController];
+        vc.previewHtmlString = self.invoicePreviewString;
+        vc.invoiceDictionary = self.invoiceData;
+    }
+
 }
-*/
 
 @end

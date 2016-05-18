@@ -647,10 +647,10 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
        }];
 }
 
-- (void)postInvoice:(NSMutableDictionary*)InvoiceInfo
+- (void)postInvoice:(NSMutableDictionary*)InvoiceInfo requestingPreview:(int)previewInt
           onSuccess:(void (^)(NSString *message))onSuccess
             onError:(void (^)(NSError *error))onError{
-    NSLog(@"%@", InvoiceInfo);
+    
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
  
@@ -659,13 +659,16 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:InvoiceInfo options:0 error:&err];
     NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSNumber *statusInt = [NSNumber numberWithInt:previewInt];
     
     [self POST:INVOICE
-    parameters:@{ @"invoice" : myString }
+    parameters:@{ @"invoice" : myString, @"preview" : statusInt }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {
-                   onSuccess(nil);
+                   
+                   NSString *htmlString = responseObject[@"data"];
+                   onSuccess(htmlString);
                }
            }
            else if (onError)
