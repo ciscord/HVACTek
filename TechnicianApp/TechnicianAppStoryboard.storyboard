@@ -1640,6 +1640,7 @@ the work you've selected</string>
                         <outlet property="videoLibraryButton" destination="9vU-HY-GLd" id="L2j-Pw-tDf"/>
                         <segue destination="C7y-Sx-Bgk" kind="unwind" identifier="unwindToServiceOptionsFromCustomersChoice" animates="NO" unwindAction="unwindToServiceOptionVC:" id="Fte-yt-qas"/>
                         <segue destination="wry-eX-x7d" kind="push" identifier="showAdditionalInfoPageVC" id="K4P-WD-rha"/>
+                        <segue destination="J4s-ud-uAn" kind="push" identifier="showTemporarTestPush" id="5xF-WX-Qsy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKs-OQ-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4877,11 +4878,12 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mwd-zf-CaD"/>
-        <segue reference="6og-9q-Y4v"/>
-        <segue reference="xdW-7q-blD"/>
-        <segue reference="DnI-yT-bKf"/>
         <segue reference="Cdo-cC-vmU"/>
         <segue reference="5VJ-cj-s1Y"/>
+        <segue reference="6og-9q-Y4v"/>
+        <segue reference="xdW-7q-blD"/>
+        <segue reference="mwd-zf-CaD"/>
+        <segue reference="DnI-yT-bKf"/>
+        <segue reference="5xF-WX-Qsy"/>
     </inferredMetricsTieBreakers>
 </document>

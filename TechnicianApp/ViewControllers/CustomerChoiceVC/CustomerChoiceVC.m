@@ -183,7 +183,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
 
 - (IBAction)btnContinue:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showAdditionalInfoPageVC" sender:self];
+   // [self performSegueWithIdentifier:@"showAdditionalInfoPageVC" sender:self];
+    [self performSegueWithIdentifier:@"showTemporarTestPush" sender:self];
 }
 
 
@@ -498,6 +499,21 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         }
     }
     
+    //showTemporarTestPush
+    
+    if ([segue.identifier isEqualToString:@"showTemporarTestPush"]) {
+        NewCustomerChoiceVC *vc = [segue destinationViewController];
+        vc.isDiscounted       = self.isDiscounted;
+        vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
+        vc.unselectedOptionsArray = self.unusedServiceOptions;
+        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
+        vc.initialTotal = self.subtotaPriceLabel.text;
+        if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
+            vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
+        }else{
+            vc.paymentValue = @"$0";
+        }
+    }
     
     
     /*
