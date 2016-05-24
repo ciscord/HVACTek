@@ -9,6 +9,8 @@
 #import "SWAPIRequestManager.h"
 #import <XMLDictionary/XMLDictionary.h>
 #import "DataLoader.h"
+#import "StringBetweenStrings.h"
+
 
 @interface SWAPIRequestManager ()
 
@@ -81,9 +83,44 @@ NSString *const kResultStatusOK = @"000";
     return operation;
 }
 
+
+#pragma mark - XML Request
+- (AFHTTPRequestOperation *)xmlRequestOperationWithXMLString:(NSString *)XMLString
+                                                  success:(void (^)(AFHTTPRequestOperation *operation, NSString *result))success
+                                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    
+    NSURL *reqUrl = [NSURL URLWithString:kSWAPI_BASE_URL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reqUrl
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"text/html" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody: [XMLString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString* responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (success) {
+            success(operation, responseString);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(operation, error);
+        }
+    }];
+    
+    [self.operationQueue addOperation:operation];
+    return operation;
+
+}
+
+
+
 - (void)connectOnSuccess:(void (^)(NSString *successMessage))onSuccess
                  onError:(void (^)(NSError *error))onError {
-
+    
     __weak typeof(self) weakSelf = self;
     NSString *body = [NSString
                       stringWithFormat:
@@ -166,8 +203,6 @@ NSString *const kResultStatusOK = @"000";
             onError(error);
         } else
         {
-            
-            
             
             if ([list isKindOfClass:[NSArray class]]) {
                 weakSelf.currentJob = [User getNextJobFromList:list withJobID:JobID];
@@ -495,6 +530,130 @@ NSString *const kResultStatusOK = @"000";
          }
      }];
 }
+
+
+#pragma mark - Update User Location Info
+- (void)getUserLocationInfoQueryWithLocationID:(NSString *)location
+                                     OnSuccess:(void (^)(NSString *account))onSuccess
+                                       onError:(void (^)(NSError *error))onError {
+    self.requestsInProgress++;
+    NSString *body = [NSString stringWithFormat:@"<SessionRequest SessionID=\"%@\"><LocationInfoQuery><LocationID>%@</LocationID></LocationInfoQuery></SessionRequest>", self.sessionID, location];
+    
+    [self xmlRequestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSString *result) {
+        if (onSuccess) {
+            onSuccess([result stringBetweenString:@"<LocationInfoQueryRecord>" andString:@"</LocationInfoQueryRecord>"]);
+        }
+        self.requestsInProgress--;
+        ///[weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        //// [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
+}
+
+
+- (void)userLocationInfoUpdateWithData:(NSString *)data
+                           andNewEmail:(NSString *)email
+                             OnSuccess:(void (^)(NSString *message))onSuccess
+                               onError:(void (^)(NSError *error))onError {
+    self.requestsInProgress++;
+    
+    NSString *mailString = [data stringBetweenString:@"<EmailAddress>" andString:@"</EmailAddress>"];
+    NSString *newString = [data stringByReplacingOccurrencesOfString:mailString withString:email];
+    
+    NSString *finalString = [newString stringByReplacingOccurrencesOfString:@"<upd_ReasonForChange></upd_ReasonForChange>" withString:@"<upd_ReasonForChange>correction</upd_ReasonForChange>"];
+    
+    NSString *body = [NSString stringWithFormat:@"<SessionRequest SessionID=\"%@\"><LocationInfoUpdate><LocationInfoUpdateData><LocationInfoUpdateRecord>%@</LocationInfoUpdateRecord></LocationInfoUpdateData></LocationInfoUpdate></SessionRequest>", self.sessionID, [self replaceBoolsInString:finalString]];
+    
+    [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
+        if (onSuccess) {
+            onSuccess(result[@"AccountInfoQueryData"][@"AccountInfoQueryRecord"][@"CCAccount"]);
+            //onSuccess([result[@"AccountInfoUpdateData"][@"AccountInfoQueryRecord"][@"EmailAddress"] isEqualToString:email]);
+        }
+        
+        self.requestsInProgress--;
+        ///[weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        //// [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
+}
+
+
+/*
+- (void)getUserAccountInfoWithLocationID:(NSString *)location
+                            andBillingID:(NSString *)billing
+                               OnSuccess:(void (^)(NSString *account))onSuccess
+                                 onError:(void (^)(NSError *error))onError {
+    self.requestsInProgress++;
+    
+    NSString *body = [NSString stringWithFormat:@"<SessionRequest SessionID=\"%@\"><AccountInfoQuery><LocationID>%@</LocationID><AR_BillingCustomerID>%@</AR_BillingCustomerID></AccountInfoQuery></SessionRequest>", self.sessionID, location, billing];
+    
+    [self xmlRequestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSString *result) {
+        if (onSuccess) {
+            onSuccess([result stringBetweenString:@"<AccountInfoQueryRecord>" andString:@"</AccountInfoQueryRecord>"]);
+        }
+        self.requestsInProgress--;
+        ///[weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        //// [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
+}
+
+
+
+- (void)userAccountInfoUpdateWithData:(NSString *)data
+                          andNewEmail:(NSString *)email
+                            OnSuccess:(void (^)(BOOL changed))onSuccess
+                              onError:(void (^)(NSError *error))onError {
+    self.requestsInProgress++;
+    
+    
+    NSString *mailString = [data stringBetweenString:@"<EmailAddress>" andString:@"</EmailAddress>"];
+    NSString *newString = [data stringByReplacingOccurrencesOfString:mailString withString:email];
+    
+    NSString *body = [NSString stringWithFormat:@"<SessionRequest SessionID=\"%@\"><AccountInfoUpdate><AccountInfoUpdateData><AccountInfoUpdateRecord>%@</AccountInfoUpdateRecord></AccountInfoUpdateData></AccountInfoUpdate></SessionRequest>", self.sessionID, [self replaceBoolsInString:newString]];
+                      
+    [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
+        if (onSuccess) {
+            onSuccess([result[@"AccountInfoUpdateData"][@"AccountInfoQueryRecord"][@"EmailAddress"] isEqualToString:email]);
+        }
+        
+        self.requestsInProgress--;
+        ///[weakSelf checkAndCloseConnectionAndSession];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.requestsInProgress--;
+        //// [weakSelf checkAndCloseConnectionAndSession];
+        if (onError) {
+            onError(error);
+        }
+    }];
+}
+
+*/
+
+#pragma mark - Replace Bools with Ints
+- (NSString*)replaceBoolsInString:(NSString *)string {
+    NSString* result = [string stringByReplacingOccurrencesOfString:@"TRUE"
+                                         withString:@"1"];
+    result = [result stringByReplacingOccurrencesOfString:@"FALSE"
+                                               withString:@"0"];
+    
+    return result;
+}
+
+
+
 
 #pragma mark - Get Company Info
 - (void)getCompanyInfoOnSuccess:(void (^)(NSString *company))onSuccess

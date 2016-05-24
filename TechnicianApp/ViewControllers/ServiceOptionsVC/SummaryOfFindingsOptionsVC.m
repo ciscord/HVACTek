@@ -67,8 +67,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         }
        /// self.allOptions = [[DataLoader sharedInstance] otherOptions];
         NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
-        if ([[DataLoader sharedInstance] addedCustomRepairsOptions].count > 0){
-            [allOptionsArray addObjectsFromArray:[[DataLoader sharedInstance] addedCustomRepairsOptions]];
+        if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
+            [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
         }
         self.allOptions = allOptionsArray.mutableCopy;
         
@@ -80,8 +80,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)customRepairOtionAdded:(NSNotification *)info {
     self.allOptions = nil;
     NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
-    if ([[DataLoader sharedInstance] addedCustomRepairsOptions].count > 0){
-        [allOptionsArray addObjectsFromArray:[[DataLoader sharedInstance] addedCustomRepairsOptions]];
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
+        [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
     }
     self.allOptions = allOptionsArray.mutableCopy;
 }
@@ -244,9 +244,9 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
             [[[DataLoader sharedInstance] iPadCommonRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
         }else{
             NSUInteger globalIndex;
-            BOOL isCustomAdded = [[[DataLoader sharedInstance] addedCustomRepairsOptions] containsObject:item];
+            BOOL isCustomAdded = [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] containsObject:item];
             if (isCustomAdded) {
-                globalIndex = [[[DataLoader sharedInstance] addedCustomRepairsOptions] indexOfObject:item];
+                globalIndex = [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] indexOfObject:item];
             }else{
                 globalIndex = [[[DataLoader sharedInstance] otherOptions] indexOfObject:item];
             }
@@ -255,7 +255,9 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
             [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
             
             if (isCustomAdded) {
-                [[[DataLoader sharedInstance] addedCustomRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
+                [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
+                Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+                [job.managedObjectContext save];
             }else{
                 [[[DataLoader sharedInstance] otherOptions] replaceObjectAtIndex:globalIndex withObject:item];
             }

@@ -28,6 +28,10 @@
                                                   success:(void (^)(AFHTTPRequestOperation *operation, NSDictionary *result))success
                                                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failre;
 
+- (AFHTTPRequestOperation *)xmlRequestOperationWithXMLString:(NSString *)XMLString
+                                                  success:(void (^)(AFHTTPRequestOperation *operation, NSString *result))success
+                                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failre;
+
 - (void)connectOnSuccess:(void (^)(NSString *successMessage))onSuccess
                  onError:(void (^)(NSError *error))onError;
 
@@ -39,6 +43,30 @@
                              onSuccess:(void (^)(NSString *successMessage))onSuccess
                                onError:(void (^)(NSError *error))onError ;
 
+///// account info
+//- (void)getUserAccountInfoWithLocationID:(NSString *)location
+//                            andBillingID:(NSString *)billing
+//                               OnSuccess:(void (^)(NSString *account))onSuccess
+//                            onError:(void (^)(NSError *error))onError;
+//
+//- (void)userAccountInfoUpdateWithData:(NSString *)data
+//                          andNewEmail:(NSString *)email
+//                            OnSuccess:(void (^)(BOOL changed))onSuccess
+//                              onError:(void (^)(NSError *error))onError;
+
+- (void)getUserLocationInfoQueryWithLocationID:(NSString *)location
+                               OnSuccess:(void (^)(NSString *account))onSuccess
+                                 onError:(void (^)(NSError *error))onError;
+
+
+- (void)userLocationInfoUpdateWithData:(NSString *)data
+                           andNewEmail:(NSString *)email
+                               OnSuccess:(void (^)(NSString *message))onSuccess
+                                 onError:(void (^)(NSError *error))onError;
+
+
 
 
 @end
+
+

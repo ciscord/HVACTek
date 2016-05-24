@@ -213,6 +213,35 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 
 - (IBAction)clickedSaveBtn:(UIButton *)sender {
+    if (self.btnSendByEmail.selected) {
+        [self performSegueWithIdentifier:@"showEmailVerificationVC" sender:self];
+    }else{
+        [self setInvoicePreview];
+    }
+}
+
+
+- (IBAction)agreeBtnClicked:(id)sender {
+    UIButton *button = sender;
+    
+    if (!button.selected)
+        button.selected = YES;
+    else
+        button.selected = NO;
+}
+
+
+- (IBAction)sendByEmailButton:(id)sender {
+    if (!self.btnSendByEmail.selected)
+        self.btnSendByEmail.selected = YES;
+    else
+        self.btnSendByEmail.selected = NO;
+}
+
+
+
+#pragma mark - Invoice Preview
+- (void)setInvoicePreview {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isInstantRRFinal"];
@@ -230,7 +259,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     job.selectedServiceOptions = self.selectedServiceOptionsDict[@"removedItems"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
     
-  ///  job.jobStatus = @(jstNeedDebrief);
+    ///  job.jobStatus = @(jstNeedDebrief);
     
     if (!job.startTime) {
         job.startTime = [NSDate date];
@@ -238,14 +267,14 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     //job.startTime = [NSDate date];
     [job.managedObjectContext save];
-   
+    
     NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
     NSMutableArray * selArray = [[NSMutableArray alloc]init];
     
     for (PricebookItem *p in items1) {
         if (p.itemID != nil) {
-        
-        
+            
+            
             [selArray addObject:@{@"itemID" :p.itemID,
                                   @"itemNumber" : p.itemNumber,
                                   @"itemGroup" :p.itemGroup,
@@ -260,44 +289,44 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     NSMutableArray * unselArray = [[NSMutableArray alloc]init];
     NSMutableArray *items2 =  self.unselectedOptionsArray;
     for (PricebookItem *p in items2) {
-      if (p.itemID != nil) {
-
-          [unselArray addObject:@{@"itemID" :p.itemID,
-                                  @"itemNumber" : p.itemNumber,
-                                  @"itemGroup" :p.itemGroup,
-                                  @"name":p.name,
-                                  @"quantity":p.quantity,
-                                  @"amount":p.amount,
-                                  @"amountESA": p.amountESA }];
-      }
+        if (p.itemID != nil) {
+            
+            [unselArray addObject:@{@"itemID" :p.itemID,
+                                    @"itemNumber" : p.itemNumber,
+                                    @"itemGroup" :p.itemGroup,
+                                    @"name":p.name,
+                                    @"quantity":p.quantity,
+                                    @"amount":p.amount,
+                                    @"amountESA": p.amountESA }];
+        }
         
     }
     
-   
+    
     NSMutableDictionary *customerInfo = [[NSMutableDictionary alloc]initWithDictionary: job.swapiCustomerInfo];
     
     UIImage *image = [UIImage imageWithData:[DataLoader sharedInstance].currentUser.activeJob.signatureFile];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (signature == nil)  //signature was removed
         signature = @"";
-   
+    
     /*(total paid, club membership, discount, deposit*/
     NSMutableArray *aitems = self.selectedServiceOptionsDict[@"removedItems"];
     CGFloat totalPriceNormal = 0;
     CGFloat totalPriceESA = 0;
     if (aitems.count) {
-     
+        
         for (PricebookItem *p in aitems) {
             int totalQuantity = 1;
             if ([p.quantity intValue] > 1)
-              totalQuantity = [p.quantity intValue];
-          
+                totalQuantity = [p.quantity intValue];
+            
             totalPriceNormal += p.amount.floatValue* totalQuantity;
             totalPriceESA += p.amountESA.floatValue* totalQuantity;
         }
     }
-
-  
+    
+    
     int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
     
     
@@ -326,38 +355,22 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     __weak __typeof(self)weakSelf = self;
     
     weakSelf.invoiceData = dict;
-  
- [[DataLoader sharedInstance] postInvoice:dict requestingPreview:1 onSuccess:^(NSString *message) {
-     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
- ///    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
- ///    [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
-     
-     self.invoicePreviewString = message;
-     [self performSegueWithIdentifier:@"showInvoicePreviewVC" sender:self];
-     
- } onError:^(NSError *error) {
-      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
- }];
-}
-
-
-- (IBAction)agreeBtnClicked:(id)sender {
-    UIButton *button = sender;
     
-    if (!button.selected)
-        button.selected = YES;
-    else
-        button.selected = NO;
+    [[DataLoader sharedInstance] postInvoice:dict requestingPreview:1 onSuccess:^(NSString *message) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        ///    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        ///    [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
+        
+        self.invoicePreviewString = message;
+        [self performSegueWithIdentifier:@"showInvoicePreviewVC" sender:self];
+        
+    } onError:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
 }
 
 
-- (IBAction)sendByEmailButton:(id)sender {
-    
-    if (!self.btnSendByEmail.selected)
-        self.btnSendByEmail.selected = YES;
-    else
-        self.btnSendByEmail.selected = NO;
-}
+
 
 
 #pragma mark - SWR Button
@@ -491,6 +504,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 - (IBAction)closeURLButtonClicked:(id)sender {
     self.hiddenURLView.hidden = YES;
+}
+
+
+#pragma mark - Unwind Segues
+- (IBAction)unwindToNewCustumerChoicePage:(UIStoryboardSegue *)unwindSegue
+{
+    if ([unwindSegue.identifier isEqualToString:@"unwindToNewCustumerChoicePageFromEmailVerification"]){
+        [self setInvoicePreview];
+    }
 }
 
 

@@ -2,7 +2,7 @@
 //  Job+CoreDataProperties.h
 //  HvacTek
 //
-//  Created by Dorin on 2/17/16.
+//  Created by Dorin on 5/19/16.
 //  Copyright © 2016 Unifeyed. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,11 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Job (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) id addedCustomRepairsOptions;
 @property (nullable, nonatomic, retain) NSNumber *amount;
 @property (nullable, nonatomic, retain) NSDate *completionTime;
 @property (nullable, nonatomic, retain) id custumerQuestions;
 @property (nullable, nonatomic, retain) NSDate *dispatchTime;
 @property (nullable, nonatomic, retain) NSDate *endTimeQuestions;
+@property (nullable, nonatomic, retain) NSString *initialCostumerRR;
+@property (nullable, nonatomic, retain) NSString *initialTechRR;
 @property (nullable, nonatomic, retain) NSString *jobID;
 @property (nullable, nonatomic, retain) NSNumber *jobStatus;
 @property (nullable, nonatomic, retain) NSNumber *price;
@@ -31,10 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *startTimeQuestions;
 @property (nullable, nonatomic, retain) id swapiJobInfo;
 @property (nullable, nonatomic, retain) id techObservations;
-@property (nullable, nonatomic, retain) id unselectedServiceOptiunons;
 @property (nullable, nonatomic, retain) NSString *totalInvestmentsRR;
-@property (nullable, nonatomic, retain) NSString *initialTechRR;
-@property (nullable, nonatomic, retain) NSString *initialCostumerRR;
+@property (nullable, nonatomic, retain) id unselectedServiceOptiunons;
 @property (nullable, nonatomic, retain) NSString *utilityOverpaymentHVAC;
 @property (nullable, nonatomic, retain) User *user;
 

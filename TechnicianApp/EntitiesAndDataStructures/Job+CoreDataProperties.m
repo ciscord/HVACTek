@@ -2,7 +2,7 @@
 //  Job+CoreDataProperties.m
 //  HvacTek
 //
-//  Created by Dorin on 2/17/16.
+//  Created by Dorin on 5/19/16.
 //  Copyright © 2016 Unifeyed. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,11 +13,14 @@
 
 @implementation Job (CoreDataProperties)
 
+@dynamic addedCustomRepairsOptions;
 @dynamic amount;
 @dynamic completionTime;
 @dynamic custumerQuestions;
 @dynamic dispatchTime;
 @dynamic endTimeQuestions;
+@dynamic initialCostumerRR;
+@dynamic initialTechRR;
 @dynamic jobID;
 @dynamic jobStatus;
 @dynamic price;
@@ -29,10 +32,8 @@
 @dynamic startTimeQuestions;
 @dynamic swapiJobInfo;
 @dynamic techObservations;
-@dynamic unselectedServiceOptiunons;
 @dynamic totalInvestmentsRR;
-@dynamic initialTechRR;
-@dynamic initialCostumerRR;
+@dynamic unselectedServiceOptiunons;
 @dynamic utilityOverpaymentHVAC;
 @dynamic user;
 

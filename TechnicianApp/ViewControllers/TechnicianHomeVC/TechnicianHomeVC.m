@@ -103,7 +103,6 @@
             self.edtJobId.text =[[[DataLoader sharedInstance] currentUser] activeJob].jobID;
             [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
             [[[DataLoader sharedInstance] selectedRepairTemporarOptions] removeAllObjects];
-            [[[DataLoader sharedInstance] addedCustomRepairsOptions] removeAllObjects];
         }
         else
         {

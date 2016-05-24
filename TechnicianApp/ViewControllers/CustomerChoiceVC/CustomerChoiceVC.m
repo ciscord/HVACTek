@@ -14,6 +14,7 @@
 #import "CustomerChoiceCell.h"
 #import "NewCustomerChoiceVC.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "AdditionalInfoPageVC.h"
 
 @interface CustomerChoiceVC ()
 
@@ -34,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *helperView;
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *videoLibraryButton;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UILabel *mainDescriptLabel;
 @property (weak, nonatomic) IBOutlet UIView *separator1;
@@ -136,6 +138,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.videoLibraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -172,8 +175,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 }
 
 
+
+#pragma mark - Button Actions
+- (IBAction)videoLibraryClicked:(id)sender {
+
+}
+
+
 - (IBAction)btnContinue:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"newCustomerChoiceSegue" sender:self];
+    [self performSegueWithIdentifier:@"showAdditionalInfoPageVC" sender:self];
 }
 
 
@@ -474,12 +484,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"newCustomerChoiceSegue"]) {
-        NewCustomerChoiceVC *vc = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"showAdditionalInfoPageVC"]) {
+        AdditionalInfoPageVC *vc = [segue destinationViewController];
         vc.isDiscounted       = self.isDiscounted;
         vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
         vc.unselectedOptionsArray = self.unusedServiceOptions;
-        //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
         vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
         vc.initialTotal = self.subtotaPriceLabel.text;
         if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
@@ -487,27 +496,46 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         }else{
             vc.paymentValue = @"$0";
         }
-        
-        
-        if (self.isOnlyDiagnostic) {
-            
-            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-            
-            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-            
-            NSDictionary *d = @{
-                                @"items" : @[diagnosticOnlyItemNoTitle],
-                                @"title" : @"Diagnostic Only"
-                                };
-            
-            vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
-        }
     }
     
+    
+    
+    /*
+     
+     if ([segue.identifier isEqualToString:@"newCustomerChoiceSegue"]) {
+     NewCustomerChoiceVC *vc = [segue destinationViewController];
+     vc.isDiscounted       = self.isDiscounted;
+     vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
+     vc.unselectedOptionsArray = self.unusedServiceOptions;
+     //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
+     vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
+     vc.initialTotal = self.subtotaPriceLabel.text;
+     if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
+     vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
+     }else{
+     vc.paymentValue = @"$0";
+     }
+     
+     
+     if (self.isOnlyDiagnostic) {
+     
+     PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
+     
+     PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
+     diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
+     diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
+     diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
+     diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
+     
+     NSDictionary *d = @{
+     @"items" : @[diagnosticOnlyItemNoTitle],
+     @"title" : @"Diagnostic Only"
+     };
+     
+     vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
+     }
+     }
+     */
     
 }
 

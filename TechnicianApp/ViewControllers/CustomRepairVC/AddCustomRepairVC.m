@@ -63,30 +63,37 @@
                                             itemGroup:@""
                                                  name:self.titleTextField.text
                                              quantity:@""
-                                               amount:@([[self cutString:self.priceTextField.text] intValue] * 0.85)
-                                         andAmountESA:[NSNumber numberWithInt:[[self cutString:self.priceTextField.text] intValue]]];
+                                               amount:@([[self getPriceAmountFromString:self.priceTextField.text] intValue] * 0.85)
+                                         andAmountESA:[NSNumber numberWithInt:[[self getPriceAmountFromString:self.priceTextField.text] intValue]]];
     
-    if ([DataLoader sharedInstance].addedCustomRepairsOptions.count > 0) {
-        [[DataLoader sharedInstance].addedCustomRepairsOptions addObject:priceBook];
+    //NSArray * questionsTech = [[[[[DataLoader sharedInstance] currentUser] activeJob] techObservations] mutableCopy];
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0) {
+        [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] addObject:priceBook];
     }else{
-        [DataLoader sharedInstance].addedCustomRepairsOptions = [[NSMutableArray alloc] initWithObjects:priceBook, nil];
+        [[[DataLoader sharedInstance] currentUser] activeJob].addedCustomRepairsOptions = [[NSMutableArray alloc] initWithObjects:priceBook, nil];
     }
+    
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    [job.managedObjectContext save];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddCustomRepairOptionNotification" object:nil];
 }
 
-- (NSString *)cutString:(NSString*)string {
+
+-(NSNumber *)getPriceAmountFromString:(NSString *)priceString {
     
-    NSString *newText;
+    NSLocale *local = [NSLocale currentLocale];
+    NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
+    [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [paymentFormatter setLocale:local];
+    [paymentFormatter setGeneratesDecimalNumbers:NO];
+    [paymentFormatter setMaximumFractionDigits:0];
     
-    if (string.length > 1){
-        newText = [string substringFromIndex:1];
-    }else{
-        newText = @"0";
-    }
+    NSNumber *number = [paymentFormatter numberFromString:priceString];
     
-    return newText;
+    return number;
 }
+
 
 #pragma mark - UITextField Delegates
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -100,15 +107,54 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if (textField == self.priceTextField) {
-        NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        if (![newText hasPrefix:@"$"])
-        {
-            return NO;
-        }
-    }
+//    if (textField == self.priceTextField) {
+//        NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//        if (![newText hasPrefix:@"$"])
+//        {
+//            return NO;
+//        }
+//    }
+//    
+//    return YES;
     
-    return YES;
+    
+    
+    if (textField == self.priceTextField) {
+        NSMutableString *mutableString = [[textField text] mutableCopy];
+        
+        NSLocale *local = [NSLocale currentLocale];
+        NSNumberFormatter *paymentFormatter = [[NSNumberFormatter alloc] init];
+        [paymentFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [paymentFormatter setLocale:local];
+        [paymentFormatter setGeneratesDecimalNumbers:NO];
+        [paymentFormatter setMaximumFractionDigits:0];
+        
+        if ([mutableString length] == 0) {
+            [mutableString setString:[local objectForKey:NSLocaleCurrencySymbol]];
+            [mutableString appendString:string];
+        } else {
+            if ([string length] > 0) {
+                [mutableString insertString:string atIndex:range.location];
+            } else {
+                [mutableString deleteCharactersInRange:range];
+            }
+        }
+        
+        NSString *penceString = [[[mutableString stringByReplacingOccurrencesOfString:
+                                   [local objectForKey:NSLocaleDecimalSeparator] withString:@""]
+                                  stringByReplacingOccurrencesOfString:
+                                  [local objectForKey:NSLocaleCurrencySymbol] withString:@""]
+                                 stringByReplacingOccurrencesOfString:
+                                 [local objectForKey:NSLocaleGroupingSeparator] withString:@""];
+        
+        NSNumber *someAmount = [NSNumber numberWithDouble:[penceString doubleValue]];
+        [textField setText:[paymentFormatter stringFromNumber:someAmount]];
+        
+        
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 
