@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TechnicianApp/ViewControllers/EmailVerificationVC/EmailVerificationVC.m"
-            timestampString = "485792814.838912"
+            timestampString = "485794182.965887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "-updateJobInfoWithDictionary:andJob:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TechnicianApp/ViewControllers/TechnicianHomeVC/TechnicianHomeVC.m"
+            timestampString = "485793621.651042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-checkJobStatus"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

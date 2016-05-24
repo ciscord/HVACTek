@@ -52,15 +52,7 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     NSDictionary *jobInfo = job.swapiJobInfo;
     self.emailTextField.text = jobInfo[@"Email"];
-    [self configureEmailFieldState];
 }
-
-- (void)configureEmailFieldState {
-    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-    NSDictionary *jobInfo = job.swapiJobInfo;
-    self.sentButton.enabled = ![self.emailTextField.text isEqualToString:jobInfo[@"Email"]];
-}
-
 
 
 #pragma mark - Button Actions
@@ -71,7 +63,14 @@
 
 - (IBAction)sentClicked:(id)sender {
     if ([self validateEmailWithString:self.emailTextField.text]) {
-        [self updateUserAccountInfo];
+        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+        NSDictionary *jobInfo = job.swapiJobInfo;
+        if ([self.emailTextField.text isEqualToString:jobInfo[@"Email"]]) {
+            [self performSegueWithIdentifier:@"unwindToNewCustumerChoicePageFromEmailVerification" sender:self];
+        }else{
+            [self updateUserAccountInfo];
+        }
+        
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please provide a valid email address." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
@@ -99,7 +98,6 @@
         self.buttonsView.hidden = editing;
         self.saveButton.hidden = !editing;
         self.emailTextField.enabled = editing;
-        [self configureEmailFieldState];
     }];
 }
 
