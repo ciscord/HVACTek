@@ -94,6 +94,8 @@
 		520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CC1B8D8D830035909C /* ESABenefitsVC.m */; };
 		520159D01B8D9C590035909C /* AgendaPictureRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CF1B8D9C590035909C /* AgendaPictureRoundView.m */; };
 		5209A1AA1CEC921B0026ED6D /* InvoicePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209A1A91CEC921B0026ED6D /* InvoicePreviewVC.m */; };
+		521984CB1CF5A460006D131D /* CHDropDownTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 521984C81CF5A460006D131D /* CHDropDownTextField.m */; };
+		521984CC1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 521984CA1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m */; };
 		521DB6B31C107063003E40D2 /* EditServiceOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 521DB6B21C107063003E40D2 /* EditServiceOptionsVC.m */; };
 		521DB6B71C10707A003E40D2 /* EditServiceOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 521DB6B51C10707A003E40D2 /* EditServiceOptionsCell.m */; };
 		521DB6B81C10707A003E40D2 /* EditServiceOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 521DB6B61C10707A003E40D2 /* EditServiceOptionsCell.xib */; };
@@ -109,6 +111,7 @@
 		5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247C5261CEDB62700670D4A /* AdditionalInfoPageVC.m */; };
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
+		5251C4201CF584F300CECB17 /* AddCustomRepairCalculationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5251C41F1CF584F300CECB17 /* AddCustomRepairCalculationsVC.m */; };
 		5264C30D1C1977A2009728E0 /* RRQuestionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */; };
 		5265782C1C6A0A2500EC1AA5 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 526578251C6A0A2500EC1AA5 /* Item+CoreDataProperties.m */; };
 		5265782D1C6A0A2500EC1AA5 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 526578271C6A0A2500EC1AA5 /* Item.m */; };
@@ -154,8 +157,6 @@
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
 		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
 		AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */; };
-		AAE7D16E1A39CFBA00F95495 /* CHDropDownTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7D16B1A39CFBA00F95495 /* CHDropDownTextField.m */; };
-		AAE7D16F1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7D16D1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m */; };
 		D29AD9A919756FF40059565A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29AD9A819756FF40059565A /* MessageUI.framework */; };
 		D29F06FF197023CA0020D83C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29F06FE197023CA0020D83C /* Foundation.framework */; };
 		D29F0701197023CA0020D83C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29F0700197023CA0020D83C /* CoreGraphics.framework */; };
@@ -312,6 +313,10 @@
 		5209A1A81CEC921B0026ED6D /* InvoicePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoicePreviewVC.h; sourceTree = "<group>"; };
 		5209A1A91CEC921B0026ED6D /* InvoicePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoicePreviewVC.m; sourceTree = "<group>"; };
 		52125DA91C57BD2500A0190F /* SignatureModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 6.xcdatamodel"; sourceTree = "<group>"; };
+		521984C71CF5A460006D131D /* CHDropDownTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextField.h; sourceTree = "<group>"; };
+		521984C81CF5A460006D131D /* CHDropDownTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDropDownTextField.m; sourceTree = "<group>"; };
+		521984C91CF5A460006D131D /* CHDropDownTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		521984CA1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDropDownTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		521DB6B11C107063003E40D2 /* EditServiceOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditServiceOptionsVC.h; sourceTree = "<group>"; };
 		521DB6B21C107063003E40D2 /* EditServiceOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditServiceOptionsVC.m; sourceTree = "<group>"; };
 		521DB6B41C10707A003E40D2 /* EditServiceOptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditServiceOptionsCell.h; sourceTree = "<group>"; };
@@ -340,6 +345,8 @@
 		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
 		524FDFF41B79046100480987 /* CustomerChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerChoiceCell.m; sourceTree = "<group>"; };
 		524FDFF51B79046100480987 /* CustomerChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerChoiceCell.xib; sourceTree = "<group>"; };
+		5251C41E1CF584F300CECB17 /* AddCustomRepairCalculationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCustomRepairCalculationsVC.h; sourceTree = "<group>"; };
+		5251C41F1CF584F300CECB17 /* AddCustomRepairCalculationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCustomRepairCalculationsVC.m; sourceTree = "<group>"; };
 		5264C30C1C1977A2009728E0 /* RRQuestionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RRQuestionsView.xib; sourceTree = "<group>"; };
 		526578241C6A0A2500EC1AA5 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
 		526578251C6A0A2500EC1AA5 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -430,10 +437,6 @@
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AA23D6471A379B4B00703952 /* TechnicianDebriefVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnicianDebriefVC.h; sourceTree = "<group>"; };
 		AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnicianDebriefVC.m; sourceTree = "<group>"; };
-		AAE7D16A1A39CFBA00F95495 /* CHDropDownTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextField.h; sourceTree = "<group>"; };
-		AAE7D16B1A39CFBA00F95495 /* CHDropDownTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDropDownTextField.m; sourceTree = "<group>"; };
-		AAE7D16C1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDropDownTextFieldTableViewCell.h; sourceTree = "<group>"; };
-		AAE7D16D1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDropDownTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		D29AD9A819756FF40059565A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D29F06FB197023CA0020D83C /* HvacTek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HvacTek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F06FE197023CA0020D83C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -967,6 +970,8 @@
 		524037D41CEB48D6008BF125 /* CustomRepairVC */ = {
 			isa = PBXGroup;
 			children = (
+				5251C41E1CF584F300CECB17 /* AddCustomRepairCalculationsVC.h */,
+				5251C41F1CF584F300CECB17 /* AddCustomRepairCalculationsVC.m */,
 				524037D51CEB4932008BF125 /* AddCustomRepairVC.h */,
 				524037D61CEB4932008BF125 /* AddCustomRepairVC.m */,
 			);
@@ -1148,10 +1153,10 @@
 		AAE7D1691A39CFBA00F95495 /* CHDropDownTextField */ = {
 			isa = PBXGroup;
 			children = (
-				AAE7D16A1A39CFBA00F95495 /* CHDropDownTextField.h */,
-				AAE7D16B1A39CFBA00F95495 /* CHDropDownTextField.m */,
-				AAE7D16C1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.h */,
-				AAE7D16D1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m */,
+				521984C71CF5A460006D131D /* CHDropDownTextField.h */,
+				521984C81CF5A460006D131D /* CHDropDownTextField.m */,
+				521984C91CF5A460006D131D /* CHDropDownTextFieldTableViewCell.h */,
+				521984CA1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m */,
 			);
 			path = CHDropDownTextField;
 			sourceTree = "<group>";
@@ -1400,11 +1405,11 @@
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
 				52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */,
+				521984CC1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m in Sources */,
 				5209A1AA1CEC921B0026ED6D /* InvoicePreviewVC.m in Sources */,
 				75D73F101A387DCD0051143C /* SystemInfoHeaderView.m in Sources */,
 				4F11D4041AA77417007FC0A8 /* User+Functional.m in Sources */,
 				4F11D3FD1AA772E4007FC0A8 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
-				AAE7D16F1A39CFBA00F95495 /* CHDropDownTextFieldTableViewCell.m in Sources */,
 				91BA9A041B8DE09F005EA4EA /* CartCell.m in Sources */,
 				4F11D3E31AA63F84007FC0A8 /* ViewOptionsVC.m in Sources */,
 				4FD2EB871A361A0F0056D4C4 /* HardTableViewCell.m in Sources */,
@@ -1429,7 +1434,6 @@
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
 				75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */,
-				AAE7D16E1A39CFBA00F95495 /* CHDropDownTextField.m in Sources */,
 				52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */,
 				4FD2EB801A361A0F0056D4C4 /* HeaderTableViewCell.m in Sources */,
 				75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */,
@@ -1452,6 +1456,7 @@
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
 				52A7D37F1CF44F4700645B6D /* StringBetweenStrings.m in Sources */,
 				4F11D3E71AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld in Sources */,
+				5251C4201CF584F300CECB17 /* AddCustomRepairCalculationsVC.m in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
 				52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
@@ -1492,6 +1497,7 @@
 				4FD2EBAB1A376DF20056D4C4 /* TechnicianHomeVC.m in Sources */,
 				5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */,
 				4FD2EB7F1A361A0F0056D4C4 /* MenuViewController.m in Sources */,
+				521984CB1CF5A460006D131D /* CHDropDownTextField.m in Sources */,
 				4F576FB81AC70E1500F0F8FB /* SServiceHistory.m in Sources */,
 				4FD2EB661A361A0F0056D4C4 /* CartViewController.m in Sources */,
 			);

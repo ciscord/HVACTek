@@ -16,6 +16,9 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -449,7 +452,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z6M-DC-dL6">
-                                        <rect key="frame" x="63" y="251" width="170" height="41"/>
+                                        <rect key="frame" x="289" y="251" width="170" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Save">
@@ -489,13 +492,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="Tm5-Ei-sz5" id="iUH-i4-27f"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8qp-uH-maO">
-                                        <rect key="frame" x="289" y="250" width="170" height="41"/>
+                                        <rect key="frame" x="63" y="250" width="170" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Cancel">
@@ -522,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcE-GS-yHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-233" y="2002"/>
+            <point key="canvasLocation" x="-243" y="2002"/>
         </scene>
         <!--Email VerificationVC-->
         <scene sceneID="AeU-Fl-IT2">
@@ -3463,7 +3466,7 @@ you must debrief from job</string>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="customRepairClicked:" destination="fbm-eM-mve" eventType="touchUpInside" id="7Qh-mz-osN"/>
-                                            <segue destination="Tm5-Ei-sz5" kind="modal" id="LDL-7a-lwC"/>
+                                            <segue destination="Kiu-pi-WnB" kind="modal" id="UMS-lD-zMB"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select options from the choices below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KSl-e9-Es8">
@@ -3520,6 +3523,7 @@ you must debrief from job</string>
                         <outlet property="tfSearch" destination="Xxp-tb-n7a" id="ksH-fD-eer"/>
                         <outlet property="titleLabel" destination="KSl-e9-Es8" id="Emh-EY-YFM"/>
                         <segue destination="i4C-Qf-Qys" kind="push" identifier="goSortingFindings" id="Lur-lH-80j"/>
+                        <segue destination="Tm5-Ei-sz5" kind="modal" identifier="showAddCustomRepairsVC" id="BJS-Yq-wNx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXv-X5-v8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4858,6 +4862,135 @@ you must debrief from job</string>
             </objects>
             <point key="canvasLocation" x="4238" y="3206"/>
         </scene>
+        <!--Drop Down Delegate-->
+        <scene sceneID="8Vx-92-XJu">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="Kiu-pi-WnB" customClass="AddCustomRepairCalculationsVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A3M-s7-PWG">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="Fmx-R8-0dJ" customClass="RoundCornerView">
+                                <rect key="frame" x="131" y="287" width="522" height="474"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Repair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n7N-pC-lUm">
+                                        <rect key="frame" x="97" y="16" width="326" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" id="Rdr-18-Fjv">
+                                        <rect key="frame" x="20" y="411" width="481" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="4HY-in-zHb">
+                                        <rect key="frame" x="260" y="418" width="1" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="k5h-35-Irm">
+                                        <rect key="frame" x="20" y="65" width="481" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gfE-RN-llN">
+                                        <rect key="frame" x="63" y="421" width="170" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backClicked:" destination="Kiu-pi-WnB" eventType="touchUpInside" id="Nbc-yK-nck"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Part Cost" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0WT-o1-39R">
+                                        <rect key="frame" x="57" y="97" width="185" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$" textAlignment="center" minimumFontSize="17" id="3Mk-Dz-qO5">
+                                        <rect key="frame" x="51" y="130" width="420" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Kiu-pi-WnB" id="MkS-vM-cYU"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BPc-tB-LTj">
+                                        <rect key="frame" x="289" y="421" width="170" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueClicked:" destination="Kiu-pi-WnB" eventType="touchUpInside" id="L28-yM-ZyT"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Freight Estimate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaP-ip-CMf">
+                                        <rect key="frame" x="57" y="193" width="185" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="$" textAlignment="center" minimumFontSize="17" id="bAo-lE-3mt">
+                                        <rect key="frame" x="50" y="226" width="420" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Kiu-pi-WnB" id="6Ty-4I-PKf"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repair Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a8w-QH-Kz9">
+                                        <rect key="frame" x="57" y="289" width="185" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Select Repair Time" textAlignment="center" minimumFontSize="17" id="p7k-LN-hOX" customClass="CHDropDownTextField">
+                                <rect key="frame" x="181" y="609" width="420" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Kiu-pi-WnB" id="6wF-CC-TEV"/>
+                                    <outlet property="dropDownDelegate" destination="Kiu-pi-WnB" id="sUe-mH-RoU"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <navigationItem key="navigationItem" id="83u-Hk-fUp"/>
+                    <connections>
+                        <outlet property="costField" destination="3Mk-Dz-qO5" id="JlK-ia-evW"/>
+                        <outlet property="estimateField" destination="bAo-lE-3mt" id="I4V-TT-TqJ"/>
+                        <outlet property="repairDropDown" destination="p7k-LN-hOX" id="Ih2-aJ-Q0f"/>
+                        <outlet property="roundedView" destination="Fmx-R8-0dJ" id="LJw-lm-4DO"/>
+                        <segue destination="Smi-Q7-NLl" kind="unwind" identifier="unwindToSummaryOfFindingsFromCalculations" animates="NO" unwindAction="unwindToSummaryOfFindings:" id="TWR-8q-BXC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K8X-iy-aqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Smi-Q7-NLl" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-243" y="734"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Signature Stop Image" width="60" height="60"/>
@@ -4878,12 +5011,12 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cdo-cC-vmU"/>
-        <segue reference="5VJ-cj-s1Y"/>
         <segue reference="6og-9q-Y4v"/>
-        <segue reference="xdW-7q-blD"/>
-        <segue reference="mwd-zf-CaD"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="mwd-zf-CaD"/>
+        <segue reference="xdW-7q-blD"/>
         <segue reference="5xF-WX-Qsy"/>
+        <segue reference="5VJ-cj-s1Y"/>
+        <segue reference="O98-Ps-4c5"/>
     </inferredMetricsTieBreakers>
 </document>

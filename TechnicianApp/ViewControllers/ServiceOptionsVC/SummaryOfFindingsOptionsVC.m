@@ -11,6 +11,7 @@
 #import "SummaryOfFindingsVC.h"
 #import "PricebookItem.h"
 #import "SortFindingsVC.h"
+#import "AddCustomRepairVC.h"
 
 
 @interface SummaryOfFindingsOptionsVC ()
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSArray               *allOptions;
 @property (nonatomic, strong) NSMutableArray        *filteredOptions;
 @property (nonatomic, strong) NSMutableArray        *selectedOptions;
+
 @property (weak, nonatomic) IBOutlet UITextField    *tfSearch;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
@@ -88,27 +90,15 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 
 
 
-#pragma mark - Color Scheme
-- (void)configureColorScheme {
-    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.customRepairButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
-    self.tfSearch.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.tfSearch.layer.borderWidth   = 1.0;
-    self.tfSearch.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-}
-
-
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-//    if (self.isiPadCommonRepairsOptions == NO) {
-//        if (self.isMovingFromParentViewController) {
-//            [DataLoader saveOptionsLocal:self.selectedOptions];
-//        }
-//    }
+    //    if (self.isiPadCommonRepairsOptions == NO) {
+    //        if (self.isMovingFromParentViewController) {
+    //            [DataLoader saveOptionsLocal:self.selectedOptions];
+    //        }
+    //    }
     if (self.isMovingFromParentViewController) {
         [DataLoader sharedInstance].selectedRepairTemporarOptions = self.selectedOptions.mutableCopy;
     }
@@ -121,6 +111,18 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Color Scheme
+- (void)configureColorScheme {
+    self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.customRepairButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.tfSearch.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
+    self.tfSearch.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.tfSearch.layer.borderWidth   = 1.0;
+    self.tfSearch.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
 
 
@@ -273,6 +275,28 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 }
 
 
+#pragma mark - Unwind Segues
+- (IBAction)unwindToSummaryOfFindings:(UIStoryboardSegue *)unwindSegue
+{
+    if ([unwindSegue.identifier isEqualToString:@"unwindToSummaryOfFindingsFromCalculations"]){
+        [self performSelector: @selector(showViewControllerAfterUnwind) withObject: nil afterDelay: 0];
+    }
+//    if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromInvoiceBtn"]){
+//        self.isEmptyOptionSelected = YES;
+//        self.isInvoiceRRSelected = YES;
+//        self.segueIdentifierToUnwindTo = @"customerChoiceSegueAfterUnwind";
+//    }
+    
+    //
+    //
+}
+
+
+-(void)showViewControllerAfterUnwind
+{
+    [self performSegueWithIdentifier:@"showAddCustomRepairsVC" sender:self];
+}
+
 
 
 #pragma mark - Navigation
@@ -300,6 +324,12 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 //      vc.optionsDisplayType = odtEditing;
 //      vc.priceBookAndServiceOptions = self.selectedOptions;
 //    }
+    
+    
+    if ([segue.identifier isEqualToString:@"showAddCustomRepairsVC"]) {
+        AddCustomRepairVC *vc = [segue destinationViewController];
+        vc.defaultPrice = self.calculatedCustomRepairPrice;
+    }
 }
 
 

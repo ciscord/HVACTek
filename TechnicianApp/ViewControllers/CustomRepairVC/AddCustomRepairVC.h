@@ -13,4 +13,6 @@
 
 @interface AddCustomRepairVC : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, strong) NSString *defaultPrice;
+
 @end

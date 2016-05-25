@@ -21,8 +21,13 @@
     [super viewDidLoad];
     
     [self configureColorScheme];
+    [self configureController];
 }
 
+
+- (void)configureController {
+    self.priceTextField.text = self.defaultPrice;
+}
 
 
 #pragma mark - Color Scheme
@@ -149,7 +154,6 @@
         
         NSNumber *someAmount = [NSNumber numberWithDouble:[penceString doubleValue]];
         [textField setText:[paymentFormatter stringFromNumber:someAmount]];
-        
         
         return NO;
     }else{

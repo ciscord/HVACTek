@@ -148,14 +148,38 @@ static CGFloat const CHDropDownTableViewSidePadding = 0;
     // UITextField's layoutSubviews doesn't play well with adding custom constraints.
     // This causes a crash when popping a VC that has this textfield as the first responder.
     // The cheapest way out is to manually layout the drop-down table.
-    if ([self.subviews containsObject:self.dropDownTableView]) {
-    CGRect frame = CGRectZero;
-    frame.origin.x = CHDropDownTableViewSidePadding;
-    frame.origin.y = CGRectGetHeight(self.bounds)+self.superview.frame.origin.y;
-    frame.size.width = CGRectGetWidth(self.bounds) - (CHDropDownTableViewSidePadding * 2);
-    frame.size.height = self.dropDownTableVisibleRowCount * CHDropDownTextFieldTableViewCellHeight;
-    self.dropDownTableView.frame = frame;
+    
+//    CGRect frame = CGRectZero;
+//    frame.origin.x = CHDropDownTableViewSidePadding;
+//    if ([self.subviews containsObject:self.dropDownTableView]) {
+//        frame.origin.y = CGRectGetHeight(self.bounds)+self.superview.frame.origin.y;
+//    }else{
+//        frame.origin.y = CGRectGetHeight(self.bounds);
+//    }
+//    frame.size.width = CGRectGetWidth(self.bounds) - (CHDropDownTableViewSidePadding * 2);
+//    frame.size.height = self.dropDownTableVisibleRowCount * CHDropDownTextFieldTableViewCellHeight;
+//    self.dropDownTableView.frame = frame;
+
+    
+    if (self.tag != 893457) {
+        if ([self.subviews containsObject:self.dropDownTableView]) {
+            CGRect frame = CGRectZero;
+            frame.origin.x = CHDropDownTableViewSidePadding;
+            frame.origin.y = CGRectGetHeight(self.bounds)+self.superview.frame.origin.y;
+            frame.size.width = CGRectGetWidth(self.bounds) - (CHDropDownTableViewSidePadding * 2);
+            frame.size.height = self.dropDownTableVisibleRowCount * CHDropDownTextFieldTableViewCellHeight;
+            self.dropDownTableView.frame = frame;
+        }
+    }else{
+        CGRect frame = CGRectZero;
+        frame.origin.x = CHDropDownTableViewSidePadding;
+        frame.origin.y = CGRectGetHeight(self.bounds);
+        frame.size.width = CGRectGetWidth(self.bounds) - (CHDropDownTableViewSidePadding * 2);
+        frame.size.height = self.dropDownTableVisibleRowCount * CHDropDownTextFieldTableViewCellHeight;
+        self.dropDownTableView.frame = frame;
     }
+
+    
 }
 
 - (BOOL)becomeFirstResponder {
@@ -167,7 +191,9 @@ static CGFloat const CHDropDownTableViewSidePadding = 0;
 - (void)addAndDisplayDropdown {
     
     [self addSubview:self.dropDownTableView];
-    self.dropDownTableView.hidden=YES;
+    if (self.tag != 893457) {
+        self.dropDownTableView.hidden=YES;
+    }
     [self layoutDropDownTableView];
     [self.dropDownTableView reloadData];
 }
