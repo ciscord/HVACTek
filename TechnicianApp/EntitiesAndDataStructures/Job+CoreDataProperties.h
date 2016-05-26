@@ -2,7 +2,7 @@
 //  Job+CoreDataProperties.h
 //  HvacTek
 //
-//  Created by Dorin on 5/19/16.
+//  Created by Dorin on 5/26/16.
 //  Copyright © 2016 Unifeyed. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *totalInvestmentsRR;
 @property (nullable, nonatomic, retain) id unselectedServiceOptiunons;
 @property (nullable, nonatomic, retain) NSString *utilityOverpaymentHVAC;
+@property (nullable, nonatomic, retain) id additionalInfoData;
 @property (nullable, nonatomic, retain) User *user;
 
 @end

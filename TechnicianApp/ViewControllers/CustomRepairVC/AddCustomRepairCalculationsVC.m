@@ -8,6 +8,7 @@
 
 #import "AddCustomRepairCalculationsVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface AddCustomRepairCalculationsVC ()
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *estimateField;
 @property (weak, nonatomic) IBOutlet RoundCornerView *roundedView;
 @property (weak, nonatomic) IBOutlet CHDropDownTextField *repairDropDown;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *keyboardAvoiding;
 
 @property (nonatomic, strong) NSArray *timeOptionsArray;
 @property (nonatomic, strong) NSString *calculatedString;
@@ -57,6 +59,8 @@
     self.repairDropDown.dropDownTableView.layer.borderWidth = 1.0;
     self.repairDropDown.dropDownTableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.repairDropDown.tag = 893457;
+    
+    self.keyboardAvoiding.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 }
 
 
@@ -186,8 +190,13 @@
     if (textField == self.costField || textField == self.estimateField)
         if (textField.text.length  == 0)
             textField.text = @"$";
+    
+    self.keyboardAvoiding.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 150);
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.keyboardAvoiding.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+}
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

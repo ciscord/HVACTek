@@ -16,6 +16,8 @@
     self.checkButton.layer.borderWidth   = 1.0;
     self.checkButton.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.checkButton.backgroundColor     = [UIColor whiteColor];
+    self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 - (IBAction)checkButtonTouchUp:(UIButton *)sender {

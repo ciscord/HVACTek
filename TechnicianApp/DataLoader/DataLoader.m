@@ -68,7 +68,7 @@ NSString *const ADD_REBATES      = @"addRebate";
 NSString *const DELETE_REBATES   = @"deleteRebate";
 NSString *const UPDATE_REBATES   = @"updateRebate";
 NSString *const ADD2CART_ITEMS   = @"add2cart";
-
+NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
 
 
 #define kStatusOK 1
@@ -647,6 +647,7 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
        }];
 }
 
+
 - (void)postInvoice:(NSMutableDictionary*)InvoiceInfo requestingPreview:(int)previewInt
           onSuccess:(void (^)(NSString *message))onSuccess
             onError:(void (^)(NSError *error))onError{
@@ -685,8 +686,6 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
                onError(error);
            }
        }];
-
-    
 }
 
 
@@ -712,6 +711,28 @@ NSString *const ADD2CART_ITEMS   = @"add2cart";
         onError(error);
       }
     }];
+}
+
+
+#pragma mark - AdditionalInfo Requests
+
+- (void)getAdditionalInfoOnSuccess:(void (^)(NSDictionary *infoDict))onSuccess
+                           onError:(void (^)(NSError *error))onError {
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self GET:ADDITIONAL_INFO parameters:@{}
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          if ([responseObject[@"status"] integerValue] == kStatusOK) {
+              NSDictionary *dict = responseObject[@"results"];
+              onSuccess(dict);
+          }
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          if (onError) {
+              onError(error);
+          }
+      }];
 }
 
 

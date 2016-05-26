@@ -329,6 +329,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
     
+    NSArray *additionalInfo = [[[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData] valueForKey:@"id"];
+    
     
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,
                             @"userCode" : [DataLoader sharedInstance].currentUser.userCode,
@@ -349,7 +351,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"serviceLevel" : [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]],
                             @"sendEmail":self.btnSendByEmail.selected ? @"1" : @"0",
                             @"signature" : signature,
-                            @"packageTotal" : [self cutSymbolOfString:self.initialTotal]
+                            @"packageTotal" : [self cutSymbolOfString:self.initialTotal],
+                            @"additional_info" : additionalInfo
                             };
     
     __weak __typeof(self)weakSelf = self;

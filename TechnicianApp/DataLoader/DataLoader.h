@@ -150,6 +150,12 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                    onError:(void (^)(NSError *error))onError;
 
 
+
+- (void)getAdditionalInfoOnSuccess:(void (^)(NSDictionary *infoDict))onSuccess
+                             onError:(void (^)(NSError *error))onError;
+
+
+
 //- (void)connectToSWAPIonSucces:(void (^)(NSString *message))onSuccess
 //                   onError:(void (^)(NSError *error))onError;
 

@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *infoTableView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+
+@property (strong, nonatomic) NSArray *additionalInfoArray;
+@property (strong, nonatomic) NSMutableArray *selectedArray;
 @end
 
 @implementation AdditionalInfoPageVC
@@ -27,12 +30,25 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     [super viewDidLoad];
     [self configureColorScheme];
     [self configureVC];
+    [self loadAdditionalInfo];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadAdditionalInfo {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
+        self.additionalInfoArray = infoDict[@"1"][@"rows"];
+        [self.infoTableView reloadData];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
 }
 
 
@@ -46,6 +62,12 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 -(void)configureVC {
     self.title = @"Customer's Choice";
     [self.infoTableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
+    
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData] count] > 0) {
+        self.selectedArray = [[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData];
+    }else{
+        self.selectedArray = [[NSMutableArray alloc] init];
+    }
 }
 
 
@@ -57,6 +79,9 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 
 
 - (IBAction)continueClicked:(id)sender {
+    [[[DataLoader sharedInstance] currentUser] activeJob].additionalInfoData = self.selectedArray;
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    [job.managedObjectContext save];
 }
 
 
@@ -66,10 +91,6 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
@@ -77,16 +98,26 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.additionalInfoArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    id selectedItem = self.additionalInfoArray[indexPath.row];
+    
     AdditionalInfoPageCells *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
+    cell.titleLabel.text = [self.additionalInfoArray objectAtIndex:indexPath.row][@"title"];
+    cell.descriptionLabel.text = [self.additionalInfoArray objectAtIndex:indexPath.row][@"description"];
+    cell.checkButton.selected = [self.selectedArray containsObject:selectedItem];
     [cell setOnCheckboxToggle:^(BOOL selected){
-        NSLog(@"selected");
+        if ([self.selectedArray containsObject:selectedItem]) {
+            [self.selectedArray removeObject:selectedItem];
+        } else {
+            [self.selectedArray addObject:selectedItem];
+        }
     }];
+    
     return cell;
 }
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 4.3">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 4.3">
     <entity name="Job" representedClassName="Job" syncable="YES">
         <attribute name="addedCustomRepairsOptions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="additionalInfoData" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="completionTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="custumerQuestions" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -35,7 +36,7 @@
         <relationship name="jobs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Job" inverseName="user" inverseEntity="Job" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Job" positionX="288" positionY="-25" width="198" height="388"/>
+        <element name="Job" positionX="288" positionY="-25" width="198" height="405"/>
         <element name="User" positionX="90" positionY="68" width="128" height="150"/>
     </elements>
 </model>

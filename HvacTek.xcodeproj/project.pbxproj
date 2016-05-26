@@ -106,8 +106,6 @@
 		523329561C17175B008ABA46 /* RRFinalChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 523329551C17175B008ABA46 /* RRFinalChoiceVC.m */; };
 		5236287C1C0EF33000B04A71 /* UtilityOverpaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5236287B1C0EF33000B04A71 /* UtilityOverpaymentVC.m */; };
 		524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 524037D61CEB4932008BF125 /* AddCustomRepairVC.m */; };
-		5247C5221CEDB04E00670D4A /* Job+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247C51F1CEDB04E00670D4A /* Job+CoreDataProperties.m */; };
-		5247C5231CEDB04E00670D4A /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247C5211CEDB04E00670D4A /* Job.m */; };
 		5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247C5261CEDB62700670D4A /* AdditionalInfoPageVC.m */; };
 		524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDFF41B79046100480987 /* CustomerChoiceCell.m */; };
 		524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 524FDFF51B79046100480987 /* CustomerChoiceCell.xib */; };
@@ -128,6 +126,8 @@
 		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
 		52A7D37F1CF44F4700645B6D /* StringBetweenStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A7D37E1CF44F4700645B6D /* StringBetweenStrings.m */; };
 		52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C787261C6DCA2C007EC77C /* THProgressView.m */; };
+		52CCB6381CF736E500BAF68A /* Job+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CCB6351CF736E500BAF68A /* Job+CoreDataProperties.m */; };
+		52CCB6391CF736E500BAF68A /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CCB6371CF736E500BAF68A /* Job.m */; };
 		52D25B2C1CEEFB3800C77BED /* AdditionalInfoPageCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D25B2A1CEEFB3800C77BED /* AdditionalInfoPageCells.m */; };
 		52D25B2D1CEEFB3800C77BED /* AdditionalInfoPageCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D25B2B1CEEFB3800C77BED /* AdditionalInfoPageCells.xib */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
@@ -336,10 +336,6 @@
 		524037D51CEB4932008BF125 /* AddCustomRepairVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCustomRepairVC.h; sourceTree = "<group>"; };
 		524037D61CEB4932008BF125 /* AddCustomRepairVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCustomRepairVC.m; sourceTree = "<group>"; };
 		5247C51D1CEDAF8900670D4A /* SignatureModel 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 10.xcdatamodel"; sourceTree = "<group>"; };
-		5247C51E1CEDB04E00670D4A /* Job+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Job+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5247C51F1CEDB04E00670D4A /* Job+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Job+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5247C5201CEDB04E00670D4A /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
-		5247C5211CEDB04E00670D4A /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		5247C5251CEDB62700670D4A /* AdditionalInfoPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalInfoPageVC.h; sourceTree = "<group>"; };
 		5247C5261CEDB62700670D4A /* AdditionalInfoPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalInfoPageVC.m; sourceTree = "<group>"; };
 		524FDFF31B79046100480987 /* CustomerChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerChoiceCell.h; sourceTree = "<group>"; };
@@ -381,6 +377,10 @@
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
 		52C787251C6DCA2C007EC77C /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
 		52C787261C6DCA2C007EC77C /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
+		52CCB6341CF736E500BAF68A /* Job+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Job+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52CCB6351CF736E500BAF68A /* Job+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Job+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52CCB6361CF736E500BAF68A /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		52CCB6371CF736E500BAF68A /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
 		52D25B291CEEFB3800C77BED /* AdditionalInfoPageCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalInfoPageCells.h; sourceTree = "<group>"; };
 		52D25B2A1CEEFB3800C77BED /* AdditionalInfoPageCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalInfoPageCells.m; sourceTree = "<group>"; };
 		52D25B2B1CEEFB3800C77BED /* AdditionalInfoPageCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdditionalInfoPageCells.xib; sourceTree = "<group>"; };
@@ -837,10 +837,10 @@
 			isa = PBXGroup;
 			children = (
 				4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */,
-				5247C51E1CEDB04E00670D4A /* Job+CoreDataProperties.h */,
-				5247C51F1CEDB04E00670D4A /* Job+CoreDataProperties.m */,
-				5247C5201CEDB04E00670D4A /* Job.h */,
-				5247C5211CEDB04E00670D4A /* Job.m */,
+				52CCB6341CF736E500BAF68A /* Job+CoreDataProperties.h */,
+				52CCB6351CF736E500BAF68A /* Job+CoreDataProperties.m */,
+				52CCB6361CF736E500BAF68A /* Job.h */,
+				52CCB6371CF736E500BAF68A /* Job.m */,
 				91CA5EFA1ADFF86B00D871FD /* User.h */,
 				91CA5EFB1ADFF86B00D871FD /* User.m */,
 				4F11D4021AA77417007FC0A8 /* User+Functional.h */,
@@ -1400,7 +1400,6 @@
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
 				52EDAFFA1CEF07D9004F3EC0 /* EmailVerificationVC.m in Sources */,
-				5247C5221CEDB04E00670D4A /* Job+CoreDataProperties.m in Sources */,
 				521DB6B31C107063003E40D2 /* EditServiceOptionsVC.m in Sources */,
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
@@ -1425,6 +1424,7 @@
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
 				52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */,
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
+				52CCB6381CF736E500BAF68A /* Job+CoreDataProperties.m in Sources */,
 				4FD2EB811A361A0F0056D4C4 /* ProdAdminTableViewCell.m in Sources */,
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
 				5265782D1C6A0A2500EC1AA5 /* Item.m in Sources */,
@@ -1450,7 +1450,6 @@
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
 				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
-				5247C5231CEDB04E00670D4A /* Job.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
 				520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */,
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
@@ -1498,6 +1497,7 @@
 				5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */,
 				4FD2EB7F1A361A0F0056D4C4 /* MenuViewController.m in Sources */,
 				521984CB1CF5A460006D131D /* CHDropDownTextField.m in Sources */,
+				52CCB6391CF736E500BAF68A /* Job.m in Sources */,
 				4F576FB81AC70E1500F0F8FB /* SServiceHistory.m in Sources */,
 				4FD2EB661A361A0F0056D4C4 /* CartViewController.m in Sources */,
 			);
