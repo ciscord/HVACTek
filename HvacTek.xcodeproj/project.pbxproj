@@ -125,6 +125,7 @@
 		528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528698B01C6B2BE9003F91C2 /* SortFindinsCell.xib */; };
 		52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */; };
 		52A7D37F1CF44F4700645B6D /* StringBetweenStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A7D37E1CF44F4700645B6D /* StringBetweenStrings.m */; };
+		52BE1C051D005BF9005AEF27 /* CompanyAditionalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BE1C041D005BF9005AEF27 /* CompanyAditionalInfo.m */; };
 		52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C787261C6DCA2C007EC77C /* THProgressView.m */; };
 		52CCB6381CF736E500BAF68A /* Job+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CCB6351CF736E500BAF68A /* Job+CoreDataProperties.m */; };
 		52CCB6391CF736E500BAF68A /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CCB6371CF736E500BAF68A /* Job.m */; };
@@ -379,6 +380,8 @@
 		52A7D37E1CF44F4700645B6D /* StringBetweenStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringBetweenStrings.m; sourceTree = "<group>"; };
 		52B2524A1C7364D5005E8824 /* SignatureModel 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 7.xcdatamodel"; sourceTree = "<group>"; };
 		52BBCCD81C50C52100577CBA /* HvacTekConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HvacTekConstants.h; path = ../ViewControllers/HvacTekConstants.h; sourceTree = "<group>"; };
+		52BE1C031D005BF9005AEF27 /* CompanyAditionalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAditionalInfo.h; sourceTree = "<group>"; };
+		52BE1C041D005BF9005AEF27 /* CompanyAditionalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyAditionalInfo.m; sourceTree = "<group>"; };
 		52C787251C6DCA2C007EC77C /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
 		52C787261C6DCA2C007EC77C /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
 		52CCB6341CF736E500BAF68A /* Job+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Job+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -869,6 +872,8 @@
 				4F11D3DF1AA6034D007FC0A8 /* PricebookItem.m */,
 				52755F951C52109E00A0E5E5 /* CompanyItem.h */,
 				52755F961C52109E00A0E5E5 /* CompanyItem.m */,
+				52BE1C031D005BF9005AEF27 /* CompanyAditionalInfo.h */,
+				52BE1C041D005BF9005AEF27 /* CompanyAditionalInfo.m */,
 				4F576FB61AC70E1500F0F8FB /* SServiceHistory.h */,
 				4F576FB71AC70E1500F0F8FB /* SServiceHistory.m */,
 				52755F981C522F9B00A0E5E5 /* HexColors.h */,
@@ -1446,6 +1451,7 @@
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
 				52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */,
 				5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */,
+				52BE1C051D005BF9005AEF27 /* CompanyAditionalInfo.m in Sources */,
 				4FD2EB671A361A0F0056D4C4 /* aQuoteFirstTableViewController.m in Sources */,
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,

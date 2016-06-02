@@ -68,7 +68,6 @@ static NSString *kCELL_IDENTIFIER = @"VideoLibraryCell";
     [webView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [webView loadRequest:urlRequest];
     [self.view addSubview:webView];
-    
 }
 
 

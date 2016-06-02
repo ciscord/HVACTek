@@ -8,7 +8,9 @@
 
 #import "TechnicianHomeVC.h"
 #import "AppDelegate.h"
+#import "CompanyAditionalInfo.h"
 #import <MBProgressHUD.h>
+#import <TWRDownloadManager/TWRDownloadManager.h>
 
 @interface TechnicianHomeVC ()
 @property (weak, nonatomic) IBOutlet UIView *vwDebrief;
@@ -23,18 +25,24 @@
 @property (weak, nonatomic) IBOutlet UIView *separator2View;
 @property (weak, nonatomic) IBOutlet UIView *separator3View;
 
+@property (weak, nonatomic) IBOutlet UIButton *syncButton;
+@property (weak, nonatomic) IBOutlet UILabel *lastSyncLabel;
+@property (weak, nonatomic) IBOutlet UILabel *syncStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *syncProgressLabel;
+
 @end
 
 @implementation TechnicianHomeVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.homeController = self;
     
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
+    //[self loadAdditionalInfo];
 }
 
 
@@ -54,10 +62,109 @@
     self.edtJobId.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
     
+    self.syncButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.syncButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateNormal];
+    self.syncProgressLabel.textColor = [UIColor blackColor];
+    self.syncStatusLabel.textColor = [UIColor blackColor];
+    self.lastSyncLabel.textColor = [UIColor blackColor];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveJobIDFromSWR:) name:@"NotifReciveJobIDFromSWR" object:nil];
 }
 
 
+
+#pragma mark - Load Aditional Info
+- (void)loadAdditionalInfo {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
+        [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
+}
+
+
+- (NSArray *)saveAdditionalInfoFromDict:(NSDictionary *)dict {
+    
+    NSMutableArray *additionalObjects = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *docDict in dict[@"1"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:docDict[@"id"]
+                                                                      info_description:docDict[@"description"]
+                                                                            info_title:docDict[@"title"]
+                                                                              info_url:docDict[@"url"]
+                                                                               isVideo:NO];
+        [additionalObjects addObject:info];
+    }
+    
+    for (NSDictionary *videoDict in dict[@"2"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:videoDict[@"id"]
+                                                                      info_description:videoDict[@"description"]
+                                                                            info_title:videoDict[@"title"]
+                                                                              info_url:videoDict[@"url"]
+                                                                               isVideo:YES];
+        [additionalObjects addObject:info];
+    }
+
+    return additionalObjects;
+}
+
+
+
+#pragma mark - Check For Sync
+- (void)checkSyncStatus {
+//    NSString *token =[[DataLoader sharedInstance] token];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
+//    [request setTimeoutInterval: 10.0];
+//    [request setValue:token forHTTPHeaderField:@"TOKEN"];
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue currentQueue]
+//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                               
+//                               if (data != nil && error == nil) {
+//                                   [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
+//                               }
+//                               else {
+//                                   NSLog(@"add2CartSyncStatus error: %@",error);
+//                               }
+//                           }];
+}
+
+
+- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
+//    NSError* error;
+//    NSDictionary* json = [NSJSONSerialization
+//                          JSONObjectWithData:responseData
+//                          options:kNilOptions
+//                          error:&error];
+//    
+//    if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
+//        NSDictionary* itemsDict = [json objectForKey:@"results"];
+//        BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
+//        [self syncLabelStatus:syncStatus];
+//        [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
+//    }
+}
+
+
+#pragma mark - Sync Action
+- (IBAction)syncClicked:(id)sender {
+    
+    for (NSDictionary *dict in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+        
+    }
+    
+    [[TWRDownloadManager sharedManager] downloadFileForURL:@"" progressBlock:^(CGFloat progress) {
+        NSLog(@"progress %f",progress);
+    } completionBlock:^(BOOL completed) {
+        NSLog(@"Completed");
+    } enableBackgroundMode:YES];
+}
+
+
+#pragma mark -
 - (void)didReciveJobIDFromSWR:(NSNotification *)info {
     [self checkJobStatus];
 }

@@ -83,7 +83,6 @@ NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
 @property (nonatomic, strong) NSMutableArray *otherOptionsLocal;
 @property (nonatomic, strong) PricebookItem *diagnosticOnlyOption;
 @property (nonatomic, strong) CompanyItem   *currentCompany;
-
 @end
 
 @implementation DataLoader
