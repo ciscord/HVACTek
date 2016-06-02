@@ -135,6 +135,10 @@
 		52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80371C7C617600D09222 /* NAPickerCell.m */; };
 		52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80391C7C617600D09222 /* NAPickerView.m */; };
 		52EDAFFA1CEF07D9004F3EC0 /* EmailVerificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EDAFF91CEF07D9004F3EC0 /* EmailVerificationVC.m */; };
+		52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1E31CFF0370008D24C9 /* VideoLibraryVC.m */; };
+		52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */; };
+		52F3D1E91CFF0B7D008D24C9 /* VideoLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */; };
+		52F3D1EC1CFF23AF008D24C9 /* AVPlayerVC.h.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
@@ -394,6 +398,13 @@
 		52EB80391C7C617600D09222 /* NAPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAPickerView.m; sourceTree = "<group>"; };
 		52EDAFF81CEF07D9004F3EC0 /* EmailVerificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailVerificationVC.h; sourceTree = "<group>"; };
 		52EDAFF91CEF07D9004F3EC0 /* EmailVerificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailVerificationVC.m; sourceTree = "<group>"; };
+		52F3D1E21CFF0370008D24C9 /* VideoLibraryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLibraryVC.h; sourceTree = "<group>"; };
+		52F3D1E31CFF0370008D24C9 /* VideoLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoLibraryVC.m; sourceTree = "<group>"; };
+		52F3D1E51CFF0B7D008D24C9 /* VideoLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLibraryCell.h; sourceTree = "<group>"; };
+		52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoLibraryCell.m; sourceTree = "<group>"; };
+		52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoLibraryCell.xib; sourceTree = "<group>"; };
+		52F3D1EA1CFF23AF008D24C9 /* AVPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerVC.h; sourceTree = "<group>"; };
+		52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerVC.h.m; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = "/Users/Unifeyed/Library/Developer/Xcode/DerivedData/HvacTek-gtpbmiynijcmdadlgdhieoepbqlz/Build/Products/Debug-iphoneos/libPods.a"; sourceTree = "<absolute>"; };
@@ -756,6 +767,7 @@
 				4FF901B81AB8460900D87FAB /* PlatinumOptionsVC */,
 				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
 				75F3DF8A1A3F055C00F60652 /* CustomerChoiceVC */,
+				52F3D1E11CFF0356008D24C9 /* VideoLibrary */,
 				5247C5241CEDB5F700670D4A /* AdditionalInfo */,
 				52EDAFF71CEF0797004F3EC0 /* EmailVerificationVC */,
 				5209A1A71CEC91EC0026ED6D /* InvoicePreviewVC */,
@@ -1056,6 +1068,20 @@
 			path = EmailVerificationVC;
 			sourceTree = "<group>";
 		};
+		52F3D1E11CFF0356008D24C9 /* VideoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				52F3D1E21CFF0370008D24C9 /* VideoLibraryVC.h */,
+				52F3D1E31CFF0370008D24C9 /* VideoLibraryVC.m */,
+				52F3D1E51CFF0B7D008D24C9 /* VideoLibraryCell.h */,
+				52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */,
+				52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */,
+				52F3D1EA1CFF23AF008D24C9 /* AVPlayerVC.h */,
+				52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */,
+			);
+			path = VideoLibrary;
+			sourceTree = "<group>";
+		};
 		52F699BE1C1EB2E800CD9274 /* CALayerXibConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -1282,6 +1308,7 @@
 			files = (
 				4FD2EB761A361A0F0056D4C4 /* prod.png in Resources */,
 				4F8EC7BD1A6053A400999FA1 /* QuestionSummaryCell.xib in Resources */,
+				52F3D1E91CFF0B7D008D24C9 /* VideoLibraryCell.xib in Resources */,
 				91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */,
 				4FD2EB8A1A361A0F0056D4C4 /* InfoPlist.strings in Resources */,
 				4FD2EB6E1A361A0F0056D4C4 /* Daikin96.jpg in Resources */,
@@ -1417,6 +1444,7 @@
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
 				75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */,
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
+				52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */,
 				5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */,
 				4FD2EB671A361A0F0056D4C4 /* aQuoteFirstTableViewController.m in Sources */,
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
@@ -1432,6 +1460,7 @@
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
+				52F3D1EC1CFF23AF008D24C9 /* AVPlayerVC.h.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
 				75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */,
 				52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */,
@@ -1465,6 +1494,7 @@
 				528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */,
 				52D25B2C1CEEFB3800C77BED /* AdditionalInfoPageCells.m in Sources */,
 				4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */,
+				52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */,
 				4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */,
 				7569FBC91A373BFC00D9EC94 /* CustomerOverviewVC.m in Sources */,
 				75D1A9011A3B15B5000F6765 /* ServiceOptionVC.m in Sources */,

@@ -330,6 +330,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
     
     NSArray *additionalInfo = [[[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData] valueForKey:@"id"];
+    //[[NSArray alloc] initWithObjects:@"1", @"13", nil];//
     
     
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,

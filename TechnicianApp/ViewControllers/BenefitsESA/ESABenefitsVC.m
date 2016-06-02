@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = NSLocalizedString(@"Discount Club Membership", nil);
+    self.title = NSLocalizedString(@"Maintenance Agreement", nil);
     
     self.discountLabel.numberOfLines = 0;
     self.discountLabel.lineBreakMode = NSLineBreakByCharWrapping;

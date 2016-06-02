@@ -108,11 +108,11 @@
 
 #pragma mark - Price Calculations
 - (void)calculatePriceForNewRepair {
-     //(Repair Time + .5)(300) + (Part Cost + Freight Estimate)(1.25)
+     //(Repair Time + .5)(325) + (Part Cost + Freight Estimate)(1.06)
     float repairTime = [self getRepairTime];
     NSNumber *partCost = [NSNumber numberWithInt:[[self getPriceAmountFromString:self.costField.text] intValue]];
     NSNumber *freightEstimate = [NSNumber numberWithInt:[[self getPriceAmountFromString:self.estimateField.text] intValue]];
-    float totalPrice = (repairTime + 0.5)*300 + (partCost.intValue + freightEstimate.intValue) * 1.25;
+    float totalPrice = (repairTime + 0.5)*325 + ((partCost.intValue + freightEstimate.intValue) * 1.06) / 0.75;
     self.calculatedString = [self getPriceFromFloat:totalPrice];
     
     [self performSegueWithIdentifier:@"unwindToSummaryOfFindingsFromCalculations" sender:self];
