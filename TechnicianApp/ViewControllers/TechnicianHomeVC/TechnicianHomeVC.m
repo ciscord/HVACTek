@@ -81,7 +81,7 @@
         [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }onError:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }
@@ -123,7 +123,7 @@
         [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }onError:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }
@@ -238,7 +238,7 @@
                                                                    [weakSelf checkJobStatus];
                                                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                                    ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                }];
     }
@@ -300,7 +300,7 @@
                                                                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        [weakSelf custumerlookup];
                                                                    } onError:^(NSError *error) {
-                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                    }];
             

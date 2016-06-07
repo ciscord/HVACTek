@@ -119,18 +119,19 @@ static NSString *kCELL_IDENTIFIER = @"VideoLibraryCell";
         cell.coverImage.image =  [UIImage imageWithCGImage:[self getVideThumbnailAtUrl:videoUrl]];
         
     }else {
-        if ([[[DataLoader sharedInstance] reachabilityManager] isReachable]) {
-            cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
-            videoUrl = [NSURL URLWithString:selectedItem.info_url];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *image = [UIImage imageWithCGImage:[self getVideThumbnailAtUrl:videoUrl]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.coverImage.image = image;
-                });
-            });
-        }else{
-            cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
-        }
+//        if ([[[DataLoader sharedInstance] reachabilityManager] isReachable]) {
+//            cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
+//            videoUrl = [NSURL URLWithString:selectedItem.info_url];
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                UIImage *image = [UIImage imageWithCGImage:[self getVideThumbnailAtUrl:videoUrl]];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    cell.coverImage.image = image;
+//                });
+//            });
+//        }else{
+//            cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
+//        }
+        cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
     }
     
     [[TWRDownloadManager sharedManager] isFileDownloadingForUrl:selectedItem.info_url withProgressBlock:^(CGFloat progress) {
