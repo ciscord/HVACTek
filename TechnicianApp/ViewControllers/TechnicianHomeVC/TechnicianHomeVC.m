@@ -42,7 +42,8 @@
     
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
-    //[self loadAdditionalInfo];
+    [self loadAdditionalInfo];
+    [self checkSyncStatus];
 }
 
 
@@ -78,9 +79,9 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
         [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }
@@ -115,52 +116,93 @@
 
 #pragma mark - Check For Sync
 - (void)checkSyncStatus {
-//    NSString *token =[[DataLoader sharedInstance] token];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
-//    [request setTimeoutInterval: 10.0];
-//    [request setValue:token forHTTPHeaderField:@"TOKEN"];
-//    [NSURLConnection sendAsynchronousRequest:request
-//                                       queue:[NSOperationQueue currentQueue]
-//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//                               
-//                               if (data != nil && error == nil) {
-//                                   [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
-//                               }
-//                               else {
-//                                   NSLog(@"add2CartSyncStatus error: %@",error);
-//                               }
-//                           }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:NO onSuccess:^(NSDictionary *infoDict) {
+        BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
+        [self syncLabelStatus:syncStatus];
+        [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
 }
 
 
-- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
-//    NSError* error;
-//    NSDictionary* json = [NSJSONSerialization
-//                          JSONObjectWithData:responseData
-//                          options:kNilOptions
-//                          error:&error];
-//    
-//    if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
-//        NSDictionary* itemsDict = [json objectForKey:@"results"];
-//        BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
-//        [self syncLabelStatus:syncStatus];
-//        [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
-//    }
+#pragma mark -
+-(void)syncLabelStatus:(BOOL)status {
+    self.syncStatusLabel.hidden = !status;
+}
+
+
+-(void)syncDateLabel:(NSString *)sync_date {
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    NSDate *syncDate = [dateFormatter dateFromString:sync_date];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *syncString = [dateFormatter stringFromDate:syncDate];
+    
+    NSString *lastSync = [NSString stringWithFormat:@"Last Sync Date: %@", syncString];
+    self.lastSyncLabel.text = lastSync;
 }
 
 
 #pragma mark - Sync Action
 - (IBAction)syncClicked:(id)sender {
-    
-    for (NSDictionary *dict in [[DataLoader sharedInstance] companyAdditionalInfo]) {
-        
+    [self.syncButton setEnabled:NO];
+    [self.syncButton setTitle:@"Sync Started" forState:UIControlStateNormal];
+    [self syncLabelStatus:NO];
+    self.lastSyncLabel.text = @"Last Sync Date: Now";
+    [self checkForDownloading];
+}
+
+
+
+#pragma mark - Downloading
+- (void)checkForDownloading {
+    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+        if (companyObject.isVideo) {
+            if (![[TWRDownloadManager sharedManager] fileExistsForUrl:companyObject.info_url]) {
+                [self startDownloadingVideo:companyObject];
+            }else{
+                if ([companyObject isEqual:[[DataLoader sharedInstance] companyAdditionalInfo].lastObject]) {
+                    [self setDefaultSyncButton];
+                    [self modifySyncStatus];
+                }
+            }
+        }
     }
-    
-    [[TWRDownloadManager sharedManager] downloadFileForURL:@"" progressBlock:^(CGFloat progress) {
-        NSLog(@"progress %f",progress);
+}
+
+
+
+-(void)startDownloadingVideo:(CompanyAditionalInfo *)object {
+    [[TWRDownloadManager sharedManager] downloadFileForURL:object.info_url progressBlock:^(CGFloat progress) {
+       // NSLog(@"progress %f video file:%@",progress, object.info_url);
     } completionBlock:^(BOOL completed) {
-        NSLog(@"Completed");
+        if ([object isEqual:[[DataLoader sharedInstance] companyAdditionalInfo].lastObject]) {
+            [self modifySyncStatus];
+            [self setDefaultSyncButton];
+        }
     } enableBackgroundMode:YES];
+}
+
+
+- (void)setDefaultSyncButton {
+    [self.syncButton setTitle:@"Sync" forState:UIControlStateNormal];
+    [self.syncButton setEnabled:YES];
+}
+
+
+- (void)modifySyncStatus {
+    [[DataLoader sharedInstance] updateStatusForAdditionalInfoOnSuccess:^(NSString *message) {
+        //
+    } onError:^(NSError *error) {
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
 }
 
 
@@ -194,9 +236,9 @@
         [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                onSuccess:^(NSString *successMessage) {
                                                                    [weakSelf checkJobStatus];
-                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                                    ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                }];
     }
@@ -255,10 +297,10 @@
             [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                    onSuccess:^(NSString *successMessage) {
                                                                        //[weakSelf checkJobStatus];
-                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        [weakSelf custumerlookup];
                                                                    } onError:^(NSError *error) {
-                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                    }];
             

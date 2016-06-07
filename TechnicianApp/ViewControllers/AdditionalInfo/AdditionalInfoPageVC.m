@@ -9,6 +9,7 @@
 #import "AdditionalInfoPageVC.h"
 #import "NewCustomerChoiceVC.h"
 #import "AdditionalInfoPageCells.h"
+#import "CompanyAditionalInfo.h"
 
 @interface AdditionalInfoPageVC ()
 
@@ -40,15 +41,24 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 }
 
 - (void)loadAdditionalInfo {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
-        self.additionalInfoArray = infoDict[@"1"][@"rows"];
-        [self.infoTableView reloadData];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    }onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        ShowOkAlertWithTitle(error.localizedDescription, self);
-    }];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
+//        self.additionalInfoArray = infoDict[@"1"][@"rows"];
+//        [self.infoTableView reloadData];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//    }onError:^(NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        ShowOkAlertWithTitle(error.localizedDescription, self);
+//    }];
+    
+    NSMutableArray *infoArray = [[NSMutableArray alloc] init];
+    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+        if (!companyObject.isVideo) {
+            [infoArray addObject:companyObject];
+        }
+    }
+    
+    self.additionalInfoArray = infoArray.mutableCopy;
 }
 
 
@@ -104,11 +114,11 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    id selectedItem = self.additionalInfoArray[indexPath.row];
+    CompanyAditionalInfo * selectedItem = self.additionalInfoArray[indexPath.row];
     
     AdditionalInfoPageCells *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-    cell.titleLabel.text = [self.additionalInfoArray objectAtIndex:indexPath.row][@"title"];
-    cell.descriptionLabel.text = [self.additionalInfoArray objectAtIndex:indexPath.row][@"description"];
+    cell.titleLabel.text = selectedItem.info_title;
+    cell.descriptionLabel.text = selectedItem.info_description;
     cell.checkButton.selected = [self.selectedArray containsObject:selectedItem];
     [cell setOnCheckboxToggle:^(BOOL selected){
         if ([self.selectedArray containsObject:selectedItem]) {

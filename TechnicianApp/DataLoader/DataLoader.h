@@ -161,4 +161,15 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 //- (void)connectToSWAPIonSucces:(void (^)(NSString *message))onSuccess
 //                   onError:(void (^)(NSError *error))onError;
 
+- (void)checkSyncStatusForAdd2Cart:(BOOL)isAdd2Cart
+                         onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
+                         onError:(void (^)(NSError *error))onError;
+
+
+
+- (void)updateStatusForAdditionalInfoOnSuccess:(void (^)(NSString *message))onSuccess
+                                       onError:(void (^)(NSError *error))onError;
+
+
+
 @end

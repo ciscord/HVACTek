@@ -139,7 +139,6 @@
 		52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1E31CFF0370008D24C9 /* VideoLibraryVC.m */; };
 		52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */; };
 		52F3D1E91CFF0B7D008D24C9 /* VideoLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */; };
-		52F3D1EC1CFF23AF008D24C9 /* AVPlayerVC.h.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
@@ -406,8 +405,6 @@
 		52F3D1E51CFF0B7D008D24C9 /* VideoLibraryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLibraryCell.h; sourceTree = "<group>"; };
 		52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoLibraryCell.m; sourceTree = "<group>"; };
 		52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoLibraryCell.xib; sourceTree = "<group>"; };
-		52F3D1EA1CFF23AF008D24C9 /* AVPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerVC.h; sourceTree = "<group>"; };
-		52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerVC.h.m; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = "/Users/Unifeyed/Library/Developer/Xcode/DerivedData/HvacTek-gtpbmiynijcmdadlgdhieoepbqlz/Build/Products/Debug-iphoneos/libPods.a"; sourceTree = "<absolute>"; };
@@ -1081,8 +1078,6 @@
 				52F3D1E51CFF0B7D008D24C9 /* VideoLibraryCell.h */,
 				52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */,
 				52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */,
-				52F3D1EA1CFF23AF008D24C9 /* AVPlayerVC.h */,
-				52F3D1EB1CFF23AF008D24C9 /* AVPlayerVC.h.m */,
 			);
 			path = VideoLibrary;
 			sourceTree = "<group>";
@@ -1466,7 +1461,6 @@
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
-				52F3D1EC1CFF23AF008D24C9 /* AVPlayerVC.h.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
 				75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */,
 				52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */,

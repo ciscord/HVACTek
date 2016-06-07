@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import <SignatureView.h>
 #import "InvoicePreviewVC.h"
+#import "CompanyAditionalInfo.h"
 
 @interface NewCustomerChoiceVC ()
 
@@ -329,7 +330,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
     
-    NSArray *additionalInfo = [[[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData] valueForKey:@"id"];
+    NSMutableArray *additionalInfo = [[NSMutableArray alloc] init];
+    for (CompanyAditionalInfo * obj  in [[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData]) {
+        [additionalInfo addObject:obj.info_id];
+    }
     //[[NSArray alloc] initWithObjects:@"1", @"13", nil];//
     
     

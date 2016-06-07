@@ -198,38 +198,47 @@ typedef void(^myCompletion)(BOOL);
 
 #pragma mark - Check For Sync
 - (void)checkSyncStatus {
-  NSString *token =[[DataLoader sharedInstance] token];
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
-  [request setTimeoutInterval: 10.0];
-  [request setValue:token forHTTPHeaderField:@"TOKEN"];
-  [NSURLConnection sendAsynchronousRequest:request
-                                     queue:[NSOperationQueue currentQueue]
-                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                           
-                           if (data != nil && error == nil) {
-                             [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
-                           }
-                           else {
-                             NSLog(@"add2CartSyncStatus error: %@",error);
-                           }
-                         }];
+//  NSString *token =[[DataLoader sharedInstance] token];
+//  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
+//  [request setTimeoutInterval: 10.0];
+//  [request setValue:token forHTTPHeaderField:@"TOKEN"];
+//  [NSURLConnection sendAsynchronousRequest:request
+//                                     queue:[NSOperationQueue currentQueue]
+//                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                           
+//                           if (data != nil && error == nil) {
+//                             [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
+//                           }
+//                           else {
+//                             NSLog(@"add2CartSyncStatus error: %@",error);
+//                           }
+//                         }];
+    
+    
+    [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:NO onSuccess:^(NSDictionary *infoDict) {
+        BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
+        [self syncLabelStatus:syncStatus];
+        [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];
+    }onError:^(NSError *error) {
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
 }
 
 
-- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
-  NSError* error;
-  NSDictionary* json = [NSJSONSerialization
-                        JSONObjectWithData:responseData
-                        options:kNilOptions
-                        error:&error];
-  
-  if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
-    NSDictionary* itemsDict = [json objectForKey:@"results"];
-    BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
-    [self syncLabelStatus:syncStatus];
-    [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
-  }
-}
+//- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
+//  NSError* error;
+//  NSDictionary* json = [NSJSONSerialization
+//                        JSONObjectWithData:responseData
+//                        options:kNilOptions
+//                        error:&error];
+//  
+//  if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
+//    NSDictionary* itemsDict = [json objectForKey:@"results"];
+//    BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
+//    [self syncLabelStatus:syncStatus];
+//    [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
+//  }
+//}
 
 
 

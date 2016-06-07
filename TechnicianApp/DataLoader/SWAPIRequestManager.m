@@ -530,7 +530,55 @@ NSString *const kResultStatusOK = @"000";
          }
      }];
 }
-
+/*
+ 
+ Printing description of result:
+ <LocationInfoQueryResponse Successful="true" ResultCode="000" ResultText="Successful" Version="1.9.200.9"><LocationInfoQueryData ReturnedRows="1" FilteredRows="1" TotalRows="1" QueryOptions="LocationID=111328">
+ <LocationInfoQueryRecord>
+ <upd_ReasonForChange></upd_ReasonForChange>
+ <LocationID>111328</LocationID>
+ <CompanyName></CompanyName>
+ <CustTitle></CustTitle>
+ <FirstName>Test</FirstName>
+ <LastName>Testington</LastName>
+ <Address1>123 media rd</Address1>
+ <Address2></Address2>
+ <City>Oxford</City>
+ <State>PA</State>
+ <Zip>19363</Zip>
+ <Phone1>61061006100</Phone1>
+ <Phone1Ext></Phone1Ext>
+ <Phone2></Phone2>
+ <Phone2Ext></Phone2Ext>
+ <LocationType>RES</LocationType>
+ <EmailAddress></EmailAddress>
+ <Contact></Contact>
+ <Priority>FALSE</Priority>
+ <Zone>NCC</Zone>
+ <TaxCode>PA</TaxCode>
+ <OwnerOccupied>TRUE</OwnerOccupied>
+ <PreferredTech></PreferredTech>
+ <Directions></Directions>
+ <Notes></Notes>
+ <AR_BillingCustomerID>103409</AR_BillingCustomerID>
+ <LeadSource></LeadSource>
+ <ReferralComment></ReferralComment>
+ <FirstName2></FirstName2>
+ <LastName2></LastName2>
+ <CustTitle2></CustTitle2>
+ <IsName2InAddress>FALSE</IsName2InAddress>
+ <Phone3></Phone3>
+ <Phone3Ext></Phone3Ext>
+ <Phone4></Phone4>
+ <Phone4Ext></Phone4Ext>
+ <DNIS></DNIS>
+ <LeadSourceType></LeadSourceType>
+ <NoEmail>TRUE</NoEmail>
+ </LocationInfoQueryRecord>
+	</LocationInfoQueryData>
+ </LocationInfoQueryResponse>
+ 
+ */
 
 #pragma mark - Update User Location Info
 - (void)getUserLocationInfoQueryWithLocationID:(NSString *)location
@@ -562,7 +610,16 @@ NSString *const kResultStatusOK = @"000";
     self.requestsInProgress++;
     
     NSString *mailString = [data stringBetweenString:@"<EmailAddress>" andString:@"</EmailAddress>"];
-    NSString *newString = [data stringByReplacingOccurrencesOfString:mailString withString:email];
+    NSString *newString;
+    if (mailString.length > 0) {
+        newString = [data stringByReplacingOccurrencesOfString:mailString withString:email];
+    }else{
+        NSString *emailForm = [NSString stringWithFormat:@"<EmailAddress></EmailAddress>"];
+        NSString *format = [NSString stringWithFormat:@"<EmailAddress>%@</EmailAddress>", email];
+        newString = [data stringByReplacingOccurrencesOfString:emailForm withString:format];
+        newString =  [newString stringByReplacingOccurrencesOfString:@"<NoEmail>TRUE</NoEmail>" withString:@"<NoEmail>0</NoEmail>"];
+    }
+    
     
     NSString *finalString = [newString stringByReplacingOccurrencesOfString:@"<upd_ReasonForChange></upd_ReasonForChange>" withString:@"<upd_ReasonForChange>correction</upd_ReasonForChange>"];
     

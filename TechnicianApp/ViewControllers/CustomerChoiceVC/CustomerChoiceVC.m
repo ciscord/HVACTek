@@ -15,6 +15,8 @@
 #import "NewCustomerChoiceVC.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "AdditionalInfoPageVC.h"
+//#import <TWRDownloadManager/TWRDownloadManager.h>
+//#import "CompanyAditionalInfo.h"
 
 @interface CustomerChoiceVC ()
 
@@ -553,6 +555,31 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
      */
     
 }
+
+
+
+#pragma mark - test downloading
+//- (void)checkForDownloading {
+//    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+//        if (companyObject.isVideo) {
+//            if (![[TWRDownloadManager sharedManager] fileExistsForUrl:companyObject.info_url]) {
+//                [self testDownload:companyObject];
+//            }else{
+//                NSLog(@"asdasdmasdnjkasdj");
+//            }
+//        }
+//    }
+//}
+//
+//
+//
+//-(void)testDownload:(CompanyAditionalInfo *)object {
+//    [[TWRDownloadManager sharedManager] downloadFileForURL:object.info_url progressBlock:^(CGFloat progress) {
+//         NSLog(@"progress %f",progress);
+//    } completionBlock:^(BOOL completed) {
+//        NSLog(@"completed test");
+//    } enableBackgroundMode:YES];
+//}
 
 
 

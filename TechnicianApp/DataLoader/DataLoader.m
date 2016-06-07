@@ -69,6 +69,9 @@ NSString *const DELETE_REBATES   = @"deleteRebate";
 NSString *const UPDATE_REBATES   = @"updateRebate";
 NSString *const ADD2CART_ITEMS   = @"add2cart";
 NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
+NSString *const SYNC_STATUS      = @"add2cart_sync";
+NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
+NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 
 
 #define kStatusOK 1
@@ -732,6 +735,72 @@ NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
               onError(error);
           }
       }];
+}
+
+
+#pragma mark - Sync Status
+- (void)checkSyncStatusForAdd2Cart:(BOOL)isAdd2Cart
+                         onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
+                           onError:(void (^)(NSError *error))onError {
+
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSString *apiString;
+    if (isAdd2Cart)
+        apiString = SYNC_STATUS;
+    else
+        apiString = SYNC_STATUS2;
+    
+    [self POST:apiString
+    parameters:@{}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject check: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               NSDictionary *dict = responseObject[@"results"];
+               onSuccess(dict);
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+    
+}
+
+
+
+- (void)updateStatusForAdditionalInfoOnSuccess:(void (^)(NSString *message))onSuccess
+                                       onError:(void (^)(NSError *error))onError {
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:SYNC_MODIFY
+    parameters:@{}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject modify sync: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               
+               onSuccess(@"asd");
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
 }
 
 

@@ -937,7 +937,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9yt-Kl-HsA">
-                                        <rect key="frame" x="258" y="671" width="188" height="52"/>
+                                        <rect key="frame" x="137" y="671" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
@@ -1085,6 +1085,25 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5pH-eu-lFi">
+                                        <rect key="frame" x="365" y="671" width="188" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Video Library">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="videoLibraryClicked:" destination="PVm-o9-UYq" eventType="touchUpInside" id="dM4-Bu-ENK"/>
+                                            <segue destination="rDe-00-kCH" kind="push" id="V7K-Zv-8PV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1102,6 +1121,7 @@
                         <outlet property="label2" destination="XZv-gL-AH6" id="hmk-F6-n4r"/>
                         <outlet property="label3" destination="BxC-dI-Jxp" id="FZT-gx-9zd"/>
                         <outlet property="titleLabel" destination="gBe-TC-gJk" id="5j2-gm-ZoD"/>
+                        <outlet property="videoButton" destination="5pH-eu-lFi" id="jgn-gJ-g4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QA1-hS-O1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1583,7 +1603,7 @@ the work you've selected</string>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93725490570068359" green="0.96470588445663452" blue="0.88627451658248901" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9vU-HY-GLd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9vU-HY-GLd">
                                         <rect key="frame" x="505" y="911" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -2605,7 +2625,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <view hidden="YES" contentMode="scaleToFill" id="JgK-9M-xRn">
+                                    <view contentMode="scaleToFill" id="JgK-9M-xRn">
                                         <rect key="frame" x="0.0" y="398" width="704" height="342"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -2635,7 +2655,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PPb-bx-fKZ">
-                                                <rect key="frame" x="175" y="105" width="354" height="46"/>
+                                                <rect key="frame" x="175" y="126" width="354" height="46"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2649,7 +2669,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -4923,7 +4943,7 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="5qV-fi-FRi">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="5qV-fi-FRi">
                                         <rect key="frame" x="18" y="8" width="656" height="620"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4967,7 +4987,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-E7-bAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6079" y="4413"/>
+            <point key="canvasLocation" x="660" y="4413"/>
         </scene>
         <!--Drop Down Delegate-->
         <scene sceneID="8Vx-92-XJu">
@@ -5127,9 +5147,10 @@ you must debrief from job</string>
     <inferredMetricsTieBreakers>
         <segue reference="Cdo-cC-vmU"/>
         <segue reference="5VJ-cj-s1Y"/>
-        <segue reference="DnI-yT-bKf"/>
         <segue reference="6og-9q-Y4v"/>
+        <segue reference="V7K-Zv-8PV"/>
         <segue reference="mwd-zf-CaD"/>
         <segue reference="xdW-7q-blD"/>
+        <segue reference="DnI-yT-bKf"/>
     </inferredMetricsTieBreakers>
 </document>
