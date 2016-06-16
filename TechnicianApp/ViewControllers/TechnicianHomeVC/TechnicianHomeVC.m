@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastSyncLabel;
 @property (weak, nonatomic) IBOutlet UILabel *syncStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *syncProgressLabel;
+@property (nonatomic) int numberOfHuds;
 
 @end
 
@@ -40,6 +41,7 @@
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.homeController = self;
     
+    self.numberOfHuds = 0;
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
     [self loadAdditionalInfo];
@@ -77,9 +79,11 @@
 #pragma mark - Load Aditional Info
 - (void)loadAdditionalInfo {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.numberOfHuds++;
     [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
         [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self checkNumberOfHuds:--self.numberOfHuds];
+        //[MBProgressHUD hideHUDForView:self.view animated:YES];
     }onError:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
@@ -117,11 +121,13 @@
 #pragma mark - Check For Sync
 - (void)checkSyncStatus {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.numberOfHuds++;
     [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:NO onSuccess:^(NSDictionary *infoDict) {
         BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
         [self syncLabelStatus:syncStatus];
         [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //[MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self checkNumberOfHuds:--self.numberOfHuds];
     }onError:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
@@ -232,13 +238,15 @@
     else
     {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.numberOfHuds++;
         __weak typeof (self) weakSelf = self;
         [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                onSuccess:^(NSString *successMessage) {
                                                                    [weakSelf checkJobStatus];
-                                                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                                   //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                   [self checkNumberOfHuds:--self.numberOfHuds];
                                                                } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                    ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                }];
     }
@@ -272,6 +280,12 @@
 
 
 
+-(void)checkNumberOfHuds:(int)number {
+    if (number == 0)
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
+
 /*
 #pragma mark - Navigation
 
@@ -293,18 +307,18 @@
         else
         {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            self.numberOfHuds++;
             __weak typeof (self) weakSelf = self;
             [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                    onSuccess:^(NSString *successMessage) {
                                                                        //[weakSelf checkJobStatus];
-                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                       //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                       [self checkNumberOfHuds:--self.numberOfHuds];
                                                                        [weakSelf custumerlookup];
                                                                    } onError:^(NSError *error) {
                                                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                    }];
-            
-            
         }
     }
 }
