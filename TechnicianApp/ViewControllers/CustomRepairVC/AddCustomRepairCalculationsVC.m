@@ -112,7 +112,7 @@
     float repairTime = [self getRepairTime];
     NSNumber *partCost = [NSNumber numberWithInt:[[self getPriceAmountFromString:self.costField.text] intValue]];
     NSNumber *freightEstimate = [NSNumber numberWithInt:[[self getPriceAmountFromString:self.estimateField.text] intValue]];
-    float totalPrice = ((repairTime + 0.5)*325 + ((partCost.intValue + freightEstimate.intValue) * 1.06) / 0.75) / 0.85;
+    float totalPrice = (repairTime + 0.5)*325 + ((partCost.intValue + freightEstimate.intValue) * 1.06) / 0.75;
     self.calculatedString = [self getPriceFromFloat:totalPrice];
     
     [self performSegueWithIdentifier:@"unwindToSummaryOfFindingsFromCalculations" sender:self];

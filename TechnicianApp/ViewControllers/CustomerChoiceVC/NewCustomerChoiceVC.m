@@ -357,7 +357,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"sendEmail":self.btnSendByEmail.selected ? @"1" : @"0",
                             @"signature" : signature,
                             @"packageTotal" : [self cutSymbolOfString:self.initialTotal],
-                            @"additional_info" : additionalInfo
+                            @"additional_info" : additionalInfo,
+                            @"date" : [self getCurrentDate]
                             };
     
     __weak __typeof(self)weakSelf = self;
@@ -738,6 +739,13 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return returnString;
 }
 
+
+- (NSString *)getCurrentDate {
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"MM/dd/YY HH:mm a"];
+    return [dateFormatter stringFromDate:currDate];
+}
 
 
 #pragma mark - Navigation
