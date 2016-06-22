@@ -25,7 +25,8 @@ typedef NS_ENUM (NSInteger, QuestionType){
     qtHeating = 1,
     qtCooling,
     qtTechnician,
-    qRepairVsReplace
+    qRepairVsReplace,
+    qtPlumbing
 
 };
 

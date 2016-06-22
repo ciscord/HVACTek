@@ -26,6 +26,9 @@
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSString *swapi_id;
 @property (nonatomic, strong) NSString *zip;
+@property (nonatomic, strong) NSString *plumbing_category;
+@property (nonatomic, strong) NSString *plumbing_group;
+@property(nonatomic, assign) BOOL isPlumbing;
 
 
 +(instancetype) companyItemWithID:(NSString*)itemID
@@ -43,6 +46,9 @@
                   secondary_color:(NSString *)secondary_color
                             state:(NSString *)state
                          swapi_id:(NSString *)swapi_id
-                              zip:(NSString *)zip;
+                              zip:(NSString *)zip
+                plumbing_category:(NSString *)plumbing_category
+                   plumbing_group:(NSString *)plumbing_group
+                       isPlumbing:(BOOL)isPlumbing;
 
 @end

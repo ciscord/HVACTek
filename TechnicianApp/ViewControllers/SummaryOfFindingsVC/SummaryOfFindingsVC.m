@@ -97,6 +97,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
             PricebookItem *p = [PricebookItem pricebookWithID:d[@"itemID"]
                                                    itemNumber:d[@"itemNumber"]
                                                     itemGroup:d[@"itemGroup"]
+                                                 itemCategory:d[@"itemCategory"]
                                                          name:d[@"name"]
                                                      quantity:@""
                                                        amount:d[@"amount"]

@@ -348,7 +348,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"City": [customerInfo objectForKeyNotNull:@"City"],
                             @"State": [customerInfo objectForKeyNotNull:@"State"],
                             @"Zip":[customerInfo objectForKeyNotNull:@"Zip"],
-                            @"AccountEmail" : [customerInfo objectForKeyNotNull:@"AccountEmail"],
+                            @"AccountEmail" : [customerInfo objectForKeyNotNull:@"EmailAddress"],
                             @"Phone" :[customerInfo objectForKeyNotNull:@"Phone"],
                             @"unselectedServiceOptiunons" : unselArray,
                             @"selectedServiceOptions" : selArray,
@@ -398,7 +398,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         
         NSLocale *locale = [NSLocale currentLocale];
         NSString *thousandSeparator = [locale objectForKey:NSLocaleGroupingSeparator];
-        NSString *formattedOutput = [form stringFromNumber:[self roundNumber:price]];
+        NSString *formattedOutput = [form stringFromNumber:price];
         NSString *resultNumber = [formattedOutput stringByReplacingOccurrencesOfString:thousandSeparator withString:@""];
 
         
@@ -437,12 +437,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
         }
     }
-}
-
-
-- (NSNumber *)roundNumber:(NSNumber *)number {
-    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
-    return roundedNumber;
 }
 
 

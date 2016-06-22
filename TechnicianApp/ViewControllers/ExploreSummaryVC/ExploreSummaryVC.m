@@ -95,6 +95,7 @@
     {
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = YES;
+        vc.questionTypeChoosed = self.sectionTypeChoosed;
     }
 }
 

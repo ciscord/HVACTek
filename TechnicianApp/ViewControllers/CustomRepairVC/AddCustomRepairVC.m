@@ -66,6 +66,7 @@
     PricebookItem *priceBook = [PricebookItem pricebookWithID:@""
                                            itemNumber:@"33XX01"
                                             itemGroup:@""
+                                         itemCategory:@""
                                                  name:self.titleTextField.text
                                              quantity:@""
                                                amount:@([[self getPriceAmountFromString:self.priceTextField.text] intValue] * 0.85)

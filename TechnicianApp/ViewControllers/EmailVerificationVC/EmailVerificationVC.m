@@ -140,9 +140,9 @@
 #pragma mark - Update Local Job Info
 - (void)updateJobInfoWithDictionary:(NSDictionary *)dict andJob:(Job *)jobObj{
     NSMutableDictionary *testDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
-    if ([dict[@"Email"] isEqualToString:dict[@"AccountEmail"]]) {
-        [testDict setObject:self.emailTextField.text forKey:@"AccountEmail"];
-    }
+//    if ([dict[@"Email"] isEqualToString:dict[@"AccountEmail"]]) {
+//        [testDict setObject:self.emailTextField.text forKey:@"AccountEmail"];
+//    }
     [testDict setObject:self.emailTextField.text forKey:@"Email"];
     [testDict setObject:self.emailTextField.text forKey:@"EmailAddress"];
     jobObj.swapiJobInfo = testDict;

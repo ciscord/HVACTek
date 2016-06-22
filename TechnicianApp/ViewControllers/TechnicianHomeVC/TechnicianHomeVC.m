@@ -81,7 +81,8 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.numberOfHuds++;
     [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
-        [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
+        if (infoDict.count)
+            [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
         [self checkNumberOfHuds:--self.numberOfHuds];
         //[MBProgressHUD hideHUDForView:self.view animated:YES];
     }onError:^(NSError *error) {
@@ -279,7 +280,7 @@
 }
 
 
-
+#pragma mark - Number of HUDs
 -(void)checkNumberOfHuds:(int)number {
     if (number == 0)
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

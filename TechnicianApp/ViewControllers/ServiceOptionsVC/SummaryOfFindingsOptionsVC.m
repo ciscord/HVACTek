@@ -56,7 +56,15 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
     if (self.isiPadCommonRepairsOptions) {
+        
+        
+        //TODO:Plumbing
+        //self.allOptions = [self filterArrayOfOptions:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
+        //
         self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+        
+        
+   //     self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
         if ([[DataLoader sharedInstance] selectedRepairTemporarOptions].count > 0){
             self.selectedOptions = [[DataLoader sharedInstance] selectedRepairTemporarOptions].mutableCopy;
         }else{
@@ -68,6 +76,10 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
             self.selectedOptions = @[].mutableCopy;
         }
        /// self.allOptions = [[DataLoader sharedInstance] otherOptions];
+        
+        //TODO:Plumbing
+        //        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[ self filterArrayOfOptions:[[DataLoader sharedInstance] otherOptions]]];
+        //
         NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
         if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
             [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
@@ -77,6 +89,27 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
     }
 }
+
+
+//TODO:Plumbing
+//- (NSArray *)filterArrayOfOptions:(NSMutableArray *)pricebook {
+//    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+//    for (PricebookItem *p in pricebook) {
+//        if (self.questionTypeChoosed == qtPlumbing) {
+//            if ([p.itemCategory isEqualToString:[[[DataLoader sharedInstance] currentCompany] plumbing_category]]) {
+//                [returnArray addObject:p];
+//            }
+//        }else{
+//            if (![p.itemCategory isEqualToString:[[[DataLoader sharedInstance] currentCompany] plumbing_category]]) {
+//                [returnArray addObject:p];
+//            }
+//        }
+//    }
+//    
+//    NSArray *array = [[NSArray alloc] initWithArray:returnArray];
+//    return array;
+//}
+
 
 
 - (void)customRepairOtionAdded:(NSNotification *)info {
@@ -307,6 +340,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = NO;
         vc.selectedOptions = self.selectedOptions;
+        vc.questionTypeChoosed = self.questionTypeChoosed;
     }
     else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
     {

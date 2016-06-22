@@ -25,7 +25,10 @@
                   secondary_color:(NSString *)secondary_color
                             state:(NSString *)state
                          swapi_id:(NSString *)swapi_id
-                              zip:(NSString *)zip {
+                              zip:(NSString *)zip
+                plumbing_category:(NSString *)plumbing_category
+                   plumbing_group:(NSString *)plumbing_group
+                       isPlumbing:(BOOL)isPlumbing {
 
     
     CompanyItem *company    = [CompanyItem new];
@@ -45,6 +48,9 @@
     company.state           = state;
     company.swapi_id        = swapi_id;
     company.zip             = zip;
+    company.plumbing_category  = plumbing_category;
+    company.plumbing_group  = plumbing_group;
+    company.isPlumbing      = isPlumbing;
     return company;
 }
 
@@ -69,6 +75,9 @@
         self.state              = [aDecoder decodeObjectForKey:@"state"];
         self.swapi_id           = [aDecoder decodeObjectForKey:@"swapi_id"];
         self.zip                = [aDecoder decodeObjectForKey:@"zip"];
+        self.plumbing_category  = [aDecoder decodeObjectForKey:@"plumbing_category"];
+        self.plumbing_group     = [aDecoder decodeObjectForKey:@"plumbing_group"];
+        self.isPlumbing         = [[aDecoder decodeObjectForKey:@"isPlumbing"] boolValue];
     }
     return self;
 }
@@ -92,6 +101,9 @@
     [aCoder encodeObject:self.state             forKey:@"state"];
     [aCoder encodeObject:self.swapi_id          forKey:@"swapi_id"];
     [aCoder encodeObject:self.zip               forKey:@"zip"];
+    [aCoder encodeObject:self.plumbing_category forKey:@"plumbing_category"];
+    [aCoder encodeObject:self.plumbing_group    forKey:@"plumbing_group"];
+    [aCoder encodeObject:[NSNumber numberWithBool:self.isPlumbing] forKey:@"isPlumbing"];
 }
 
 @end

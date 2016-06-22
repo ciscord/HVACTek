@@ -13,6 +13,7 @@
 + (instancetype)pricebookWithID:(NSString *)itemID
                      itemNumber:(NSString *)itemNumber
                       itemGroup:(NSString *)itemGroup
+                   itemCategory:(NSString *)itemCategory
                            name:(NSString *)name
                        quantity:(NSString *)quantity
                          amount:(NSNumber *)amount
@@ -21,6 +22,7 @@
     pricebook.itemID     = itemID;
     pricebook.itemNumber = itemNumber;
     pricebook.itemGroup  = itemGroup;
+    pricebook.itemCategory = itemCategory;
     pricebook.name       = name;
     pricebook.quantity   = quantity;
     pricebook.amount     = amount;
@@ -37,6 +39,7 @@
         self.itemID     = [aDecoder decodeObjectForKey:@"itemID"] ;
         self.itemNumber = [aDecoder decodeObjectForKey:@"itemNumber"];
         self.itemGroup  = [aDecoder decodeObjectForKey:@"itemGroup"];
+        self.itemCategory = [aDecoder decodeObjectForKey:@"itemCategory"];
         self.name       = [aDecoder decodeObjectForKey:@"name"];
         self.quantity   = [aDecoder decodeObjectForKey:@"quantity"];
         self.amount     = [aDecoder decodeObjectForKey:@"amount"];
@@ -53,6 +56,7 @@
    [aCoder encodeObject:self.itemID forKey:@"itemID"] ;
    [aCoder encodeObject:self.itemNumber forKey:@"itemNumber"];
    [aCoder encodeObject:self.itemGroup forKey:@"itemGroup"];
+    [aCoder encodeObject:self.itemCategory forKey:@"itemCategory"];
    [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.quantity forKey:@"quantity"];
     [aCoder encodeObject:self.amount forKey:@"amount"];

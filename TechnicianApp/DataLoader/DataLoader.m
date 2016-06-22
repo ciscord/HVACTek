@@ -301,6 +301,8 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
                NSLog(@"weakSelf.userInfo: %@",weakSelf.userInfo);
                NSDictionary *companyDict = [weakSelf.userInfo objectForKey:@"business"];
                
+               NSDictionary *swapiDict = weakSelf.userInfo[@"swapi"];
+               
                self.currentCompany = [CompanyItem companyItemWithID:companyDict[@"id"]
                                                            address1:companyDict[@"address1"]
                                                            address2:companyDict[@"address2"]
@@ -316,9 +318,11 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
                                                     secondary_color:companyDict[@"secondary_color"]                           //companyDict[@"secondary_color"]  @"#EE4236"
                                                               state:companyDict[@"state"]
                                                            swapi_id:companyDict[@"swapi_id"]
-                                                                zip:companyDict[@"zip"]];
-               
-               NSDictionary *swapiDict = weakSelf.userInfo[@"swapi"];
+                                                                zip:companyDict[@"zip"]
+                                                  plumbing_category:swapiDict[@"plumbing_category"]
+                                                     plumbing_group:swapiDict[@"plumbing_group"]
+                                                         isPlumbing:[companyDict[@"plumbing"] boolValue]];
+
                
                weakSelf.currentUser = [User userWithName:[swapiDict objectForKey:@"username"] userID:@([weakSelf.userInfo[@"id"] integerValue]) andCode:weakSelf.userInfo[@"code"]];
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
@@ -486,8 +490,21 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
           }
       }];
 }
+//ItemGroup = "SERVICE APP
+
+/*
+ "plumbing_category" = "SCHNELLER PLBG";
+ "plumbing_group" = "";
+ 
+ "pricebook_category" = "SCHNELLER HVAC";
+ "pricebook_group" = "SERVICE APP";
+ */
 
 
+- (NSNumber *)roundNumber:(NSNumber *)number {
+    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
+    return roundedNumber;
+}
 - (void)getPricebookOptionsOnSuccess:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
                              onError:(void (^)(NSError *error))onError {
     //    type={type_id}&group={group_id}&api¬_key={api_key}
@@ -501,14 +518,16 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
           NSArray *pricebook = d[@"PricebookTaskQueryData"][@"PricebookTaskQueryRecord"];
           NSMutableArray *iPadCommonRepairsOptions = @[].mutableCopy;
           NSMutableArray *otherOptions = @[].mutableCopy;
+          
           for (NSDictionary *pricebookInfo in pricebook) {
               PricebookItem *p = [PricebookItem pricebookWithID:pricebookInfo[@"ItemID"]
                                                      itemNumber:pricebookInfo[@"ItemNumber"]
                                                       itemGroup:pricebookInfo[@"ItemGroup"]
+                                                   itemCategory:pricebookInfo[@"ItemCategory"]
                                                            name:pricebookInfo[@"Description"]
                                                        quantity:@""
-                                                         amount:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)
-                                                   andAmountESA:@([pricebookInfo[@"TaskTotalPrice"] floatValue])];
+                                                         amount:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)]
+                                                   andAmountESA:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue])]];
               
               if ([p.itemGroup isEqualToString:kPricebookGroup]) {
                   [iPadCommonRepairsOptions addObject:p];
@@ -725,10 +744,10 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
     
     [self GET:ADDITIONAL_INFO parameters:@{}
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          if ([responseObject[@"status"] integerValue] == kStatusOK) {
+          //if ([responseObject[@"status"] integerValue] == kStatusOK) {
               NSDictionary *dict = responseObject[@"results"];
               onSuccess(dict);
-          }
+          //}
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if (onError) {

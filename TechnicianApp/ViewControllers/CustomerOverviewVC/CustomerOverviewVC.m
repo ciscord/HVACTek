@@ -143,6 +143,7 @@
 @interface CustomerOverviewVC ()
 @property (weak, nonatomic) IBOutlet UIButton *btnHeatingCall;
 @property (weak, nonatomic) IBOutlet UIButton *btnCoolingCall;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @property (weak, nonatomic) IBOutlet UIView      *vContainer;
 @property (weak, nonatomic) IBOutlet UILabel     *lbCustomerInfoTitle;
@@ -181,10 +182,16 @@ static NSString *kSystemInfoCellIdentifier     = @"kSystemInfoCellIdentifier";
 static NSString *kServiceHistoryCellIdentifier = @"ServiceHistoryTableViewCell";
 static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 
+const int kControllerWidth = 190;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    //TODO:Plumbing
+    //[self configureSegmentControl];
+    //
     [self configureColorScheme];
 
     self.lbCustomerInfoTitle.font       = [UIFont fontWithName:@"Calibri" size:16];
@@ -247,6 +254,22 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
     self.btnCoolingCall.layer.mask = maskLayer2;
 }
 
+
+- (void)configureSegmentControl {
+    BOOL plumbing = [[[DataLoader sharedInstance] currentCompany] isPlumbing];
+    if (!plumbing)
+        [self.segmentedControl removeSegmentAtIndex:2 animated:NO];
+    
+    self.segmentedControl.tintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIFont fontWithName:@"HelveticaNeue-Light" size:19], NSFontAttributeName,
+                                [UIColor cs_getColorWithProperty:kColorPrimary], NSForegroundColorAttributeName,
+                                nil];
+    [self.segmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[UIColor cs_getColorWithProperty:kColorPrimary0] forKey:NSForegroundColorAttributeName];
+    [self.segmentedControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateSelected];
+}
 
 
 
@@ -506,8 +529,18 @@ static NSString *kSystemInfoHeaderView         = @"SystemInfoHeaderView";
 //    [self.tvSystemInfo endUpdates];
 }
 
-#pragma mark - UITableViewDelegate & DataSource
 
+- (IBAction)segmentedControlClicked:(id)sender {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.selectedType = qtHeating;
+    } else if(self.segmentedControl.selectedSegmentIndex == 1) {
+        self.selectedType = qtCooling;
+    } else if(self.segmentedControl.selectedSegmentIndex == 2) {
+        self.selectedType = qtPlumbing;
+    }
+}
+
+#pragma mark - UITableViewDelegate & DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.tvCustomerInfo) {
         return 1;

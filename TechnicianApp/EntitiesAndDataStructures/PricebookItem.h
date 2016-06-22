@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSString *itemID;
 @property (nonatomic, strong) NSString *itemNumber;
 @property (nonatomic, strong) NSString *itemGroup;
+@property (nonatomic, strong) NSString *itemCategory;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *quantity;
 @property (nonatomic, strong) NSNumber *amount;
@@ -21,6 +22,7 @@
 +(instancetype) pricebookWithID:(NSString*)itemID
                      itemNumber:(NSString*)itemNumber
                       itemGroup:(NSString*)itemGroup
+                   itemCategory:(NSString*)itemCategory
                            name:(NSString *)name
                        quantity:(NSString *)quantity
                          amount:(NSNumber *)amount

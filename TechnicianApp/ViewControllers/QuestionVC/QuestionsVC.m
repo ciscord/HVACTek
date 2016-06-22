@@ -278,7 +278,13 @@
         QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
       ///  NSMutableArray *arr = _questions.mutableCopy;
         vc.questionType = qtTechnician;
+        vc.sectionTypeChoosed = self.sectionTypeChoosed;
        /// vc.questions    = arr;
+    }
+    
+    if ([segue.identifier isEqualToString:@"showUtilityOverpayment"]) {
+        UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;
+        vc.sectionChoosed = self.sectionTypeChoosed;
     }
     
     

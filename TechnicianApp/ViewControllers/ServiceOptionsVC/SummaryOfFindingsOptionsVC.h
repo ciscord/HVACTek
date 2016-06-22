@@ -10,6 +10,7 @@
 
 @interface SummaryOfFindingsOptionsVC : BaseVC <UITextFieldDelegate>
 
+@property (nonatomic, assign) QuestionType  questionTypeChoosed;
 @property(nonatomic, assign) BOOL isiPadCommonRepairsOptions;
 @property (nonatomic, strong) NSString *calculatedCustomRepairPrice;
 

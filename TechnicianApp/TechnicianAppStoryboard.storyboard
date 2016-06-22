@@ -2905,6 +2905,7 @@ you must debrief from job</string>
                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yji-dL-bDC">
                                 <rect key="frame" x="195" y="256" width="189" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Heating Call">
@@ -3087,6 +3088,19 @@ you must debrief from job</string>
                                     <action selector="btnReturnVisit:" destination="dBc-mz-UYT" eventType="touchUpInside" id="co1-xA-bLf"/>
                                 </connections>
                             </button>
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cGu-ma-SyJ">
+                                <rect key="frame" x="92" y="260" width="585" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Heating Call"/>
+                                    <segment title="Cooling Call"/>
+                                    <segment title="Plumbing Call"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlClicked:" destination="dBc-mz-UYT" eventType="valueChanged" id="sbP-mX-1wz"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="wAl-KP-w8J"/>
@@ -3098,6 +3112,7 @@ you must debrief from job</string>
                         <outlet property="lbServiceHistoryInfoTitle" destination="ahk-TP-42Q" id="d3T-m4-O31"/>
                         <outlet property="lbSystemInfoTitle" destination="dP3-FZ-aEi" id="Hly-7j-X1N"/>
                         <outlet property="returnBtn" destination="RLx-Bw-0Oz" id="sAA-tc-U8m"/>
+                        <outlet property="segmentedControl" destination="cGu-ma-SyJ" id="f4n-6f-uL8"/>
                         <outlet property="separator1" destination="Ecd-5H-Mvy" id="wmS-UY-FGI"/>
                         <outlet property="separator2" destination="UdZ-Db-7XM" id="fF6-N7-pAf"/>
                         <outlet property="separator3" destination="tes-Vo-rpO" id="nN5-Fy-iLc"/>
@@ -5145,12 +5160,12 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cdo-cC-vmU"/>
-        <segue reference="5VJ-cj-s1Y"/>
         <segue reference="6og-9q-Y4v"/>
         <segue reference="V7K-Zv-8PV"/>
         <segue reference="mwd-zf-CaD"/>
-        <segue reference="xdW-7q-blD"/>
         <segue reference="DnI-yT-bKf"/>
+        <segue reference="xdW-7q-blD"/>
+        <segue reference="Cdo-cC-vmU"/>
+        <segue reference="5VJ-cj-s1Y"/>
     </inferredMetricsTieBreakers>
 </document>
