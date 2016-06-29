@@ -101,7 +101,8 @@
                                                                       info_description:docDict[@"description"]
                                                                             info_title:docDict[@"title"]
                                                                               info_url:docDict[@"url"]
-                                                                               isVideo:NO];
+                                                                               isVideo:NO
+                                                                               isPicture:NO];
         [additionalObjects addObject:info];
     }
     
@@ -110,7 +111,18 @@
                                                                       info_description:videoDict[@"description"]
                                                                             info_title:videoDict[@"title"]
                                                                               info_url:videoDict[@"url"]
-                                                                               isVideo:YES];
+                                                                               isVideo:YES
+                                                                             isPicture:NO];
+        [additionalObjects addObject:info];
+    }
+    
+    for (NSDictionary *imageDict in dict[@"3"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:imageDict[@"id"]
+                                                                      info_description:imageDict[@"description"]
+                                                                            info_title:imageDict[@"title"]
+                                                                              info_url:imageDict[@"url"]
+                                                                               isVideo:NO
+                                                                             isPicture:YES];
         [additionalObjects addObject:info];
     }
 

@@ -24,6 +24,9 @@ PODS:
   - FrameAccessor (2.0)
   - MBProgressHUD (0.9)
   - MD5Digest (0.1.0)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
   - SFRoundProgressCounterView (0.0.5):
     - TTTAttributedLabel (~> 1.7.1)
   - SignatureView (1.1.0)
@@ -39,6 +42,7 @@ DEPENDENCIES:
   - FrameAccessor
   - MBProgressHUD
   - MD5Digest
+  - SDWebImage (~> 3.8)
   - SFRoundProgressCounterView
   - SignatureView
   - SSKeychain
@@ -52,6 +56,7 @@ SPEC CHECKSUMS:
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
   MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
   MD5Digest: 99bcccfc389c5b7a0edaf66beb80fbc7596a3b65
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SFRoundProgressCounterView: 9b94f5297ce6bb8c633af9c1e583889864595cfa
   SignatureView: 23bb085add66110062decbfa899ed93d111b76e5
   SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
@@ -60,4 +65,6 @@ SPEC CHECKSUMS:
   TWRDownloadManager: 34193d7d1ab6e6b4243d74fa4f686cc2ed5ef40f
   XMLDictionary: f9f51601ba76678b594ab485f2b00ec1fed23724
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: b1519dc50207e0f1f01d26de427f4712a2aa09ff
+
+COCOAPODS: 1.0.1

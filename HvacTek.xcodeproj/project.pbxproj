@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DF02C1D2423B8007CE24F /* PictureLibraryVC.m */; };
+		0E5DF0301D242798007CE24F /* PictureGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */; };
+		43C48D74209A4379C316545D /* libPods-HvacTek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */; };
 		4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */; };
 		4F11D3DD1AA1F7F1007FC0A8 /* SWAPIRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3DC1AA1F7F1007FC0A8 /* SWAPIRequestManager.m */; };
 		4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3DF1AA6034D007FC0A8 /* PricebookItem.m */; };
@@ -159,7 +162,6 @@
 		91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A061B8DF034005EA4EA /* ProductCell.m */; };
 		91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA9A071B8DF034005EA4EA /* ProductCell.xib */; };
 		91CA5EFC1ADFF86B00D871FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CA5EFB1ADFF86B00D871FD /* User.m */; };
-		982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C60E5FF5C4D649D9A154A1 /* libPods.a */; };
 		AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */; };
 		D29AD9A919756FF40059565A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29AD9A819756FF40059565A /* MessageUI.framework */; };
 		D29F06FF197023CA0020D83C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29F06FE197023CA0020D83C /* Foundation.framework */; };
@@ -169,7 +171,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0F55343F8CAA370BDE55C875 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		0E5DF02B1D2423B8007CE24F /* PictureLibraryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureLibraryVC.h; sourceTree = "<group>"; };
+		0E5DF02C1D2423B8007CE24F /* PictureLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureLibraryVC.m; sourceTree = "<group>"; };
+		0E5DF02E1D242798007CE24F /* PictureGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureGalleryVC.h; sourceTree = "<group>"; };
+		0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureGalleryVC.m; sourceTree = "<group>"; };
+		2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.debug.xcconfig"; sourceTree = "<group>"; };
 		4F11D3D71A9F7DEB007FC0A8 /* Unifeiyed_Quoting 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 2.xcdatamodel"; sourceTree = "<group>"; };
 		4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 3.xcdatamodel"; sourceTree = "<group>"; };
 		4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Unifeiyed_Quoting.xcdatamodel; sourceTree = "<group>"; };
@@ -446,6 +452,7 @@
 		91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		91CA5EFA1ADFF86B00D871FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HvacTek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA23D6471A379B4B00703952 /* TechnicianDebriefVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnicianDebriefVC.h; sourceTree = "<group>"; };
 		AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnicianDebriefVC.m; sourceTree = "<group>"; };
 		D29AD9A819756FF40059565A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -457,7 +464,7 @@
 		D29F0708197023CA0020D83C /* Signature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Signature-Info.plist"; sourceTree = "<group>"; };
 		D29F070E197023CA0020D83C /* Signature-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Signature-Prefix.pch"; sourceTree = "<group>"; };
 		D29F071C197023CA0020D83C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		FD31FC73BEEEDA33BB03C045 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,13 +477,24 @@
 				D29F0705197023CA0020D83C /* CoreData.framework in Frameworks */,
 				D29F0703197023CA0020D83C /* UIKit.framework in Frameworks */,
 				D29F06FF197023CA0020D83C /* Foundation.framework in Frameworks */,
-				982E90EA41BF7C7034FEFC71 /* libPods.a in Frameworks */,
+				43C48D74209A4379C316545D /* libPods-HvacTek.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E5DF02A1D2423B8007CE24F /* PictureLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				0E5DF02B1D2423B8007CE24F /* PictureLibraryVC.h */,
+				0E5DF02C1D2423B8007CE24F /* PictureLibraryVC.m */,
+				0E5DF02E1D242798007CE24F /* PictureGalleryVC.h */,
+				0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */,
+			);
+			path = PictureLibrary;
+			sourceTree = "<group>";
+		};
 		4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,6 +786,7 @@
 				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
 				75F3DF8A1A3F055C00F60652 /* CustomerChoiceVC */,
 				52F3D1E11CFF0356008D24C9 /* VideoLibrary */,
+				0E5DF02A1D2423B8007CE24F /* PictureLibrary */,
 				5247C5241CEDB5F700670D4A /* AdditionalInfo */,
 				52EDAFF71CEF0797004F3EC0 /* EmailVerificationVC */,
 				5209A1A71CEC91EC0026ED6D /* InvoicePreviewVC */,
@@ -1092,6 +1111,15 @@
 			path = "NSDictionary+NSNullReplaceWithNil";
 			sourceTree = "<group>";
 		};
+		5375E9D434BD86E454077487 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */,
+				E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		75399F581A39CD250013EAC0 /* RepairVsServiceVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1199,7 +1227,7 @@
 				D29F0707197023CA0020D83C /* Supporting Files */,
 				D29F06FD197023CA0020D83C /* Frameworks */,
 				D29F06FC197023CA0020D83C /* Products */,
-				E90976CC807E3E5334998E21 /* Pods */,
+				5375E9D434BD86E454077487 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1222,6 +1250,7 @@
 				D29F0704197023CA0020D83C /* CoreData.framework */,
 				D29F071C197023CA0020D83C /* XCTest.framework */,
 				58C60E5FF5C4D649D9A154A1 /* libPods.a */,
+				9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1237,15 +1266,6 @@
 			path = "Unifeiyed Quoting";
 			sourceTree = "<group>";
 		};
-		E90976CC807E3E5334998E21 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FD31FC73BEEEDA33BB03C045 /* Pods.debug.xcconfig */,
-				0F55343F8CAA370BDE55C875 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1253,13 +1273,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "HvacTek" */;
 			buildPhases = (
-				BFF2E02D615784A6639ED173 /* Check Pods Manifest.lock */,
+				7E8F24EAB53D957596F3DEE3 /* [CP] Check Pods Manifest.lock */,
 				D29F06F7197023CA0020D83C /* Sources */,
 				D29F06F8197023CA0020D83C /* Frameworks */,
 				D29F06F9197023CA0020D83C /* Resources */,
-				F8DDBC55936E193F37CBB05C /* Copy Pods Resources */,
 				4FD6166D1AF11B060025AB99 /* ShellScript */,
-				BCB325831DDF30BC44FE7509 /* Embed Pods Frameworks */,
+				D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */,
+				0067B5E179166A79C94B2789 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1353,6 +1373,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0067B5E179166A79C94B2789 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4FD6166D1AF11B060025AB99 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1366,29 +1401,14 @@
 			shellPath = /bin/sh;
 			shellScript = "    ";
 		};
-		BCB325831DDF30BC44FE7509 /* Embed Pods Frameworks */ = {
+		7E8F24EAB53D957596F3DEE3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BFF2E02D615784A6639ED173 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1396,19 +1416,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F8DDBC55936E193F37CBB05C /* Copy Pods Resources */ = {
+		D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1424,6 +1444,7 @@
 				5277B1871C16D912008929ED /* RRQuestionsVC.m in Sources */,
 				524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */,
 				4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */,
+				0E5DF0301D242798007CE24F /* PictureGalleryVC.m in Sources */,
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
 				52EDAFFA1CEF07D9004F3EC0 /* EmailVerificationVC.m in Sources */,
@@ -1469,6 +1490,7 @@
 				4F11D3FB1AA772E4007FC0A8 /* NSManagedObject+CoreDataCustom.m in Sources */,
 				520159D01B8D9C590035909C /* AgendaPictureRoundView.m in Sources */,
 				52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */,
+				0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
 				524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
@@ -1621,7 +1643,7 @@
 		};
 		D29F072E197023CA0020D83C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD31FC73BEEEDA33BB03C045 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1645,7 +1667,7 @@
 		};
 		D29F072F197023CA0020D83C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F55343F8CAA370BDE55C875 /* Pods.release.xcconfig */;
+			baseConfigurationReference = E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

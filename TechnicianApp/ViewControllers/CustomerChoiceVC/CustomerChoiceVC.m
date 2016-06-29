@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label7;
 @property (weak, nonatomic) IBOutlet UIView *helpView3;
 @property (weak, nonatomic) IBOutlet UILabel *label8;
+@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 
 @end
 
@@ -141,6 +142,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.videoLibraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 

@@ -1,6 +1,7 @@
 platform :ios, "7.1"
-xcodeproj 'HvacTek'
-inhibit_all_warnings!
+
+target "HvacTek" do
+
 pod 'MBProgressHUD'
 pod 'SSKeychain'
 pod 'AFNetworking'
@@ -12,3 +13,6 @@ pod 'BCGenieEffect'
 pod 'XMLDictionary'
 pod 'SignatureView'
 pod 'TWRDownloadManager'
+pod 'SDWebImage', '~>3.8'
+
+end

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UILabel *esaLabel;
 @property (weak, nonatomic) IBOutlet UIButton *videoButton;
+@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @end
 
 @implementation ESABenefitsVC
@@ -43,6 +44,7 @@
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label0.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];

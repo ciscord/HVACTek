@@ -14,6 +14,8 @@
 @interface PlatinumOptionsVC ()
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
 @property (weak, nonatomic) IBOutlet UIButton     *btnContinue;
+@property (weak, nonatomic) IBOutlet UIButton *videoButton;
+@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @end
 
 static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
@@ -31,6 +33,8 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
 //    self.priceBookAndServiceOptions.firstObject[@"items"] = [self.priceBookAndServiceOptions.firstObject[@"items"] sortedArrayUsingDescriptors:sortDescriptors];
   
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 - (void)didReceiveMemoryWarning {

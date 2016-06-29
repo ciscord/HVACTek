@@ -14,7 +14,8 @@
                            info_description:(NSString*)info_description
                                  info_title:(NSString*)info_title
                                    info_url:(NSString*)info_url
-                                    isVideo:(BOOL)isVideo {
+                                    isVideo:(BOOL)isVideo
+                                  isPicture:(BOOL)isPicture {
     
     CompanyAditionalInfo *company   = [CompanyAditionalInfo new];
     company.info_id                 = info_id;
@@ -22,6 +23,7 @@
     company.info_title              = info_title;
     company.info_url                = info_url;
     company.isVideo                 = isVideo;
+    company.isPicture               = isPicture;
     return company;
 }
 
@@ -36,6 +38,7 @@
         self.info_title         = [aDecoder decodeObjectForKey:@"info_title"];
         self.info_url           = [aDecoder decodeObjectForKey:@"info_url"];
         self.isVideo            = [[aDecoder decodeObjectForKey:@"isVideo"] boolValue];
+        self.isPicture          = [[aDecoder decodeObjectForKey:@"isPicture"] boolValue];
     }
     return self;
 }
@@ -49,6 +52,7 @@
     [aCoder encodeObject:self.info_title            forKey:@"info_title"];
     [aCoder encodeObject:self.info_url              forKey:@"info_url"];
     [aCoder encodeObject:[NSNumber numberWithBool:self.isVideo] forKey:@"isVideo"];
+    [aCoder encodeObject:[NSNumber numberWithBool:self.isPicture] forKey:@"isPicture"];
 }
 
 
