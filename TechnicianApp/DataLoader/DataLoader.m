@@ -765,7 +765,7 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
-    
+    ////add2cart_sync/2 cand termin syncronizarea(downloadarea)....2 folosesc pentru additional info
     NSString *apiString;
     if (isAdd2Cart)
         apiString = SYNC_STATUS;

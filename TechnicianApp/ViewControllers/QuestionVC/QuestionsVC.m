@@ -248,7 +248,7 @@
 //            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
             job.custumerQuestions = self.questions;
             [job.managedObjectContext save];
-            [self performSegueWithIdentifier:@"technicianQuestionsSegue" sender:self];
+            [self performSegueWithIdentifier:@"showMemberBenefitsVC" sender:self];
         }
         
     }
@@ -274,13 +274,13 @@
 //    }
     
     
-    if ([segue.identifier isEqualToString:@"technicianQuestionsSegue"]) {
-        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
-      ///  NSMutableArray *arr = _questions.mutableCopy;
-        vc.questionType = qtTechnician;
-        vc.sectionTypeChoosed = self.sectionTypeChoosed;
-       /// vc.questions    = arr;
-    }
+//    if ([segue.identifier isEqualToString:@"technicianQuestionsSegue"]) {
+//        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
+//      ///  NSMutableArray *arr = _questions.mutableCopy;
+//        vc.questionType = qtTechnician;
+//        vc.sectionTypeChoosed = self.sectionTypeChoosed;
+//       /// vc.questions    = arr;
+//    }
     
     if ([segue.identifier isEqualToString:@"showUtilityOverpayment"]) {
         UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;

@@ -7,7 +7,7 @@
 //
 
 #import "ESABenefitsVC.h"
-#import "ViewOptionsVC.h"
+#import "QuestionsVC.h"
 
 @interface ESABenefitsVC ()
 
@@ -62,10 +62,10 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue destinationViewController] isKindOfClass:[ViewOptionsVC class]]) {
+    if ([[segue destinationViewController] isKindOfClass:[QuestionsVC class]]) {
         
-        ViewOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.serviceOptionsPriceBook;
+        QuestionsVC *vc = [segue destinationViewController];
+        vc.questionType = qtTechnician;
     }
 }
 

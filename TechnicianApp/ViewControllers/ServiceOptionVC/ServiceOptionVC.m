@@ -11,7 +11,6 @@
 #import "ViewOptionsVC.h"
 #import "CustomerChoiceVC.h"
 #import "PlatinumOptionsVC.h"
-#import "ESABenefitsVC.h"
 #import "EnlargeOptionsVC.h"
 #import "EditServiceOptionsVC.h"
 #import "RRFinalChoiceVC.h"
@@ -245,7 +244,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 #pragma mark - Next Action
 - (IBAction)nextBtnClicked:(UIButton *)sender {
     if ([self servicesOptionsWereEdited]) {
-        [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
+        [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"No options have been changed. Are you sure you wish to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         [alert show];
@@ -269,7 +268,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [self performSegueWithIdentifier:@"showBenefitsVC" sender:self];
+        [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];
     }
 }
 
@@ -468,10 +467,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         PlatinumOptionsVC *vc = [segue destinationViewController];
         vc.priceBookAndServiceOptions = self.options;
         
-    }
-    else if ([vc isKindOfClass:[ESABenefitsVC class]]) {
-        ESABenefitsVC *vc = [segue destinationViewController];
-        vc.serviceOptionsPriceBook = self.options;
     }
     
     

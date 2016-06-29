@@ -525,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcE-GS-yHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-243" y="2002"/>
+            <point key="canvasLocation" x="-251" y="3206"/>
         </scene>
         <!--Email VerificationVC-->
         <scene sceneID="AeU-Fl-IT2">
@@ -733,7 +733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vd5-uq-LDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="635" y="2002"/>
+            <point key="canvasLocation" x="655" y="2002"/>
         </scene>
         <!--Setting AgendaVC-->
         <scene sceneID="xND-k4-Rx6">
@@ -951,7 +951,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="iP6-St-rfT" kind="push" id="Ae9-pM-ut2"/>
+                                            <segue destination="gRq-ku-OmV" kind="push" identifier="showTechnicianQuestionsSection" id="l3w-NU-4MI"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5iW-3w-OjT">
@@ -1126,7 +1126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QA1-hS-O1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-243" y="3206"/>
+            <point key="canvasLocation" x="3315" y="734"/>
         </scene>
         <!--View OptionsVC-->
         <scene sceneID="PLH-i3-kQ2">
@@ -1179,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQN-Vf-qPm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="3206"/>
+            <point key="canvasLocation" x="655" y="3206"/>
         </scene>
         <!--Summary Of FindingsVC-->
         <scene sceneID="aei-zq-f1M">
@@ -2455,7 +2455,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                     <navigationItem key="navigationItem" id="LCK-Sx-uBG"/>
                     <connections>
                         <outlet property="vwContent" destination="jRQ-25-ZqA" id="dth-cT-dPC"/>
-                        <segue destination="gRq-ku-OmV" kind="push" identifier="technicianQuestionsSegue" id="XBy-5R-nRs"/>
+                        <segue destination="b14-6y-0Uy" kind="push" identifier="showMemberBenefitsVC" id="DN7-JL-yXh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxi-Ql-8m9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2525,7 +2525,7 @@ Copyright 2012 ITSUP2U Media • 1115 Elkton Drive, Suite 402 • Colorado Sprin
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nT-KF-s98" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5292" y="734"/>
+            <point key="canvasLocation" x="-243" y="2002"/>
         </scene>
         <!--Technician Home-->
         <scene sceneID="Zpf-C3-Vu6">
@@ -3184,7 +3184,7 @@ you must debrief from job</string>
                     <connections>
                         <outlet property="btnContinue" destination="hYN-xn-H6M" id="fqi-XQ-Cix"/>
                         <outlet property="tableView" destination="OZT-M3-SFp" id="fZV-3e-luJ"/>
-                        <segue destination="b14-6y-0Uy" kind="push" identifier="showBenefitsVC" id="3J1-27-ud1"/>
+                        <segue destination="iP6-St-rfT" kind="push" identifier="showViewOptionsVC" id="W7T-f7-sPv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oXI-Bu-6Y9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3215,7 +3215,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QOU-iH-RoC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3315" y="734"/>
+            <point key="canvasLocation" x="4268" y="734"/>
         </scene>
         <!--Service OptionVC-->
         <scene sceneID="pBq-eR-wyw">
@@ -3730,7 +3730,7 @@ you must debrief from job</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VhB-Yo-BtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="7CH-bu-5f6"/>
             </objects>
-            <point key="canvasLocation" x="4268" y="734"/>
+            <point key="canvasLocation" x="5292" y="734"/>
         </scene>
         <!--Edit Service OptionsVC-->
         <scene sceneID="MtW-KW-hT7">
@@ -3814,7 +3814,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82V-ud-xaR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4238" y="2002"/>
+            <point key="canvasLocation" x="4268" y="2002"/>
         </scene>
         <!--RRQuestionsVC-->
         <scene sceneID="5aW-6d-rBo">
@@ -5161,11 +5161,11 @@ you must debrief from job</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6og-9q-Y4v"/>
-        <segue reference="V7K-Zv-8PV"/>
-        <segue reference="mwd-zf-CaD"/>
         <segue reference="DnI-yT-bKf"/>
         <segue reference="xdW-7q-blD"/>
+        <segue reference="mwd-zf-CaD"/>
         <segue reference="Cdo-cC-vmU"/>
         <segue reference="5VJ-cj-s1Y"/>
+        <segue reference="V7K-Zv-8PV"/>
     </inferredMetricsTieBreakers>
 </document>
