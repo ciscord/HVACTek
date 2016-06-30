@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
     [self.pictureView sd_setImageWithURL:[NSURL URLWithString:self.pictureName]
-                       placeholderImage:nil
+                       placeholderImage:[UIImage imageNamed:@"pictureGallery_placeholder"]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                   //
                               }];

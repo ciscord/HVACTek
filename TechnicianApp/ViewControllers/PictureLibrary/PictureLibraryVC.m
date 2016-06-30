@@ -81,11 +81,11 @@ static NSString *kCELL_IDENTIFIER = @"VideoLibraryCell";
     VideoLibraryCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     cell.titleLabel.text = selectedItem.info_title;
     cell.descriptionLabel.text = selectedItem.info_description;
-    //cell.coverImage.image = [UIImage imageNamed:@"video-thumbnail"];
+    //cell.coverImage.image = [UIImage imageNamed:@"pictureGallery_placeholder"];
     
     
     [cell.coverImage sd_setImageWithURL:[NSURL URLWithString:selectedItem.info_url]
-                      placeholderImage:nil
+                      placeholderImage:[UIImage imageNamed:@"pictureGallery_placeholder"]
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                  //
                              }];
