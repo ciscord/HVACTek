@@ -11,6 +11,7 @@
 #import "CompanyAditionalInfo.h"
 #import <MBProgressHUD.h>
 #import <TWRDownloadManager/TWRDownloadManager.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface TechnicianHomeVC ()
 @property (weak, nonatomic) IBOutlet UIView *vwDebrief;
@@ -44,7 +45,6 @@
     self.numberOfHuds = 0;
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
-    [self loadAdditionalInfo];
     [self checkSyncStatus];
 }
 
@@ -72,61 +72,6 @@
     self.lastSyncLabel.textColor = [UIColor blackColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveJobIDFromSWR:) name:@"NotifReciveJobIDFromSWR" object:nil];
-}
-
-
-
-#pragma mark - Load Aditional Info
-- (void)loadAdditionalInfo {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.numberOfHuds++;
-    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
-        if (infoDict.count)
-            [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
-        [self checkNumberOfHuds:--self.numberOfHuds];
-        //[MBProgressHUD hideHUDForView:self.view animated:YES];
-    }onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        ShowOkAlertWithTitle(error.localizedDescription, self);
-    }];
-}
-
-
-- (NSArray *)saveAdditionalInfoFromDict:(NSDictionary *)dict {
-    
-    NSMutableArray *additionalObjects = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *docDict in dict[@"1"][@"rows"]) {
-        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:docDict[@"id"]
-                                                                      info_description:docDict[@"description"]
-                                                                            info_title:docDict[@"title"]
-                                                                              info_url:docDict[@"url"]
-                                                                               isVideo:NO
-                                                                               isPicture:NO];
-        [additionalObjects addObject:info];
-    }
-    
-    for (NSDictionary *videoDict in dict[@"2"][@"rows"]) {
-        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:videoDict[@"id"]
-                                                                      info_description:videoDict[@"description"]
-                                                                            info_title:videoDict[@"title"]
-                                                                              info_url:videoDict[@"url"]
-                                                                               isVideo:YES
-                                                                             isPicture:NO];
-        [additionalObjects addObject:info];
-    }
-    
-    for (NSDictionary *imageDict in dict[@"3"][@"rows"]) {
-        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:imageDict[@"id"]
-                                                                      info_description:imageDict[@"description"]
-                                                                            info_title:imageDict[@"title"]
-                                                                              info_url:imageDict[@"url"]
-                                                                               isVideo:NO
-                                                                             isPicture:YES];
-        [additionalObjects addObject:info];
-    }
-
-    return additionalObjects;
 }
 
 
@@ -192,8 +137,25 @@
                     [self modifySyncStatus];
                 }
             }
+        }else if (companyObject.isPicture) {
+            [self downloadImageFromURL:companyObject.info_url];
         }
     }
+}
+
+
+-(void)downloadImageFromURL:(NSString *)imageURL {
+    SDWebImageDownloader *downloader = [SDWebImageDownloader sharedDownloader];
+    [downloader downloadImageWithURL:[NSURL URLWithString: imageURL]
+                             options:0
+                            progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                // progression tracking code
+                            }
+                           completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                               if (image && finished) {
+                                   [[SDImageCache sharedImageCache] storeImage:image forKey:imageURL];
+                               }
+                           }];
 }
 
 

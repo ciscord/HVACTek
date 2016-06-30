@@ -7,6 +7,7 @@
 //
 
 #import "LoginVC.h"
+#import "CompanyAditionalInfo.h"
 
 @interface LoginVC ()
 
@@ -74,8 +75,10 @@
                                              [userPassword setObject:weakSelf.txtAPI.text forKey:@"companyAPI"];
                                              [userPassword synchronize];
                                              
-                                             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                             [weakSelf performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
+                                             //[MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                             
+                                             [weakSelf performSelectorOnMainThread:@selector(loadAdditionalInfo) withObject:nil waitUntilDone:NO];
+                                             //[weakSelf performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
                                          }
                                            onError:^(NSError *error) {
                                                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
@@ -83,4 +86,62 @@
                                            }];
   
 }
+
+
+
+
+
+#pragma mark - Load Aditional Info
+- (void)loadAdditionalInfo {
+    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
+        if (infoDict.count)
+            [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        ShowOkAlertWithTitle(error.localizedDescription, self);
+    }];
+}
+
+
+- (NSArray *)saveAdditionalInfoFromDict:(NSDictionary *)dict {
+    
+    NSMutableArray *additionalObjects = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *docDict in dict[@"1"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:docDict[@"id"]
+                                                                      info_description:docDict[@"description"]
+                                                                            info_title:docDict[@"title"]
+                                                                              info_url:docDict[@"url"]
+                                                                               isVideo:NO
+                                                                             isPicture:NO];
+        [additionalObjects addObject:info];
+    }
+    
+    for (NSDictionary *videoDict in dict[@"2"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:videoDict[@"id"]
+                                                                      info_description:videoDict[@"description"]
+                                                                            info_title:videoDict[@"title"]
+                                                                              info_url:videoDict[@"url"]
+                                                                               isVideo:YES
+                                                                             isPicture:NO];
+        [additionalObjects addObject:info];
+    }
+    
+    for (NSDictionary *imageDict in dict[@"3"][@"rows"]) {
+        CompanyAditionalInfo *info = [CompanyAditionalInfo companyAdditionalInfoWithID:imageDict[@"id"]
+                                                                      info_description:imageDict[@"description"]
+                                                                            info_title:imageDict[@"title"]
+                                                                              info_url:imageDict[@"url"]
+                                                                               isVideo:NO
+                                                                             isPicture:YES];
+        [additionalObjects addObject:info];
+    }
+    
+    return additionalObjects;
+}
+
+
 @end

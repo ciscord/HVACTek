@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="enC-KU-ZUB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="enC-KU-ZUB">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -648,6 +648,40 @@ $</string>
                                             <action selector="cartButon:" destination="3cm-Mv-pde" eventType="touchUpInside" id="XCH-6D-NS1"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2by-ML-2Oc" userLabel="Video">
+                                        <rect key="frame" x="590" y="25" width="65" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Video">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="videoButtonClicked:" destination="3cm-Mv-pde" eventType="touchUpInside" id="K48-bA-B2f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byh-wC-Ciq" userLabel="Picture">
+                                        <rect key="frame" x="590" y="55" width="65" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Picture">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="pictureButtonClicked:" destination="3cm-Mv-pde" eventType="touchUpInside" id="FFd-OH-ai9"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HNg-HV-Wrm">
                                         <rect key="frame" x="182" y="126" width="91" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -894,11 +928,13 @@ $</string>
                         <outlet property="months60Button" destination="ZsP-8a-D2g" id="8IE-fW-VXs"/>
                         <outlet property="months70Button" destination="ABi-nR-gSN" id="flH-Xh-dh7"/>
                         <outlet property="months84Button" destination="KDf-IA-B8R" id="fxN-GD-1KJ"/>
+                        <outlet property="pictureButton" destination="byh-wC-Ciq" id="tc1-cn-6fh"/>
                         <outlet property="rebatesButton" destination="ngu-Qg-pVs" id="shc-RD-bRo"/>
                         <outlet property="secView" destination="v1f-bh-t6C" id="wYy-92-hBz"/>
                         <outlet property="tableViewX" destination="T0p-eU-Fug" id="zaW-iH-w41"/>
                         <outlet property="totalAmountLabel" destination="vUE-b9-zrd" id="8L7-o5-yck"/>
                         <outlet property="totalSavingsLabel" destination="1HQ-Gv-lCF" id="vN3-mO-WaL"/>
+                        <outlet property="videoButton" destination="2by-ML-2Oc" id="3xz-oa-vQ6"/>
                         <segue destination="wG7-4b-tHM" kind="push" identifier="cart" id="sM0-6D-9oL"/>
                         <segue destination="qav-sT-PJS" kind="push" identifier="rebate" id="mxH-CD-Iqb"/>
                         <segue destination="wG7-4b-tHM" kind="push" identifier="savedCart" id="Q6u-D9-n1g"/>

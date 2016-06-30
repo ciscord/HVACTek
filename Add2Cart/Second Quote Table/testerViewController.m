@@ -7,6 +7,8 @@
 //
 
 #import "testerViewController.h"
+#import "PictureLibraryVC.h"
+#import "VideoLibraryVC.h"
 
 @interface testerViewController (){
     
@@ -21,6 +23,8 @@
     IBOutlet UIButton *btnCart3;
     __weak IBOutlet UIButton *cartButton;
     __weak IBOutlet UIImageView *logoImageView;
+    __weak IBOutlet UIButton *videoButton;
+    __weak IBOutlet UIButton *pictureButton;
 }
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
@@ -150,6 +154,8 @@
     self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -2138,6 +2144,19 @@
     [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
 
+
+#pragma mark - Video and Picture Actions
+- (IBAction)videoButtonClicked:(id)sender {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:[NSBundle mainBundle]];
+    VideoLibraryVC * detail = [storyboard instantiateViewControllerWithIdentifier:@"VideoLibraryVC"];
+    [self.navigationController pushViewController: detail animated: YES];
+}
+
+- (IBAction)pictureButtonClicked:(id)sender {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:[NSBundle mainBundle]];
+    PictureLibraryVC * detail = [storyboard instantiateViewControllerWithIdentifier:@"PictureLibraryVC"];
+    [self.navigationController pushViewController: detail animated: YES];
+}
 
 
 #pragma mark - CartViewController Delegates
