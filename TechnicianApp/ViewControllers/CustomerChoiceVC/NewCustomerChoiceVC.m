@@ -348,7 +348,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
                             @"City": [customerInfo objectForKeyNotNull:@"City"],
                             @"State": [customerInfo objectForKeyNotNull:@"State"],
                             @"Zip":[customerInfo objectForKeyNotNull:@"Zip"],
-                            @"AccountEmail" : [customerInfo objectForKeyNotNull:@"EmailAddress"],
+                            @"AccountEmail" : [customerInfo objectForKeyNotNull:@"Email"],
                             @"Phone" :[customerInfo objectForKeyNotNull:@"Phone"],
                             @"unselectedServiceOptiunons" : unselArray,
                             @"selectedServiceOptions" : selArray,

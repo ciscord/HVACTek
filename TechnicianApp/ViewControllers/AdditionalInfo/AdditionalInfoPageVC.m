@@ -53,7 +53,7 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     
     NSMutableArray *infoArray = [[NSMutableArray alloc] init];
     for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
-        if (!companyObject.isVideo) {
+        if (!companyObject.isVideo && !companyObject.isPicture) {
             [infoArray addObject:companyObject];
         }
     }
