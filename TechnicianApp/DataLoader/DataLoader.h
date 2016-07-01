@@ -84,8 +84,12 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 @property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptions;
 @property (nonatomic, strong) NSMutableArray *otherOptions;
+@property (nonatomic, strong) NSMutableArray *plumbingCommonRepairsOptions;
+@property (nonatomic, strong) NSMutableArray *plumbingOtherOptions;
 @property (nonatomic, strong) NSMutableArray *selectedRepairTemporarOptions;
 @property (nonatomic, strong) NSArray *companyAdditionalInfo;
+
+@property (nonatomic, assign) QuestionType currentJobCallType;
 
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;
 

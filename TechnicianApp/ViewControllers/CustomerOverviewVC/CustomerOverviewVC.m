@@ -188,10 +188,7 @@ const int kControllerWidth = 190;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    //TODO:Plumbing
-    //[self configureSegmentControl];
-    //
+    [self configureSegmentControl];
     [self configureColorScheme];
 
     self.lbCustomerInfoTitle.font       = [UIFont fontWithName:@"Calibri" size:16];
@@ -490,13 +487,13 @@ const int kControllerWidth = 190;
 }
 
 - (IBAction)btnReturnVisit:(id)sender {
+    [DataLoader sharedInstance].currentJobCallType = self.selectedType;
     [self performSegueWithIdentifier:@"returnVisit" sender:self];
 }
 
 
 - (IBAction)beginAppointment:(id)sender {
-    
-    
+    [DataLoader sharedInstance].currentJobCallType = self.selectedType;
     [self performSegueWithIdentifier:@"goSettingAgenda" sender:self];
     
 /*
@@ -530,6 +527,7 @@ const int kControllerWidth = 190;
 }
 
 
+#pragma mark - SegmentedControl Action
 - (IBAction)segmentedControlClicked:(id)sender {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
         self.selectedType = qtHeating;

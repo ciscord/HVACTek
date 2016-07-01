@@ -87,7 +87,6 @@
     if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
         QuestionsVC *vc = segue.destinationViewController;
         vc.questionType = self.choosedType;
-        vc.sectionTypeChoosed = self.choosedType;
     }
     
 }

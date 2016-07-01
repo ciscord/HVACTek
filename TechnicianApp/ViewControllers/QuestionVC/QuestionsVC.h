@@ -11,7 +11,6 @@
 @interface QuestionsVC : BaseVC
 
 @property (nonatomic, assign) QuestionType  questionType;
-@property (nonatomic, assign) QuestionType  sectionTypeChoosed;
 @property(nonatomic, strong) NSArray *questions;
 
 @end

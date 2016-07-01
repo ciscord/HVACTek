@@ -156,7 +156,7 @@
     self.lastSyncLabel.text = lastSync;
 }
 
-//plumbing
+
 #pragma mark - Sync Action
 - (IBAction)syncClicked:(id)sender {
     [self.syncButton setEnabled:NO];

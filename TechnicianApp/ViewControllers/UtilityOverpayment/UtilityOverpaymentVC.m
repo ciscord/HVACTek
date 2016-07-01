@@ -133,11 +133,11 @@
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[ExploreSummaryVC class]])
-    {
-        ExploreSummaryVC *vc = (ExploreSummaryVC*)segue.destinationViewController;
-        vc.sectionTypeChoosed = self.sectionChoosed;
-    }
+//    if ([segue.destinationViewController isKindOfClass:[ExploreSummaryVC class]])
+//    {
+//        ExploreSummaryVC *vc = (ExploreSummaryVC*)segue.destinationViewController;
+//        vc.sectionTypeChoosed = self.sectionChoosed;
+//    }
 }
 
 @end
