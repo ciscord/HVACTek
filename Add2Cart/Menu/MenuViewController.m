@@ -215,7 +215,7 @@ typedef void(^myCompletion)(BOOL);
 //                         }];
     
     
-    [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:NO onSuccess:^(NSDictionary *infoDict) {
+    [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:YES onSuccess:^(NSDictionary *infoDict) {
         BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
         [self syncLabelStatus:syncStatus];
         [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];

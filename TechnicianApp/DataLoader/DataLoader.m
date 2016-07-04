@@ -69,7 +69,7 @@ NSString *const DELETE_REBATES   = @"deleteRebate";
 NSString *const UPDATE_REBATES   = @"updateRebate";
 NSString *const ADD2CART_ITEMS   = @"add2cart";
 NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
-NSString *const SYNC_STATUS      = @"add2cart_sync";
+NSString *const SYNC_STATUS      = @"add2cart_sync_status";
 NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 

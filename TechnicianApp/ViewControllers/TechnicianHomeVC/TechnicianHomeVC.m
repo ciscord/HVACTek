@@ -127,12 +127,16 @@
 
 #pragma mark - Downloading
 - (void)checkForDownloading {
+    int x = [self numberOfVideoObjects];
+    int y = 0;
+    
     for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
         if (companyObject.isVideo) {
+            y++;
             if (![[TWRDownloadManager sharedManager] fileExistsForUrl:companyObject.info_url]) {
                 [self startDownloadingVideo:companyObject];
             }else{
-                if ([companyObject isEqual:[[DataLoader sharedInstance] companyAdditionalInfo].lastObject]) {
+                if (y==x) {
                     [self setDefaultSyncButton];
                     [self modifySyncStatus];
                 }
@@ -142,6 +146,17 @@
         }
     }
 }
+
+
+-(int)numberOfVideoObjects {
+    int x = 0;
+    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+        if (companyObject.isVideo)
+            x++;
+    }
+    return x;
+}
+ 
 
 
 -(void)downloadImageFromURL:(NSString *)imageURL {
@@ -164,7 +179,8 @@
     [[TWRDownloadManager sharedManager] downloadFileForURL:object.info_url progressBlock:^(CGFloat progress) {
        // NSLog(@"progress %f video file:%@",progress, object.info_url);
     } completionBlock:^(BOOL completed) {
-        if ([object isEqual:[[DataLoader sharedInstance] companyAdditionalInfo].lastObject]) {
+        NSLog(@"~~~completed downloading~~~");
+        if ([[TWRDownloadManager sharedManager] currentDownloads].count == 0) {
             [self modifySyncStatus];
             [self setDefaultSyncButton];
         }
@@ -197,6 +213,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     
