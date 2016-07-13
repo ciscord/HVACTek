@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "CompanyAditionalInfo.h"
 
+
 @interface LoginVC ()
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
@@ -47,8 +48,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   
 }
+
+
 /*
 #pragma mark - Navigation
 

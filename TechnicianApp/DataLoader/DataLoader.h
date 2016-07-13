@@ -18,6 +18,7 @@
 #import "CompanyItem.h"
 #import "HvacTekConstants.h"
 #import "UIImageView+AFNetworking.h"
+#import "Logs+Functional.h"
 
 //#define NSLog(...)
 
@@ -170,6 +171,11 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 - (void)updateStatusForAdditionalInfoOnSuccess:(void (^)(NSString *message))onSuccess
                                        onError:(void (^)(NSError *error))onError;
+
+
+- (void)sendLogs:(NSArray *)logs
+       onSuccess:(void (^)(NSString *message))onSuccess
+        onError:(void (^)(NSError *error))onError;
 
 
 

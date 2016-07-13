@@ -46,6 +46,7 @@
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
     [self checkSyncStatus];
+    [self checkForLogs];
 }
 
 
@@ -74,6 +75,32 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReciveJobIDFromSWR:) name:@"NotifReciveJobIDFromSWR" object:nil];
 }
 
+
+#pragma mark - Check For Logs
+- (void)checkForLogs {
+    NSArray *allLogs = [Logs findAll];
+    if (allLogs.count > 0) {
+        NSMutableArray *logsArray = [[NSMutableArray alloc] init];
+        for (Logs*log in allLogs) {
+            NSDictionary * dict = @{@"user_id" : log.userID,
+                                    @"date" : log.date.stringFromDate,
+                                    @"module" : log.module,
+                                    @"message" : log.message,
+                                    @"request" : log.request,
+                                    @"response" : log.response};
+            [logsArray addObject:dict];
+        }
+        
+        [[DataLoader sharedInstance] sendLogs:logsArray onSuccess:^(NSString *message) {
+            for (Logs*log in allLogs) {
+                [log.managedObjectContext deleteObject:log];
+                [[log managedObjectContext] save];
+            }
+        } onError:^(NSError *error) {
+            //
+        }];
+    }
+}
 
 
 #pragma mark - Check For Sync

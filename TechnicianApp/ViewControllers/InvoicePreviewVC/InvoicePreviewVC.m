@@ -41,17 +41,52 @@
     
     [[DataLoader sharedInstance] postInvoice:self.invoiceDictionary requestingPreview:0 onSuccess:^(NSString *message) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self trySendingLogWithMessage:@"Success" andResponse:message.description];
             AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
             [self.navigationController popToViewController:appDelegate.homeController animated:YES];
         
     } onError:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self trySendingLogWithMessage:@"Error" andResponse:error.localizedDescription];
     }];
 }
+
+
+-(void)trySendingLogWithMessage:(NSString *)message andResponse:(NSString *)response {
+    NSDate *date = [NSDate new];
+    NSString *userID = [[[[DataLoader sharedInstance] currentUser] userID] stringValue];
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:self.invoiceDictionary options:0 error:&err];
+    NSString * requestString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+    
+    NSDictionary * dict = @{@"user_id" : userID,
+                            @"date" : date.stringFromDate,
+                            @"module" : @"Invoice",
+                            @"message" : message,
+                            @"request" : requestString,
+                            @"response" : response};
+    
+    NSArray *logArray = [[NSArray alloc] initWithObjects:dict, nil];
+    
+    [[DataLoader sharedInstance] sendLogs:logArray onSuccess:^(NSString *message) {
+        NSLog(@"success log");
+    } onError:^(NSError *error) {
+        Logs *log = [Logs initLogWithUserID:userID
+                                       date:date
+                                    message:message
+                                     module:@"Invoice"
+                                    request:requestString
+                                andResponse:response];
+        [log.managedObjectContext save];
+    }];
+}
+
 
 - (IBAction)cancelClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 #pragma mark - UIWebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

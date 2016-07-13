@@ -72,6 +72,7 @@ NSString *const ADDITIONAL_INFO  = @"getAdditionalInfo";
 NSString *const SYNC_STATUS      = @"add2cart_sync_status";
 NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
+NSString *const LOGS             = @"addError";
 
 
 #define kStatusOK 1
@@ -689,7 +690,12 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {
                    
-                   NSString *htmlString = responseObject[@"data"];
+                   NSString *htmlString;
+                   if (previewInt == 1)
+                       htmlString = responseObject[@"data"];
+                   else if (previewInt == 0)
+                       htmlString = (NSString *)responseObject;
+                   
                    onSuccess(htmlString);
                }
            }
@@ -822,6 +828,37 @@ NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
        }];
 }
 
+
+
+#pragma mark - Send Logs
+- (void)sendLogs:(NSArray *)logs
+       onSuccess:(void (^)(NSString *message))onSuccess
+         onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:logs options:0 error:&err];
+    NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    
+    [self POST:LOGS
+    parameters:@{@"errors" : myString}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               onSuccess(@"succes");
+           } else if (onError) {
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+}
 
 
 #pragma mark - Rebates Requests

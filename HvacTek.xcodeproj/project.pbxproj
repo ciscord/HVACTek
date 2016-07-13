@@ -134,6 +134,10 @@
 		52CCB6391CF736E500BAF68A /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CCB6371CF736E500BAF68A /* Job.m */; };
 		52D25B2C1CEEFB3800C77BED /* AdditionalInfoPageCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D25B2A1CEEFB3800C77BED /* AdditionalInfoPageCells.m */; };
 		52D25B2D1CEEFB3800C77BED /* AdditionalInfoPageCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D25B2B1CEEFB3800C77BED /* AdditionalInfoPageCells.xib */; };
+		52D388941D3640F3009D2D49 /* Logs+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D388911D3640F3009D2D49 /* Logs+CoreDataProperties.m */; };
+		52D388951D3640F3009D2D49 /* Logs.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D388931D3640F3009D2D49 /* Logs.m */; };
+		52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D388971D3655A2009D2D49 /* Logs+Functional.m */; };
+		52D3889B1D366807009D2D49 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D3889A1D366807009D2D49 /* NSDate+Utilities.m */; };
 		52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */; };
 		52EB803A1C7C617600D09222 /* NALabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80351C7C617600D09222 /* NALabelCell.m */; };
 		52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB80371C7C617600D09222 /* NAPickerCell.m */; };
@@ -396,6 +400,14 @@
 		52D25B291CEEFB3800C77BED /* AdditionalInfoPageCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalInfoPageCells.h; sourceTree = "<group>"; };
 		52D25B2A1CEEFB3800C77BED /* AdditionalInfoPageCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalInfoPageCells.m; sourceTree = "<group>"; };
 		52D25B2B1CEEFB3800C77BED /* AdditionalInfoPageCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdditionalInfoPageCells.xib; sourceTree = "<group>"; };
+		52D388901D3640F3009D2D49 /* Logs+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Logs+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52D388911D3640F3009D2D49 /* Logs+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Logs+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52D388921D3640F3009D2D49 /* Logs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logs.h; sourceTree = "<group>"; };
+		52D388931D3640F3009D2D49 /* Logs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logs.m; sourceTree = "<group>"; };
+		52D388961D365483009D2D49 /* Logs+Functional.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Logs+Functional.h"; sourceTree = "<group>"; };
+		52D388971D3655A2009D2D49 /* Logs+Functional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Logs+Functional.m"; sourceTree = "<group>"; };
+		52D388991D366807009D2D49 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		52D3889A1D366807009D2D49 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		52EAF0FA1B90C1FA002310B4 /* EnlargeOptionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnlargeOptionsVC.h; sourceTree = "<group>"; };
 		52EAF0FB1B90C1FA002310B4 /* EnlargeOptionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnlargeOptionsVC.m; sourceTree = "<group>"; };
 		52EB80341C7C617600D09222 /* NALabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NALabelCell.h; sourceTree = "<group>"; };
@@ -413,6 +425,7 @@
 		52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoLibraryCell.xib; sourceTree = "<group>"; };
 		52F699BF1C1EB30D00CD9274 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
+		52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 11.xcdatamodel"; sourceTree = "<group>"; };
 		58C60E5FF5C4D649D9A154A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = "/Users/Unifeyed/Library/Developer/Xcode/DerivedData/HvacTek-gtpbmiynijcmdadlgdhieoepbqlz/Build/Products/Debug-iphoneos/libPods.a"; sourceTree = "<absolute>"; };
 		75399F591A39CD2E0013EAC0 /* RepairVsServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairVsServiceVC.h; sourceTree = "<group>"; };
 		75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairVsServiceVC.m; sourceTree = "<group>"; };
@@ -878,6 +891,12 @@
 				4F11D4031AA77417007FC0A8 /* User+Functional.m */,
 				4F11D4051AA77579007FC0A8 /* Job+Functional.h */,
 				4F11D4061AA77579007FC0A8 /* Job+Functional.m */,
+				52D388921D3640F3009D2D49 /* Logs.h */,
+				52D388931D3640F3009D2D49 /* Logs.m */,
+				52D388901D3640F3009D2D49 /* Logs+CoreDataProperties.h */,
+				52D388911D3640F3009D2D49 /* Logs+CoreDataProperties.m */,
+				52D388961D365483009D2D49 /* Logs+Functional.h */,
+				52D388971D3655A2009D2D49 /* Logs+Functional.m */,
 				4FD2EBCC1A3B40770056D4C4 /* BaseEntity.h */,
 				4FD2EBCD1A3B40770056D4C4 /* BaseEntity.m */,
 				4FD2EBCF1A3B45F80056D4C4 /* Customer.h */,
@@ -899,6 +918,8 @@
 				52BBCCD81C50C52100577CBA /* HvacTekConstants.h */,
 				52A1D00A1C6CDA0A00F68253 /* NSMutableAttributedString+Color.h */,
 				52A1D00B1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m */,
+				52D388991D366807009D2D49 /* NSDate+Utilities.h */,
+				52D3889A1D366807009D2D49 /* NSDate+Utilities.m */,
 				52A7D37D1CF44F4700645B6D /* StringBetweenStrings.h */,
 				52A7D37E1CF44F4700645B6D /* StringBetweenStrings.m */,
 				52C787251C6DCA2C007EC77C /* THProgressView.h */,
@@ -1472,6 +1493,7 @@
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
+				52D388951D3640F3009D2D49 /* Logs.m in Sources */,
 				52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */,
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
 				52CCB6381CF736E500BAF68A /* Job+CoreDataProperties.m in Sources */,
@@ -1493,6 +1515,7 @@
 				0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
 				524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */,
+				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
@@ -1522,6 +1545,8 @@
 				75D1A9011A3B15B5000F6765 /* ServiceOptionVC.m in Sources */,
 				52EB803A1C7C617600D09222 /* NALabelCell.m in Sources */,
 				75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */,
+				52D388941D3640F3009D2D49 /* Logs+CoreDataProperties.m in Sources */,
+				52D3889B1D366807009D2D49 /* NSDate+Utilities.m in Sources */,
 				75D73F161A38A9E30051143C /* SummaryOfFindingsOptionsVC.m in Sources */,
 				52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */,
 				91CA5EFC1ADFF86B00D871FD /* User.m in Sources */,
@@ -1730,6 +1755,7 @@
 		4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */,
 				5247C51D1CEDAF8900670D4A /* SignatureModel 10.xcdatamodel */,
 				52955A911C745E570009F7FF /* SignatureModel 8.xcdatamodel */,
 				52B2524A1C7364D5005E8824 /* SignatureModel 7.xcdatamodel */,
@@ -1740,7 +1766,7 @@
 				91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */,
 				4F11D3E61AA76FA7007FC0A8 /* SignatureModel.xcdatamodel */,
 			);
-			currentVersion = 5247C51D1CEDAF8900670D4A /* SignatureModel 10.xcdatamodel */;
+			currentVersion = 52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

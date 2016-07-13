@@ -14,6 +14,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "UIImageView+AFNetworking.h"
 #import "HvakTekColorScheme.h"
+#import "NSDate+Utilities.h"
 
 
 @interface BaseVC : UIViewController
