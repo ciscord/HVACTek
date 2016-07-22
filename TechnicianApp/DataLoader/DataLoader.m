@@ -502,10 +502,16 @@ NSString *const LOGS             = @"addError";
  */
 
 
+
+
 - (NSNumber *)roundNumber:(NSNumber *)number {
     NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
     return roundedNumber;
 }
+
+
+
+#pragma mark - Get PriceBook
 - (void)getPricebookOptionsOnSuccess:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
                              onError:(void (^)(NSError *error))onError {
     //    type={type_id}&group={group_id}&api¬_key={api_key}
@@ -519,6 +525,9 @@ NSString *const LOGS             = @"addError";
           NSArray *pricebook = d[@"PricebookTaskQueryData"][@"PricebookTaskQueryRecord"];
           NSMutableArray *iPadCommonRepairsOptions = @[].mutableCopy;
           NSMutableArray *otherOptions = @[].mutableCopy;
+          NSMutableArray *plumbingCommonRepairsOptions  = @[].mutableCopy;
+          NSMutableArray *plumbingOtherOptions  = @[].mutableCopy;
+          
           
           for (NSDictionary *pricebookInfo in pricebook) {
               PricebookItem *p = [PricebookItem pricebookWithID:pricebookInfo[@"ItemID"]
@@ -530,12 +539,27 @@ NSString *const LOGS             = @"addError";
                                                          amount:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)]
                                                    andAmountESA:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue])]];
               
+              
               if ([p.itemGroup isEqualToString:kPricebookGroup]) {
-                  [iPadCommonRepairsOptions addObject:p];
+                  if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
+                      [plumbingCommonRepairsOptions addObject:p];
+                  else
+                      [iPadCommonRepairsOptions addObject:p];
               }
               else {
-                  [otherOptions addObject:p];
+                  if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
+                      [plumbingOtherOptions addObject:p];
+                  else
+                      [otherOptions addObject:p];
               }
+              
+              
+//              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
+//                  [iPadCommonRepairsOptions addObject:p];
+//              }
+//              else {
+//                  [otherOptions addObject:p];
+//              }
               
               // Diagnostic Only item
               if ([p.itemNumber isEqualToString:@"1003001"]) {
@@ -544,6 +568,8 @@ NSString *const LOGS             = @"addError";
           }
           weakSelf.iPadCommonRepairsOptions = iPadCommonRepairsOptions;
           weakSelf.otherOptions = otherOptions;
+          weakSelf.plumbingCommonRepairsOptions = plumbingCommonRepairsOptions;
+          weakSelf.plumbingOtherOptions = plumbingOtherOptions;
           
           if (onSuccess) {
               onSuccess(weakSelf.iPadCommonRepairsOptions, weakSelf.otherOptions, weakSelf.diagnosticOnlyOption);
@@ -558,6 +584,9 @@ NSString *const LOGS             = @"addError";
 }
 
 
+
+
+#pragma mark - Debrief Job
 - (void)debriefJobWithInfo:(NSDictionary*)debriefInfo
                  onSuccess:(void (^)(NSString *message))onSuccess
                    onError:(void (^)(NSError *error))onError {

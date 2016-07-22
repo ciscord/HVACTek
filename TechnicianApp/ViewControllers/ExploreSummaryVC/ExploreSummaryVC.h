@@ -10,7 +10,6 @@
 
 @interface ExploreSummaryVC : BaseVC
 
-@property (nonatomic, assign) QuestionType  sectionTypeChoosed;
 @property(strong, nonatomic) NSArray *questions;
 
 @end

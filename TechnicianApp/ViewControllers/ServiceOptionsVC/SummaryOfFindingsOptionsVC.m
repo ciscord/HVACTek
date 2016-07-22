@@ -57,11 +57,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     if (self.isiPadCommonRepairsOptions) {
         
-        
-        //TODO:Plumbing
-        //self.allOptions = [self filterArrayOfOptions:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
-        //
-        self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+        self.allOptions = [self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
         
         
    //     self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
@@ -77,10 +73,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         }
        /// self.allOptions = [[DataLoader sharedInstance] otherOptions];
         
-        //TODO:Plumbing
-        //        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[ self filterArrayOfOptions:[[DataLoader sharedInstance] otherOptions]]];
-        //
-        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
+        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
         if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
             [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
         }
@@ -91,30 +84,27 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 }
 
 
-//TODO:Plumbing
-//- (NSArray *)filterArrayOfOptions:(NSMutableArray *)pricebook {
-//    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
-//    for (PricebookItem *p in pricebook) {
-//        if (self.questionTypeChoosed == qtPlumbing) {
-//            if ([p.itemCategory isEqualToString:[[[DataLoader sharedInstance] currentCompany] plumbing_category]]) {
-//                [returnArray addObject:p];
-//            }
-//        }else{
-//            if (![p.itemCategory isEqualToString:[[[DataLoader sharedInstance] currentCompany] plumbing_category]]) {
-//                [returnArray addObject:p];
-//            }
-//        }
-//    }
-//    
-//    NSArray *array = [[NSArray alloc] initWithArray:returnArray];
-//    return array;
-//}
+-(NSMutableArray *)getOptionsTypeOfArray:(NSMutableArray *)array {
+    if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
+        if ([array isEqualToArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]])
+            return [[DataLoader sharedInstance] plumbingCommonRepairsOptions];
+        else if ([array isEqualToArray:[[DataLoader sharedInstance] otherOptions]])
+            return [[DataLoader sharedInstance] plumbingOtherOptions];
+    }else{
+        if ([array isEqualToArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]])
+            return [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+        else if ([array isEqualToArray:[[DataLoader sharedInstance] otherOptions]])
+            return [[DataLoader sharedInstance] otherOptions];
+    }
+    NSMutableArray *returnArr = [[NSMutableArray alloc] init];
+    return returnArr;
+}
 
 
 
 - (void)customRepairOtionAdded:(NSNotification *)info {
     self.allOptions = nil;
-    NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[[DataLoader sharedInstance] otherOptions]];
+    NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
         [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
     }
@@ -273,17 +263,17 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         PricebookItem *item = self.filteredOptions[itemIndex];
         
         if (self.isiPadCommonRepairsOptions) {
-            NSUInteger globalIndex = [[[DataLoader sharedInstance] iPadCommonRepairsOptions] indexOfObject:item];
+            NSUInteger globalIndex = [[self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]] indexOfObject:item];
             item.quantity = term;
             [self.filteredOptions replaceObjectAtIndex:itemIndex withObject:item];
-            [[[DataLoader sharedInstance] iPadCommonRepairsOptions] replaceObjectAtIndex:globalIndex withObject:item];
+            [[self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]] replaceObjectAtIndex:globalIndex withObject:item];
         }else{
             NSUInteger globalIndex;
             BOOL isCustomAdded = [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] containsObject:item];
             if (isCustomAdded) {
                 globalIndex = [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] indexOfObject:item];
             }else{
-                globalIndex = [[[DataLoader sharedInstance] otherOptions] indexOfObject:item];
+                globalIndex = [[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]] indexOfObject:item];
             }
             
             item.quantity = term;
@@ -294,7 +284,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
                 Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
                 [job.managedObjectContext save];
             }else{
-                [[[DataLoader sharedInstance] otherOptions] replaceObjectAtIndex:globalIndex withObject:item];
+                [[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]] replaceObjectAtIndex:globalIndex withObject:item];
             }
         }
     }
@@ -340,7 +330,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = NO;
         vc.selectedOptions = self.selectedOptions;
-        vc.questionTypeChoosed = self.questionTypeChoosed;
     }
     else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
     {
