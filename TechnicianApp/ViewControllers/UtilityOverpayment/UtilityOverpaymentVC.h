@@ -9,5 +9,5 @@
 #import "BaseVC.h"
 
 @interface UtilityOverpaymentVC : BaseVC <UITextFieldDelegate>
-
+@property (nonatomic, assign) QuestionType sectionChoosed;
 @end

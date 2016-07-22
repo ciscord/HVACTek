@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) QuestionType  questionType;
 @property(nonatomic, strong) NSArray *questions;
+@property (nonatomic, assign) QuestionType sectionTypeChoosed;
 
 @end
