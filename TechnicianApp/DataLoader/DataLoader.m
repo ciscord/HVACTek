@@ -540,26 +540,46 @@ NSString *const LOGS             = @"addError";
                                                    andAmountESA:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue])]];
               
               
-              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
-                  if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
+//              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
+//                  if (self.currentCompany.isPlumbing) {
+//                      if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
+//                          [plumbingCommonRepairsOptions addObject:p];
+//                      else
+//                          [iPadCommonRepairsOptions addObject:p];
+//                  }else{
+//                      [iPadCommonRepairsOptions addObject:p];
+//                  }
+//              }
+//              else {
+//                  if (self.currentCompany.isPlumbing) {
+//                      if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
+//                          [plumbingOtherOptions addObject:p];
+//                      else
+//                          [otherOptions addObject:p];
+//                  }else{
+//                      [otherOptions addObject:p];
+//                  }
+//              }
+              
+              
+    /////////////////////////////////
+              if (self.currentCompany.isPlumbing) {
+                  if ([p.itemGroup isEqualToString:kPricebookGroup])
+                      [iPadCommonRepairsOptions addObject:p];
+                  else
+                      [otherOptions addObject:p];
+                  
+                  if ([p.itemGroup isEqualToString:self.currentCompany.plumbing_group])
                       [plumbingCommonRepairsOptions addObject:p];
                   else
-                      [iPadCommonRepairsOptions addObject:p];
-              }
-              else {
-                  if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
                       [plumbingOtherOptions addObject:p];
+              }else{
+                  if ([p.itemGroup isEqualToString:kPricebookGroup])
+                      [iPadCommonRepairsOptions addObject:p];
                   else
                       [otherOptions addObject:p];
               }
               
-              
-//              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
-//                  [iPadCommonRepairsOptions addObject:p];
-//              }
-//              else {
-//                  [otherOptions addObject:p];
-//              }
               
               // Diagnostic Only item
               if ([p.itemNumber isEqualToString:@"1003001"]) {
