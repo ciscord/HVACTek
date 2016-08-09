@@ -9,6 +9,7 @@
 #import "testerViewController.h"
 #import "PictureLibraryVC.h"
 #import "VideoLibraryVC.h"
+#import "RRQuestionsVC.h"
 
 @interface testerViewController (){
     
@@ -25,6 +26,7 @@
     __weak IBOutlet UIImageView *logoImageView;
     __weak IBOutlet UIButton *videoButton;
     __weak IBOutlet UIButton *pictureButton;
+    __weak IBOutlet UIButton *tcoButton;
 }
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
@@ -156,6 +158,7 @@
     cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    tcoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -2158,6 +2161,13 @@
     [self.navigationController pushViewController: detail animated: YES];
 }
 
+- (IBAction)tcoClicked:(id)sender {
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"accessTCOfromAdd2cart"];
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:[NSBundle mainBundle]];
+    RRQuestionsVC * detail = [storyboard instantiateViewControllerWithIdentifier:@"RRQuestionsVC"];
+    [self.navigationController pushViewController: detail animated: YES];
+}
 
 #pragma mark - CartViewController Delegates
 -(void)editCardSelected {

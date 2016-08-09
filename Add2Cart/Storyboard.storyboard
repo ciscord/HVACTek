@@ -649,7 +649,7 @@ $</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2by-ML-2Oc" userLabel="Video">
-                                        <rect key="frame" x="590" y="25" width="65" height="25"/>
+                                        <rect key="frame" x="590" y="8" width="65" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Video">
@@ -666,7 +666,7 @@ $</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byh-wC-Ciq" userLabel="Picture">
-                                        <rect key="frame" x="590" y="55" width="65" height="25"/>
+                                        <rect key="frame" x="590" y="38" width="65" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Picture">
@@ -680,6 +680,23 @@ $</string>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="pictureButtonClicked:" destination="3cm-Mv-pde" eventType="touchUpInside" id="FFd-OH-ai9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0qv-ZW-PD4">
+                                        <rect key="frame" x="590" y="68" width="65" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="TCO">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="tcoClicked:" destination="3cm-Mv-pde" eventType="touchUpInside" id="u7b-Qn-EW8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HNg-HV-Wrm">
@@ -932,6 +949,7 @@ $</string>
                         <outlet property="rebatesButton" destination="ngu-Qg-pVs" id="shc-RD-bRo"/>
                         <outlet property="secView" destination="v1f-bh-t6C" id="wYy-92-hBz"/>
                         <outlet property="tableViewX" destination="T0p-eU-Fug" id="zaW-iH-w41"/>
+                        <outlet property="tcoButton" destination="0qv-ZW-PD4" id="otX-Gw-FGl"/>
                         <outlet property="totalAmountLabel" destination="vUE-b9-zrd" id="8L7-o5-yck"/>
                         <outlet property="totalSavingsLabel" destination="1HQ-Gv-lCF" id="vN3-mO-WaL"/>
                         <outlet property="videoButton" destination="2by-ML-2Oc" id="3xz-oa-vQ6"/>

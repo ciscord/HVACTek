@@ -66,6 +66,12 @@
     self.hideRoundView.layer.borderWidth   = 3.0;
     self.hideRoundView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"accessTCOfromAdd2cart"] == YES) {
+        self.optionsBtn.hidden = YES;
+        self.invoiceBtn.hidden = YES;
+        self.rvsrBtn.hidden = YES;
+    }
+    
 }
 
 

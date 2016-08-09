@@ -190,6 +190,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"accessTCOfromAdd2cart"];
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isInstantRRFinal"])
@@ -201,7 +202,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
             [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
         }
     }
-    
 }
 
 
