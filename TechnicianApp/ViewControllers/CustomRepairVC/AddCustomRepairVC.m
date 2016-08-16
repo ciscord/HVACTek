@@ -63,13 +63,16 @@
 
 #pragma mark - Save Pricebook item
 -(void)addPricebookItem {
+    
+    NSNumber *number = @([[self getPriceAmountFromString:self.priceTextField.text] doubleValue] * 0.85);
+    
     PricebookItem *priceBook = [PricebookItem pricebookWithID:@""
                                            itemNumber:@"33XX01"
                                             itemGroup:@""
                                          itemCategory:@""
                                                  name:self.titleTextField.text
                                              quantity:@""
-                                               amount:@([[self getPriceAmountFromString:self.priceTextField.text] intValue] * 0.85)
+                                               amount:[self roundNumber:number]
                                          andAmountESA:[NSNumber numberWithInt:[[self getPriceAmountFromString:self.priceTextField.text] intValue]]];
     
     //NSArray * questionsTech = [[[[[DataLoader sharedInstance] currentUser] activeJob] techObservations] mutableCopy];
@@ -100,6 +103,11 @@
     return number;
 }
 
+
+- (NSNumber *)roundNumber:(NSNumber *)number {
+    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
+    return roundedNumber;
+}
 
 #pragma mark - UITextField Delegates
 - (void)textFieldDidBeginEditing:(UITextField *)textField
