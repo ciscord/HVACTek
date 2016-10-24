@@ -31,12 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
 @property (weak, nonatomic) IBOutlet UIButton *investmentButton;
-@property (weak, nonatomic) IBOutlet UIButton *months24Button;
-@property (weak, nonatomic) IBOutlet UIButton *months36Button;
-@property (weak, nonatomic) IBOutlet UIButton *months48Button;
-@property (weak, nonatomic) IBOutlet UIButton *months60Button;
-@property (weak, nonatomic) IBOutlet UIButton *months70Button;
-@property (weak, nonatomic) IBOutlet UIButton *months84Button;
+@property (weak, nonatomic) IBOutlet UICollectionView *monthsCollectionView;
 
 @end
 
@@ -48,7 +43,9 @@
 @synthesize secView;
 @synthesize tableViewX;
 @synthesize firstOption;
+@synthesize financialsData;
 
+static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,7 +71,11 @@
     
     [self configureColorScheme];
     [self configureUpperView];
+    
+    self.financialsData = [[NSMutableArray alloc] init];
     allData = [[NSMutableArray alloc] init];
+    
+     [self.monthsCollectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
     //Init the ints ??????
     choosedAirCon = 0;
@@ -101,8 +102,7 @@
     afterSavings =0.0f ;
     finacePay = 0.0f;
     monthlyPay = 0.0f;
-    //Months set to default at 60
-    self.months = 24;
+    
     
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
@@ -125,7 +125,45 @@
     [tableViewX addGestureRecognizer:swipeGestureRight];
     [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
+    
+    [self fetchFinancingObjects];
 }
+
+
+#pragma mark - Fetch Financing
+
+-(void)fetchFinancingObjects {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *fetchingError = nil;
+    
+    [self.financialsData addObjectsFromArray:[self.managedObjectContext
+                                  executeFetchRequest:fetchRequest error:&fetchingError]];
+    self.financialsData = [self filterFinancials:self.financialsData];
+    [self configureFinancingDefaults];
+}
+
+
+-(NSMutableArray *)filterFinancials:(NSMutableArray *)financials {
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"months"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSMutableArray *returnArr = [[NSMutableArray alloc] initWithArray:[financials sortedArrayUsingDescriptors:sortDescriptors]];
+    return returnArr;
+}
+
+
+-(void)configureFinancingDefaults {
+    if (self.financialsData.count > 0) {
+        Financials *item = self.financialsData[0];
+        self.months = item.months.intValue;
+    }
+}
+
+
 
 
 -(void) home {
@@ -159,12 +197,6 @@
     videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     tcoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months60Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months70Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.months84Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
    // btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
@@ -1683,6 +1715,45 @@
 }
 
 
+#pragma mark - UICollectionViewDatasource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.financialsData count];
+}
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger itemIndex = indexPath.item;
+    Financials *item      = self.financialsData[itemIndex];
+    MonthsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    cell.monthLabel.text = item.months;
+    return cell;
+}
+
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    Financials *item = self.financialsData[indexPath.item];
+    self.months = item.months.intValue;
+    secView.hidden = YES;
+    [self buildQuote];
+}
+
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(95, 50);
+}
+
+
+
 #pragma mark -
 
 -(void) warn {
@@ -1984,6 +2055,29 @@
     }
     
     float invest;
+    
+    Financials *financeObject;
+    for (int i = 0; i < [self.financialsData count]; i++) {
+        Financials *element = [self.financialsData objectAtIndex:i];
+        if (element.months.intValue == self.months) {
+            financeObject = element;
+            break;
+        }
+    }
+    
+    if (financeObject != nil) {
+        //NSLog(@"%f", financeObject.discount1.doubleValue);
+        
+        if (self.months > 83) {
+            finacePay = ((totalAmount - totalSavings)/financeObject.discount1.doubleValue) * financeObject.discount2.doubleValue;
+            invest = (totalAmount - totalSavings)/financeObject.discount1.doubleValue;
+        }else{
+            finacePay = (totalAmount - totalSavings)/financeObject.discount1.doubleValue/self.months;
+            invest = (finacePay*self.months);
+        }
+    }
+    
+    /*
     switch (self.months) {
         case 24:
         {
@@ -2025,7 +2119,7 @@
             break;
         }
     }
-    
+    */
     //        case 144:{
     //            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
     //            invest = (totalAmount - totalSavings)/.909;
@@ -2057,19 +2151,27 @@
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
     lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
-    switch (self.months) {
-        case 84:
-            //3.99% Best Rate 84 Months
-            lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
-            break;
-        case 0:
-            lblFinancing.text =[NSString stringWithFormat:@""];
-            break;
-            
-        default:
-            lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
-            break;
+//    switch (self.months) {
+//        case 84:
+//            //3.99% Best Rate 84 Months
+//            lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
+//            break;
+//        case 0:
+//            lblFinancing.text =[NSString stringWithFormat:@""];
+//            break;
+//            
+//        default:
+//            lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
+//            break;
+//    }
+    
+    
+    if (self.months > 83) {
+        lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
+    }else{
+        lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
     }
+    
     
     /*
      case 144:

@@ -161,6 +161,11 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
+		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
+		867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */; };
+		867BF0AB1DBDE64000AF8CD6 /* MonthsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 867BF0A91DBDE64000AF8CD6 /* MonthsCollectionViewCell.xib */; };
+		867BF0AE1DBDED7900AF8CD6 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0AD1DBDED7900AF8CD6 /* KTCenterFlowLayout.m */; };
 		91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91BA99FF1B8DDC78005EA4EA /* CartCell.xib */; };
 		91BA9A041B8DE09F005EA4EA /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A031B8DE09F005EA4EA /* CartCell.m */; };
 		91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BA9A061B8DF034005EA4EA /* ProductCell.m */; };
@@ -452,6 +457,16 @@
 		75F3DF8E1A3F1E3E00F60652 /* RecommendationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationTableViewCell.h; sourceTree = "<group>"; };
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
+		861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 6.xcdatamodel"; sourceTree = "<group>"; };
+		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
+		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
+		862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataProperties.h"; sourceTree = "<group>"; };
+		862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataProperties.m"; sourceTree = "<group>"; };
+		867BF0A71DBDE64000AF8CD6 /* MonthsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthsCollectionViewCell.h; sourceTree = "<group>"; };
+		867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthsCollectionViewCell.m; sourceTree = "<group>"; };
+		867BF0A91DBDE64000AF8CD6 /* MonthsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthsCollectionViewCell.xib; sourceTree = "<group>"; };
+		867BF0AC1DBDED7900AF8CD6 /* KTCenterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterFlowLayout.h; sourceTree = "<group>"; };
+		867BF0AD1DBDED7900AF8CD6 /* KTCenterFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCenterFlowLayout.m; sourceTree = "<group>"; };
 		91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 4.xcdatamodel"; sourceTree = "<group>"; };
 		9142323A1B4D5D3A00907F60 /* SignatureModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -604,6 +619,10 @@
 		4FD2EB1B1A361A0F0056D4C4 /* Add2CartDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */,
+				862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */,
+				862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */,
+				862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */,
 				526578241C6A0A2500EC1AA5 /* Item+CoreDataProperties.h */,
 				526578251C6A0A2500EC1AA5 /* Item+CoreDataProperties.m */,
 				526578261C6A0A2500EC1AA5 /* Item.h */,
@@ -724,6 +743,7 @@
 				4FD2EB5D1A361A0F0056D4C4 /* testerViewController.m */,
 				4FD2EB5A1A361A0F0056D4C4 /* HardTableViewCell.h */,
 				4FD2EB5B1A361A0F0056D4C4 /* HardTableViewCell.m */,
+				867BF0A61DBDE5EF00AF8CD6 /* CollectionCell */,
 			);
 			path = "Second Quote Table";
 			sourceTree = "<group>";
@@ -1216,6 +1236,18 @@
 			path = CustomerChoiceVC;
 			sourceTree = "<group>";
 		};
+		867BF0A61DBDE5EF00AF8CD6 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				867BF0AC1DBDED7900AF8CD6 /* KTCenterFlowLayout.h */,
+				867BF0AD1DBDED7900AF8CD6 /* KTCenterFlowLayout.m */,
+				867BF0A71DBDE64000AF8CD6 /* MonthsCollectionViewCell.h */,
+				867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */,
+				867BF0A91DBDE64000AF8CD6 /* MonthsCollectionViewCell.xib */,
+			);
+			path = CollectionCell;
+			sourceTree = "<group>";
+		};
 		AA23D6461A379B1900703952 /* TechnicianDebriefVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1368,6 +1400,7 @@
 				52D25B2D1CEEFB3800C77BED /* AdditionalInfoPageCells.xib in Resources */,
 				4FD2EB161A361A000056D4C4 /* Images.xcassets in Resources */,
 				75D73F121A387DDA0051143C /* SystemInfoHeaderView.xib in Resources */,
+				867BF0AB1DBDE64000AF8CD6 /* MonthsCollectionViewCell.xib in Resources */,
 				4FD2EB961A3622280056D4C4 /* framd.ttf in Resources */,
 				75D73F1B1A38AB950051143C /* ServiceOptionViewCell.xib in Resources */,
 				4FD2EB741A361A0F0056D4C4 /* mail.png in Resources */,
@@ -1514,6 +1547,7 @@
 				52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */,
 				0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
+				862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */,
 				524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */,
 				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
@@ -1537,6 +1571,7 @@
 				5265782F1C6A0A2500EC1AA5 /* Photos.m in Sources */,
 				4FD2EB6A1A361A0F0056D4C4 /* TypeOneTableViewCell.m in Sources */,
 				528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */,
+				867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */,
 				52D25B2C1CEEFB3800C77BED /* AdditionalInfoPageCells.m in Sources */,
 				4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */,
 				52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */,
@@ -1566,7 +1601,9 @@
 				4F3C50B51A3F0D8C00778972 /* QuestionView.m in Sources */,
 				5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */,
 				4FD2EB631A361A0F0056D4C4 /* FirstOption.m in Sources */,
+				867BF0AE1DBDED7900AF8CD6 /* KTCenterFlowLayout.m in Sources */,
 				5236287C1C0EF33000B04A71 /* UtilityOverpaymentVC.m in Sources */,
+				862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */,
 				4FD2EBCE1A3B40770056D4C4 /* BaseEntity.m in Sources */,
 				4F11D3FA1AA772E4007FC0A8 /* NSManagedObject+CoreData.m in Sources */,
 				4FD2EB621A361A0F0056D4C4 /* AddProductViewController.m in Sources */,
@@ -1741,13 +1778,14 @@
 		4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */,
 				528530031C326A1900168AC2 /* Unifeiyed_Quoting 5.xcdatamodel */,
 				91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */,
 				4F11D3D71A9F7DEB007FC0A8 /* Unifeiyed_Quoting 2.xcdatamodel */,
 				4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */,
 				4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */,
 			);
-			currentVersion = 91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */;
+			currentVersion = 861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */;
 			path = Unifeiyed_Quoting.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

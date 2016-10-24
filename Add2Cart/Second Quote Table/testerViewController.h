@@ -10,13 +10,16 @@
 #import "AppDelegate.h"
 #import "Item.h"
 #import "Photos.h"
+#import "Financials+CoreDataClass.h"
 #import "CartViewController.h"
 #import "HardTableViewCell.h"
 #import "FirstOption.h"
+#import "MonthsCollectionViewCell.h"
+#import "KTCenterFlowLayout.h"
 
 #import "RebateQuoteTableViewController.h"
 
-@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, UIPageViewControllerDelegate, NSFetchedResultsControllerDelegate>
+@interface testerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MyDataDelegate, UIPageViewControllerDelegate, NSFetchedResultsControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 {
     //NSArray *allData;
    NSMutableArray *allData;
@@ -63,8 +66,7 @@
     
     NSMutableArray *rebates;
   
- 
-   
+    
   //  BOOL second;
     
     NSArray *test;
@@ -112,6 +114,8 @@
 @property (nonatomic, strong)  NSMutableArray *savedCarts;
 @property (nonatomic, strong)  NSMutableArray *cartItems;
 
+// Financials
+@property (nonatomic, strong) NSMutableArray *financialsData;
 
 
 - (IBAction)cartButon:(id)sender;

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Financials" representedClassName="Financials" syncable="YES">
+        <attribute name="businessid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discount1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discount2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="financialId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="months" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="currentCart" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="finalOption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="finalPrice" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="include" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="manu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optEightPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optFivePrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optFourPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optionEight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionFive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionFour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionOne" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSeven" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionSix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionThree" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionTwo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optOnePrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optSevenPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optSixPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optThreePrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="optTwoPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ord" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeID" optional="YES" attributeType="Integer 64" defaultValueString="100" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="usserAdet" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photos" inverseName="items" inverseEntity="Photos" syncable="YES"/>
+    </entity>
+    <entity name="Photos" representedClassName="Photos" syncable="YES">
+        <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="image" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Financials" positionX="-5877" positionY="-2403" width="128" height="118"/>
+        <element name="Item" positionX="-5985" positionY="-2559" width="128" height="463"/>
+        <element name="Photos" positionX="-5778" positionY="-2169" width="128" height="88"/>
+    </elements>
+</model>

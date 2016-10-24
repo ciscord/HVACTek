@@ -21,6 +21,7 @@
 #import "THProgressView.h"
 #import "DataLoader.h"
 #import "HvacTekConstants.h"
+#import "Financials+CoreDataClass.h"
 
 static const CGSize progressViewSize = { 300.0f, 20.0f };
 
@@ -248,6 +249,11 @@ typedef void(^myCompletion)(BOOL);
   NSArray* rebates = [responseData objectForKey:@"rebates"];
   NSArray* products = [responseData objectForKey:@"products"];
   NSArray* systProducts = [responseData objectForKey:@"system_products"];
+  NSArray * financials = [responseData objectForKey:@"financials"];
+    
+    if (financials.count > 0) {
+        [self saveFinancials:financials];
+    }
   
   if (rebates.count > 0) {
     [self addRebates:rebates];
@@ -260,6 +266,8 @@ typedef void(^myCompletion)(BOOL);
   if (products.count > 0) {
     [self addProducts:products];
   }
+    
+
 }
 
 
@@ -378,25 +386,53 @@ typedef void(^myCompletion)(BOOL);
 
 #pragma mark - Clear Everything
 -(void) clearEverything {
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.backgroundContext];
-  NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"modelName" ascending:YES];
-  NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
-  fetchRequest.sortDescriptors = sortDescriptors;
-  [fetchRequest setEntity:entity];
-  
-  NSError *fetchingError = nil;
-  
-  NSArray *occP = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
-  
-  if (![occP count]) {
+    [self clearItems];
+    [self clearFinancials];
+}
+
+
+-(void) clearItems {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.backgroundContext];
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"modelName" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+    fetchRequest.sortDescriptors = sortDescriptors;
+    [fetchRequest setEntity:entity];
     
-  } else  {
-    for (int i = 0; i<occP.count; i++) {
-      Item  *del = occP[i];
-      [self.backgroundContext deleteObject:del];
+    NSError *fetchingError = nil;
+    
+    NSArray *occP = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
+    
+    if (![occP count]) {
+        
+    } else  {
+        for (int i = 0; i<occP.count; i++) {
+            Item  *del = occP[i];
+            [self.backgroundContext deleteObject:del];
+        }
     }
-  }
+}
+
+-(void) clearFinancials {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"financialId" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+    fetchRequest.sortDescriptors = sortDescriptors;
+    [fetchRequest setEntity:entity];
+    
+    NSError *fetchingError = nil;
+    
+    NSArray *occP = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
+    
+    if (![occP count]) {
+        
+    } else  {
+        for (int i = 0; i<occP.count; i++) {
+            Financials  *del = occP[i];
+            [self.backgroundContext deleteObject:del];
+        }
+    }
 }
 
 
@@ -649,6 +685,31 @@ typedef void(^myCompletion)(BOOL);
   }else {
     return productImages.firstObject;
   }
+}
+
+
+
+
+#pragma mark - Save Financials
+- (void)saveFinancials:(NSArray *)financials {
+    for (int x = 0; x < financials.count; x++) {
+        Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
+        itm.financialId = [financials[x] objectForKey:@"id"];
+        itm.businessid = [financials[x] objectForKey:@"businessid"];
+        
+        if ([[financials[x] objectForKey:@"discount1"] isEqual:[NSNull null]]) {
+            itm.discount1 = @"1";
+        }else{
+            itm.discount1 = [financials[x] objectForKey:@"discount1"];
+        }
+        if ([[financials[x] objectForKey:@"discount2"] isEqual:[NSNull null]]) {
+            itm.discount2 =  @"1";
+        }else{
+            itm.discount2 = [financials[x] objectForKey:@"discount2"];
+        }
+        
+        itm.months = [financials[x] objectForKey:@"months"];
+    }
 }
 
 

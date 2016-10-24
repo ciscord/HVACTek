@@ -10,6 +10,7 @@
 #import "ProductCell.h"
 #import "Item.h"
 #import "HvakTekColorScheme.h"
+#import "Financials+CoreDataClass.h"
 
 
 
