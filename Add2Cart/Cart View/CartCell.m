@@ -20,6 +20,7 @@
  @property (nonatomic, strong)  NSMutableArray *productList;
  @property (nonatomic, strong)  NSMutableArray *occurenciesList;
  @property (nonatomic, strong)  NSMutableArray *rebates;
+ @property (nonatomic, strong)  NSMutableArray *financialsData;
  @property (nonatomic, strong)  NSNumber *months;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
@@ -67,6 +68,7 @@
     self.cartItems = [self.cart objectForKey:@"cartItems"];
     self.months = [self.cart objectForKey:@"cartMonths"];
     self.rebates = [self.cart objectForKey:@"cartRebates"];
+    self.financialsData = [self.cart objectForKey:@"financialsData"];
 
     self.productList = [[NSMutableArray alloc]init];
     self.occurenciesList = [[NSMutableArray alloc]init];
@@ -123,6 +125,31 @@
     }
     
     float invest;
+    
+    Financials *financeObject;
+    for (int i = 0; i < [self.financialsData count]; i++) {
+        Financials *element = [self.financialsData objectAtIndex:i];
+        if (element.months.intValue == self.months.intValue) {
+            financeObject = element;
+            break;
+        }
+    }
+    
+    
+    if (financeObject != nil) {
+        if (self.months.intValue > 83) {
+            finacePay = ((totalAmount - totalSavings)/financeObject.discount1.doubleValue) * financeObject.discount2.doubleValue;
+            invest = (totalAmount - totalSavings)/financeObject.discount1.doubleValue;
+        }else{
+            finacePay = (totalAmount - totalSavings)/financeObject.discount1.doubleValue/self.months.intValue;
+            invest = (finacePay*self.months.intValue);
+        }
+    }
+    
+
+    
+    
+    /*
     switch ([self.months intValue]) {
         case 24:
         {
@@ -165,6 +192,8 @@
             break;
         }
     }
+    */
+    
     
     /*
      case 144:{
@@ -175,11 +204,12 @@
      */
     
     
-    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
+    float localInvest = (totalAmount - totalSavings);
+    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
 
 
--(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month {
+-(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
 
     
     NSNumberFormatter *nf = [NSNumberFormatter new];
@@ -197,7 +227,7 @@
     
     //new
     self.systemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-    self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
+    self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
     switch ([self.months intValue]) {
         case 84:
             self.financing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months",[self.months intValue]];

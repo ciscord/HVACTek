@@ -2077,6 +2077,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
+    
     /*
     switch (self.months) {
         case 24:
@@ -2126,11 +2127,12 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //            break;
     //        }
     
-    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay ];
+    float localInvest = (totalAmount - totalSavings);
+    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
 
 
--(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month {
+-(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
     
     totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
     totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
@@ -2149,7 +2151,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [numberFormatter setMinimumFractionDigits:0];
     
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-    lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:total]]];
+    lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
     lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
 //    switch (self.months) {
 //        case 84:
@@ -2436,6 +2438,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cart setObject:tt forKey:@"cartItems"];
         [cart setObject:[NSNumber numberWithInt:self.months] forKey:@"cartMonths"];
         [cart setObject:rebates forKey:@"cartRebates"];
+        [cart setObject:self.financialsData forKey:@"financialsData"];
         cartView.testerVC = self;
         cartView.isViewingCart = NO;
         

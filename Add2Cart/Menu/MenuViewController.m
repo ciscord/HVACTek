@@ -10,7 +10,7 @@
 
 // ==================== API URLs =====================
 #define kAdd2CartURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
-#define kAdd2CartSyncURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart_sync/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
+///#define kAdd2CartSyncURL [NSURL URLWithString:@"http://www.hvactek.com/api/add2cart_sync/?id=0&page=0&limit=0&order=title,asc&api_key=12b5401c039fe55e8df6304d8fcc121e"]
 
 
 //http://www.hvactek.com/
