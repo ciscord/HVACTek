@@ -74,6 +74,7 @@
         }
         else
         {
+            ShowOkAlertWithTitle(@"This is the first question. Please click the button at the top to back or click next.", weakSelf);
             weakSelf.currentQuestionIndex = 0;
         }
     };
