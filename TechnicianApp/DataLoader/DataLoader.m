@@ -16,11 +16,11 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
-
-#define BASE_URL                    @"http://hvactek.devebs.net/api/"
+//  @"http://www.hvactek.com/api/"
+#define BASE_URL                    @"http://staging.unifeyed.com/hvactek/api/"//@"http://hvactek.devebs.net/api/"
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
@@ -191,6 +191,7 @@ NSString *const LOGS             = @"addError";
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     if (self.reachabilityManager.isReachable) {
+        
         return [super POST:URLString parameters:parameters success:success failure:failure];
     } else {
         [self showErrorMessage:[self noInternetConnectionError]];
@@ -206,6 +207,7 @@ NSString *const LOGS             = @"addError";
        constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+  //  NSLog(@"%@", error)
     if (self.reachabilityManager.isReachable) {
         return [super POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
     } else {
@@ -288,7 +290,7 @@ NSString *const LOGS             = @"addError";
     NSString *signature = [hmacData base64EncodedStringWithOptions:0];     //[[NSString alloc] initWithData:hmacData encoding:NSASCIIStringEncoding];
     
     __weak typeof(self) weakSelf = self;
-    
+      NSLog(@"%@",signature);
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
@@ -296,6 +298,7 @@ NSString *const LOGS             = @"addError";
     [self POST:USER_LOGIN
     parameters:@{ @"email":username, @"password":password, @"signature":signature }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                weakSelf.userInfo = responseObject[@"results"];
                
@@ -353,10 +356,12 @@ NSString *const LOGS             = @"addError";
                
            } else if (onError) {
                NSLog(@"%@", responseObject[@"message"]);
+                NSLog(@"%@",responseObject);
                onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
            }
        }
        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"%@",error);
            if (onError) {
                onError(error);
            }
