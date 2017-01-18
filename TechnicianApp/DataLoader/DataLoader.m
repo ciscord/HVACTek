@@ -510,7 +510,7 @@ NSString *const LOGS             = @"addError";
 
 
 - (NSNumber *)roundNumber:(NSNumber *)number {
-    NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
+    NSNumber *roundedNumber = [NSNumber numberWithFloat: ceilf(number.floatValue)];
     return roundedNumber;
 }
 
