@@ -195,11 +195,10 @@
     formatterCurrency = [[NSNumberFormatter alloc] init];
     
     formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
-   
-    [formatterCurrency setRoundingMode: NSNumberFormatterRoundUp];
+    [formatterCurrency setMaximumFractionDigits:0];
     [formatterCurrency stringFromNumber: @(12345.2324565)];
     
-    return [formatterCurrency stringFromNumber:[NSNumber numberWithFloat:number]];
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
 
 
