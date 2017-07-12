@@ -2127,7 +2127,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //            break;
     //        }
     
-    float localInvest = (totalAmount - totalSavings);
+    float localInvest = finacePay * self.months;//(totalAmount - totalSavings);
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
 

@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "DataLoader.h"
 // #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @implementation AppDelegate
 
@@ -19,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // [Crashlytics startWithAPIKey:@"fc62541ac0b1cf9e884084965cf833ff17d9d545"];
-    
+    [Fabric with:@[[Crashlytics class]]];
     [[NSUserDefaults standardUserDefaults]setInteger:0 forKey:@"seg"];
     
    // [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
@@ -29,6 +32,7 @@
     [NSPersistentStoreCoordinator setDataModelName:@"SignatureModel" withStoreName: @"SignatureDB.sqlite"];
     
     [DataLoader sharedInstance];
+    
     
     return YES;
 }

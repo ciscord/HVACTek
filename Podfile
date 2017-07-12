@@ -14,5 +14,7 @@ pod 'XMLDictionary'
 pod 'SignatureView'
 pod 'TWRDownloadManager'
 pod 'SDWebImage', '~>3.8'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end
