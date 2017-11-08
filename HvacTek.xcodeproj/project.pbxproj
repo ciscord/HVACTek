@@ -92,6 +92,9 @@
 		4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901B61AB845F500D87FAB /* PlatinumOptionsVC.m */; };
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
 		4FF901BD1AB847FE00D87FAB /* PlatinumOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */; };
+		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
+		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
+		5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */; };
 		520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C51B8D8CBC0035909C /* SettingAgendaVC.m */; };
 		520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C81B8D8CCF0035909C /* AgendaPictureVC.m */; };
 		520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CC1B8D8D830035909C /* ESABenefitsVC.m */; };
@@ -321,6 +324,11 @@
 		4FF901B91AB847FE00D87FAB /* PlatinumOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatinumOptionCell.h; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.h; sourceTree = SOURCE_ROOT; };
 		4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatinumOptionCell.m; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.m; sourceTree = SOURCE_ROOT; };
 		4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlatinumOptionCell.xib; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.xib; sourceTree = SOURCE_ROOT; };
+		508566241FB38025000B0F56 /* IAQStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IAQStoryboard.storyboard; sourceTree = "<group>"; };
+		508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeProcessVC.h; sourceTree = "<group>"; };
+		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
+		5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeatingStaticPressureVC.h; sourceTree = "<group>"; };
+		5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeatingStaticPressureVC.m; sourceTree = "<group>"; };
 		520159C41B8D8CBC0035909C /* SettingAgendaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAgendaVC.h; sourceTree = "<group>"; };
 		520159C51B8D8CBC0035909C /* SettingAgendaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAgendaVC.m; sourceTree = "<group>"; };
 		520159C71B8D8CCF0035909C /* AgendaPictureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaPictureVC.h; sourceTree = "<group>"; };
@@ -977,6 +985,50 @@
 			path = SummaryOfFindingsVC;
 			sourceTree = "<group>";
 		};
+		508566211FB38012000B0F56 /* IAQ */ = {
+			isa = PBXGroup;
+			children = (
+				5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */,
+				508566261FB38159000B0F56 /* HealthyHomeProcessVC */,
+				508566221FB38012000B0F56 /* IAQDataModel */,
+				508566231FB38012000B0F56 /* Images */,
+				508566241FB38025000B0F56 /* IAQStoryboard.storyboard */,
+			);
+			path = IAQ;
+			sourceTree = "<group>";
+		};
+		508566221FB38012000B0F56 /* IAQDataModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = IAQDataModel;
+			sourceTree = "<group>";
+		};
+		508566231FB38012000B0F56 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		508566261FB38159000B0F56 /* HealthyHomeProcessVC */ = {
+			isa = PBXGroup;
+			children = (
+				508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */,
+				508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */,
+			);
+			path = HealthyHomeProcessVC;
+			sourceTree = "<group>";
+		};
+		5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */ = {
+			isa = PBXGroup;
+			children = (
+				5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */,
+				5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */,
+			);
+			path = HeatingStaticPressureVC;
+			sourceTree = "<group>";
+		};
 		520159C31B8D8C940035909C /* Agenda */ = {
 			isa = PBXGroup;
 			children = (
@@ -1271,6 +1323,7 @@
 		D29F06F2197023CA0020D83C = {
 			isa = PBXGroup;
 			children = (
+				508566211FB38012000B0F56 /* IAQ */,
 				4FD2EB121A3619F40056D4C4 /* AppDelegate.h */,
 				4FD2EB131A3619F40056D4C4 /* AppDelegate.m */,
 				4FD2EB171A361A0F0056D4C4 /* Add2Cart */,
@@ -1418,6 +1471,7 @@
 				4FD2EB701A361A0F0056D4C4 /* email.png in Resources */,
 				521DB6B81C10707A003E40D2 /* EditServiceOptionsCell.xib in Resources */,
 				91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */,
+				508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */,
 				4FD2EB7C1A361A0F0056D4C4 /* txt.png in Resources */,
 				4FD2EB711A361A0F0056D4C4 /* go-previous-orange.png in Resources */,
 				4FD2EB6F1A361A0F0056D4C4 /* DZ18TC.jpg in Resources */,
@@ -1540,6 +1594,7 @@
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
+				5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */,
 				52D388951D3640F3009D2D49 /* Logs.m in Sources */,
 				52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */,
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
@@ -1567,6 +1622,7 @@
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
+				508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */,
 				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
