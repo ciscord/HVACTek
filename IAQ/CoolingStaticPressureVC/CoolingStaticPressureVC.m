@@ -1,15 +1,15 @@
 //
-//  HeatingStaticPressureVC.m
+//  CoolingStaticPressureVC.m
 //  HvacTek
 //
-//  Created by Max on 11/8/17.
+//  Created by Admin on 11/11/17.
 //  Copyright © 2017 Unifeyed. All rights reserved.
 //
 
-#import "HeatingStaticPressureVC.h"
+#import "CoolingStaticPressureVC.h"
 #import "CHDropDownTextField.h"
 #import "CHDropDownTextFieldTableViewCell.h"
-@interface HeatingStaticPressureVC () <CHDropDownTextFieldDelegate, UITextFieldDelegate>
+@interface CoolingStaticPressureVC () <CHDropDownTextFieldDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation HeatingStaticPressureVC
+@implementation CoolingStaticPressureVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,15 +70,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

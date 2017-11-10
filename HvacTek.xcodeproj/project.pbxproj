@@ -164,6 +164,8 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
+		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
 		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
 		867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */; };
@@ -465,6 +467,10 @@
 		75F3DF8E1A3F1E3E00F60652 /* RecommendationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationTableViewCell.h; sourceTree = "<group>"; };
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
+		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
+		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
+		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
+		84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoolingStaticPressureVC.m; sourceTree = "<group>"; };
 		861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 6.xcdatamodel"; sourceTree = "<group>"; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
 		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -988,6 +994,8 @@
 		508566211FB38012000B0F56 /* IAQ */ = {
 			isa = PBXGroup;
 			children = (
+				84AFAD931FB62066006CA298 /* CoolingStaticPressureVC */,
+				84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */,
 				5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */,
 				508566261FB38159000B0F56 /* HealthyHomeProcessVC */,
 				508566221FB38012000B0F56 /* IAQDataModel */,
@@ -1288,6 +1296,24 @@
 			path = CustomerChoiceVC;
 			sourceTree = "<group>";
 		};
+		84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */ = {
+			isa = PBXGroup;
+			children = (
+				84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */,
+				84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */,
+			);
+			path = HealthyHomeSolutionsVC;
+			sourceTree = "<group>";
+		};
+		84AFAD931FB62066006CA298 /* CoolingStaticPressureVC */ = {
+			isa = PBXGroup;
+			children = (
+				84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */,
+				84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */,
+			);
+			path = CoolingStaticPressureVC;
+			sourceTree = "<group>";
+		};
 		867BF0A61DBDE5EF00AF8CD6 /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1407,7 +1433,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 8WY55993RN;
+						DevelopmentTeam = 5JZ562WR45;
 					};
 				};
 			};
@@ -1585,6 +1611,7 @@
 				521DB6B71C10707A003E40D2 /* EditServiceOptionsCell.m in Sources */,
 				4FD2EB141A3619F40056D4C4 /* AppDelegate.m in Sources */,
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
+				84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */,
 				75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */,
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
 				52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */,
@@ -1621,6 +1648,7 @@
 				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
+				84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
 				508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */,
 				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
@@ -1780,6 +1808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1804,6 +1833,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
