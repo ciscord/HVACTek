@@ -56,8 +56,10 @@
 - (void)configureBackgroundColor {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
-    for (UIView* seperatorView in seperatorViewArray) {
-        seperatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    if (seperatorViewArray) {
+        for (UIView* seperatorView in seperatorViewArray) {
+            seperatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        }
     }
     
     nextButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

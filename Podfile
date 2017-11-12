@@ -1,8 +1,8 @@
-platform :ios, "7.1"
+platform :ios, "8.0"
 
 target "HvacTek" do
 
-pod 'MBProgressHUD'
+pod 'MBProgressHUD', '~> 1.1.0'
 pod 'SSKeychain'
 pod 'AFNetworking'
 pod 'TPKeyboardAvoiding'
@@ -16,5 +16,5 @@ pod 'TWRDownloadManager'
 pod 'SDWebImage', '~>3.8'
 pod 'Fabric'
 pod 'Crashlytics'
-
+pod 'URBNAlert', '~> 1.9.7'
 end

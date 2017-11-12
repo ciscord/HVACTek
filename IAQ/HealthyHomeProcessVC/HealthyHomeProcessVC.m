@@ -33,7 +33,6 @@
 
     self.layer1View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     
-    
     self.technicalLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.customerLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
