@@ -1098,18 +1098,11 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                             <segue destination="p28-lU-3b5" kind="show" id="1WA-bS-wE9"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select options from the choices below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSc-Ei-nMg">
-                                        <rect key="frame" x="74" y="26" width="581" height="41"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                        <color key="textColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1n-Dd-6Ci">
-                                        <rect key="frame" x="50" y="96" width="650" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.67450980390000004" green="0.83529411760000005" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ywL-lG-h8U">
+                                        <rect key="frame" x="8" y="8" width="712" height="664"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1119,7 +1112,6 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                     <connections>
                         <outlet property="layer1View" destination="2ep-f8-qE2" id="hhr-Ye-GPj"/>
                         <outlet property="nextButton" destination="Yog-bf-hqH" id="Sv1-8M-YdU"/>
-                        <outletCollection property="optionLabelArray" destination="tSc-Ei-nMg" id="FVK-JD-obs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzI-ci-umv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1495,6 +1487,9 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="qzH-vs-wOe"/>
+                                                </connections>
                                             </button>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFN-cx-9iu">
                                                 <rect key="frame" x="534" y="14" width="178" height="113"/>
@@ -1511,8 +1506,11 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="e3o-2e-lWO"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-gJ-OKm">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-gJ-OKm">
                                                         <rect key="frame" x="8" y="34" width="170" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -1523,6 +1521,9 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="1Pb-gl-buL"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-QA-hcL">
                                                         <rect key="frame" x="14" y="32" width="150" height="1"/>
@@ -1596,7 +1597,7 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                 <rect key="frame" x="534" y="14" width="178" height="113"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7b-2o-Ex3">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7b-2o-Ex3">
                                                         <rect key="frame" x="8" y="-4" width="170" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -1607,8 +1608,11 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="p6Y-U0-fq0"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z58-Lh-34v">
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z58-Lh-34v">
                                                         <rect key="frame" x="8" y="34" width="170" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -1619,6 +1623,9 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="ecg-Yp-4LE"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kY6-YG-6Re">
                                                         <rect key="frame" x="14" y="32" width="150" height="1"/>
@@ -1646,7 +1653,7 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpe-Iy-CIU">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpe-Iy-CIU">
                                                 <rect key="frame" x="163" y="97" width="186" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1660,6 +1667,9 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="njD-4r-w53"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1706,7 +1716,7 @@ Comprehensive Diagnostic</string>
                                                 <rect key="frame" x="534" y="14" width="178" height="113"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Z2-Sr-XMo">
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Z2-Sr-XMo">
                                                         <rect key="frame" x="8" y="-4" width="170" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -1717,8 +1727,11 @@ Comprehensive Diagnostic</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="oII-On-Pjb"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHK-yP-fad">
+                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHK-yP-fad">
                                                         <rect key="frame" x="8" y="34" width="170" height="36"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -1729,6 +1742,9 @@ Comprehensive Diagnostic</string>
                                                         <state key="highlighted">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="priceClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="Mcr-qo-YNZ"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cEk-Pk-VLC">
                                                         <rect key="frame" x="14" y="32" width="150" height="1"/>
@@ -1756,7 +1772,7 @@ Comprehensive Diagnostic</string>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwn-Qa-tcV">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwn-Qa-tcV">
                                                 <rect key="frame" x="163" y="97" width="186" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1770,6 +1786,9 @@ Comprehensive Diagnostic</string>
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="AzG-7X-ebA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1834,22 +1853,25 @@ Comprehensive Diagnostic</string>
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="emailClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="FQc-c9-M1x"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2e-BY-NWk">
                                         <rect key="frame" x="0.0" y="12" width="728" height="140"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrj-sy-WiK">
-                                                <rect key="frame" x="294" y="20" width="100" height="100"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <rect key="frame" x="314" y="20" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                 <state key="normal" title="BEST">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.93626195192337036" green="0.96553260087966919" blue="0.88594871759414673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxy-Zu-lxM">
                                         <rect key="frame" x="20" y="692" width="55" height="55"/>
@@ -1864,6 +1886,9 @@ Comprehensive Diagnostic</string>
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="M6n-4f-K0i"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-ft-gxq">
                                         <rect key="frame" x="20" y="179" width="392" height="266"/>
@@ -1873,7 +1898,7 @@ Bypass Humidifier Maintenance
 Comprehensive Diagnostic
 install EZ Trap &amp; Test Drain Line
 Install Safety Wet Switch &amp; Test System Operation</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1891,6 +1916,9 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="authorizeClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="t6J-wu-1fD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-iF-5ft">
                                         <rect key="frame" x="439" y="196" width="170" height="36"/>
@@ -1928,6 +1956,126 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q63-AH-Hzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3629.6875" y="816.796875"/>
+        </scene>
+        <!--HealthyHomeSolutionsDetailVC-->
+        <scene sceneID="43f-bW-wDL">
+            <objects>
+                <viewController storyboardIdentifier="HealthyHomeSolutionsDetailVC" title="Customer's Choice" id="npg-Ug-MEZ" userLabel="HealthyHomeSolutionsDetailVC" customClass="HealthyHomeSolutionsDetailVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OI2-Am-P5N"/>
+                        <viewControllerLayoutGuide type="bottom" id="if4-5e-9uv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EED-iA-Pvh">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hsT-Ah-SJb" customClass="RoundCornerView">
+                                <rect key="frame" x="20" y="249" width="728" height="755"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9J-KS-awT">
+                                        <rect key="frame" x="0.0" y="12" width="728" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GX-pU-q6N">
+                                                <rect key="frame" x="314" y="20" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                                <state key="normal" title="BEST">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93626195192337036" green="0.96553260087966919" blue="0.88594871759414673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double-tap any image to enlarge" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Und-fM-1Ub">
+                                        <rect key="frame" x="227" y="160" width="274" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6P6-Cu-5nu">
+                                        <rect key="frame" x="8" y="191" width="712" height="455"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="agreementcell" rowHeight="120" id="lJ9-UV-Fbp" customClass="HealthyAgreementTableViewCell">
+                                                <rect key="frame" x="0.0" y="28" width="712" height="120"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJ9-UV-Fbp" id="lzd-ww-xay">
+                                                    <rect key="frame" x="0.0" y="0.0" width="712" height="119.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWn-Vj-fmb">
+                                                            <rect key="frame" x="34" y="5" width="663" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vr5-Vp-62p">
+                                                            <rect key="frame" x="34" y="30" width="100" height="80"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SH4-i6-Dt8">
+                                                            <rect key="frame" x="150" y="29" width="100" height="80"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egN-fC-4Fi">
+                                                            <rect key="frame" x="265" y="30" width="100" height="80"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="imageImageView" destination="egN-fC-4Fi" id="85x-2l-zAM"/>
+                                                    <outlet property="pdfImageView" destination="vr5-Vp-62p" id="lxe-zi-1ei"/>
+                                                    <outlet property="titleLabel" destination="YWn-Vj-fmb" id="XGQ-F5-yoB"/>
+                                                    <outlet property="videoImageView" destination="SH4-i6-Dt8" id="0LV-w2-D6g"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="npg-Ug-MEZ" id="ijM-O5-bVe"/>
+                                            <outlet property="delegate" destination="npg-Ug-MEZ" id="EcK-Uc-xAp"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyo-Jl-OA6">
+                                        <rect key="frame" x="271" y="692" width="186" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backClick:" destination="npg-Ug-MEZ" eventType="touchUpInside" id="ZCR-lE-gCE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="circleButton" destination="7GX-pU-q6N" id="Phh-YY-ekQ"/>
+                        <outlet property="dataTableView" destination="6P6-Cu-5nu" id="tMc-Z3-KXH"/>
+                        <outlet property="layer1View" destination="hsT-Ah-SJb" id="h0Q-i0-83y"/>
+                        <outlet property="nextButton" destination="eyo-Jl-OA6" id="LRC-hP-H8h"/>
+                        <outlet property="topBannerView" destination="X9J-KS-awT" id="4mf-9c-6rZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EwC-Hl-loz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2944.53125" y="816.796875"/>
         </scene>
     </scenes>
     <resources>

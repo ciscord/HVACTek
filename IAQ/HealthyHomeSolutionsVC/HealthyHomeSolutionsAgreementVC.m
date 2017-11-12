@@ -9,6 +9,8 @@
 #import "HealthyHomeSolutionsAgreementVC.h"
 
 @interface HealthyHomeSolutionsAgreementVC ()
+@property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
+
 @property (weak, nonatomic) IBOutlet UIView *topBannerView;
 @property (weak, nonatomic) IBOutlet UIButton *circleButton;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -27,7 +29,7 @@
     // Do any additional setup after loading the view.
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
-    self.circleButton.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
     self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
     self.circleButton.clipsToBounds = true;
     
@@ -38,6 +40,10 @@
     }else{
         self.priceButton.titleLabel.textColor = [UIColor hx_colorWithHexString:@"C42E3C"];
     }
+    
+    self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.emailButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.backButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
 }
 

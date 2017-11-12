@@ -25,7 +25,7 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - FrameAccessor (2.0)
-  - MBProgressHUD (0.9)
+  - MBProgressHUD (1.1.0)
   - MD5Digest (0.1.0)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -37,6 +37,9 @@ PODS:
   - TPKeyboardAvoiding (1.2.6)
   - TTTAttributedLabel (1.7.5)
   - TWRDownloadManager (1.1.1)
+  - URBNAlert (1.9.8):
+    - URBNConvenience (~> 0.8.2)
+  - URBNConvenience (0.8.7)
   - XMLDictionary (1.4)
 
 DEPENDENCIES:
@@ -45,7 +48,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - FrameAccessor
-  - MBProgressHUD
+  - MBProgressHUD (~> 1.1.0)
   - MD5Digest
   - SDWebImage (~> 3.8)
   - SFRoundProgressCounterView
@@ -53,6 +56,7 @@ DEPENDENCIES:
   - SSKeychain
   - TPKeyboardAvoiding
   - TWRDownloadManager
+  - URBNAlert (~> 1.9.7)
   - XMLDictionary
 
 SPEC CHECKSUMS:
@@ -61,7 +65,7 @@ SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FrameAccessor: 443a13e58e23a10ff22180da0897b28c3f6abf66
-  MBProgressHUD: d8e7ea388dc1549a42e0d219067cf5f2c898fb66
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MD5Digest: 99bcccfc389c5b7a0edaf66beb80fbc7596a3b65
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SFRoundProgressCounterView: 9b94f5297ce6bb8c633af9c1e583889864595cfa
@@ -70,8 +74,10 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: ee4dd35e3bb7bb64bfbda47e7cc9ba872ff10f77
   TTTAttributedLabel: 19f03d496810ab0706c392a297c6d49fe173bac4
   TWRDownloadManager: 34193d7d1ab6e6b4243d74fa4f686cc2ed5ef40f
+  URBNAlert: 5fcc2676e9f9d03699683633894e06ba793bb837
+  URBNConvenience: 043eb5f7cc0825cc94fcb4535f91fd27f22ec8de
   XMLDictionary: f9f51601ba76678b594ab485f2b00ec1fed23724
 
-PODFILE CHECKSUM: 368a1cbf00be5112db546add2c1d554f765b56ef
+PODFILE CHECKSUM: 1c841f6a277fe0d9fb889741ea4b8d9f334a87f4
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

@@ -15,7 +15,6 @@
 @property(nonatomic, strong) UIImageView *imgTopBar;
 @property(nonatomic, strong) UIView *titleView;
 @property(nonatomic, strong) UIView *logoView;
-@property(nonatomic, strong) UILabel *lbTitle;
 @property(nonatomic, strong) UIView *upperArcView;
 @property(nonatomic, strong) UIView *bottomArcView;
 

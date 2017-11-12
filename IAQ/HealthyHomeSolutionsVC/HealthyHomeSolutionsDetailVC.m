@@ -7,8 +7,14 @@
 //
 
 #import "HealthyHomeSolutionsDetailVC.h"
+#import "HealthyAgreementTableViewCell.h"
+@interface HealthyHomeSolutionsDetailVC ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
-@interface HealthyHomeSolutionsDetailVC ()
+@property (weak, nonatomic) IBOutlet UIView *topBannerView;
+@property (weak, nonatomic) IBOutlet UIButton *circleButton;
+@property (strong, nonatomic) IBOutlet UITableView *dataTableView;
+
 
 @end
 
@@ -17,6 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
+    [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
+    self.circleButton.clipsToBounds = true;
+    
+    [self.dataTableView reloadData];
+}
+- (IBAction)backClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +49,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    HealthyAgreementTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"agreementcell" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120.0f;
+    
+}
+
 
 @end

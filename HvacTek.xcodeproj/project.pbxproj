@@ -102,6 +102,7 @@
 		505C6B7B1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */; };
 		505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */; };
 		505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */; };
+		5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */; };
 		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
 		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
 		5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */; };
@@ -356,6 +357,8 @@
 		505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedControl.m; sourceTree = "<group>"; };
 		505C6B7F1FB6AA4A00761B04 /* SVSegmentedThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedThumb.h; sourceTree = "<group>"; };
 		505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedThumb.m; sourceTree = "<group>"; };
+		5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyAgreementTableViewCell.h; sourceTree = "<group>"; };
+		5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyAgreementTableViewCell.m; sourceTree = "<group>"; };
 		508566241FB38025000B0F56 /* IAQStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IAQStoryboard.storyboard; sourceTree = "<group>"; };
 		508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeProcessVC.h; sourceTree = "<group>"; };
 		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
@@ -1087,6 +1090,15 @@
 			path = SVSegmentedControl;
 			sourceTree = "<group>";
 		};
+		506772591FB8B0ED00274990 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */,
+				5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		508566211FB38012000B0F56 /* IAQ */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,6 +1413,7 @@
 		84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */ = {
 			isa = PBXGroup;
 			children = (
+				506772591FB8B0ED00274990 /* cells */,
 				84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */,
 				84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */,
 				505C6B761FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.h */,
@@ -1620,9 +1633,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/URBNAlert/URBNAlert.bundle,
+				"${PODS_ROOT}/URBNConvenience/Pod/Resources/URBNConvenience.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1661,13 +1678,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HvacTek-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */ = {
@@ -1761,6 +1781,7 @@
 				84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
 				508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */,
+				5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */,
 				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,

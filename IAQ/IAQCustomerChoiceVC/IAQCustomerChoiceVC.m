@@ -7,7 +7,8 @@
 //
 
 #import "IAQCustomerChoiceVC.h"
-
+#import "HealthyHomeSolutionsAgreementVC.h"
+#import "HealthyHomeSolutionsDetailVC.h"
 @interface IAQCustomerChoiceVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *detailButtonArray;
@@ -39,6 +40,8 @@
     }
     
     if (self.mode == 1) {
+        self.lbTitle.text = @"Healthy Home Solutions";
+        
         for (UIButton* priceView in self.priceViewArray) {
             priceView.hidden = false;
         }
@@ -48,7 +51,10 @@
         for (UIButton* detailButton in self.detailButtonArray) {
             detailButton.hidden = false;
         }
+        
     }else {
+        self.lbTitle.text = @"Customer's Choice";
+        
         for (UIButton* priceView in self.priceViewArray) {
             priceView.hidden = true;
         }
@@ -60,7 +66,18 @@
         }
     }
 }
-
+- (IBAction)priceClick:(id)sender {
+    
+    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsAgreementVC"];
+    
+    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+}
+- (IBAction)detailsClick:(id)sender {
+    
+    HealthyHomeSolutionsDetailVC* healthyHomeSolutionsDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsDetailVC"];
+    
+    [self.navigationController pushViewController:healthyHomeSolutionsDetailVC animated:true];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
