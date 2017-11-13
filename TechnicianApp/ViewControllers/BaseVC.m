@@ -15,7 +15,6 @@
 @property(nonatomic, strong) UIImageView *imgTopBar;
 @property(nonatomic, strong) UIView *titleView;
 @property(nonatomic, strong) UIView *logoView;
-@property(nonatomic, strong) UILabel *lbTitle;
 @property(nonatomic, strong) UIView *upperArcView;
 @property(nonatomic, strong) UIView *bottomArcView;
 
@@ -55,6 +54,14 @@
 #pragma mark - BackgroundColors
 - (void)configureBackgroundColor {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    
+    if (seperatorViewArray) {
+        for (UIView* seperatorView in seperatorViewArray) {
+            seperatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        }
+    }
+    
+    nextButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 

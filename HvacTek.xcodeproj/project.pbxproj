@@ -92,6 +92,20 @@
 		4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901B61AB845F500D87FAB /* PlatinumOptionsVC.m */; };
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
 		4FF901BD1AB847FE00D87FAB /* PlatinumOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */; };
+		505C6B611FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B601FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m */; };
+		505C6B651FB68E2D00761B04 /* IAQCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B641FB68E2D00761B04 /* IAQCustomerChoiceVC.m */; };
+		505C6B691FB69DE200761B04 /* IsYourHomeHealthyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B681FB69DE200761B04 /* IsYourHomeHealthyVC.m */; };
+		505C6B6D1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B6C1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m */; };
+		505C6B711FB69E3E00761B04 /* VideoForCustomerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B701FB69E3E00761B04 /* VideoForCustomerVC.m */; };
+		505C6B751FB69E7900761B04 /* HereWhatWeProposeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B741FB69E7900761B04 /* HereWhatWeProposeVC.m */; };
+		505C6B781FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B771FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m */; };
+		505C6B7B1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */; };
+		505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */; };
+		505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */; };
+		5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */; };
+		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
+		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
+		5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */; };
 		520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C51B8D8CBC0035909C /* SettingAgendaVC.m */; };
 		520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C81B8D8CCF0035909C /* AgendaPictureVC.m */; };
 		520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CC1B8D8D830035909C /* ESABenefitsVC.m */; };
@@ -161,6 +175,8 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
+		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
 		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
 		867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */; };
@@ -321,6 +337,33 @@
 		4FF901B91AB847FE00D87FAB /* PlatinumOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatinumOptionCell.h; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.h; sourceTree = SOURCE_ROOT; };
 		4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatinumOptionCell.m; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.m; sourceTree = SOURCE_ROOT; };
 		4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlatinumOptionCell.xib; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.xib; sourceTree = SOURCE_ROOT; };
+		505C6B5F1FB68B9600761B04 /* HealthyHomeSolutionsSortVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsSortVC.h; sourceTree = "<group>"; };
+		505C6B601FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsSortVC.m; sourceTree = "<group>"; };
+		505C6B631FB68E2D00761B04 /* IAQCustomerChoiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAQCustomerChoiceVC.h; sourceTree = "<group>"; };
+		505C6B641FB68E2D00761B04 /* IAQCustomerChoiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAQCustomerChoiceVC.m; sourceTree = "<group>"; };
+		505C6B671FB69DE200761B04 /* IsYourHomeHealthyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsYourHomeHealthyVC.h; sourceTree = "<group>"; };
+		505C6B681FB69DE200761B04 /* IsYourHomeHealthyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsYourHomeHealthyVC.m; sourceTree = "<group>"; };
+		505C6B6B1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BreatheEasyHealthyHomeVC.h; sourceTree = "<group>"; };
+		505C6B6C1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreatheEasyHealthyHomeVC.m; sourceTree = "<group>"; };
+		505C6B6F1FB69E3E00761B04 /* VideoForCustomerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoForCustomerVC.h; sourceTree = "<group>"; };
+		505C6B701FB69E3E00761B04 /* VideoForCustomerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoForCustomerVC.m; sourceTree = "<group>"; };
+		505C6B731FB69E7900761B04 /* HereWhatWeProposeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HereWhatWeProposeVC.h; sourceTree = "<group>"; };
+		505C6B741FB69E7900761B04 /* HereWhatWeProposeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HereWhatWeProposeVC.m; sourceTree = "<group>"; };
+		505C6B761FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsDetailVC.h; sourceTree = "<group>"; };
+		505C6B771FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsDetailVC.m; sourceTree = "<group>"; };
+		505C6B791FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsAgreementVC.h; sourceTree = "<group>"; };
+		505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsAgreementVC.m; sourceTree = "<group>"; };
+		505C6B7D1FB6AA4A00761B04 /* SVSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedControl.h; sourceTree = "<group>"; };
+		505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedControl.m; sourceTree = "<group>"; };
+		505C6B7F1FB6AA4A00761B04 /* SVSegmentedThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedThumb.h; sourceTree = "<group>"; };
+		505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedThumb.m; sourceTree = "<group>"; };
+		5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyAgreementTableViewCell.h; sourceTree = "<group>"; };
+		5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyAgreementTableViewCell.m; sourceTree = "<group>"; };
+		508566241FB38025000B0F56 /* IAQStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IAQStoryboard.storyboard; sourceTree = "<group>"; };
+		508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeProcessVC.h; sourceTree = "<group>"; };
+		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
+		5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeatingStaticPressureVC.h; sourceTree = "<group>"; };
+		5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeatingStaticPressureVC.m; sourceTree = "<group>"; };
 		520159C41B8D8CBC0035909C /* SettingAgendaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAgendaVC.h; sourceTree = "<group>"; };
 		520159C51B8D8CBC0035909C /* SettingAgendaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAgendaVC.m; sourceTree = "<group>"; };
 		520159C71B8D8CCF0035909C /* AgendaPictureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaPictureVC.h; sourceTree = "<group>"; };
@@ -457,6 +500,10 @@
 		75F3DF8E1A3F1E3E00F60652 /* RecommendationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationTableViewCell.h; sourceTree = "<group>"; };
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
+		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
+		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
+		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
+		84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoolingStaticPressureVC.m; sourceTree = "<group>"; };
 		861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 6.xcdatamodel"; sourceTree = "<group>"; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
 		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -848,6 +895,7 @@
 		4FD2EBA71A376C740056D4C4 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				505C6B7C1FB6AA4A00761B04 /* SVSegmentedControl */,
 				4F11D3FE1AA7738D007FC0A8 /* KCOrderedAccessorFix */,
 				4F11D3F11AA772E4007FC0A8 /* ZACoreData */,
 				AAE7D1691A39CFBA00F95495 /* CHDropDownTextField */,
@@ -975,6 +1023,132 @@
 			);
 			name = PlatinumOptionsVC;
 			path = SummaryOfFindingsVC;
+			sourceTree = "<group>";
+		};
+		505C6B5E1FB68B8800761B04 /* HealthyHomeSolutionsSortVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B5F1FB68B9600761B04 /* HealthyHomeSolutionsSortVC.h */,
+				505C6B601FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m */,
+			);
+			path = HealthyHomeSolutionsSortVC;
+			sourceTree = "<group>";
+		};
+		505C6B621FB68E2000761B04 /* IAQCustomerChoiceVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B631FB68E2D00761B04 /* IAQCustomerChoiceVC.h */,
+				505C6B641FB68E2D00761B04 /* IAQCustomerChoiceVC.m */,
+			);
+			path = IAQCustomerChoiceVC;
+			sourceTree = "<group>";
+		};
+		505C6B661FB69DD600761B04 /* IsYourHomeHealthyVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B671FB69DE200761B04 /* IsYourHomeHealthyVC.h */,
+				505C6B681FB69DE200761B04 /* IsYourHomeHealthyVC.m */,
+			);
+			path = IsYourHomeHealthyVC;
+			sourceTree = "<group>";
+		};
+		505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B6B1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.h */,
+				505C6B6C1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m */,
+			);
+			path = BreatheEasyHealthyHomeVC;
+			sourceTree = "<group>";
+		};
+		505C6B6E1FB69E2200761B04 /* VideoForCustomerVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B6F1FB69E3E00761B04 /* VideoForCustomerVC.h */,
+				505C6B701FB69E3E00761B04 /* VideoForCustomerVC.m */,
+			);
+			path = VideoForCustomerVC;
+			sourceTree = "<group>";
+		};
+		505C6B721FB69E6000761B04 /* HereWhatWeProposeVC */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B731FB69E7900761B04 /* HereWhatWeProposeVC.h */,
+				505C6B741FB69E7900761B04 /* HereWhatWeProposeVC.m */,
+			);
+			path = HereWhatWeProposeVC;
+			sourceTree = "<group>";
+		};
+		505C6B7C1FB6AA4A00761B04 /* SVSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B7D1FB6AA4A00761B04 /* SVSegmentedControl.h */,
+				505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */,
+				505C6B7F1FB6AA4A00761B04 /* SVSegmentedThumb.h */,
+				505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */,
+			);
+			path = SVSegmentedControl;
+			sourceTree = "<group>";
+		};
+		506772591FB8B0ED00274990 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */,
+				5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		508566211FB38012000B0F56 /* IAQ */ = {
+			isa = PBXGroup;
+			children = (
+				505C6B721FB69E6000761B04 /* HereWhatWeProposeVC */,
+				505C6B6E1FB69E2200761B04 /* VideoForCustomerVC */,
+				505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */,
+				505C6B661FB69DD600761B04 /* IsYourHomeHealthyVC */,
+				505C6B621FB68E2000761B04 /* IAQCustomerChoiceVC */,
+				505C6B5E1FB68B8800761B04 /* HealthyHomeSolutionsSortVC */,
+				84AFAD931FB62066006CA298 /* CoolingStaticPressureVC */,
+				84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */,
+				5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */,
+				508566261FB38159000B0F56 /* HealthyHomeProcessVC */,
+				508566221FB38012000B0F56 /* IAQDataModel */,
+				508566231FB38012000B0F56 /* Images */,
+				508566241FB38025000B0F56 /* IAQStoryboard.storyboard */,
+			);
+			path = IAQ;
+			sourceTree = "<group>";
+		};
+		508566221FB38012000B0F56 /* IAQDataModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = IAQDataModel;
+			sourceTree = "<group>";
+		};
+		508566231FB38012000B0F56 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		508566261FB38159000B0F56 /* HealthyHomeProcessVC */ = {
+			isa = PBXGroup;
+			children = (
+				508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */,
+				508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */,
+			);
+			path = HealthyHomeProcessVC;
+			sourceTree = "<group>";
+		};
+		5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */ = {
+			isa = PBXGroup;
+			children = (
+				5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */,
+				5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */,
+			);
+			path = HeatingStaticPressureVC;
 			sourceTree = "<group>";
 		};
 		520159C31B8D8C940035909C /* Agenda */ = {
@@ -1236,6 +1410,29 @@
 			path = CustomerChoiceVC;
 			sourceTree = "<group>";
 		};
+		84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */ = {
+			isa = PBXGroup;
+			children = (
+				506772591FB8B0ED00274990 /* cells */,
+				84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */,
+				84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */,
+				505C6B761FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.h */,
+				505C6B771FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m */,
+				505C6B791FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.h */,
+				505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */,
+			);
+			path = HealthyHomeSolutionsVC;
+			sourceTree = "<group>";
+		};
+		84AFAD931FB62066006CA298 /* CoolingStaticPressureVC */ = {
+			isa = PBXGroup;
+			children = (
+				84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */,
+				84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */,
+			);
+			path = CoolingStaticPressureVC;
+			sourceTree = "<group>";
+		};
 		867BF0A61DBDE5EF00AF8CD6 /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1271,6 +1468,7 @@
 		D29F06F2197023CA0020D83C = {
 			isa = PBXGroup;
 			children = (
+				508566211FB38012000B0F56 /* IAQ */,
 				4FD2EB121A3619F40056D4C4 /* AppDelegate.h */,
 				4FD2EB131A3619F40056D4C4 /* AppDelegate.m */,
 				4FD2EB171A361A0F0056D4C4 /* Add2Cart */,
@@ -1354,7 +1552,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 8WY55993RN;
+						DevelopmentTeam = 5JZ562WR45;
 					};
 				};
 			};
@@ -1418,6 +1616,7 @@
 				4FD2EB701A361A0F0056D4C4 /* email.png in Resources */,
 				521DB6B81C10707A003E40D2 /* EditServiceOptionsCell.xib in Resources */,
 				91BA9A011B8DDC78005EA4EA /* CartCell.xib in Resources */,
+				508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */,
 				4FD2EB7C1A361A0F0056D4C4 /* txt.png in Resources */,
 				4FD2EB711A361A0F0056D4C4 /* go-previous-orange.png in Resources */,
 				4FD2EB6F1A361A0F0056D4C4 /* DZ18TC.jpg in Resources */,
@@ -1434,9 +1633,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/URBNAlert/URBNAlert.bundle,
+				"${PODS_ROOT}/URBNConvenience/Pod/Resources/URBNConvenience.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1475,13 +1678,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HvacTek-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */ = {
@@ -1520,7 +1726,9 @@
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
 				52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */,
+				505C6B711FB69E3E00761B04 /* VideoForCustomerVC.m in Sources */,
 				521984CC1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m in Sources */,
+				505C6B781FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m in Sources */,
 				5209A1AA1CEC921B0026ED6D /* InvoicePreviewVC.m in Sources */,
 				75D73F101A387DCD0051143C /* SystemInfoHeaderView.m in Sources */,
 				4F11D4041AA77417007FC0A8 /* User+Functional.m in Sources */,
@@ -1531,6 +1739,7 @@
 				521DB6B71C10707A003E40D2 /* EditServiceOptionsCell.m in Sources */,
 				4FD2EB141A3619F40056D4C4 /* AppDelegate.m in Sources */,
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
+				84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */,
 				75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */,
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
 				52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */,
@@ -1540,6 +1749,7 @@
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
+				5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */,
 				52D388951D3640F3009D2D49 /* Logs.m in Sources */,
 				52755F971C52109E00A0E5E5 /* CompanyItem.m in Sources */,
 				52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */,
@@ -1551,7 +1761,9 @@
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
+				505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
+				505C6B751FB69E7900761B04 /* HereWhatWeProposeVC.m in Sources */,
 				75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */,
 				52755F9A1C522F9B00A0E5E5 /* HexColors.m in Sources */,
 				4FD2EB801A361A0F0056D4C4 /* HeaderTableViewCell.m in Sources */,
@@ -1566,12 +1778,16 @@
 				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
 				4FD2EB841A361A0F0056D4C4 /* RebateQuoteTableViewController.m in Sources */,
 				4FD2EB6B1A361A0F0056D4C4 /* TypeThreeTableViewCell.m in Sources */,
+				84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */,
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
+				508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */,
+				5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */,
 				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
 				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
+				505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
 				520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */,
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
@@ -1580,6 +1796,7 @@
 				5251C4201CF584F300CECB17 /* AddCustomRepairCalculationsVC.m in Sources */,
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
 				52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */,
+				505C6B611FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				5265782F1C6A0A2500EC1AA5 /* Photos.m in Sources */,
@@ -1587,6 +1804,8 @@
 				528698B11C6B2BE9003F91C2 /* SortFindinsCell.m in Sources */,
 				867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */,
 				52D25B2C1CEEFB3800C77BED /* AdditionalInfoPageCells.m in Sources */,
+				505C6B7B1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m in Sources */,
+				505C6B691FB69DE200761B04 /* IsYourHomeHealthyVC.m in Sources */,
 				4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */,
 				52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */,
 				4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */,
@@ -1600,6 +1819,7 @@
 				52C787271C6DCA2C007EC77C /* THProgressView.m in Sources */,
 				91CA5EFC1ADFF86B00D871FD /* User.m in Sources */,
 				4F576FB41AC7000A00F0F8FB /* ServiceHistoryTableViewCell.m in Sources */,
+				505C6B651FB68E2D00761B04 /* IAQCustomerChoiceVC.m in Sources */,
 				4FD2EB691A361A0F0056D4C4 /* QuoteFirstTableViewController.m in Sources */,
 				4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */,
 				528698AD1C6B1EF2003F91C2 /* SortFindingsVC.m in Sources */,
@@ -1612,6 +1832,7 @@
 				5265782C1C6A0A2500EC1AA5 /* Item+CoreDataProperties.m in Sources */,
 				AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */,
 				5233294D1C1706D9008ABA46 /* RROverviewVC.m in Sources */,
+				505C6B6D1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m in Sources */,
 				4F3C50B51A3F0D8C00778972 /* QuestionView.m in Sources */,
 				5280CE591C538FF2000FE8F8 /* HvakTekColorScheme.m in Sources */,
 				4FD2EB631A361A0F0056D4C4 /* FirstOption.m in Sources */,
@@ -1724,6 +1945,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1748,6 +1970,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

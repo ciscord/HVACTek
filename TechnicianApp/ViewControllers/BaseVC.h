@@ -18,7 +18,11 @@
 
 
 @interface BaseVC : UIViewController
-
+{
+    IBOutletCollection(UIView) NSArray* seperatorViewArray;
+    __weak IBOutlet UIButton *nextButton;
+}
 @property (nonatomic, assign) BOOL isTitleViewHidden;
+@property(nonatomic, strong) UILabel *lbTitle;
 - (NSString *)changeCurrencyFormat:(float)number;
 @end
