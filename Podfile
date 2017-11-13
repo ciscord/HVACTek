@@ -4,7 +4,7 @@ target "HvacTek" do
 
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'SSKeychain'
-pod 'AFNetworking'
+pod 'AFNetworking', '~> 2.5.4'
 pod 'TPKeyboardAvoiding'
 pod 'FrameAccessor'
 pod 'SFRoundProgressCounterView'
@@ -16,5 +16,5 @@ pod 'TWRDownloadManager'
 pod 'SDWebImage', '~>3.8'
 pod 'Fabric'
 pod 'Crashlytics'
-pod 'URBNAlert', '~> 1.9.7'
+pod 'TYAlertController'
 end

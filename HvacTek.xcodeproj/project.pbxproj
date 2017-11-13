@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DF02C1D2423B8007CE24F /* PictureLibraryVC.m */; };
 		0E5DF0301D242798007CE24F /* PictureGalleryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */; };
-		43C48D74209A4379C316545D /* libPods-HvacTek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */; };
 		4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */; };
 		4F11D3DD1AA1F7F1007FC0A8 /* SWAPIRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3DC1AA1F7F1007FC0A8 /* SWAPIRequestManager.m */; };
 		4F11D3E01AA6034D007FC0A8 /* PricebookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F11D3DF1AA6034D007FC0A8 /* PricebookItem.m */; };
@@ -106,6 +105,9 @@
 		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
 		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
 		5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */; };
+		50E8D0101FB9E2120099691D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D00F1FB9E2120099691D /* NSString+Validation.m */; };
+		50E8D0131FB9E3740099691D /* TYAlertController+HvacTek.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D0121FB9E3740099691D /* TYAlertController+HvacTek.m */; };
+		50E8D0161FB9F5A10099691D /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D0151FB9F5A10099691D /* UIImage+Additions.m */; };
 		520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C51B8D8CBC0035909C /* SettingAgendaVC.m */; };
 		520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159C81B8D8CCF0035909C /* AgendaPictureVC.m */; };
 		520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520159CC1B8D8D830035909C /* ESABenefitsVC.m */; };
@@ -161,6 +163,7 @@
 		52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1E61CFF0B7D008D24C9 /* VideoLibraryCell.m */; };
 		52F3D1E91CFF0B7D008D24C9 /* VideoLibraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52F3D1E71CFF0B7D008D24C9 /* VideoLibraryCell.xib */; };
 		52F699C11C1EB30D00CD9274 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F699C01C1EB30D00CD9274 /* CALayer+XibConfiguration.m */; };
+		673F3428D2A05FD61B0ADA5B /* libPods-HvacTek.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3093503DF504DF5E9E7EE8 /* libPods-HvacTek.a */; };
 		75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5A1A39CD2E0013EAC0 /* RepairVsServiceVC.m */; };
 		75399F5F1A39D4130013EAC0 /* PriceBookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75399F5D1A39D4130013EAC0 /* PriceBookView.m */; };
 		75399F621A39D7FB0013EAC0 /* PriceBookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75399F611A39D7FB0013EAC0 /* PriceBookView.xib */; };
@@ -200,7 +203,7 @@
 		0E5DF02C1D2423B8007CE24F /* PictureLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureLibraryVC.m; sourceTree = "<group>"; };
 		0E5DF02E1D242798007CE24F /* PictureGalleryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureGalleryVC.h; sourceTree = "<group>"; };
 		0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureGalleryVC.m; sourceTree = "<group>"; };
-		2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.debug.xcconfig"; sourceTree = "<group>"; };
+		35FED52A17AD62BDE4A03FAD /* Pods-HvacTek.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.debug.xcconfig"; sourceTree = "<group>"; };
 		4F11D3D71A9F7DEB007FC0A8 /* Unifeiyed_Quoting 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 2.xcdatamodel"; sourceTree = "<group>"; };
 		4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 3.xcdatamodel"; sourceTree = "<group>"; };
 		4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Unifeiyed_Quoting.xcdatamodel; sourceTree = "<group>"; };
@@ -364,6 +367,12 @@
 		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
 		5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeatingStaticPressureVC.h; sourceTree = "<group>"; };
 		5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeatingStaticPressureVC.m; sourceTree = "<group>"; };
+		50E8D00E1FB9E2120099691D /* NSString+Validation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
+		50E8D00F1FB9E2120099691D /* NSString+Validation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
+		50E8D0111FB9E3740099691D /* TYAlertController+HvacTek.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+HvacTek.h"; sourceTree = "<group>"; };
+		50E8D0121FB9E3740099691D /* TYAlertController+HvacTek.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TYAlertController+HvacTek.m"; sourceTree = "<group>"; };
+		50E8D0141FB9F5A10099691D /* UIImage+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		50E8D0151FB9F5A10099691D /* UIImage+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		520159C41B8D8CBC0035909C /* SettingAgendaVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAgendaVC.h; sourceTree = "<group>"; };
 		520159C51B8D8CBC0035909C /* SettingAgendaVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAgendaVC.m; sourceTree = "<group>"; };
 		520159C71B8D8CCF0035909C /* AgendaPictureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaPictureVC.h; sourceTree = "<group>"; };
@@ -500,6 +509,7 @@
 		75F3DF8E1A3F1E3E00F60652 /* RecommendationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationTableViewCell.h; sourceTree = "<group>"; };
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
+		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
 		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
 		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
@@ -527,7 +537,6 @@
 		91CA5EF91ADFF7F100D871FD /* SignatureModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		91CA5EFA1ADFF86B00D871FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		91CA5EFB1ADFF86B00D871FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HvacTek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA23D6471A379B4B00703952 /* TechnicianDebriefVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnicianDebriefVC.h; sourceTree = "<group>"; };
 		AA23D6481A379B4B00703952 /* TechnicianDebriefVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnicianDebriefVC.m; sourceTree = "<group>"; };
 		D29AD9A819756FF40059565A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -539,7 +548,7 @@
 		D29F0708197023CA0020D83C /* Signature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Signature-Info.plist"; sourceTree = "<group>"; };
 		D29F070E197023CA0020D83C /* Signature-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Signature-Prefix.pch"; sourceTree = "<group>"; };
 		D29F071C197023CA0020D83C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
+		DC3093503DF504DF5E9E7EE8 /* libPods-HvacTek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HvacTek.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,7 +561,7 @@
 				D29F0705197023CA0020D83C /* CoreData.framework in Frameworks */,
 				D29F0703197023CA0020D83C /* UIKit.framework in Frameworks */,
 				D29F06FF197023CA0020D83C /* Foundation.framework in Frameworks */,
-				43C48D74209A4379C316545D /* libPods-HvacTek.a in Frameworks */,
+				673F3428D2A05FD61B0ADA5B /* libPods-HvacTek.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +577,15 @@
 				0E5DF02F1D242798007CE24F /* PictureGalleryVC.m */,
 			);
 			path = PictureLibrary;
+			sourceTree = "<group>";
+		};
+		2321ED30159CBF01355D2A3C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				35FED52A17AD62BDE4A03FAD /* Pods-HvacTek.debug.xcconfig */,
+				7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */ = {
@@ -905,6 +923,12 @@
 				4FD2EBA81A376C740056D4C4 /* TODOMacros.h */,
 				4FD2EBBF1A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.h */,
 				4FD2EBC01A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m */,
+				50E8D00E1FB9E2120099691D /* NSString+Validation.h */,
+				50E8D00F1FB9E2120099691D /* NSString+Validation.m */,
+				50E8D0111FB9E3740099691D /* TYAlertController+HvacTek.h */,
+				50E8D0121FB9E3740099691D /* TYAlertController+HvacTek.m */,
+				50E8D0141FB9F5A10099691D /* UIImage+Additions.h */,
+				50E8D0151FB9F5A10099691D /* UIImage+Additions.m */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -1326,15 +1350,6 @@
 			path = "NSDictionary+NSNullReplaceWithNil";
 			sourceTree = "<group>";
 		};
-		5375E9D434BD86E454077487 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */,
-				E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		75399F581A39CD250013EAC0 /* RepairVsServiceVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1478,7 +1493,7 @@
 				D29F0707197023CA0020D83C /* Supporting Files */,
 				D29F06FD197023CA0020D83C /* Frameworks */,
 				D29F06FC197023CA0020D83C /* Products */,
-				5375E9D434BD86E454077487 /* Pods */,
+				2321ED30159CBF01355D2A3C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1501,7 +1516,7 @@
 				D29F0704197023CA0020D83C /* CoreData.framework */,
 				D29F071C197023CA0020D83C /* XCTest.framework */,
 				58C60E5FF5C4D649D9A154A1 /* libPods.a */,
-				9AD337B701F0CD5C3ED084D5 /* libPods-HvacTek.a */,
+				DC3093503DF504DF5E9E7EE8 /* libPods-HvacTek.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1524,14 +1539,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D29F072D197023CA0020D83C /* Build configuration list for PBXNativeTarget "HvacTek" */;
 			buildPhases = (
-				7E8F24EAB53D957596F3DEE3 /* [CP] Check Pods Manifest.lock */,
+				88C4B5DB16D4D41BCBFE0897 /* [CP] Check Pods Manifest.lock */,
 				D29F06F7197023CA0020D83C /* Sources */,
 				D29F06F8197023CA0020D83C /* Frameworks */,
 				D29F06F9197023CA0020D83C /* Resources */,
 				4FD6166D1AF11B060025AB99 /* ShellScript */,
-				D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */,
-				0067B5E179166A79C94B2789 /* [CP] Copy Pods Resources */,
 				5B467DCB1F1660A6001EC4AD /* ShellScript */,
+				E8414F989629051B80F72B22 /* [CP] Embed Pods Frameworks */,
+				302731919046BD925B5C846D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1627,15 +1642,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0067B5E179166A79C94B2789 /* [CP] Copy Pods Resources */ = {
+		302731919046BD925B5C846D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/URBNAlert/URBNAlert.bundle,
-				"${PODS_ROOT}/URBNConvenience/Pod/Resources/URBNConvenience.bundle",
+				"${PODS_ROOT}/SSKeychain/Support/SSKeychain.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1672,7 +1686,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a75e890b1bc2618b6a4cf38a0605bd626e51d55b d858de7efcbb8fa3b51349972a9b78eebe76af3865615cb82f641f441fa7855b\n";
 		};
-		7E8F24EAB53D957596F3DEE3 /* [CP] Check Pods Manifest.lock */ = {
+		88C4B5DB16D4D41BCBFE0897 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1690,7 +1704,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D19A18F836A87D46C02DD6FD /* [CP] Embed Pods Frameworks */ = {
+		E8414F989629051B80F72B22 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1725,6 +1739,7 @@
 				521DB6B31C107063003E40D2 /* EditServiceOptionsVC.m in Sources */,
 				75D73F1A1A38AB950051143C /* ServiceOptionViewCell.m in Sources */,
 				4FD2EBA01A37337A0056D4C4 /* BaseVC.m in Sources */,
+				50E8D0161FB9F5A10099691D /* UIImage+Additions.m in Sources */,
 				52EB803B1C7C617600D09222 /* NAPickerCell.m in Sources */,
 				505C6B711FB69E3E00761B04 /* VideoForCustomerVC.m in Sources */,
 				521984CC1CF5A460006D131D /* CHDropDownTextFieldTableViewCell.m in Sources */,
@@ -1748,6 +1763,7 @@
 				4FD2EB671A361A0F0056D4C4 /* aQuoteFirstTableViewController.m in Sources */,
 				4FD2EB9C1A3624140056D4C4 /* MainVC.m in Sources */,
 				4FD2EB941A3622280056D4C4 /* DataLoader.m in Sources */,
+				50E8D0131FB9E3740099691D /* TYAlertController+HvacTek.m in Sources */,
 				4FD2EBC11A3887FC0056D4C4 /* SFCounterLabel+SignatureFormat.m in Sources */,
 				5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */,
 				52D388951D3640F3009D2D49 /* Logs.m in Sources */,
@@ -1844,6 +1860,7 @@
 				4FD2EB621A361A0F0056D4C4 /* AddProductViewController.m in Sources */,
 				4FD2EBAB1A376DF20056D4C4 /* TechnicianHomeVC.m in Sources */,
 				5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */,
+				50E8D0101FB9E2120099691D /* NSString+Validation.m in Sources */,
 				4FD2EB7F1A361A0F0056D4C4 /* MenuViewController.m in Sources */,
 				521984CB1CF5A460006D131D /* CHDropDownTextField.m in Sources */,
 				52CCB6391CF736E500BAF68A /* Job.m in Sources */,
@@ -1940,7 +1957,7 @@
 		};
 		D29F072E197023CA0020D83C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D6F063408C3A2A435538BC1 /* Pods-HvacTek.debug.xcconfig */;
+			baseConfigurationReference = 35FED52A17AD62BDE4A03FAD /* Pods-HvacTek.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1965,7 +1982,7 @@
 		};
 		D29F072F197023CA0020D83C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E797420371E19BD97EBE7FC5 /* Pods-HvacTek.release.xcconfig */;
+			baseConfigurationReference = 7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

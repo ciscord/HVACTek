@@ -7,7 +7,7 @@
 //
 
 #import "HealthyHomeSolutionsAgreementVC.h"
-
+#import "TYAlertController.h"
 @interface HealthyHomeSolutionsAgreementVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
@@ -56,7 +56,47 @@
 }
 
 -(IBAction)emailClick:(id)sender {
+    TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
+    alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
+    [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        UITextField* emailField = [alertView.textFieldArray objectAtIndex:0];
+        
+        if (![emailField.text isValidEmail]) {
+            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
+            [self presentViewController:alert animated:true completion:nil];
+        }
+        
+        [self showEmailSentAlert:emailField.text];
+    }]];
+    
+    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Email:";
+    }];
+    
+    TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
+    
+    [self presentViewController:alertController animated:true completion: nil];
+    
+}
+
+-(void) showEmailSentAlert:(NSString*) email{
+    NSString* messageString = [NSString stringWithFormat:@"Your choice has been sent to %@", email];
+    
+    TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"Email Sent" message:messageString];
+    alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"Back" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        
+    }]];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        
+    }]];
+    
+    TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
+    
+    [self presentViewController:alertController animated:true completion: nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

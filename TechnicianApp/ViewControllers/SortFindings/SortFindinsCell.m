@@ -15,10 +15,19 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-  [super setSelected:selected animated:animated];
+
+    [super setSelected:selected animated:animated];
   
-  self.lbTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-  self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.lbTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    [self.upButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    [self.downButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
+    
+    [self.upButton setImage:[[UIImage imageNamed:@"karmaSortFilterUp"] imageWithColor:[UIColor cs_getColorWithProperty:kColorPrimary]] forState:UIControlStateNormal];
+    [self.downButton setImage:[[UIImage imageNamed:@"karmaSortFilterDown"] imageWithColor:[UIColor cs_getColorWithProperty:kColorPrimary]] forState:UIControlStateNormal];
+    
+    
+    
 }
 
 

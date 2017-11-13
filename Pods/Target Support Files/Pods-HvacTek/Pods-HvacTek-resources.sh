@@ -84,12 +84,10 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/URBNAlert/URBNAlert.bundle"
-  install_resource "${PODS_ROOT}/URBNConvenience/Pod/Resources/URBNConvenience.bundle"
+  install_resource "${PODS_ROOT}/SSKeychain/Support/SSKeychain.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "$PODS_CONFIGURATION_BUILD_DIR/URBNAlert/URBNAlert.bundle"
-  install_resource "${PODS_ROOT}/URBNConvenience/Pod/Resources/URBNConvenience.bundle"
+  install_resource "${PODS_ROOT}/SSKeychain/Support/SSKeychain.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
