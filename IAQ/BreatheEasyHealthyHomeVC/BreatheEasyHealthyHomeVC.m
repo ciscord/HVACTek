@@ -9,7 +9,8 @@
 #import "BreatheEasyHealthyHomeVC.h"
 
 @interface BreatheEasyHealthyHomeVC ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *dividerImageView;
+@property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 @end
 
 @implementation BreatheEasyHealthyHomeVC
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.layer1View bringSubviewToFront:self.dividerImageView];
 }
 
 - (void)didReceiveMemoryWarning {

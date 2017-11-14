@@ -18,6 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.myhomeCircleView.bounds;
+    gradient.colors = @[(id)[UIColor hx_colorWithHexString:@"#FDF462"].CGColor, (id)[UIColor hx_colorWithHexString:@"#F6CA47"].CGColor];
+    
+    [self.myhomeCircleView.layer insertSublayer:gradient atIndex:0];
 }
 
 #pragma mark IBAction button

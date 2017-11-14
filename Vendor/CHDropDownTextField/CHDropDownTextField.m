@@ -245,6 +245,7 @@ static CGFloat const CHDropDownTableViewSidePadding = 0;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self.cellClass)];
     NSString *title = [self.dropDownTableTitlesArray objectAtIndex:indexPath.row];
     cell.textLabel.text = title;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:10]];
     
     if ([self dropDownSubtitlesShouldBeShown] == YES) {
         cell.detailTextLabel.text = [self.dropDownTableSubtitlesArray objectAtIndex:indexPath.row];

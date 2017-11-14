@@ -16,6 +16,9 @@
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *descriptionLabelArray;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *bigButtonArray;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *priceViewArray;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLabelHeightConstraint;
+
 @end
 
 @implementation IAQCustomerChoiceVC
@@ -51,7 +54,7 @@
         for (UIButton* detailButton in self.detailButtonArray) {
             detailButton.hidden = false;
         }
-        
+        self.topLabelHeightConstraint.constant = 44;
     }else {
         self.lbTitle.text = @"Customer's Choice";
         
@@ -64,6 +67,7 @@
         for (UIButton* detailButton in self.detailButtonArray) {
             detailButton.hidden = true;
         }
+        self.topLabelHeightConstraint.constant = 0;
     }
 }
 - (IBAction)priceClick:(id)sender {

@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIView *myhomeCircleView;
 @property (weak, nonatomic) IBOutlet UILabel *myhomePointLabel;
 @property (weak, nonatomic) IBOutlet UIView *segmentView;
+@property (weak, nonatomic) IBOutlet UIView *baseView;
+@property (weak, nonatomic) IBOutlet UIImageView *homeImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *plantImageView;
 @end
 
 @implementation IsYourHomeHealthyVC
@@ -23,6 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.baseView bringSubviewToFront:self.plantImageView];
+    self.myhomeCircleView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
+    
     self.purificationSegment = [[SVSegmentedControl alloc] initWithSectionTitles: @[@"Good", @"Fair", @"Poor"]];
     self.purificationSegment.backgroundTintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.purificationSegment.cornerRadius = 0;
