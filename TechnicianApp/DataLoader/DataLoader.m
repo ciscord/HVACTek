@@ -73,7 +73,7 @@ NSString *const SYNC_STATUS      = @"add2cart_sync_status";
 NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 NSString *const LOGS             = @"addError";
-
+NSString *const IAQPRODUCTS      = @"iaqProducts";
 
 #define kStatusOK 1
 
@@ -794,7 +794,28 @@ NSString *const LOGS             = @"addError";
     }];
 }
 
-
+#pragma mark - IQA Products
+-(void)getIAQProducts:(NSURL *)reqUrl
+                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                   onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self GET:IAQPRODUCTS
+   parameters:@{}
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          if ([responseObject[@"status"] integerValue] == kStatusOK) {
+              NSDictionary *dict = responseObject[@"results"];
+              onSuccess(@"OK", dict);
+          }
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          if (onError) {
+              onError(error);
+          }
+      }];
+}
 #pragma mark - AdditionalInfo Requests
 
 - (void)getAdditionalInfoOnSuccess:(void (^)(NSDictionary *infoDict))onSuccess

@@ -21,7 +21,7 @@
 @end
 
 @implementation BaseVC
-
+@synthesize nextButton;
 /*
  
  [self configureColorScheme];

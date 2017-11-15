@@ -11,5 +11,6 @@
 @interface NSString (Validation)
 
 -(BOOL) isValidEmail;
+-(bool) isNumeric;
 
 @end

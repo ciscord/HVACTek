@@ -181,6 +181,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
        onSuccess:(void (^)(NSString *message))onSuccess
         onError:(void (^)(NSError *error))onError;
 
-
+-(void)getIAQProducts:(NSURL *)reqUrl
+                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                   onError:(void (^)(NSError *error))onError;
 
 @end

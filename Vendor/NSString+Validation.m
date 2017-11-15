@@ -20,4 +20,17 @@
     return [emailTest evaluateWithObject:self];
 }
 
+-(bool) isNumeric{
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    //Set the locale to US
+    [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    //Set the number style to Scientific
+    [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
+    NSNumber* number = [numberFormatter numberFromString:self];
+    if (number != nil) {
+        return true;
+    }
+    return false;
+}
 @end

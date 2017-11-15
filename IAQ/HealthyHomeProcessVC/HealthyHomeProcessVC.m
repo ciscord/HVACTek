@@ -7,7 +7,9 @@
 //
 
 #import "HealthyHomeProcessVC.h"
-
+#import "DataLoader.h"
+#import "HeatingStaticPressureVC.h"
+#import "IAQDataModel.h"
 @interface HealthyHomeProcessVC ()
 
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
@@ -19,7 +21,7 @@
 
 
 @end
-
+#define kAdd2CartURL [NSURL URLWithString:@""]
 @implementation HealthyHomeProcessVC
 
 - (void)viewDidLoad {
@@ -38,6 +40,48 @@
     
     self.technicalDetailLabel.textColor = [UIColor blackColor];
     self.customerDetailLabel.textColor = [UIColor blackColor];
+    
+}
+- (IBAction)nextButtonClick:(id)sender {
+    
+    [[DataLoader sharedInstance] getIAQProducts:kAdd2CartURL
+                                           onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                               NSArray* receiveDataArray = (NSArray*) reciveData;
+                                               
+                                               for (NSDictionary* product in receiveDataArray) {
+                                                   IAQProductModel* iaqProduct = [[IAQProductModel alloc] init];
+                                                   iaqProduct.quantity = @"0";
+                                                   iaqProduct.businessId = [product objectForKey:@"businessid"];
+                                                   iaqProduct.createdAt = [product objectForKey:@"created_at"];
+                                                   iaqProduct.createdBy = [product objectForKey:@"created_by"];
+                                                   iaqProduct.productId = [product objectForKey:@"id"];
+                                                   iaqProduct.ord = [product objectForKey:@"ord"];
+                                                   iaqProduct.price = [product objectForKey:@"price"];
+                                                   iaqProduct.title = [product objectForKey:@"title"];
+                                                   
+                                                   iaqProduct.files = [NSMutableArray array];
+                                                   NSArray* fileArray = [product objectForKey:@"files"];
+                                                   
+                                                   for (NSDictionary* filedata in fileArray) {
+                                                       FileModel* iaqFile = [[FileModel alloc] init];
+                                                       iaqFile.createAt = [filedata objectForKey:@"created_at"];
+                                                       iaqFile.desString = [filedata objectForKey:@"description"];
+                                                       iaqFile.filename = [filedata objectForKey:@"filename"];
+                                                       iaqFile.fullUrl = [filedata objectForKey:@"full_url"];
+                                                       iaqFile.iqaId = [filedata objectForKey:@"iaq_id"];
+                                                       iaqFile.iqaId = [filedata objectForKey:@"id"];
+                                                       iaqFile.ord = [filedata objectForKey:@"ord"];
+                                                       iaqFile.type = [filedata objectForKey:@"type"];
+                                                       [iaqProduct.files addObject:iaqFile];
+                                                   }
+                                                   [[IAQDataModel sharedIAQDataModel].iaqProductsArray addObject: iaqProduct];
+                                               }
+                                               
+                                               HeatingStaticPressureVC* heatingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HeatingStaticPressureVC"];
+                                               [self.navigationController pushViewController:heatingStaticPressureVC animated:true];
+                                           }onError:^(NSError *error) {
+                                               ShowOkAlertWithTitle(error.localizedDescription, self);
+                                           }];
     
 }
 

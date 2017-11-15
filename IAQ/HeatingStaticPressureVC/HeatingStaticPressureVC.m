@@ -9,6 +9,8 @@
 #import "HeatingStaticPressureVC.h"
 #import "CHDropDownTextField.h"
 #import "CHDropDownTextFieldTableViewCell.h"
+#import "CoolingStaticPressureVC.h"
+
 @interface HeatingStaticPressureVC () <CHDropDownTextFieldDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
@@ -56,6 +58,74 @@
     self.systemTypeField.dropDownTableView.layer.borderWidth = 1.0;
     self.systemTypeField.dropDownTableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.systemTypeField.tag = 893457;
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    NSString* dateString = [df stringFromDate:today];
+    
+    self.dateField.text = dateString;
+    
+    [self.aField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.bField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.cField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.dField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
+
+-(IBAction)nextButtonClick:(id)sender {
+    if ([self isEmptyField]) {
+        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please fill out the required fields"];
+        [self presentViewController:alert animated:true completion:nil];
+        return;
+    }
+    
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName = self.nameField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.todayDate = self.dateField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.filterSize = self.filterSizeField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.filterMervRating = self.mervRatingField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.systemType = self.systemTypeField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingA = self.aField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingB = self.bField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingC = self.cField.text;
+    [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingD = self.dField.text;
+    
+    CoolingStaticPressureVC* coolingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoolingStaticPressureVC"];
+    [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
+}
+
+-(BOOL) isEmptyField {
+    if (self.nameField.text.length == 0 ||
+        self.dateField.text.length == 0 ||
+        self.filterSizeField.text.length == 0 ||
+        self.mervRatingField.text.length == 0 ||
+        self.systemTypeField.text.length == 0 ||
+        self.aField.text.length == 0 ||
+        self.bField.text.length == 0 ||
+        self.cField.text.length == 0 ||
+        self.dField.text.length == 0
+        ) {
+        return true;
+    }
+    return false;
+}
+
+-(void)textFieldDidChange :(UITextField *)theTextField{
+    
+    if (![self.aField.text isNumeric] ||
+        ![self.bField.text isNumeric] ||
+        ![self.cField.text isNumeric] ||
+        ![self.dField.text isNumeric] ) {
+    
+        return;
+    }
+    float aValue = [self.aField.text floatValue];
+    float bValue = [self.bField.text floatValue];
+    float cValue = [self.cField.text floatValue];
+    float dValue = [self.dField.text floatValue];
+    
+    self.abField.text = [NSString stringWithFormat:@"%.2f", aValue + bValue];
+    self.acField.text = [NSString stringWithFormat:@"%.2f", aValue - cValue];
+    self.bdField.text = [NSString stringWithFormat:@"%.2f", bValue - dValue];
 }
 
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {

@@ -10,6 +10,4 @@
 #import "SortFindinsCell.h"
 @interface HealthyHomeSolutionsSortVC : BaseVC
 
-@property (nonatomic, retain) NSMutableArray *findingsArray;
-
 @end

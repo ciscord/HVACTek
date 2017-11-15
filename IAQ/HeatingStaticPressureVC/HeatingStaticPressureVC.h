@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseVC.h"
+#import "IAQDataModel.h"
+
 @interface HeatingStaticPressureVC : BaseVC
 
 @end
