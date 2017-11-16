@@ -27,6 +27,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"Healthy Home Solutions";
     [self.titleLabel setTextColor:[UIColor cs_getColorWithProperty:kColorPrimary]];
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     

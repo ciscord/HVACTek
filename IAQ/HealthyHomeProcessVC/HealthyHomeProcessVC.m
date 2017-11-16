@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Healthy Home Process";
     // Do any additional setup after loading the view.
     [self configureColorScheme];
 }
@@ -43,11 +44,14 @@
     
 }
 - (IBAction)nextButtonClick:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof (self) weakSelf = self;
     
     [[DataLoader sharedInstance] getIAQProducts:kAdd2CartURL
                                            onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                NSArray* receiveDataArray = (NSArray*) reciveData;
-                                               
+                                               [IAQDataModel sharedIAQDataModel].iaqProductsArray = [NSMutableArray array];
                                                for (NSDictionary* product in receiveDataArray) {
                                                    IAQProductModel* iaqProduct = [[IAQProductModel alloc] init];
                                                    iaqProduct.quantity = @"0";
@@ -81,6 +85,7 @@
                                                [self.navigationController pushViewController:heatingStaticPressureVC animated:true];
                                            }onError:^(NSError *error) {
                                                ShowOkAlertWithTitle(error.localizedDescription, self);
+                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                            }];
     
 }

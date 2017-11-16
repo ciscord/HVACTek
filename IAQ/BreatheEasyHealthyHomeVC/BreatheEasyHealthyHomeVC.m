@@ -7,7 +7,7 @@
 //
 
 #import "BreatheEasyHealthyHomeVC.h"
-
+#import "VideoForCustomerVC.h"
 @interface BreatheEasyHealthyHomeVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *dividerImageView;
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
@@ -18,9 +18,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"Breathe Easy Healthy Home";
     [self.layer1View bringSubviewToFront:self.dividerImageView];
+     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
-
+#pragma mark Button event
+-(IBAction)nextButtonClick:(id)sender {
+    VideoForCustomerVC* videoForCustomerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoForCustomerVC"];
+    [self.navigationController pushViewController:videoForCustomerVC animated:true];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"Heating Static Pressure";
     for (UILabel* backlabel in self.backgroundLabel) {
         backlabel.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     }

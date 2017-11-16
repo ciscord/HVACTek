@@ -8,6 +8,7 @@
 
 #import "HereWhatWeProposeVC.h"
 #import "IAQCustomerChoiceVC.h"
+#import "VideoForCustomerVC.h"
 @interface HereWhatWeProposeVC ()
 @property (weak, nonatomic) IBOutlet UIView *myhomeCircleView;
 @property (weak, nonatomic) IBOutlet UILabel *myhomePointLabel;
@@ -18,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"Here's What We Propose";
     CAGradientLayer *gradient = [CAGradientLayer layer];
     
     gradient.frame = self.myhomeCircleView.bounds;
@@ -29,9 +31,8 @@
 #pragma mark IBAction button
 - (IBAction)nextClick:(id)sender {
     
-    IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
-    iaqCustomerChoiceVC.mode = 1;
-    [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
+    VideoForCustomerVC* videoForCustomerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoForCustomerVC"];
+    [self.navigationController pushViewController:videoForCustomerVC animated:true];
     
 }
 

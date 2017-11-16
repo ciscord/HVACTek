@@ -105,6 +105,7 @@
 		505C6B7B1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */; };
 		505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */; };
 		505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */; };
+		506329DB1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 506329DA1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m */; };
 		5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */; };
 		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
 		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
@@ -372,6 +373,8 @@
 		505C6B7E1FB6AA4A00761B04 /* SVSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedControl.m; sourceTree = "<group>"; };
 		505C6B7F1FB6AA4A00761B04 /* SVSegmentedThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSegmentedThumb.h; sourceTree = "<group>"; };
 		505C6B801FB6AA4A00761B04 /* SVSegmentedThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSegmentedThumb.m; sourceTree = "<group>"; };
+		506329D91FBDCEB4004D8648 /* IAQEditServiceOptionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAQEditServiceOptionsVC.h; sourceTree = "<group>"; };
+		506329DA1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAQEditServiceOptionsVC.m; sourceTree = "<group>"; };
 		5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyAgreementTableViewCell.h; sourceTree = "<group>"; };
 		5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyAgreementTableViewCell.m; sourceTree = "<group>"; };
 		508566241FB38025000B0F56 /* IAQStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IAQStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1075,6 +1078,8 @@
 			children = (
 				505C6B631FB68E2D00761B04 /* IAQCustomerChoiceVC.h */,
 				505C6B641FB68E2D00761B04 /* IAQCustomerChoiceVC.m */,
+				506329D91FBDCEB4004D8648 /* IAQEditServiceOptionsVC.h */,
+				506329DA1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m */,
 			);
 			path = IAQCustomerChoiceVC;
 			sourceTree = "<group>";
@@ -1144,10 +1149,10 @@
 				84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */,
 				505C6B5E1FB68B8800761B04 /* HealthyHomeSolutionsSortVC */,
 				505C6B621FB68E2000761B04 /* IAQCustomerChoiceVC */,
+				505C6B661FB69DD600761B04 /* IsYourHomeHealthyVC */,
 				505C6B721FB69E6000761B04 /* HereWhatWeProposeVC */,
 				505C6B6E1FB69E2200761B04 /* VideoForCustomerVC */,
 				505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */,
-				505C6B661FB69DD600761B04 /* IsYourHomeHealthyVC */,
 				508566221FB38012000B0F56 /* IAQDataModel */,
 				508566231FB38012000B0F56 /* Images */,
 				508566241FB38025000B0F56 /* IAQStoryboard.storyboard */,
@@ -1846,6 +1851,7 @@
 				505C6B691FB69DE200761B04 /* IsYourHomeHealthyVC.m in Sources */,
 				4FE495941A38E7BA00E09FD7 /* QuestionsVC.m in Sources */,
 				52F3D1E41CFF0370008D24C9 /* VideoLibraryVC.m in Sources */,
+				506329DB1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m in Sources */,
 				4FF901B71AB845F500D87FAB /* PlatinumOptionsVC.m in Sources */,
 				7569FBC91A373BFC00D9EC94 /* CustomerOverviewVC.m in Sources */,
 				75D1A9011A3B15B5000F6765 /* ServiceOptionVC.m in Sources */,

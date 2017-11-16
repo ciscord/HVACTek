@@ -14,5 +14,16 @@
 @property (nonatomic, strong) StaticPressureModel * coolingStaticPressure;
 @property (nonatomic, strong) NSMutableArray*       iaqProductsArray;
 @property (nonatomic, strong) NSMutableArray*       iaqSortedProductsArray;
+@property (nonatomic, strong) NSMutableArray*       iaqBestProductsArray;
+@property (nonatomic, strong) NSMutableArray*       iaqBetterProductsArray;
+@property (nonatomic, strong) NSMutableArray*       iaqGoodProductsArray;
+
+@property (readwrite) int airPurification;
+@property (readwrite) int humidification;
+@property (readwrite) int airFiltration;
+@property (readwrite) int dehumidification;
+@property (readwrite) int calculatedScore;
+
+@property (readwrite) int isfinal;
 +(IAQDataModel*) sharedIAQDataModel;
 @end

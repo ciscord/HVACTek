@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"Healthy Home Solutions";
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
     [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
