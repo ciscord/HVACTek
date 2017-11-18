@@ -34,21 +34,17 @@ static NSString *findingsCellID = @"SortFindinsCell";
     return 60;
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -75,8 +71,6 @@ static NSString *findingsCellID = @"SortFindinsCell";
     return cell;
 }
 
-
-
 #pragma mark - Change Row Position
 - (void)upButtonClicked:(id)sender {
     [self.findingsTable setUserInteractionEnabled:NO];
@@ -86,14 +80,12 @@ static NSString *findingsCellID = @"SortFindinsCell";
     
 }
 
-
 - (void)downButtonClicked:(id)sender {
     [self.findingsTable setUserInteractionEnabled:NO];
     [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] + 1];
     [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] + 1 inSection:0]];
     [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
 }
-
 
 -(void)reloadFindingTable {
     [self.findingsTable reloadData];
@@ -103,7 +95,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
     IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
-    iaqCustomerChoiceVC.mode = 0;
+    
     [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
 }
 

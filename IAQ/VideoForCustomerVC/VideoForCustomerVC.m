@@ -58,7 +58,7 @@
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
     int viewsToPop = 2;
-    [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:YES];
+    [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
     [IAQDataModel sharedIAQDataModel].isfinal = 1;
 }
 - (void)didReceiveMemoryWarning {

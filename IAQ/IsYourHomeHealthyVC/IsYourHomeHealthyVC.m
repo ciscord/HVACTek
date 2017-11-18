@@ -154,6 +154,7 @@
             calculatedScore += 0;
             break;
     }
+    [IAQDataModel sharedIAQDataModel].calculatedScore = calculatedScore;
     
     self.myhomePointLabel.text = [NSString stringWithFormat:@"%d", calculatedScore];
     
@@ -170,12 +171,6 @@
     }else if (calculatedScore <= 100) {
         self.homeImageView.image = [UIImage imageNamed:@"best"];
         self.scoreLabel.text = @"BEST";
-//        CAGradientLayer *gradient = [CAGradientLayer layer];
-//
-//        gradient.frame = self.myhomeCircleView.bounds;
-//        gradient.colors = @[(id)[UIColor hx_colorWithHexString:@"#ffcc00"].CGColor, (id)[UIColor hx_colorWithHexString:@"#F6CA47"].CGColor];
-//
-//        [self.myhomeCircleView.layer insertSublayer:gradient atIndex:0];
 
         self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
     }

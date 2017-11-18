@@ -450,7 +450,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="JJA-jg-P8n" customClass="CHDropDownTextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="JJA-jg-P8n" customClass="CHDropDownTextField">
                                                 <rect key="frame" x="467" y="156" width="154" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -855,7 +855,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="jVS-iA-cZN" customClass="CHDropDownTextField">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="jVS-iA-cZN" customClass="CHDropDownTextField">
                                                 <rect key="frame" x="467" y="156" width="154" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1489,9 +1489,6 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="nextClick:" destination="5dt-um-TZV" eventType="touchUpInside" id="dlk-lz-vqg"/>
-                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluesky" translatesAutoresizingMaskIntoConstraints="NO" id="BwZ-Mo-OuL">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="719"/>
@@ -1509,11 +1506,11 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-7U-vjD">
-                                                <rect key="frame" x="8" y="114" width="144" height="21"/>
+                                                <rect key="frame" x="8" y="114" width="144" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="6JJ-B1-ned"/>
+                                                    <constraint firstAttribute="height" constant="35" id="6JJ-B1-ned"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1576,9 +1573,11 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="homeImageView" destination="Agm-9V-b3p" id="IGa-rW-esJ"/>
                         <outlet property="myhomeCircleView" destination="ouu-OB-o1M" id="PXG-qc-G9F"/>
-                        <outlet property="myhomePointLabel" destination="wAI-Uj-DTL" id="4O4-9l-CsE"/>
+                        <outlet property="myhomePointLabel" destination="wAI-Uj-DTL" id="V5L-9K-byJ"/>
                         <outlet property="nextButton" destination="oIg-Cu-mSb" id="939-1Z-22j"/>
+                        <outlet property="scoreLabel" destination="u41-7U-vjD" id="nnK-72-PXz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ofo-EX-EXd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2092,8 +2091,20 @@ Comprehensive Diagnostic</string>
                     </view>
                     <connections>
                         <outlet property="bestChoiceLabel" destination="z8g-K1-ths" id="g0X-i5-lq7"/>
+                        <outlet property="bestEqual24Label" destination="pdf-y2-cpc" id="9GW-aS-gOn"/>
+                        <outlet property="bestFinancingLabel" destination="tBL-bo-DVs" id="aQc-av-nRU"/>
+                        <outlet property="bestFirstPrice" destination="xdm-lI-iyF" id="8IG-nf-24M"/>
+                        <outlet property="bestSecondPrice" destination="Zvv-gJ-OKm" id="Jsp-AI-q89"/>
                         <outlet property="betterChoiceLabel" destination="KMx-5f-mNl" id="2AN-SW-lIE"/>
+                        <outlet property="betterEqual24Label" destination="gWX-jd-zxa" id="30l-ad-vXx"/>
+                        <outlet property="betterFinancingLabel" destination="9M1-C5-JL4" id="nPW-xy-BNq"/>
+                        <outlet property="betterFirstPrice" destination="C7b-2o-Ex3" id="xP5-5I-nlm"/>
+                        <outlet property="betterSecondPrice" destination="Z58-Lh-34v" id="IgT-j1-eKC"/>
                         <outlet property="goodChoiceLabel" destination="acP-Do-R9g" id="hFl-jx-2se"/>
+                        <outlet property="goodEqual24Label" destination="tp3-1H-Gw5" id="XOE-tx-ZuB"/>
+                        <outlet property="goodFinancingLabel" destination="Ble-MG-73d" id="UAl-hh-1V5"/>
+                        <outlet property="goodFirstPrice" destination="7Z2-Sr-XMo" id="q0U-hH-gdd"/>
+                        <outlet property="goodSecondPrice" destination="nHK-yP-fad" id="eUf-fJ-r3B"/>
                         <outlet property="layer1View" destination="qdF-re-Ie0" id="N4C-Yd-OGI"/>
                         <outlet property="nextButton" destination="sg6-XZ-IU6" id="8oW-70-uA2"/>
                         <outlet property="topLabelHeightConstraint" destination="eni-PE-ysR" id="okn-78-rnc"/>
@@ -2197,9 +2208,11 @@ Comprehensive Diagnostic</string>
                                             <action selector="backClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="M6n-4f-K0i"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-ft-gxq">
-                                        <rect key="frame" x="20" y="179" width="392" height="266"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-ft-gxq">
+                                        <rect key="frame" x="20" y="179" width="350" height="126"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="350" id="jHe-5U-uXr"/>
+                                        </constraints>
                                         <string key="text">Add PVC Uniton for pump Access
 Bypass Humidifier Maintenance
 Comprehensive Diagnostic
@@ -2230,18 +2243,19 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                             <action selector="authorizeClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="t6J-wu-1fD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-iF-5ft">
-                                        <rect key="frame" x="439" y="207" width="170" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-iF-5ft">
+                                        <rect key="frame" x="386" y="207" width="282" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="wBJ-mW-5U0"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                         <state key="normal" title="$1350.00">
                                             <color key="titleColor" red="0.76862745099999996" green="0.18039215689999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15% Savings" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-o5-0Tz">
-                                        <rect key="frame" x="420" y="253" width="274" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% Savings Does Not Qualify For 0% Financing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-o5-0Tz">
+                                        <rect key="frame" x="390" y="253" width="317" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2249,10 +2263,18 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="E2e-BY-NWk" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" id="0Si-bi-nKU"/>
+                                    <constraint firstItem="mJ8-ft-gxq" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="20" id="1Wh-sO-9Md"/>
+                                    <constraint firstItem="mJ8-ft-gxq" firstAttribute="top" secondItem="E2e-BY-NWk" secondAttribute="bottom" constant="27" id="3Px-el-CMz"/>
                                     <constraint firstAttribute="bottom" secondItem="3En-VY-PSr" secondAttribute="bottom" constant="8" id="7In-LP-SnW"/>
+                                    <constraint firstItem="W1P-iF-5ft" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="16" id="9lz-dU-oUf"/>
                                     <constraint firstAttribute="bottom" secondItem="V68-YT-dBK" secondAttribute="bottom" constant="8" id="DCj-QA-cuL"/>
+                                    <constraint firstItem="gJi-o5-0Tz" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="20" id="Dgf-8Y-vUM"/>
+                                    <constraint firstAttribute="trailing" secondItem="W1P-iF-5ft" secondAttribute="trailing" constant="60" id="Edg-Xe-opy"/>
+                                    <constraint firstAttribute="trailing" secondItem="gJi-o5-0Tz" secondAttribute="trailing" constant="21" id="Etk-Cr-bJD"/>
+                                    <constraint firstItem="gJi-o5-0Tz" firstAttribute="top" secondItem="W1P-iF-5ft" secondAttribute="bottom" constant="10" id="IqM-Uc-TFx"/>
                                     <constraint firstItem="3En-VY-PSr" firstAttribute="centerX" secondItem="e1I-dh-gYO" secondAttribute="centerX" constant="100" id="Xex-cG-Pi0"/>
                                     <constraint firstItem="V68-YT-dBK" firstAttribute="centerX" secondItem="e1I-dh-gYO" secondAttribute="centerX" constant="-100" id="ZZH-Ea-viS"/>
+                                    <constraint firstItem="W1P-iF-5ft" firstAttribute="top" secondItem="E2e-BY-NWk" secondAttribute="bottom" constant="55" id="kBy-cC-eEh"/>
                                     <constraint firstItem="E2e-BY-NWk" firstAttribute="top" secondItem="e1I-dh-gYO" secondAttribute="top" constant="12" id="l0J-3J-zoa"/>
                                     <constraint firstAttribute="trailing" secondItem="E2e-BY-NWk" secondAttribute="trailing" id="n7w-xK-sMe"/>
                                     <constraint firstItem="Kxy-Zu-lxM" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="20" id="py2-bL-sSQ"/>
@@ -2469,7 +2491,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="19v-VM-EDS">
-                                        <rect key="frame" x="137" y="711" width="188" height="52"/>
+                                        <rect key="frame" x="137" y="721" width="188" height="52"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="ga9-aV-IXI"/>

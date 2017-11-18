@@ -7,7 +7,15 @@
 //
 
 #import "BaseVC.h"
-
+typedef NS_ENUM (NSInteger, IAQTYPE){
+    BEST,
+    BETTER,
+    GOOD
+};
+typedef NS_ENUM (NSInteger, COSTTYPE){
+    ORIGIN,
+    SAVING
+};
 @interface IAQCustomerChoiceVC : BaseVC
-@property (readwrite) int mode;
+
 @end

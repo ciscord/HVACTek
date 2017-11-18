@@ -7,7 +7,8 @@
 //
 
 #import "BaseVC.h"
-
+#import "IAQCustomerChoiceVC.h"
 @interface HealthyHomeSolutionsAgreementVC : BaseVC
-@property (readwrite) int mode;
+@property (readwrite) IAQTYPE iaqType;
+@property (readwrite) COSTTYPE costType;
 @end

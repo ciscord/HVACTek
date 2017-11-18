@@ -8,6 +8,7 @@
 
 #import "HealthyHomeSolutionsAgreementVC.h"
 #import "TYAlertController.h"
+#import "IAQDataModel.h"
 @interface HealthyHomeSolutionsAgreementVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
@@ -29,17 +30,41 @@
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
     [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
     self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
     self.circleButton.clipsToBounds = true;
     
     self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    if (self.mode == 0) {
-        self.priceButton.titleLabel.textColor = [UIColor blackColor];
+    NSMutableArray* selectedProductArray;
+    float totalCost =0;
+    if (self.iaqType == BEST) {
+        [self.circleButton setTitle:@"Best" forState:UIControlStateNormal];
+        selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBestProductsArray;
+        totalCost = [IAQDataModel sharedIAQDataModel].bestTotalPrice;
+    }else if (self.iaqType == BETTER) {
+        [self.circleButton setTitle:@"Better" forState:UIControlStateNormal];
+        selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray;
+        totalCost = [IAQDataModel sharedIAQDataModel].betterTotalPrice;
+    }else if (self.iaqType == GOOD) {
+        [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
+        selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray;
+        totalCost = [IAQDataModel sharedIAQDataModel].goodTotalPrice;
+    }
+    
+    NSString* iaqProductString = @"";
+    for (IAQProductModel* iaqProduct in selectedProductArray) {
+        iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
+        
+    }
+    self.descriptionLabel.text = iaqProductString;
+    
+    if (self.costType == SAVING) {
+        [self.priceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
     }else{
-        self.priceButton.titleLabel.textColor = [UIColor hx_colorWithHexString:@"C42E3C"];
+        [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
+        [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
     }
     
     self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

@@ -25,5 +25,9 @@
 @property (readwrite) int calculatedScore;
 
 @property (readwrite) int isfinal;
+@property (readwrite) float bestTotalPrice;
+@property (readwrite) float betterTotalPrice;
+@property (readwrite) float goodTotalPrice;
+
 +(IAQDataModel*) sharedIAQDataModel;
 @end

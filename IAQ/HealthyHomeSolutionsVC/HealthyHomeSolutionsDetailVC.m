@@ -25,10 +25,17 @@
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
     [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
     self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
     self.circleButton.clipsToBounds = true;
+    
+    if (self.iaqType == BEST) {
+        [self.circleButton setTitle:@"Best" forState:UIControlStateNormal];
+    }else if (self.iaqType == BETTER) {
+        [self.circleButton setTitle:@"Better" forState:UIControlStateNormal];
+    }else if (self.iaqType == GOOD) {
+        [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
+    }
     
     [self.dataTableView reloadData];
 }
