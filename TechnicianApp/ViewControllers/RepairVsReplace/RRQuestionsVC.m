@@ -23,8 +23,6 @@
 
 @implementation RRQuestionsVC
 
-
-
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,8 +32,6 @@
     self.title = @"Customer's Choice";
     [self loadQuestionsData];
 }
-
-
 
 #pragma mark - Load Questions
 - (void)loadQuestionsData {
@@ -49,8 +45,6 @@
         
         }];
 }
-
-
 
 #pragma mark - Prepare Questions
 -(void)prepareRRQuestionToDisplay
@@ -117,7 +111,6 @@
                                               }];
 }
 
-
 #pragma mark - BackgroundColors
 - (void)configureBackgroundColor {
     self.currentRRQuestionView.answerTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -145,15 +138,11 @@
     [self.nextRRQuestionView.btnNext setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateHighlighted];
 }
 
-
 #pragma mark - QuestionView Y Position
 -(CGFloat)questionViewPositionY
 {
     return self.vwContent.middleY - (self.view.middleY - self.vwContent.middleY) + 50;
 }
-
-
-
 
 #pragma mark - Next Question Animation
 -(void)showNextRRQuestionView:(RRQuestionsView*)currentView moveFromRightToLeft:(BOOL)moveFromRightToLeft
@@ -223,14 +212,10 @@
     }
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

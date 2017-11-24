@@ -10,15 +10,16 @@
 #import "DataLoader.h"
 #import "HeatingStaticPressureVC.h"
 #import "IAQDataModel.h"
-@interface HealthyHomeProcessVC ()
+#import "AppDelegate.h"
+@interface HealthyHomeProcessVC ()<NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
-
 @property (weak, nonatomic) IBOutlet UILabel *technicalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *technicalDetailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerDetailLabel;
 
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end
 #define kAdd2CartURL [NSURL URLWithString:@""]
@@ -50,10 +51,20 @@
     [[DataLoader sharedInstance] getIAQProducts:kAdd2CartURL
                                            onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                               
+                                               //online: delete previous data and add new data
+                                               [self deleteAllEntities:@"IAQProductModel"];
+                                               AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+                                               NSManagedObjectContext* backgroundMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                                               [backgroundMOC setUndoManager:nil];
+                                               [backgroundMOC setParentContext:appDelegate.managedObjectContext];
+                                               
                                                NSArray* receiveDataArray = (NSArray*) reciveData;
-                                               [IAQDataModel sharedIAQDataModel].iaqProductsArray = [NSMutableArray array];
+                                               
                                                for (NSDictionary* product in receiveDataArray) {
-                                                   IAQProductModel* iaqProduct = [[IAQProductModel alloc] init];
+                                                   
+                                                   IAQProductModel* iaqProduct = [NSEntityDescription insertNewObjectForEntityForName:@"IAQProductModel" inManagedObjectContext:backgroundMOC];
+                                                   
                                                    iaqProduct.quantity = @"0";
                                                    iaqProduct.businessId = [product objectForKey:@"businessid"];
                                                    iaqProduct.createdAt = [product objectForKey:@"created_at"];
@@ -67,7 +78,7 @@
                                                    NSArray* fileArray = [product objectForKey:@"files"];
                                                    
                                                    for (NSDictionary* filedata in fileArray) {
-                                                       FileModel* iaqFile = [[FileModel alloc] init];
+                                                       FileModel* iaqFile = [[FileModel alloc]init];
                                                        iaqFile.createAt = [filedata objectForKey:@"created_at"];
                                                        iaqFile.desString = [filedata objectForKey:@"description"];
                                                        iaqFile.filename = [filedata objectForKey:@"filename"];
@@ -77,17 +88,86 @@
                                                        iaqFile.ord = [filedata objectForKey:@"ord"];
                                                        iaqFile.type = [filedata objectForKey:@"type"];
                                                        [iaqProduct.files addObject:iaqFile];
+                                                       
                                                    }
-                                                   [[IAQDataModel sharedIAQDataModel].iaqProductsArray addObject: iaqProduct];
+                                                   
+                                               }
+                                               NSError *error;
+                                               if (![backgroundMOC save:&error]) {
+                                                   NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
                                                }
                                                
-                                               HeatingStaticPressureVC* heatingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HeatingStaticPressureVC"];
-                                               [self.navigationController pushViewController:heatingStaticPressureVC animated:true];
+                                               [appDelegate.managedObjectContext save:&error];
+                                               
+                                               //load data from coredata
+                                               [self loadIAQFromCoredata];
+                                               
                                            }onError:^(NSError *error) {
-                                               ShowOkAlertWithTitle(error.localizedDescription, self);
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                               //offline load data
+                                               [self loadIAQFromCoredata];
                                            }];
     
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    // if you've already made a fetch request, return the results
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"IAQProductModel" inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    // sort by id
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"productId" ascending:YES];
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)deleteAllEntities:(NSString *)nameEntity
+{
+    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:nameEntity];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *object in fetchedObjects)
+    {
+        [appDelegate.managedObjectContext deleteObject:object];
+    }
+    
+    error = nil;
+    [appDelegate.managedObjectContext save:&error];
+}
+
+-(void) loadIAQFromCoredata {
+    [IAQDataModel sharedIAQDataModel].iaqProductsArray = [NSMutableArray array];
+    for (IAQProductModel* iaqProduct in self.fetchedResultsController.fetchedObjects) {
+        [[IAQDataModel sharedIAQDataModel].iaqProductsArray addObject: iaqProduct];
+    }
+    
+    HeatingStaticPressureVC* heatingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HeatingStaticPressureVC"];
+    [self.navigationController pushViewController:heatingStaticPressureVC animated:true];
+    _fetchedResultsController = nil;
 }
 
 - (void)didReceiveMemoryWarning {

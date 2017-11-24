@@ -10,7 +10,6 @@
 #import "BaseVC.h"
 @interface IAQEditServiceOptionsVC : BaseVC <UITableViewDelegate, UITableViewDataSource>
 
-
 @property (strong, nonatomic) NSMutableArray *servicesArray;
 @property (strong, nonatomic) NSMutableArray *changedServicesArray;
 @property (nonatomic) NSInteger selectedIndex;

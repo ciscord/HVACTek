@@ -368,7 +368,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
        }];
 }
 
-
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
                                  onSuccess:(void (^)(NSString *successMessage))onSuccess
                                    onError:(void (^)(NSError *error))onError {
@@ -506,15 +505,10 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
  "pricebook_group" = "SERVICE APP";
  */
 
-
-
-
 - (NSNumber *)roundNumber:(NSNumber *)number {
     NSNumber *roundedNumber = [NSNumber numberWithFloat: ceilf(number.floatValue)];
     return roundedNumber;
 }
-
-
 
 #pragma mark - Get PriceBook
 - (void)getPricebookOptionsOnSuccess:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
@@ -585,7 +579,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
                       [otherOptions addObject:p];
               }
               
-              
               // Diagnostic Only item
               if ([p.itemNumber isEqualToString:@"1003001"]) {
                   weakSelf.diagnosticOnlyOption = p;
@@ -607,9 +600,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
           }
       }];
 }
-
-
-
 
 #pragma mark - Debrief Job
 - (void)debriefJobWithInfo:(NSDictionary*)debriefInfo
@@ -637,9 +627,7 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
     }
     
     [temp setObject:@{@"1" : custumerQuestions, @"2" : techObservations, @"3" : rrObservations} forKey:@"questions"];
-    
-    
-    
+  
     NSArray * options = self.currentUser.activeJob.selectedServiceOptions;
     NSMutableArray * selectedServiceOptions = [[NSMutableArray alloc]init];
     for (PricebookItem *q in options) {
@@ -656,8 +644,7 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
     
     [temp setObject:selectedServiceOptions forKey:@"selected"];
     [temp setObject:unselectedServiceOptiunons forKey:@"not_selected"];
-    
-    
+   
     ////
     
     if (self.currentUser.activeJob.initialCostumerRR == nil)
@@ -685,10 +672,7 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
-    
-
-    
-    
+  
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&err];
     NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -722,7 +706,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
            }
        }];
 }
-
 
 - (void)postInvoice:(NSMutableDictionary*)InvoiceInfo requestingPreview:(int)previewInt
           onSuccess:(void (^)(NSString *message))onSuccess
@@ -768,8 +751,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
            }
        }];
 }
-
-
 
 #pragma mark - Add2Cart Products
 -(void)getAdd2CartProducts:(NSURL *)reqUrl
@@ -837,7 +818,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
       }];
 }
 
-
 #pragma mark - Sync Status
 - (void)checkSyncStatusForAdd2Cart:(BOOL)isAdd2Cart
                          onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
@@ -875,8 +855,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
     
 }
 
-
-
 - (void)updateStatusForAdditionalInfoOnSuccess:(void (^)(NSString *message))onSuccess
                                        onError:(void (^)(NSError *error))onError {
     self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -902,8 +880,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
            }
        }];
 }
-
-
 
 #pragma mark - Send Logs
 - (void)sendLogs:(NSArray *)logs
@@ -934,7 +910,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
            }
        }];
 }
-
 
 #pragma mark - Rebates Requests
 -(void)addRebatesToPortal:(NSString *)title
@@ -973,8 +948,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
        }];
     
 }
-
-
 
 -(void)updateRebatesToPortal:(NSString *)title
                       amount:(CGFloat)amount
@@ -1050,17 +1023,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
        }];
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /*
  -(void)addRebatesToPortal:(NSString *)title
  amount:(CGFloat)amount
@@ -1097,8 +1059,6 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
  }
 */
 
-
-
 - (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
 {
     NSError* error;
@@ -1111,11 +1071,7 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
     return nsJson;
 }
 
-
-
 @end
-
-
 
 void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewController)
 {

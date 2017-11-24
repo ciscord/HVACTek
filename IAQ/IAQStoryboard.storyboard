@@ -1237,7 +1237,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWI-c7-oKW">
-                                <rect key="frame" x="0.0" y="100" width="768" height="824"/>
+                                <rect key="frame" x="0.0" y="210" width="768" height="714"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb3-gR-Tbe">
                                 <rect key="frame" x="291" y="932" width="186" height="55"/>
@@ -1263,7 +1263,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                             <constraint firstItem="UWI-c7-oKW" firstAttribute="leading" secondItem="VwN-5a-6oH" secondAttribute="leading" id="4MT-lq-cU0"/>
                             <constraint firstItem="HQh-ae-Yho" firstAttribute="top" secondItem="UWI-c7-oKW" secondAttribute="bottom" constant="100" id="M30-jc-tLM"/>
                             <constraint firstAttribute="trailing" secondItem="UWI-c7-oKW" secondAttribute="trailing" id="XA9-wB-EuP"/>
-                            <constraint firstItem="UWI-c7-oKW" firstAttribute="top" secondItem="1hX-bU-k6n" secondAttribute="bottom" constant="80" id="e6e-Xn-q9d"/>
+                            <constraint firstItem="UWI-c7-oKW" firstAttribute="top" secondItem="1hX-bU-k6n" secondAttribute="bottom" constant="190" id="e6e-Xn-q9d"/>
                             <constraint firstItem="HQh-ae-Yho" firstAttribute="top" secondItem="nb3-gR-Tbe" secondAttribute="bottom" constant="37" id="i7e-oj-QF0"/>
                             <constraint firstItem="nb3-gR-Tbe" firstAttribute="centerX" secondItem="VwN-5a-6oH" secondAttribute="centerX" id="yJd-Vb-Paa"/>
                         </constraints>
@@ -2352,43 +2352,47 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6P6-Cu-5nu">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6P6-Cu-5nu">
                                         <rect key="frame" x="8" y="191" width="712" height="510"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="agreementcell" rowHeight="120" id="lJ9-UV-Fbp" customClass="HealthyAgreementTableViewCell">
-                                                <rect key="frame" x="0.0" y="28" width="712" height="120"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="agreementcell" rowHeight="50" id="lJ9-UV-Fbp" customClass="HealthyAgreementTableViewCell">
+                                                <rect key="frame" x="0.0" y="55.5" width="712" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJ9-UV-Fbp" id="lzd-ww-xay">
-                                                    <rect key="frame" x="0.0" y="0.0" width="712" height="119.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="712" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWn-Vj-fmb">
-                                                            <rect key="frame" x="34" y="5" width="663" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWn-Vj-fmb">
+                                                            <rect key="frame" x="90" y="15" width="607" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="ohk-JF-Jjl"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vr5-Vp-62p">
-                                                            <rect key="frame" x="34" y="30" width="100" height="80"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SH4-i6-Dt8">
-                                                            <rect key="frame" x="150" y="29" width="100" height="80"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egN-fC-4Fi">
-                                                            <rect key="frame" x="265" y="30" width="100" height="80"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="vr5-Vp-62p">
+                                                            <rect key="frame" x="40" y="10" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="SZh-zf-xzj"/>
+                                                                <constraint firstAttribute="width" constant="30" id="zHU-gS-erN"/>
+                                                            </constraints>
                                                         </imageView>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="YWn-Vj-fmb" firstAttribute="leading" secondItem="vr5-Vp-62p" secondAttribute="trailing" constant="20" id="gRU-lA-Zxh"/>
+                                                        <constraint firstItem="YWn-Vj-fmb" firstAttribute="trailing" secondItem="lzd-ww-xay" secondAttribute="trailingMargin" id="kSX-oE-1n3"/>
+                                                        <constraint firstItem="vr5-Vp-62p" firstAttribute="leading" secondItem="lzd-ww-xay" secondAttribute="leading" constant="40" id="osX-gz-EOz"/>
+                                                        <constraint firstItem="vr5-Vp-62p" firstAttribute="centerY" secondItem="lzd-ww-xay" secondAttribute="centerY" id="ucX-ys-nXy"/>
+                                                        <constraint firstItem="YWn-Vj-fmb" firstAttribute="centerY" secondItem="lzd-ww-xay" secondAttribute="centerY" id="zPp-yM-RmS"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="imageImageView" destination="egN-fC-4Fi" id="85x-2l-zAM"/>
-                                                    <outlet property="pdfImageView" destination="vr5-Vp-62p" id="lxe-zi-1ei"/>
+                                                    <outlet property="iconView" destination="vr5-Vp-62p" id="2CC-zi-ShT"/>
                                                     <outlet property="titleLabel" destination="YWn-Vj-fmb" id="XGQ-F5-yoB"/>
-                                                    <outlet property="videoImageView" destination="SH4-i6-Dt8" id="0LV-w2-D6g"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -2450,11 +2454,56 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                         <outlet property="layer1View" destination="hsT-Ah-SJb" id="h0Q-i0-83y"/>
                         <outlet property="nextButton" destination="eyo-Jl-OA6" id="LRC-hP-H8h"/>
                         <outlet property="topBannerView" destination="X9J-KS-awT" id="4mf-9c-6rZ"/>
+                        <outlet property="topLabel" destination="Und-fM-1Ub" id="Wuc-pm-yPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EwC-Hl-loz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2944.53125" y="816.796875"/>
+        </scene>
+        <!--PDFViewControllerVC-->
+        <scene sceneID="g6v-kJ-7V8">
+            <objects>
+                <viewController storyboardIdentifier="PDFViewControllerVC" id="f3s-Rc-eKp" userLabel="PDFViewControllerVC" customClass="PDFViewControllerVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U2m-c3-7aQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="RC1-Zw-j3n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nlt-ha-xg2">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uii-Cb-4lI">
+                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="38V-KL-qVk"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="Kfr-Xo-XyE">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="f5F-MG-gWz">
+                                            <connections>
+                                                <action selector="doneClick:" destination="f3s-Rc-eKp" id="zfH-TY-Hty"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Uii-Cb-4lI" secondAttribute="trailing" id="8mx-d0-oEy"/>
+                            <constraint firstItem="Uii-Cb-4lI" firstAttribute="leading" secondItem="nlt-ha-xg2" secondAttribute="leading" id="ZRh-yj-t26"/>
+                            <constraint firstItem="Uii-Cb-4lI" firstAttribute="top" secondItem="U2m-c3-7aQ" secondAttribute="bottom" id="dGA-MI-BOV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="f5F-MG-gWz" id="8gN-sj-mYr"/>
+                        <outlet property="navBar" destination="Uii-Cb-4lI" id="JXz-69-grI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fyf-Go-DV8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1547.65625" y="816.796875"/>
         </scene>
         <!--IAQEditServiceOptionsVC-->
         <scene sceneID="nYj-rc-RR9">
@@ -2575,6 +2624,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
         <image name="best" width="205" height="241"/>
         <image name="bluesky" width="468" height="434"/>
         <image name="iaq-divider" width="710" height="256"/>
+        <image name="image" width="43" height="40"/>
         <image name="plant" width="485" height="140"/>
     </resources>
 </document>

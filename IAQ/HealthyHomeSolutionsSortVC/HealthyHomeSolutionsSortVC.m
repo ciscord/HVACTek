@@ -67,7 +67,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
     cell.downButton.tag = indexPath.row;
     [cell.upButton addTarget:self action:@selector(upButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [cell.downButton addTarget:self action:@selector(downButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 

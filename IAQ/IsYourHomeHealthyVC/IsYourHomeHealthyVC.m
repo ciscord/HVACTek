@@ -107,6 +107,7 @@
     
     int calculatedScore = 0;
     
+    //calculate the score
     switch ([IAQDataModel sharedIAQDataModel].airPurification) {
         case 0:
             calculatedScore += 29;

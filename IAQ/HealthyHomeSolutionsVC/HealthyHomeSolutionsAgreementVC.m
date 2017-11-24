@@ -11,7 +11,6 @@
 #import "IAQDataModel.h"
 @interface HealthyHomeSolutionsAgreementVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
-
 @property (weak, nonatomic) IBOutlet UIView *topBannerView;
 @property (weak, nonatomic) IBOutlet UIButton *circleButton;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -30,6 +29,7 @@
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
     [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
     self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
     self.circleButton.clipsToBounds = true;
@@ -61,7 +61,10 @@
     
     if (self.costType == SAVING) {
         [self.priceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
+        if (totalCost < 1000) {
+            [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+        }else
+            [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
     }else{
         [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
         [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];

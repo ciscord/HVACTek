@@ -12,13 +12,11 @@
 #import "ServiceOptionViewCell.h"
 #import "IAQDataModel.h"
 #import "HealthyHomeSolutionsSortVC.h"
-
+#import "IAQCustomerChoiceVC.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
-
-@property (strong, nonatomic) IBOutlet UILabel* titleLabel;
-
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic)     IBOutlet RoundCornerView *layer1View;
+@property (weak, nonatomic)   IBOutlet UILabel* titleLabel;
+@property (weak, nonatomic)     IBOutlet UICollectionView *collectionView;
 
 @end
 static NSString *kCellIdentifier = @"ServiceOptionViewCell";
@@ -34,12 +32,10 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [IAQDataModel sharedIAQDataModel].iaqProductsArray.count;
 }
-
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -51,9 +47,9 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger itemIndex = indexPath.item;
-    IAQProductModel *item      = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
+    IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
     
-    ServiceOptionViewCell             *cell     = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
+    ServiceOptionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.btnCheckbox.hidden = true;
     cell.lbValue.text = item.title;
     cell.qtyTextField.delegate = self;
@@ -68,8 +64,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     return cell;
 }
 
-
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -78,6 +72,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     if (![term isNumeric]) {
         return NO;
     }
+    
     NSInteger itemIndex = textField.tag;
     IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
     
@@ -95,22 +90,30 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 -(IBAction)nextButtonClick:(id)sender {
 
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
-    BOOL checkSelectedService = false;
+    
     for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
         if ([iaqModel.quantity intValue] > 0) {
-            checkSelectedService = true;
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
         }
     }
     
-    if (checkSelectedService == false) {
+    if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 0) {
         TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please input quantity"];
         [self presentViewController:alert animated:true completion:nil];
         return;
     }
+    [IAQDataModel sharedIAQDataModel].isfinal = false;
     
-    HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-    [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+    //skip sort page if array count is 1
+    if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
+        IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
+        
+        [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
+    }else {
+        HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
+        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

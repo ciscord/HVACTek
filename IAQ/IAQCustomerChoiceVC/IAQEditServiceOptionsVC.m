@@ -25,12 +25,10 @@
     [self configureVC];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(void)configureVC {
     self.title = @"Customer's Choice";
@@ -60,8 +58,6 @@
     [self.serviceTableView reloadData];
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.bacBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -69,13 +65,10 @@
     self.serviceNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
-
-
 #pragma mark - Buttons Actions
 - (IBAction)backButtonClicked:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:true];
 }
-
 
 - (IBAction)saveButtonClicked:(UIButton *)sender {
     
@@ -97,20 +90,16 @@
     [self.navigationController popViewControllerAnimated:true];
 }
 
-
-
 #pragma mark - UITableViewDelegate & DataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
 }
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *v = [UIView new];
     [v setBackgroundColor:[UIColor clearColor]];
     return v;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.servicesArray count];
@@ -121,11 +110,9 @@
     return 1;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 55;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EditServiceOptionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditServiceOptionsCell"];
@@ -159,10 +146,9 @@
         cell.changeStatusButton.backgroundColor = [UIColor colorWithRed:239/255.0f green:64/255.0f blue:55/255.0f alpha:1.0f];
         [cell.changeStatusButton setTitle:@"+" forState:UIControlStateNormal];
     }
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

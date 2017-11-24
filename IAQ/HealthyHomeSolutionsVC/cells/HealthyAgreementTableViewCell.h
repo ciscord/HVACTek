@@ -10,8 +10,6 @@
 
 @interface HealthyAgreementTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *pdfImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *videoImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 @end

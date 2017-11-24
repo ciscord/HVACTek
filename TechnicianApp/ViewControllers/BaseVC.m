@@ -8,8 +8,6 @@
 
 #import "BaseVC.h"
 
-
-
 @interface BaseVC ()
 
 @property(nonatomic, strong) UIImageView *imgTopBar;
@@ -35,8 +33,6 @@
  
  */
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -48,8 +44,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
-
-
 
 #pragma mark - BackgroundColors
 - (void)configureBackgroundColor {
@@ -63,8 +57,6 @@
     
     nextButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
-
-
 
 #pragma mark - Logo
 - (void)configureLogoImage {
@@ -92,8 +84,6 @@
     [self.view addSubview:self.imgTopBar];
 }
 
-
-
 #pragma mark - Title
 - (void)configureTitle{
     
@@ -114,7 +104,6 @@
     [self configureUpperView];
     [self configureBottomView];
 }
-
 
 - (void)configureUpperView {
     CGFloat round = 20;
@@ -140,7 +129,6 @@
     
     [self.view addSubview:self.upperArcView];
 }
-
 
 - (void)configureBottomView {
     CGFloat round = 20;
@@ -168,8 +156,6 @@
     [self.view addSubview:self.bottomArcView];
 }
 
-
-
 #pragma mark
 -(void)setTitle:(NSString *)title
 {
@@ -177,19 +163,15 @@
     self.lbTitle.text = title;
 }
 
-
 -(void)setIsTitleViewHidden:(BOOL)isTitleViewHidden
 {
     self.titleView.hidden = isTitleViewHidden;
 }
 
-
 -(BOOL)isTitleViewHidden
 {
     return self.titleView.hidden;
 }
-
-
 
 #pragma mark -
 - (void)didReceiveMemoryWarning {

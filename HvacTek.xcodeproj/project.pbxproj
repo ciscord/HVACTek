@@ -92,9 +92,8 @@
 		4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF901BA1AB847FE00D87FAB /* PlatinumOptionCell.m */; };
 		4FF901BD1AB847FE00D87FAB /* PlatinumOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */; };
 		50085BC61FBC801B002892C6 /* StaticPressureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50085BC51FBC801B002892C6 /* StaticPressureModel.m */; };
-		50085BC91FBC812C002892C6 /* IAQProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50085BC81FBC812C002892C6 /* IAQProductModel.m */; };
-		50085BCC1FBC8261002892C6 /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50085BCB1FBC8261002892C6 /* FileModel.m */; };
 		50085BCF1FBC84C2002892C6 /* IAQDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50085BCE1FBC84C2002892C6 /* IAQDataModel.m */; };
+		5011B7561FC5CC720041BDAA /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5011B7531FC5CC720041BDAA /* FileModel.m */; };
 		505C6B611FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B601FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m */; };
 		505C6B651FB68E2D00761B04 /* IAQCustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B641FB68E2D00761B04 /* IAQCustomerChoiceVC.m */; };
 		505C6B691FB69DE200761B04 /* IsYourHomeHealthyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C6B681FB69DE200761B04 /* IsYourHomeHealthyVC.m */; };
@@ -110,6 +109,7 @@
 		508566251FB38025000B0F56 /* IAQStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 508566241FB38025000B0F56 /* IAQStoryboard.storyboard */; };
 		508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */; };
 		5085662D1FB39A0E000B0F56 /* HeatingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */; };
+		50E115841FC73440003734F1 /* PDFViewControllerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E115831FC73440003734F1 /* PDFViewControllerVC.m */; };
 		50E8D0101FB9E2120099691D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D00F1FB9E2120099691D /* NSString+Validation.m */; };
 		50E8D0131FB9E3740099691D /* TYAlertController+HvacTek.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D0121FB9E3740099691D /* TYAlertController+HvacTek.m */; };
 		50E8D0161FB9F5A10099691D /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E8D0151FB9F5A10099691D /* UIImage+Additions.m */; };
@@ -183,6 +183,7 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */; };
 		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
 		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
@@ -347,12 +348,10 @@
 		4FF901BB1AB847FE00D87FAB /* PlatinumOptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlatinumOptionCell.xib; path = TechnicianApp/ViewControllers/PlatinumOptionsVC/PlatinumOptionCell.xib; sourceTree = SOURCE_ROOT; };
 		50085BC41FBC801B002892C6 /* StaticPressureModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaticPressureModel.h; sourceTree = "<group>"; };
 		50085BC51FBC801B002892C6 /* StaticPressureModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StaticPressureModel.m; sourceTree = "<group>"; };
-		50085BC71FBC812C002892C6 /* IAQProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAQProductModel.h; sourceTree = "<group>"; };
-		50085BC81FBC812C002892C6 /* IAQProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAQProductModel.m; sourceTree = "<group>"; };
-		50085BCA1FBC8261002892C6 /* FileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
-		50085BCB1FBC8261002892C6 /* FileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
 		50085BCD1FBC84C2002892C6 /* IAQDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAQDataModel.h; sourceTree = "<group>"; };
 		50085BCE1FBC84C2002892C6 /* IAQDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAQDataModel.m; sourceTree = "<group>"; };
+		5011B7521FC5CC720041BDAA /* FileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
+		5011B7531FC5CC720041BDAA /* FileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
 		505C6B5F1FB68B9600761B04 /* HealthyHomeSolutionsSortVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsSortVC.h; sourceTree = "<group>"; };
 		505C6B601FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsSortVC.m; sourceTree = "<group>"; };
 		505C6B631FB68E2D00761B04 /* IAQCustomerChoiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAQCustomerChoiceVC.h; sourceTree = "<group>"; };
@@ -382,6 +381,8 @@
 		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
 		5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeatingStaticPressureVC.h; sourceTree = "<group>"; };
 		5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeatingStaticPressureVC.m; sourceTree = "<group>"; };
+		50E115821FC73440003734F1 /* PDFViewControllerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFViewControllerVC.h; sourceTree = "<group>"; };
+		50E115831FC73440003734F1 /* PDFViewControllerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFViewControllerVC.m; sourceTree = "<group>"; };
 		50E8D00E1FB9E2120099691D /* NSString+Validation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
 		50E8D00F1FB9E2120099691D /* NSString+Validation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validation.m"; sourceTree = "<group>"; };
 		50E8D0111FB9E3740099691D /* TYAlertController+HvacTek.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TYAlertController+HvacTek.h"; sourceTree = "<group>"; };
@@ -525,6 +526,7 @@
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
+		84A16E151FC4928700F01106 /* IAQData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IAQData.xcdatamodel; sourceTree = "<group>"; };
 		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
 		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
@@ -1163,14 +1165,13 @@
 		508566221FB38012000B0F56 /* IAQDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				5011B7521FC5CC720041BDAA /* FileModel.h */,
+				5011B7531FC5CC720041BDAA /* FileModel.m */,
 				50085BC41FBC801B002892C6 /* StaticPressureModel.h */,
 				50085BC51FBC801B002892C6 /* StaticPressureModel.m */,
-				50085BC71FBC812C002892C6 /* IAQProductModel.h */,
-				50085BC81FBC812C002892C6 /* IAQProductModel.m */,
-				50085BCA1FBC8261002892C6 /* FileModel.h */,
-				50085BCB1FBC8261002892C6 /* FileModel.m */,
 				50085BCD1FBC84C2002892C6 /* IAQDataModel.h */,
 				50085BCE1FBC84C2002892C6 /* IAQDataModel.m */,
+				84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */,
 			);
 			path = IAQDataModel;
 			sourceTree = "<group>";
@@ -1460,6 +1461,8 @@
 				505C6B771FB69F3C00761B04 /* HealthyHomeSolutionsDetailVC.m */,
 				505C6B791FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.h */,
 				505C6B7A1FB69FE800761B04 /* HealthyHomeSolutionsAgreementVC.m */,
+				50E115821FC73440003734F1 /* PDFViewControllerVC.h */,
+				50E115831FC73440003734F1 /* PDFViewControllerVC.m */,
 			);
 			path = HealthyHomeSolutionsVC;
 			sourceTree = "<group>";
@@ -1593,6 +1596,7 @@
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
 						DevelopmentTeam = 5JZ562WR45;
+						LastSwiftMigration = 0910;
 					};
 				};
 			};
@@ -1758,6 +1762,7 @@
 				524FDFF61B79046100480987 /* CustomerChoiceCell.m in Sources */,
 				4FD2EBD71A3B462E0056D4C4 /* Question.m in Sources */,
 				0E5DF0301D242798007CE24F /* PictureGalleryVC.m in Sources */,
+				50E115841FC73440003734F1 /* PDFViewControllerVC.m in Sources */,
 				4FD2EBA31A3762310056D4C4 /* LoginVC.m in Sources */,
 				4FD2EB821A361A0F0056D4C4 /* ProductAdminTableViewController.m in Sources */,
 				52EDAFFA1CEF07D9004F3EC0 /* EmailVerificationVC.m in Sources */,
@@ -1799,9 +1804,11 @@
 				4FD2EBC61A38B26B0056D4C4 /* DebriefReminderVC.m in Sources */,
 				5265782D1C6A0A2500EC1AA5 /* Item.m in Sources */,
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
+				5011B7561FC5CC720041BDAA /* FileModel.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
+				84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */,
 				505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
 				505C6B751FB69E7900761B04 /* HereWhatWeProposeVC.m in Sources */,
@@ -1839,7 +1846,6 @@
 				4F8EC7BC1A6053A400999FA1 /* QuestionSummaryCell.m in Sources */,
 				52EB803C1C7C617600D09222 /* NAPickerView.m in Sources */,
 				505C6B611FB68B9600761B04 /* HealthyHomeSolutionsSortVC.m in Sources */,
-				50085BC91FBC812C002892C6 /* IAQProductModel.m in Sources */,
 				4F7223451ABC84CE008C41DB /* NSDictionary+NSNullReplaceWithNil.m in Sources */,
 				4FD2EB6C1A361A0F0056D4C4 /* TypeTwoTableViewCell.m in Sources */,
 				5265782F1C6A0A2500EC1AA5 /* Photos.m in Sources */,
@@ -1890,7 +1896,6 @@
 				4FD2EBAB1A376DF20056D4C4 /* TechnicianHomeVC.m in Sources */,
 				5247C5271CEDB62700670D4A /* AdditionalInfoPageVC.m in Sources */,
 				50E8D0101FB9E2120099691D /* NSString+Validation.m in Sources */,
-				50085BCC1FBC8261002892C6 /* FileModel.m in Sources */,
 				4FD2EB7F1A361A0F0056D4C4 /* MenuViewController.m in Sources */,
 				521984CB1CF5A460006D131D /* CHDropDownTextField.m in Sources */,
 				52CCB6391CF736E500BAF68A /* Job.m in Sources */,
@@ -1991,6 +1996,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
@@ -2002,7 +2008,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Signature-Prefix.pch";
 				INFOPLIST_FILE = "Signature-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -2016,6 +2023,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
@@ -2027,7 +2035,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Signature-Prefix.pch";
 				INFOPLIST_FILE = "Signature-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.unifeyed.HvacTek;
 				PRODUCT_NAME = HvacTek;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -2090,6 +2099,16 @@
 			);
 			currentVersion = 52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84A16E151FC4928700F01106 /* IAQData.xcdatamodel */,
+			);
+			currentVersion = 84A16E151FC4928700F01106 /* IAQData.xcdatamodel */;
+			path = IAQData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

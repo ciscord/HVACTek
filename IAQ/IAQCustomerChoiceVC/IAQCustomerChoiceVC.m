@@ -64,6 +64,7 @@
     
     for (UIButton* bigButton in self.bigButtonArray) {
         bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        bigButton.userInteractionEnabled = false;
     }
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -71,7 +72,6 @@
     [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
     [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
     [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
-    
     
 }
 
@@ -129,6 +129,7 @@
         self.bestFinancingLabel.text = @"0% Financing";
         self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
     }else{
+        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
         self.bestFinancingLabel.text = @"Does Not Qualify";
         self.bestEqual24Label.text = @"For 0% Financing";
     }
@@ -151,6 +152,7 @@
         self.betterFinancingLabel.text = @"0% Financing";
         self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
     }else{
+        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
         self.betterFinancingLabel.text = @"Does Not Qualify";
         self.betterEqual24Label.text = @"For 0% Financing";
     }
@@ -173,6 +175,7 @@
         self.goodFinancingLabel.text = @"0% Financing";
         self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
     }else{
+        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
         self.goodFinancingLabel.text = @"Does Not Qualify";
         self.goodEqual24Label.text = @"For 0% Financing";
     }

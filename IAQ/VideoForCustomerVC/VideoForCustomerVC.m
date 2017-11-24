@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "IAQDataModel.h"
+#import <TWRDownloadManager.h>
 @interface VideoForCustomerVC ()
 @property (nonatomic, retain) AVPlayerViewController *playerViewController;
 @property (weak, nonatomic) IBOutlet UIView *videoView;
@@ -41,9 +42,36 @@
         TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"There is no video"];
         [self presentViewController:alert animated:true completion:nil];
     }else {
-        NSURL *urlVideoFile = [NSURL URLWithString:mainVideoPath];
-        
+        NSURL *urlVideoFile;
         _playerViewController = [[AVPlayerViewController alloc] init];
+        
+        if ([[TWRDownloadManager sharedManager] fileExistsForUrl:mainVideoPath]) {
+            urlVideoFile =  [NSURL fileURLWithPath:[[TWRDownloadManager sharedManager] localPathForFile:mainVideoPath]];
+            
+        }else {
+            if ([[[DataLoader sharedInstance] reachabilityManager] isReachable]) {
+                urlVideoFile = [NSURL URLWithString:mainVideoPath];
+                
+                [[TWRDownloadManager sharedManager] downloadFileForURL:mainVideoPath progressBlock:^(CGFloat progress) {
+                    NSLog(@"progress %f video file:%@",progress, mainVideoPath);
+                } completionBlock:^(BOOL completed) {
+                    NSLog(@"~~~completed downloading~~~");
+                    
+                } enableBackgroundMode:YES];
+                
+            }else{
+                UIAlertController *alert= [UIAlertController alertControllerWithTitle: @"Oops! Something went wrong."
+                                                                              message: @"Video wasn't downloaded to the app and there isn't internet connection available right now."
+                                                                       preferredStyle: UIAlertControllerStyleAlert];
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                           }];
+                [alert addAction:ok];
+                [self presentViewController:alert animated:YES completion:nil];
+                NSLog(@"is Not Reachable");
+            }
+        }
+        
         _playerViewController.player = [AVPlayer playerWithURL:urlVideoFile];
         _playerViewController.view.frame = self.videoView.bounds;
         _playerViewController.showsPlaybackControls = YES;
@@ -51,7 +79,6 @@
         [self.videoView addSubview:_playerViewController.view];
         self.view.autoresizesSubviews = YES;
     }
-    
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }

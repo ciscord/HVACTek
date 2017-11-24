@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IAQProductModel.h"
+#import "FileModel.h"
+#import "IAQProductModel+CoreDataProperties.h"
 #import "StaticPressureModel.h"
+
 @interface IAQDataModel : NSObject
 @property (nonatomic, strong) StaticPressureModel * heatingStaticPressure;
 @property (nonatomic, strong) StaticPressureModel * coolingStaticPressure;

@@ -166,7 +166,9 @@
         return _managedObjectModel;
     }
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Unifeiyed_Quoting" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     return _managedObjectModel;
 }
 
