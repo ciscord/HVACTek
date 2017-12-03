@@ -16,7 +16,7 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -74,6 +74,8 @@ NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 NSString *const LOGS             = @"addError";
 NSString *const IAQPRODUCTS      = @"iaqProducts";
+NSString *const ADDIAQAUTHORIZESALE      = @"addIaqAuthorizeSale";
+NSString *const EMAILIAQAUTHORIZESALE      = @"emailIaqAuthorizeSale";
 
 #define kStatusOK 1
 
@@ -332,7 +334,8 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
                weakSelf.currentUser.add2cart =[NSNumber numberWithBool:([weakSelf.userInfo[@"add2cart"] intValue]==1)] ;
                weakSelf.currentUser.tech = [NSNumber numberWithBool:([weakSelf.userInfo[@"tech"] intValue]==1)];
                weakSelf.currentUser.password = swapiDict[@"password"];
-          //     weakSelf.currentUser.userToken = weakSelf.userInfo[@"token"];
+               weakSelf.currentUser.firstName = weakSelf.userInfo[@"firstname"];
+               weakSelf.currentUser.lastName = weakSelf.userInfo[@"lastname"];
                [weakSelf.currentUser.managedObjectContext save];
                
                [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
@@ -796,6 +799,79 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
               onError(error);
           }
       }];
+}
+#pragma mark - emailIaqAuthorizeSale
+-(void)emailIaqAuthorizeSale:(NSString *)authid
+                   email:(NSString*)email
+                   onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                     onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self POST:EMAILIAQAUTHORIZESALE
+    parameters:@{@"id":authid, @"email": email}
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
+          NSDictionary *dict = responseObject[@"results"];
+          onSuccess(@"OK", dict);
+      
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          if (onError) {
+              onError(error);
+          }
+      }];
+    
+}
+#pragma mark - addIaqAuthorizeSale
+-(void)addIaqAuthorizeSale:(NSString *)products
+                  customer:(NSString*)customer
+                technician:(NSString*)technician
+                     price:(CGFloat)price
+                 signature:(NSString*)signature
+                 onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
+                   onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"MM/dd/yyyy"];
+    NSString* dateString = [df stringFromDate:today];
+    
+    if (![signature isEqualToString:@""]) {
+        [self POST:ADDIAQAUTHORIZESALE
+        parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price], @"signature":signature}
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               
+               NSDictionary *dict = responseObject[@"result"];
+               onSuccess(dict);
+               
+           }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               if (onError) {
+                   onError(error);
+               }
+           }];
+    }else {
+        [self POST:ADDIAQAUTHORIZESALE
+        parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price]}
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               
+               NSDictionary *dict = responseObject[@"result"];
+               onSuccess(dict);
+               
+           }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               if (onError) {
+                   onError(error);
+               }
+           }];
+    }
+    
+    
 }
 #pragma mark - AdditionalInfo Requests
 

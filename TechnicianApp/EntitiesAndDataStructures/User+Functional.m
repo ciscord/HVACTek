@@ -24,7 +24,17 @@
     return user;
 }
 
-
++ (instancetype)userWithName:(NSString*)userName userID:(NSNumber*)userID andCode:(NSString*)userCode firstName:(NSString*)firstName lastName:(NSString*)lastName {
+    
+    User *user = [User findFirstByAttribute:@"userCode" withValue:userCode createNewIfNotExists:YES];
+    user.userName = userName;
+    user.userID = userID;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    [user.managedObjectContext save];
+    
+    return user;
+}
 -(Job*)activeJob
 {
     return [[self.jobs filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"jobStatus != %i", jstDone]] anyObject];

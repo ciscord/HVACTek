@@ -2123,6 +2123,7 @@ Comprehensive Diagnostic</string>
                         <outletCollection property="priceViewArray" destination="CFN-cx-9iu" id="cXf-1c-Cnq"/>
                         <outletCollection property="priceViewArray" destination="3vj-16-BiT" id="6Lr-Md-t1E"/>
                         <outletCollection property="priceViewArray" destination="MBL-fQ-kSY" id="lYK-5W-AsL"/>
+                        <outletCollection property="descriptionLabelArray" destination="0YB-EA-hpB" id="0K0-xy-9HQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qV-G8-euc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2208,20 +2209,6 @@ Comprehensive Diagnostic</string>
                                             <action selector="backClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="M6n-4f-K0i"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-ft-gxq">
-                                        <rect key="frame" x="20" y="179" width="350" height="126"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="350" id="jHe-5U-uXr"/>
-                                        </constraints>
-                                        <string key="text">Add PVC Uniton for pump Access
-Bypass Humidifier Maintenance
-Comprehensive Diagnostic
-install EZ Trap &amp; Test Drain Line
-Install Safety Wet Switch &amp; Test System Operation</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V68-YT-dBK">
                                         <rect key="frame" x="171" y="731" width="186" height="55"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2243,39 +2230,94 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                             <action selector="authorizeClick:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="t6J-wu-1fD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-iF-5ft">
-                                        <rect key="frame" x="386" y="207" width="282" height="36"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN3-2h-otC" customClass="SignatureView">
+                                        <rect key="frame" x="8" y="598" width="712" height="110"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bC4-LM-a2L">
+                                                <rect key="frame" x="674" y="8" width="30" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="pUc-JC-2ql"/>
+                                                    <constraint firstAttribute="width" constant="30" id="sS6-FE-Azw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                                <state key="normal" title="X">
+                                                    <color key="titleColor" red="0.85970908720000005" green="0.25061677630000001" blue="0.022383840459999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="authorizeSignatureClearClicked:" destination="Cgs-Bu-X2G" eventType="touchUpInside" id="Vm1-Eq-ssR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="wBJ-mW-5U0"/>
+                                            <constraint firstAttribute="trailing" secondItem="bC4-LM-a2L" secondAttribute="trailing" constant="8" id="D4V-Xd-ClU"/>
+                                            <constraint firstItem="bC4-LM-a2L" firstAttribute="top" secondItem="WN3-2h-otC" secondAttribute="top" constant="8" id="jzJ-jw-O4Y"/>
+                                            <constraint firstAttribute="height" constant="110" id="z99-KR-PNE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="$1350.00">
-                                            <color key="titleColor" red="0.76862745099999996" green="0.18039215689999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% Savings Does Not Qualify For 0% Financing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-o5-0Tz">
-                                        <rect key="frame" x="390" y="253" width="317" height="14"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dX2-UR-pNI">
+                                        <rect key="frame" x="8" y="152" width="712" height="428"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-ft-gxq">
+                                                <rect key="frame" x="17" y="25" width="350" height="126"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="350" id="jHe-5U-uXr"/>
+                                                </constraints>
+                                                <string key="text">Add PVC Uniton for pump Access
+Bypass Humidifier Maintenance
+Comprehensive Diagnostic
+install EZ Trap &amp; Test Drain Line
+Install Safety Wet Switch &amp; Test System Operation</string>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1P-iF-5ft">
+                                                <rect key="frame" x="383" y="53" width="282" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="wBJ-mW-5U0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                                <state key="normal" title="$1350.00">
+                                                    <color key="titleColor" red="0.76862745099999996" green="0.18039215689999999" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% Savings Does Not Qualify For 0% Financing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-o5-0Tz">
+                                                <rect key="frame" x="387" y="99" width="317" height="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="W1P-iF-5ft" secondAttribute="trailing" constant="47" id="208-cv-JqP"/>
+                                            <constraint firstAttribute="trailing" secondItem="gJi-o5-0Tz" secondAttribute="trailing" constant="8" id="5bP-vY-arF"/>
+                                            <constraint firstItem="W1P-iF-5ft" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="16" id="GF5-Sy-cu2"/>
+                                            <constraint firstItem="gJi-o5-0Tz" firstAttribute="top" secondItem="W1P-iF-5ft" secondAttribute="bottom" constant="10" id="iWX-Oc-JgL"/>
+                                            <constraint firstItem="W1P-iF-5ft" firstAttribute="top" secondItem="dX2-UR-pNI" secondAttribute="top" constant="53" id="mHy-fa-9QE"/>
+                                            <constraint firstItem="gJi-o5-0Tz" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="20" id="pKa-Uy-AIW"/>
+                                            <constraint firstItem="mJ8-ft-gxq" firstAttribute="leading" secondItem="dX2-UR-pNI" secondAttribute="leading" constant="17" id="ucX-LE-JI5"/>
+                                            <constraint firstItem="mJ8-ft-gxq" firstAttribute="top" secondItem="dX2-UR-pNI" secondAttribute="top" constant="25" id="xnJ-FW-eco"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="E2e-BY-NWk" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" id="0Si-bi-nKU"/>
-                                    <constraint firstItem="mJ8-ft-gxq" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="20" id="1Wh-sO-9Md"/>
-                                    <constraint firstItem="mJ8-ft-gxq" firstAttribute="top" secondItem="E2e-BY-NWk" secondAttribute="bottom" constant="27" id="3Px-el-CMz"/>
+                                    <constraint firstAttribute="trailing" secondItem="dX2-UR-pNI" secondAttribute="trailing" constant="8" id="587-Fa-fcc"/>
                                     <constraint firstAttribute="bottom" secondItem="3En-VY-PSr" secondAttribute="bottom" constant="8" id="7In-LP-SnW"/>
-                                    <constraint firstItem="W1P-iF-5ft" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="16" id="9lz-dU-oUf"/>
                                     <constraint firstAttribute="bottom" secondItem="V68-YT-dBK" secondAttribute="bottom" constant="8" id="DCj-QA-cuL"/>
-                                    <constraint firstItem="gJi-o5-0Tz" firstAttribute="leading" secondItem="mJ8-ft-gxq" secondAttribute="trailing" constant="20" id="Dgf-8Y-vUM"/>
-                                    <constraint firstAttribute="trailing" secondItem="W1P-iF-5ft" secondAttribute="trailing" constant="60" id="Edg-Xe-opy"/>
-                                    <constraint firstAttribute="trailing" secondItem="gJi-o5-0Tz" secondAttribute="trailing" constant="21" id="Etk-Cr-bJD"/>
-                                    <constraint firstItem="gJi-o5-0Tz" firstAttribute="top" secondItem="W1P-iF-5ft" secondAttribute="bottom" constant="10" id="IqM-Uc-TFx"/>
+                                    <constraint firstItem="dX2-UR-pNI" firstAttribute="top" secondItem="E2e-BY-NWk" secondAttribute="bottom" id="EHj-cH-TML"/>
+                                    <constraint firstItem="dX2-UR-pNI" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="8" id="IE9-pN-nj9"/>
+                                    <constraint firstItem="3En-VY-PSr" firstAttribute="top" secondItem="WN3-2h-otC" secondAttribute="bottom" constant="23" id="Sz5-lg-39M"/>
+                                    <constraint firstItem="WN3-2h-otC" firstAttribute="top" secondItem="dX2-UR-pNI" secondAttribute="bottom" constant="18" id="Wfd-Es-cWb"/>
                                     <constraint firstItem="3En-VY-PSr" firstAttribute="centerX" secondItem="e1I-dh-gYO" secondAttribute="centerX" constant="100" id="Xex-cG-Pi0"/>
                                     <constraint firstItem="V68-YT-dBK" firstAttribute="centerX" secondItem="e1I-dh-gYO" secondAttribute="centerX" constant="-100" id="ZZH-Ea-viS"/>
-                                    <constraint firstItem="W1P-iF-5ft" firstAttribute="top" secondItem="E2e-BY-NWk" secondAttribute="bottom" constant="55" id="kBy-cC-eEh"/>
+                                    <constraint firstAttribute="trailing" secondItem="WN3-2h-otC" secondAttribute="trailing" constant="8" id="iXs-ZN-eLV"/>
                                     <constraint firstItem="E2e-BY-NWk" firstAttribute="top" secondItem="e1I-dh-gYO" secondAttribute="top" constant="12" id="l0J-3J-zoa"/>
+                                    <constraint firstItem="WN3-2h-otC" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="8" id="mVP-EE-4xb"/>
                                     <constraint firstAttribute="trailing" secondItem="E2e-BY-NWk" secondAttribute="trailing" id="n7w-xK-sMe"/>
                                     <constraint firstItem="Kxy-Zu-lxM" firstAttribute="leading" secondItem="e1I-dh-gYO" secondAttribute="leading" constant="20" id="py2-bL-sSQ"/>
                                     <constraint firstAttribute="bottom" secondItem="Kxy-Zu-lxM" secondAttribute="bottom" constant="8" id="wQZ-Bc-B9P"/>
@@ -2299,6 +2341,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                         <outlet property="layer1View" destination="e1I-dh-gYO" id="43B-H1-SxU"/>
                         <outlet property="priceButton" destination="W1P-iF-5ft" id="FmD-kr-bCR"/>
                         <outlet property="priceDescriptionLabel" destination="gJi-o5-0Tz" id="vf8-PT-a2c"/>
+                        <outlet property="signatureView" destination="WN3-2h-otC" id="MCU-Rk-FLq"/>
                         <outlet property="topBannerView" destination="E2e-BY-NWk" id="Fna-Q8-MXS"/>
                     </connections>
                 </viewController>

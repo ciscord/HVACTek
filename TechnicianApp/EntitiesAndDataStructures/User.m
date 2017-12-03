@@ -19,5 +19,6 @@
 @dynamic userName;
 @dynamic password;
 @dynamic jobs;
-
+@dynamic firstName;
+@dynamic lastName;
 @end

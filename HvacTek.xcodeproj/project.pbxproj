@@ -376,6 +376,7 @@
 		506329DA1FBDCEB4004D8648 /* IAQEditServiceOptionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAQEditServiceOptionsVC.m; sourceTree = "<group>"; };
 		5067725A1FB8B12B00274990 /* HealthyAgreementTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyAgreementTableViewCell.h; sourceTree = "<group>"; };
 		5067725B1FB8B12B00274990 /* HealthyAgreementTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyAgreementTableViewCell.m; sourceTree = "<group>"; };
+		506E00291FD06F9800C74A4D /* SignatureModel 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 12.xcdatamodel"; sourceTree = "<group>"; };
 		508566241FB38025000B0F56 /* IAQStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IAQStoryboard.storyboard; sourceTree = "<group>"; };
 		508566271FB3819F000B0F56 /* HealthyHomeProcessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeProcessVC.h; sourceTree = "<group>"; };
 		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
@@ -2086,6 +2087,7 @@
 		4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				506E00291FD06F9800C74A4D /* SignatureModel 12.xcdatamodel */,
 				52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */,
 				5247C51D1CEDAF8900670D4A /* SignatureModel 10.xcdatamodel */,
 				52955A911C745E570009F7FF /* SignatureModel 8.xcdatamodel */,
@@ -2097,7 +2099,7 @@
 				91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */,
 				4F11D3E61AA76FA7007FC0A8 /* SignatureModel.xcdatamodel */,
 			);
-			currentVersion = 52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */;
+			currentVersion = 506E00291FD06F9800C74A4D /* SignatureModel 12.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

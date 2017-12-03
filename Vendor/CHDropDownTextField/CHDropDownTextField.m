@@ -185,7 +185,8 @@ static CGFloat const CHDropDownTableViewSidePadding = 0;
 - (BOOL)becomeFirstResponder {
     
     [self addAndDisplayDropdown];
-    return [super becomeFirstResponder];
+    [super becomeFirstResponder];
+    return [super resignFirstResponder];
 }
 
 - (void)addAndDisplayDropdown {
@@ -200,9 +201,12 @@ static CGFloat const CHDropDownTableViewSidePadding = 0;
 
 - (BOOL)resignFirstResponder {
     
-    [self.dropDownTableView removeFromSuperview];
-    
     return [super resignFirstResponder];
+}
+
+- (void) hideDropDown {
+    
+    [self.dropDownTableView removeFromSuperview];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

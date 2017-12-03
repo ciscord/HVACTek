@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * userCode;
 @property (nonatomic, retain) NSNumber * userID;
 @property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSSet *jobs;
 @end

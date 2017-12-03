@@ -82,6 +82,7 @@
  */
 @property (nonatomic, assign) IBOutlet id<CHDropDownTextFieldDelegate> dropDownDelegate;
 
+- (void) hideDropDown;
 @end
 
 /**

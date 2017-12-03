@@ -129,10 +129,12 @@
 
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
     self.systemTypeField.text = self.systemTypeField.dropDownTableTitlesArray[index];
+    [self.systemTypeField hideDropDown];
     
 }
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:true];
+    [self.systemTypeField hideDropDown];
     
 }
 - (void)didReceiveMemoryWarning {
