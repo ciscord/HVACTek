@@ -184,6 +184,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 -(void)getIAQProducts:(NSURL *)reqUrl
                  onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                    onError:(void (^)(NSError *error))onError;
+
 -(void)emailIaqAuthorizeSale:(NSString *)authid
                        email:(NSString*)email
                    onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
@@ -196,4 +197,11 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                  signature:(NSString*)signature
                  onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
                    onError:(void (^)(NSError *error))onError;
+
+-(void)addIaqAuthorizeSaleUnapproved:(NSString *)products
+                            customer:(NSString*)customer
+                          technician:(NSString*)technician
+                               price:(CGFloat)price
+                           onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
+                             onError:(void (^)(NSError *error))onError;
 @end

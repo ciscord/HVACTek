@@ -74,8 +74,9 @@ NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 NSString *const LOGS             = @"addError";
 NSString *const IAQPRODUCTS      = @"iaqProducts";
-NSString *const ADDIAQAUTHORIZESALE      = @"addIaqAuthorizeSale";
-NSString *const EMAILIAQAUTHORIZESALE      = @"emailIaqAuthorizeSale";
+NSString *const ADDIAQAUTHORIZESALE                 = @"addIaqAuthorizeSale";
+NSString *const ADDIAQAUTHORIZESALEUNAPPROVED       = @"addIaqAuthorizeSaleUnapproved";
+NSString *const EMAILIAQAUTHORIZESALE               = @"emailIaqAuthorizeSale";
 
 #define kStatusOK 1
 
@@ -841,36 +842,55 @@ NSString *const EMAILIAQAUTHORIZESALE      = @"emailIaqAuthorizeSale";
     [df setDateFormat:@"MM/dd/yyyy"];
     NSString* dateString = [df stringFromDate:today];
     
-    if (![signature isEqualToString:@""]) {
-        [self POST:ADDIAQAUTHORIZESALE
-        parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price], @"signature":signature}
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
-               NSDictionary *dict = responseObject[@"result"];
-               onSuccess(dict);
-               
+
+    [self POST:ADDIAQAUTHORIZESALE
+    parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price], @"signature":signature}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSDictionary *dict = responseObject[@"result"];
+           onSuccess(dict);
+           
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
            }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               if (onError) {
-                   onError(error);
-               }
-           }];
-    }else {
-        [self POST:ADDIAQAUTHORIZESALE
-        parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price]}
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
-               NSDictionary *dict = responseObject[@"result"];
-               onSuccess(dict);
-               
-           }
-           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               if (onError) {
-                   onError(error);
-               }
-           }];
-    }
+       }];
+
+
     
+    
+}
+#pragma mark - addIaqAuthorizeSaleUnapproved
+-(void)addIaqAuthorizeSaleUnapproved:(NSString *)products
+                  customer:(NSString*)customer
+                technician:(NSString*)technician
+                     price:(CGFloat)price
+                 onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
+                   onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSDate *today = [NSDate date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"MM/dd/yyyy"];
+    NSString* dateString = [df stringFromDate:today];
+   
+    [self POST:ADDIAQAUTHORIZESALEUNAPPROVED
+    parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price]}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSDictionary *dict = responseObject[@"result"];
+           onSuccess(dict);
+           
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+
     
 }
 #pragma mark - AdditionalInfo Requests

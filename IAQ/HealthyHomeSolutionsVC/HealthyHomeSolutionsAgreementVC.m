@@ -96,46 +96,14 @@
 }
 
 -(IBAction)authorizeClick:(id)sender {
-    NSString* iaqProductString = @"";
-    if (selectedProductArray.count >= 1) {
-        IAQProductModel* iaqProduct = selectedProductArray[0];
-        iaqProductString = [NSString stringWithFormat:@"%@", iaqProduct.title];
-    }
-    if (selectedProductArray.count > 1) {
-        for (int i = 1; i < selectedProductArray.count; i++) {
-            IAQProductModel* iaqProduct = selectedProductArray[i];
-            iaqProductString = [NSString stringWithFormat:@"%@,%@", iaqProductString, iaqProduct.title];
-        }
-    }
     
     UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    if (signature == nil)  //signature was removed
-        signature = @"";
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    __weak typeof (self) weakSelf = self;
-    NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
-    
-    [[DataLoader sharedInstance] addIaqAuthorizeSale:iaqProductString
-                                            customer:[IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName
-                                          technician:technicanName
-                                               price:totalCost
-                                           signature:signature
-                                           onSuccess:^(NSDictionary *dataDictionary) {
-                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                               authid = [dataDictionary objectForKey:@"id"];
-                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Success"];
-                                               [self presentViewController:alert animated:true completion:nil];
-                                               
-                                           } onError:^(NSError *error) {
-                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
-                                               [self presentViewController:alert animated:true completion:nil];
-                                           }];
-}
-
--(IBAction)emailClick:(id)sender {
+    if (signature == nil) {
+        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Signature is required"];
+        [self presentViewController:alert animated:true completion:nil];
+        return;
+    }
     TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
@@ -148,23 +116,122 @@
             
         }else {
             
-            if (authid != nil) {
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                __weak typeof (self) weakSelf = self;
-                
-                [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
-                     [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                    [self showEmailSentAlert:emailField.text];
-                
-            
-                } onError:^(NSError *error) {
-                     [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                    TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
-                    [self presentViewController:alert animated:true completion:nil];
-                }];
-            }else {
-                //???
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            __weak typeof (self) weakSelf = self;
+            NSString* iaqProductString = @"";
+            if (selectedProductArray.count >= 1) {
+                IAQProductModel* iaqProduct = selectedProductArray[0];
+                iaqProductString = [NSString stringWithFormat:@"%@", iaqProduct.title];
             }
+            if (selectedProductArray.count > 1) {
+                for (int i = 1; i < selectedProductArray.count; i++) {
+                    IAQProductModel* iaqProduct = selectedProductArray[i];
+                    iaqProductString = [NSString stringWithFormat:@"%@,%@", iaqProductString, iaqProduct.title];
+                }
+            }
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
+            
+            [[DataLoader sharedInstance] addIaqAuthorizeSale:iaqProductString
+                                                    customer:[IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName
+                                                  technician:technicanName
+                                                       price:totalCost
+                                                   signature:signature
+                                                   onSuccess:^(NSDictionary *dataDictionary) {
+                                                       
+                                                       authid = [dataDictionary objectForKey:@"id"];
+                                                       
+                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                           
+                                                           [self showEmailSentAlert:emailField.text];
+                                                           
+                                                       } onError:^(NSError *error) {
+                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                           TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
+                                                           [self presentViewController:alert animated:true completion:nil];
+                                                       }];
+                                                       
+                                                   } onError:^(NSError *error) {
+                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                       TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
+                                                       [self presentViewController:alert animated:true completion:nil];
+                                                   }];
+            
+        
+        }
+        
+    }]];
+    
+    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Email:";
+    }];
+    
+    TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
+    
+    [self presentViewController:alertController animated:true completion: nil];
+    
+    
+}
+
+-(IBAction)emailClick:(id)sender {
+    
+    TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
+    alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        UITextField* emailField = [alertView.textFieldArray objectAtIndex:0];
+        
+        if (![emailField.text isValidEmail]) {
+            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
+            [self presentViewController:alert animated:true completion:nil];
+            
+        }else {
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            __weak typeof (self) weakSelf = self;
+            NSString* iaqProductString = @"";
+            if (selectedProductArray.count >= 1) {
+                IAQProductModel* iaqProduct = selectedProductArray[0];
+                iaqProductString = [NSString stringWithFormat:@"%@", iaqProduct.title];
+            }
+            if (selectedProductArray.count > 1) {
+                for (int i = 1; i < selectedProductArray.count; i++) {
+                    IAQProductModel* iaqProduct = selectedProductArray[i];
+                    iaqProductString = [NSString stringWithFormat:@"%@,%@", iaqProductString, iaqProduct.title];
+                }
+            }
+            
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
+            
+            [[DataLoader sharedInstance] addIaqAuthorizeSaleUnapproved:iaqProductString
+                                                    customer:[IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName
+                                                  technician:technicanName
+                                                       price:totalCost
+                                                   onSuccess:^(NSDictionary *dataDictionary) {
+                                                       
+                                                       authid = [dataDictionary objectForKey:@"id"];
+                                                       
+                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                           
+                                                           [self showEmailSentAlert:emailField.text];
+                                                           
+                                                       } onError:^(NSError *error) {
+                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                           TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
+                                                           [self presentViewController:alert animated:true completion:nil];
+                                                       }];
+                                                       
+                                                   } onError:^(NSError *error) {
+                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                       TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
+                                                       [self presentViewController:alert animated:true completion:nil];
+                                                   }];
+            
+            
         }
         
     }]];
@@ -180,6 +247,7 @@
 }
 
 -(void) showEmailSentAlert:(NSString*) email{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSString* messageString = [NSString stringWithFormat:@"Your choice has been sent to %@", email];
     
     TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"Email Sent" message:messageString];
@@ -190,7 +258,8 @@
     }]];
     
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        
+        [self.navigationController popToViewController: self.navigationController.viewControllers[1] animated:NO];
+        [IAQDataModel sharedIAQDataModel].isfinal = 0;
     }]];
     
     TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
