@@ -1534,7 +1534,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 5JZ562WR45;
+						DevelopmentTeam = 8WY55993RN;
 						LastSwiftMigration = 0910;
 					};
 				};
@@ -1919,7 +1919,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5JZ562WR45;
+				DEVELOPMENT_TEAM = 8WY55993RN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1946,7 +1946,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5JZ562WR45;
+				DEVELOPMENT_TEAM = 8WY55993RN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
