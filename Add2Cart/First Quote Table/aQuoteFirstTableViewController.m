@@ -65,15 +65,13 @@
     ductlessPicker.hidden = YES;
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:nil
+                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            
                                            UIImageView *strongImageView = weakImageView;
@@ -96,13 +94,11 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,7 +112,6 @@
     // Return the number of rows in the section.
     return 5;
 }
-
 
 #pragma mark - Picker
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -218,7 +213,6 @@
     }
 }
 
-
 - (IBAction)heatingSwitchFire:(id)sender {
     nextButton.enabled = YES;
     if (heatingSwitch.isOn) {
@@ -252,8 +246,6 @@
         ductlessPicker.hidden =  YES;
     }
 }
-
-
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

@@ -51,7 +51,7 @@
     [self configureUpperView];
     [self configureColorScheme];
     [self configureVC];
-  }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -68,8 +68,6 @@
 
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
@@ -77,7 +75,7 @@
     
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:nil
+                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            
                                            UIImageView *strongImageView = weakImageView;
@@ -89,9 +87,6 @@
                                            //
                                        }];
 }
-
-
-
 
 #pragma mark - Upper View
 - (void)configureUpperView {
@@ -119,15 +114,10 @@
     [self.view addSubview:upperArcView];
 }
 
-
-
-
 -(void)configureVC{
     [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell"];
      self.cartstableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
-
-
 
 -(float) parseTheString:(NSString *) string {
     NSArray *strip = [[NSArray alloc]init];
@@ -160,8 +150,6 @@
     }
 }
 
-
-
 - (IBAction)btnDone:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
@@ -173,7 +161,6 @@
     [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
 
 -(void) back {
     
@@ -192,8 +179,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
-
 
 - (IBAction)email:(id)sender {
     
@@ -245,14 +230,10 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
-
 #pragma mark - Tableview Delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.carts.count;
 };
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -279,7 +260,6 @@
        return acell;
 };
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -304,12 +284,9 @@
       return 230 + (50 * nsar.count);
 }
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 5;
 }
-
 
 #pragma mark - CartCell Delegate
 -(void)editCard:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount {
@@ -335,18 +312,14 @@
         
         vc.months = [monthCount intValue];
         
-        // isEditing!
-        
         if (!vc.isEditing) {
             int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
             [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
         }
         [self.navigationController popViewControllerAnimated:YES];
         
-      //  [self.delegate saveCartSelected];
     }
     
-
 };
 
 
@@ -354,16 +327,12 @@
     
     testerViewController * vc =(testerViewController*)self.testerVC;
     
-    
     if (self.isViewingCart) {
-        
-        
         if ([vc.savedCarts containsObject:cart]) {
             [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
             
             [self.delegate saveCartSelected];
         }
-        
         
     }else {
         
@@ -403,14 +372,11 @@
     
 };
 
-
 -(void)done{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 };
-
-
 
 #pragma mark - Reset Rebates on Home
 -(void)resetRebatesOnHome {
@@ -424,18 +390,7 @@
         [fetchRequest setEntity:entity];
         [fetchRequest setPredicate:cartPredicate];
         
-        
-//        self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-//        
-//        self.prodFRC.delegate = self;
-        
         NSError *fetchingError = nil;
-//        if ([self.prodFRC performFetch:&fetchingError]) {
-//            NSLog(@"Successfully fetched ");
-//            
-//        } else {
-//            NSLog(@"Failed to get the result");
-//        }
         
         allData = [[NSArray alloc]init];
         allData = [self.managedObjectContext
@@ -444,8 +399,6 @@
         [self resetAllRebates];
     }
 }
-
-
 
 -(void)resetAllRebates {
     for (int j = 0; j  < allData.count; j++){
@@ -460,7 +413,5 @@
         NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
     }
 }
-
-
 
 @end

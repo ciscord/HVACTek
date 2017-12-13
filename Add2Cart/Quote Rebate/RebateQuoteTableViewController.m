@@ -40,7 +40,7 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
     
-    }
+}
 
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -50,6 +50,7 @@
 
     
 }
+
 -(void) viewDidDisappear:(BOOL)animated {
       //(@"sendin back puch is %d",purch.count);
          NSError *error;
@@ -59,24 +60,12 @@
     [self.delegate receiveData:rebatesToSend:purch];
 }
 
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
-//    self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
-//    secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
-//    cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months24Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months36Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months48Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months60Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months70Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.months84Button.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                         placeholderImage:nil
+                         placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                       
                                       UIImageView *strongImageView = weakImageView;
@@ -88,9 +77,6 @@
                                       //
                                   }];
 }
-
-
-
 
 -(void) fetchData {
     
@@ -104,18 +90,7 @@
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:cartPredicate];
     
-    
-//    self.prodFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-//    
-//    self.prodFRC.delegate = self;
-  
     NSError *fetchingError = nil;
-//    if ([self.prodFRC performFetch:&fetchingError]) {
-//        NSLog(@"Successfully fetched ");
-//        
-//    } else {
-//        NSLog(@"Failed to get the result");
-//    }
   
     allData = [[NSArray alloc]init];
     allData = [self.managedObjectContext
@@ -140,8 +115,6 @@
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
-           // NSLog(@"name: %@",itm.modelName);
-           // NSLog(@"price: %@",itm.finalPrice);
 
             [selected addObject:itm];
                        
@@ -153,8 +126,6 @@
     [self.tableView reloadData];
     
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -168,13 +139,10 @@
     return 1;
 }
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return selected.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -195,9 +163,6 @@
     return cell;
 }
 
-
-
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     Item * aItem = selected[indexPath.row];
@@ -207,8 +172,6 @@
     
     return NO;
 }
-
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -237,8 +200,6 @@
     }
 }
 
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Item * aItem = selected[indexPath.row];
     if ([aItem.usserAdet intValue]==1) {
@@ -247,8 +208,6 @@
     }
     
 }
-
-
 
 #pragma mark - Custom Switch
 -(void) customSwitch:(id) sender {
@@ -260,18 +219,13 @@
     } else {
         itm.include = [NSNumber numberWithBool:NO];
     }
-
     
 }
-
 
 - (IBAction)btnAddRebate:(id)sender {
     [self performSegueWithIdentifier:@"addEditRebate" sender:self];
     
-    
 }
-
-
 
 #pragma mark - Segue
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender   {
@@ -291,7 +245,5 @@
     }
 
 }
-
-
 
 @end

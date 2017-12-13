@@ -27,7 +27,7 @@
 {
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:nil
+                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            
                                            UIImageView *strongImageView = weakImageView;

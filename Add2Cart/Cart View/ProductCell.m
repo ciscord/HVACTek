@@ -12,6 +12,7 @@
 @implementation ProductCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
 }
 

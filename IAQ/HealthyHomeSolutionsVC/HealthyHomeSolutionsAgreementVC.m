@@ -15,6 +15,8 @@
     NSMutableArray* selectedProductArray;
     float totalCost;
     NSString* authid;
+    NSString* customerName;
+    NSString* iaqProductString;
 }
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 @property (weak, nonatomic) IBOutlet UIView *topBannerView;
@@ -62,9 +64,25 @@
         totalCost = [IAQDataModel sharedIAQDataModel].goodTotalPrice;
     }
     
-    NSString* iaqProductString = @"";
+    iaqProductString = @"";
     for (IAQProductModel* iaqProduct in selectedProductArray) {
         iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
+        
+    }
+    
+    customerName = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName;
+    if (self.fromAddCart2) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        iaqProductString = [userdefault objectForKey:@"iaqProduct"];
+        customerName = [userdefault objectForKey:@"customerName"];
+        totalCost = [[userdefault objectForKey:@"totalCost"] floatValue];
+        NSString *signature = [userdefault objectForKey:@"signature"];
+        if (signature != nil) {
+            NSData* imageData = [[NSData alloc] initWithBase64EncodedString:signature options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            UIImage* signatureImage = [UIImage imageWithData:imageData];
+            [self.signatureView setImage:signatureImage];
+        }
+        
         
     }
     self.descriptionLabel.text = iaqProductString;
@@ -118,15 +136,15 @@
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof (self) weakSelf = self;
-            NSString* iaqProductString = @"";
+            NSString* iaqProductStringFormatted = @"";
             if (selectedProductArray.count >= 1) {
                 IAQProductModel* iaqProduct = selectedProductArray[0];
-                iaqProductString = [NSString stringWithFormat:@"%@", iaqProduct.title];
+                iaqProductStringFormatted = [NSString stringWithFormat:@"%@", iaqProduct.title];
             }
             if (selectedProductArray.count > 1) {
                 for (int i = 1; i < selectedProductArray.count; i++) {
                     IAQProductModel* iaqProduct = selectedProductArray[i];
-                    iaqProductString = [NSString stringWithFormat:@"%@,%@", iaqProductString, iaqProduct.title];
+                    iaqProductStringFormatted = [NSString stringWithFormat:@"%@,%@", iaqProductStringFormatted, iaqProduct.title];
                 }
             }
             
@@ -134,8 +152,8 @@
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
-            [[DataLoader sharedInstance] addIaqAuthorizeSale:iaqProductString
-                                                    customer:[IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName
+            [[DataLoader sharedInstance] addIaqAuthorizeSale:iaqProductStringFormatted
+                                                    customer:customerName
                                                   technician:technicanName
                                                        price:totalCost
                                                    signature:signature
@@ -144,6 +162,13 @@
                                                        authid = [dataDictionary objectForKey:@"id"];
                                                        
                                                        [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                           
+                                                           NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                                                           [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                           [userdefault setObject:customerName forKey:@"customerName"];
+                                                           [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
+                                                           [userdefault setObject:signature forKey:@"signature"];
+                                                           [userdefault synchronize];
                                                            
                                                            [self showEmailSentAlert:emailField.text];
                                                            
@@ -191,15 +216,15 @@
             
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof (self) weakSelf = self;
-            NSString* iaqProductString = @"";
+            NSString* iaqProductStringFormatted = @"";
             if (selectedProductArray.count >= 1) {
                 IAQProductModel* iaqProduct = selectedProductArray[0];
-                iaqProductString = [NSString stringWithFormat:@"%@", iaqProduct.title];
+                iaqProductStringFormatted = [NSString stringWithFormat:@"%@", iaqProduct.title];
             }
             if (selectedProductArray.count > 1) {
                 for (int i = 1; i < selectedProductArray.count; i++) {
                     IAQProductModel* iaqProduct = selectedProductArray[i];
-                    iaqProductString = [NSString stringWithFormat:@"%@,%@", iaqProductString, iaqProduct.title];
+                    iaqProductStringFormatted = [NSString stringWithFormat:@"%@,%@", iaqProductStringFormatted, iaqProduct.title];
                 }
             }
             
@@ -207,8 +232,8 @@
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
-            [[DataLoader sharedInstance] addIaqAuthorizeSaleUnapproved:iaqProductString
-                                                    customer:[IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName
+            [[DataLoader sharedInstance] addIaqAuthorizeSaleUnapproved:iaqProductStringFormatted
+                                                    customer:customerName
                                                   technician:technicanName
                                                        price:totalCost
                                                    onSuccess:^(NSDictionary *dataDictionary) {
@@ -216,6 +241,12 @@
                                                        authid = [dataDictionary objectForKey:@"id"];
                                                        
                                                        [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                           
+                                                           NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                                                           [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                           [userdefault setObject:customerName forKey:@"customerName"];
+                                                           [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
+                                                           [userdefault synchronize];
                                                            
                                                            [self showEmailSentAlert:emailField.text];
                                                            
@@ -271,14 +302,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

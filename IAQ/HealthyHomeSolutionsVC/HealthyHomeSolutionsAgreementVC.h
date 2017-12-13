@@ -11,4 +11,5 @@
 @interface HealthyHomeSolutionsAgreementVC : BaseVC
 @property (readwrite) IAQTYPE iaqType;
 @property (readwrite) COSTTYPE costType;
+@property (readwrite) Boolean fromAddCart2;
 @end

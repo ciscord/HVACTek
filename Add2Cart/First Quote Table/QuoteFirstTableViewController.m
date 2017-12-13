@@ -28,7 +28,6 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,28 +54,23 @@
     }
 }
 
-
 -(void) home {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-
 -(void) back {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
-
 -(void) addDataOneOff {
     [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"SecondOptions"];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
-
 
 -(void) fetchData {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -96,7 +90,6 @@
     
     [self.tableView reloadData];
 }
-
 
 -(void) sortData {
     
@@ -122,17 +115,14 @@
     return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return secondOptions.count;
 }
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 195.0f;
 }
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     HeaderTableViewCell   *header = [tableView dequeueReusableCellWithIdentifier:@"Header"];
@@ -141,12 +131,10 @@
     return header;
 }
 
-
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80.0f;
     
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,7 +169,6 @@
     return nil;
 }
 
-
 -(void) customSwitch:(id)sender {
     Item *itm = [secondOptions objectAtIndex:[sender tag]];
     UISwitch* switchControl = sender;
@@ -193,14 +180,12 @@
     }
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TypeThreeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if ([cell.nameLabel.text isEqualToString:@"Misc Add - (Type In Description & Price)"]){
         [self performSegueWithIdentifier:@"miscAdd" sender:self];
     }
 }
-
 
 #pragma mark - Picker
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -217,7 +202,6 @@
     return YES;
 }
 
-
 -(void) buildQuote {
    
     [addedItems removeAllObjects];
@@ -231,7 +215,6 @@
         }
     }
 }
-
 
 - (IBAction)nextPage:(id)sender {
     [self buildQuote];
@@ -247,7 +230,6 @@
         [self performSegueWithIdentifier:@"quoteProd" sender:self];
     }
 }
-
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"quoteProd"]) {
@@ -267,6 +249,5 @@
     mc.managedObjectContext = managedObjectContext;
     }
 }
-
 
 @end

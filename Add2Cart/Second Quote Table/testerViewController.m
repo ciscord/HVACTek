@@ -10,23 +10,42 @@
 #import "PictureLibraryVC.h"
 #import "VideoLibraryVC.h"
 #import "RRQuestionsVC.h"
-
+#import "HealthyHomeSolutionsAgreementVC.h"
+#import "IAQDataModel.h"
 @interface testerViewController (){
     
     IBOutlet UILabel *lblSystemRebates;
     IBOutlet UILabel *lblInvestemts;
-    IBOutlet UILabel *lblFinancing;
+//    IBOutlet UILabel *lblFinancing;
     
     IBOutlet UIButton *btnFinancing;
-    IBOutlet UILabel *lblFinancingValue;
+    
+    __weak IBOutlet UIButton *btnEasyPay;
+//    IBOutlet UILabel *lblFinancingValue;
     IBOutlet UIButton *btnCart1;
     IBOutlet UIButton *btnCart2;
     IBOutlet UIButton *btnCart3;
     __weak IBOutlet UIButton *cartButton;
+    __weak IBOutlet UIButton *iaqButton;
+    
     __weak IBOutlet UIImageView *logoImageView;
     __weak IBOutlet UIButton *videoButton;
     __weak IBOutlet UIButton *pictureButton;
     __weak IBOutlet UIButton *tcoButton;
+    
+    __weak IBOutlet UILabel *lblEasyPay;
+    __weak IBOutlet UILabel *lblEasyPrice;
+    __weak IBOutlet UILabel *lblEasyPercent;
+    
+    __weak IBOutlet UILabel *lblInvestmentMonth;
+    __weak IBOutlet UILabel *lblFastPercent;
+    
+    __weak IBOutlet UILabel *lblFastPay;
+    __weak IBOutlet UILabel *lblFastPrice;
+
+    float easyPaymentFactor;
+    float fastPaymentFactor;
+    
 }
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
@@ -68,6 +87,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //need to update
+    easyPaymentFactor = 0.0105;
+    fastPaymentFactor = 0.0115;
+    
+    lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
+    lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
+    //
     
     [self configureColorScheme];
     [self configureUpperView];
@@ -194,6 +220,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    iaqButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     tcoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -201,10 +228,10 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
    // btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
      btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
+    btnEasyPay.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     __weak UIImageView *weakImageView = logoImageView;
     [logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:nil
+                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            
                                            UIImageView *strongImageView = weakImageView;
@@ -560,147 +587,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [self fillArrays:itm];
     }
     
-    
- /*
-    for (int xj = 0; xj < typeThrees.count; xj++) {
-        itm = typeThrees[xj];
-        NSString *name = itm.modelName;
-        NSData *pdata = itm.photo;
-        NSString *type = itm.type;
-        NSString *opt = itm.optionOne;
-        NSString *man = itm.manu;
-        float opty = [itm.optOnePrice floatValue] ;
-        itm.finalOption = opt;
-        itm.finalPrice = [NSNumber numberWithFloat:opty];
-        [self fillArrays:itm];
-
-        
-        int currCartInd = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
-        
-        if ([itm.optionOne floatValue] != 0) {
-            NSString *option = itm.optionOne;
-            float optionPrice = [itm.optOnePrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.photo = pdata;
-            item.manu = man;
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optTwoPrice floatValue] != 0) {
-            NSString *option = itm.optionTwo;
-            float optionPrice = [itm.optTwoPrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.photo = pdata;
-            item.manu = man;
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optThreePrice floatValue] != 0) {
-            NSString *option = itm.optionThree;
-            float optionPrice = [itm.optThreePrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optFourPrice floatValue] != 0) {
-            NSString *option = itm.optionFour;
-            float optionPrice = [itm.optFourPrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optFivePrice floatValue] != 0) {
-            NSString *option = itm.optionFive;
-            float optionPrice = [itm.optFivePrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        
-        if ([itm.optSixPrice floatValue] != 0) {
-            NSString *option = itm.optionSix;
-            float optionPrice = [itm.optSixPrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        
-        if ([itm.optSevenPrice floatValue] != 0) {
-            NSString *option = itm.optionSeven;
-            float optionPrice = [itm.optSevenPrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-        
-        if ([itm.optEightPrice floatValue] != 0) {
-            NSString *option = itm.optionEight;
-            float optionPrice = [itm.optEightPrice floatValue] ;
-            Item *item;
-            item.modelName = name;
-            item.finalOption = option;
-            item.finalPrice = [NSNumber numberWithFloat:optionPrice];
-            item.type = type;
-            item.photo = pdata;
-            item.manu = man;
-            item.typeID = [NSNumber numberWithInt:3];
-            item.currentCart = [NSNumber numberWithInt:currCartInd];
-            [self fillArrays:item];
-        }
-    } */
 }
 
 
@@ -2077,56 +1963,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
-    /*
-    switch (self.months) {
-        case 24:
-        {
-            finacePay =  (totalAmount - totalSavings)/24;//.915
-            invest = (finacePay*24);
-            break;
-        }
-        case 36:
-        {
-            finacePay = (totalAmount - totalSavings)/.88/36;
-            invest = (finacePay*36);
-            break;
-        }
-        case 48:{
-            finacePay = (totalAmount - totalSavings)/.865/48;
-            invest = (finacePay*48);
-            break;
-        }
-        case 60:{
-            finacePay = (totalAmount - totalSavings)/.85/60;
-            invest = (finacePay*60);
-            break;
-        }
-            //(((C4 / .8975) * 0.0144)*84)
-        case 84:{
-            finacePay = ((totalAmount - totalSavings)/.8975) * 0.0144;
-            invest = (totalAmount - totalSavings)/.8975;
-            break;
-        }
-        case 72:{
-            finacePay =  (totalAmount - totalSavings)/72;
-            invest = (finacePay*72);
-            break;
-        }
-        default:
-        {
-            finacePay = totalAmount - totalSavings;
-            invest=  (totalAmount - totalSavings);
-            break;
-        }
-    }
-    */
-    //        case 144:{
-    //            finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
-    //            invest = (totalAmount - totalSavings)/.909;
-    //            break;
-    //        }
-    
     float localInvest = finacePay * self.months;//(totalAmount - totalSavings);
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
@@ -2152,45 +1988,15 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
     lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
-    lblFinancingValue.text = [NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:finacePay]]];
-//    switch (self.months) {
-//        case 84:
-//            //3.99% Best Rate 84 Months
-//            lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
-//            break;
-//        case 0:
-//            lblFinancing.text =[NSString stringWithFormat:@""];
-//            break;
-//            
-//        default:
-//            lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
-//            break;
-//    }
-    
+
+    lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
+    lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor]]];
     
     if (self.months > 83) {
-        lblFinancing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months\n",self.months];
+
     }else{
-        lblFinancing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments\n",self.months];
+
     }
-    
-    
-    /*
-     case 144:
-     lblFinancing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months\n",self.months];
-     break;
-     */
-    
-    NSMutableAttributedString *TitleText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",lblFinancing.text,lblFinancingValue.text]];
-    // NSArray *aStrings=[btnTitleText.string componentsSeparatedByString:separator];
-    
-    NSMutableAttributedString *chargeStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",lblFinancing.text]];
-    NSDictionary *chargeAttr=@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:15]};
-    NSDictionary *moneyAttr=@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17]};
-    
-    [TitleText setAttributes:chargeAttr range:NSMakeRange(0,[chargeStr length])];
-    [TitleText setAttributes:moneyAttr range:NSMakeRange([chargeStr length],[TitleText length]-[chargeStr length])];
-    [lblFinancing setAttributedText:TitleText];
     
     [tableViewX reloadData];
 }
@@ -2206,7 +2012,26 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self performSegueWithIdentifier:@"rebate" sender:self];
 }
 
+#pragma mark - IAQ Button
 
+- (IBAction)iaqButton:(id)sender {
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    NSString* iaqProductString = [userdefault objectForKey:@"iaqProduct"];
+    
+    if (iaqProductString != nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
+        HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsAgreementVC"];
+        healthyHomeSolutionsAgreementVC.fromAddCart2 = true;
+        [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+        
+    }else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
+        
+        UIViewController *vc = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
 #pragma mark - Buttons Actions
 - (IBAction)monthBut:(id)sender {
     int mon = [sender tag];
@@ -2233,6 +2058,20 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self.view bringSubviewToFront:secView];
 }
 
+- (IBAction)fastPayClick:(id)sender {
+    [self performSegueWithIdentifier:@"cart" sender:nil];
+    
+}
+
+- (IBAction)investmentClick:(id)sender {
+    [self performSegueWithIdentifier:@"cart" sender:nil];
+    
+}
+
+- (IBAction)easyPayClick:(id)sender {
+    [self performSegueWithIdentifier:@"cart" sender:nil];
+    
+}
 
 
 #pragma mark - CartBtns Actions
@@ -2298,10 +2137,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     choosedWarranties = 0;
     choosedDuctlessMiniSplits = 0;
 }
-
-
-
-
 
 -(void)assignChoosedOptionsValues {
     if (_cartItems.count > 0) {
@@ -2405,9 +2240,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
-
-
 #pragma mark - Segue
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -2432,8 +2264,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 [tt addObject:itm];
         }
         
-        
-        
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
         [cart setObject:tt forKey:@"cartItems"];
         [cart setObject:[NSNumber numberWithInt:self.months] forKey:@"cartMonths"];
@@ -2447,8 +2277,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cartView.cartstableView reloadData];
     }
     
-    
-    
     if ([segue.identifier isEqualToString:@"savedCart"]) {
         CartViewController *cartView = segue.destinationViewController;
         cartView.delegate = self;
@@ -2461,8 +2289,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cartView.cartstableView reloadData];
     }
 }
-
-
 
 #pragma mark - Reset Rebates on Home
 
@@ -2487,8 +2313,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
-
 -(void)resetAllRebates {
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
@@ -2502,36 +2326,5 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
     }
 }
-
-
-
-
-
-/*
- case 3:
- if (airCon.count == 0) {
- case 5:
- if (heatPump.count == 0) {
- case 4:
- if (furn.count == 0) {
- case 7:
- if (airH.count == 0) {
- case 6:
- if (geo.count == 0) {
- case 2:
- if (iaq.count == 0) {
- case 0:
- if (acces.count == 0) {
- case 9:
- if (boilers.count == 0) {
- case 8:
- if (hotwater .count == 0) {
- case 1:
- if (warranties.count == 0) {
- case 10:
- if (ductlessMiniSplits.count == 0) {
- */
-
-
 
 @end

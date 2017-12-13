@@ -92,7 +92,7 @@ typedef void(^myCompletion)(BOOL);
     
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                          placeholderImage:nil
+                          placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                        
                                        UIImageView *strongImageView = weakImageView;
@@ -190,31 +190,13 @@ typedef void(^myCompletion)(BOOL);
   [self.view addSubview:self.progressBar];
 }
 
-
 - (void)updateProgressForValue:(NSNumber *)newValue
 {
   [self.progressBar setProgress:[newValue floatValue] animated:YES];
 }
 
-
 #pragma mark - Check For Sync
 - (void)checkSyncStatus {
-//  NSString *token =[[DataLoader sharedInstance] token];
-//  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kAdd2CartSyncURL];
-//  [request setTimeoutInterval: 10.0];
-//  [request setValue:token forHTTPHeaderField:@"TOKEN"];
-//  [NSURLConnection sendAsynchronousRequest:request
-//                                     queue:[NSOperationQueue currentQueue]
-//                         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//                           
-//                           if (data != nil && error == nil) {
-//                             [self performSelectorOnMainThread:@selector(fetchAdd2CartSyncStatus:) withObject:data waitUntilDone:NO];
-//                           }
-//                           else {
-//                             NSLog(@"add2CartSyncStatus error: %@",error);
-//                           }
-//                         }];
-    
     
     [[DataLoader sharedInstance] checkSyncStatusForAdd2Cart:YES onSuccess:^(NSDictionary *infoDict) {
         BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
@@ -224,24 +206,6 @@ typedef void(^myCompletion)(BOOL);
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }
-
-
-//- (void)fetchAdd2CartSyncStatus:(NSData *)responseData {
-//  NSError* error;
-//  NSDictionary* json = [NSJSONSerialization
-//                        JSONObjectWithData:responseData
-//                        options:kNilOptions
-//                        error:&error];
-//  
-//  if ([[json objectForKey:@"message"] isEqualToString:@"Succes"]) {
-//    NSDictionary* itemsDict = [json objectForKey:@"results"];
-//    BOOL syncStatus = [[itemsDict objectForKey:@"sync"] boolValue];
-//    [self syncLabelStatus:syncStatus];
-//    [self syncDateLabel:[itemsDict objectForKey:@"sync_date"]];
-//  }
-//}
-
-
 
 #pragma mark - Fetched ADD2CART Items
 - (void)fetchedAdd2CartItems:(NSDictionary *)responseData {
@@ -270,9 +234,6 @@ typedef void(^myCompletion)(BOOL);
 
 }
 
-
-
-
 #pragma mark - Add Products
 -(void) addProducts:(NSArray *)products {
   [self addProductsCartOne:products];
@@ -287,9 +248,6 @@ typedef void(^myCompletion)(BOOL);
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
 }
-
-
-
 
 #pragma mark - Fetch System Products
 -(void)addSystemProducts:(NSArray *)systemProd {
@@ -315,9 +273,6 @@ typedef void(^myCompletion)(BOOL);
     itemA.currentCart = [NSNumber numberWithInt:i];
   }
 }
-
-
-
 
 #pragma mark - Add Rebates
 -(void) addRebates:(NSArray *)rebates {
@@ -347,9 +302,6 @@ typedef void(^myCompletion)(BOOL);
     }
 }
 
-
-
-
 #pragma mark - Segues
 - (IBAction)productAdmin:(id)sender {
     [self performSegueWithIdentifier:@"prodAdmin" sender:self];
@@ -360,8 +312,6 @@ typedef void(^myCompletion)(BOOL);
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
     [self performSegueWithIdentifier:@"quoteFirst" sender:self];
 }
-
-
 
 #pragma mark - Sync Button Clicked
 - (IBAction)synCButton:(id)sender {
@@ -381,15 +331,11 @@ typedef void(^myCompletion)(BOOL);
   [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
 }
 
-
-
-
 #pragma mark - Clear Everything
 -(void) clearEverything {
     [self clearItems];
     [self clearFinancials];
 }
-
 
 -(void) clearItems {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -434,7 +380,6 @@ typedef void(^myCompletion)(BOOL);
         }
     }
 }
-
 
 #pragma mark - add products for carts
 - (void)addProductsCartOne:(NSArray *)products {
@@ -510,9 +455,6 @@ typedef void(^myCompletion)(BOOL);
     }
 }
 
-
-
-
 - (void)addProductsCartTwo:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
     
@@ -581,8 +523,6 @@ typedef void(^myCompletion)(BOOL);
         }
     }
 }
-
-
 
 - (void)addProductsCartThree:(NSArray *)products {
     NSMutableArray *newProd = [[NSMutableArray alloc]initWithCapacity:products.count];
@@ -653,9 +593,6 @@ typedef void(^myCompletion)(BOOL);
     }
 }
 
-
-
-
 #pragma mark - Insert Photo in Core Data
 - (Photos *)insertPhotosToDataBaseWithPath:(NSString *)stringPath {
   
@@ -687,9 +624,6 @@ typedef void(^myCompletion)(BOOL);
   }
 }
 
-
-
-
 #pragma mark - Save Financials
 - (void)saveFinancials:(NSArray *)financials {
     for (int x = 0; x < financials.count; x++) {
@@ -711,7 +645,6 @@ typedef void(^myCompletion)(BOOL);
         itm.months = [financials[x] objectForKey:@"months"];
     }
 }
-
 
 #pragma mark - Memory Warning
 - (void)didReceiveMemoryWarning

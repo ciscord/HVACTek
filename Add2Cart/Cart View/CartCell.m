@@ -16,12 +16,12 @@
 
 @interface CartCell ()
 
- @property (nonatomic, strong)  NSMutableArray *cartItems;
- @property (nonatomic, strong)  NSMutableArray *productList;
- @property (nonatomic, strong)  NSMutableArray *occurenciesList;
- @property (nonatomic, strong)  NSMutableArray *rebates;
- @property (nonatomic, strong)  NSMutableArray *financialsData;
- @property (nonatomic, strong)  NSNumber *months;
+@property (nonatomic, strong)  NSMutableArray *cartItems;
+@property (nonatomic, strong)  NSMutableArray *productList;
+@property (nonatomic, strong)  NSMutableArray *occurenciesList;
+@property (nonatomic, strong)  NSMutableArray *rebates;
+@property (nonatomic, strong)  NSMutableArray *financialsData;
+@property (nonatomic, strong)  NSNumber *months;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
@@ -38,12 +38,10 @@
 - (void)awakeFromNib {
     // Initialization code
     [self configureColorScheme];
-      [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
-      self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
+    self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -58,11 +56,9 @@
     self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-
 
 -(void) updateProductList {
     self.cartItems = [self.cart objectForKey:@"cartItems"];
@@ -90,14 +86,12 @@
             }
         }
         
-        
     }
         [self.occurenciesList addObjectsFromArray:self.productList];
         [self.poductTableView reloadData];
 
     [self buildQuote];
 }
-
 
 -(void) buildQuote {
     float totalAmount = 0.0f;
@@ -145,10 +139,6 @@
             invest = (finacePay*self.months.intValue);
         }
     }
-    
-
-    
-    
     /*
     switch ([self.months intValue]) {
         case 24:
@@ -208,7 +198,6 @@
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
 
-
 -(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
 
     
@@ -217,13 +206,10 @@
     [nf setMaximumFractionDigits:2];
     [nf setMinimumFractionDigits:2];
     
-    
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     [numberFormatter setMaximumFractionDigits:0];
     [numberFormatter setMinimumFractionDigits:0];
-    
-    
     
     //new
     self.systemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
@@ -253,7 +239,6 @@
     
 }
 
-
 #pragma marck tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -261,8 +246,6 @@
     return self.productList.count;
 
 };
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -284,7 +267,6 @@
         acell.lblTitle.text = title;
     }
     
-
     return acell;
 };
 
@@ -297,7 +279,6 @@
     [self.delegate done];
 }
 
-
 - (IBAction)saveCart:(id)sender {
     [self.delegate save:self.cart withIndex:[sender tag] andMonths:self.months];
 }
@@ -306,6 +287,5 @@
 - (IBAction)editCart:(id)sender {
     [self.delegate editCard:self.cart withIndex:[sender tag] andMonths:self.months];
 }
-
 
 @end

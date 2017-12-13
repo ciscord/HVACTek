@@ -31,14 +31,6 @@
     return self;
 }
 
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -70,7 +62,6 @@
             }
 }
 
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
@@ -78,7 +69,7 @@
     
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:nil
+                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                            
                                            UIImageView *strongImageView = weakImageView;
@@ -90,9 +81,6 @@
                                            //
                                        }];
 }
-
-
-
 
 #pragma mark - Upper View
 - (void)configureUpperView {
@@ -120,8 +108,6 @@
     [self.view addSubview:upperArcView];
 }
 
-
-
 -(void) home {
   
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -131,7 +117,6 @@
 -(void) back {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 -(void) getItem:(Item *)itemy {
     
@@ -149,15 +134,13 @@
     } else  {
         editt = [occ lastObject];
     }
-  }
-
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -170,8 +153,6 @@
     }
     return YES;
 }
-
-
 
 - (IBAction)saveButton:(id)sender {
     
@@ -217,7 +198,6 @@
         }
     }
 }
-
 
 #pragma mark - Add New Rebate
 -(void)addLocalRebateWithId:(NSNumber *)rebID andOrd:(NSNumber *)ordID {
