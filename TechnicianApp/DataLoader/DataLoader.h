@@ -204,4 +204,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                                price:(CGFloat)price
                            onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
                              onError:(void (^)(NSError *error))onError;
+
+-(void)add2cartFinancials:(NSDictionary *) parameters
+                onSuccess:(void (^)(NSString *successMessage, NSArray *reciveData))onSuccess
+                  onError:(void (^)(NSError *error))onError;
 @end

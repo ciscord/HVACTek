@@ -77,7 +77,7 @@ NSString *const IAQPRODUCTS      = @"iaqProducts";
 NSString *const ADDIAQAUTHORIZESALE                 = @"addIaqAuthorizeSale";
 NSString *const ADDIAQAUTHORIZESALEUNAPPROVED       = @"addIaqAuthorizeSaleUnapproved";
 NSString *const EMAILIAQAUTHORIZESALE               = @"emailIaqAuthorizeSale";
-
+NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 #define kStatusOK 1
 
 
@@ -893,6 +893,30 @@ NSString *const EMAILIAQAUTHORIZESALE               = @"emailIaqAuthorizeSale";
 
     
 }
+
+#pragma mark - ADD2CART add2cartFinancials
+-(void)add2cartFinancials:(NSDictionary *) parameters
+            onSuccess:(void (^)(NSString *successMessage, NSArray *reciveData))onSuccess
+              onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self GET:ADD2CARTFINANCIALS
+   parameters:parameters
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          if ([responseObject[@"status"] integerValue] == kStatusOK) {
+              NSArray *array = responseObject[@"results"];
+              onSuccess(@"OK", array);
+          }
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          if (onError) {
+              onError(error);
+          }
+      }];
+}
+
 #pragma mark - AdditionalInfo Requests
 
 - (void)getAdditionalInfoOnSuccess:(void (^)(NSDictionary *infoDict))onSuccess

@@ -22,7 +22,7 @@
 #import "DataLoader.h"
 #import "HvacTekConstants.h"
 #import "Financials+CoreDataClass.h"
-
+#import "MBProgressHUD.h"
 static const CGSize progressViewSize = { 300.0f, 20.0f };
 
 typedef void(^myCompletion)(BOOL);
@@ -309,8 +309,21 @@ typedef void(^myCompletion)(BOOL);
 
 
 - (IBAction)newQuote:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
-    [self performSegueWithIdentifier:@"quoteFirst" sender:self];
+    __weak typeof (self) weakSelf = self;
+    [[DataLoader sharedInstance] add2cartFinancials:nil
+                                      onSuccess:^(NSString *successMessage, NSArray *reciveData) {
+                                          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                          
+                                          [self saveFinancialsV1:reciveData];
+                                          [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
+                                          [self performSegueWithIdentifier:@"quoteFirst" sender:self];
+                                      }onError:^(NSError *error) {
+                                          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                          //run with offline data
+                                          [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
+                                          [self performSegueWithIdentifier:@"quoteFirst" sender:self];
+                                      }];
+    
 }
 
 #pragma mark - Sync Button Clicked
@@ -645,7 +658,30 @@ typedef void(^myCompletion)(BOOL);
         itm.months = [financials[x] objectForKey:@"months"];
     }
 }
-
+- (void)saveFinancialsV1:(NSArray *)financials {
+    for (int x = 0; x < financials.count; x++) {
+        Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
+        itm.financialId = [financials[x] objectForKey:@"id"];
+        itm.businessid = [financials[x] objectForKey:@"businessid"];
+        
+        if ([[financials[x] objectForKey:@"value1"] isEqual:[NSNull null]]) {
+            itm.discount1 = @"1";
+        }else{
+            itm.discount1 = [financials[x] objectForKey:@"value1"];
+        }
+        if ([[financials[x] objectForKey:@"value2"] isEqual:[NSNull null]]) {
+            itm.discount2 =  @"1";
+        }else{
+            itm.discount2 = [financials[x] objectForKey:@"value2"];
+        }
+        
+        itm.months = [financials[x] objectForKey:@"months"];
+    }
+    NSError *errorz;
+    if (![self.backgroundContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+}
 #pragma mark - Memory Warning
 - (void)didReceiveMemoryWarning
 {
