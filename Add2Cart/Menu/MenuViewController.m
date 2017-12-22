@@ -309,20 +309,8 @@ typedef void(^myCompletion)(BOOL);
 
 
 - (IBAction)newQuote:(id)sender {
-    __weak typeof (self) weakSelf = self;
-    [[DataLoader sharedInstance] add2cartFinancials:nil
-                                      onSuccess:^(NSString *successMessage, NSArray *reciveData) {
-                                          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                          
-                                          [self saveFinancialsV1:reciveData];
-                                          [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
-                                          [self performSegueWithIdentifier:@"quoteFirst" sender:self];
-                                      }onError:^(NSError *error) {
-                                          [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                          //run with offline data
-                                          [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
-                                          [self performSegueWithIdentifier:@"quoteFirst" sender:self];
-                                      }];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"workingCurrentCartIndex"];
+    [self performSegueWithIdentifier:@"quoteFirst" sender:self];
     
 }
 

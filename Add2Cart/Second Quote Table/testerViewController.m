@@ -88,11 +88,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 {
     [super viewDidLoad];
     //need to update
-    easyPaymentFactor = 0.0105;
-    fastPaymentFactor = 0.0115;
+    easyPaymentFactor = 0;
+    fastPaymentFactor = 0;
     
-    lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
-    lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
+    lblEasyPercent.text = @"";
+    lblFastPercent.text = @"";
     //
     
     [self configureColorScheme];
@@ -153,6 +153,32 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self.view sendSubviewToBack:secView];
     
     [self fetchFinancingObjects];
+    
+    __weak typeof (self) weakSelf = self;
+    [[DataLoader sharedInstance] add2cartFinancials:nil
+                                          onSuccess:^(NSString *successMessage, NSArray *reciveData) {
+                                              if (reciveData.count == 1) {
+                                                  NSDictionary* dataEasyFastpay = [reciveData objectAtIndex:0];
+//                                                  NSString* idForFinancial = [dataEasyFastpay objectForKey:@"id"];
+//                                                  NSString* businessId = [dataEasyFastpay objectForKey:@"businessid"];
+                                                  NSDictionary* dicEasyPay = [dataEasyFastpay objectForKey:@"easy_pay"];
+                                                  NSDictionary* dicFastPay = [dataEasyFastpay objectForKey:@"fast_pay"];
+                                                  easyPaymentFactor = [[dicEasyPay objectForKey:@"value"] floatValue];
+                                                  if (easyPaymentFactor < 0.001) {
+                                                      easyPaymentFactor = 0;
+                                                  }
+                                                  fastPaymentFactor = [[dicFastPay objectForKey:@"value"] floatValue];
+                                                  if (fastPaymentFactor < 0.001) {
+                                                      fastPaymentFactor = 0;
+                                                  }
+                                                  [self buildQuote];
+                                                  
+                                              }
+                                              
+                                          }onError:^(NSError *error) {
+                                              [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                              
+                                          }];
 }
 
 
@@ -278,17 +304,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //Fetch the data.
     [self fetchData];
     
-    
-    
     totalAmount = 0.0f;
     totalSavings = 0.0f;
     afterSavings =0.0f ;
     finacePay = 0.0f;
     monthlyPay = 0.0f;
     
-    
     [self assignChoosedOptionsValues];
-    
     
     [self buildQuote];
     
@@ -315,10 +337,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
-
-
-
 -(void) setupArrays {
     headers = [[NSArray alloc]initWithObjects:@"Controls",  @"Warranties", @"Indoor Air Quality", @"Air Conditioners", @"Furnaces", @"Heat Pumps",
                @"Air Handlers", @"Geothermal" , @"Hot Water Heaters", @"Boilers",  @"Ductless Mini Splits", nil];
@@ -339,15 +357,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     ductlessMiniSplits = [[NSMutableArray alloc] init];
 }
 
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - Fetch and Sort
 -(void) fetchData {
@@ -373,8 +387,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //Need to call sort here
     [self sortData];
 }
-
-
 
 -(void) sortData {
     
@@ -423,8 +435,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         if ((tID == 4)&& (![typeFours containsObject:itm])) {
             [typeFours addObject:itm];
         }
-        
-        
         
     } //end of iteration
     
@@ -493,9 +503,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
-    
-    
     [self arraySort];
     
     //call the blanks here
@@ -528,7 +535,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     
 }
-
 
 -(void) arraySort {
     
@@ -573,8 +579,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
-
 -(void) sortTypeThrees {
     Item *itm;
     
@@ -589,7 +593,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 
-
 -(void) sortTypeFours {
     Item *itm;
     for (int xj = 0; xj < typeFours.count; xj++) {
@@ -601,7 +604,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [self fillArrays:itm];
     }
 }
-
 
 -(void) fillArrays:(Item *)itm {
     
@@ -653,7 +655,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
 }
 
-
 -(Item *)loadTheBlank {
     
     for (int x = 0; x < allData.count; x++) {
@@ -667,7 +668,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     return blank;
 }
-
 
 #pragma mark - Check Actions
 -(float) checkOptionsCoolPrice:(Item *)itm {
@@ -692,8 +692,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return 0.0f;
 }
 
-
-
 -(NSString *) checkOptionsCoolOpt:(Item *)itm {
     
     if ([itm.optionOne isEqualToString:firstOption.coolingValue]) {
@@ -716,8 +714,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     return @"None";
 }
-
-
 
 -(float) checkOptionsHeatPrice:(Item *)itm {
     
@@ -742,7 +738,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return 0.0f;
 }
 
-
 -(NSString *) checkOptionsHeatOpt:(Item *)itm {
     if ([itm.optionOne isEqualToString:firstOption.heatingValue]) {
         return itm.optionOne;
@@ -763,8 +758,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     return @"None";
 }
-
-
 
 -(float) checkOptionsBoilersPrice:(Item *)itm {
     
@@ -789,7 +782,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return 0.0f;
 }
 
-
 -(NSString *) checkOptionsBoilersOpt:(Item *)itm {
     if ([itm.optionOne isEqualToString:firstOption.boilersValue]) {
         return itm.optionOne;
@@ -810,7 +802,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     return @"None";
 }
-
 
 -(float) checkOptionsDuctlessPrice:(Item *)itm {
     
@@ -835,7 +826,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return 0.0f;
 }
 
-
 -(NSString *) checkOptionsDuctlessOpt:(Item *)itm {
     if ([itm.optionOne isEqualToString:firstOption.ductlessValue]) {
         return itm.optionOne;
@@ -856,8 +846,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     return @"None";
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -972,15 +960,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return 1;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.buyButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     Item *itm = nil;
-    
-    
     
     cell.inCartLabel.hidden = YES;
     
@@ -1301,7 +1285,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [tableViewX reloadData];
 }
 
-
 -(void) cellSwiped:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
@@ -1443,9 +1426,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     
 }
-
-
-
 
 -(void) cellSwipedLeft:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
@@ -1600,17 +1580,14 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 
-
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.financialsData count];
 }
 
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger itemIndex = indexPath.item;
@@ -1620,7 +1597,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return cell;
 }
 
-
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -1629,7 +1605,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     secView.hidden = YES;
     [self buildQuote];
 }
-
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
@@ -1967,8 +1942,19 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
 }
 
-
 -(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
+    
+    if (easyPaymentFactor < 0.0001) {
+        lblEasyPercent.text = @"0%";
+    }else {
+        lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
+    }
+    
+    if (fastPaymentFactor < 0.0001) {
+        lblFastPercent.text = @"0%";
+    }else {
+        lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
+    }
     
     totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
     totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
@@ -1991,6 +1977,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
     lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
     lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor]]];
+    
     
     if (self.months > 83) {
 
