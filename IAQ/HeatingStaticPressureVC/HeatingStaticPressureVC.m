@@ -70,6 +70,11 @@
     [self.bField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.cField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.dField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.aField.delegate = self;
+    self.bField.delegate = self;
+    self.cField.delegate = self;
+    self.dField.delegate = self;
 }
 
 -(IBAction)nextButtonClick:(id)sender {
@@ -127,7 +132,39 @@
     self.acField.text = [NSString stringWithFormat:@"%.2f", aValue - cValue];
     self.bdField.text = [NSString stringWithFormat:@"%.2f", bValue - dValue];
 }
-
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    unsigned long numberOfDots = [textField.text componentsSeparatedByString:@"."].count - 1;
+    if (numberOfDots >0 && [string isEqualToString:@"."]) {
+        return false;
+    }
+    NSString* newString = [NSString stringWithFormat:@"%@%@", textField.text, string];
+    if (newString.length > 1) {
+        unichar firstChar = [[newString uppercaseString] characterAtIndex:0];
+        unichar secondChar = [[newString uppercaseString] characterAtIndex:1];
+        if (firstChar == '0' && secondChar != '.') {
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
+            if (stringIsValid) {
+                textField.text = string;
+            }
+            
+            return false;
+        }
+        
+    }
+    if (textField.text.length == 1 && string.length == 0) {
+        textField.text = @"0";
+        return false;
+    }
+    NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:newString];
+    
+    BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
+    
+    return stringIsValid;
+}
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
     self.systemTypeField.text = self.systemTypeField.dropDownTableTitlesArray[index];
     [self.systemTypeField hideDropDown];
