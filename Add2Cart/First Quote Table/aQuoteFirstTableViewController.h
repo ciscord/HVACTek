@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @property (weak, nonatomic) IBOutlet UISwitch *coolingSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *heatingSwitch;

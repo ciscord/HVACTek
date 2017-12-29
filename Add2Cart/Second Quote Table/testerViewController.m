@@ -137,8 +137,12 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     //Setup the navbar.
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
-    [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:backButton, btnShare, nil]];
+    UIButton* backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 34)];
+    [backButton setTitle:@"Back" forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc] initWithCustomView:backButton];// style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:btnBack, btnShare, nil]];
     
     //Set delegate & views
     tableViewX.delegate = self;
