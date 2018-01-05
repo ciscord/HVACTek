@@ -1919,7 +1919,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         totalSavings += [itm.finalPrice floatValue];
     }
     
-    float invest;
+    float invest = 0.0;
     
     Financials *financeObject;
     for (int i = 0; i < [self.financialsData count]; i++) {
@@ -1931,13 +1931,22 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     
     if (financeObject != nil) {
-        //NSLog(@"%f", financeObject.discount1.doubleValue);
+        //NSLog(@"%f", financeObject.discount1.floatValue);
+        float discount1 = 1.0;
+        if ([financeObject.discount1 isNumeric]) {
+            discount1 = [financeObject.discount1 floatValue];
+        }
+        
+        float discount2 = 1.0;//= financeObject.discount2;
+        if ([financeObject.discount2 isNumeric]) {
+            discount2 = [financeObject.discount2 floatValue];
+        }
         
         if (self.months > 83) {
-            finacePay = ((totalAmount - totalSavings)/financeObject.discount1.doubleValue) * financeObject.discount2.doubleValue;
-            invest = (totalAmount - totalSavings)/financeObject.discount1.doubleValue;
+            finacePay = ( (float)(totalAmount - totalSavings) / discount1 ) * discount2;
+            invest = (float)(totalAmount - totalSavings) / discount1;
         }else{
-            finacePay = (totalAmount - totalSavings)/financeObject.discount1.doubleValue/self.months;
+            finacePay = (float)(totalAmount - totalSavings) / discount1 / (float)self.months;
             invest = (finacePay*self.months);
         }
     }
@@ -1948,48 +1957,53 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 -(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
     
-    if (easyPaymentFactor < 0.0001) {
-        lblEasyPercent.text = @"0%";
-    }else {
-        lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+       // Some code
     
-    if (fastPaymentFactor < 0.0001) {
-        lblFastPercent.text = @"0%";
-    }else {
-        lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
-    }
+        if (easyPaymentFactor < 0.0001) {
+            lblEasyPercent.text = @"0%";
+        }else {
+            lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
+        }
+        
+        if (fastPaymentFactor < 0.0001) {
+            lblFastPercent.text = @"0%";
+        }else {
+            lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
+        }
+        
+        totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
+        totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
+        afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.0f",afterSaving];
+        financeMonthLabel.text = [NSString stringWithFormat:@"0%% Financing\nMonthlyPayment\n$%.0f",financeP];
+        monthlyPayment.text = [NSString stringWithFormat:@"Monthly Payment\n$%.0f",month];
+        
+        NSNumberFormatter *nf = [NSNumberFormatter new];
+        nf.numberStyle = NSNumberFormatterDecimalStyle;
+        [nf setMaximumFractionDigits:2];
+        [nf setMinimumFractionDigits:2];
+        
+        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        [numberFormatter setMaximumFractionDigits:0];
+        [numberFormatter setMinimumFractionDigits:0];
+        
+        lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
+        lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
+        
+        lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
+        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor]]];
+        
+        
+        if (self.months > 83) {
+            
+        }else{
+            
+        }
+        
+        [tableViewX reloadData];
+    });
     
-    totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
-    totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
-    afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.0f",afterSaving];
-    financeMonthLabel.text = [NSString stringWithFormat:@"0%% Financing\nMonthlyPayment\n$%.0f",financeP];
-    monthlyPayment.text = [NSString stringWithFormat:@"Monthly Payment\n$%.0f",month];
-    
-    NSNumberFormatter *nf = [NSNumberFormatter new];
-    nf.numberStyle = NSNumberFormatterDecimalStyle;
-    [nf setMaximumFractionDigits:2];
-    [nf setMinimumFractionDigits:2];
-    
-    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    [numberFormatter setMaximumFractionDigits:0];
-    [numberFormatter setMinimumFractionDigits:0];
-    
-    lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
-    lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
-
-    lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
-    lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor]]];
-    
-    
-    if (self.months > 83) {
-
-    }else{
-
-    }
-    
-    [tableViewX reloadData];
 }
 
 
