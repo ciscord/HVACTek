@@ -65,7 +65,8 @@
     [self login];
 }
 
--(void)login{
+-(void)login{    
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof (self) weakSelf = self;
     [[DataLoader sharedInstance] loginWithUsername:self.txtUser.text
@@ -83,7 +84,7 @@
                                              //[weakSelf performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
                                          }
                                            onError:^(NSError *error) {
-                                               [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                            }];
   

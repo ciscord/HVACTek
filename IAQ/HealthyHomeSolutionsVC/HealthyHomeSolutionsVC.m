@@ -67,17 +67,46 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *term = [textField.text stringByReplacingCharactersInRange:range withString: string];
+    unsigned long numberOfDots = [textField.text componentsSeparatedByString:@"."].count - 1;
+    if (numberOfDots >0 && [string isEqualToString:@"."]) {
+        return false;
+    }
+    NSString* newString = [NSString stringWithFormat:@"%@%@", textField.text, string];
+    if (newString.length > 1) {
+        unichar firstChar = [[newString uppercaseString] characterAtIndex:0];
+        unichar secondChar = [[newString uppercaseString] characterAtIndex:1];
+        if (firstChar == '0' && secondChar != '.') {
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
+            if (stringIsValid) {
+                textField.text = string;
+            }
+            
+            return false;
+        }
+        
+    }
+    if (textField.text.length == 1 && string.length == 0) {
+        textField.text = @"0";
+        return false;
+    }
+    NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:newString];
     
-    if (![term isNumeric]) {
-        return NO;
+    BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
+    
+    if (stringIsValid) {
+        
+        NSInteger itemIndex = textField.tag;
+        IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
+        
+        item.quantity = newString;
     }
     
-    NSInteger itemIndex = textField.tag;
-    IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
     
-    item.quantity = term;
-    return YES;
+    return stringIsValid;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
