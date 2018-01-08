@@ -1992,7 +1992,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
         
         lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor / 100]]];
-        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor / 100]]];
+        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.months]]];
         
         
         if (self.months > 83) {
