@@ -85,7 +85,7 @@
                                          }
                                            onError:^(NSError *error) {
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                               ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+//                                               ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                            }];
   
 }
