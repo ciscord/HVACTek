@@ -1963,13 +1963,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         if (easyPaymentFactor < 0.0001) {
             lblEasyPercent.text = @"0%";
         }else {
-            lblEasyPercent.text = [NSString stringWithFormat:@"%%%.4f",easyPaymentFactor];
+            lblEasyPercent.text = [NSString stringWithFormat:@"%.4f%%",easyPaymentFactor];
         }
         
         if (fastPaymentFactor < 0.0001) {
             lblFastPercent.text = @"0%";
         }else {
-            lblFastPercent.text = [NSString stringWithFormat:@"%%%.4f",fastPaymentFactor];
+            lblFastPercent.text = [NSString stringWithFormat:@"%.4f%%",fastPaymentFactor];
         }
         
         totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
@@ -1991,8 +1991,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
         lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
         
-        lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
-        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor]]];
+        lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor / 100]]];
+        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * fastPaymentFactor / 100]]];
         
         
         if (self.months > 83) {
@@ -2064,7 +2064,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 - (IBAction)fastPayClick:(id)sender {
-    [self performSegueWithIdentifier:@"cart" sender:nil];
+//    [self performSegueWithIdentifier:@"cart" sender:nil];
+    secView.hidden = NO;
+    [self.view bringSubviewToFront:secView];
     
 }
 
@@ -2074,7 +2076,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 - (IBAction)easyPayClick:(id)sender {
-    [self performSegueWithIdentifier:@"cart" sender:nil];
+//    [self performSegueWithIdentifier:@"cart" sender:nil];
+    secView.hidden = NO;
+    [self.view bringSubviewToFront:secView];
     
 }
 
