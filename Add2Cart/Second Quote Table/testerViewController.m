@@ -46,6 +46,7 @@
     float easyPaymentFactor;
     float fastPaymentFactor;
     
+    BOOL isEasy;
 }
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 @property (weak, nonatomic) IBOutlet UIButton *rebatesButton;
@@ -62,7 +63,8 @@
 @synthesize secView;
 @synthesize tableViewX;
 @synthesize firstOption;
-@synthesize financialsData;
+@synthesize easyFinancialsData;
+@synthesize fastFinancialsData;
 
 static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
@@ -96,7 +98,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self configureColorScheme];
     [self configureUpperView];
     
-    self.financialsData = [[NSMutableArray alloc] init];
+    self.easyFinancialsData = [[NSMutableArray alloc] init];
+    self.fastFinancialsData = [[NSMutableArray alloc] init];
+    
     allData = [[NSMutableArray alloc] init];
     
      [self.monthsCollectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
@@ -151,70 +155,145 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
     
-    [self fetchFinancingObjects];
+    
     
     __weak typeof (self) weakSelf = self;
     [[DataLoader sharedInstance] add2cartFinancials:nil
-                                          onSuccess:^(NSString *successMessage, NSArray *reciveData) {
+                                          onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                               if (reciveData.count == 1) {
-                                                  NSDictionary* dataEasyFastpay = [reciveData objectAtIndex:0];
-//                                                  NSString* idForFinancial = [dataEasyFastpay objectForKey:@"id"];
-//                                                  NSString* businessId = [dataEasyFastpay objectForKey:@"businessid"];
-                                                  NSArray* arrayEasyPay = [dataEasyFastpay objectForKey:@"easy_pay"];
-                                                  NSArray* arrayFastPay = [dataEasyFastpay objectForKey:@"fast_pay"];
-                                                  if (arrayEasyPay != nil && arrayFastPay != nil) {
-                                                      NSDictionary* dicEasyPay = [arrayEasyPay objectAtIndex:0];
-                                                      NSDictionary* dicFastPay = [arrayFastPay objectAtIndex:0];
+                                                  [self  clearFinancials];
+                                                  [self saveFinancials:reciveData];
+                                                  [self fetchFinancingObjects];
+                                                  [self buildQuote];
                                                   
-                                                      easyPaymentFactor = [[dicEasyPay objectForKey:@"value"] floatValue];
-                                                      if (easyPaymentFactor < 0.001) {
-                                                          easyPaymentFactor = 0;
-                                                      }
-                                                      fastPaymentFactor = [[dicFastPay objectForKey:@"value"] floatValue];
-                                                      if (fastPaymentFactor < 0.001) {
-                                                          fastPaymentFactor = 0;
-                                                      }
-                                                      [self buildQuote];
-                                                  }
                                                   
                                                   
                                               }
                                               
                                           }onError:^(NSError *error) {
                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                              
+                                              [self fetchFinancingObjects];
                                           }];
 }
 
-#pragma mark - Fetch Financing
 
--(void)fetchFinancingObjects {
+-(void) clearFinancials {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"financialId" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
+    fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
     
     NSError *fetchingError = nil;
     
-    [self.financialsData addObjectsFromArray:[self.managedObjectContext
+    NSArray *occP = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+    
+    if (![occP count]) {
+        
+    } else  {
+        for (int i = 0; i<occP.count; i++) {
+            Financials  *del = occP[i];
+            [self.managedObjectContext deleteObject:del];
+        }
+    }
+}
+
+- (void)saveFinancials:(NSDictionary *)financials {
+    NSDictionary* datadict = ((NSArray*)financials)[0];
+    
+    NSArray* easyPayArray = [datadict objectForKey:@"easy_pay"];
+    for (int x = 0; x < easyPayArray.count; x++) {
+        
+        if (![self isEmpty:[easyPayArray[x] objectForKey:@"value"]] &&
+            ![self isEmpty:[easyPayArray[x] objectForKey:@"month"]] ) {
+            Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
+            itm.financialId = [easyPayArray[x] objectForKey:@"id"];
+            itm.businessid = [easyPayArray[x] objectForKey:@"businessid"];
+            itm.description1 = [easyPayArray[x] objectForKey:@"description"];
+            itm.month = [easyPayArray[x] objectForKey:@"month"];
+            itm.type = @"easy";
+            itm.value = [easyPayArray[x] objectForKey:@"value"];
+            
+        }
+        
+    }
+    NSArray* fastPayArray = [datadict objectForKey:@"fast_pay"];
+    for (int x = 0; x < fastPayArray.count; x++) {
+        
+        if (![self isEmpty:[fastPayArray[x] objectForKey:@"month"]] ) {
+            Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
+            itm.financialId = [fastPayArray[x] objectForKey:@"id"];
+            itm.businessid = [fastPayArray[x] objectForKey:@"businessid"];
+            itm.description1 = [fastPayArray[x] objectForKey:@"description"];
+            itm.month = [fastPayArray[x] objectForKey:@"month"];
+            itm.type = @"fast";
+            itm.value = [fastPayArray[x] objectForKey:@"value"];
+            
+        }
+        
+    }
+    
+    NSError *errorz;
+    if (![self.managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+    
+}
+- (BOOL) isEmpty:(NSObject*) data {
+    if (data == nil) {
+        return true;
+    }
+    if ([data isEqual:[NSNull null]]) {
+        return true;
+    }
+    return false;
+}
+#pragma mark - Fetch Financing
+
+-(void)fetchFinancingObjects {
+    
+    //easy financial
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"easy"];
+    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"month" ascending:YES];
+    fetchRequest.sortDescriptors =[NSArray arrayWithObject:sort];
+    
+    [fetchRequest setEntity:entity];
+    
+    NSError *fetchingError = nil;
+    
+    [self.easyFinancialsData addObjectsFromArray:[self.managedObjectContext
                                   executeFetchRequest:fetchRequest error:&fetchingError]];
-    self.financialsData = [self filterFinancials:self.financialsData];
+    
+    //fast financial
+    NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
+    fetchRequest1.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"fast"];
+    sort =[NSSortDescriptor sortDescriptorWithKey:@"month" ascending:YES];
+    fetchRequest1.sortDescriptors =[NSArray arrayWithObject:sort];
+    
+    [fetchRequest1 setEntity:entity];
+    
+    [self.fastFinancialsData addObjectsFromArray:[self.managedObjectContext
+                                                  executeFetchRequest:fetchRequest1 error:&fetchingError]];
+    
     [self configureFinancingDefaults];
 }
 
--(NSMutableArray *)filterFinancials:(NSMutableArray *)financials {
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"month"
-                                                 ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSMutableArray *returnArr = [[NSMutableArray alloc] initWithArray:[financials sortedArrayUsingDescriptors:sortDescriptors]];
-    return returnArr;
-}
-
 -(void)configureFinancingDefaults {
-    if (self.financialsData.count > 0) {
-        Financials *item = self.financialsData[0];
-        self.months = item.month.intValue;
-    }
+//    if (self.easyFinancialsData.count > 0) {
+//        Financials *item = self.easyFinancialsData[0];
+//        self.easyMonth = item.month.intValue;
+//    }
+//
+//    if (self.fastFinancialsData.count > 0) {
+//        Financials *item = self.fastFinancialsData[0];
+//        self.fastMonth = item.month.intValue;
+//    }
+    self.easyMonth = -1;
+    self.fastMonth = -1;
 }
 
 -(void) home {
@@ -1558,7 +1637,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.financialsData count];
+    if (isEasy) {
+        return self.easyFinancialsData.count;
+    }else {
+        return self.fastFinancialsData.count;
+    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -1567,7 +1650,12 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger itemIndex = indexPath.item;
-    Financials *item      = self.financialsData[itemIndex];
+    Financials *item;
+    if (isEasy) {
+        item = self.easyFinancialsData[itemIndex];
+    }else {
+        item = self.fastFinancialsData[itemIndex];
+    }
     MonthsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.monthLabel.text = item.month;
     return cell;
@@ -1576,8 +1664,17 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    Financials *item = self.financialsData[indexPath.item];
-    self.months = item.month.intValue;
+    Financials *item;
+    if (isEasy) {
+        item = self.easyFinancialsData[indexPath.item];
+        self.easyMonth = item.month.intValue;
+        self.fastMonth = -1;
+    }else {
+        item = self.fastFinancialsData[indexPath.item];
+        self.fastMonth = item.month.intValue;
+        self.easyMonth = -1;
+    }
+    
     secView.hidden = YES;
     [self buildQuote];
 }
@@ -1880,57 +1977,49 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     float invest = 0.0;
     
-    Financials *financeObject;
-    for (int i = 0; i < [self.financialsData count]; i++) {
-        Financials *element = [self.financialsData objectAtIndex:i];
-        if (element.month.intValue == self.months) {
-            financeObject = element;
+    Financials *easyFinanceObject;
+    for (int i = 0; i < [self.easyFinancialsData count]; i++) {
+        Financials *element = [self.easyFinancialsData objectAtIndex:i];
+        if (element.month.intValue == self.easyMonth) {
+            easyFinanceObject = element;
+            easyPaymentFactor = element.value.floatValue;
             break;
         }
     }
     
-    if (financeObject != nil) {
-        //NSLog(@"%f", financeObject.discount1.floatValue);
-        float discount1 = 1.0;
-        if ([financeObject.value isNumeric]) {
-            discount1 = [financeObject.value floatValue];
-        }
-        
-        float discount2 = 1.0;//= financeObject.discount2;
-        if ([financeObject.value isNumeric]) {
-            discount2 = [financeObject.value floatValue];
-        }
-        
-        if (self.months > 83) {
-            finacePay = ( (float)(totalAmount - totalSavings) / discount1 ) * discount2;
-            invest = (float)(totalAmount - totalSavings) / discount1;
-        }else{
-            finacePay = (float)(totalAmount - totalSavings) / discount1 / (float)self.months;
-            invest = (finacePay*self.months);
+    Financials *fastFinanceObject;
+    for (int i = 0; i < [self.fastFinancialsData count]; i++) {
+        Financials *element = [self.fastFinancialsData objectAtIndex:i];
+        if (element.month.intValue == self.fastMonth) {
+            fastFinanceObject = element;
+            break;
         }
     }
     
-    float localInvest = finacePay * self.months;//(totalAmount - totalSavings);
-    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
+//    if (easyFinanceObject != nil) {
+//
+//        if (self.months > 83) {
+//            finacePay = ( (float)(totalAmount - totalSavings) / discount1 ) * discount2;
+//            invest = (float)(totalAmount - totalSavings) / discount1;
+//        }else{
+//            finacePay = (float)(totalAmount - totalSavings) / discount1 / (float)self.months;
+//            invest = (finacePay*self.months);
+//        }
+//    }
+    
+    
+//    float localInvest = finacePay * self.months;//(totalAmount - totalSavings);
+    invest = (float)(totalAmount - totalSavings);
+    float localInvest = (float)(totalAmount - totalSavings);
+    
+    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest easyFinanceObject:easyFinanceObject fastFinanceObject:fastFinanceObject];
 }
 
--(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
+-(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest easyFinanceObject:(Financials*)easyFinanceObject fastFinanceObject:(Financials*)fastFinanceObject {
     
     dispatch_async(dispatch_get_main_queue(), ^{
        // Some code
     
-        if (easyPaymentFactor < 0.0001) {
-            lblEasyPercent.text = @"0%";
-        }else {
-            lblEasyPercent.text = [NSString stringWithFormat:@"%.4f%%",easyPaymentFactor];
-        }
-        
-        if (fastPaymentFactor < 0.0001) {
-            lblFastPercent.text = @"0%";
-        }else {
-            lblFastPercent.text = [NSString stringWithFormat:@"%.4f%%",fastPaymentFactor];
-        }
-        
         totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
         totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
         afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.0f",afterSaving];
@@ -1950,16 +2039,24 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
         lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
         
-        lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor / 100]]];
-        lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.months]]];
-        
-        
-        if (self.months > 83) {
-            
-        }else{
-            
+        if (fastFinanceObject) {
+            lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.fastMonth]]];
+            lblFastPercent.text = fastFinanceObject.description1;
+        }else {
+            lblFastPrice.text = @"No Financial";
+            lblFastPercent.text = @"";
         }
-        
+        if (easyFinanceObject) {
+            lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor / 100]]];
+            if (easyPaymentFactor < 0.0001) {
+                lblEasyPercent.text = @"0%";
+            }else {
+                lblEasyPercent.text = [NSString stringWithFormat:@"%.4f%%",easyPaymentFactor];
+            }
+        }else {
+            lblEasyPrice.text = @"No Financial";
+            lblEasyPercent.text = @"";
+        }
         [tableViewX reloadData];
     });
     
@@ -1998,8 +2095,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 #pragma mark - Buttons Actions
 - (IBAction)monthBut:(id)sender {
     int mon = [sender tag];
-    self.months = mon;
-    
+    if (isEasy) {
+        self.easyMonth = mon;
+        self.fastMonth = -1;
+    }else {
+        self.fastMonth = mon;
+        self.easyMonth = -1;
+    }
     secView.hidden = YES;
     [self buildQuote];
 }
@@ -2018,22 +2120,26 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self.view bringSubviewToFront:secView];
 }
 
-- (IBAction)fastPayClick:(id)sender {
-//    [self performSegueWithIdentifier:@"cart" sender:nil];
+#pragma mark easy, fast, invest click
+- (IBAction)easyPayClick:(id)sender {
+    isEasy = true;
+    [_monthsCollectionView reloadData];
     secView.hidden = NO;
     [self.view bringSubviewToFront:secView];
     
 }
+- (IBAction)fastPayClick:(id)sender {
+//    [self performSegueWithIdentifier:@"cart" sender:nil];
+    isEasy = false;
+    [_monthsCollectionView reloadData];
+    secView.hidden = NO;
+    [self.view bringSubviewToFront:secView];
+    
+}
+
 
 - (IBAction)investmentClick:(id)sender {
     [self performSegueWithIdentifier:@"cart" sender:nil];
-    
-}
-
-- (IBAction)easyPayClick:(id)sender {
-//    [self performSegueWithIdentifier:@"cart" sender:nil];
-    secView.hidden = NO;
-    [self.view bringSubviewToFront:secView];
     
 }
 
@@ -2225,9 +2331,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
         [cart setObject:tt forKey:@"cartItems"];
-        [cart setObject:[NSNumber numberWithInt:self.months] forKey:@"cartMonths"];
+        [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"cartMonths"];
         [cart setObject:rebates forKey:@"cartRebates"];
-        [cart setObject:self.financialsData forKey:@"financialsData"];
+        [cart setObject:self.fastFinancialsData forKey:@"financialsData"];
         cartView.testerVC = self;
         cartView.isViewingCart = NO;
         

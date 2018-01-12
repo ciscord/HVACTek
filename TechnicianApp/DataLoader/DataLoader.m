@@ -890,7 +890,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 
 #pragma mark - ADD2CART add2cartFinancials
 -(void)add2cartFinancials:(NSDictionary *) parameters
-            onSuccess:(void (^)(NSString *successMessage, NSArray *reciveData))onSuccess
+            onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
               onError:(void (^)(NSError *error))onError {
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -900,8 +900,8 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
    parameters:parameters
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           if ([responseObject[@"status"] integerValue] == kStatusOK) {
-              NSArray *array = responseObject[@"results"];
-              onSuccess(@"OK", array);
+              NSDictionary *dict = responseObject[@"results"];
+              onSuccess(@"OK", dict);
           }
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {

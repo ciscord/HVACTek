@@ -300,7 +300,7 @@
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
         
-        vc.months = [monthCount intValue];
+        vc.fastMonth = [monthCount intValue];
         
         [[NSUserDefaults standardUserDefaults] setInteger:editIndex forKey:@"workingCurrentCartIndex"];
         [self.navigationController popViewControllerAnimated:YES];
@@ -310,7 +310,7 @@
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
         
-        vc.months = [monthCount intValue];
+        vc.fastMonth = [monthCount intValue];
         
         if (!vc.isEditing) {
             int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
@@ -343,7 +343,7 @@
             
             [vc.cartItems removeAllObjects];
             
-            vc.months = [monthCount intValue];
+            vc.fastMonth = [monthCount intValue];
             
             if (vc.savedCarts.count < 3)
                 [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
@@ -355,7 +355,7 @@
                 [vc.savedCarts addObject:cart];
                 [vc.cartItems removeAllObjects];
                 
-                vc.months = [monthCount intValue];
+                vc.fastMonth = [monthCount intValue];
                 
                 
                 int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;

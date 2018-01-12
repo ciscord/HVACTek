@@ -206,6 +206,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                              onError:(void (^)(NSError *error))onError;
 
 -(void)add2cartFinancials:(NSDictionary *) parameters
-                onSuccess:(void (^)(NSString *successMessage, NSArray *reciveData))onSuccess
+                onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                   onError:(void (^)(NSError *error))onError;
 @end

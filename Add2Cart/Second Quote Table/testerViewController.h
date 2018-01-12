@@ -90,7 +90,8 @@
 }
 
 @property (nonatomic, assign) BOOL isEditing;
-@property (nonatomic, assign) int months;
+@property (nonatomic, assign) int easyMonth;
+@property (nonatomic, assign) int fastMonth;
 
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
@@ -115,7 +116,8 @@
 @property (nonatomic, strong)  NSMutableArray *cartItems;
 
 // Financials
-@property (nonatomic, strong) NSMutableArray *financialsData;
+@property (nonatomic, strong) NSMutableArray *easyFinancialsData;
+@property (nonatomic, strong) NSMutableArray *fastFinancialsData;
 
 
 - (IBAction)cartButon:(id)sender;
