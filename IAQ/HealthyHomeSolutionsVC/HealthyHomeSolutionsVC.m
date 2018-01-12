@@ -82,8 +82,11 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
             BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
             if (stringIsValid) {
                 textField.text = string;
+                NSInteger itemIndex = textField.tag;
+                IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
+                
+                item.quantity = string;
             }
-            
             return false;
         }
         

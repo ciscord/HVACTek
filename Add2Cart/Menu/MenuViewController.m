@@ -60,24 +60,21 @@ typedef void(^myCompletion)(BOOL);
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
+    [super viewDidLoad];
     
     [self configureColorScheme];
     [self configureUpperView];
   
-  AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-  managedObjectContext = apDel.managedObjectContext;
+    AppDelegate *apDel = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    managedObjectContext = apDel.managedObjectContext;
     
     self.backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     self.backgroundContext.parentContext = managedObjectContext;
   
-  [self checkSyncStatus];
-  [self initializeProgressBar];
-    
+    [self checkSyncStatus];
+    [self initializeProgressBar];
     
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -210,68 +207,68 @@ typedef void(^myCompletion)(BOOL);
 #pragma mark - Fetched ADD2CART Items
 - (void)fetchedAdd2CartItems:(NSDictionary *)responseData {
   
-  NSArray* rebates = [responseData objectForKey:@"rebates"];
-  NSArray* products = [responseData objectForKey:@"products"];
-  NSArray* systProducts = [responseData objectForKey:@"system_products"];
-  NSArray * financials = [responseData objectForKey:@"financials"];
+    NSArray* rebates = [responseData objectForKey:@"rebates"];
+    NSArray* products = [responseData objectForKey:@"products"];
+    NSArray* systProducts = [responseData objectForKey:@"system_products"];
+    NSArray * financials = [responseData objectForKey:@"financials"];
     
     if (financials.count > 0) {
         [self saveFinancials:financials];
     }
   
-  if (rebates.count > 0) {
-    [self addRebates:rebates];
-  }
-  
-  if (systProducts.count > 0) {
-    [self addSystemProducts:systProducts];
-  }
-  
-  if (products.count > 0) {
-    [self addProducts:products];
-  }
+    if (rebates.count > 0) {
+        [self addRebates:rebates];
+    }
     
-
-}
-
-#pragma mark - Add Products
--(void) addProducts:(NSArray *)products {
-  [self addProductsCartOne:products];
-  [self addProductsCartTwo:products];
-  [self addProductsCartThree:products];
-  
-  self.lastSyncLabel.text = @"Last Sync Date: Now";
-  [self startSyncing:NO];
+    if (systProducts.count > 0) {
+        [self addSystemProducts:systProducts];
+    }
+    
+    if (products.count > 0) {
+        [self addProducts:products];
+    }
     
     NSError *errorz;
     if (![self.backgroundContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
     }
+
+}
+
+#pragma mark - Add Products
+-(void) addProducts:(NSArray *)products {
+    [self addProductsCartOne:products];
+    [self addProductsCartTwo:products];
+    [self addProductsCartThree:products];
+
+    self.lastSyncLabel.text = @"Last Sync Date: Now";
+    [self startSyncing:NO];
+    
 }
 
 #pragma mark - Fetch System Products
 -(void)addSystemProducts:(NSArray *)systemProd {
-  
-  for (int i = 0; i < 3; i++) {
-    
-    for (NSDictionary *itm in systemProd) {
-      Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
-      item.modelName = itm[@"modelName"];
-      item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
-      item.type = itm[@"type"];
-      item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
-      item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
-      item.currentCart = [NSNumber numberWithInt:i];
+
+    for (int i = 0; i < 3; i++) {
+
+        for (NSDictionary *itm in systemProd) {
+            Item *item= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
+            item.modelName = itm[@"modelName"];
+            item.finalPrice = [NSNumber numberWithFloat:[itm[@"finalPrice"] floatValue]];
+            item.type = itm[@"type"];
+            item.include = [itm[@"include"] isEqualToString:@"1"]? [NSNumber numberWithBool:YES] : [NSNumber numberWithBool:NO];
+            item.ord = [NSNumber numberWithInt:[itm[@"ord"] intValue]];
+            item.currentCart = [NSNumber numberWithInt:i];
+        }
+
+
+        Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
+        itemA.modelName = @"No Product Selected";
+        itemA.finalOption = @"None";
+        itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
+        itemA.type = @"Blank";
+        itemA.currentCart = [NSNumber numberWithInt:i];
     }
-    
-      
-    Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
-    itemA.modelName = @"No Product Selected";
-    itemA.finalOption = @"None";
-    itemA.finalPrice = [NSNumber numberWithFloat:0.0f];
-    itemA.type = @"Blank";
-    itemA.currentCart = [NSNumber numberWithInt:i];
-  }
 }
 
 #pragma mark - Add Rebates
@@ -316,20 +313,20 @@ typedef void(^myCompletion)(BOOL);
 
 #pragma mark - Sync Button Clicked
 - (IBAction)synCButton:(id)sender {
-  [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
+    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"newSession"];
 
-  [self startSyncing:YES];
-  [self clearEverything];
+    [self startSyncing:YES];
+    [self clearEverything];
 
-  [[DataLoader sharedInstance] getAdd2CartProducts:kAdd2CartURL
+    [[DataLoader sharedInstance] getAdd2CartProducts:kAdd2CartURL
                                          onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                            [self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
                                             //[self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];
                                          }onError:^(NSError *error) {
                                            ShowOkAlertWithTitle(error.localizedDescription, self);
                                          }];
-    
-  [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
+
+    [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:@"newSession"];
 }
 
 #pragma mark - Clear Everything
@@ -437,8 +434,8 @@ typedef void(^myCompletion)(BOOL);
                 }
             } //end of options
           
-          NSString *urly = [products[x] objectForKey:@"full_url"];
-          itm.image = [self insertPhotosToDataBaseWithPath:urly];
+            NSString *urly = [products[x] objectForKey:@"full_url"];
+            itm.image = [self insertPhotosToDataBaseWithPath:urly];
 
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
@@ -513,8 +510,8 @@ typedef void(^myCompletion)(BOOL);
             } //end of options
             
             NSString *urly = [products[x] objectForKey:@"full_url"];
-          itm.image = [self insertPhotosToDataBaseWithPath:urly];
-          
+            itm.image = [self insertPhotosToDataBaseWithPath:urly];
+
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
@@ -582,9 +579,9 @@ typedef void(^myCompletion)(BOOL);
                 }
             }
             
-          NSString *urly = [products[x] objectForKey:@"full_url"];
-          itm.image = [self insertPhotosToDataBaseWithPath:urly];
-          
+            NSString *urly = [products[x] objectForKey:@"full_url"];
+            itm.image = [self insertPhotosToDataBaseWithPath:urly];
+
             NSString *type = [products[x] objectForKey:@"category_name"];
             if ([type isEqualToString:@"AC"]) {
                 itm.type = @"Air Conditioners";
@@ -597,83 +594,65 @@ typedef void(^myCompletion)(BOOL);
 #pragma mark - Insert Photo in Core Data
 - (Photos *)insertPhotosToDataBaseWithPath:(NSString *)stringPath {
   
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
-  NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"url = %@",stringPath];
-  
-  [fetchRequest setEntity:entity];
-  [fetchRequest setPredicate:cartPredicate];
-  
-  NSError *fetchingError = nil;
-  
-  NSArray * productImages = [[NSArray alloc]init];
-  productImages = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
-    
-  
-  if ([productImages count] == 0) {
-    Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
-    
-    NSURL *url = [NSURL URLWithString:stringPath];
-    NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
-    pf.photoData = imageData;
-    pf.url = stringPath;
-    
-    
-    return pf;
-  }else {
-    return productImages.firstObject;
-  }
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
+    NSPredicate *cartPredicate = [NSPredicate predicateWithFormat:@"url = %@",stringPath];
+
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:cartPredicate];
+
+    NSError *fetchingError = nil;
+
+    NSArray * productImages = [[NSArray alloc]init];
+    productImages = [self.backgroundContext executeFetchRequest:fetchRequest error:&fetchingError];
+
+
+    if ([productImages count] == 0) {
+        Photos* pf = (Photos *)[NSEntityDescription insertNewObjectForEntityForName:@"Photos" inManagedObjectContext:self.backgroundContext];
+
+        NSURL *url = [NSURL URLWithString:stringPath];
+        NSData *imageData = [[NSData alloc]initWithContentsOfURL:url];
+        pf.photoData = imageData;
+        pf.url = stringPath;
+
+
+        return pf;
+    }else {
+        return productImages.firstObject;
+    }
 }
 
 #pragma mark - Save Financials
 - (void)saveFinancials:(NSArray *)financials {
     for (int x = 0; x < financials.count; x++) {
-        Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
-        itm.financialId = [financials[x] objectForKey:@"id"];
-        itm.businessid = [financials[x] objectForKey:@"businessid"];
         
-        if ([[financials[x] objectForKey:@"discount1"] isEqual:[NSNull null]]) {
-            itm.discount1 = @"1";
-        }else{
-            itm.discount1 = [financials[x] objectForKey:@"discount1"];
-        }
-        if ([[financials[x] objectForKey:@"discount2"] isEqual:[NSNull null]]) {
-            itm.discount2 =  @"1";
-        }else{
-            itm.discount2 = [financials[x] objectForKey:@"discount2"];
+        if (![self isEmpty:[financials[x] objectForKey:@"value"]] &&
+            ![self isEmpty:[financials[x] objectForKey:@"month"]] ) {
+            Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
+            itm.financialId = [financials[x] objectForKey:@"id"];
+            itm.businessid = [financials[x] objectForKey:@"businessid"];
+            itm.description1 = [financials[x] objectForKey:@"description"];
+            itm.month = [financials[x] objectForKey:@"month"];
+            itm.type = [financials[x] objectForKey:@"type"];
+            itm.value = [financials[x] objectForKey:@"value"];
+            
         }
         
-        itm.months = [financials[x] objectForKey:@"months"];
     }
 }
-- (void)saveFinancialsV1:(NSArray *)financials {
-    for (int x = 0; x < financials.count; x++) {
-        Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
-        itm.financialId = [financials[x] objectForKey:@"id"];
-        itm.businessid = [financials[x] objectForKey:@"businessid"];
-        
-        if ([[financials[x] objectForKey:@"value1"] isEqual:[NSNull null]]) {
-            itm.discount1 = @"1";
-        }else{
-            itm.discount1 = [financials[x] objectForKey:@"value1"];
-        }
-        if ([[financials[x] objectForKey:@"value2"] isEqual:[NSNull null]]) {
-            itm.discount2 =  @"1";
-        }else{
-            itm.discount2 = [financials[x] objectForKey:@"value2"];
-        }
-        
-        itm.months = [financials[x] objectForKey:@"months"];
+- (BOOL) isEmpty:(NSObject*) data {
+    if (data == nil) {
+        return true;
     }
-    NSError *errorz;
-    if (![self.backgroundContext save:&errorz]) {
-        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    if ([data isEqual:[NSNull null]]) {
+        return true;
     }
+    return false;
 }
 #pragma mark - Memory Warning
 - (void)didReceiveMemoryWarning
 {
-  [super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];
 }
 
 

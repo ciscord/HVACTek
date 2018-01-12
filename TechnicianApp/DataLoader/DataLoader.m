@@ -90,6 +90,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 @property (nonatomic, strong) NSMutableArray *otherOptionsLocal;
 @property (nonatomic, strong) PricebookItem *diagnosticOnlyOption;
 @property (nonatomic, strong) CompanyItem   *currentCompany;
+@property (readwrite) BOOL hasInternet;
 @end
 
 @implementation DataLoader
@@ -108,22 +109,15 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
     self = [super initWithBaseURL:url];
     if (self) {
-        [self.reachabilityManager startMonitoring];
-        //s_dl_instance.responseSerializer = [AFJSONResponseSerializer serializer];
-        //[s_dl_instance.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
-//        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            self.hasInternet = (status != AFNetworkReachabilityStatusNotReachable && status != AFNetworkReachabilityStatusUnknown);
+            
+        }];
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
         [self.requestSerializer setValue:API_KEY forHTTPHeaderField:@"API-KEY"];
         
-      ///  self.SWAPIManager = [SWAPIRequestManager sharedInstance];
-        
-        
-        
-//        [self.SWAPIManager connectOnSuccess:^(NSString *successMessage) {
-//            
-//        } onError:^(NSError *error) {
-//            
-//        }];
     }
     return self;
 }
@@ -178,7 +172,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                      parameters:(id)parameters
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    if (self.reachabilityManager.isReachable) {
+    if (self.hasInternet) {
         return [super GET:URLString parameters:parameters success:success failure:failure];
     } else {
         [self showErrorMessage:[self noInternetConnectionError]];
@@ -193,7 +187,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                       parameters:(id)parameters
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    if (self.reachabilityManager.isReachable) {
+    if (self.hasInternet) {
         
         return [super POST:URLString parameters:parameters success:success failure:failure];
     } else {
@@ -211,7 +205,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
   //  NSLog(@"%@", error)
-    if (self.reachabilityManager.isReachable) {
+    if (self.hasInternet) {
         return [super POST:URLString parameters:parameters constructingBodyWithBlock:block success:success failure:failure];
     } else {
         [self showErrorMessage:[self noInternetConnectionError]];

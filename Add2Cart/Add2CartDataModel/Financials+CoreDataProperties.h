@@ -1,9 +1,9 @@
 //
 //  Financials+CoreDataProperties.h
-//  HvacTek
+//  
 //
-//  Created by Dora on 10/22/16.
-//  Copyright © 2016 Unifeyed. All rights reserved.
+//  Created by Max on 1/11/18.
+//
 //
 
 #import "Financials+CoreDataClass.h"
@@ -16,10 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<Financials *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *businessid;
-@property (nullable, nonatomic, copy) NSString *discount1;
-@property (nullable, nonatomic, copy) NSString *discount2;
+@property (nullable, nonatomic, copy) NSString *description1;
+@property (nullable, nonatomic, copy) NSString *type;
 @property (nullable, nonatomic, copy) NSString *financialId;
-@property (nullable, nonatomic, copy) NSString *months;
+@property (nullable, nonatomic, copy) NSString *month;
+@property (nullable, nonatomic, copy) NSString *value;
 
 @end
 

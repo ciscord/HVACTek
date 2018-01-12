@@ -219,16 +219,8 @@
 - (IBAction)nextPage:(id)sender {
     [self buildQuote];
     
-    if (self.testerVC) {
-        self.testerVC.managedObjectContext = managedObjectContext;
-        
-        self.testerVC.additemsB  = addedItems;
-        self.testerVC.firstOption = firstOption;
-        [self.navigationController pushViewController:self.testerVC animated:YES];
-    }else
-    {
-        [self performSegueWithIdentifier:@"quoteProd" sender:self];
-    }
+    [self performSegueWithIdentifier:@"quoteProd" sender:self];
+    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -240,8 +232,6 @@
         sq.additemsB  = addedItems;
         sq.firstOption = firstOption;
         
-        self.testerVC = [[testerViewController alloc]init];
-        self.testerVC = segue.destinationViewController;
     }
     
     if ([segue.identifier isEqualToString:@"miscAdd"]) {

@@ -1,9 +1,9 @@
 //
 //  Financials+CoreDataProperties.m
-//  HvacTek
+//  
 //
-//  Created by Dora on 10/22/16.
-//  Copyright © 2016 Unifeyed. All rights reserved.
+//  Created by Max on 1/11/18.
+//
 //
 
 #import "Financials+CoreDataProperties.h"
@@ -15,9 +15,10 @@
 }
 
 @dynamic businessid;
-@dynamic discount1;
-@dynamic discount2;
+@dynamic description1;
+@dynamic type;
 @dynamic financialId;
-@dynamic months;
+@dynamic month;
+@dynamic value;
 
 @end

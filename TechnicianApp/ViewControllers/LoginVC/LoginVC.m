@@ -34,11 +34,10 @@
         self.txtUser.text = [userPassword valueForKey:@"us"];
         self.txtPassword.text = [userPassword valueForKey:@"pw"];
         self.txtAPI.text = [userPassword valueForKey:@"companyAPI"];
-        [self performSelector:@selector(login) withObject:self afterDelay:0.2];
+        [self performSelector:@selector(login) withObject:self afterDelay:1];
     }
  
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -50,7 +49,6 @@
     [super viewWillAppear:animated];
 }
 
-
 /*
 #pragma mark - Navigation
 
@@ -60,8 +58,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)btnContinueTouch:(id)sender
-{
+- (IBAction)btnContinueTouch:(id)sender {
     [self login];
 }
 
@@ -85,14 +82,13 @@
                                          }
                                            onError:^(NSError *error) {
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//                                               ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                               if (error.code != 404) {
+                                                   ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                               }
+                                               
                                            }];
   
 }
-
-
-
-
 
 #pragma mark - Load Aditional Info
 - (void)loadAdditionalInfo {
@@ -145,6 +141,5 @@
     
     return additionalObjects;
 }
-
 
 @end

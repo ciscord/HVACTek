@@ -75,14 +75,12 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     return self;
 }
 
-
 -(void) viewDidDisappear:(BOOL)animated {
     NSError *error;
     if (![managedObjectContext save:&error]) {
         NSLog(@"Cannot save ! %@ %@",error,[error localizedDescription]);
     }
 }
-
 
 - (void)viewDidLoad
 {
@@ -116,8 +114,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     choosedWarranties = 0;
     choosedDuctlessMiniSplits = 0;
     
-    
-    
     //Tapped is for collapsable cell
     tapped= FALSE;
     sections = [[NSMutableSet alloc]initWithCapacity:9];
@@ -128,7 +124,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     afterSavings =0.0f ;
     finacePay = 0.0f;
     monthlyPay = 0.0f;
-    
     
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
@@ -165,17 +160,23 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                                                   NSDictionary* dataEasyFastpay = [reciveData objectAtIndex:0];
 //                                                  NSString* idForFinancial = [dataEasyFastpay objectForKey:@"id"];
 //                                                  NSString* businessId = [dataEasyFastpay objectForKey:@"businessid"];
-                                                  NSDictionary* dicEasyPay = [dataEasyFastpay objectForKey:@"easy_pay"];
-                                                  NSDictionary* dicFastPay = [dataEasyFastpay objectForKey:@"fast_pay"];
-                                                  easyPaymentFactor = [[dicEasyPay objectForKey:@"value"] floatValue];
-                                                  if (easyPaymentFactor < 0.001) {
-                                                      easyPaymentFactor = 0;
+                                                  NSArray* arrayEasyPay = [dataEasyFastpay objectForKey:@"easy_pay"];
+                                                  NSArray* arrayFastPay = [dataEasyFastpay objectForKey:@"fast_pay"];
+                                                  if (arrayEasyPay != nil && arrayFastPay != nil) {
+                                                      NSDictionary* dicEasyPay = [arrayEasyPay objectAtIndex:0];
+                                                      NSDictionary* dicFastPay = [arrayFastPay objectAtIndex:0];
+                                                  
+                                                      easyPaymentFactor = [[dicEasyPay objectForKey:@"value"] floatValue];
+                                                      if (easyPaymentFactor < 0.001) {
+                                                          easyPaymentFactor = 0;
+                                                      }
+                                                      fastPaymentFactor = [[dicFastPay objectForKey:@"value"] floatValue];
+                                                      if (fastPaymentFactor < 0.001) {
+                                                          fastPaymentFactor = 0;
+                                                      }
+                                                      [self buildQuote];
                                                   }
-                                                  fastPaymentFactor = [[dicFastPay objectForKey:@"value"] floatValue];
-                                                  if (fastPaymentFactor < 0.001) {
-                                                      fastPaymentFactor = 0;
-                                                  }
-                                                  [self buildQuote];
+                                                  
                                                   
                                               }
                                               
@@ -184,7 +185,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                                               
                                           }];
 }
-
 
 #pragma mark - Fetch Financing
 
@@ -201,26 +201,21 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self configureFinancingDefaults];
 }
 
-
 -(NSMutableArray *)filterFinancials:(NSMutableArray *)financials {
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"months"
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"month"
                                                  ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSMutableArray *returnArr = [[NSMutableArray alloc] initWithArray:[financials sortedArrayUsingDescriptors:sortDescriptors]];
     return returnArr;
 }
 
-
 -(void)configureFinancingDefaults {
     if (self.financialsData.count > 0) {
         Financials *item = self.financialsData[0];
-        self.months = item.months.intValue;
+        self.months = item.month.intValue;
     }
 }
-
-
-
 
 -(void) home {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -228,22 +223,14 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-
-
 -(void) back {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-
 
 -(void) viewDidAppear:(BOOL)animated   {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud showWhileExecuting:@selector(resetCartData) onTarget:self withObject:nil animated:YES];
 }
-
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -300,9 +287,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     [self.detailsView addSubview:upperArcView];
 }
-
-
-
 
 - (void)resetCartData {
     //Fetch the data.
@@ -493,8 +477,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
-    
     for (int x = 0; x < ductlessProds.count; x++) {
         Item *itm = ductlessProds[x];
         itm.finalPrice = [NSNumber numberWithFloat:[self checkOptionsDuctlessPrice:itm]];
@@ -668,7 +650,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
         
     }
-    
     
     return blank;
 }
@@ -945,7 +926,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
         }
     }
-    
     
 }
 
@@ -1417,8 +1397,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
-    
     if (change) {
         
         change = NO;
@@ -1434,8 +1412,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 -(void) cellSwipedLeft:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:tableViewX];
     NSIndexPath *swipedIndexPath = [tableViewX indexPathForRowAtPoint:swipeLocation];
-    
-    
     
     Item *itm;
     BOOL change = FALSE;
@@ -1555,8 +1531,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
-    
     if (swipedIndexPath.section == 10) {
         if ( choosedDuctlessMiniSplits >0) {
             itm = ductlessMiniSplits[choosedDuctlessMiniSplits];
@@ -1567,8 +1541,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             change = YES;
         }
     }
-    
-    
     
     if (change) {
         
@@ -1597,7 +1569,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSInteger itemIndex = indexPath.item;
     Financials *item      = self.financialsData[itemIndex];
     MonthsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
-    cell.monthLabel.text = item.months;
+    cell.monthLabel.text = item.month;
     return cell;
 }
 
@@ -1605,7 +1577,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     Financials *item = self.financialsData[indexPath.item];
-    self.months = item.months.intValue;
+    self.months = item.month.intValue;
     secView.hidden = YES;
     [self buildQuote];
 }
@@ -1616,8 +1588,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 {
     return CGSizeMake(95, 50);
 }
-
-
 
 #pragma mark -
 
@@ -1701,8 +1671,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 
-
-
 -(void) remButton:(id)sender {
     int j = [sender tag];
     Item *itm;
@@ -1783,7 +1751,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
 -(void) purchase:(Item *)itm {
     
     int occurrences = 0;
@@ -1800,8 +1767,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     isLast = TRUE;
     [self buildQuote];
 }
-
-
 
 -(void) removeTheProd:(Item *)itm {
     
@@ -1832,13 +1797,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self buildQuote];
 }
 
-
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
     if (_cartItems.count == 0) {
         [_cartItems addObjectsFromArray:purchData];
     }
 }
-
 
 -(float) parseTheString:(NSString *) string {
     NSArray *strip = [[NSArray alloc]init];
@@ -1866,8 +1829,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
-
 -(NSString *) parseTheOptionName:(NSString *) string {
     NSArray *strip = [[NSArray alloc]init];
     strip = [string componentsSeparatedByString:@"$"];
@@ -1879,8 +1840,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         return @"";
     }
 }
-
-
 
 #pragma mark - Update Labels
 -(void) buildQuote {
@@ -1924,7 +1883,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     Financials *financeObject;
     for (int i = 0; i < [self.financialsData count]; i++) {
         Financials *element = [self.financialsData objectAtIndex:i];
-        if (element.months.intValue == self.months) {
+        if (element.month.intValue == self.months) {
             financeObject = element;
             break;
         }
@@ -1933,13 +1892,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     if (financeObject != nil) {
         //NSLog(@"%f", financeObject.discount1.floatValue);
         float discount1 = 1.0;
-        if ([financeObject.discount1 isNumeric]) {
-            discount1 = [financeObject.discount1 floatValue];
+        if ([financeObject.value isNumeric]) {
+            discount1 = [financeObject.value floatValue];
         }
         
         float discount2 = 1.0;//= financeObject.discount2;
-        if ([financeObject.discount2 isNumeric]) {
-            discount2 = [financeObject.discount2 floatValue];
+        if ([financeObject.value isNumeric]) {
+            discount2 = [financeObject.value floatValue];
         }
         
         if (self.months > 83) {
@@ -2006,7 +1965,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 
-
 #pragma mark - CartBtn Action
 - (IBAction)cartButon:(id)sender {
     [self performSegueWithIdentifier:@"cart" sender:nil];
@@ -2050,13 +2008,10 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     secView.hidden = YES;
 }
 
-
-
 - (IBAction)finBut:(id)sender {
     secView.hidden = NO;
     [self.view bringSubviewToFront:secView];
 }
-
 
 - (IBAction)btnFinancing:(id)sender {
     secView.hidden = NO;
@@ -2082,23 +2037,18 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 
-
 #pragma mark - CartBtns Actions
 - (IBAction)btncart1:(id)sender {
     [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
 
-
 - (IBAction)btnCart2:(id)sender {
     [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
 
-
-
 - (IBAction)btnCart3:(id)sender {
     [self performSegueWithIdentifier:@"savedCart" sender:self];
 }
-
 
 #pragma mark - Video and Picture Actions
 - (IBAction)videoButtonClicked:(id)sender {

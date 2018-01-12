@@ -346,6 +346,7 @@
 		508566281FB3819F000B0F56 /* HealthyHomeProcessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeProcessVC.m; sourceTree = "<group>"; };
 		5085662B1FB39A0E000B0F56 /* HeatingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeatingStaticPressureVC.h; sourceTree = "<group>"; };
 		5085662C1FB39A0E000B0F56 /* HeatingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeatingStaticPressureVC.m; sourceTree = "<group>"; };
+		5094CE982007F494004DB56A /* Unifeiyed_Quoting 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 8.xcdatamodel"; sourceTree = "<group>"; };
 		50E115821FC73440003734F1 /* PDFViewControllerVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFViewControllerVC.h; sourceTree = "<group>"; };
 		50E115831FC73440003734F1 /* PDFViewControllerVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFViewControllerVC.m; sourceTree = "<group>"; };
 		50E8D00E1FB9E2120099691D /* NSString+Validation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Validation.h"; sourceTree = "<group>"; };
@@ -1992,6 +1993,7 @@
 		4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5094CE982007F494004DB56A /* Unifeiyed_Quoting 8.xcdatamodel */,
 				861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */,
 				528530031C326A1900168AC2 /* Unifeiyed_Quoting 5.xcdatamodel */,
 				91159A3C1B344D6500F7899C /* Unifeiyed_Quoting 4.xcdatamodel */,
@@ -1999,7 +2001,7 @@
 				4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */,
 				4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */,
 			);
-			currentVersion = 861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */;
+			currentVersion = 5094CE982007F494004DB56A /* Unifeiyed_Quoting 8.xcdatamodel */;
 			path = Unifeiyed_Quoting.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

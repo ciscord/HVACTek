@@ -123,7 +123,7 @@
     Financials *financeObject;
     for (int i = 0; i < [self.financialsData count]; i++) {
         Financials *element = [self.financialsData objectAtIndex:i];
-        if (element.months.intValue == self.months.intValue) {
+        if (element.month.intValue == self.months.intValue) {
             financeObject = element;
             break;
         }
@@ -132,10 +132,10 @@
     
     if (financeObject != nil) {
         if (self.months.intValue > 83) {
-            finacePay = ((totalAmount - totalSavings)/financeObject.discount1.doubleValue) * financeObject.discount2.doubleValue;
-            invest = (totalAmount - totalSavings)/financeObject.discount1.doubleValue;
+            finacePay = ((totalAmount - totalSavings)/financeObject.value.doubleValue) * financeObject.value.doubleValue;
+            invest = (totalAmount - totalSavings)/financeObject.value.doubleValue;
         }else{
-            finacePay = (totalAmount - totalSavings)/financeObject.discount1.doubleValue/self.months.intValue;
+            finacePay = (totalAmount - totalSavings)/financeObject.value.doubleValue/self.months.intValue;
             invest = (finacePay*self.months.intValue);
         }
     }

@@ -148,6 +148,15 @@
                 }
             }
             
+            if (self.fromAddCart2) {
+                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                
+                iaqProductStringFormatted = [userdefault objectForKey:@"iaqProductStringFormatted"];
+                if (iaqProductStringFormatted == nil) {
+                    iaqProductStringFormatted = @"";
+                }
+            }
+            
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
@@ -165,6 +174,7 @@
                                                            
                                                            NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
                                                            [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                           [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
                                                            [userdefault setObject:customerName forKey:@"customerName"];
                                                            [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
                                                            [userdefault setObject:signature forKey:@"signature"];
@@ -228,6 +238,15 @@
                 }
             }
             
+            if (self.fromAddCart2) {
+                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                
+                iaqProductStringFormatted = [userdefault objectForKey:@"iaqProductStringFormatted"];
+                if (iaqProductStringFormatted == nil) {
+                    iaqProductStringFormatted = @"";
+                }
+            }
+            
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
@@ -244,6 +263,7 @@
                                                            
                                                            NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
                                                            [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                           [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
                                                            [userdefault setObject:customerName forKey:@"customerName"];
                                                            [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
                                                            [userdefault synchronize];
