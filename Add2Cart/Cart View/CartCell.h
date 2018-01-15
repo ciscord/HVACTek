@@ -21,9 +21,17 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblCartNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *systemRebates;
-@property (weak, nonatomic) IBOutlet UILabel *financing;
+
 @property (weak, nonatomic) IBOutlet UILabel *investemnt;
-@property (strong, nonatomic) IBOutlet UILabel *lblFinaincinSum;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblEasyPay;
+@property (strong, nonatomic) IBOutlet UILabel *lblEasyPayPrice;
+@property (weak, nonatomic) IBOutlet UIButton *easyPayButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblFastPay;
+@property (strong, nonatomic) IBOutlet UILabel *lblFastPayPrice;
+@property (weak, nonatomic) IBOutlet UIButton *fastPayButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 -(void) updateProductList;
 @end

@@ -2047,7 +2047,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             lblFastPercent.text = @"";
         }
         if (easyFinanceObject) {
-            lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor / 100]]];
+            lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
             if (easyPaymentFactor < 0.0001) {
                 lblEasyPercent.text = @"0%";
             }else {
@@ -2331,9 +2331,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
         [cart setObject:tt forKey:@"cartItems"];
-        [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"cartMonths"];
+        [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
+        [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
         [cart setObject:rebates forKey:@"cartRebates"];
-        [cart setObject:self.fastFinancialsData forKey:@"financialsData"];
+        [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
+        [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
         cartView.testerVC = self;
         cartView.isViewingCart = NO;
         

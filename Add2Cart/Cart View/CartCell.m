@@ -15,18 +15,23 @@
 
 
 @interface CartCell ()
+{
+    float easyPaymentFactor;
+}
 
 @property (nonatomic, strong)  NSMutableArray *cartItems;
 @property (nonatomic, strong)  NSMutableArray *productList;
 @property (nonatomic, strong)  NSMutableArray *occurenciesList;
 @property (nonatomic, strong)  NSMutableArray *rebates;
-@property (nonatomic, strong)  NSMutableArray *financialsData;
-@property (nonatomic, strong)  NSNumber *months;
+@property (nonatomic, strong)  NSMutableArray *easyFinancialsData;
+@property (nonatomic, strong)  NSMutableArray *fastFinancialsData;
+@property (nonatomic, strong)  NSNumber *fastMonth;
+@property (nonatomic, strong)  NSNumber *easyMonth;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
 @property (weak, nonatomic) IBOutlet UIButton *investmentButton;
-@property (weak, nonatomic) IBOutlet UIButton *financingButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
@@ -48,7 +53,8 @@
     self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     self.sysRebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.financingButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
+    self.easyPayButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
+    self.fastPayButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
     self.doneButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.saveButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.editButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -62,9 +68,11 @@
 
 -(void) updateProductList {
     self.cartItems = [self.cart objectForKey:@"cartItems"];
-    self.months = [self.cart objectForKey:@"cartMonths"];
+    self.fastMonth = [self.cart objectForKey:@"fastMonth"];
+    self.easyMonth = [self.cart objectForKey:@"easyMonth"];
     self.rebates = [self.cart objectForKey:@"cartRebates"];
-    self.financialsData = [self.cart objectForKey:@"financialsData"];
+    self.fastFinancialsData = [self.cart objectForKey:@"fastFinancialsData"];
+    self.easyFinancialsData = [self.cart objectForKey:@"easyFinancialsData"];
 
     self.productList = [[NSMutableArray alloc]init];
     self.occurenciesList = [[NSMutableArray alloc]init];
@@ -120,87 +128,33 @@
     
     float invest;
     
-    Financials *financeObject;
-    for (int i = 0; i < [self.financialsData count]; i++) {
-        Financials *element = [self.financialsData objectAtIndex:i];
-        if (element.month.intValue == self.months.intValue) {
-            financeObject = element;
+    Financials *fastFinanceObject;
+    for (int i = 0; i < [self.fastFinancialsData count]; i++) {
+        Financials *element = [self.fastFinancialsData objectAtIndex:i];
+        if (element.month.intValue == self.fastMonth.intValue) {
+            fastFinanceObject = element;
             break;
         }
     }
     
-    
-    if (financeObject != nil) {
-        if (self.months.intValue > 83) {
-            finacePay = ((totalAmount - totalSavings)/financeObject.value.doubleValue) * financeObject.value.doubleValue;
-            invest = (totalAmount - totalSavings)/financeObject.value.doubleValue;
-        }else{
-            finacePay = (totalAmount - totalSavings)/financeObject.value.doubleValue/self.months.intValue;
-            invest = (finacePay*self.months.intValue);
-        }
-    }
-    /*
-    switch ([self.months intValue]) {
-        case 24:
-        {
-            finacePay =  (totalAmount - totalSavings)/24;//.915
-            invest = (finacePay*24);
-         
-            break;
-        }
-            
-        case 36:
-        {
-            finacePay = (totalAmount - totalSavings)/.88/36;
-            invest = (finacePay*36);
-            break;
-        }
-        case 48:{
-            finacePay = (totalAmount - totalSavings)/.865/48;
-            invest = (finacePay*48);
-            break;
-        }
-        case 60:{
-            finacePay = (totalAmount - totalSavings)/.85/60;
-            invest = (finacePay*60);
-            break;
-        }
-        case 84:{
-            finacePay = ((totalAmount - totalSavings)/.8975) * 0.0144;
-            invest = (totalAmount - totalSavings)/.8975;
-            break;
-        }
-        case 72:{
-            finacePay =  (totalAmount - totalSavings)/72;
-            invest = (finacePay*72);
-            break;
-        }
-        default:
-        {
-            finacePay = totalAmount - totalSavings;
-            invest=  (totalAmount - totalSavings);
+    Financials *easyFinanceObject;
+    for (int i = 0; i < [self.easyFinancialsData count]; i++) {
+        Financials *element = [self.easyFinancialsData objectAtIndex:i];
+        if (element.month.intValue == self.easyMonth.intValue) {
+            easyFinanceObject = element;
+            easyPaymentFactor = element.value.floatValue;
             break;
         }
     }
-    */
     
+    invest = (float)(totalAmount - totalSavings);
+    float localInvest = (float)(totalAmount - totalSavings);
     
-    /*
-     case 144:{
-     finacePay = ((totalAmount - totalSavings)/.909) * 0.0111;
-     invest = (totalAmount - totalSavings)/.909;
-     break;
-     }
-     */
-    
-    
-    float localInvest = (totalAmount - totalSavings);
-    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest];
+    [self updateLabels:invest :totalSavings :afterSavings :finacePay :monthlyPay localInvest:localInvest easyFinanceObject:easyFinanceObject fastFinanceObject:fastFinanceObject];
 }
 
--(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest {
+-(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest easyFinanceObject:(Financials*)easyFinanceObject fastFinanceObject:(Financials*)fastFinanceObject {
 
-    
     NSNumberFormatter *nf = [NSNumberFormatter new];
     nf.numberStyle = NSNumberFormatterDecimalStyle;
     [nf setMaximumFractionDigits:2];
@@ -214,28 +168,23 @@
     //new
     self.systemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
     self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
-    switch ([self.months intValue]) {
-        case 84:
-            self.financing.text =[NSString stringWithFormat:@"3.99%% Best Rate \n%i Months",[self.months intValue]];
-            
-            break;
-        case 0:
-            self.financing.text =[NSString stringWithFormat:@"Cash /Check /Credit Card"];
-            break;
-            
-        default:
-            self.financing.text =[NSString stringWithFormat:@"0%% Financing\n%i Equal Payments",[self.months intValue]];
-            break;
+    
+    if (fastFinanceObject) {
+        self.lblFastPayPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / [self.fastMonth intValue]]]];
+        
+    }else {
+        self.lblFastPayPrice.text = @"No Financial";
+        
     }
     
-    /*
-     case 144:
-     self.financing.text =[NSString stringWithFormat:@"7.99%% Lowest Payment \n%i Months",[self.months intValue]];
-     break;
-     */
-    
-   self.lblFinaincinSum.text =[NSString stringWithFormat:@"$%@",[nf stringFromNumber:[NSNumber numberWithFloat:financeP]]];
-    
+    if (easyFinanceObject) {
+        
+        self.lblEasyPayPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
+        
+    }else {
+        self.lblEasyPayPrice.text = @"No Financial";
+        
+    }
     
 }
 
@@ -280,12 +229,12 @@
 }
 
 - (IBAction)saveCart:(id)sender {
-    [self.delegate save:self.cart withIndex:[sender tag] andMonths:self.months];
+    [self.delegate save:self.cart withIndex:[sender tag] andMonths:self.fastMonth];
 }
 
 
 - (IBAction)editCart:(id)sender {
-    [self.delegate editCard:self.cart withIndex:[sender tag] andMonths:self.months];
+    [self.delegate editCard:self.cart withIndex:[sender tag] andMonths:self.fastMonth];
 }
 
 @end
