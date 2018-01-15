@@ -2043,19 +2043,19 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.fastMonth]]];
             lblFastPercent.text = fastFinanceObject.description1;
         }else {
-            lblFastPrice.text = @"No Financial";
-            lblFastPercent.text = @"";
+            lblFastPrice.text = @"0";
+            lblFastPercent.text = @"No Financing Selected";
         }
         if (easyFinanceObject) {
             lblEasyPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest * easyPaymentFactor]]];
             if (easyPaymentFactor < 0.0001) {
                 lblEasyPercent.text = @"0%";
             }else {
-                lblEasyPercent.text = [NSString stringWithFormat:@"%.4f%%",easyPaymentFactor];
+                lblEasyPercent.text = easyFinanceObject.description1;
             }
         }else {
-            lblEasyPrice.text = @"No Financial";
-            lblEasyPercent.text = @"";
+            lblEasyPrice.text = @"0";
+            lblEasyPercent.text = @"No Financing Selected";
         }
         [tableViewX reloadData];
     });
