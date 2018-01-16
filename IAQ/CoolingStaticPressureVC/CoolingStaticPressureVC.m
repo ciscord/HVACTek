@@ -81,6 +81,28 @@
     
     self.nameField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName;
 }
+
+- (void) viewDidAppear:(BOOL)animated {
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQCoolingStaticPressure) {
+        [[IAQDataModel sharedIAQDataModel] loadCoolingStaticPressure];
+        
+        self.nameField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.customerName;
+        self.dateField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.todayDate;
+        self.filterSizeField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.filterSize;
+        self.mervRatingField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.filterMervRating;
+        self.systemTypeField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.systemType;
+        self.aField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.heatingA;
+        self.bField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.heatingB;
+        self.cField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.heatingC;
+        self.dField.text = [IAQDataModel sharedIAQDataModel].coolingStaticPressure.heatingD;
+        
+        HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
+        [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
+        
+    }
+    
+}
+
 -(IBAction)nextButtonClick:(id)sender {
     
     [IAQDataModel sharedIAQDataModel].coolingStaticPressure.customerName = self.nameField.text;
@@ -95,6 +117,12 @@
     
     HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
     [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        [userdefault setObject:[NSNumber numberWithInteger:IAQCoolingStaticPressure]  forKey:@"iaqCurrentStep"];
+        [userdefault synchronize];
+    }
 }
 
 -(BOOL) isEmptyField {

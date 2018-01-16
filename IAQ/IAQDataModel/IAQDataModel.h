@@ -10,8 +10,23 @@
 #import "FileModel.h"
 #import "IAQProductModel+CoreDataProperties.h"
 #import "StaticPressureModel.h"
-
+typedef NS_ENUM(NSInteger, IAQCurrentView) {
+    IAQNone = -1,
+    IAQHealthyHomeProcess,
+    IAQHeatingStaticPressure,
+    IAQCoolingStaticPressure,
+    IAQHealthyHomeSolution,
+    IAQHealthyHomeSolutionSort,
+    IAQCustomerChoice,
+    IAQIsYourHomeHealthy,
+    IAQBreatheEasyHealtyHome,
+    IAQVideoForCustomer,
+    IAQIsYourHomeHealthyFinal,
+    IAQHereWhatWePropose,
+    IAQCustomerChoiceFinal
+};
 @interface IAQDataModel : NSObject
+
 @property (nonatomic, strong) StaticPressureModel * heatingStaticPressure;
 @property (nonatomic, strong) StaticPressureModel * coolingStaticPressure;
 @property (nonatomic, strong) NSMutableArray*       iaqProductsArray;
@@ -19,6 +34,13 @@
 @property (nonatomic, strong) NSMutableArray*       iaqBestProductsArray;
 @property (nonatomic, strong) NSMutableArray*       iaqBetterProductsArray;
 @property (nonatomic, strong) NSMutableArray*       iaqGoodProductsArray;
+
+@property (nonatomic, strong) NSMutableArray*       iaqSortedProductsIdArray;
+@property (nonatomic, strong) NSMutableArray*       iaqSortedProductsQuantityArray;
+
+@property (nonatomic, strong) NSMutableArray*       iaqBestProductsIdArray;
+@property (nonatomic, strong) NSMutableArray*       iaqBetterProductsIdArray;
+@property (nonatomic, strong) NSMutableArray*       iaqGoodProductsIdArray;
 
 @property (readwrite) int airPurification;
 @property (readwrite) int humidification;
@@ -31,5 +53,15 @@
 @property (readwrite) float betterTotalPrice;
 @property (readwrite) float goodTotalPrice;
 
+@property (readwrite) IAQCurrentView currentStep;
 +(IAQDataModel*) sharedIAQDataModel;
+
+- (void) saveHeatingStaticPressure;
+
+- (void) loadHeatingStaticPressure;
+
+- (void) saveCoolingStaticPressure;
+
+- (void) loadCoolingStaticPressure;
+
 @end

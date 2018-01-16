@@ -12,6 +12,7 @@
 #import "SummaryOfFindingsVC.h"
 #import "CustomerChoiceVC.h"
 #import "AppDelegate.h"
+#import "IAQDataModel.h"
 
 @interface MainVC ()
 @property (strong, nonatomic) IBOutlet UIButton *btnTechApp;
@@ -64,7 +65,7 @@
 - (IBAction)btnIAQTouch:(id)sender
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-    
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
     UIViewController *vc = [storyboard instantiateInitialViewController];
     [self.navigationController pushViewController:vc animated:YES];
 }

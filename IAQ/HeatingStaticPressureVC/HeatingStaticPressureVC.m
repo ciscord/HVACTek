@@ -81,6 +81,27 @@
     self.mervRatingField.delegate = self;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHeatingStaticPressure) {
+        [[IAQDataModel sharedIAQDataModel] loadHeatingStaticPressure];
+        
+        self.nameField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName;
+        self.dateField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.todayDate;
+        self.filterSizeField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.filterSize;
+        self.mervRatingField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.filterMervRating;
+        self.systemTypeField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.systemType;
+        self.aField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingA;
+        self.bField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingB;
+        self.cField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingC;
+        self.dField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.heatingD;
+        
+        CoolingStaticPressureVC* coolingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoolingStaticPressureVC"];
+        [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
+        
+    }
+    
+}
+
 -(IBAction)nextButtonClick:(id)sender {
     
     [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName = self.nameField.text;
@@ -95,6 +116,12 @@
     
     CoolingStaticPressureVC* coolingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoolingStaticPressureVC"];
     [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        [userdefault setObject:[NSNumber numberWithInteger:IAQHeatingStaticPressure]  forKey:@"iaqCurrentStep"];
+        [userdefault synchronize];
+    }
 }
 
 -(BOOL) isEmptyField {

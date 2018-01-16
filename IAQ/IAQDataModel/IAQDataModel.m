@@ -30,4 +30,31 @@
         return sharedInstance;
     }
 }
+
+- (void) saveHeatingStaticPressure {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.heatingStaticPressure];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"heatingStaticPressure"];
+    [defaults synchronize];
+}
+
+- (void) loadHeatingStaticPressure {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedObject = [defaults objectForKey:@"heatingStaticPressure"];
+    self.heatingStaticPressure = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+}
+
+- (void) saveCoolingStaticPressure {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.coolingStaticPressure];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"coolingStaticPressure"];
+    [defaults synchronize];
+}
+
+- (void) loadCoolingStaticPressure {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedObject = [defaults objectForKey:@"coolingStaticPressure"];
+    self.coolingStaticPressure = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+}
+
 @end

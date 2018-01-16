@@ -25,7 +25,7 @@
         <!--Healthy Home Process-->
         <scene sceneID="x59-5R-hKu">
             <objects>
-                <viewController title="Healthy Home Process" id="mTh-Mz-WUI" customClass="HealthyHomeProcessVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HealthyHomeProcessVC" title="Healthy Home Process" id="mTh-Mz-WUI" customClass="HealthyHomeProcessVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qkO-hV-f5R"/>
                         <viewControllerLayoutGuide type="bottom" id="RtB-TA-W8u"/>

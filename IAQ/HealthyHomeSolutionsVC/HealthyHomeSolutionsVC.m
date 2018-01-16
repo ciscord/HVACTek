@@ -86,6 +86,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
                 IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
                 
                 item.quantity = string;
+                
             }
             return false;
         }
@@ -122,10 +123,14 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 -(IBAction)nextButtonClick:(id)sender {
 
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
     
     for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
         if ([iaqModel.quantity intValue] > 0) {
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
+            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
+            
         }
     }
     
@@ -136,6 +141,14 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }
     [IAQDataModel sharedIAQDataModel].isfinal = false;
     
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
+        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
+        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolution]  forKey:@"iaqCurrentStep"];
+        [userdefault synchronize];
+    }
+    
     //skip sort page if array count is 1
     if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
         IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
@@ -144,6 +157,35 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }else {
         HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
         [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+    }
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolution) {
+       
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [userdefault objectForKey:@"iaqSortedProductsQuantityArray"];
+        
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+            if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
+                iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
+                [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+            }
+        }
+        
+        //skip sort page if array count is 1
+        if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
+            IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
+            
+            [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
+        }else {
+            HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
+            [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+        }
+        
     }
     
 }

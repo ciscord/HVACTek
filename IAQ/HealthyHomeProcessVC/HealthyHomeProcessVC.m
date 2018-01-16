@@ -32,6 +32,12 @@
     [self configureColorScheme];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeProcess) {
+        [self loadIAQFromCoredata];
+    }
+
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
 
@@ -168,6 +174,12 @@
     HeatingStaticPressureVC* heatingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HeatingStaticPressureVC"];
     [self.navigationController pushViewController:heatingStaticPressureVC animated:true];
     _fetchedResultsController = nil;
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeProcess]  forKey:@"iaqCurrentStep"];
+        [userdefault synchronize];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

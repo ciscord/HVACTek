@@ -69,9 +69,38 @@
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
-    [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
-    [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolutionSort) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [userdefault objectForKey:@"iaqBestProductsIdArray"];
+        [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [userdefault objectForKey:@"iaqBetterProductsIdArray"];
+        [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [userdefault objectForKey:@"iaqGoodProductsIdArray"];
+        
+        //load products
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+            
+            //best
+            if ([[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray containsObject:iaqModel.productId]) {
+                [[IAQDataModel sharedIAQDataModel].iaqBestProductsArray addObject:iaqModel];
+            }
+            
+            //better
+            if ([[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray containsObject:iaqModel.productId]) {
+                [[IAQDataModel sharedIAQDataModel].iaqBetterProductsArray addObject:iaqModel];
+            }
+            
+            //good
+            if ([[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray containsObject:iaqModel.productId]) {
+                [[IAQDataModel sharedIAQDataModel].iaqGoodProductsArray addObject:iaqModel];
+            }
+        }
+        
+    }else{
+        [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+        [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+        [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+    }
+    
     
 }
 

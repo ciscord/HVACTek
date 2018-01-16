@@ -2067,31 +2067,25 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self performSegueWithIdentifier:@"cart" sender:nil];
 }
 
-
+#pragma mark Rebate Button Action
 - (IBAction)rebateButton:(id)sender {
     [self performSegueWithIdentifier:@"rebate" sender:self];
 }
 
-#pragma mark - IAQ Button
-
+#pragma mark - IAQ Button(Home icon)
 - (IBAction)iaqButton:(id)sender {
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-    NSString* iaqProductString = [userdefault objectForKey:@"iaqProduct"];
-    
-    if (iaqProductString != nil) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-        HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsAgreementVC"];
-        healthyHomeSolutionsAgreementVC.fromAddCart2 = true;
-        [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
-        
-    }else {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-        
-        UIViewController *vc = [storyboard instantiateInitialViewController];
-        [self.navigationController pushViewController:vc animated:YES];
+    NSNumber* iaqCurrentStep = [userdefault objectForKey:@"iaqCurrentStep"];
+    if (iaqCurrentStep == nil) {
+        iaqCurrentStep = [NSNumber numberWithInteger:IAQHealthyHomeProcess];
     }
+    [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
+    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeProcessVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
 }
+
 #pragma mark - Buttons Actions
 - (IBAction)monthBut:(id)sender {
     int mon = [sender tag];
@@ -2136,7 +2130,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [self.view bringSubviewToFront:secView];
     
 }
-
 
 - (IBAction)investmentClick:(id)sender {
     [self performSegueWithIdentifier:@"cart" sender:nil];
@@ -2186,7 +2179,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 -(void)saveCartSelected {
     [self restoreChoosedItems];
 }
-
 
 #pragma mark -
 -(void)restoreChoosedItems {
