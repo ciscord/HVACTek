@@ -841,8 +841,17 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price], @"signature":signature}
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            
-           NSDictionary *dict = responseObject[@"result"];
-           onSuccess(dict);
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               NSDictionary *dict = responseObject[@"result"];
+               onSuccess(dict);
+           }else{
+               NSError *error = [NSError errorWithDomain:@""
+                                                    code:1001
+                                                userInfo:@{
+                                                           NSLocalizedDescriptionKey:responseObject[@"message"]
+                                                           }];
+               onError(error);
+           }
            
        }
        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -874,9 +883,17 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [self POST:ADDIAQAUTHORIZESALEUNAPPROVED
     parameters:@{@"date" : dateString , @"products": products, @"customer":customer, @"technician": technician, @"price":[NSNumber numberWithFloat:price]}
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-           
-           NSDictionary *dict = responseObject[@"result"];
-           onSuccess(dict);
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               NSDictionary *dict = responseObject[@"result"];
+               onSuccess(dict);
+           }else{
+               NSError *error = [NSError errorWithDomain:@""
+                                                  code:1001
+                                              userInfo:@{
+                                                         NSLocalizedDescriptionKey:responseObject[@"message"]
+                                                         }];
+               onError(error);
+           }
            
        }
        failure:^(AFHTTPRequestOperation *operation, NSError *error) {

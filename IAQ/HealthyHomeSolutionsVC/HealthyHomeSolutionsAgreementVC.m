@@ -114,7 +114,7 @@
 }
 
 -(IBAction)authorizeClick:(id)sender {
-    
+    __weak typeof (self) weakSelf = self;
     UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (signature == nil) {
@@ -134,8 +134,6 @@
             
         }else {
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            __weak typeof (self) weakSelf = self;
             NSString* iaqProductStringFormatted = @"";
             if (selectedProductArray.count >= 1) {
                 IAQProductModel* iaqProduct = selectedProductArray[0];
@@ -157,7 +155,7 @@
                 }
             }
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
@@ -172,26 +170,40 @@
                                                        
                                                        [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                                            
-                                                           NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-                                                           [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
-                                                           [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
-                                                           [userdefault setObject:customerName forKey:@"customerName"];
-                                                           [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
-                                                           [userdefault setObject:signature forKey:@"signature"];
-                                                           [userdefault synchronize];
+                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                               NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                                                               [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                               [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
+                                                               [userdefault setObject:customerName forKey:@"customerName"];
+                                                               [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
+                                                               [userdefault setObject:signature forKey:@"signature"];
+                                                               [userdefault synchronize];
+                                                               
+                                                               [self showEmailSentAlert:emailField.text];
+                                                           });
                                                            
-                                                           [self showEmailSentAlert:emailField.text];
                                                            
                                                        } onError:^(NSError *error) {
-                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                           TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
-                                                           [self presentViewController:alert animated:true completion:nil];
+                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           });
+                                                           
                                                        }];
                                                        
                                                    } onError:^(NSError *error) {
-                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                       TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
-                                                       [self presentViewController:alert animated:true completion:nil];
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                           if (error.code == 1001) {
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Customer Name is required"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           }else {
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           }
+                                                       });
+                                                       
                                                    }];
             
         
@@ -214,7 +226,7 @@
     
     TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
+    __weak typeof (self) weakSelf = self;
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         UITextField* emailField = [alertView.textFieldArray objectAtIndex:0];
         
@@ -224,8 +236,6 @@
             
         }else {
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            __weak typeof (self) weakSelf = self;
             NSString* iaqProductStringFormatted = @"";
             if (selectedProductArray.count >= 1) {
                 IAQProductModel* iaqProduct = selectedProductArray[0];
@@ -247,7 +257,7 @@
                 }
             }
             
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
             
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
@@ -261,25 +271,40 @@
                                                        
                                                        [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                                            
-                                                           NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-                                                           [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
-                                                           [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
-                                                           [userdefault setObject:customerName forKey:@"customerName"];
-                                                           [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
-                                                           [userdefault synchronize];
+                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                               NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+                                                               [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
+                                                               [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
+                                                               [userdefault setObject:customerName forKey:@"customerName"];
+                                                               [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
+                                                               [userdefault synchronize];
+                                                               
+                                                               [self showEmailSentAlert:emailField.text];
+                                                           });
                                                            
-                                                           [self showEmailSentAlert:emailField.text];
                                                            
                                                        } onError:^(NSError *error) {
-                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                           TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
-                                                           [self presentViewController:alert animated:true completion:nil];
+                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed sending Email"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           });
+                                                           
                                                        }];
                                                        
                                                    } onError:^(NSError *error) {
-                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                       TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
-                                                       [self presentViewController:alert animated:true completion:nil];
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                           [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                           if (error.code == 1001) {
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Customer Name is required"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           }else {
+                                                               TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Failed"];
+                                                               [self presentViewController:alert animated:true completion:nil];
+                                                           }
+                                                       });
+                                                       
+                                                       
                                                    }];
             
             

@@ -82,11 +82,6 @@
 }
 
 -(IBAction)nextButtonClick:(id)sender {
-    if ([self isEmptyField]) {
-        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please fill out the required fields"];
-        [self presentViewController:alert animated:true completion:nil];
-        return;
-    }
     
     [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName = self.nameField.text;
     [IAQDataModel sharedIAQDataModel].heatingStaticPressure.todayDate = self.dateField.text;

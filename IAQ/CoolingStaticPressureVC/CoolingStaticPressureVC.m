@@ -78,13 +78,10 @@
     self.nameField.delegate = self;
     self.filterSizeField.delegate = self;
     self.mervRatingField.delegate = self;
+    
+    self.nameField.text = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName;
 }
 -(IBAction)nextButtonClick:(id)sender {
-    if ([self isEmptyField]) {
-        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please fill out the required fields"];
-        [self presentViewController:alert animated:true completion:nil];
-        return;
-    }
     
     [IAQDataModel sharedIAQDataModel].coolingStaticPressure.customerName = self.nameField.text;
     [IAQDataModel sharedIAQDataModel].coolingStaticPressure.todayDate = self.dateField.text;
