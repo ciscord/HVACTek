@@ -27,6 +27,7 @@
 @property (nonatomic, strong)  NSMutableArray *fastFinancialsData;
 @property (nonatomic, strong)  NSNumber *fastMonth;
 @property (nonatomic, strong)  NSNumber *easyMonth;
+@property (nonatomic, strong)  NSNumber *selectedIndex;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
@@ -70,6 +71,7 @@
     self.cartItems = [self.cart objectForKey:@"cartItems"];
     self.fastMonth = [self.cart objectForKey:@"fastMonth"];
     self.easyMonth = [self.cart objectForKey:@"easyMonth"];
+    self.selectedIndex = [self.cart objectForKey:@"selectedIndex"];
     self.rebates = [self.cart objectForKey:@"cartRebates"];
     self.fastFinancialsData = [self.cart objectForKey:@"fastFinancialsData"];
     self.easyFinancialsData = [self.cart objectForKey:@"easyFinancialsData"];
@@ -129,22 +131,14 @@
     float invest;
     
     Financials *fastFinanceObject;
-    for (int i = 0; i < [self.fastFinancialsData count]; i++) {
-        Financials *element = [self.fastFinancialsData objectAtIndex:i];
-        if (element.month.intValue == self.fastMonth.intValue) {
-            fastFinanceObject = element;
-            break;
-        }
+    if ([self.fastMonth intValue] != -1) {
+        fastFinanceObject = [self.fastFinancialsData objectAtIndex:[self.selectedIndex intValue]];
     }
     
     Financials *easyFinanceObject;
-    for (int i = 0; i < [self.easyFinancialsData count]; i++) {
-        Financials *element = [self.easyFinancialsData objectAtIndex:i];
-        if (element.month.intValue == self.easyMonth.intValue) {
-            easyFinanceObject = element;
-            easyPaymentFactor = element.value.floatValue;
-            break;
-        }
+    if ([self.easyMonth intValue] != -1) {
+        easyFinanceObject = [self.easyFinancialsData objectAtIndex:[self.selectedIndex intValue]];
+        easyPaymentFactor = easyFinanceObject.value.floatValue;
     }
     
     invest = (float)(totalAmount - totalSavings);

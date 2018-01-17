@@ -90,6 +90,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //need to update
     easyPaymentFactor = 0;
     fastPaymentFactor = 0;
+    self.fastMonth = -1;
+    self.easyMonth = -1;
     
     lblEasyPercent.text = @"";
     lblFastPercent.text = @"";
@@ -1669,10 +1671,12 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         item = self.easyFinancialsData[indexPath.item];
         self.easyMonth = item.month.intValue;
         self.fastMonth = -1;
+        self.selectedIndex = indexPath.item;
     }else {
         item = self.fastFinancialsData[indexPath.item];
         self.fastMonth = item.month.intValue;
         self.easyMonth = -1;
+        self.selectedIndex = indexPath.item;
     }
     
     secView.hidden = YES;
@@ -1978,37 +1982,17 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     float invest = 0.0;
     
     Financials *easyFinanceObject;
-    for (int i = 0; i < [self.easyFinancialsData count]; i++) {
-        Financials *element = [self.easyFinancialsData objectAtIndex:i];
-        if (element.month.intValue == self.easyMonth) {
-            easyFinanceObject = element;
-            easyPaymentFactor = element.value.floatValue;
-            break;
-        }
+    if (self.easyMonth != -1) {
+        easyFinanceObject = [self.easyFinancialsData objectAtIndex:self.selectedIndex];
+        easyPaymentFactor = easyFinanceObject.value.floatValue;
     }
     
     Financials *fastFinanceObject;
-    for (int i = 0; i < [self.fastFinancialsData count]; i++) {
-        Financials *element = [self.fastFinancialsData objectAtIndex:i];
-        if (element.month.intValue == self.fastMonth) {
-            fastFinanceObject = element;
-            break;
-        }
+    if (self.fastMonth != -1) {
+        fastFinanceObject = [self.fastFinancialsData objectAtIndex:self.selectedIndex];
+        
     }
     
-//    if (easyFinanceObject != nil) {
-//
-//        if (self.months > 83) {
-//            finacePay = ( (float)(totalAmount - totalSavings) / discount1 ) * discount2;
-//            invest = (float)(totalAmount - totalSavings) / discount1;
-//        }else{
-//            finacePay = (float)(totalAmount - totalSavings) / discount1 / (float)self.months;
-//            invest = (finacePay*self.months);
-//        }
-//    }
-    
-    
-//    float localInvest = finacePay * self.months;//(totalAmount - totalSavings);
     invest = (float)(totalAmount - totalSavings);
     float localInvest = (float)(totalAmount - totalSavings);
     
@@ -2325,6 +2309,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cart setObject:tt forKey:@"cartItems"];
         [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
         [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
+        [cart setObject:[NSNumber numberWithInt:self.selectedIndex] forKey:@"selectedIndex"];
         [cart setObject:rebates forKey:@"cartRebates"];
         [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
         [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
