@@ -71,10 +71,6 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     self.separatorView.y = self.frame.size.height-1;
 
 }
-- (void) prepareForReuse{
-
-  //  NSLog(@"adscads");
-}
 
 - (void)setCellData:(NSMutableDictionary *)cellData {
     _cellData               = cellData;
@@ -615,11 +611,11 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     [[DataLoader sharedInstance] debriefJobWithInfo:params
                                           onSuccess:^(NSString *message) {
                                               
-         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
          [weakSelf debriefCurrentJob];
 
      } onError:^(NSError *error) {
-         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
          ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
      }];
 }

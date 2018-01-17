@@ -75,6 +75,7 @@ static UIFont *boldSystemFont;
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
     if (!s_CalibriLight13) {
         s_CalibriLight13 = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
     }
@@ -89,7 +90,7 @@ static UIFont *boldSystemFont;
     
     self.lbDate.font = boldSystemFont;
     self.lbAmount.font = boldSystemFont;
-    
+    [super awakeFromNib];
     [self configureColorScheme];
     
     

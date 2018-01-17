@@ -369,7 +369,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     weakSelf.invoiceData = dict;
     
     [[DataLoader sharedInstance] postInvoice:dict requestingPreview:1 onSuccess:^(NSString *message) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         ///    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         ///    [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
         
@@ -377,7 +377,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [self performSegueWithIdentifier:@"showInvoicePreviewVC" sender:self];
         
     } onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     }];
 }
 

@@ -8,6 +8,7 @@
 
 #import "BreatheEasyHealthyHomeVC.h"
 #import "VideoForCustomerVC.h"
+#import "IAQDataModel.h"
 @interface BreatheEasyHealthyHomeVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *dividerImageView;
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
@@ -21,6 +22,11 @@
     self.title = @"Breathe Easy Healthy Home";
     [self.layer1View bringSubviewToFront:self.dividerImageView];
      [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQBreatheEasyHealtyHome) {
+        VideoForCustomerVC* videoForCustomerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoForCustomerVC"];
+        [self.navigationController pushViewController:videoForCustomerVC animated:true];
+    }
 }
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {

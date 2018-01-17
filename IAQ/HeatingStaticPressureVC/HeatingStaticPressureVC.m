@@ -79,9 +79,7 @@
     self.nameField.delegate = self;
     self.filterSizeField.delegate = self;
     self.mervRatingField.delegate = self;
-}
-
-- (void) viewDidAppear:(BOOL)animated {
+    
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHeatingStaticPressure) {
         [[IAQDataModel sharedIAQDataModel] loadHeatingStaticPressure];
         
@@ -99,7 +97,6 @@
         [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
         
     }
-    
 }
 
 -(IBAction)nextButtonClick:(id)sender {
@@ -118,6 +115,7 @@
     [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
     
     if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        [[IAQDataModel sharedIAQDataModel] saveHeatingStaticPressure];
         NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
         [userdefault setObject:[NSNumber numberWithInteger:IAQHeatingStaticPressure]  forKey:@"iaqCurrentStep"];
         [userdefault synchronize];
@@ -139,14 +137,12 @@
     }
     return false;
 }
-
--(void)textFieldDidChange :(UITextField *)theTextField{
-    
+-(void) calculateData {
     if (![self.aField.text isNumeric] ||
         ![self.bField.text isNumeric] ||
         ![self.cField.text isNumeric] ||
         ![self.dField.text isNumeric] ) {
-    
+        
         return;
     }
     float aValue = [self.aField.text floatValue];
@@ -157,6 +153,9 @@
     self.abField.text = [NSString stringWithFormat:@"%.2f", aValue + bValue];
     self.acField.text = [NSString stringWithFormat:@"%.2f", aValue - cValue];
     self.bdField.text = [NSString stringWithFormat:@"%.2f", bValue - dValue];
+}
+-(void)textFieldDidChange :(UITextField *)theTextField{
+    [self calculateData];
 }
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
@@ -177,13 +176,14 @@
                 if (stringIsValid) {
                     textField.text = string;
                 }
-                
+                [self calculateData];
                 return false;
             }
             
         }
         if (textField.text.length == 1 && string.length == 0) {
             textField.text = @"0";
+            [self calculateData];
             return false;
         }
         NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];

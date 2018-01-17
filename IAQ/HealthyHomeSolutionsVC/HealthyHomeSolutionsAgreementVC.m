@@ -335,7 +335,7 @@
     
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         [self.navigationController popToViewController: self.navigationController.viewControllers[1] animated:NO];
-        [IAQDataModel sharedIAQDataModel].isfinal = 0;
+        [[IAQDataModel sharedIAQDataModel] resetAllData];
     }]];
     
     TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];

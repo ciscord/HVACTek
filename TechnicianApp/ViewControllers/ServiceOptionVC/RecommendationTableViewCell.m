@@ -70,6 +70,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
     [self.tableView registerClass:[ServiceOptionTableViewCell class] forCellReuseIdentifier:kCELL_IDENTIFIER];
     
     self.lbSelectOption.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22];

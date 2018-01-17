@@ -12,7 +12,7 @@
 #import "RRQuestionsVC.h"
 #import "HealthyHomeSolutionsAgreementVC.h"
 #import "IAQDataModel.h"
-@interface testerViewController (){
+@interface testerViewController () <CartViewControllerDelegate>{
     
     IBOutlet UILabel *lblSystemRebates;
     IBOutlet UILabel *lblInvestemts;
@@ -2189,7 +2189,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in airCon) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedAirCon = [airCon indexOfObject:objItm];
+                        choosedAirCon = (int)[airCon indexOfObject:objItm];
                     }
                 }
                 
@@ -2197,7 +2197,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in heatPump) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedHeatPump = [heatPump indexOfObject:objItm];
+                        choosedHeatPump = (int)[heatPump indexOfObject:objItm];
                     }
                 }
                 
@@ -2205,7 +2205,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in furn) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedFurn = [furn indexOfObject:objItm];
+                        choosedFurn = (int)[furn indexOfObject:objItm];
                     }
                 }
                 
@@ -2213,7 +2213,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in airH) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedAirH = [airH indexOfObject:objItm];
+                        choosedAirH = (int)[airH indexOfObject:objItm];
                     }
                 }
                 
@@ -2221,7 +2221,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in geo) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedGeo = [geo indexOfObject:objItm];
+                        choosedGeo = (int)[geo indexOfObject:objItm];
                     }
                 }
                 
@@ -2229,7 +2229,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in iaq) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedIAQ = [iaq indexOfObject:objItm];
+                        choosedIAQ = (int)[iaq indexOfObject:objItm];
                     }
                 }
                 
@@ -2237,7 +2237,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in boilers) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedBoilers = [boilers indexOfObject:objItm];
+                        choosedBoilers = (int)[boilers indexOfObject:objItm];
                     }
                 }
                 
@@ -2245,7 +2245,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in hotwater) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedHotWater = [hotwater indexOfObject:objItm];
+                        choosedHotWater = (int)[hotwater indexOfObject:objItm];
                     }
                 }
                 
@@ -2253,7 +2253,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in acces) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedAcces = [acces indexOfObject:objItm];
+                        choosedAcces = (int)[acces indexOfObject:objItm];
                     }
                 }
                 
@@ -2261,7 +2261,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in warranties) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedWarranties = [warranties indexOfObject:objItm];
+                        choosedWarranties = (int)[warranties indexOfObject:objItm];
                     }
                 }
                 
@@ -2269,7 +2269,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 
                 for (Item * objItm  in ductlessMiniSplits) {
                     if ([objItm.modelName isEqualToString:itm.modelName]){
-                        choosedDuctlessMiniSplits = [ductlessMiniSplits indexOfObject:objItm];
+                        choosedDuctlessMiniSplits = (int)[ductlessMiniSplits indexOfObject:objItm];
                     }
                 }
                 

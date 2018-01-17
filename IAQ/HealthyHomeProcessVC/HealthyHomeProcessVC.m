@@ -30,14 +30,12 @@
     self.title = @"Healthy Home Process";
     // Do any additional setup after loading the view.
     [self configureColorScheme];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
+    
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeProcess) {
         [self loadIAQFromCoredata];
     }
-
 }
+
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
 

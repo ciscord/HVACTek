@@ -11,12 +11,10 @@
 #import "Item.h"
 #import "testerViewController.h"
 
-
 @protocol CartViewControllerDelegate
 -(void)editCardSelected;
 -(void)saveCartSelected;
 @end
-
 
 @interface CartViewController : UIViewController <MFMailComposeViewControllerDelegate, NSFetchedResultsControllerDelegate>
 {
@@ -46,10 +44,7 @@
 @property (nonatomic, strong)  NSMutableArray *carts;
 @property (nonatomic, strong) id testerVC;
 
-
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
-
-
 
 - (IBAction)email:(id)sender;
 - (IBAction)mainMenu:(id)sender;

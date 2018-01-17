@@ -80,6 +80,11 @@
         self.view.autoresizesSubviews = YES;
     }
     
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQVideoForCustomer) {
+        int viewsToPop = 2;
+        [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
+        [IAQDataModel sharedIAQDataModel].isfinal = 1;
+    }
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark Button event
@@ -87,6 +92,14 @@
     int viewsToPop = 2;
     [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
     [IAQDataModel sharedIAQDataModel].isfinal = 1;
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];
+        
+        [userdefault synchronize];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

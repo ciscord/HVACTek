@@ -42,7 +42,6 @@
     
 }
 
-
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     rebatesToSend = [[NSMutableArray alloc]init];
@@ -96,7 +95,7 @@
     allData = [self.managedObjectContext
                executeFetchRequest:fetchRequest error:&fetchingError];
     
-    NSLog(@"In rebates all data holds %d",allData.count);
+//    NSLog(@"In rebates all data holds %d",allData.count);
     [self selectProducts];
 }
 
@@ -109,7 +108,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 -(void) selectProducts {
     selected = [[NSMutableArray alloc]init];
     for (int j = 0; j  < allData.count; j++){
@@ -120,7 +118,7 @@
                        
         }
     }
-    NSLog(@"selected contains %d",selected.count);
+//    NSLog(@"selected contains %d",selected.count);
     
     
     [self.tableView reloadData];
@@ -211,7 +209,7 @@
 
 #pragma mark - Custom Switch
 -(void) customSwitch:(id) sender {
-    int x = [sender tag];
+    int x = (int)[sender tag];
     Item *itm = selected[x];
     UISwitch* switchControl = sender;
     if (switchControl.isOn) {

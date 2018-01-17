@@ -9,7 +9,15 @@
 #import "FirstOption.h"
 
 @implementation FirstOption
-
-
+-(id) init {
+    if (self = [super init]) {
+        self.coolingValue = @"";
+        self.heatingValue = @"";
+        self.boilersValue = @"";
+        self.ductlessValue = @"";
+    }
+    
+    return self;
+}
 
 @end

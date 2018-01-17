@@ -56,5 +56,25 @@
     NSData *encodedObject = [defaults objectForKey:@"coolingStaticPressure"];
     self.coolingStaticPressure = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
 }
+/*
+ resetAllData is called when Authorize or Email success.
+ */
+- (void) resetAllData {
+    self.isfinal = 0;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"heatingStaticPressure"];
+    [defaults removeObjectForKey:@"coolingStaticPressure"];
+    [defaults removeObjectForKey:@"iaqCurrentStep"];
+    [defaults removeObjectForKey:@"iaqSortedProductsIdArray"];
+    [defaults removeObjectForKey:@"iaqSortedProductsQuantityArray"];
+    [defaults removeObjectForKey:@"iaqBestProductsIdArray"];
+    [defaults removeObjectForKey:@"iaqBetterProductsIdArray"];
+    [defaults removeObjectForKey:@"iaqGoodProductsIdArray"];
+    [defaults removeObjectForKey:@"airPurification"];
+    [defaults removeObjectForKey:@"humidification"];
+    [defaults removeObjectForKey:@"airFiltration"];
+    [defaults removeObjectForKey:@"dehumidification"];
+    [defaults synchronize];
+}
 
 @end

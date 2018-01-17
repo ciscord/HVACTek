@@ -43,6 +43,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
     [self configureColorScheme];
     [self.poductTableView registerNib:[UINib nibWithNibName:@"ProductCell" bundle:nil] forCellReuseIdentifier:@"ProductCell"];
     self.poductTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

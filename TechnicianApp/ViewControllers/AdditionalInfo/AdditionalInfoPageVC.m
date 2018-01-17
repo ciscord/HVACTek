@@ -45,9 +45,9 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 //    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
 //        self.additionalInfoArray = infoDict[@"1"][@"rows"];
 //        [self.infoTableView reloadData];
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
 //    }onError:^(NSError *error) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
 //        ShowOkAlertWithTitle(error.localizedDescription, self);
 //    }];
     

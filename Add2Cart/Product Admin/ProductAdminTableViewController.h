@@ -27,6 +27,6 @@
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-- (IBAction)addProduct:(id)sender;
+//- (IBAction)addProduct:(id)sender;
 
 @end

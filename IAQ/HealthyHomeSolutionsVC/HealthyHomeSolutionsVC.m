@@ -30,6 +30,33 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //load
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolution) {
+        
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [userdefault objectForKey:@"iaqSortedProductsQuantityArray"];
+        
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+            if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
+                iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
+                [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+            }
+        }
+        
+        //skip sort page if array count is 1
+        if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
+            IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
+            
+            [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
+        }else {
+            HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
+            [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+        }
+        
+    }
 }
 
 #pragma mark - UICollectionViewDatasource
@@ -124,6 +151,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
     
     for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
         if ([iaqModel.quantity intValue] > 0) {
@@ -157,35 +185,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }else {
         HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
         [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
-    }
-    
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolution) {
-       
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        
-        [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
-        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [userdefault objectForKey:@"iaqSortedProductsQuantityArray"];
-        
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-            if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
-                iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
-                [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
-            }
-        }
-        
-        //skip sort page if array count is 1
-        if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
-            IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
-            
-            [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
-        }else {
-            HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-            [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
-        }
-        
     }
     
 }

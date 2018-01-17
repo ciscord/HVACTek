@@ -229,8 +229,8 @@
     NSArray *visibleIndexSorted = [visibleIndex sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
         CGRect r1 = [self.tableView rectForRowAtIndexPath:(NSIndexPath *)a];
         CGRect r2 = [self.tableView rectForRowAtIndexPath:(NSIndexPath *)b];
-        CGFloat y1 = fabsf(r1.origin.y + r1.size.height/2 - self.tableView.contentOffset.y - self.tableView.center.y);
-        CGFloat y2 = fabsf(r2.origin.y + r2.size.height/2 - self.tableView.contentOffset.y - self.tableView.center.y);
+        double y1 = fabs(r1.origin.y + r1.size.height/2 - self.tableView.contentOffset.y - self.tableView.center.y);
+        double y2 = fabs(r2.origin.y + r2.size.height/2 - self.tableView.contentOffset.y - self.tableView.center.y);
         if (y1 > y2) {
             return NSOrderedDescending;
         }

@@ -85,12 +85,12 @@
     __weak typeof (self) weakSelf = self;
     
 //    [[DataLoader sharedInstance]connectToSWAPIonSucces:^(NSString *message) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (weakSelf == weakSelf.navigationController.topViewController) {
             [weakSelf performSegueWithIdentifier:@"tehnicianHome" sender:self];
         }        
 //    } onError:^(NSError *error) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
 //        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
 //    }];
 

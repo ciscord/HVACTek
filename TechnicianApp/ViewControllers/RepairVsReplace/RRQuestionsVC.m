@@ -39,7 +39,7 @@
     
     __weak typeof(self) weakSelf = self;
     [[DataLoader sharedInstance] getQuestionsOfType:self.questionType onSuccess:^(NSArray *resultQuestions) {
-            weakSelf.questionsArray = resultQuestions;
+            weakSelf.questionsArray = [NSMutableArray arrayWithArray:resultQuestions];
             [weakSelf prepareRRQuestionToDisplay];
         } onError:^(NSError *error) {
         

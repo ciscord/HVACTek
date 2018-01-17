@@ -119,7 +119,7 @@
 }
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    int j = [pickerView tag];
+    int j = (int)[pickerView tag];
     switch (j) {
         case 1:{
             return coolingArray.count;
@@ -147,7 +147,7 @@
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
 {
   
-    int j = [pickerView tag];
+    int j = (int)[pickerView tag];
     switch (j) {
         case 1:{
             return coolingArray[row];
@@ -175,7 +175,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
 {
     
-    int j = [pickerView tag];
+    int j = (int)[pickerView tag];
     switch (j) {
         case 1:
             firstOption.coolingValue = coolingArray[row];

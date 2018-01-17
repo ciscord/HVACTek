@@ -18,8 +18,6 @@
 @property (weak, nonatomic) NSString *type;
 @property (weak, nonatomic) Item *itemz;
 
-- (IBAction)saveButton:(id)sender;
-
-
+//- (IBAction)saveButton:(id)sender;
 
 @end

@@ -152,7 +152,7 @@
 
 #pragma mark - Show Alerts
 - (void)succesfullAlert {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     UIAlertController *alert= [UIAlertController alertControllerWithTitle: @""
                                                                   message: @"Email address was successfully changed"
                                                            preferredStyle: UIAlertControllerStyleAlert];
@@ -167,7 +167,7 @@
 
 
 - (void)showFailedAlert {
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     UIAlertController *alert= [UIAlertController alertControllerWithTitle: @""
                                                                   message: @"Oops. Something went wrong. Please try again later."
                                                            preferredStyle: UIAlertControllerStyleAlert];

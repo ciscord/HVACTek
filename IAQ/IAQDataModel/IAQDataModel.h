@@ -64,4 +64,6 @@ typedef NS_ENUM(NSInteger, IAQCurrentView) {
 
 - (void) loadCoolingStaticPressure;
 
+- (void) resetAllData;
+
 @end

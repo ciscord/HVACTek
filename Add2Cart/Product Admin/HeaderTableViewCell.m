@@ -25,6 +25,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     __weak UIImageView *weakImageView = self.logoImageView;
     [self.logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
                               placeholderImage:[UIImage imageNamed:@"bg-top-bar"]

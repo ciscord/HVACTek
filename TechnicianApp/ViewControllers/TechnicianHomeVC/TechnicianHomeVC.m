@@ -114,7 +114,7 @@
         //[MBProgressHUD hideHUDForView:self.view animated:YES];
         [self checkNumberOfHuds:--self.numberOfHuds];
     }onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }
@@ -265,7 +265,7 @@
                                                                    //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                    [self checkNumberOfHuds:--self.numberOfHuds];
                                                                } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                   [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                    ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                }];
     }
@@ -301,7 +301,7 @@
 #pragma mark - Number of HUDs
 -(void)checkNumberOfHuds:(int)number {
     if (number == 0)
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 
@@ -335,7 +335,7 @@
                                                                        [self checkNumberOfHuds:--self.numberOfHuds];
                                                                        [weakSelf custumerlookup];
                                                                    } onError:^(NSError *error) {
-                                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
                                                                    }];
         }

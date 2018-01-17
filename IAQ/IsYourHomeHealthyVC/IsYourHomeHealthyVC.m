@@ -85,6 +85,24 @@
         [weakSelf reloadData];
     };
     
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQIsYourHomeHealthy) {
+        
+        [IAQDataModel sharedIAQDataModel].airPurification = [[userdefault objectForKey:@"airPurification"] intValue];
+        [IAQDataModel sharedIAQDataModel].humidification = [[userdefault objectForKey:@"humidification"] intValue];
+        [IAQDataModel sharedIAQDataModel].airFiltration = [[userdefault objectForKey:@"airFiltration"] intValue];
+        [IAQDataModel sharedIAQDataModel].dehumidification = [[userdefault objectForKey:@"dehumidification"] intValue];
+        
+        //go to next screen
+        if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
+            HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
+            [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
+        }else {
+            BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
+            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
+        }
+        
+    }
     
     [self reloadData];
     
@@ -179,6 +197,22 @@
 
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
+    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+        [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].airPurification] forKey:@"airPurification"];
+        [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].humidification] forKey:@"humidification"];
+        [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].airFiltration] forKey:@"airFiltration"];
+        [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].dehumidification] forKey:@"dehumidification"];
+        
+        if ([IAQDataModel sharedIAQDataModel].isfinal == 0) {
+            [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthy]  forKey:@"iaqCurrentStep"];
+        }else {
+            [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthyFinal]  forKey:@"iaqCurrentStep"];
+        }
+    
+        [userdefault synchronize];
+    }
     if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
         HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
         [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];

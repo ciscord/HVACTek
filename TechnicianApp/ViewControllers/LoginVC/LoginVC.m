@@ -75,7 +75,7 @@
                                              [userPassword setObject:weakSelf.txtAPI.text forKey:@"companyAPI"];
                                              [userPassword synchronize];
                                              
-                                             //[MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                             //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                              
                                              [weakSelf performSelectorOnMainThread:@selector(loadAdditionalInfo) withObject:nil waitUntilDone:NO];
                                              //[weakSelf performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
@@ -96,10 +96,10 @@
     [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
         if (infoDict.count)
             [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
     }onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
 }

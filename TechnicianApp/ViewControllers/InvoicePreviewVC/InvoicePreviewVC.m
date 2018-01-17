@@ -40,13 +40,13 @@
     [job.managedObjectContext save];
     
     [[DataLoader sharedInstance] postInvoice:self.invoiceDictionary requestingPreview:0 onSuccess:^(NSString *message) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self trySendingLogWithMessage:@"Success" andResponse:message.description];
             AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
             [self.navigationController popToViewController:appDelegate.homeController animated:YES];
         
     } onError:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self trySendingLogWithMessage:@"Error" andResponse:error.localizedDescription];
     }];
 }

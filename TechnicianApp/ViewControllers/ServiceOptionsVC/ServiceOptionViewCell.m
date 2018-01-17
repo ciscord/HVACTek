@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    
+    [super awakeFromNib];
     self.qtyTextField.layer.borderWidth   = 1.0;
     self.qtyTextField.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.qtyTextField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];

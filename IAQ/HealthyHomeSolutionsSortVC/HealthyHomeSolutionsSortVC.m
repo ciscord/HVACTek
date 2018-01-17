@@ -27,9 +27,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
     [self.findingsTable registerNib:[UINib nibWithNibName:findingsCellID bundle:nil] forCellReuseIdentifier:findingsCellID];
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
+    
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolutionSort) {
         
         IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
@@ -37,8 +35,8 @@ static NSString *findingsCellID = @"SortFindinsCell";
         [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
         
     }
-    
 }
+
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
@@ -109,8 +107,8 @@ static NSString *findingsCellID = @"SortFindinsCell";
     [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
     
     if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
         [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
         
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
             
