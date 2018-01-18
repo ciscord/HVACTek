@@ -174,8 +174,9 @@
     _fetchedResultsController = nil;
     
     if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
+        [[IAQDataModel sharedIAQDataModel] resetAllData];
         NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeProcess]  forKey:@"iaqCurrentStep"];
+        [userdefault setObject:[NSNumber numberWithInteger:IAQHeatingStaticPressure]  forKey:@"iaqCurrentStep"];
         [userdefault synchronize];
     }
 }

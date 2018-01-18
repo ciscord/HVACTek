@@ -30,6 +30,14 @@
 }
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
+    
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQVideoForCustomer]  forKey:@"iaqCurrentStep"];
+    
+    [userdefault synchronize];
+    
     VideoForCustomerVC* videoForCustomerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoForCustomerVC"];
     [self.navigationController pushViewController:videoForCustomerVC animated:true];
 }

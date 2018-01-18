@@ -90,16 +90,16 @@
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
     int viewsToPop = 2;
+    
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthyFinal]  forKey:@"iaqCurrentStep"];
+    
+    [userdefault synchronize];
     [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
     [IAQDataModel sharedIAQDataModel].isfinal = 1;
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        
-        [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];
-        
-        [userdefault synchronize];
-    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

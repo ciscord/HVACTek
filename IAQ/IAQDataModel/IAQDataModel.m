@@ -74,6 +74,7 @@
     [defaults removeObjectForKey:@"humidification"];
     [defaults removeObjectForKey:@"airFiltration"];
     [defaults removeObjectForKey:@"dehumidification"];
+    [defaults removeObjectForKey:@"isfinal"];
     [defaults synchronize];
 }
 

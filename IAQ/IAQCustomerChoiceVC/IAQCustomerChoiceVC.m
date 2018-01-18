@@ -70,10 +70,13 @@
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-    [IAQDataModel sharedIAQDataModel].isfinal = [[userdefault objectForKey:@"isfinal"] intValue];
+    
     
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQCustomerChoice) {
-        
+        [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray array];
+        [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray array];
+        [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray array];
+           
         [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [userdefault objectForKey:@"iaqBestProductsIdArray"];
         [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [userdefault objectForKey:@"iaqBetterProductsIdArray"];
         [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [userdefault objectForKey:@"iaqGoodProductsIdArray"];
@@ -96,7 +99,9 @@
                 [[IAQDataModel sharedIAQDataModel].iaqGoodProductsArray addObject:iaqModel];
             }
         }
-        if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
+        
+        if ([IAQDataModel sharedIAQDataModel].currentStep == IAQCustomerChoiceFinal) {
+            [IAQDataModel sharedIAQDataModel].isfinal = [[userdefault objectForKey:@"isfinal"] intValue];
             
         }else {
             //go to next screen
@@ -277,33 +282,33 @@
     IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
     [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        
-        [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [NSMutableArray array];
-        [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [NSMutableArray array];
-        [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [NSMutableArray array];
-        
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBestProductsArray) {
-            [[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray addObject:iaqModel.productId];
-        }
-        
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray) {
-            [[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray addObject:iaqModel.productId];
-        }
-        
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray) {
-            [[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray addObject:iaqModel.productId];
-        }
-        
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray forKey:@"iaqBestProductsIdArray"];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray forKey:@"iaqBetterProductsIdArray"];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray forKey:@"iaqGoodProductsIdArray"];
-        
-        [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoice]  forKey:@"iaqCurrentStep"];
-        [userdefault synchronize];
+    [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [NSMutableArray array];
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBestProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray addObject:iaqModel.productId];
     }
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray addObject:iaqModel.productId];
+    }
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray addObject:iaqModel.productId];
+    }
+    
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray forKey:@"iaqBestProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray forKey:@"iaqBetterProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray forKey:@"iaqGoodProductsIdArray"];
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthy]  forKey:@"iaqCurrentStep"];
+    [userdefault synchronize];
+
 }
 -(IBAction)optionButtonClick:(id)sender {
 

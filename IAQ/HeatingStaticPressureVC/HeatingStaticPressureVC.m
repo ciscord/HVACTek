@@ -100,6 +100,11 @@
 }
 
 -(IBAction)nextButtonClick:(id)sender {
+    if ([self isEmptyField]) {
+        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Customer name is required"];
+        [self presentViewController:alert animated:true completion:nil];
+        return;
+    }
     
     [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName = self.nameField.text;
     [IAQDataModel sharedIAQDataModel].heatingStaticPressure.todayDate = self.dateField.text;
@@ -114,30 +119,23 @@
     CoolingStaticPressureVC* coolingStaticPressureVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoolingStaticPressureVC"];
     [self.navigationController pushViewController:coolingStaticPressureVC animated:true];
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        [[IAQDataModel sharedIAQDataModel] saveHeatingStaticPressure];
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHeatingStaticPressure]  forKey:@"iaqCurrentStep"];
-        [userdefault synchronize];
-    }
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    [[IAQDataModel sharedIAQDataModel] saveHeatingStaticPressure];
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQCoolingStaticPressure]  forKey:@"iaqCurrentStep"];
+    [userdefault synchronize];
+
 }
 
 -(BOOL) isEmptyField {
-    if (self.nameField.text.length == 0 ||
-        self.dateField.text.length == 0 ||
-        self.filterSizeField.text.length == 0 ||
-        self.mervRatingField.text.length == 0 ||
-        self.systemTypeField.text.length == 0 ||
-        self.aField.text.length == 0 ||
-        self.bField.text.length == 0 ||
-        self.cField.text.length == 0 ||
-        self.dField.text.length == 0
-        ) {
+    if (self.nameField.text.length == 0) {
         return true;
     }
     return false;
 }
 -(void) calculateData {
+    
     if (![self.aField.text isNumeric] ||
         ![self.bField.text isNumeric] ||
         ![self.cField.text isNumeric] ||

@@ -2061,7 +2061,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     NSNumber* iaqCurrentStep = [userdefault objectForKey:@"iaqCurrentStep"];
     if (iaqCurrentStep == nil) {
-        iaqCurrentStep = [NSNumber numberWithInteger:IAQHealthyHomeProcess];
+        iaqCurrentStep = [NSNumber numberWithInteger:IAQNone];
     }
     [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     

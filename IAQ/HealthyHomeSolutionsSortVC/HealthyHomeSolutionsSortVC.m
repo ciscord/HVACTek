@@ -106,23 +106,25 @@ static NSString *findingsCellID = @"SortFindinsCell";
     
     [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
-        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
         
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
-            
-            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
-            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
-        
-        }
-        
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolutionSort]  forKey:@"iaqCurrentStep"];
-        [userdefault synchronize];
+        [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
+        [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
+    
     }
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoice]  forKey:@"iaqCurrentStep"];
+    [userdefault synchronize];
+    
 }
 
 - (void)didReceiveMemoryWarning {

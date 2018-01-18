@@ -52,6 +52,14 @@
     int viewsToPop = 2;//go to cutomer's choice screen
     [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
     
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
+    [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoiceFinal]  forKey:@"iaqCurrentStep"];
+    [userdefault synchronize];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -34,6 +34,8 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     //load
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolution) {
         
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
+        
         NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
         
         [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
@@ -136,7 +138,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         item.quantity = newString;
     }
     
-    
     return stringIsValid;
 }
 
@@ -169,13 +170,20 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }
     [IAQDataModel sharedIAQDataModel].isfinal = false;
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep == IAQNone) {
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
-        [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolution]  forKey:@"iaqCurrentStep"];
-        [userdefault synchronize];
+    //reset auto load
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
+    
+    if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
+        [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoice]  forKey:@"iaqCurrentStep"];
+    }else{
+        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolutionSort]  forKey:@"iaqCurrentStep"];
     }
+    
+    [userdefault synchronize];
     
     //skip sort page if array count is 1
     if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
