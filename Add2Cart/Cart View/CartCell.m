@@ -27,7 +27,8 @@
 @property (nonatomic, strong)  NSMutableArray *fastFinancialsData;
 @property (nonatomic, strong)  NSNumber *fastMonth;
 @property (nonatomic, strong)  NSNumber *easyMonth;
-@property (nonatomic, strong)  NSNumber *selectedIndex;
+@property (nonatomic, strong)  NSNumber *easySelectedIndex;
+@property (nonatomic, strong)  NSNumber *fastSelectedIndex;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
@@ -72,7 +73,8 @@
     self.cartItems = [self.cart objectForKey:@"cartItems"];
     self.fastMonth = [self.cart objectForKey:@"fastMonth"];
     self.easyMonth = [self.cart objectForKey:@"easyMonth"];
-    self.selectedIndex = [self.cart objectForKey:@"selectedIndex"];
+    self.easySelectedIndex = [self.cart objectForKey:@"easySelectedIndex"];
+    self.fastSelectedIndex = [self.cart objectForKey:@"fastSelectedIndex"];
     self.rebates = [self.cart objectForKey:@"cartRebates"];
     self.fastFinancialsData = [self.cart objectForKey:@"fastFinancialsData"];
     self.easyFinancialsData = [self.cart objectForKey:@"easyFinancialsData"];
@@ -133,12 +135,12 @@
     
     Financials *fastFinanceObject;
     if ([self.fastMonth intValue] != -1) {
-        fastFinanceObject = [self.fastFinancialsData objectAtIndex:[self.selectedIndex intValue]];
+        fastFinanceObject = [self.fastFinancialsData objectAtIndex:[self.fastSelectedIndex intValue]];
     }
     
     Financials *easyFinanceObject;
     if ([self.easyMonth intValue] != -1) {
-        easyFinanceObject = [self.easyFinancialsData objectAtIndex:[self.selectedIndex intValue]];
+        easyFinanceObject = [self.easyFinancialsData objectAtIndex:[self.easySelectedIndex intValue]];
         easyPaymentFactor = easyFinanceObject.value.floatValue;
     }
     
@@ -196,7 +198,6 @@
     
     ProductCell *acell = [self.poductTableView dequeueReusableCellWithIdentifier:@"ProductCell"];
     NSString * title = [self.productList objectAtIndex:indexPath.row];
-    
     
     int occurrences = 0;
     for(NSString *name in self.occurenciesList) {

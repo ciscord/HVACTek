@@ -91,7 +91,8 @@
 @property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, assign) int easyMonth;
 @property (nonatomic, assign) int fastMonth;
-@property (nonatomic, assign) int selectedIndex;
+@property (nonatomic, assign) int easySelectedIndex;
+@property (nonatomic, assign) int fastSelectedIndex;
 
 @property (nonatomic, strong) NSFetchedResultsController *prodFRC;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;

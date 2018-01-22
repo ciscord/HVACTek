@@ -157,8 +157,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [tableViewX addGestureRecognizer:swipeGestureLeft];
     [self.view sendSubviewToBack:secView];
     
-    
-    
     __weak typeof (self) weakSelf = self;
     [[DataLoader sharedInstance] add2cartFinancials:nil
                                           onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
@@ -285,17 +283,22 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void)configureFinancingDefaults {
-//    if (self.easyFinancialsData.count > 0) {
-//        Financials *item = self.easyFinancialsData[0];
-//        self.easyMonth = item.month.intValue;
-//    }
-//
-//    if (self.fastFinancialsData.count > 0) {
-//        Financials *item = self.fastFinancialsData[0];
-//        self.fastMonth = item.month.intValue;
-//    }
-    self.easyMonth = -1;
-    self.fastMonth = -1;
+    if (self.easyFinancialsData.count > 0) {
+        Financials *item = self.easyFinancialsData[0];
+        self.easyMonth = item.month.intValue;
+        self.easySelectedIndex = 0;
+    }else {
+        self.easyMonth = -1;
+    }
+
+    if (self.fastFinancialsData.count > 0) {
+        Financials *item = self.fastFinancialsData[0];
+        self.fastMonth = item.month.intValue;
+        self.fastSelectedIndex = 0;
+    }else {
+        self.fastMonth = -1;
+    }
+    
 }
 
 -(void) home {
@@ -1342,9 +1345,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
 }
 
-
 #pragma mark - TableView Helpers
-
 
 -(void)rl {
     [tableViewX reloadData];
@@ -1356,7 +1357,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //   HardTableViewCell *swipedCell = (HardTableViewCell*)[tableViewX cellForRowAtIndexPath:swipedIndexPath];
     BOOL change = FALSE;
     Item *itm;
-    
     
     if (swipedIndexPath.section == 3) {
         
@@ -1464,7 +1464,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             change = YES;
         }
     }
-    
     
     if (swipedIndexPath.section == 10) {
         if ( ductlessMiniSplits.count > 0  && choosedDuctlessMiniSplits < ductlessMiniSplits.count-1) {
@@ -1600,7 +1599,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         }
     }
     
-    
     if (swipedIndexPath.section == 1) {
         if ( choosedWarranties >0) {
             itm = warranties[choosedWarranties];
@@ -1670,13 +1668,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     if (isEasy) {
         item = self.easyFinancialsData[indexPath.item];
         self.easyMonth = item.month.intValue;
-        self.fastMonth = -1;
-        self.selectedIndex = indexPath.item;
+        self.easySelectedIndex = indexPath.item;
     }else {
         item = self.fastFinancialsData[indexPath.item];
         self.fastMonth = item.month.intValue;
-        self.easyMonth = -1;
-        self.selectedIndex = indexPath.item;
+        self.fastSelectedIndex = indexPath.item;
     }
     
     secView.hidden = YES;
@@ -1846,7 +1842,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             break;
         }
             
-            
         default:
             break;
     }
@@ -1983,13 +1978,13 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     Financials *easyFinanceObject;
     if (self.easyMonth != -1) {
-        easyFinanceObject = [self.easyFinancialsData objectAtIndex:self.selectedIndex];
+        easyFinanceObject = [self.easyFinancialsData objectAtIndex:self.easySelectedIndex];
         easyPaymentFactor = easyFinanceObject.value.floatValue;
     }
     
     Financials *fastFinanceObject;
     if (self.fastMonth != -1) {
-        fastFinanceObject = [self.fastFinancialsData objectAtIndex:self.selectedIndex];
+        fastFinanceObject = [self.fastFinancialsData objectAtIndex:self.fastSelectedIndex];
         
     }
     
@@ -2309,7 +2304,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cart setObject:tt forKey:@"cartItems"];
         [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
         [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
-        [cart setObject:[NSNumber numberWithInt:self.selectedIndex] forKey:@"selectedIndex"];
+        [cart setObject:[NSNumber numberWithInt:self.easySelectedIndex] forKey:@"easySelectedIndex"];
+        [cart setObject:[NSNumber numberWithInt:self.fastSelectedIndex] forKey:@"fastSelectedIndex"];
         [cart setObject:rebates forKey:@"cartRebates"];
         [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
         [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
