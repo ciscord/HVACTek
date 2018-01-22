@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end
-#define kAdd2CartURL [NSURL URLWithString:@""]
+
 @implementation HealthyHomeProcessVC
 
 - (void)viewDidLoad {
@@ -52,8 +52,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof (self) weakSelf = self;
     
-    [[DataLoader sharedInstance] getIAQProducts:kAdd2CartURL
-                                           onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+    [[DataLoader sharedInstance] getIAQProducts: ^(NSString *successMessage, NSDictionary *reciveData) {
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                
                                                //online: delete previous data and add new data

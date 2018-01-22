@@ -102,9 +102,6 @@ typedef void(^myCompletion)(BOOL);
                                    }];
 }
 
-
-
-
 #pragma mark - Upper View
 - (void)configureUpperView {
     CGFloat round = 20;
@@ -131,8 +128,6 @@ typedef void(^myCompletion)(BOOL);
     [self.view addSubview:upperArcView];
 }
 
-
-
 #pragma mark -
 -(void)syncLabelStatus:(BOOL)status {
   self.syncStatusLabel.hidden = !status;
@@ -153,7 +148,6 @@ typedef void(^myCompletion)(BOOL);
   self.lastSyncLabel.text = lastSync;
 }
 
-
 - (void)startSyncing:(BOOL)starting {
   if (starting == YES) {
     self.add2cartButton.hidden = YES;
@@ -172,7 +166,6 @@ typedef void(^myCompletion)(BOOL);
     [self.syncProgressLabel setText:@"Sync In Progress - 0%"];
   }
 }
-
 
 #pragma mark - ProgressBar
 - (void)initializeProgressBar {
@@ -261,7 +254,6 @@ typedef void(^myCompletion)(BOOL);
             item.currentCart = [NSNumber numberWithInt:i];
         }
 
-
         Item *itemA= (Item *)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.backgroundContext];
         itemA.modelName = @"No Product Selected";
         itemA.finalOption = @"None";
@@ -318,8 +310,7 @@ typedef void(^myCompletion)(BOOL);
     [self startSyncing:YES];
     [self clearEverything];
 
-    [[DataLoader sharedInstance] getAdd2CartProducts:kAdd2CartURL
-                                         onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+    [[DataLoader sharedInstance] getAdd2CartProducts: ^(NSString *successMessage, NSDictionary *reciveData) {
                                            [self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
                                             //[self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];
                                          }onError:^(NSError *error) {

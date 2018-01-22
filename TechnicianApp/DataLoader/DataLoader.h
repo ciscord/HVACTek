@@ -129,10 +129,12 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                   onError:(void (^)(NSError *error))onError;
 
 
--(void)getAdd2CartProducts:(NSURL *)reqUrl
-                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+-(void)getAdd2CartProducts:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                    onError:(void (^)(NSError *error))onError;
 
+-(void)add2cartFinancials:(NSDictionary *) parameters
+                onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+                  onError:(void (^)(NSError *error))onError;
 
 -(void)getAssignmentListFromSWAPIWithJobID:(NSString*)JobID
                                  onSuccess:(void (^)(NSString *successMessage))onSuccess
@@ -180,9 +182,10 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 - (void)sendLogs:(NSArray *)logs
        onSuccess:(void (^)(NSString *message))onSuccess
         onError:(void (^)(NSError *error))onError;
-
--(void)getIAQProducts:(NSURL *)reqUrl
-                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+//------------------------------------------------------------------------------------------
+#pragma mark - IAQ
+//------------------------------------------------------------------------------------------
+-(void)getIAQProducts:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                    onError:(void (^)(NSError *error))onError;
 
 -(void)emailIaqAuthorizeSale:(NSString *)authid
@@ -205,7 +208,8 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
                            onSuccess:(void (^)(NSDictionary *dataDictionary))onSuccess
                              onError:(void (^)(NSError *error))onError;
 
--(void)add2cartFinancials:(NSDictionary *) parameters
-                onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
-                  onError:(void (^)(NSError *error))onError;
+-(void)getMainVideo: (void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+            onError:(void (^)(NSError *error))onError;
+
+
 @end

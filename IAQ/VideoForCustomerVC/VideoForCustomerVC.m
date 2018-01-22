@@ -11,6 +11,8 @@
 #import <AVKit/AVKit.h>
 #import "IAQDataModel.h"
 #import <TWRDownloadManager.h>
+#import "DataLoader.h"
+
 @interface VideoForCustomerVC ()
 @property (nonatomic, retain) AVPlayerViewController *playerViewController;
 @property (weak, nonatomic) IBOutlet UIView *videoView;
@@ -21,65 +23,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    IAQProductModel* mainProductModel = nil;
-    NSString* mainVideoPath = nil;
-    for (IAQProductModel* productModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-        if ([productModel.productId isEqualToString:@"1"]) {
-            mainProductModel = productModel;
-            break;
-        }
-    }
+    __weak typeof (self) weakSelf = self;
     
-    if (mainProductModel != nil) {
-        for (FileModel* fileModel in mainProductModel.files) {
-            if ([fileModel.type isEqualToString:@"video"]) {
-                mainVideoPath = fileModel.fullUrl;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DataLoader sharedInstance] getMainVideo: ^(NSString *successMessage, NSDictionary *reciveData) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+    
+        NSString* mainVideoPath = [reciveData objectForKey:@"url"];
+
+        if ([mainVideoPath isEqualToString:@""] || mainVideoPath == nil) {
+            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"There is no video"];
+            [self presentViewController:alert animated:true completion:nil];
+        }else {
+            NSURL *urlVideoFile;
+            _playerViewController = [[AVPlayerViewController alloc] init];
+            
+            if ([[TWRDownloadManager sharedManager] fileExistsForUrl:mainVideoPath]) {
+                urlVideoFile =  [NSURL fileURLWithPath:[[TWRDownloadManager sharedManager] localPathForFile:mainVideoPath]];
+                
+            }else {
+                if ([[[DataLoader sharedInstance] reachabilityManager] isReachable]) {
+                    urlVideoFile = [NSURL URLWithString:mainVideoPath];
+                    
+                    [[TWRDownloadManager sharedManager] downloadFileForURL:mainVideoPath progressBlock:^(CGFloat progress) {
+                        NSLog(@"progress %f video file:%@",progress, mainVideoPath);
+                    } completionBlock:^(BOOL completed) {
+                        NSLog(@"~~~completed downloading~~~");
+                        
+                    } enableBackgroundMode:YES];
+                    
+                }else{
+                    UIAlertController *alert= [UIAlertController alertControllerWithTitle: @"Oops! Something went wrong."
+                                                                                  message: @"Video wasn't downloaded to the app and there isn't internet connection available right now."
+                                                                           preferredStyle: UIAlertControllerStyleAlert];
+                    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action){
+                                                               }];
+                    [alert addAction:ok];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    NSLog(@"is Not Reachable");
+                }
             }
+            
+            _playerViewController.player = [AVPlayer playerWithURL:urlVideoFile];
+            _playerViewController.view.frame = self.videoView.bounds;
+            _playerViewController.showsPlaybackControls = YES;
+            
+            [self.videoView addSubview:_playerViewController.view];
+            self.view.autoresizesSubviews = YES;
         }
-    }
-    
-    if (mainVideoPath == nil) {
+        
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"There is no video"];
         [self presentViewController:alert animated:true completion:nil];
-    }else {
-        NSURL *urlVideoFile;
-        _playerViewController = [[AVPlayerViewController alloc] init];
-        
-        if ([[TWRDownloadManager sharedManager] fileExistsForUrl:mainVideoPath]) {
-            urlVideoFile =  [NSURL fileURLWithPath:[[TWRDownloadManager sharedManager] localPathForFile:mainVideoPath]];
-            
-        }else {
-            if ([[[DataLoader sharedInstance] reachabilityManager] isReachable]) {
-                urlVideoFile = [NSURL URLWithString:mainVideoPath];
-                
-                [[TWRDownloadManager sharedManager] downloadFileForURL:mainVideoPath progressBlock:^(CGFloat progress) {
-                    NSLog(@"progress %f video file:%@",progress, mainVideoPath);
-                } completionBlock:^(BOOL completed) {
-                    NSLog(@"~~~completed downloading~~~");
-                    
-                } enableBackgroundMode:YES];
-                
-            }else{
-                UIAlertController *alert= [UIAlertController alertControllerWithTitle: @"Oops! Something went wrong."
-                                                                              message: @"Video wasn't downloaded to the app and there isn't internet connection available right now."
-                                                                       preferredStyle: UIAlertControllerStyleAlert];
-                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
-                                                           handler:^(UIAlertAction * action){
-                                                           }];
-                [alert addAction:ok];
-                [self presentViewController:alert animated:YES completion:nil];
-                NSLog(@"is Not Reachable");
-            }
-        }
-        
-        _playerViewController.player = [AVPlayer playerWithURL:urlVideoFile];
-        _playerViewController.view.frame = self.videoView.bounds;
-        _playerViewController.showsPlaybackControls = YES;
-        
-        [self.videoView addSubview:_playerViewController.view];
-        self.view.autoresizesSubviews = YES;
-    }
-    
+    }];
+
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQVideoForCustomer) {
         int viewsToPop = 2;
         [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];

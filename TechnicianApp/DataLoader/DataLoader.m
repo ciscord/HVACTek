@@ -74,6 +74,7 @@ NSString *const SYNC_STATUS2     = @"add2cart_sync_status/2";
 NSString *const SYNC_MODIFY      = @"do_add2cart_sync/2";
 NSString *const LOGS             = @"addError";
 NSString *const IAQPRODUCTS      = @"iaqProducts";
+NSString *const GETMAINVIDEO      = @"getMainVideo";
 NSString *const ADDIAQAUTHORIZESALE                 = @"addIaqAuthorizeSale";
 NSString *const ADDIAQAUTHORIZESALEUNAPPROVED       = @"addIaqAuthorizeSaleUnapproved";
 NSString *const EMAILIAQAUTHORIZESALE               = @"emailIaqAuthorizeSale";
@@ -751,8 +752,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 }
 
 #pragma mark - Add2Cart Products
--(void)getAdd2CartProducts:(NSURL *)reqUrl
-                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+-(void)getAdd2CartProducts:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                    onError:(void (^)(NSError *error))onError {
   
   self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -774,8 +774,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 }
 
 #pragma mark - IQA Products
--(void)getIAQProducts:(NSURL *)reqUrl
-                 onSuccess:(void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+-(void)getIAQProducts: (void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
                    onError:(void (^)(NSError *error))onError {
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -787,6 +786,41 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
           if ([responseObject[@"status"] integerValue] == kStatusOK) {
               NSDictionary *dict = responseObject[@"results"];
               onSuccess(@"OK", dict);
+          }else {
+              NSError *error = [NSError errorWithDomain:@""
+                                                   code:1001
+                                               userInfo:@{
+                                                          NSLocalizedDescriptionKey:responseObject[@"message"]
+                                                          }];
+              onError(error);
+          }
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          if (onError) {
+              onError(error);
+          }
+      }];
+}
+#pragma mark - IQA Get Main Video
+-(void)getMainVideo: (void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
+              onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    [self GET:GETMAINVIDEO
+   parameters:@{}
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          if ([responseObject[@"status"] integerValue] == kStatusOK) {
+              NSDictionary *dict = responseObject[@"results"];
+              onSuccess(@"OK", dict);
+          }else {
+              NSError *error = [NSError errorWithDomain:@""
+                                                   code:1001
+                                               userInfo:@{
+                                                          NSLocalizedDescriptionKey:responseObject[@"message"]
+                                                          }];
+              onError(error);
           }
       }
       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
