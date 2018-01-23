@@ -29,6 +29,7 @@
 @property (nonatomic, strong)  NSNumber *easyMonth;
 @property (nonatomic, strong)  NSNumber *easySelectedIndex;
 @property (nonatomic, strong)  NSNumber *fastSelectedIndex;
+@property (nonatomic, strong)  NSString *investDescription;
 
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIButton *sysRebatesButton;
@@ -78,6 +79,7 @@
     self.rebates = [self.cart objectForKey:@"cartRebates"];
     self.fastFinancialsData = [self.cart objectForKey:@"fastFinancialsData"];
     self.easyFinancialsData = [self.cart objectForKey:@"easyFinancialsData"];
+    self.investDescription = [self.cart objectForKey:@"investDescription"];
 
     self.productList = [[NSMutableArray alloc]init];
     self.occurenciesList = [[NSMutableArray alloc]init];

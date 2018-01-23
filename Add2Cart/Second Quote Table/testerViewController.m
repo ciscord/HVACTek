@@ -46,6 +46,8 @@
     float easyPaymentFactor;
     float fastPaymentFactor;
     
+    NSString* investDescription;
+    
     BOOL isEasy;
 }
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
@@ -166,8 +168,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                                                   [self fetchFinancingObjects];
                                                   [self buildQuote];
                                                   
-                                                  
-                                                  
                                               }
                                               
                                           }onError:^(NSError *error) {
@@ -234,6 +234,14 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
     }
     
+    NSDictionary* investmentDescription = [datadict objectForKey:@"investment_description"];
+    if (investmentDescription != nil) {
+        Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
+        itm.financialId = [investmentDescription objectForKey:@"id"];
+        itm.businessid = [investmentDescription objectForKey:@"businessid"];
+        itm.value = [investmentDescription objectForKey:@"value"];
+        itm.type = @"investment";
+    }
     NSError *errorz;
     if (![self.managedObjectContext save:&errorz]) {
         NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
@@ -278,6 +286,20 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     [self.fastFinancialsData addObjectsFromArray:[self.managedObjectContext
                                                   executeFetchRequest:fetchRequest1 error:&fetchingError]];
+    
+    //investment
+    NSFetchRequest *fetchRequest2 = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
+    fetchRequest2.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"investment"];
+    [fetchRequest2 setEntity:entity];
+    
+    NSArray* investmentArray  = [self.managedObjectContext executeFetchRequest:fetchRequest2 error:&fetchingError];
+    if (investmentArray.count > 0 && investmentArray != nil) {
+        Financials *investItem = [investmentArray objectAtIndex:0];
+        investDescription = investItem.value;
+    }else{
+        investDescription = @"";
+    }
     
     [self configureFinancingDefaults];
 }
@@ -2017,7 +2039,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
         lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
-        
+        lblInvestmentMonth.text = investDescription;
         if (fastFinanceObject) {
             lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.fastMonth]]];
             lblFastPercent.text = fastFinanceObject.description1;
@@ -2306,6 +2328,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
         [cart setObject:[NSNumber numberWithInt:self.easySelectedIndex] forKey:@"easySelectedIndex"];
         [cart setObject:[NSNumber numberWithInt:self.fastSelectedIndex] forKey:@"fastSelectedIndex"];
+        [cart setObject:investDescription forKey:@"investDescription"];
         [cart setObject:rebates forKey:@"cartRebates"];
         [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
         [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
