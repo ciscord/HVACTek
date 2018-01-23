@@ -265,7 +265,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"easy"];
-    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"month" ascending:YES];
+    NSSortDescriptor *sort =[NSSortDescriptor sortDescriptorWithKey:@"financialId" ascending:YES];
     fetchRequest.sortDescriptors =[NSArray arrayWithObject:sort];
     
     [fetchRequest setEntity:entity];
@@ -279,7 +279,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] init];
     entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:managedObjectContext];
     fetchRequest1.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"fast"];
-    sort =[NSSortDescriptor sortDescriptorWithKey:@"month" ascending:YES];
+    sort =[NSSortDescriptor sortDescriptorWithKey:@"financialId" ascending:YES];
     fetchRequest1.sortDescriptors =[NSArray arrayWithObject:sort];
     
     [fetchRequest1 setEntity:entity];
