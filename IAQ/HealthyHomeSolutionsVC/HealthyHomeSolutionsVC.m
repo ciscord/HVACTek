@@ -14,6 +14,9 @@
 #import "HealthyHomeSolutionsSortVC.h"
 #import "IAQCustomerChoiceVC.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
+{
+    NSMutableArray* checkedProducts;
+}
 @property (weak, nonatomic)     IBOutlet RoundCornerView *layer1View;
 @property (weak, nonatomic)   IBOutlet UILabel* titleLabel;
 @property (weak, nonatomic)     IBOutlet UICollectionView *collectionView;
@@ -41,10 +44,15 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
         [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [userdefault objectForKey:@"iaqSortedProductsQuantityArray"];
         
+        checkedProducts = [NSMutableArray array];
+        
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
             if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
                 iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
                 [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+                [checkedProducts addObject:@"1"];
+            }else {
+                [checkedProducts addObject:@"0"];
             }
         }
         
@@ -57,6 +65,14 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
             HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
             [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
         }
+        
+    }else {
+        checkedProducts = [NSMutableArray array];
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+            [checkedProducts addObject:@"1"];
+            iaqModel.quantity = @"1";
+        }
+    
         
     }
 }
@@ -79,17 +95,30 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
     
     ServiceOptionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
-    cell.btnCheckbox.hidden = true;
+    cell.btnCheckbox.hidden = false;
     cell.lbValue.text = item.title;
     cell.qtyTextField.delegate = self;
     cell.qtyTextField.text    = item.quantity;
     cell.qtyTextField.tag = itemIndex;
     cell.tag = itemIndex;
    
-    CGRect titleRect = cell.lbValue.frame;
-    titleRect.origin.x = 10;
-    titleRect.size.width += 49;
-    cell.lbValue.frame = titleRect;
+    NSString* checkedState = [checkedProducts objectAtIndex:indexPath.item];
+    if ([checkedState isEqualToString:@"1"]) {
+        cell.btnCheckbox.selected = true;
+    }else{
+        cell.btnCheckbox.selected = false;
+    }
+    
+    [cell setOnCheckboxToggle:^(BOOL selected){
+        [checkedProducts removeObjectAtIndex:itemIndex];
+        if (selected) {
+            [checkedProducts insertObject:@"1" atIndex:itemIndex];
+        }else {
+            [checkedProducts insertObject:@"0" atIndex:itemIndex];
+        }
+        
+        
+    }];
     return cell;
 }
 
@@ -154,8 +183,9 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
     
-    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-        if ([iaqModel.quantity intValue] > 0) {
+    for (int i = 0; i <  [IAQDataModel sharedIAQDataModel].iaqProductsArray.count; i++) {
+        IAQProductModel * iaqModel  = [[IAQDataModel sharedIAQDataModel].iaqProductsArray objectAtIndex:i];
+        if ([iaqModel.quantity intValue] > 0 && [[checkedProducts objectAtIndex:i] isEqualToString:@"1"]) {
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
