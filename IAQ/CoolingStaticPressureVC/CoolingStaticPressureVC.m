@@ -61,7 +61,7 @@
     
     NSDate *today = [NSDate date];
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd"];
+    [df setDateFormat:@"MM-dd-yyyy"];
     NSString* dateString = [df stringFromDate:today];
     
     self.dateField.text = dateString;
