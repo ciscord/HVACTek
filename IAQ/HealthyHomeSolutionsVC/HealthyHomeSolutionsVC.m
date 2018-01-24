@@ -72,7 +72,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
             [checkedProducts addObject:@"1"];
             iaqModel.quantity = @"1";
         }
-    
         
     }
 }
@@ -115,8 +114,12 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
             [checkedProducts insertObject:@"1" atIndex:itemIndex];
         }else {
             [checkedProducts insertObject:@"0" atIndex:itemIndex];
+           
+            item.quantity = @"0";
+            
+            [collectionView reloadData];
+            
         }
-        
         
     }];
     return cell;
