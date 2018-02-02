@@ -112,6 +112,12 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         [checkedProducts removeObjectAtIndex:itemIndex];
         if (selected) {
             [checkedProducts insertObject:@"1" atIndex:itemIndex];
+            if ([item.quantity isEqualToString:@"0"]) {
+                item.quantity = @"1";
+                
+                [collectionView reloadData];
+            }
+            
         }else {
             [checkedProducts insertObject:@"0" atIndex:itemIndex];
            
