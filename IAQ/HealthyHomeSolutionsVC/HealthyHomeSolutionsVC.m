@@ -15,7 +15,8 @@
 #import "IAQCustomerChoiceVC.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
 {
-    NSMutableArray* checkedProducts;
+    
+    
 }
 @property (weak, nonatomic)     IBOutlet RoundCornerView *layer1View;
 @property (weak, nonatomic)   IBOutlet UILabel* titleLabel;
@@ -24,7 +25,7 @@
 @end
 static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 @implementation HealthyHomeSolutionsVC
-
+@synthesize checkedProducts;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -96,10 +97,10 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     ServiceOptionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:indexPath];
     cell.btnCheckbox.hidden = false;
     cell.lbValue.text = item.title;
-    cell.qtyTextField.delegate = self;
     cell.qtyTextField.text    = item.quantity;
     cell.qtyTextField.tag = itemIndex;
     cell.tag = itemIndex;
+    cell.parentViewController = self;
    
     NSString* checkedState = [checkedProducts objectAtIndex:indexPath.item];
     if ([checkedState isEqualToString:@"1"]) {
@@ -131,53 +132,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     return cell;
 }
 
-#pragma mark - UITextFieldDelegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    unsigned long numberOfDots = [textField.text componentsSeparatedByString:@"."].count - 1;
-    if (numberOfDots >0 && [string isEqualToString:@"."]) {
-        return false;
-    }
-    NSString* newString = [NSString stringWithFormat:@"%@%@", textField.text, string];
-    if (newString.length > 1) {
-        unichar firstChar = [[newString uppercaseString] characterAtIndex:0];
-        unichar secondChar = [[newString uppercaseString] characterAtIndex:1];
-        if (firstChar == '0' && secondChar != '.') {
-            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
-            
-            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
-            if (stringIsValid) {
-                textField.text = string;
-                NSInteger itemIndex = textField.tag;
-                IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
-                
-                item.quantity = string;
-                
-            }
-            return false;
-        }
-        
-    }
-    if (textField.text.length == 1 && string.length == 0) {
-        textField.text = @"0";
-        return false;
-    }
-    NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-    NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:newString];
-    
-    BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
-    
-    if (stringIsValid) {
-        
-        NSInteger itemIndex = textField.tag;
-        IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
-        
-        item.quantity = newString;
-    }
-    
-    return stringIsValid;
-}
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

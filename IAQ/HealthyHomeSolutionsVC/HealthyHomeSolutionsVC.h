@@ -10,5 +10,6 @@
 #import "BaseVC.h"
 @interface HealthyHomeSolutionsVC : BaseVC
 
+@property (nonatomic, strong) NSMutableArray* checkedProducts;
 @end
 
