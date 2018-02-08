@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HvakTekColorScheme.h"
 
 @interface RebateTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

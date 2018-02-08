@@ -385,6 +385,7 @@
                         <outlet property="price" destination="vS4-nT-ui5" id="7qU-Us-3Gf"/>
                         <outlet property="saveButton" destination="RWi-Wm-hav" id="GT6-JS-jZh"/>
                         <outlet property="typeButton" destination="3Cu-Cl-fL9" id="OLd-2I-4p6"/>
+                        <outlet property="view" destination="pU3-Mo-U34" id="YG9-TY-6QZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ube-FT-kYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1057,6 +1058,7 @@ $</string>
                         <outlet property="nameField" destination="DoB-DW-h8Z" id="oWA-EB-rAq"/>
                         <outlet property="priceField" destination="Xua-a4-8Jj" id="463-qp-FpX"/>
                         <outlet property="save" destination="ZKb-iP-4m5" id="OwJ-NY-um7"/>
+                        <outlet property="view" destination="UOD-z3-aCe" id="rJl-uy-PPD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UcZ-a1-md0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1226,6 +1228,7 @@ $</string>
                         <outlet property="nameField" destination="ROC-XL-Msu" id="NGV-kz-mkr"/>
                         <outlet property="priceField" destination="BQc-wQ-r2G" id="fj5-Ex-zCK"/>
                         <outlet property="save" destination="eOC-FY-s3Q" id="jwp-X4-zi8"/>
+                        <outlet property="view" destination="Ka1-zc-8WT" id="7j2-0v-PIL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BfP-v8-4NR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1476,7 +1479,6 @@ $</string>
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="bvI-60-GuT" id="lhD-AM-e7J"/>
                                     <outlet property="priceLabel" destination="CQq-hW-cgI" id="Q6g-JP-srC"/>
@@ -1536,12 +1538,12 @@ $</string>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="7LT-L2-noz"/>
                     <connections>
                         <outlet property="cartstableView" destination="a5W-d6-vOQ" id="jC3-IL-GLX"/>
                         <outlet property="logoImageView" destination="YNY-Lu-a4j" id="eTV-pa-H1z"/>
+                        <outlet property="view" destination="29T-Os-IjA" id="BEE-0X-bV5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QOt-xU-11T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1782,6 +1784,6 @@ $</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Q6u-D9-n1g"/>
-        <segue reference="qZQ-p3-4ZV"/>
+        <segue reference="hzT-Sd-w8O"/>
     </inferredMetricsTieBreakers>
 </document>

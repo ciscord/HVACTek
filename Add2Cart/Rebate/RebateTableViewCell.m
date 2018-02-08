@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        
     }
     return self;
 }
@@ -23,6 +24,8 @@
 {
     [super awakeFromNib];
     // Initialization code
+    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
