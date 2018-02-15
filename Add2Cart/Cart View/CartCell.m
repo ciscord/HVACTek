@@ -168,6 +168,8 @@
     self.systemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
     self.investemnt.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
     
+    [numberFormatter setMaximumFractionDigits:2];
+    [numberFormatter setMinimumFractionDigits:2];
     if (fastFinanceObject) {
         self.lblFastPayPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / [self.fastMonth intValue]]]];
         

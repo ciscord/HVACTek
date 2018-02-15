@@ -24,8 +24,8 @@
     [super awakeFromNib];
     // Initialization code
     // Initialization code
-    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
-    self.contentView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    self.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -2040,6 +2040,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         lblSystemRebates.text=[NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:totalSave]]];
         lblInvestemts.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest]]];
         lblInvestmentMonth.text = investDescription;
+        
+        [numberFormatter setMaximumFractionDigits:2];
+        [numberFormatter setMinimumFractionDigits:2];
         if (fastFinanceObject) {
             lblFastPrice.text = [NSString stringWithFormat:@"$%@",[numberFormatter stringFromNumber:[NSNumber numberWithFloat:localInvest / self.fastMonth]]];
             lblFastPercent.text = fastFinanceObject.description1;
