@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *authorizeButton;
+@property (weak, nonatomic) IBOutlet UIButton *mainMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
@@ -102,6 +103,7 @@
     }
     
     self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.mainMenuButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.emailButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.backButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
@@ -111,6 +113,11 @@
 }
 -(IBAction)backClick:(id)sender {
     [self.navigationController popViewControllerAnimated:true];
+}
+- (IBAction)mainMenuClick:(id)sender {
+    NSArray* viewControllers = self.navigationController.viewControllers;
+    
+    [self.navigationController popToViewController:[viewControllers objectAtIndex:1] animated:true];
 }
 
 -(IBAction)authorizeClick:(id)sender {
