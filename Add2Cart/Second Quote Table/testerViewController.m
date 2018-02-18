@@ -237,9 +237,17 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSDictionary* investmentDescription = [datadict objectForKey:@"investment_description"];
     if (investmentDescription != nil) {
         Financials *itm = (Financials *)[NSEntityDescription insertNewObjectForEntityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
+        
         itm.financialId = [investmentDescription objectForKey:@"id"];
         itm.businessid = [investmentDescription objectForKey:@"businessid"];
-        itm.value = [investmentDescription objectForKey:@"value"];
+        
+        NSString* investmentDescriptionValue = [investmentDescription objectForKey:@"value"];
+        if (investmentDescriptionValue == nil || [investmentDescription isEqual:[NSNull null]]) {
+            itm.value = @"";
+        }else {
+            itm.value = [investmentDescription objectForKey:@"value"];
+        }
+        
         itm.type = @"investment";
     }
     NSError *errorz;
