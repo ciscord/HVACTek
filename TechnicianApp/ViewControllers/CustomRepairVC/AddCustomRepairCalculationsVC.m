@@ -31,7 +31,6 @@
     [self configureController];
 }
 
-
 - (void)configureController {
     self.timeOptionsArray = [[NSArray alloc] initWithObjects:@"15 Minutes", @"Half an Hour", @"45 Minutes",
                           @"1 Hour", @"1.25 Hours", @"1.5 Hours", @"1.75 Hours",
@@ -63,7 +62,6 @@
     self.keyboardAvoiding.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 }
 
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.view.backgroundColor = [UIColor colorWithRed:162/255.0f green:162/255.0f blue:162/255.0f alpha:0.7f];
@@ -81,8 +79,6 @@
     self.estimateField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
-
-
 #pragma mark - Buttons Action
 - (IBAction)continueClicked:(id)sender {
     if ([self checkForEmptyField:self.costField] && [self checkForEmptyField:self.estimateField] && [self checkForEmptyDropDownField:self.repairDropDown]) {
@@ -93,18 +89,13 @@
     }
 }
 
-
 - (IBAction)backClicked:(id)sender {
     [self dismissController];
 }
 
-
-
 -(void)dismissController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 #pragma mark - Price Calculations
 - (void)calculatePriceForNewRepair {
@@ -118,12 +109,10 @@
     [self performSegueWithIdentifier:@"unwindToSummaryOfFindingsFromCalculations" sender:self];
 }
 
-
 - (float)getRepairTime {
     NSUInteger selectedIndex = [self.timeOptionsArray indexOfObject:self.repairDropDown.text];
     return selectedIndex * 0.25 + 0.25;
 }
-
 
 -(NSNumber *)getPriceAmountFromString:(NSString *)priceString {
     
@@ -138,8 +127,6 @@
     
     return number;
 }
-
-
 
 - (NSString *)getPriceFromFloat:(float)price {
     NSLocale *local = [NSLocale currentLocale];
@@ -156,12 +143,10 @@
     return finalString;
 }
 
-
 - (NSNumber *)roundNumber:(NSNumber *)number {
     NSNumber *roundedNumber = [NSNumber numberWithFloat:roundf(number.floatValue)];
     return roundedNumber;
 }
-
 
 #pragma mark - TextFields Validators
 - (BOOL)checkForEmptyField:(UITextField *)textField {
@@ -172,8 +157,6 @@
     }
 }
 
-
-
 - (BOOL)checkForEmptyDropDownField:(UITextField *)textField {
     if (textField.text.length > 0 && ![textField.text isEqualToString:@"Select Repair Time"]) {
         return YES;
@@ -181,8 +164,6 @@
         return NO;
     }
 }
-
-
 
 #pragma mark - UITextField Delegates
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -197,7 +178,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.keyboardAvoiding.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 }
-
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == self.costField || textField == self.estimateField) {
@@ -238,21 +218,21 @@
     }
 }
 
-
+-(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:true];
+    [self.repairDropDown hideDropDown];
+    
+}
 
 #pragma mark - CHDropDownTextField Delegates
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
     NSLog(@"selected");
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
