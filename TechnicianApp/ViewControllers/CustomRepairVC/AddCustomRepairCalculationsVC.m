@@ -29,6 +29,12 @@
     [super viewDidLoad];
     [self configureColorScheme];
     [self configureController];
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.roundedView addGestureRecognizer:singleFingerTap];
+    
 }
 
 - (void)configureController {
@@ -218,15 +224,16 @@
     }
 }
 
--(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+{
     [self.view endEditing:true];
     [self.repairDropDown hideDropDown];
-    
 }
 
 #pragma mark - CHDropDownTextField Delegates
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
     NSLog(@"selected");
+    [self.repairDropDown hideDropDown];
 }
 
 - (void)didReceiveMemoryWarning {
