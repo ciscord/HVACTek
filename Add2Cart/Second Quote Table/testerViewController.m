@@ -94,7 +94,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     fastPaymentFactor = 0;
     self.fastMonth = -1;
     self.easyMonth = -1;
-    
+    investDescription = @"";
     lblEasyPercent.text = @"";
     lblFastPercent.text = @"";
     //
