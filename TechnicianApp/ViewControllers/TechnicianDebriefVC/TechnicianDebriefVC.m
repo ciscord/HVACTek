@@ -40,6 +40,8 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 @property (nonatomic, strong) IBOutlet UILabel             *lblTitle;
 @property (nonatomic, strong) IBOutlet UILabel             *lblSubtitle;
 @property (nonatomic, strong) IBOutlet CHDropDownTextField *txtField;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @property (nonatomic, strong) IBOutlet UITextView          *txtView;
 @property (nonatomic, strong) IBOutlet UIButton            *btnChkBox;
 @property (nonatomic, strong) IBOutlet UILabel             *lblTitlePlaceHolder;
@@ -77,7 +79,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     self.lblSubtitle.hidden = YES;
     self.txtField.hidden    = YES;
     self.btnChkBox.hidden = YES;
-    
+    self.textField.hidden = YES;
     self.cellType = [_cellData[@"accType"] integerValue];
 
     self.lblTitle.text = _cellData[@"title"];
@@ -137,25 +139,28 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     case txtFieldCellAcc:
     case txtFieldNumericCellAcc:
     {
-        self.txtField.text = cellData[@"accVal"];
+        
+        self.textField.text = cellData[@"accVal"];
 
         if ([cellData[@"align"] integerValue] == cRight) {
-            self.txtField.frame = self.lblTextFieldPlaceHolder.frame;
+            self.textField.frame = self.lblTextFieldPlaceHolder.frame;
             self.lblTitle.frame = self.lblTitlePlaceHolder.frame;
 
         }
         if (!self.paddingView) {
             self.paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
         }
-        self.txtField.leftView          = self.paddingView;
-        self.txtField.leftViewMode      = UITextFieldViewModeAlways;
-        self.txtField.layer.borderWidth = 1;
-        self.txtField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
-        self.txtField.hidden            = NO;
+        self.textField.leftView          = self.paddingView;
+        self.textField.leftViewMode      = UITextFieldViewModeAlways;
+        self.textField.layer.borderWidth = 1;
+        self.textField.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
+        self.textField.hidden            = NO;
         if (self.cellType == txtFieldNumericCellAcc) {
-            self.txtField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            self.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         }
-      //  self.txtField.delegate = self;
+        self.textField.delegate = self;
+        self.textField.enabled = true;
+        self.textField.userInteractionEnabled = true;
         break;
     }
     case chkBoxCellAcc:
@@ -205,7 +210,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
     case txtFieldCellAcc:
     case txtFieldNumericCellAcc:
     {
-        value = self.txtField.text;
+        value = self.textField.text;
         break;
     }
     case chkBoxCellAcc:
@@ -223,6 +228,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 
 - (void)dropDownTextField:(CHDropDownTextField *)dropDownTextField didChooseDropDownOptionAtIndex:(NSUInteger)index {
     self.txtField.text = self.txtField.dropDownTableTitlesArray[index];
+    [dropDownTextField hideDropDown];
     if (self.onDropDownValueChange) {
         self.onDropDownValueChange(self);
     }
@@ -241,9 +247,7 @@ typedef NS_ENUM (NSInteger, TDCellAccType){
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 
-    if ([[(CHDropDownTextField *)textField dropDownTableTitlesArray] count]) {
-        [textField resignFirstResponder];
-    }
+    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -764,6 +768,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     cell.lblTitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     cell.lblSubtitle.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     cell.txtField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    cell.textField.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     cell.backgroundColor = [UIColor clearColor];
     
     if ([self.elementsToShow[indexPath.row + sectionIdx][@"accType"] integerValue] == drpDownCellAcc) {
@@ -826,12 +831,13 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
             
         }];
     }
+    
     cell.tag = [cell.cellData[@"cellType"] integerValue];
     
     __weak typeof (self) weakSelf = self;
     [cell setOnTextChange:^(DebriefCell *c, NSString *str) {
-        CGFloat sum1 = (c == weakSelf.totalRevenuCell ? str.doubleValue : [weakSelf.totalRevenuCell.txtField.text doubleValue]);
-        CGFloat sum2 = (c == weakSelf.addOnFutureRevenuCell ? str.doubleValue : [weakSelf.addOnFutureRevenuCell.txtField.text doubleValue]);
+        CGFloat sum1 = (c == weakSelf.totalRevenuCell ? str.doubleValue : [weakSelf.totalRevenuCell.textField.text doubleValue]);
+        CGFloat sum2 = (c == weakSelf.addOnFutureRevenuCell ? str.doubleValue : [weakSelf.addOnFutureRevenuCell.textField.text doubleValue]);
         CGFloat totalSum = sum1 + sum2;
         
         [weakSelf.elementsToShow enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
