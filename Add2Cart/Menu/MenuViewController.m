@@ -351,7 +351,7 @@ typedef void(^myCompletion)(BOOL);
 -(void) clearFinancials {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:self.backgroundContext];
-    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"financialId" ascending:YES];
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc]initWithKey:@"sortIndex" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:nameSort, nil];
     fetchRequest.sortDescriptors = sortDescriptors;
     [fetchRequest setEntity:entity];
@@ -626,7 +626,7 @@ typedef void(^myCompletion)(BOOL);
             itm.month = [financials[x] objectForKey:@"month"];
             itm.type = [financials[x] objectForKey:@"type"];
             itm.value = [financials[x] objectForKey:@"value"];
-            
+            itm.sortIndex = [NSNumber numberWithInt:x];
         }
         
     }

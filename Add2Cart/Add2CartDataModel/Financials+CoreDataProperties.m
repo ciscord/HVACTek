@@ -20,5 +20,5 @@
 @dynamic financialId;
 @dynamic month;
 @dynamic value;
-
+@dynamic sortIndex;
 @end

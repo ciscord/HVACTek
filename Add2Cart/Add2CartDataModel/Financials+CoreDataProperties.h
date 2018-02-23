@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *financialId;
 @property (nullable, nonatomic, copy) NSString *month;
 @property (nullable, nonatomic, copy) NSString *value;
-
+@property (nullable, nonatomic, copy) NSNumber *sortIndex;
 @end
 
 NS_ASSUME_NONNULL_END
