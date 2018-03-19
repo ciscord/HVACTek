@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "Item.h"
+#import "CartItem+CoreDataClass.h"
 #import "Photos.h"
 #import "Financials+CoreDataClass.h"
 #import "HardTableViewCell.h"
@@ -127,6 +128,5 @@
 - (IBAction)doneBut:(id)sender;
 - (IBAction)finBut:(id)sender;
 
-
-
+- (void) clearCart;
 @end

@@ -274,8 +274,11 @@
             // do nothing
             
         } else {
-            if (![nsar containsObject:itm.modelName])
-                [nsar addObject:itm.modelName];
+            if (itm.modelName != nil) {
+                if (![nsar containsObject:itm.modelName])
+                    [nsar addObject:itm.modelName];
+            }
+            
         }
         
         
@@ -373,6 +376,8 @@
 };
 
 -(void)done{
+    testerViewController * vc =(testerViewController*)self.testerVC;
+    [vc clearCart];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];

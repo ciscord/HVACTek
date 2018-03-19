@@ -165,6 +165,8 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */; };
+		84186E59205AB8BC0065AFFD /* CartItem+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E55205AB8BB0065AFFD /* CartItem+CoreDataClass.m */; };
 		84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */; };
 		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
 		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
@@ -493,6 +495,11 @@
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
+		84186E53205AB7C60065AFFD /* Unifeiyed_Quoting 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 10.xcdatamodel"; sourceTree = "<group>"; };
+		84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataProperties.m"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.m"; sourceTree = "<absolute>"; };
+		84186E55205AB8BB0065AFFD /* CartItem+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataClass.m"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataClass.m"; sourceTree = "<absolute>"; };
+		84186E56205AB8BB0065AFFD /* CartItem+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataClass.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataClass.h"; sourceTree = "<absolute>"; };
+		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = "<absolute>"; };
 		84A16E151FC4928700F01106 /* IAQData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IAQData.xcdatamodel; sourceTree = "<group>"; };
 		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
@@ -667,6 +674,10 @@
 		4FD2EB1B1A361A0F0056D4C4 /* Add2CartDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				84186E56205AB8BB0065AFFD /* CartItem+CoreDataClass.h */,
+				84186E55205AB8BB0065AFFD /* CartItem+CoreDataClass.m */,
+				84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */,
+				84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */,
 				862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */,
 				862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */,
 				862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */,
@@ -1744,6 +1755,7 @@
 				52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */,
 				0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
+				84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */,
 				862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */,
 				524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */,
 				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
@@ -1757,6 +1769,7 @@
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				4F11D3DA1A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld in Sources */,
 				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,
+				84186E59205AB8BC0065AFFD /* CartItem+CoreDataClass.m in Sources */,
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
 				505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
@@ -1994,6 +2007,7 @@
 		4F11D3D61A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84186E53205AB7C60065AFFD /* Unifeiyed_Quoting 10.xcdatamodel */,
 				5088EFF720408B2A00243AB8 /* Unifeiyed_Quoting 9.xcdatamodel */,
 				5094CE982007F494004DB56A /* Unifeiyed_Quoting 8.xcdatamodel */,
 				861A67CD1DBBA282003B2078 /* Unifeiyed_Quoting 6.xcdatamodel */,
@@ -2003,7 +2017,7 @@
 				4F11D3D81A9F7DEB007FC0A8 /* Unifeiyed_Quoting 3.xcdatamodel */,
 				4F11D3D91A9F7DEB007FC0A8 /* Unifeiyed_Quoting.xcdatamodel */,
 			);
-			currentVersion = 5088EFF720408B2A00243AB8 /* Unifeiyed_Quoting 9.xcdatamodel */;
+			currentVersion = 84186E53205AB7C60065AFFD /* Unifeiyed_Quoting 10.xcdatamodel */;
 			path = Unifeiyed_Quoting.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

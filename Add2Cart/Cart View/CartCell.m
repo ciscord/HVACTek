@@ -92,13 +92,15 @@
             // do nothing
             
         } else {
-            
-            if ([self.productList containsObject:itm.modelName]){
-                [self.occurenciesList addObject:itm.modelName];
-                
-            }else{
-                [self.productList addObject:itm.modelName];
+            if (itm.modelName != nil) {
+                if ([self.productList containsObject:itm.modelName]){
+                    [self.occurenciesList addObject:itm.modelName];
+                    
+                }else{
+                    [self.productList addObject:itm.modelName];
+                }
             }
+            
         }
         
     }

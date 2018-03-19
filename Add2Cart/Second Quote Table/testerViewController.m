@@ -135,7 +135,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
-    self.carts = [[NSMutableArray alloc]init];
+    [self fetchCartObjects];
     self.savedCarts = [[NSMutableArray alloc]init];
     
     //Setup the navbar.
@@ -176,7 +176,26 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                                           }];
 }
 
-
+#pragma mark - Clear Cart and Financial
+- (void) clearCart {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CartItem" inManagedObjectContext:self.managedObjectContext];
+  
+    [fetchRequest setEntity:entity];
+    
+    NSError *fetchingError = nil;
+    
+    NSArray *occP = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchingError];
+    
+    if (![occP count]) {
+        
+    } else  {
+        for (int i = 0; i<occP.count; i++) {
+            CartItem  *del = occP[i];
+            [self.managedObjectContext deleteObject:del];
+        }
+    }
+}
 -(void) clearFinancials {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Financials" inManagedObjectContext:self.managedObjectContext];
@@ -197,6 +216,53 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             [self.managedObjectContext deleteObject:del];
         }
     }
+}
+
+#pragma mark - Save Cart and Financial
+-(void) saveCart {
+    [self clearCart];
+    
+    for (int x = 0; x < _cartItems.count; x++) {
+        Item * item = [_cartItems objectAtIndex:x];
+        CartItem *cartItem = (CartItem*) [NSEntityDescription insertNewObjectForEntityForName:@"CartItem" inManagedObjectContext:self.managedObjectContext];
+    
+        cartItem.currentCart = item.currentCart;
+        cartItem.finalOption = item.finalOption;
+        cartItem.finalPrice = item.finalPrice;
+        cartItem.include = item.include;
+        cartItem.manu = item.manu;
+        cartItem.modelName = item.modelName;
+        cartItem.optEightPrice = item.optEightPrice;
+        cartItem.optFivePrice = item.optFivePrice;
+        cartItem.optFourPrice = item.optFourPrice;
+        cartItem.optionEight = item.optionEight;
+        cartItem.optionFive = item.optionFive;
+        cartItem.optionFour = item.optionFour;
+        cartItem.optionOne = item.optionOne;
+        cartItem.optionSeven = item.optionSeven;
+        cartItem.optionSix = item.optionSix;
+        cartItem.optionThree = item.optionThree;
+        cartItem.optionTwo = item.optionTwo;
+        cartItem.optOnePrice = item.optOnePrice;
+        cartItem.optSevenPrice = item.optSevenPrice;
+        cartItem.optSixPrice = item.optSixPrice;
+        cartItem.optThreePrice = item.optThreePrice;
+        cartItem.optTwoPrice = item.optTwoPrice;
+        cartItem.ord = item.ord;
+        cartItem.photo = item.photo;
+        cartItem.type = item.type;
+        cartItem.typeID = item.typeID;
+        cartItem.usserAdet = item.usserAdet;
+        cartItem.image = item.image;
+        
+        
+    }
+    NSError *errorz;
+    if (![self.managedObjectContext save:&errorz]) {
+        NSLog(@"Cannot save ! %@ %@",errorz,[errorz localizedDescription]);
+    }
+    
+    [self fetchCartObjects];
 }
 
 - (void)saveFinancials:(NSDictionary *)financials {
@@ -267,7 +333,22 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     return false;
 }
-#pragma mark - Fetch Financing
+#pragma mark - Fetch Cart and Financing
+
+-(void)fetchCartObjects {
+    
+    //easy financial
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"CartItem" inManagedObjectContext:managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    
+    NSError *fetchingError = nil;
+    _cartItems = [NSMutableArray array];
+    [_cartItems addObjectsFromArray:[self.managedObjectContext
+                                                  executeFetchRequest:fetchRequest error:&fetchingError]];
+   
+}
 
 -(void)fetchFinancingObjects {
     
@@ -1894,6 +1975,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     isLast = TRUE;
     [self buildQuote];
+    
+    [self saveCart];
 }
 
 -(void) removeTheProd:(Item *)itm {
@@ -1923,12 +2006,16 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }
     
     [self buildQuote];
+    
+    [self saveCart];
 }
 
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
     if (_cartItems.count == 0) {
         [_cartItems addObjectsFromArray:purchData];
     }
+    
+    [self saveCart];
 }
 
 -(float) parseTheString:(NSString *) string {
@@ -1987,9 +2074,15 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     for (int jj = 0; jj <additemsB.count; jj++) {
         Item *itm = additemsB[jj];
         
+        BOOL findItem = false;
+        for (int xx = 0; xx < _cartItems.count; xx ++) {
+            CartItem* item = [_cartItems objectAtIndex:xx];
+            if ([item.modelName isEqualToString:itm.modelName]) {
+                findItem = true;
+            }
+        }
         
-        if (![_cartItems containsObject:itm]) {    ///object contains additional items prices
-            
+        if (!findItem) {
             if ([itm.type isEqualToString:@"TypeTwo"]&&[itm.optionOne floatValue]!=0)
             {
                 totalAmount += [itm.finalPrice floatValue]*[itm.optionOne floatValue];
@@ -1999,6 +2092,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
                 totalAmount += [itm.finalPrice floatValue];
             }
         }
+        
     }
     
     for (int jj = 0; jj <rebates.count; jj++) {
@@ -2331,8 +2425,19 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         for (int jj = 0; jj <additemsB.count; jj++) {
             Item *itm = additemsB[jj];
-            if (![tt containsObject:itm])
+            
+            BOOL findItem = false;
+            for (int xx = 0; xx < tt.count; xx ++) {
+                CartItem* item = [tt objectAtIndex:xx];
+                if ([item.modelName isEqualToString:itm.modelName]) {
+                    findItem = true;
+                }
+            }
+            
+            if (!findItem) {
                 [tt addObject:itm];
+            }
+                
         }
         
         NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
