@@ -8,7 +8,8 @@
 
 #import "SettingAgendaVC.h"
 #import "AgendaPictureVC.h"
-
+#import "IAQDataModel.h"
+#import "HealthyHomeSolutionsAgreementVC.h"
 @interface SettingAgendaVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *presentationLbl;
@@ -75,6 +76,8 @@
 
 #pragma mark - ConfigureVC
 - (void)configureVC {
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
     
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     NSDictionary *jobInfo = job.swapiJobInfo;
@@ -93,7 +96,18 @@
     
 }
 
-
+- (void)tapIAQButton {
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    NSNumber* iaqCurrentStep = [userdefault objectForKey:@"iaqCurrentStep"];
+    if (iaqCurrentStep == nil) {
+        iaqCurrentStep = [NSNumber numberWithInteger:IAQNone];
+    }
+    [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
+    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeProcessVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+}
 - (void)setLabelsTexts {
     self.presentationLbl.text = [NSString stringWithFormat:@"Hello, My name is %@ from %@.", self.techName, self.companyName];
     self.thankLbl.text = [NSString stringWithFormat:@"I want to thank you for choosing %@ to service you today.", self.companyName];

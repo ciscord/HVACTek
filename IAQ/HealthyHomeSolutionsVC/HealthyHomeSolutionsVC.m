@@ -13,6 +13,8 @@
 #import "IAQDataModel.h"
 #import "HealthyHomeSolutionsSortVC.h"
 #import "IAQCustomerChoiceVC.h"
+#import "TechnicianHomeVC.h"
+#import "AppDelegate.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
 {
     
@@ -30,6 +32,11 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
+    
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
+    
     [self.titleLabel setTextColor:[UIColor cs_getColorWithProperty:kColorPrimary]];
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
@@ -75,6 +82,23 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
         
     }
+}
+
+- (void) tapTechButton {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+    TechnicianHomeVC* technicianHomeVC = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
+    
+    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    
+    UINavigationController *navController = (UINavigationController *)appDelegate.window.rootViewController;
+    
+    UIViewController* homeViewController = [navController.viewControllers objectAtIndex:1];
+    [navController popToViewController:homeViewController animated:true];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5), dispatch_get_main_queue(), ^{
+        [navController pushViewController:technicianHomeVC animated:true];
+    });
+    
 }
 
 #pragma mark - UICollectionViewDatasource
