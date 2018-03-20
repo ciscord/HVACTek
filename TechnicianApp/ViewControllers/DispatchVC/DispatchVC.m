@@ -45,7 +45,25 @@
 	self.vwCounter.hideFraction = YES;
 	self.vwInspiration.backgroundColor = self.view.backgroundColor;
 	[self.imgInspiration setImageWithURL:[NSURL URLWithString:[[DataLoader sharedInstance] inspirationImagePath]] placeholderImage:nil];
-  [self setCustomerInfo];
+    [self setCustomerInfo];
+    
+    if ([TechDataModel sharedTechDataModel].currentStep > Dispatch) {
+        
+        Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+        if (!job.dispatchTime) {
+            job.dispatchTime = [NSDate date];
+            [job.managedObjectContext save];
+        }
+        
+        [self performSelector:@selector(prepareCustomerOverview) withObject:nil afterDelay:1];
+        
+        self.vwInspiration.hidden = NO;
+        [self.vwCounter start];
+        
+    }else {
+        
+    }
+    
 }
 
 
@@ -124,6 +142,9 @@
         [job.managedObjectContext save];
     }
 
+    [TechDataModel sharedTechDataModel].currentStep = TechNone;
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerOverview];
+    
     [self performSelector:@selector(prepareCustomerOverview) withObject:nil afterDelay:1];
 
 	self.vwInspiration.hidden = NO;

@@ -167,6 +167,7 @@
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
 		84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */; };
 		84186E59205AB8BC0065AFFD /* CartItem+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E55205AB8BB0065AFFD /* CartItem+CoreDataClass.m */; };
+		8421B00620602D61000FF69A /* TechDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421B00520602D61000FF69A /* TechDataModel.m */; };
 		84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */; };
 		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
 		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
@@ -500,6 +501,8 @@
 		84186E55205AB8BB0065AFFD /* CartItem+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataClass.m"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataClass.m"; sourceTree = "<absolute>"; };
 		84186E56205AB8BB0065AFFD /* CartItem+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataClass.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataClass.h"; sourceTree = "<absolute>"; };
 		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = "<absolute>"; };
+		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
+		8421B00520602D61000FF69A /* TechDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechDataModel.m; sourceTree = "<group>"; };
 		84A16E151FC4928700F01106 /* IAQData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IAQData.xcdatamodel; sourceTree = "<group>"; };
 		84AFAD901FB61F3D006CA298 /* HealthyHomeSolutionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthyHomeSolutionsVC.h; sourceTree = "<group>"; };
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
@@ -991,6 +994,8 @@
 				52EB80371C7C617600D09222 /* NAPickerCell.m */,
 				52EB80381C7C617600D09222 /* NAPickerView.h */,
 				52EB80391C7C617600D09222 /* NAPickerView.m */,
+				8421B00420602D61000FF69A /* TechDataModel.h */,
+				8421B00520602D61000FF69A /* TechDataModel.m */,
 			);
 			path = EntitiesAndDataStructures;
 			sourceTree = "<group>";
@@ -1547,7 +1552,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 8WY55993RN;
+						DevelopmentTeam = 5JZ562WR45;
 						LastSwiftMigration = 0910;
 					};
 				};
@@ -1773,6 +1778,7 @@
 				4FD2EB881A361A0F0056D4C4 /* testerViewController.m in Sources */,
 				505C6B821FB6AA4A00761B04 /* SVSegmentedThumb.m in Sources */,
 				75D73F1F1A38BFDD0051143C /* SummaryOfFindingsVC.m in Sources */,
+				8421B00620602D61000FF69A /* TechDataModel.m in Sources */,
 				50085BCF1FBC84C2002892C6 /* IAQDataModel.m in Sources */,
 				520159C61B8D8CBC0035909C /* SettingAgendaVC.m in Sources */,
 				520159CD1B8D8D830035909C /* ESABenefitsVC.m in Sources */,
@@ -1934,7 +1940,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8WY55993RN;
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1961,7 +1967,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8WY55993RN;
+				DEVELOPMENT_TEAM = 5JZ562WR45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -59,6 +59,19 @@
     }
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    
+    
+    if ([TechDataModel sharedTechDataModel].currentStep > Questions) {
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        UtilityOverpaymentVC * utilityOverpaymentController = [storyboard instantiateViewControllerWithIdentifier:@"UtilityOverpaymentVC"];
+        utilityOverpaymentController.sectionChoosed = self.sectionTypeChoosed;
+      
+        [self.navigationController pushViewController:utilityOverpaymentController animated:true];
+        
+    }else {
+        
+    }
 }
 
 
@@ -286,6 +299,9 @@
     if ([segue.identifier isEqualToString:@"showUtilityOverpayment"]) {
         UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;
         vc.sectionChoosed = self.sectionTypeChoosed;
+        
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
     }
     
     

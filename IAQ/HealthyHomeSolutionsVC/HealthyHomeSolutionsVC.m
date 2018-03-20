@@ -15,6 +15,7 @@
 #import "IAQCustomerChoiceVC.h"
 #import "TechnicianHomeVC.h"
 #import "AppDelegate.h"
+#import "TechDataModel.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
 {
     
@@ -85,6 +86,15 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 }
 
 - (void) tapTechButton {
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    NSNumber* techCurrentStep = [userdefault objectForKey:@"techCurrentStep"];
+    if (techCurrentStep == nil) {
+        techCurrentStep = [NSNumber numberWithInteger:TechNone];
+    }
+    [TechDataModel sharedTechDataModel].currentStep = [techCurrentStep integerValue];
+
+    
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
     TechnicianHomeVC* technicianHomeVC = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];

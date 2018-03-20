@@ -15,8 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "HvakTekColorScheme.h"
 #import "NSDate+Utilities.h"
-
-
+#import "TechDataModel.h"
 @interface BaseVC : UIViewController
 {
     IBOutletCollection(UIView) NSArray* seperatorViewArray;

@@ -81,6 +81,17 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
     }
+    
+    if ([TechDataModel sharedTechDataModel].currentStep > SummaryOfFindingsOptions) {
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        SummaryOfFindingsOptionsVC * summaryOfFindingsOptionsVC = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC"];
+        summaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
+        [self.navigationController pushViewController:summaryOfFindingsOptionsVC animated:true];
+        
+    }else {
+        
+    }
 }
 
 
@@ -187,7 +198,9 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (IBAction)btnContinueTouch:(id)sender {
 
     [DataLoader saveOptionsLocal:self.selectedOptions];
-    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];  //showServiceOptionsDirect
+  
+    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];
+    
 }
 
 
@@ -330,6 +343,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = NO;
         vc.selectedOptions = self.selectedOptions;
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SortFindings];
     }
     else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
     {
@@ -340,6 +355,11 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     {
         SortFindingsVC *vc = (SortFindingsVC*)segue.destinationViewController;
         vc.findingsArray = self.selectedOptions;
+        
+        
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SortFindings];
+        
     }
 //    else if ([segue.destinationViewController isKindOfClass:[ServiceOptionVC class]])
 //    {

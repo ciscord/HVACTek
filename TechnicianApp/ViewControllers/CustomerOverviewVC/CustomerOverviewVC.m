@@ -206,6 +206,23 @@ const int kControllerWidth = 190;
 
     self.selectedType = qtHeating;
     [self performSelector:@selector(configureData) withObject:nil afterDelay:0.1];
+    
+    if (SummaryOfFindingsOptions1 > [TechDataModel sharedTechDataModel].currentStep && [TechDataModel sharedTechDataModel].currentStep > CustomerOverview) {
+        [DataLoader sharedInstance].currentJobCallType = self.selectedType;
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        SettingAgendaVC * settingViewController = [storyboard instantiateViewControllerWithIdentifier:@"SettingAgendaVC"];
+        settingViewController.choosenType = self.selectedType;
+        [self.navigationController pushViewController:settingViewController animated:true];
+        
+    }else if ([TechDataModel sharedTechDataModel].currentStep > SummaryOfFindingsOptions){
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        SummaryOfFindingsOptionsVC * summaryViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
+        summaryViewController.isiPadCommonRepairsOptions = YES;
+        [self.navigationController pushViewController:summaryViewController animated:true];
+        
+    }
 }
 
 
@@ -459,12 +476,16 @@ const int kControllerWidth = 190;
     if ([segue.identifier isEqualToString:@"goSettingAgenda"]) {
         SettingAgendaVC *vc = segue.destinationViewController;
         vc.choosenType = self.selectedType;
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SettingAgenda];
     }
     //returnVisit
     
     if ([segue.identifier isEqualToString:@"returnVisit"]) {
         SummaryOfFindingsOptionsVC *vc = segue.destinationViewController;
            vc.isiPadCommonRepairsOptions = YES;
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
     }
     
 }
