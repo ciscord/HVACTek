@@ -28,12 +28,16 @@ static NSString *findingsCellID = @"SortFindinsCell";
     self.title = @"Summary of Findings Sort";
     [self.findingsTable registerNib:[UINib nibWithNibName:findingsCellID bundle:nil] forCellReuseIdentifier:findingsCellID];
   
+    self.findingsArray = [DataLoader loadLocalSavedFindingOptions];
+    
     NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"amount" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
     NSArray *sortArr = [self.findingsArray sortedArrayUsingDescriptors:sortDescriptors];
     self.findingsArray = [sortArr mutableCopy];
   
     self.continueButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:SortFindings];
 }
 
 
@@ -131,10 +135,10 @@ static NSString *findingsCellID = @"SortFindinsCell";
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
+    if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
         ServiceOptionVC *vc = [segue destinationViewController];
         vc.optionsDisplayType = odtEditing;
-        vc.priceBookAndServiceOptions = self.findingsArray;
+        [DataLoader saveFindingOptionsLocal:self.findingsArray];
     }
 }
 

@@ -69,18 +69,22 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     self.keyboardAvoiding.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
 
+    NSDictionary* customerChoiceData = [DataLoader loadLocalCustomerChoiceData];
+
+    self.fullServiceOptions = [customerChoiceData objectForKey:@"fullServiceOptions"];
+    self.isDiscounted = [[customerChoiceData objectForKey:@"isDiscounted"] boolValue];
+    self.isOnlyDiagnostic = [[customerChoiceData objectForKey:@"isOnlyDiagnostic"] boolValue];
+    self.isComingFromInvoice = [[customerChoiceData objectForKey:@"isComingFromInvoice"] boolValue];
+    self.selectedServiceOptions = [customerChoiceData objectForKey:@"selectedServiceOptions"];
+
     [self configureColorScheme];
     
-
-
     [self.tvMainTable registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
-//    [self.tvMainTable reloadData];
-
-    
+   
     [self refreshSubtotalPrice];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerChoice];
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -483,106 +487,31 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return result;
 }
 
-
-
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showAdditionalInfoPageVC"]) {
         AdditionalInfoPageVC *vc = [segue destinationViewController];
-        vc.isDiscounted       = self.isDiscounted;
-        vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
-        vc.unselectedOptionsArray = self.unusedServiceOptions;
-        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
-        vc.initialTotal = self.subtotaPriceLabel.text;
+       
+        NSString* paymentValue;
         if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
-            vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
+            paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
         }else{
-            vc.paymentValue = @"$0";
-        }    }
+            paymentValue = @"$0";
+        }
+        
+        NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
+                                             @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
+                                             
+                                             @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
+                                             @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
+                                             @"initialTotal" : self.subtotaPriceLabel.text,
+                                             @"paymentValue" : paymentValue,
+                                             }.mutableCopy;
+        
+        [DataLoader saveAdditionalInfo:customerChoiceData];
+    }
     
-//    //showTemporarTestPush
-//    
-//    if ([segue.identifier isEqualToString:@"showTemporarTestPush"]) {
-//        NewCustomerChoiceVC *vc = [segue destinationViewController];
-//        vc.isDiscounted       = self.isDiscounted;
-//        vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
-//        vc.unselectedOptionsArray = self.unusedServiceOptions;
-//        vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
-//        vc.initialTotal = self.subtotaPriceLabel.text;
-//        if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
-//            vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
-//        }else{
-//            vc.paymentValue = @"$0";
-//        }
-//    }
-    
-    
-    /*
-     
-     if ([segue.identifier isEqualToString:@"newCustomerChoiceSegue"]) {
-     NewCustomerChoiceVC *vc = [segue destinationViewController];
-     vc.isDiscounted       = self.isDiscounted;
-     vc.isOnlyDiagnostic   = self.isOnlyDiagnostic;
-     vc.unselectedOptionsArray = self.unusedServiceOptions;
-     //vc.selectedServiceOptionsDict = self.selectedServiceOptions;
-     vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:self.selectedServiceOptions];
-     vc.initialTotal = self.subtotaPriceLabel.text;
-     if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
-     vc.paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
-     }else{
-     vc.paymentValue = @"$0";
-     }
-     
-     
-     if (self.isOnlyDiagnostic) {
-     
-     PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-     
-     PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-     diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-     diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-     diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-     diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-     
-     NSDictionary *d = @{
-     @"items" : @[diagnosticOnlyItemNoTitle],
-     @"title" : @"Diagnostic Only"
-     };
-     
-     vc.selectedServiceOptionsDict = [self addDiscountsToDictionary:d];//d;
-     }
-     }
-     */
     
 }
-
-
-
-#pragma mark - test downloading
-//- (void)checkForDownloading {
-//    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
-//        if (companyObject.isVideo) {
-//            if (![[TWRDownloadManager sharedManager] fileExistsForUrl:companyObject.info_url]) {
-//                [self testDownload:companyObject];
-//            }else{
-//                NSLog(@"asdasdmasdnjkasdj");
-//            }
-//        }
-//    }
-//}
-//
-//
-//
-//-(void)testDownload:(CompanyAditionalInfo *)object {
-//    [[TWRDownloadManager sharedManager] downloadFileForURL:object.info_url progressBlock:^(CGFloat progress) {
-//         NSLog(@"progress %f",progress);
-//    } completionBlock:^(BOOL completed) {
-//        NSLog(@"completed test");
-//    } enableBackgroundMode:YES];
-//}
-
-
-
-
 @end

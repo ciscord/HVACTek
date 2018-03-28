@@ -32,6 +32,7 @@
     [super viewDidLoad];
     [self configureColorScheme];
     [self configureVC];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:RROverview];
 }
 
 

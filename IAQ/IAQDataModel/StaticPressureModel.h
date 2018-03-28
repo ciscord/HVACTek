@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface StaticPressureModel : NSObject
+@interface StaticPressureModel : NSObject <NSCoding>
 @property (nonatomic, strong) NSString* customerName;
 @property (nonatomic, strong) NSString* todayDate;
 @property (nonatomic, strong) NSString* filterSize;

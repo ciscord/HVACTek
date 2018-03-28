@@ -131,23 +131,128 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     return [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
 }
 
-+(void)saveOptionsLocal:(NSMutableArray*)selectedOptions {
++ (void) clearAllLocalData {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"selectedOptions"];
+    [defaults removeObjectForKey:@"selectedFindingOptions"];
+    [defaults removeObjectForKey:@"priceBookAndServiceOptions"];
+    [defaults removeObjectForKey:@"FinalOptions"];
+    [defaults removeObjectForKey:@"CustomerChoiceData"];
+    [defaults removeObjectForKey:@"AdditionalInfo"];
+    [defaults removeObjectForKey:@"NewCustomerChoice"];
+    [defaults synchronize];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSString *filePath = [basePath stringByAppendingPathComponent: @"selectedOptions"];
-    [selectedOptions writeToFile:filePath atomically: YES];
+    [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
+    
+}
++ (void)saveOptionsLocal:(NSMutableArray*)selectedOptions {
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"selectedOptions"];
+    [defaults synchronize];
+    
 }
 
-+(NSMutableArray*)loadLocalSavedOptions {
++ (NSMutableArray*)loadLocalSavedOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSString *filePath = [basePath stringByAppendingPathComponent: @"selectedOptions"];
-    
-    NSMutableArray *selectedOptions = [NSMutableArray arrayWithContentsOfFile: filePath];
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
     return selectedOptions;
 }
+
++ (void)saveFindingOptionsLocal:(NSMutableArray*)selectedOptions {
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"selectedFindingOptions"];
+    [defaults synchronize];
+    
+}
+
++ (NSMutableArray*)loadLocalSavedFindingOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFindingOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    return selectedOptions;
+}
+
++ (void)savePriceBookAndServiceOptionsLocal:(NSMutableArray*)selectedOptions {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"priceBookAndServiceOptions"];
+    [defaults synchronize];
+    
+}
+
++(NSMutableArray*)loadLocalPriceBookAndServiceOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"priceBookAndServiceOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    return selectedOptions;
+}
++ (void)saveFinalOptionsLocal:(NSMutableArray*)selectedOptions {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"FinalOptions"];
+    [defaults synchronize];
+    
+}
+
++(NSMutableArray*)loadLocalFinalOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"FinalOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    return selectedOptions;
+}
+
++ (void) saveCustomerChoiceData:customerChoiceData {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:customerChoiceData];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"CustomerChoiceData"];
+    [defaults synchronize];
+}
+
++(NSDictionary*)loadLocalCustomerChoiceData {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"CustomerChoiceData"];
+    NSDictionary *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    return notes;
+}
+
++ (void) saveAdditionalInfo:customerChoiceData {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:customerChoiceData];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"AdditionalInfo"];
+    [defaults synchronize];
+}
+
++(NSDictionary*)loadLocalAdditionalInfo {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"AdditionalInfo"];
+    NSDictionary *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    return notes;
+}
+
++ (void) saveNewCustomerChoice:customerChoiceData {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:customerChoiceData];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"NewCustomerChoice"];
+    [defaults synchronize];
+}
+
++(NSDictionary*)loadLocalNewCustomerChoice {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"NewCustomerChoice"];
+    NSDictionary *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    return notes;
+}
+
+
 
 - (void)showErrorMessage:(NSError *)error {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

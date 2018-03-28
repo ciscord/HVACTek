@@ -206,6 +206,8 @@ const int kControllerWidth = 190;
 
     self.selectedType = qtHeating;
     [self performSelector:@selector(configureData) withObject:nil afterDelay:0.1];
+   
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerOverview];
 }
 
 
@@ -495,23 +497,7 @@ const int kControllerWidth = 190;
 - (IBAction)beginAppointment:(id)sender {
     [DataLoader sharedInstance].currentJobCallType = self.selectedType;
     [self performSegueWithIdentifier:@"goSettingAgenda" sender:self];
-    
-/*
-    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-    if (!job.startTime) {
-        job.startTime = [NSDate date];
-        [job.managedObjectContext save];
-    }
-//    if (!job.startTimeQuestions) {
-//        job.startTimeQuestions = [NSDate date];
-//        [job.managedObjectContext save];
-//    }
-    
-    job.startTimeQuestions = [NSDate date];
-    [job.managedObjectContext save];
-    
-    [self performSegueWithIdentifier:@"customerQuestionsSegue" sender:self];
-    */
+
 }
 
 - (void)toggleSectionVisibility:(NSInteger)section {

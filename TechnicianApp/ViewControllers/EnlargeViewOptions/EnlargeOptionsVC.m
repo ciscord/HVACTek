@@ -43,6 +43,7 @@
     tap.numberOfTapsRequired = 1;
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
+    
 }
 
 

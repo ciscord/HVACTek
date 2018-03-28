@@ -23,6 +23,8 @@
     
     [self configureColorScheme];
     [self.invoiceWebView loadHTMLString:self.previewHtmlString baseURL:nil];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:InvoicePreview];
 }
 
 #pragma mark - Color Scheme
@@ -42,8 +44,16 @@
     [[DataLoader sharedInstance] postInvoice:self.invoiceDictionary requestingPreview:0 onSuccess:^(NSString *message) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self trySendingLogWithMessage:@"Success" andResponse:message.description];
-            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.homeController) {
             [self.navigationController popToViewController:appDelegate.homeController animated:YES];
+        }else {
+            UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:1];
+            [self.navigationController popToViewController:homeViewController animated:true];
+        }
+        
         
     } onError:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

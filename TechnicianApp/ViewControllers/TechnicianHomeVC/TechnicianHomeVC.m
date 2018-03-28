@@ -47,6 +47,8 @@
     [self configureColorScheme];
     [self checkSyncStatus];
     [self checkForLogs];
+
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianHome];
 }
 
 
@@ -261,7 +263,9 @@
         __weak typeof (self) weakSelf = self;
         [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                onSuccess:^(NSString *successMessage) {
+                                                                   [DataLoader clearAllLocalData];
                                                                    [weakSelf checkJobStatus];
+                                                                   [[TechDataModel sharedTechDataModel] saveEditJobID:self.edtJobId.text];
                                                                    //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                    [self checkNumberOfHuds:--self.numberOfHuds];
                                                                } onError:^(NSError *error) {
@@ -279,7 +283,7 @@
         self.vwDebrief.hidden = YES;
         if ([[[DataLoader sharedInstance] currentUser] activeJob]) {
             self.edtJobId.text =[[[DataLoader sharedInstance] currentUser] activeJob].jobID;
-            [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
+//            [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
         }
         else
         {
@@ -334,6 +338,7 @@
                                                                        //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        [self checkNumberOfHuds:--self.numberOfHuds];
                                                                        [weakSelf custumerlookup];
+                                                                       
                                                                    } onError:^(NSError *error) {
                                                                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);

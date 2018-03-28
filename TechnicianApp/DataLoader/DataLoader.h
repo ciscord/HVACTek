@@ -98,9 +98,29 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 
 + (DataLoader *)sharedInstance;
-+ (void)        saveOptionsLocal:(NSMutableArray *)selectedOptions;
+
++ (void)    saveOptionsLocal:(NSMutableArray *)selectedOptions;
 + (NSMutableArray *)loadLocalSavedOptions;
 
++ (void)    saveFindingOptionsLocal:(NSMutableArray*)selectedOptions;
++ (NSMutableArray*) loadLocalSavedFindingOptions;
+
++ (void)    savePriceBookAndServiceOptionsLocal:(NSMutableArray*)selectedOptions;
++ (NSMutableArray*) loadLocalPriceBookAndServiceOptions;
+
++ (void)    saveFinalOptionsLocal:(NSMutableArray*)selectedOptions;
++ (NSMutableArray*) loadLocalFinalOptions;
+
++ (void) saveCustomerChoiceData:(NSDictionary*)customerChoiceData;
++ (NSDictionary*)loadLocalCustomerChoiceData;
+
++ (void) saveAdditionalInfo:(NSDictionary*)customerChoiceData;
++(NSDictionary*)loadLocalAdditionalInfo;
+
++ (void) saveNewCustomerChoice:(NSDictionary*)customerChoiceData;
++(NSDictionary*)loadLocalNewCustomerChoice;
+
++ (void) clearAllLocalData;
 //------------------------------------------------------------------------------------------
 #pragma mark - Login
 //------------------------------------------------------------------------------------------

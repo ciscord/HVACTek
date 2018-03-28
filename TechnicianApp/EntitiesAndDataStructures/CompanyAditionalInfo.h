@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CompanyAditionalInfo : NSObject
+@interface CompanyAditionalInfo : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *info_description;
 @property (nonatomic, strong) NSString *info_id;

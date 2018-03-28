@@ -77,6 +77,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
                                                object:nil];
     [self.tableView registerNib:[UINib nibWithNibName:s_CellID bundle:nil] forCellReuseIdentifier:s_CellID];
     [self setFilterTerm:@""];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindings];
 }
 
 -(void) loadLocalPricebooks
@@ -271,7 +273,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
                 [result addObject:p];
             }
         }
-        vc.priceBookAndServiceOptions = result;
+        [DataLoader saveFindingOptionsLocal:result];
     }
 }
 

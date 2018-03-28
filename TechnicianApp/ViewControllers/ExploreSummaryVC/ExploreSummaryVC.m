@@ -28,6 +28,8 @@
     [self configureColorScheme];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionSummaryCell" bundle:nil] forCellReuseIdentifier:@"QuestionSummaryCell"];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:ExploreSummary];
 }
 
 
@@ -95,6 +97,7 @@
     {
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = YES;
+        
     }
 }
 

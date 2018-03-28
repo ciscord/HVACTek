@@ -56,7 +56,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
     if (self.isiPadCommonRepairsOptions) {
-        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
         self.allOptions = [self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
         
         
@@ -68,6 +68,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         }
     }
     else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions2];
+        self.selectedOptions = [DataLoader loadLocalSavedOptions];
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
@@ -81,6 +83,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
     }
+    
+    
 }
 
 
@@ -186,8 +190,15 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 #pragma mark - Continue Action
 - (IBAction)btnContinueTouch:(id)sender {
 
-    [DataLoader saveOptionsLocal:self.selectedOptions];
-    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];  //showServiceOptionsDirect
+    if (self.isiPadCommonRepairsOptions) {
+        [DataLoader saveOptionsLocal:self.selectedOptions];
+    }else {
+        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
+    }
+    
+  
+    [self performSegueWithIdentifier:(self.isiPadCommonRepairsOptions ? @"selectOptionsSegue" : @"goSortingFindings") sender:self];
+    
 }
 
 
@@ -248,8 +259,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     ServiceOptionViewCell *cell = (ServiceOptionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.btnCheckbox.selected = [self.selectedOptions containsObject:selectedItem];
 }
-
-
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -329,27 +338,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     {
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = NO;
-        vc.selectedOptions = self.selectedOptions;
-    }
-    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsVC class]])
-    {
-        //        SummaryOfFindingsVC *vc = (SummaryOfFindingsVC*)segue.destinationViewController;
-        //        vc.selectedServiceOptions = self.selectedOptions;
-    }
-    else if ([segue.destinationViewController isKindOfClass:[SortFindingsVC class]])
-    {
-        SortFindingsVC *vc = (SortFindingsVC*)segue.destinationViewController;
-        vc.findingsArray = self.selectedOptions;
-    }
-//    else if ([segue.destinationViewController isKindOfClass:[ServiceOptionVC class]])
-//    {
-//      ServiceOptionVC *vc = (ServiceOptionVC*)segue.destinationViewController;
-//      vc.optionsDisplayType = odtEditing;
-//      vc.priceBookAndServiceOptions = self.selectedOptions;
-//    }
-    
-    
-    if ([segue.identifier isEqualToString:@"showAddCustomRepairsVC"]) {
+        
+    }else if ([segue.identifier isEqualToString:@"showAddCustomRepairsVC"]) {
         AddCustomRepairVC *vc = [segue destinationViewController];
         vc.defaultPrice = self.calculatedCustomRepairPrice;
     }

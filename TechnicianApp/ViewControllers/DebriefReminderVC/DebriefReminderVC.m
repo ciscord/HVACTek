@@ -28,6 +28,8 @@
     NSDictionary *jobInfo = job.swapiJobInfo;
     NSDictionary *customerInfo = job.swapiCustomerInfo;
     self.lbLastJopInfo.text = [NSString stringWithFormat:@"%@ - %@ %@\n%@\n%@, %@ %@", jobInfo[@"JobNo"], [customerInfo objectForKeyNotNull:@"FirstName"], [customerInfo objectForKeyNotNull:@"LastName"], [customerInfo objectForKeyNotNull:@"Address1"], [customerInfo objectForKeyNotNull:@"City"], [customerInfo objectForKeyNotNull:@"State"], [customerInfo objectForKeyNotNull:@"Zip"]];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:DebriefReminder];
 }
 
 

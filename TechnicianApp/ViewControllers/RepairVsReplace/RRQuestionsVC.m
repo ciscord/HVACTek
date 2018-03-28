@@ -31,6 +31,7 @@
     
     self.title = @"Customer's Choice";
     [self loadQuestionsData];
+    
 }
 
 #pragma mark - Load Questions

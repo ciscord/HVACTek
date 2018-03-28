@@ -39,8 +39,10 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     if (self.questionType == qtTechnician) {
         questionsArray = job.techObservations;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions1];
     }else{
         questionsArray = job.custumerQuestions;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
     }
     
     if (!questionsArray.count) {
@@ -59,6 +61,7 @@
     }
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
+    
 }
 
 
@@ -286,6 +289,7 @@
     if ([segue.identifier isEqualToString:@"showUtilityOverpayment"]) {
         UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;
         vc.sectionChoosed = self.sectionTypeChoosed;
+        
     }
     
     

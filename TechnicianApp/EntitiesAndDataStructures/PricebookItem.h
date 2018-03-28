@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PricebookItem : NSObject
+@interface PricebookItem : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *itemID;
 @property (nonatomic, strong) NSString *itemNumber;
 @property (nonatomic, strong) NSString *itemGroup;

@@ -45,7 +45,10 @@
 	self.vwCounter.hideFraction = YES;
 	self.vwInspiration.backgroundColor = self.view.backgroundColor;
 	[self.imgInspiration setImageWithURL:[NSURL URLWithString:[[DataLoader sharedInstance] inspirationImagePath]] placeholderImage:nil];
-  [self setCustomerInfo];
+    [self setCustomerInfo];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:Dispatch];
+    
 }
 
 
@@ -77,15 +80,6 @@
 	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
 	paragraphStyle.alignment = NSTextAlignmentCenter;
 
-//	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
-//	[string addAttributes:@{ NSForegroundColorAttributeName : [UIColor blackColor],
-//	                         NSFontAttributeName : font,
-//	                         NSStrokeWidthAttributeName : [NSNumber numberWithFloat:-2.0],
-//	                         NSStrokeColorAttributeName : [UIColor whiteColor],
-//	                         NSParagraphStyleAttributeName : paragraphStyle }
-//	                range:NSMakeRange(0, [text length])];
-
-//	self.lbInspirationSentence.attributedText = string;
     self.lbInspirationSentence.text = @"";
    
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
@@ -123,7 +117,7 @@
         job.dispatchTime = [NSDate date];
         [job.managedObjectContext save];
     }
-
+    
     [self performSelector:@selector(prepareCustomerOverview) withObject:nil afterDelay:1];
 
 	self.vwInspiration.hidden = NO;

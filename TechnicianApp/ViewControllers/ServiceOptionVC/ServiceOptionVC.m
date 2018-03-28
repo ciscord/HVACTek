@@ -49,14 +49,21 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     self.btnZeroPercent.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
     if (self.optionsDisplayType == odtEditing) {
-        self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_immediateRepair"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_systemPrevention"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_cleanAirSolution"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : [UIImage imageNamed:@"btn_totalComfortEnhancement"], @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
+        self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_immediateRepair"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_systemPrevention"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_cleanAirSolution"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                         @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_totalComfortEnhancement"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption1];
+        
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption2];
     }
 
+    self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+    
     self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
-
+    
     if (self.priceBookAndServiceOptions) {
         [self resetOptions];
     } else {
@@ -64,6 +71,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     
     self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
+    
+    
 }
 
 
@@ -111,22 +120,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
         for (NSInteger i = 0; i < self.options.count; i++) {
             NSMutableDictionary *option = self.options[i];
-//            if (i == 0 || (i == 1 && [[self.options[i-1][@"items"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]] count])) {
-//                option[@"items"]      = self.priceBookAndServiceOptions.mutableCopy;
-//                option[@"isEditable"] = @(i == 1);
-//            } else {
-//                option[@"items"]      = @[].mutableCopy;
-//                option[@"isEditable"] = @(NO);
-//            }
             
             option[@"items"]        = self.priceBookAndServiceOptions.mutableCopy;
             option[@"removedItems"] = self.priceBookAndServiceOptions.mutableCopy;
-            //option[@"isEditable"]   = @(i == 1);
-            
-            
             
         }
-///        self.btnContinue.hidden = [self.options[1][@"items"] count] > 1;
         [self.tableView reloadData];
     }
 }
@@ -141,14 +139,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     id object = [items objectAtIndex:[items indexOfObject:self.removedOptions[optionIndex]]];
     [self.removedOptions removeObject:object];
-    
-//    if ([self.removedOptions count] == 0)
-//        [self.removedOptions insertObject:object atIndex:[self.removedOptions count]];
-//    else
-        [self.removedOptions insertObject:object atIndex:items.count - 1];
 
+    [self.removedOptions insertObject:object atIndex:items.count - 1];
 
-    
     [items removeObject:object];
     
     /////
@@ -165,8 +158,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     if (editableItems.count == 1 & items.count == 1){
         [editableItems removeAllObjects];
     }
-    
-    
     
     if (editableItems.count > 0 && self.options.count > index+1) {
         NSMutableDictionary *nextOption = self.options[index+1];
@@ -321,7 +312,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     NSArray         *removedItems    = option[@"removedItems"];
 
     RecommendationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
-    cell.choiceImageView.image        = option[@"optionImage"];
+    cell.choiceImageView.image        = [UIImage imageWithData:option[@"optionImage"]];;
     cell.lbRecommandationName.text    = option[@"title"];
     cell.rowIndex                     = indexPath.section;
     
@@ -415,60 +406,40 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     ViewOptionsVC *vc = [segue destinationViewController];
     if ([vc isKindOfClass:[ViewOptionsVC class]]) {
         
-        ViewOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.options;
+        [DataLoader saveFinalOptionsLocal:self.options];
         
     } else if ([vc isKindOfClass:[ServiceOptionVC class]]) {
         
         ServiceOptionVC *vc = [segue destinationViewController];
         vc.optionsDisplayType         = odtReadonlyWithPrice;
-        vc.priceBookAndServiceOptions = self.options;
+        [DataLoader saveFindingOptionsLocal:self.options];
         
     } else if ([vc isKindOfClass:[CustomerChoiceVC class]]) {
         
-        CustomerChoiceVC *vc = [segue destinationViewController];
-        vc.fullServiceOptions = self.options.firstObject[@"items"];
-        vc.isDiscounted       = self.isDiscountedPriceSelected;
-        vc.isOnlyDiagnostic   = self.isDiagnositcOnlyPriceSelected;
-        vc.isComingFromInvoice = self.isInvoiceRRSelected;
-        
+        NSDictionary* customerChoiceData;
         if (self.isEmptyOptionSelected) {
             NSDictionary *d = @{};
-            vc.selectedServiceOptions = d;
+            customerChoiceData = @{@"fullServiceOptions": self.options.firstObject[@"items"],
+                                   @"isDiscounted": [NSNumber numberWithBool:self.isDiscountedPriceSelected],
+                                   @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isDiagnositcOnlyPriceSelected],
+                                   @"isComingFromInvoice": [NSNumber numberWithBool:self.isInvoiceRRSelected],
+                                   @"selectedServiceOptions" : d.mutableCopy}.mutableCopy;
+            
         }else{
-            vc.selectedServiceOptions = self.customerSelectedOptions;
+            customerChoiceData = @{@"fullServiceOptions": self.options.firstObject[@"items"],
+                                   @"isDiscounted": [NSNumber numberWithBool:self.isDiscountedPriceSelected],
+                                   @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isDiagnositcOnlyPriceSelected],
+                                   @"isComingFromInvoice": [NSNumber numberWithBool:self.isInvoiceRRSelected],
+                                   @"selectedServiceOptions" : self.customerSelectedOptions.mutableCopy}.mutableCopy;
         }
         
-        
-        
-        
-//        if (self.isDiagnositcOnlyPriceSelected) {
-//            
-//            PricebookItem *diagnosticOnlyItem = [[DataLoader sharedInstance] diagnosticOnlyOption];
-//            
-//            PricebookItem *diagnosticOnlyItemNoTitle = [PricebookItem new];
-//            diagnosticOnlyItemNoTitle.itemID     = diagnosticOnlyItem.itemID;
-//            diagnosticOnlyItemNoTitle.itemNumber = diagnosticOnlyItem.itemNumber;
-//            diagnosticOnlyItemNoTitle.itemGroup  = diagnosticOnlyItem.itemGroup;
-//            diagnosticOnlyItemNoTitle.amount     = diagnosticOnlyItem.amount;
-//            
-//            NSDictionary *d = @{
-//                                @"items" : @[diagnosticOnlyItemNoTitle],
-//                                @"title" : @"Diagnostic Only"
-//                                };
-//            
-//            vc.selectedServiceOptions = d;
-//        } else {
-//            vc.selectedServiceOptions = self.customerSelectedOptions;
-//        }
+        [DataLoader saveCustomerChoiceData:customerChoiceData];
         
     } else if ([vc isKindOfClass:[PlatinumOptionsVC class]]) {
         
-        PlatinumOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.options;
+        [DataLoader saveFinalOptionsLocal:self.options];
         
     }
-    
     
     if ([segue.identifier isEqualToString:@"showInstantRRFinalChoiceVC"]) {
         RRFinalChoiceVC *vc = [segue destinationViewController];
@@ -476,18 +447,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         vc.totalInvestment = job.totalInvestmentsRR;
     }
     
-    
-    //    if ([segue.destinationViewController isKindOfClass:[EnlargeOptionsVC class]])
-    //    {
-    //        EnlargeOptionsVC *vc = (EnlargeOptionsVC*)segue.destinationViewController;
-    //        vc.enlargeIndex = [NSString stringWithFormat:@"%ld",(long)self.selectedOption + 1];
-    //
-    ////        NSDictionary           *option   = self.options[self.selectedOption];
-    ////        NSArray                *items    = option[@"items"];
-    //        
-    //        
-    //
-    //    }
 }
 
 

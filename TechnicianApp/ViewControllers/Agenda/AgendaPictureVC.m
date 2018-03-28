@@ -34,6 +34,17 @@
     [self configureColorScheme];
     
     self.title = NSLocalizedString(@"Expectations", nil);
+    
+    if ([TechDataModel sharedTechDataModel].currentStep > AgendaPicture) {
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        QuestionsVC * questionViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC"];
+        questionViewController.questionType = self.choosedType;
+        [self.navigationController pushViewController:questionViewController animated:true];
+        
+    }else {
+        
+    }
 }
 
 
@@ -87,6 +98,8 @@
     if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
         QuestionsVC *vc = segue.destinationViewController;
         vc.questionType = self.choosedType;
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
     }
     
 }

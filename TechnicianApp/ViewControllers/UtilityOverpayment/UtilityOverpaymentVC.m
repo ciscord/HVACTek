@@ -31,6 +31,7 @@
     
     self.title = NSLocalizedString(@"Utility Overpayment", nil);
     [self configureVC];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
 }
 
 
@@ -128,6 +129,7 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     job.utilityOverpaymentHVAC = self.amountTextField.text;
     [job.managedObjectContext save];
+    
 }
 
 

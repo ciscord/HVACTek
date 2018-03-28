@@ -43,9 +43,16 @@
     
     [self configureVC];
     
-    
-    
-    //[[[DataLoader sharedInstance] SWAPIManager] whoList]
+    if ([TechDataModel sharedTechDataModel].currentStep > SettingAgenda) {
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        AgendaPictureVC * agendaViewController = [storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
+        agendaViewController.choosedType = self.choosenType;
+        [self.navigationController pushViewController:agendaViewController animated:true];
+        
+    }else {
+        
+    }
 }
 
 
@@ -133,6 +140,8 @@
     if ([segue.identifier isEqualToString:@"goPictureAgenda"]) {
         AgendaPictureVC *vc = segue.destinationViewController;
         vc.choosedType = self.choosenType;
+        [TechDataModel sharedTechDataModel].currentStep = TechNone;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:AgendaPicture];
     }
 }
 

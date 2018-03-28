@@ -343,6 +343,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
    
      self.getcArray = [NSNumber numberWithBool:NO];
    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianDebrief];
 }
 
 #pragma mark - Color Scheme
@@ -575,7 +576,13 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
     self.jobToDebrief.jobStatus = @(jstDone);
     [self.jobToDebrief.managedObjectContext save];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self.navigationController popToViewController:appDelegate.homeController animated:YES];
+    if (appDelegate.homeController) {
+        [self.navigationController popToViewController:appDelegate.homeController animated:YES];
+    }else {
+        UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:1];
+        [self.navigationController popToViewController:homeViewController animated:true];
+    }
+    
     //[appDelegate.homeController getNextJob];
     ShowOkAlertWithTitle(@"Job Done!", appDelegate.homeController);
 }
