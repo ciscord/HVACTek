@@ -25,6 +25,7 @@
     [super viewDidLoad];
     [self configureColorScheme];
     [self configureVC];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:EmailVerification];
 }
 
 - (void)didReceiveMemoryWarning {

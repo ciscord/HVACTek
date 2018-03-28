@@ -14,14 +14,29 @@ typedef NS_ENUM(NSInteger, TechCurrentView) {
     CustomerOverview,
     SettingAgenda,
     AgendaPicture,
-    Questions,
+    Questions,//5
+    Questions1,
     UtilityOverpayment,
     ExploreSummary,
-    SummaryOfFindingsOptions,
     SortFindings,
-    SummaryOfFindingsOptions2,
-    
+    SummaryOfFindingsOptions2,//10
+    EmailVerification,
     SummaryOfFindingsOptions1,
+    ESABenefits,//
+    ViewOptions,
+    SummaryOfFindings,//15
+    CustomerChoice,
+    InvoicePreview,//
+    RepairVsService,
+    TechnicianDebrief,//19
+    DebriefReminder,//20
+    ServiceOption1,
+    ServiceOption2,
+    PlatinumOptions,
+    RROverview,
+    RRFinalChoice,
+    NewCustomerChoice,
+    AdditionalInfoPage
     
 };
 

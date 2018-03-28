@@ -31,17 +31,7 @@
     
     self.title = NSLocalizedString(@"Utility Overpayment", nil);
     [self configureVC];
-    
-    if ([TechDataModel sharedTechDataModel].currentStep > UtilityOverpayment) {
-        
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        ExploreSummaryVC * exploreSummaryVC = [storyboard instantiateViewControllerWithIdentifier:@"ExploreSummaryVC"];
-        
-        [self.navigationController pushViewController:exploreSummaryVC animated:true];
-        
-    }else {
-        
-    }
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
 }
 
 
@@ -140,8 +130,6 @@
     job.utilityOverpaymentHVAC = self.amountTextField.text;
     [job.managedObjectContext save];
     
-    [TechDataModel sharedTechDataModel].currentStep = TechNone;
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:ExploreSummary];
 }
 
 

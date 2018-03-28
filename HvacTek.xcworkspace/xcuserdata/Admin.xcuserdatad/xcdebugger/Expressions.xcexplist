@@ -18,5 +18,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "-[NewCustomerChoiceVC setInvoicePreview]:NewCustomerChoiceVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[DataLoader sharedInstance].currentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

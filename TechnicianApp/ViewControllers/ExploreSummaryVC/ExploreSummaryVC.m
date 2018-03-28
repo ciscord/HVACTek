@@ -29,16 +29,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionSummaryCell" bundle:nil] forCellReuseIdentifier:@"QuestionSummaryCell"];
     
-    if ([TechDataModel sharedTechDataModel].currentStep > ExploreSummary) {
-        
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        SummaryOfFindingsOptionsVC * summaryOfFindingsOptionsVC = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC"];
-        summaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
-        [self.navigationController pushViewController:summaryOfFindingsOptionsVC animated:true];
-        
-    }else {
-        
-    }
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:ExploreSummary];
 }
 
 
@@ -107,8 +98,6 @@
         SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
         vc.isiPadCommonRepairsOptions = YES;
         
-        [TechDataModel sharedTechDataModel].currentStep = TechNone;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions];
     }
 }
 

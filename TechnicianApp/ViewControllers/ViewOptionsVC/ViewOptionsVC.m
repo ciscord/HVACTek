@@ -36,6 +36,8 @@
                        range:NSMakeRange(0, [textString length])];
     self.titleLabel.attributedText = attrString;
     
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:ViewOptions];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,15 +51,9 @@
     if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
         ServiceOptionVC *vc = [segue destinationViewController];
         vc.optionsDisplayType = odtReadonlyWithPrice;
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+        
     }
     
-    if ([[segue destinationViewController] isKindOfClass:[PlatinumOptionsVC class]]) {
-        
-        PlatinumOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
-    }
-
 }
 
 @end

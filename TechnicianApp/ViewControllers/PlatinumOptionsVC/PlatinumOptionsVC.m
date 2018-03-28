@@ -27,14 +27,14 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     
     self.title = @"Summary of Findings";
     [self.tableView registerNib:[UINib nibWithNibName:s_PlatinumOptionCellID bundle:nil] forCellReuseIdentifier:s_PlatinumOptionCellID];
-    
-//    NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"amount" ascending:YES];
-//    NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
-//    self.priceBookAndServiceOptions.firstObject[@"items"] = [self.priceBookAndServiceOptions.firstObject[@"items"] sortedArrayUsingDescriptors:sortDescriptors];
-  
+      
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:PlatinumOptions];
+    
+    self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,14 +83,14 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     
     if ([[segue destinationViewController] isKindOfClass:[ViewOptionsVC class]])
     {
-        ViewOptionsVC *vc = [segue destinationViewController];
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+        [DataLoader saveFindingOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
+       
     }
     
     if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
         ServiceOptionVC *vc = [segue destinationViewController];
         vc.optionsDisplayType = odtReadonlyWithPrice;
-        vc.priceBookAndServiceOptions = self.priceBookAndServiceOptions;
+        [DataLoader saveFindingOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
     }
 }
 

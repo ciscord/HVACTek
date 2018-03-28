@@ -39,6 +39,7 @@
     [super viewDidLoad];
     [self configureColorScheme];
     [self configureVC];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:RRFinalChoice];
 }
 
 
@@ -148,12 +149,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue destinationViewController] isKindOfClass:[CustomerChoiceVC class]]) {
-        CustomerChoiceVC *vc = [segue destinationViewController];
- //       vc.fullServiceOptions = self.options.firstObject[@"items"];
-        vc.isDiscounted       = NO;
-        vc.isOnlyDiagnostic   = NO;
-        NSDictionary *d = @{};
-        vc.selectedServiceOptions = d;
+      
+        NSDictionary* customerChoiceData = @{@"fullServiceOptions": @{}.mutableCopy,
+                                   @"isDiscounted": [NSNumber numberWithBool:NO],
+                                   @"isOnlyDiagnostic": [NSNumber numberWithBool:NO],
+                                   @"isComingFromInvoice": [NSNumber numberWithBool:NO],
+                                   @"selectedServiceOptions" : @{}.mutableCopy}.mutableCopy;
+        
+        [DataLoader saveCustomerChoiceData:customerChoiceData];
+        
     }
 }
 

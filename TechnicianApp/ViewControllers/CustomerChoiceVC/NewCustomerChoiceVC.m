@@ -69,9 +69,18 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     // Do any additional setup after loading the view.
     
     self.title = NSLocalizedString(@"Customer's Choice", nil);
+    
+    NSDictionary* customerChoiceData = [DataLoader loadLocalNewCustomerChoice];
+    
+    self.isDiscounted = [[customerChoiceData objectForKey:@"isDiscounted"] boolValue];
+    self.isOnlyDiagnostic = [[customerChoiceData objectForKey:@"isOnlyDiagnostic"] boolValue];
+    self.unselectedOptionsArray = [customerChoiceData objectForKey:@"unselectedOptionsArray"];
+    self.selectedServiceOptionsDict = [customerChoiceData objectForKey:@"selectedServiceOptionsDict"];
+    self.initialTotal = [customerChoiceData objectForKey:@"initialTotal"];
+    self.paymentValue = [customerChoiceData objectForKey:@"paymentValue"];
+    
     [self configureColorScheme];
 
-    
     [self.selectedOptionsTableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
     [self.selectedOptionsTableView reloadData];
     
@@ -80,6 +89,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         self.stopView.hidden = YES;
     
     [self updateTotalPrice];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:NewCustomerChoice];
 }
 
 
@@ -446,34 +456,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
 
 #pragma mark - SWR Button
 - (IBAction)swrButtonClicked:(id)sender {
-    
-//    NSMutableArray * selectedArray = [[NSMutableArray alloc] init];
-//    
-//    [selectedArray addObject:@{@"sku" : @"1003001",
-//                               @"qty" : [NSNumber numberWithInt:1],
-//                               @"price" : [NSNumber numberWithFloat:1.01],
-//                               @"taxable" : [NSNumber numberWithBool:false]}];
-//    
-//    [selectedArray addObject:@{@"sku" : @"PPTU",
-//                               @"qty" : [NSNumber numberWithInt:1],
-//                               @"price" : [NSNumber numberWithFloat:2.01],
-//                               @"taxable" : [NSNumber numberWithBool:false]}];
-//    
-//    NSDictionary * dict = @{ @"items" : selectedArray };
-//    
-//    
-//    NSError * err;
-//    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
-//    NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSString *urlString = [NSString stringWithFormat:@"swremote://?invoiceItems=%@", [self urlEncode:passedString]];
-//    
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    if ([[UIApplication sharedApplication] canOpenURL:url])
-//    {
-//        [[UIApplication sharedApplication] openURL:url];
-//    } else {
-//        NSLog(@"Handle unable to find a registered app with 'swremote:' scheme");
-//    }
     [self sendInvoiceToSWRForTest:NO];
 }
 

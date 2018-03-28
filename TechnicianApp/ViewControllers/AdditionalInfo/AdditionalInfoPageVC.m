@@ -29,9 +29,20 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSDictionary* customerChoiceData = [DataLoader loadLocalAdditionalInfo];
+    
+    self.isDiscounted = [[customerChoiceData objectForKey:@"isDiscounted"] boolValue];
+    self.isOnlyDiagnostic = [[customerChoiceData objectForKey:@"isOnlyDiagnostic"] boolValue];
+    self.unselectedOptionsArray = [customerChoiceData objectForKey:@"unselectedOptionsArray"];
+    self.selectedServiceOptionsDict = [customerChoiceData objectForKey:@"selectedServiceOptionsDict"];
+    self.initialTotal = [customerChoiceData objectForKey:@"initialTotal"];
+    self.paymentValue = [customerChoiceData objectForKey:@"paymentValue"];
+    
+    
     [self configureColorScheme];
     [self configureVC];
     [self loadAdditionalInfo];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:AdditionalInfoPage];
 }
 
 
@@ -136,13 +147,18 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showNewCustomerChoiceVC"]) {
-        NewCustomerChoiceVC *vc = [segue destinationViewController];
-        vc.isDiscounted = self.isDiscounted;
-        vc.isOnlyDiagnostic = self.isOnlyDiagnostic;
-        vc.unselectedOptionsArray = self.unselectedOptionsArray;
-        vc.selectedServiceOptionsDict = self.selectedServiceOptionsDict;
-        vc.initialTotal = self.initialTotal;
-        vc.paymentValue = self.paymentValue;
+//        NewCustomerChoiceVC *vc = [segue destinationViewController];
+        
+        NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
+                                             @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
+                                             @"unselectedOptionsArray" : self.unselectedOptionsArray.mutableCopy,
+                                             @"selectedServiceOptionsDict" : self.selectedServiceOptionsDict.mutableCopy,
+                                             @"initialTotal" : self.initialTotal,
+                                             @"paymentValue" : self.paymentValue
+                                             }.mutableCopy;
+        
+        [DataLoader saveNewCustomerChoice:customerChoiceData];
+        
     }
 }
 

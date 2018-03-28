@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CompanyItem : NSObject
+@interface CompanyItem : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *address1;
 @property (nonatomic, strong) NSString *address2;

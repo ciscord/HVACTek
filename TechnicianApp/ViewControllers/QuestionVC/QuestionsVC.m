@@ -39,8 +39,10 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     if (self.questionType == qtTechnician) {
         questionsArray = job.techObservations;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions1];
     }else{
         questionsArray = job.custumerQuestions;
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
     }
     
     if (!questionsArray.count) {
@@ -60,18 +62,6 @@
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
-    
-    if ([TechDataModel sharedTechDataModel].currentStep > Questions) {
-        
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        UtilityOverpaymentVC * utilityOverpaymentController = [storyboard instantiateViewControllerWithIdentifier:@"UtilityOverpaymentVC"];
-        utilityOverpaymentController.sectionChoosed = self.sectionTypeChoosed;
-      
-        [self.navigationController pushViewController:utilityOverpaymentController animated:true];
-        
-    }else {
-        
-    }
 }
 
 
@@ -300,8 +290,6 @@
         UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;
         vc.sectionChoosed = self.sectionTypeChoosed;
         
-        [TechDataModel sharedTechDataModel].currentStep = TechNone;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
     }
     
     
