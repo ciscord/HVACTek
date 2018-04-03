@@ -29,6 +29,9 @@
     // Do any additional setup after loading the view.
     self.title = (self.questionType == qtTechnician ? @"Tech Observations" : @"Explore Summary");
     
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     ////
     //tech intrebari se scot mereu de pe portal
     /////

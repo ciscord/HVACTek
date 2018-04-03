@@ -8,13 +8,6 @@
 
 #import "BaseVC.h"
 
-typedef NS_ENUM (NSInteger, OptionsDisplayType){
-    odtEditing,
-    odtNoValues,
-    odtReadonlyWithPrice,
-    odtCustomerFinalChoice
-};
-
 @interface ServiceOptionVC : BaseVC <UIAlertViewDelegate>
 
 @property (nonatomic, assign) OptionsDisplayType optionsDisplayType;

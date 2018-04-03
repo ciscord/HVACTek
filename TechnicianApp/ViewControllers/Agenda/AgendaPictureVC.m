@@ -35,6 +35,9 @@
     
     self.title = NSLocalizedString(@"Expectations", nil);
     
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     if ([TechDataModel sharedTechDataModel].currentStep > AgendaPicture) {
         
         UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];

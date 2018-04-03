@@ -45,6 +45,10 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     // Do any additional setup after loading the view.
     
     self.title = @"Develop Summary of Findings";
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     self.vControlContainer.backgroundColor = [UIColor colorWithRed:0.937 green:0.965 blue:0.886 alpha:1.000];
     
     self.tfSearch.leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 5.0, 0.0)];
@@ -259,8 +263,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     if ([[segue identifier] isEqualToString:@"serviceOptionSegue"])
     {
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType = odtEditing;
+//        ServiceOptionVC *vc = [segue destinationViewController];
+        [DataLoader saveOptionsDisplayType:odtEditing];
         NSMutableArray *result = @[].mutableCopy;
         for (PricebookItem *p in self.selectedMainOptions) {
             p.isMain = YES;

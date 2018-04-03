@@ -16,6 +16,7 @@
 #import "HvakTekColorScheme.h"
 #import "NSDate+Utilities.h"
 #import "TechDataModel.h"
+
 @interface BaseVC : UIViewController
 {
     IBOutletCollection(UIView) NSArray* seperatorViewArray;
@@ -25,4 +26,6 @@
 @property(nonatomic, strong) UILabel *lbTitle;
 @property(nonatomic, strong) IBOutlet UIButton *nextButton;
 - (NSString *)changeCurrencyFormat:(float)number;
+- (void) tapTechButton;
+- (void) tapIAQButton;
 @end

@@ -31,6 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Is Your Home Healthy?";
+    
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     // Do any additional setup after loading the view.
     self.baseView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];
     [self.baseView bringSubviewToFront:self.plantImageView];

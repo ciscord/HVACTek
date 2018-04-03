@@ -25,6 +25,9 @@
     // Do any additional setup after loading the view.
     __weak typeof (self) weakSelf = self;
     
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DataLoader sharedInstance] getMainVideo: ^(NSString *successMessage, NSDictionary *reciveData) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];

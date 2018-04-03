@@ -26,6 +26,10 @@ static NSString *findingsCellID = @"SortFindinsCell";
     [super viewDidLoad];
   
     self.title = @"Summary of Findings Sort";
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     [self.findingsTable registerNib:[UINib nibWithNibName:findingsCellID bundle:nil] forCellReuseIdentifier:findingsCellID];
   
     self.findingsArray = [DataLoader loadLocalSavedFindingOptions];
@@ -136,8 +140,8 @@ static NSString *findingsCellID = @"SortFindinsCell";
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType = odtEditing;
+//        ServiceOptionVC *vc = [segue destinationViewController];
+        [DataLoader saveOptionsDisplayType:odtEditing];
         [DataLoader saveFindingOptionsLocal:self.findingsArray];
     }
 }

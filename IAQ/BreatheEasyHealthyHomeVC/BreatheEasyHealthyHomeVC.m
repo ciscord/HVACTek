@@ -20,6 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Breathe Easy Healthy Home";
+    
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     [self.layer1View bringSubviewToFront:self.dividerImageView];
      [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     

@@ -29,6 +29,9 @@
     [super viewDidLoad];
     [self configureColorScheme];
     
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     self.title = NSLocalizedString(@"Utility Overpayment", nil);
     [self configureVC];
     [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];

@@ -43,11 +43,16 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     // Do any additional setup after loading the view.
 
     self.title = @"Customer's Choice";
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     [self.tableView registerNib:[UINib nibWithNibName:kCELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:kCELL_IDENTIFIER];
     
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.btnZeroPercent.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
+    self.optionsDisplayType = [DataLoader loadOptionsDisplayType];
     if (self.optionsDisplayType == odtEditing) {
         self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_immediateRepair"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
                          @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_systemPrevention"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
@@ -410,8 +415,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         
     } else if ([vc isKindOfClass:[ServiceOptionVC class]]) {
         
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType         = odtReadonlyWithPrice;
+//        ServiceOptionVC *vc = [segue destinationViewController];
+        [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
         [DataLoader saveFindingOptionsLocal:self.options];
         
     } else if ([vc isKindOfClass:[CustomerChoiceVC class]]) {

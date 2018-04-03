@@ -24,6 +24,9 @@
     // Do any additional setup after loading the view.
     self.title = @"Here's What We Propose";
     
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
     self.myhomePointLabel.text = [NSString stringWithFormat:@"%d", [IAQDataModel sharedIAQDataModel].calculatedScore];
     

@@ -26,6 +26,10 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     [super viewDidLoad];
     
     self.title = @"Summary of Findings";
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     [self.tableView registerNib:[UINib nibWithNibName:s_PlatinumOptionCellID bundle:nil] forCellReuseIdentifier:s_PlatinumOptionCellID];
       
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -88,8 +92,8 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     }
     
     if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType = odtReadonlyWithPrice;
+//        ServiceOptionVC *vc = [segue destinationViewController];
+        [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
         [DataLoader saveFindingOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
     }
 }

@@ -40,7 +40,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
     [self.navigationItem setRightBarButtonItem:techButton];
     
-    
     [self.titleLabel setTextColor:[UIColor cs_getColorWithProperty:kColorPrimary]];
     [self.collectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
@@ -86,120 +85,6 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
         
     }
-}
-
-- (void) tapTechButton {
-    
-    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-    NSNumber* techCurrentStep = [userdefault objectForKey:@"techCurrentStep"];
-    if (techCurrentStep == nil) {
-        techCurrentStep = [NSNumber numberWithInteger:TechnicianHome];
-    }
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-    UIViewController* currentViewController;
-    
-    Job* activeJob = [[[DataLoader sharedInstance] currentUser] activeJob];
-    if (activeJob == nil) {
-        currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
-    }else {
-        switch (techCurrentStep.intValue) {
-            case TechnicianHome:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
-                break;
-            case Dispatch:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"DispatchVC"];
-                break;
-            case CustomerOverview:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"CustomerOverviewVC"];
-                break;
-            case SettingAgenda:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SettingAgendaVC"];
-                break;
-            case AgendaPicture:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
-                break;
-            case Questions:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC"];
-                break;
-            case Questions1:
-            {
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC1"];
-                QuestionsVC* questionsVC = (QuestionsVC*) currentViewController;
-                
-                questionsVC.questionType = qtTechnician;
-                break;
-            }
-            case UtilityOverpayment:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"UtilityOverpaymentVC"];
-                break;
-            case ExploreSummary:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"ExploreSummaryVC"];
-                break;
-            case SummaryOfFindingsOptions1:
-            {
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
-                SummaryOfFindingsOptionsVC* questionsVC = (SummaryOfFindingsOptionsVC*) currentViewController;
-                
-                questionsVC.isiPadCommonRepairsOptions = YES;
-                break;
-            }
-            case SortFindings:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SortFindingsVC"];
-                break;
-            case SummaryOfFindingsOptions2:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC2"];
-                break;
-            case ViewOptions:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewOptionsVC"];
-                break;
-            case PlatinumOptions:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"PlatinumOptionsVC"];
-                break;
-            case RRFinalChoice:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"RRFinalChoiceVC"];
-                break;
-            case ServiceOption1:
-            {
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"ServiceOptionVC"];
-                ServiceOptionVC* serviceOptionVC = (ServiceOptionVC*) currentViewController;
-                
-                serviceOptionVC.optionsDisplayType = odtEditing;
-                break;
-            }
-            case CustomerChoice:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"CustomerChoiceVC"];
-                break;
-            case AdditionalInfoPage:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"AdditionalInfoPageVC"];
-                break;
-            case NewCustomerChoice:
-            case InvoicePreview:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"NewCustomerChoiceVC"];
-                break;
-                
-            case TechnicianDebrief:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianDebriefVC"];
-                break;
-            default:
-                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
-                break;
-        }
-    }
-    
-    
-    
-    
-    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
-    
-    UINavigationController *navController = (UINavigationController *)appDelegate.window.rootViewController;
-    
-    UIViewController* homeViewController = [navController.viewControllers objectAtIndex:1];
-    [navController popToViewController:homeViewController animated:true];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5), dispatch_get_main_queue(), ^{
-        [navController pushViewController:currentViewController animated:true];
-    });
-    
 }
 
 #pragma mark - UICollectionViewDatasource

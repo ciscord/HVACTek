@@ -32,6 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
+    
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];

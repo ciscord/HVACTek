@@ -304,6 +304,10 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     self.loadet = [NSNumber numberWithBool:NO];
     self.hideSection1 = [NSNumber numberWithBool:NO];
     self.hideSection2 = [NSNumber numberWithBool:NO];

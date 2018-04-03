@@ -67,6 +67,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
     self.title = NSLocalizedString(@"Customer's Choice", nil);
     
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     self.keyboardAvoiding.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
 
     NSDictionary* customerChoiceData = [DataLoader loadLocalCustomerChoiceData];

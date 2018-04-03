@@ -20,7 +20,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "Logs+Functional.h"
 
+
 //#define NSLog(...)
+typedef NS_ENUM (NSInteger, OptionsDisplayType){
+    odtEditing,
+    odtNoValues,
+    odtReadonlyWithPrice,
+    odtCustomerFinalChoice
+};
 
 typedef NS_ENUM (NSInteger, QuestionType){
     qtHeating = 1,
@@ -119,6 +126,10 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 + (void) saveNewCustomerChoice:(NSDictionary*)customerChoiceData;
 +(NSDictionary*)loadLocalNewCustomerChoice;
+
++ (void) saveOptionsDisplayType : (OptionsDisplayType) currentType;
+
++ (OptionsDisplayType) loadOptionsDisplayType;
 
 + (void) clearAllLocalData;
 //------------------------------------------------------------------------------------------

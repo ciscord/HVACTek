@@ -23,6 +23,10 @@
     // Do any additional setup after loading the view.
     
     self.title = @"Customer's Choice";
+    
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
@@ -49,8 +53,8 @@
     
   //  ServiceOptionVC *vc = [segue destinationViewController];
     if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
-        ServiceOptionVC *vc = [segue destinationViewController];
-        vc.optionsDisplayType = odtReadonlyWithPrice;
+//        ServiceOptionVC *vc = [segue destinationViewController];
+        [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
         
     }
     

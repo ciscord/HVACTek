@@ -49,6 +49,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     for (UILabel* descriptionLabel in self.descriptionLabelArray) {
         descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     }

@@ -29,6 +29,9 @@
     [super viewDidLoad];
     self.title = @"Healthy Home Process";
     // Do any additional setup after loading the view.
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     [self configureColorScheme];
     
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeProcess) {

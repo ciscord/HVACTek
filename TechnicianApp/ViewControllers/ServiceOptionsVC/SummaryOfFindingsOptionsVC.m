@@ -37,6 +37,9 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [super viewDidLoad];
     self.title = (self.isiPadCommonRepairsOptions ? @"Common Repairs" : @"Specialized Repairs");
     
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    [self.navigationItem setRightBarButtonItem:iaqButton];
+    
     [self configureColorScheme];
     
     self.filteredOptions = @[].mutableCopy;

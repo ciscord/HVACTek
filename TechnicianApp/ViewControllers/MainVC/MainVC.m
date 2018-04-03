@@ -59,6 +59,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
 
     UIViewController *vc = [storyboard instantiateInitialViewController];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -67,6 +68,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
     UIViewController *vc = [storyboard instantiateInitialViewController];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

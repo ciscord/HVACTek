@@ -154,6 +154,21 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
 }
 
++ (void) saveOptionsDisplayType : (OptionsDisplayType) currentType {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithInteger:currentType] forKey:@"OptionsDisplayType"];
+ 
+    [defaults synchronize];
+}
+
++ (OptionsDisplayType) loadOptionsDisplayType {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"OptionsDisplayType"]) {
+        return [[defaults objectForKey:@"OptionsDisplayType"] integerValue];
+    }else
+        return odtEditing;
+    
+}
 + (NSMutableArray*)loadLocalSavedOptions {
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];

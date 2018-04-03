@@ -32,6 +32,10 @@
 
 -(void)configureVC {
     self.title = @"Customer's Choice";
+    
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    [self.navigationItem setRightBarButtonItem:techButton];
+    
     [self.serviceTableView registerNib:[UINib nibWithNibName:@"EditServiceOptionsCell" bundle:nil] forCellReuseIdentifier:@"EditServiceOptionsCell"];
     
     [self configureColorScheme];
