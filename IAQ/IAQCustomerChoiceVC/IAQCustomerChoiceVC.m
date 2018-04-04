@@ -168,14 +168,14 @@
     
     [IAQDataModel sharedIAQDataModel].bestTotalPrice = totalCost;
     self.bestChoiceLabel.text = iaqProductString;
-    [self.bestFirstPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+    [self.bestFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
-        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
+        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.bestFinancingLabel.text = @"0% Financing";
-        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
+        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
-        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
         self.bestFinancingLabel.text = @"Does Not Qualify";
         self.bestEqual24Label.text = @"For 0% Financing";
     }
@@ -191,14 +191,14 @@
     
     [IAQDataModel sharedIAQDataModel].betterTotalPrice = totalCost;
     self.betterChoiceLabel.text = iaqProductString;
-    [self.betterFirstPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+    [self.betterFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
-        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
+        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.betterFinancingLabel.text = @"0% Financing";
-        self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
+        self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
-        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
         self.betterFinancingLabel.text = @"Does Not Qualify";
         self.betterEqual24Label.text = @"For 0% Financing";
     }
@@ -214,14 +214,14 @@
     
     [IAQDataModel sharedIAQDataModel].goodTotalPrice = totalCost;
     self.goodChoiceLabel.text = iaqProductString;
-    [self.goodFirstPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+    [self.goodFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
-        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost * 0.85] forState:UIControlStateNormal];
+        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.goodFinancingLabel.text = @"0% Financing";
-        self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.2f", totalCost / 24];
+        self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
-        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
         self.goodFinancingLabel.text = @"Does Not Qualify";
         self.goodEqual24Label.text = @"For 0% Financing";
     }

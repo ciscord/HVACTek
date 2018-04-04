@@ -95,15 +95,17 @@
     if (self.costType == SAVING) {
         [self.priceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         if (totalCost < 1000) {
-            [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+            [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
+            _priceDescriptionLabel.text = @"15% Savings Does Not Qualify For 0% Financing";
         }else{
             totalCost = totalCost * 0.85;
-            [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+            [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
+            _priceDescriptionLabel.text = @"15% Savings 0% Financing";
         }
         
     }else{
         [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
-        [self.priceButton setTitle:[NSString stringWithFormat:@"$%.2f", totalCost] forState:UIControlStateNormal];
+        [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     }
     
     self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
