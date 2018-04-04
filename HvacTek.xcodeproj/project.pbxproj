@@ -495,6 +495,7 @@
 		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
 		8421B00520602D61000FF69A /* TechDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechDataModel.m; sourceTree = "<group>"; };
 		84A16E151FC4928700F01106 /* IAQData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IAQData.xcdatamodel; sourceTree = "<group>"; };
+		84A178C42074D5D0002426EB /* IAQData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IAQData 2.xcdatamodel"; sourceTree = "<group>"; };
 		84A7A6EE206BE8600003E075 /* CartItem+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CartItem+CoreDataClass.h"; sourceTree = "<group>"; };
 		84A7A6EF206BE8600003E075 /* CartItem+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CartItem+CoreDataClass.m"; sourceTree = "<group>"; };
 		84A7A6F3206BE8730003E075 /* Unifeiyed_Quoting 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Unifeiyed_Quoting 10.xcdatamodel"; sourceTree = "<group>"; };
@@ -2033,9 +2034,10 @@
 		84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84A178C42074D5D0002426EB /* IAQData 2.xcdatamodel */,
 				84A16E151FC4928700F01106 /* IAQData.xcdatamodel */,
 			);
-			currentVersion = 84A16E151FC4928700F01106 /* IAQData.xcdatamodel */;
+			currentVersion = 84A178C42074D5D0002426EB /* IAQData 2.xcdatamodel */;
 			path = IAQData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

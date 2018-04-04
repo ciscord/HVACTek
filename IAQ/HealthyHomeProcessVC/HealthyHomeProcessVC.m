@@ -76,7 +76,7 @@
                                                    iaqProduct.createdAt = [product objectForKey:@"created_at"];
                                                    iaqProduct.createdBy = [product objectForKey:@"created_by"];
                                                    iaqProduct.productId = [product objectForKey:@"id"];
-                                                   iaqProduct.ord = [product objectForKey:@"ord"];
+                                                   iaqProduct.ord = [[product objectForKey:@"ord"] intValue];
                                                    iaqProduct.price = [product objectForKey:@"price"];
                                                    iaqProduct.title = [product objectForKey:@"title"];
                                                    
@@ -131,7 +131,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // sort by id
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"productId" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ord" ascending:YES];
     
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     
