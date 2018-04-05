@@ -166,6 +166,8 @@
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
 		84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */; };
 		8421B00620602D61000FF69A /* TechDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421B00520602D61000FF69A /* TechDataModel.m */; };
+		849478282075535900321316 /* MediaLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849478262075535900321316 /* MediaLibraryVC.m */; };
+		8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8494782920755B5C00321316 /* PDFViewController1VC.m */; };
 		84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A16E141FC4928700F01106 /* IAQData.xcdatamodeld */; };
 		84A7A6F1206BE8600003E075 /* CartItem+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7A6EF206BE8600003E075 /* CartItem+CoreDataClass.m */; };
 		84A7A6FC206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A7A6F2206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld */; };
@@ -494,6 +496,10 @@
 		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = "<absolute>"; };
 		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
 		8421B00520602D61000FF69A /* TechDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechDataModel.m; sourceTree = "<group>"; };
+		849478262075535900321316 /* MediaLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaLibraryVC.m; sourceTree = "<group>"; };
+		849478272075535900321316 /* MediaLibraryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaLibraryVC.h; sourceTree = "<group>"; };
+		8494782920755B5C00321316 /* PDFViewController1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewController1VC.m; sourceTree = "<group>"; };
+		8494782A20755B5C00321316 /* PDFViewController1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewController1VC.h; sourceTree = "<group>"; };
 		84A16E151FC4928700F01106 /* IAQData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IAQData.xcdatamodel; sourceTree = "<group>"; };
 		84A178C42074D5D0002426EB /* IAQData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IAQData 2.xcdatamodel"; sourceTree = "<group>"; };
 		84A7A6EE206BE8600003E075 /* CartItem+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CartItem+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -858,6 +864,7 @@
 				75F3DF8A1A3F055C00F60652 /* CustomerChoiceVC */,
 				52F3D1E11CFF0356008D24C9 /* VideoLibrary */,
 				0E5DF02A1D2423B8007CE24F /* PictureLibrary */,
+				849478252075532800321316 /* Media Library */,
 				5247C5241CEDB5F700670D4A /* AdditionalInfo */,
 				52EDAFF71CEF0797004F3EC0 /* EmailVerificationVC */,
 				5209A1A71CEC91EC0026ED6D /* InvoicePreviewVC */,
@@ -1109,10 +1116,10 @@
 				84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */,
 				505C6B5E1FB68B8800761B04 /* HealthyHomeSolutionsSortVC */,
 				505C6B621FB68E2000761B04 /* IAQCustomerChoiceVC */,
+				505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */,
+				505C6B6E1FB69E2200761B04 /* VideoForCustomerVC */,
 				505C6B661FB69DD600761B04 /* IsYourHomeHealthyVC */,
 				505C6B721FB69E6000761B04 /* HereWhatWeProposeVC */,
-				505C6B6E1FB69E2200761B04 /* VideoForCustomerVC */,
-				505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */,
 				508566221FB38012000B0F56 /* IAQDataModel */,
 				508566231FB38012000B0F56 /* Images */,
 				508566241FB38025000B0F56 /* IAQStoryboard.storyboard */,
@@ -1407,6 +1414,17 @@
 				524FDFF51B79046100480987 /* CustomerChoiceCell.xib */,
 			);
 			path = CustomerChoiceVC;
+			sourceTree = "<group>";
+		};
+		849478252075532800321316 /* Media Library */ = {
+			isa = PBXGroup;
+			children = (
+				8494782A20755B5C00321316 /* PDFViewController1VC.h */,
+				8494782920755B5C00321316 /* PDFViewController1VC.m */,
+				849478272075535900321316 /* MediaLibraryVC.h */,
+				849478262075535900321316 /* MediaLibraryVC.m */,
+			);
+			path = "Media Library";
 			sourceTree = "<group>";
 		};
 		84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */ = {
@@ -1722,6 +1740,7 @@
 				4F11D3E31AA63F84007FC0A8 /* ViewOptionsVC.m in Sources */,
 				4FD2EB871A361A0F0056D4C4 /* HardTableViewCell.m in Sources */,
 				521DB6B71C10707A003E40D2 /* EditServiceOptionsCell.m in Sources */,
+				849478282075535900321316 /* MediaLibraryVC.m in Sources */,
 				4FD2EB141A3619F40056D4C4 /* AppDelegate.m in Sources */,
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
 				84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */,
@@ -1746,6 +1765,7 @@
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
 				5011B7561FC5CC720041BDAA /* FileModel.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
+				8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
 				84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */,
