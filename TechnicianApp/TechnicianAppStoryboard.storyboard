@@ -3523,8 +3523,8 @@ you must debrief from job</string>
                                 <rect key="frame" x="39" y="247" width="690" height="757"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="c8P-WC-s5v">
-                                        <rect key="frame" x="45" y="30" width="600" height="485"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="c8P-WC-s5v">
+                                        <rect key="frame" x="45" y="30" width="600" height="646"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3534,24 +3534,8 @@ you must debrief from job</string>
                                             <outlet property="delegate" destination="EPT-2t-ogo" id="3JQ-Du-xOy"/>
                                         </connections>
                                     </tableView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_immediateRepair" id="sb1-eO-4dJ">
-                                        <rect key="frame" x="45" y="612" width="125" height="125"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_systemPrevention" id="Fas-Rg-6aD">
-                                        <rect key="frame" x="203" y="612" width="125" height="125"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_totalComfortEnhancement" id="fNw-mR-VC9">
-                                        <rect key="frame" x="520" y="612" width="125" height="125"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_cleanAirSolution" id="5v7-vh-hkc">
-                                        <rect key="frame" x="361" y="612" width="125" height="125"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rbs-3Y-MNw">
-                                        <rect key="frame" x="30" y="537" width="188" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rbs-3Y-MNw">
+                                        <rect key="frame" x="33" y="684" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
@@ -3568,12 +3552,12 @@ you must debrief from job</string>
                                             <segue destination="8qd-Vt-zmM" kind="push" id="2dB-gR-Mnj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P0S-KB-XDj">
-                                        <rect key="frame" x="466" y="537" width="188" height="52"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P0S-KB-XDj">
+                                        <rect key="frame" x="469" y="684" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Picture">
+                                        <state key="normal" title="Library">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -3583,25 +3567,7 @@ you must debrief from job</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="r6C-7a-Cui" kind="push" id="Tfd-dX-3pM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xbe-bz-7rA">
-                                        <rect key="frame" x="248" y="537" width="188" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Video">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="rDe-00-kCH" kind="push" id="Sg2-aj-GQN"/>
+                                            <segue destination="ECM-RE-IpD" kind="push" id="Jqz-G0-X87"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3615,7 +3581,6 @@ you must debrief from job</string>
                         <outlet property="btnContinue" destination="Rbs-3Y-MNw" id="f0c-LF-NAf"/>
                         <outlet property="pictureButton" destination="P0S-KB-XDj" id="CuA-Lo-1rW"/>
                         <outlet property="tableView" destination="c8P-WC-s5v" id="6yh-4R-f0L"/>
-                        <outlet property="videoButton" destination="xbe-bz-7rA" id="sv1-qt-god"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfh-TC-yZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5049,6 +5014,64 @@ you must debrief from job</string>
             </objects>
             <point key="canvasLocation" x="-243" y="4413"/>
         </scene>
+        <!--Media LibraryVC-->
+        <scene sceneID="9Rj-z2-qZm">
+            <objects>
+                <viewController storyboardIdentifier="MediaLibraryVC" automaticallyAdjustsScrollViewInsets="NO" id="ECM-RE-IpD" customClass="MediaLibraryVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zyd-id-mnc">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="T56-aJ-OOb" customClass="RoundCornerView">
+                                <rect key="frame" x="39" y="247" width="690" height="757"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="wXA-Ty-5ci">
+                                        <rect key="frame" x="18" y="8" width="656" height="620"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="separatorColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="ECM-RE-IpD" id="bln-fc-9Ae"/>
+                                            <outlet property="delegate" destination="ECM-RE-IpD" id="xzU-F2-072"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uzs-7A-v1z">
+                                        <rect key="frame" x="251" y="664" width="188" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backClicked:" destination="ECM-RE-IpD" eventType="touchUpInside" id="8M1-8b-NK8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kPk-2W-S6o"/>
+                    <connections>
+                        <outlet property="backButton" destination="uzs-7A-v1z" id="Pkh-rs-f2q"/>
+                        <outlet property="pictureTableView" destination="wXA-Ty-5ci" id="nYZ-SI-i5V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpQ-tU-7Gv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-251" y="5570"/>
+        </scene>
         <!--Picture GalleryVC-->
         <scene sceneID="Dhi-n8-VBf">
             <objects>
@@ -5209,6 +5232,39 @@ you must debrief from job</string>
             </objects>
             <point key="canvasLocation" x="-243" y="734"/>
         </scene>
+        <!--PDFViewControllerVC-->
+        <scene sceneID="NNA-uB-pwk">
+            <objects>
+                <viewController storyboardIdentifier="PDFViewController1VC" id="9bd-yk-VMu" userLabel="PDFViewControllerVC" customClass="PDFViewController1VC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x7K-MO-Muf">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="HTI-0x-x6p">
+                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="u6c-Tm-Zpe">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="QHB-QS-Fuj">
+                                            <connections>
+                                                <action selector="doneClick:" destination="9bd-yk-VMu" id="NvQ-yd-KaK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="QHB-QS-Fuj" id="37n-jG-ola"/>
+                        <outlet property="navBar" destination="HTI-0x-x6p" id="clc-Ux-8CP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L8L-dn-rci" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1087" y="5570"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Signature Stop Image" width="60" height="60"/>
@@ -5216,11 +5272,7 @@ you must debrief from job</string>
         <image name="agenda-exploreIcon" width="130" height="132"/>
         <image name="agenda-optionsIcon" width="58" height="83"/>
         <image name="agenda-todayIcon" width="142" height="84"/>
-        <image name="btn_cleanAirSolution" width="125" height="125"/>
-        <image name="btn_immediateRepair" width="125" height="125"/>
         <image name="btn_repairVsReplace" width="900" height="109"/>
-        <image name="btn_systemPrevention" width="125" height="125"/>
-        <image name="btn_totalComfortEnhancement" width="125" height="125"/>
         <image name="destersMyCell-1" width="697" height="81"/>
         <image name="service-option-checkmark.png" width="39" height="39"/>
         <image name="service-option-item-bg" width="39" height="39"/>

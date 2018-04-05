@@ -8,6 +8,6 @@
 
 #import "BaseVC.h"
 
-@interface PictureLibraryVC : BaseVC
+@interface MediaLibraryVC : BaseVC
 
 @end

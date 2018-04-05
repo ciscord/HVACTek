@@ -14,7 +14,6 @@
 @interface PlatinumOptionsVC ()
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
 @property (weak, nonatomic) IBOutlet UIButton     *btnContinue;
-@property (weak, nonatomic) IBOutlet UIButton *videoButton;
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @end
 
@@ -33,7 +32,6 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     [self.tableView registerNib:[UINib nibWithNibName:s_PlatinumOptionCellID bundle:nil] forCellReuseIdentifier:s_PlatinumOptionCellID];
       
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     [[TechDataModel sharedTechDataModel] saveCurrentStep:PlatinumOptions];
