@@ -11,7 +11,7 @@
 #import "HealthyHomeSolutionsDetailVC.h"
 #import "IAQDataModel.h"
 #import "IAQEditServiceOptionsVC.h"
-#import "IsYourHomeHealthyVC.h"
+#import "BreatheEasyHealthyHomeVC.h"
 @interface IAQCustomerChoiceVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
@@ -108,8 +108,8 @@
             
         }else {
             //go to next screen
-            IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
-            [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
+            BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
+            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
         }
         
     }else{
@@ -282,8 +282,8 @@
     [self.navigationController pushViewController:healthyHomeSolutionsDetailVC animated:true];
 }
 -(IBAction)nextButtonClick:(id)sender {
-    IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
-    [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
+    BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
+    [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
     
     [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [NSMutableArray array];

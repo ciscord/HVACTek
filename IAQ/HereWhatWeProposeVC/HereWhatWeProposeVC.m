@@ -52,11 +52,11 @@
 
 #pragma mark IBAction button
 - (IBAction)nextButtonClick:(id)sender {
-    int viewsToPop = 2;//go to cutomer's choice screen
+    int viewsToPop = 4;//go to cutomer's choice screen
     [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
     
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-    
+    [IAQDataModel sharedIAQDataModel].isfinal = 1;
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
         
     [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];

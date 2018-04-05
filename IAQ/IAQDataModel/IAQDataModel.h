@@ -18,10 +18,9 @@ typedef NS_ENUM(NSInteger, IAQCurrentView) {
     IAQHealthyHomeSolution,
     IAQHealthyHomeSolutionSort,
     IAQCustomerChoice,
-    IAQIsYourHomeHealthy,
     IAQBreatheEasyHealtyHome,
     IAQVideoForCustomer,
-    IAQIsYourHomeHealthyFinal,
+    IAQIsYourHomeHealthy,
     IAQHereWhatWePropose,
     IAQCustomerChoiceFinal
 };

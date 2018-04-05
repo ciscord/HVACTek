@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mTh-Mz-WUI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mTh-Mz-WUI">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1413,6 +1413,13 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                             <constraint firstAttribute="width" constant="342" id="d5W-UE-qGr"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EPAlogo" translatesAutoresizingMaskIntoConstraints="NO" id="VJz-0O-QmD">
+                                        <rect key="frame" x="42" y="386" width="250" height="266"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="bM3-kx-bmy"/>
+                                            <constraint firstAttribute="height" constant="266" id="ypU-Ur-1F2"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1422,10 +1429,12 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                     <constraint firstItem="P2g-lc-1Yx" firstAttribute="top" secondItem="E0J-mJ-PTw" secondAttribute="top" id="IYq-Nt-lSI"/>
                                     <constraint firstItem="DXB-1M-bhk" firstAttribute="top" secondItem="E0J-mJ-PTw" secondAttribute="top" constant="32" id="Tky-SC-zEU"/>
                                     <constraint firstItem="wZu-il-MqI" firstAttribute="leading" secondItem="DXB-1M-bhk" secondAttribute="trailing" constant="109" id="UYF-QU-kYR"/>
+                                    <constraint firstItem="VJz-0O-QmD" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" constant="42" id="Vjy-2y-GYe"/>
                                     <constraint firstAttribute="trailing" secondItem="3Zg-RQ-2kF" secondAttribute="trailing" constant="48" id="XU2-Fd-94h"/>
                                     <constraint firstAttribute="bottom" secondItem="zBn-Ji-34h" secondAttribute="bottom" constant="30" id="Xkq-q0-bQD"/>
                                     <constraint firstItem="nmQ-xh-Zk0" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" id="cP9-fD-fxE"/>
                                     <constraint firstAttribute="trailing" secondItem="nmQ-xh-Zk0" secondAttribute="trailing" id="dPQ-Uw-gWO"/>
+                                    <constraint firstAttribute="bottom" secondItem="VJz-0O-QmD" secondAttribute="bottom" constant="182" id="e7E-WY-1IQ"/>
                                     <constraint firstAttribute="trailing" secondItem="P2g-lc-1Yx" secondAttribute="trailing" id="k0W-IJ-41k"/>
                                     <constraint firstItem="zBn-Ji-34h" firstAttribute="top" secondItem="P2g-lc-1Yx" secondAttribute="bottom" constant="30" id="ndx-gj-9jV"/>
                                     <constraint firstItem="DXB-1M-bhk" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" constant="42" id="oZ8-61-nHe"/>
@@ -2687,6 +2696,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
         </scene>
     </scenes>
     <resources>
+        <image name="EPAlogo" width="412" height="449"/>
         <image name="back" width="37" height="37"/>
         <image name="best" width="205" height="241"/>
         <image name="bluesky" width="468" height="434"/>

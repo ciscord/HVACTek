@@ -12,7 +12,7 @@
 #import "IAQDataModel.h"
 #import <TWRDownloadManager.h>
 #import "DataLoader.h"
-
+#import "IsYourHomeHealthyVC.h"
 @interface VideoForCustomerVC ()
 @property (nonatomic, retain) AVPlayerViewController *playerViewController;
 @property (weak, nonatomic) IBOutlet UIView *videoView;
@@ -83,25 +83,23 @@
     }];
 
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQVideoForCustomer) {
-        int viewsToPop = 2;
-        [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
-        [IAQDataModel sharedIAQDataModel].isfinal = 1;
+        IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
+        [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
     }
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
-    int viewsToPop = 2;
     
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     
-    [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthyFinal]  forKey:@"iaqCurrentStep"];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthy]  forKey:@"iaqCurrentStep"];
     
     [userdefault synchronize];
-    [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
-    [IAQDataModel sharedIAQDataModel].isfinal = 1;
-    
+    IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
+    [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

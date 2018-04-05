@@ -91,8 +91,6 @@
     
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     
-    
-    
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQIsYourHomeHealthy) {
         
         [IAQDataModel sharedIAQDataModel].airPurification = [[userdefault objectForKey:@"airPurification"] intValue];
@@ -103,14 +101,9 @@
         //go to next screen
         [IAQDataModel sharedIAQDataModel].isfinal = [[userdefault objectForKey:@"isfinal"] intValue];
         
-        if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
-            HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
-            [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
-        }else {
-            BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
-            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
-        }
-        
+        HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
+        [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
+    
     }
     
     [self reloadData];
@@ -214,21 +207,12 @@
     [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].airFiltration] forKey:@"airFiltration"];
     [userdefault setObject:[NSNumber numberWithInt:[IAQDataModel sharedIAQDataModel].dehumidification] forKey:@"dehumidification"];
     
-    if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHereWhatWePropose]  forKey:@"iaqCurrentStep"];
-    }else {
-        [userdefault setObject:[NSNumber numberWithInteger:IAQBreatheEasyHealtyHome]  forKey:@"iaqCurrentStep"];
-    }
-
+    [userdefault setObject:[NSNumber numberWithInteger:IAQHereWhatWePropose]  forKey:@"iaqCurrentStep"];
+    
     [userdefault synchronize];
 
-    if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {
-        HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
-        [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
-    }else {
-        BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
-        [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
-    }
+    HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
+    [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
     
 }
 - (void)didReceiveMemoryWarning {
