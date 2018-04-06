@@ -215,6 +215,7 @@
         currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
     }else {
         switch (techCurrentStep.intValue) {
+                
             case TechnicianHome:
                 currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
                 break;
@@ -230,17 +231,15 @@
             case AgendaPicture:
                 currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
                 break;
+            case ESABenefits:
+                currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"ESABenefitsVC"];
+                break;
             case Questions:
                 currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC"];
                 break;
             case Questions1:
-            {
                 currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC1"];
-                QuestionsVC* questionsVC = (QuestionsVC*) currentViewController;
-                
-                questionsVC.questionType = qtTechnician;
                 break;
-            }
             case UtilityOverpayment:
                 currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"UtilityOverpaymentVC"];
                 break;

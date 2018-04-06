@@ -38,16 +38,7 @@
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
-    if ([TechDataModel sharedTechDataModel].currentStep > AgendaPicture) {
-        
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        QuestionsVC * questionViewController = [storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC"];
-        questionViewController.questionType = self.choosedType;
-        [self.navigationController pushViewController:questionViewController animated:true];
-        
-    }else {
-        
-    }
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:AgendaPicture];
 }
 
 
@@ -81,10 +72,7 @@
         job.startTime = [NSDate date];
         [job.managedObjectContext save];
     }
-    //    if (!job.startTimeQuestions) {
-    //        job.startTimeQuestions = [NSDate date];
-    //        [job.managedObjectContext save];
-    //    }
+    
     
     job.startTimeQuestions = [NSDate date];
     [job.managedObjectContext save];
@@ -98,12 +86,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
-        QuestionsVC *vc = segue.destinationViewController;
-        vc.questionType = self.choosedType;
-        [TechDataModel sharedTechDataModel].currentStep = TechNone;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
-    }
+    
     
 }
 

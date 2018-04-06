@@ -41,17 +41,8 @@
     self.title = NSLocalizedString(@"Setting The Agenda", nil);
     
     [self configureVC];
-    
-    if ([TechDataModel sharedTechDataModel].currentStep > SettingAgenda) {
-        
-        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        AgendaPictureVC * agendaViewController = [storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
-        agendaViewController.choosedType = self.choosenType;
-        [self.navigationController pushViewController:agendaViewController animated:true];
-        
-    }else {
-        
-    }
+    self.choosenType = [DataLoader loadQuestionType];
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:SettingAgenda];
 }
 
 
@@ -124,12 +115,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"goPictureAgenda"]) {
-        AgendaPictureVC *vc = segue.destinationViewController;
-        vc.choosedType = self.choosenType;
-        [TechDataModel sharedTechDataModel].currentStep = TechNone;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:AgendaPicture];
-    }
 }
 
 

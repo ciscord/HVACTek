@@ -263,7 +263,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     if ([[segue identifier] isEqualToString:@"serviceOptionSegue"])
     {
-//        ServiceOptionVC *vc = [segue destinationViewController];
         [DataLoader saveOptionsDisplayType:odtEditing];
         NSMutableArray *result = @[].mutableCopy;
         for (PricebookItem *p in self.selectedMainOptions) {

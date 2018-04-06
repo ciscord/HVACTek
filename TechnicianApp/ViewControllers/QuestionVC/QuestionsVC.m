@@ -27,6 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    self.questionType = [DataLoader loadQuestionType];
+    
     self.title = (self.questionType == qtTechnician ? @"Tech Observations" : @"Explore Summary");
     
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
@@ -35,7 +39,6 @@
     ////
     //tech intrebari se scot mereu de pe portal
     /////
-    
     
     
     NSArray *questionsArray;
@@ -174,14 +177,6 @@
 
 -(void)setQuestions:(NSArray *)questions
 {
-    //disable questions
-//    NSMutableArray *arr = questions.mutableCopy;
-//    if (self.questionType != qtTechnician)
-//    {
-//        [arr addObject:[[Question alloc] initWithDictionary:@{kQuestionIDKey : @(0), kQuestionTypeKey : @(kNoAnswerQuestion),
-//                                                              kQuestionQuestionKey : @"Thank you\nYou have completed the questions.\nPlease return the device to your technician."}]];
-//    }
-    
     //activate questions
     _questions = questions;
 }
@@ -227,11 +222,6 @@
     }
     else
     {
-        /* Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
-         if (!job.startTime) {
-         job.startTime = [NSDate date];
-         [job.managedObjectContext save];
-         }*/
         self.currentQuestionIndex--;
         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
         if (self.questionType!=qtTechnician) {
@@ -246,13 +236,9 @@
         if (self.questionType == qtTechnician) {
             job.techObservations = self.questions;
             [job.managedObjectContext save];
-            //[self performSegueWithIdentifier:@"selectOptionsIpadRepairsSegue" sender:self];
             [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
         } else
         {
-//            job.custumerQuestions = self.questions;
-//            [job.managedObjectContext save];
-//            [self performSegueWithIdentifier:@"exploreSummarySegue" sender:self];
             job.custumerQuestions = self.questions;
             [job.managedObjectContext save];
             [self performSegueWithIdentifier:@"showMemberBenefitsVC" sender:self];
@@ -267,28 +253,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-//    if ([segue.destinationViewController isKindOfClass:[ExploreSummaryVC class]])
-//    {
-//        ExploreSummaryVC *vc = (ExploreSummaryVC*)segue.destinationViewController;
-//        NSMutableArray *arr = _questions.mutableCopy;
-//        [arr removeLastObject];
-//        vc.questions = arr;
-//    }
-//    else if ([segue.destinationViewController isKindOfClass:[SummaryOfFindingsOptionsVC class]])
-//    {
-//        SummaryOfFindingsOptionsVC *vc = (SummaryOfFindingsOptionsVC*)segue.destinationViewController;
-//        vc.isiPadCommonRepairsOptions = YES;
-//    }
-    
-    
-//    if ([segue.identifier isEqualToString:@"technicianQuestionsSegue"]) {
-//        QuestionsVC    *vc  = (QuestionsVC *)segue.destinationViewController;
-//      ///  NSMutableArray *arr = _questions.mutableCopy;
-//        vc.questionType = qtTechnician;
-//        vc.sectionTypeChoosed = self.sectionTypeChoosed;
-//       /// vc.questions    = arr;
-//    }
-    
     if ([segue.identifier isEqualToString:@"showUtilityOverpayment"]) {
         UtilityOverpaymentVC    *vc  = (UtilityOverpaymentVC *)segue.destinationViewController;
         vc.sectionChoosed = self.sectionTypeChoosed;

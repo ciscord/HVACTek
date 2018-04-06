@@ -169,6 +169,23 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
         return odtEditing;
     
 }
+
++ (void) saveQuestionType : (QuestionType) currentType {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithInteger:currentType] forKey:@"QuestionType"];
+    
+    [defaults synchronize];
+}
+
++ (QuestionType) loadQuestionType {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"QuestionType"]) {
+        return [[defaults objectForKey:@"QuestionType"] integerValue];
+    }else
+        return qtHeating;
+    
+}
+
 + (NSMutableArray*)loadLocalSavedOptions {
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];

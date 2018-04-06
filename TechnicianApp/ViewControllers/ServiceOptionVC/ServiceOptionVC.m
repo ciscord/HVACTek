@@ -151,14 +151,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     
     /////
     
-   // [items removeObjectAtIndex:optionIndex];
     option[@"items"]      = items;
     option[@"isEditable"] = @(NO);
 
     
     NSMutableArray *editableItems = [[NSMutableArray alloc] initWithArray:[items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isMain == NO"]]];
-    
-   // NSLog(@"editableItems %lu",(unsigned long)editableItems.count);
     
     if (editableItems.count == 1 & items.count == 1){
         [editableItems removeAllObjects];
@@ -167,10 +164,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     if (editableItems.count > 0 && self.options.count > index+1) {
         NSMutableDictionary *nextOption = self.options[index+1];
         nextOption[@"items"]      = items.mutableCopy;
-       // nextOption[@"isEditable"] = @(items.count > 1);
     }
-    
-///    self.btnContinue.hidden = ([editableItems count] > 0) && (self.options.lastObject != option);
 
     [self.tableView reloadData];
 }
@@ -214,8 +208,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Options Action
 - (void)selectOptionsToEditAtRow:(NSInteger)index {
-//    NSDictionary *option   = self.options[index];
-//    NSMutableArray *items    = option[@"items"];
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
     EditServiceOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EditServiceOptionsVC"];

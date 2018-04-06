@@ -78,7 +78,6 @@
                                                amount:[self roundNumber:number]
                                          andAmountESA:[NSNumber numberWithInt:[[self getPriceAmountFromString:self.priceTextField.text] intValue]]];
     
-    //NSArray * questionsTech = [[[[[DataLoader sharedInstance] currentUser] activeJob] techObservations] mutableCopy];
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0) {
         [[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] addObject:priceBook];
     }else{
@@ -123,18 +122,6 @@
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-//    if (textField == self.priceTextField) {
-//        NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//        if (![newText hasPrefix:@"$"])
-//        {
-//            return NO;
-//        }
-//    }
-//    
-//    return YES;
-    
-    
     
     if (textField == self.priceTextField) {
         NSMutableString *mutableString = [[textField text] mutableCopy];

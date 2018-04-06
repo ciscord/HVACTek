@@ -456,14 +456,9 @@ const int kControllerWidth = 190;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-//    if ([segue.identifier isEqualToString:@"customerQuestionsSegue"]) {
-//        QuestionsVC *vc = segue.destinationViewController;
-//        vc.questionType = self.selectedType;
-//    }
     
     if ([segue.identifier isEqualToString:@"goSettingAgenda"]) {
-        SettingAgendaVC *vc = segue.destinationViewController;
-        vc.choosenType = self.selectedType;
+        [DataLoader saveQuestionType:self.selectedType];
     }
     //returnVisit
     

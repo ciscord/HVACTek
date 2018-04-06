@@ -62,8 +62,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
         self.allOptions = [self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
         
-        
-   //     self.allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
         if ([[DataLoader sharedInstance] selectedRepairTemporarOptions].count > 0){
             self.selectedOptions = [[DataLoader sharedInstance] selectedRepairTemporarOptions].mutableCopy;
         }else{
@@ -76,7 +74,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
-       /// self.allOptions = [[DataLoader sharedInstance] otherOptions];
         
         NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
         if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
@@ -124,11 +121,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    //    if (self.isiPadCommonRepairsOptions == NO) {
-    //        if (self.isMovingFromParentViewController) {
-    //            [DataLoader saveOptionsLocal:self.selectedOptions];
-    //        }
-    //    }
     if (self.isMovingFromParentViewController) {
         [DataLoader sharedInstance].selectedRepairTemporarOptions = self.selectedOptions.mutableCopy;
     }
@@ -316,11 +308,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     if ([unwindSegue.identifier isEqualToString:@"unwindToSummaryOfFindingsFromCalculations"]){
         [self performSelector: @selector(showViewControllerAfterUnwind) withObject: nil afterDelay: 0];
     }
-//    if ([unwindSegue.identifier isEqualToString:@"unwindToServiceOptionsFromInvoiceBtn"]){
-//        self.isEmptyOptionSelected = YES;
-//        self.isInvoiceRRSelected = YES;
-//        self.segueIdentifierToUnwindTo = @"customerChoiceSegueAfterUnwind";
-//    }
     
     //
     //

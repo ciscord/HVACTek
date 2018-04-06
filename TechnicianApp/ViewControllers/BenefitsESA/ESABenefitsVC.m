@@ -40,6 +40,8 @@
     self.discountView.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self configureColorScheme];
+    
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:ESABenefits];
 }
 
 
@@ -82,8 +84,7 @@
     
     if ([[segue destinationViewController] isKindOfClass:[QuestionsVC class]]) {
         
-        QuestionsVC *vc = [segue destinationViewController];
-        vc.questionType = qtTechnician;
+        [DataLoader saveQuestionType:qtTechnician];
     }
     
 }

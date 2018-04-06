@@ -105,15 +105,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
   [self.findingsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] - 1];
   [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] - 1 inSection:0]];
   [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
-  
-//  [self.findingsTable beginUpdates];
-//  [self.findingsTable reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender tag] - 1 inSection:0]]
-//                        withRowAnimation:UITableViewRowAnimationNone];
-//  [self.findingsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender tag] inSection:0]]
-//                        withRowAnimation:UITableViewRowAnimationTop];
-//  [self.findingsTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender tag] - 1 inSection:0]]
-//                        withRowAnimation:UITableViewRowAnimationBottom];
-//  [self.findingsTable endUpdates];
+ 
 }
 
 
@@ -140,7 +132,6 @@ static NSString *findingsCellID = @"SortFindinsCell";
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
-//        ServiceOptionVC *vc = [segue destinationViewController];
         [DataLoader saveOptionsDisplayType:odtEditing];
         [DataLoader saveFindingOptionsLocal:self.findingsArray];
     }

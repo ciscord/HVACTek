@@ -131,6 +131,10 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 + (OptionsDisplayType) loadOptionsDisplayType;
 
++ (void) saveQuestionType : (QuestionType) currentType;
+
++ (QuestionType) loadQuestionType;
+
 + (void) clearAllLocalData;
 //------------------------------------------------------------------------------------------
 #pragma mark - Login

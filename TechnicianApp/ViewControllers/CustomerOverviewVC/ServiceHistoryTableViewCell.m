@@ -93,11 +93,6 @@ static UIFont *boldSystemFont;
     [super awakeFromNib];
     [self configureColorScheme];
     
-    
-//    self.lbDateValue.font = s_Calibri14;
-//    self.lbAmountValue.font = s_Calibri14;
-//    self.lbJobInstructions.font = s_Calibri14;
-//    self.lbWorkDone.font = s_Calibri14;
 }
 
 #pragma mark - Color Scheme
