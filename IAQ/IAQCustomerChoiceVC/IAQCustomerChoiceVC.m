@@ -67,7 +67,6 @@
     
     for (UIButton* bigButton in self.bigButtonArray) {
         bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-        bigButton.userInteractionEnabled = false;
     }
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -176,8 +175,8 @@
         self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
         [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.bestFinancingLabel.text = @"Does Not Qualify";
-        self.bestEqual24Label.text = @"For 0% Financing";
+        self.bestFinancingLabel.text = @"0% Financing";
+        self.bestEqual24Label.text = @"";
     }
     
     //calculate better price
@@ -199,8 +198,8 @@
         self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
         [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.betterFinancingLabel.text = @"Does Not Qualify";
-        self.betterEqual24Label.text = @"For 0% Financing";
+        self.betterFinancingLabel.text = @"0% Financing";
+        self.betterEqual24Label.text = @"";
     }
     
     //calculate good price
@@ -222,8 +221,8 @@
         self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
     }else{
         [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.goodFinancingLabel.text = @"Does Not Qualify";
-        self.goodEqual24Label.text = @"For 0% Financing";
+        self.goodFinancingLabel.text = @"0% Financing";
+        self.goodEqual24Label.text = @"";
     }
 }
 #pragma mark Button event
