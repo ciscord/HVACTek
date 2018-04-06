@@ -1639,9 +1639,12 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <state key="normal" title="BEST">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="6kA-hk-k6r"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8g-K1-ths">
-                                                <rect key="frame" x="163" y="0.0" width="363" height="94"/>
+                                                <rect key="frame" x="163" y="0.0" width="363" height="140"/>
                                                 <string key="text">Add PVC Uniton for pump Access
 Bypass Humidifier Maintenance
 Comprehensive Diagnostic
@@ -1668,27 +1671,6 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gX3-Wh-wo1">
-                                                <rect key="frame" x="163" y="97" width="186" height="32"/>
-                                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="op6-SC-obS"/>
-                                                    <constraint firstAttribute="width" constant="186" id="zVH-8z-6FI"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                                <state key="normal" title="Details">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="qzH-vs-wOe"/>
-                                                </connections>
                                             </button>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFN-cx-9iu">
                                                 <rect key="frame" x="534" y="14" width="178" height="112"/>
@@ -1758,9 +1740,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                             <constraint firstAttribute="trailing" secondItem="jDO-1U-s6g" secondAttribute="trailing" constant="17" id="6Oj-Y6-LNw"/>
                                             <constraint firstAttribute="bottom" secondItem="CFN-cx-9iu" secondAttribute="bottom" constant="14" id="9MY-r1-HdV"/>
                                             <constraint firstAttribute="height" constant="140" id="AKG-if-86i"/>
-                                            <constraint firstItem="gX3-Wh-wo1" firstAttribute="leading" secondItem="uBc-2f-WAC" secondAttribute="trailing" constant="23" id="FVI-L9-lph"/>
                                             <constraint firstAttribute="trailing" secondItem="CFN-cx-9iu" secondAttribute="trailing" id="Fif-qG-HTg"/>
-                                            <constraint firstAttribute="bottom" secondItem="gX3-Wh-wo1" secondAttribute="bottom" constant="11" id="GDe-Bb-BbR"/>
                                             <constraint firstItem="jDO-1U-s6g" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" constant="8" id="Icl-CA-mFd"/>
                                             <constraint firstItem="z8g-K1-ths" firstAttribute="leading" secondItem="uBc-2f-WAC" secondAttribute="trailing" constant="23" id="Ryw-ba-anE"/>
                                             <constraint firstItem="uBc-2f-WAC" firstAttribute="leading" secondItem="RfP-OV-4jU" secondAttribute="leading" id="caJ-eS-zHY"/>
@@ -1768,14 +1748,14 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                             <constraint firstItem="z8g-K1-ths" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" id="fpK-Hy-NKQ"/>
                                             <constraint firstAttribute="bottom" secondItem="uBc-2f-WAC" secondAttribute="bottom" id="iix-bZ-Zdb"/>
                                             <constraint firstItem="uBc-2f-WAC" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" id="lgQ-3N-YPT"/>
-                                            <constraint firstItem="gX3-Wh-wo1" firstAttribute="top" secondItem="z8g-K1-ths" secondAttribute="bottom" constant="3" id="pLf-RT-KQP"/>
+                                            <constraint firstAttribute="bottom" secondItem="z8g-K1-ths" secondAttribute="bottom" id="oos-od-Kk9"/>
                                             <constraint firstItem="CFN-cx-9iu" firstAttribute="leading" secondItem="z8g-K1-ths" secondAttribute="trailing" constant="8" id="xBb-H7-t0J"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMa-lm-0jK">
                                         <rect key="frame" x="8" y="212" width="712" height="140"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqX-aY-SpN">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqX-aY-SpN">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1785,9 +1765,12 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                 <state key="normal" title="BETTER">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="wAi-fl-9k9"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-5f-mNl">
-                                                <rect key="frame" x="163" y="0.0" width="363" height="94"/>
+                                                <rect key="frame" x="163" y="0.0" width="363" height="140"/>
                                                 <string key="text">Add PVC Uniton for Pump Access
 Bypass Humidifier Maintenance
 Comprehensive Diagnostic
@@ -1876,38 +1859,15 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                     <constraint firstAttribute="width" constant="178" id="IZa-AN-tQp"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpe-Iy-CIU">
-                                                <rect key="frame" x="163" y="97" width="186" height="32"/>
-                                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="186" id="9Sd-hL-v66"/>
-                                                    <constraint firstAttribute="height" constant="32" id="du0-Wk-i02"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                                <state key="normal" title="Details">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="njD-4r-w53"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="KMx-5f-mNl" secondAttribute="bottom" id="0Mj-GZ-RLp"/>
                                             <constraint firstItem="zqX-aY-SpN" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" id="1fW-5h-Ed0"/>
                                             <constraint firstAttribute="bottom" secondItem="zqX-aY-SpN" secondAttribute="bottom" id="2dP-76-hdJ"/>
-                                            <constraint firstItem="xpe-Iy-CIU" firstAttribute="top" secondItem="KMx-5f-mNl" secondAttribute="bottom" constant="3" id="4x2-7c-0Vv"/>
                                             <constraint firstItem="KMx-5f-mNl" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" id="5CZ-ha-rPP"/>
                                             <constraint firstItem="KMx-5f-mNl" firstAttribute="leading" secondItem="zqX-aY-SpN" secondAttribute="trailing" constant="23" id="7sH-xD-kuD"/>
                                             <constraint firstItem="3vj-16-BiT" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" constant="14" id="E0z-9D-Z4K"/>
-                                            <constraint firstItem="xpe-Iy-CIU" firstAttribute="leading" secondItem="zqX-aY-SpN" secondAttribute="trailing" constant="23" id="FJw-Pp-OZ0"/>
-                                            <constraint firstAttribute="bottom" secondItem="xpe-Iy-CIU" secondAttribute="bottom" constant="11" id="JJz-O0-biJ"/>
                                             <constraint firstAttribute="trailing" secondItem="3vj-16-BiT" secondAttribute="trailing" id="Kma-pR-JmP"/>
                                             <constraint firstAttribute="height" constant="140" id="NWM-to-Fr5"/>
                                             <constraint firstAttribute="trailing" secondItem="Lj9-vd-TkQ" secondAttribute="trailing" constant="17" id="OOk-MY-eM0"/>
@@ -1920,7 +1880,7 @@ Install EZ Trap &amp; Test Drain Line</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Jy-LT-YdZ">
                                         <rect key="frame" x="8" y="364" width="712" height="140"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XET-Ho-Wlq">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XET-Ho-Wlq">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1930,9 +1890,12 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                 <state key="normal" title="GOOD">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="Qe3-jJ-1YY"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acP-Do-R9g">
-                                                <rect key="frame" x="163" y="0.0" width="363" height="94"/>
+                                                <rect key="frame" x="163" y="0.0" width="363" height="140"/>
                                                 <string key="text">Add PVC Uniton for Pump Access
 Bypass Humidifier Maintenance
 Comprehensive Diagnostic</string>
@@ -2020,44 +1983,21 @@ Comprehensive Diagnostic</string>
                                                     <constraint firstAttribute="width" constant="178" id="uTE-nj-5F3"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwn-Qa-tcV">
-                                                <rect key="frame" x="163" y="97" width="186" height="32"/>
-                                                <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="cel-yd-yTc"/>
-                                                    <constraint firstAttribute="width" constant="186" id="sX1-Rf-4Wx"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                                <state key="normal" title="Details">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="AzG-7X-ebA"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="XET-Ho-Wlq" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" id="3tZ-p8-4Zn"/>
-                                            <constraint firstAttribute="bottom" secondItem="uwn-Qa-tcV" secondAttribute="bottom" constant="11" id="9SD-TL-Y5A"/>
                                             <constraint firstItem="acP-Do-R9g" firstAttribute="leading" secondItem="XET-Ho-Wlq" secondAttribute="trailing" constant="23" id="9VD-p7-Aqu"/>
-                                            <constraint firstItem="uwn-Qa-tcV" firstAttribute="leading" secondItem="XET-Ho-Wlq" secondAttribute="trailing" constant="23" id="C5Y-IM-P15"/>
                                             <constraint firstItem="jKU-vn-MWG" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" constant="8" id="GkJ-2x-Gm4"/>
                                             <constraint firstAttribute="trailing" secondItem="MBL-fQ-kSY" secondAttribute="trailing" id="HgN-Ut-8Wj"/>
                                             <constraint firstItem="XET-Ho-Wlq" firstAttribute="leading" secondItem="8Jy-LT-YdZ" secondAttribute="leading" id="JBG-cg-yWd"/>
                                             <constraint firstItem="MBL-fQ-kSY" firstAttribute="leading" secondItem="acP-Do-R9g" secondAttribute="trailing" constant="8" id="Lhj-Wb-IP4"/>
                                             <constraint firstAttribute="bottom" secondItem="MBL-fQ-kSY" secondAttribute="bottom" constant="14" id="SFv-j5-JqI"/>
                                             <constraint firstItem="MBL-fQ-kSY" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" constant="14" id="Xdi-xc-Dvb"/>
+                                            <constraint firstAttribute="bottom" secondItem="acP-Do-R9g" secondAttribute="bottom" id="ZYs-gn-MuM"/>
                                             <constraint firstItem="acP-Do-R9g" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" id="kiI-vq-3SC"/>
                                             <constraint firstAttribute="height" constant="140" id="nGY-AP-HZd"/>
                                             <constraint firstAttribute="trailing" secondItem="jKU-vn-MWG" secondAttribute="trailing" constant="17" id="q7Y-ED-mJG"/>
-                                            <constraint firstItem="uwn-Qa-tcV" firstAttribute="top" secondItem="acP-Do-R9g" secondAttribute="bottom" constant="3" id="sfD-DR-NQm"/>
                                             <constraint firstAttribute="bottom" secondItem="XET-Ho-Wlq" secondAttribute="bottom" id="zDi-TM-kbF"/>
                                         </constraints>
                                     </view>
@@ -2126,9 +2066,6 @@ Comprehensive Diagnostic</string>
                         <outletCollection property="descriptionLabelArray" destination="z8g-K1-ths" id="qLX-Nr-PGJ"/>
                         <outletCollection property="descriptionLabelArray" destination="KMx-5f-mNl" id="fBl-1E-B9C"/>
                         <outletCollection property="descriptionLabelArray" destination="acP-Do-R9g" id="MtJ-fV-2xe"/>
-                        <outletCollection property="detailButtonArray" destination="gX3-Wh-wo1" id="30G-gG-53h"/>
-                        <outletCollection property="detailButtonArray" destination="xpe-Iy-CIU" id="03z-Qq-xRv"/>
-                        <outletCollection property="detailButtonArray" destination="uwn-Qa-tcV" id="vm1-wE-rwC"/>
                         <outletCollection property="priceViewArray" destination="CFN-cx-9iu" id="cXf-1c-Cnq"/>
                         <outletCollection property="priceViewArray" destination="3vj-16-BiT" id="6Lr-Md-t1E"/>
                         <outletCollection property="priceViewArray" destination="MBL-fQ-kSY" id="lYK-5W-AsL"/>
