@@ -511,7 +511,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
                                              @"initialTotal" : self.subtotaPriceLabel.text,
                                              @"paymentValue" : paymentValue,
                                              }.mutableCopy;
-        
+        [DataLoader saveNewCustomerChoice:customerChoiceData];
         [DataLoader saveAdditionalInfo:customerChoiceData];
     }
     
