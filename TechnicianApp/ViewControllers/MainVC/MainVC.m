@@ -13,7 +13,7 @@
 #import "CustomerChoiceVC.h"
 #import "AppDelegate.h"
 #import "IAQDataModel.h"
-
+#import "HealthyHomeSolutionsVC.h"
 @interface MainVC ()
 @property (strong, nonatomic) IBOutlet UIButton *btnTechApp;
 @property (strong, nonatomic) IBOutlet UIButton *btnAdd2CardApp;
@@ -67,9 +67,12 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-    UIViewController *vc = [storyboard instantiateInitialViewController];
+//    UIViewController *vc = [storyboard instantiateInitialViewController];
+//
+//    [self.navigationController pushViewController:vc animated:YES];
+    HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
     
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)CustomerOverviewTest:(id)sender {

@@ -12,9 +12,6 @@
 #import "StaticPressureModel.h"
 typedef NS_ENUM(NSInteger, IAQCurrentView) {
     IAQNone = -1,
-    IAQHealthyHomeProcess,
-    IAQHeatingStaticPressure,
-    IAQCoolingStaticPressure,
     IAQHealthyHomeSolution,
     IAQHealthyHomeSolutionSort,
     IAQCustomerChoice,
@@ -22,7 +19,10 @@ typedef NS_ENUM(NSInteger, IAQCurrentView) {
     IAQVideoForCustomer,
     IAQIsYourHomeHealthy,
     IAQHereWhatWePropose,
-    IAQCustomerChoiceFinal
+    IAQCustomerChoiceFinal,
+    IAQHealthyHomeProcess,
+    IAQHeatingStaticPressure,
+    IAQCoolingStaticPressure,
 };
 @interface IAQDataModel : NSObject
 

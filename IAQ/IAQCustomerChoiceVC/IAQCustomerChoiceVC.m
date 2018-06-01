@@ -308,7 +308,7 @@
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray forKey:@"iaqBetterProductsIdArray"];
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray forKey:@"iaqGoodProductsIdArray"];
     
-    [userdefault setObject:[NSNumber numberWithInteger:IAQIsYourHomeHealthy]  forKey:@"iaqCurrentStep"];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQBreatheEasyHealtyHome]  forKey:@"iaqCurrentStep"];
     [userdefault synchronize];
 
 }

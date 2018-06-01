@@ -16,7 +16,7 @@
 #import "ServiceOptionVC.h"
 #import "IAQDataModel.h"
 #import "HealthyHomeSolutionsAgreementVC.h"
-
+#import "HealthyHomeSolutionsVC.h"
 @interface BaseVC ()
 
 @property(nonatomic, strong) UIImageView *imgTopBar;
@@ -319,8 +319,11 @@
     [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeProcessVC"];
-    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+//    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeProcessVC"];
+//    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+    
+    HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
 }
 
 

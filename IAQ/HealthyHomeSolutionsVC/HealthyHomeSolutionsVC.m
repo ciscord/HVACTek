@@ -19,7 +19,7 @@
 #import "QuestionsVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
 #import "ServiceOptionVC.h"
-@interface HealthyHomeSolutionsVC ()<UITextFieldDelegate>
+@interface HealthyHomeSolutionsVC ()<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 {
     
     
@@ -27,7 +27,7 @@
 @property (weak, nonatomic)     IBOutlet RoundCornerView *layer1View;
 @property (weak, nonatomic)   IBOutlet UILabel* titleLabel;
 @property (weak, nonatomic)     IBOutlet UICollectionView *collectionView;
-
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
 static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 @implementation HealthyHomeSolutionsVC
@@ -47,7 +47,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     
     //load
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolution) {
-        
+        [self loadIAQFromCoredata];
         [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
         
         NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
@@ -78,11 +78,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
         
     }else {
-        checkedProducts = [NSMutableArray array];
-        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-            [checkedProducts addObject:@"1"];
-            iaqModel.quantity = @"1";
-        }
+        [self downloadIAQProducts];
         
     }
 }
@@ -198,6 +194,135 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
         [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
     }
+    
+}
+//////////////////////////////////////////////
+- (void) downloadIAQProducts {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof (self) weakSelf = self;
+    
+    [[DataLoader sharedInstance] getIAQProducts: ^(NSString *successMessage, NSDictionary *reciveData) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        
+        //online: delete previous data and add new data
+        [self deleteAllEntities:@"IAQProductModel"];
+        AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext* backgroundMOC = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [backgroundMOC setUndoManager:nil];
+        [backgroundMOC setParentContext:appDelegate.managedObjectContext];
+        
+        NSArray* receiveDataArray = (NSArray*) reciveData;
+        
+        for (NSDictionary* product in receiveDataArray) {
+            
+            IAQProductModel* iaqProduct = [NSEntityDescription insertNewObjectForEntityForName:@"IAQProductModel" inManagedObjectContext:backgroundMOC];
+            
+            iaqProduct.quantity = @"0";
+            iaqProduct.businessId = [product objectForKey:@"businessid"];
+            iaqProduct.createdAt = [product objectForKey:@"created_at"];
+            iaqProduct.createdBy = [product objectForKey:@"created_by"];
+            iaqProduct.productId = [product objectForKey:@"id"];
+            iaqProduct.ord = [[product objectForKey:@"ord"] intValue];
+            iaqProduct.price = [product objectForKey:@"price"];
+            iaqProduct.title = [product objectForKey:@"title"];
+            
+            iaqProduct.files = [NSMutableArray array];
+            NSArray* fileArray = [product objectForKey:@"files"];
+            
+            for (NSDictionary* filedata in fileArray) {
+                FileModel* iaqFile = [[FileModel alloc]init];
+                iaqFile.createAt = [filedata objectForKey:@"created_at"];
+                iaqFile.desString = [filedata objectForKey:@"description"];
+                iaqFile.filename = [filedata objectForKey:@"filename"];
+                iaqFile.fullUrl = [filedata objectForKey:@"full_url"];
+                iaqFile.iqaId = [filedata objectForKey:@"iaq_id"];
+                iaqFile.iqaId = [filedata objectForKey:@"id"];
+                iaqFile.ord = [filedata objectForKey:@"ord"];
+                iaqFile.type = [filedata objectForKey:@"type"];
+                [iaqProduct.files addObject:iaqFile];
+                
+            }
+            
+        }
+        NSError *error;
+        if (![backgroundMOC save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+        
+        [appDelegate.managedObjectContext save:&error];
+        
+        //load data from coredata
+        [self loadIAQFromCoredata];
+        checkedProducts = [NSMutableArray array];
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+            [checkedProducts addObject:@"1"];
+            iaqModel.quantity = @"1";
+        }
+        [self.collectionView reloadData];
+    }onError:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        //offline load data
+        [self loadIAQFromCoredata];
+    }];
+    
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    // if you've already made a fetch request, return the results
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"IAQProductModel" inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    // sort by id
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ord" ascending:YES];
+    
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:appDelegate.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)deleteAllEntities:(NSString *)nameEntity
+{
+    AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:nameEntity];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *object in fetchedObjects)
+    {
+        [appDelegate.managedObjectContext deleteObject:object];
+    }
+    
+    error = nil;
+    [appDelegate.managedObjectContext save:&error];
+}
+
+-(void) loadIAQFromCoredata {
+    [IAQDataModel sharedIAQDataModel].iaqProductsArray = [NSMutableArray array];
+    for (IAQProductModel* iaqProduct in self.fetchedResultsController.fetchedObjects) {
+        [[IAQDataModel sharedIAQDataModel].iaqProductsArray addObject: iaqProduct];
+    }
+    
+    _fetchedResultsController = nil;
     
 }
 
