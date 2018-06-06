@@ -9,7 +9,7 @@
 #import "ESABenefitsVC.h"
 #import "QuestionsVC.h"
 #import "UtilityOverpaymentVC.h"
-
+#import "MediaLibraryVC.h"
 @interface ESABenefitsVC ()
 
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
@@ -19,8 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UILabel *esaLabel;
-@property (weak, nonatomic) IBOutlet UIButton *videoButton;
-@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
+@property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @end
 
 @implementation ESABenefitsVC
@@ -49,8 +48,7 @@
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.libraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label0.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -67,6 +65,12 @@
     else
         [self performSegueWithIdentifier:@"showTechnicianQuestionsSection" sender:self];
     
+}
+- (IBAction)libraryButtonClicked:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+    
+    MediaLibraryVC* mediaLibraryVC = [storyboard instantiateViewControllerWithIdentifier:@"MediaLibraryVC"];
+    [self.navigationController pushViewController:mediaLibraryVC animated:true];
 }
 
 

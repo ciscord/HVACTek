@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mTh-Mz-WUI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mTh-Mz-WUI">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Courier.ttc">
-            <string>Courier</string>
-        </array>
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-        </array>
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Healthy Home Process-->
         <scene sceneID="x59-5R-hKu">
@@ -47,7 +35,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84F-3P-0DA">
-                                        <rect key="frame" x="85" y="88" width="581" height="243"/>
+                                        <rect key="frame" x="85" y="88" width="581" height="242.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="284" id="0nV-fq-I8f"/>
                                         </constraints>
@@ -78,7 +66,7 @@ Dedicated Power Source From The Panel For A Dehumidifier Or Steam Humidifier?
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Engagement" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGg-2c-ubt">
-                                        <rect key="frame" x="85" y="351" width="581" height="41"/>
+                                        <rect key="frame" x="85" y="350.5" width="581" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="HPq-1T-oYU"/>
                                         </constraints>
@@ -87,14 +75,14 @@ Dedicated Power Source From The Panel For A Dehumidifier Or Steam Humidifier?
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxO-Wn-hMc">
-                                        <rect key="frame" x="16" y="402" width="700" height="1"/>
+                                        <rect key="frame" x="16" y="401.5" width="700" height="1"/>
                                         <color key="backgroundColor" red="0.67450980390000004" green="0.83529411760000005" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="dTo-tz-JJt"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIs-bj-dIo">
-                                        <rect key="frame" x="85" y="418" width="581" height="197"/>
+                                        <rect key="frame" x="85" y="417.5" width="581" height="197"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="232" id="dbP-45-NpM"/>
                                         </constraints>
@@ -1609,7 +1597,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                 <rect key="frame" x="20" y="210" width="728" height="794"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sg6-XZ-IU6">
-                                        <rect key="frame" x="271" y="731" width="186" height="55"/>
+                                        <rect key="frame" x="121" y="731" width="186" height="55"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="186" id="ALL-ab-Odm"/>
@@ -2010,12 +1998,34 @@ Comprehensive Diagnostic</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71r-lO-VXb">
+                                        <rect key="frame" x="421" y="731" width="186" height="55"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="9Rm-sx-3HW"/>
+                                            <constraint firstAttribute="width" constant="186" id="IVH-eN-jq1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
+                                        <state key="normal" title="Library">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="libraryButtonClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="zVH-NJ-ova"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RfP-OV-4jU" firstAttribute="leading" secondItem="qdF-re-Ie0" secondAttribute="leading" constant="8" id="0NV-1l-7XE"/>
                                     <constraint firstItem="EMa-lm-0jK" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="bottom" constant="12" id="CRa-5f-9bW"/>
                                     <constraint firstItem="8Jy-LT-YdZ" firstAttribute="leading" secondItem="qdF-re-Ie0" secondAttribute="leading" constant="8" id="CpZ-S5-LpX"/>
+                                    <constraint firstAttribute="bottom" secondItem="71r-lO-VXb" secondAttribute="bottom" constant="8" id="Dpu-6e-t2c"/>
                                     <constraint firstItem="0YB-EA-hpB" firstAttribute="leading" secondItem="qdF-re-Ie0" secondAttribute="leading" constant="8" id="NWv-9E-bwj"/>
                                     <constraint firstItem="8Jy-LT-YdZ" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="bottom" constant="12" id="Xcf-Ye-gBz"/>
                                     <constraint firstItem="RfP-OV-4jU" firstAttribute="top" secondItem="0YB-EA-hpB" secondAttribute="bottom" constant="8" id="igH-42-JoC"/>
@@ -2024,8 +2034,9 @@ Comprehensive Diagnostic</string>
                                     <constraint firstAttribute="trailing" secondItem="EMa-lm-0jK" secondAttribute="trailing" constant="8" id="nNX-Fl-XVM"/>
                                     <constraint firstItem="0YB-EA-hpB" firstAttribute="top" secondItem="qdF-re-Ie0" secondAttribute="top" constant="8" id="pQJ-ss-147"/>
                                     <constraint firstAttribute="trailing" secondItem="8Jy-LT-YdZ" secondAttribute="trailing" constant="8" id="rcZ-AP-6Dv"/>
+                                    <constraint firstItem="71r-lO-VXb" firstAttribute="centerX" secondItem="qdF-re-Ie0" secondAttribute="centerX" constant="150" id="sRn-q2-1Wc"/>
                                     <constraint firstAttribute="trailing" secondItem="RfP-OV-4jU" secondAttribute="trailing" constant="8" id="tCw-HE-53B"/>
-                                    <constraint firstItem="sg6-XZ-IU6" firstAttribute="centerX" secondItem="qdF-re-Ie0" secondAttribute="centerX" id="tkJ-mZ-a6S"/>
+                                    <constraint firstItem="sg6-XZ-IU6" firstAttribute="centerX" secondItem="qdF-re-Ie0" secondAttribute="centerX" constant="-150" id="tkJ-mZ-a6S"/>
                                     <constraint firstAttribute="bottom" secondItem="sg6-XZ-IU6" secondAttribute="bottom" constant="8" id="z1X-ve-Jvv"/>
                                 </constraints>
                             </view>
@@ -2055,6 +2066,7 @@ Comprehensive Diagnostic</string>
                         <outlet property="goodFirstPrice" destination="7Z2-Sr-XMo" id="q0U-hH-gdd"/>
                         <outlet property="goodSecondPrice" destination="nHK-yP-fad" id="eUf-fJ-r3B"/>
                         <outlet property="layer1View" destination="qdF-re-Ie0" id="N4C-Yd-OGI"/>
+                        <outlet property="libraryButton" destination="71r-lO-VXb" id="pBG-Y7-DeY"/>
                         <outlet property="nextButton" destination="sg6-XZ-IU6" id="8oW-70-uA2"/>
                         <outlet property="topLabelHeightConstraint" destination="eni-PE-ysR" id="okn-78-rnc"/>
                         <outletCollection property="bigButtonArray" destination="uBc-2f-WAC" id="dqF-OD-L5h"/>
@@ -2210,7 +2222,7 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                 </state>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15% Savings Does Not Qualify For 0% Financing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-o5-0Tz">
-                                                <rect key="frame" x="387" y="99" width="317" height="14"/>
+                                                <rect key="frame" x="387" y="99" width="317" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

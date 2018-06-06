@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="Epd-XR-kxb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="Epd-XR-kxb">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Arial.ttf">
-            <string>ArialMT</string>
-        </array>
-        <array key="Helvetica.ttc">
-            <string>Helvetica</string>
-        </array>
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-            <string>HelveticaNeue-Italic</string>
-            <string>HelveticaNeue-Medium</string>
-            <string>HelveticaNeue-MediumItalic</string>
-        </array>
-        <array key="HelveticaNeueExtras.ttc">
-            <string>HelveticaNeue-CondensedBlack</string>
-        </array>
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-        </array>
         <array key="calibri.ttf">
             <string>Calibri</string>
         </array>
@@ -1114,31 +1095,12 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5pH-eu-lFi">
-                                        <rect key="frame" x="255" y="671" width="188" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Video">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="videoLibraryClicked:" destination="PVm-o9-UYq" eventType="touchUpInside" id="dM4-Bu-ENK"/>
-                                            <segue destination="rDe-00-kCH" kind="push" id="V7K-Zv-8PV"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="101-eK-Vbh">
                                         <rect key="frame" x="473" y="671" width="188" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
-                                        <state key="normal" title="Picture">
+                                        <state key="normal" title="Library">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1148,7 +1110,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="r6C-7a-Cui" kind="push" id="eZl-f6-IlR"/>
+                                            <action selector="libraryButtonClicked:" destination="b14-6y-0Uy" eventType="touchUpInside" id="aw0-7S-FYI"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1167,9 +1129,8 @@
                         <outlet property="label1" destination="DHO-o1-AIr" id="TPp-Ln-w8a"/>
                         <outlet property="label2" destination="XZv-gL-AH6" id="hmk-F6-n4r"/>
                         <outlet property="label3" destination="BxC-dI-Jxp" id="FZT-gx-9zd"/>
-                        <outlet property="pictureButton" destination="101-eK-Vbh" id="khD-wV-Ev0"/>
+                        <outlet property="libraryButton" destination="101-eK-Vbh" id="OhD-4e-4Qb"/>
                         <outlet property="titleLabel" destination="gBe-TC-gJk" id="5j2-gm-ZoD"/>
-                        <outlet property="videoButton" destination="5pH-eu-lFi" id="jgn-gJ-g4W"/>
                         <segue destination="rTZ-Tj-552" kind="push" identifier="showPlumbingUtilityOverpayment" id="5bY-p7-VHi"/>
                         <segue destination="gRq-ku-OmV" kind="push" identifier="showTechnicianQuestionsSection" id="331-cM-ClE"/>
                     </connections>
@@ -4924,7 +4885,7 @@ you must debrief from job</string>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="wXA-Ty-5ci">
                                         <rect key="frame" x="18" y="8" width="656" height="620"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="separatorColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <sections/>
@@ -5179,7 +5140,7 @@ you must debrief from job</string>
         <segue reference="XFb-hP-yDf"/>
         <segue reference="xdW-7q-blD"/>
         <segue reference="mwd-zf-CaD"/>
-        <segue reference="yE2-Ol-FwD"/>
+        <segue reference="5bY-p7-VHi"/>
         <segue reference="jvv-2R-Bdt"/>
         <segue reference="O98-Ps-4c5"/>
         <segue reference="DnI-yT-bKf"/>

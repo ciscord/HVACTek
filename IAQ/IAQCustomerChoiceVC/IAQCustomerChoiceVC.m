@@ -12,9 +12,13 @@
 #import "IAQDataModel.h"
 #import "IAQEditServiceOptionsVC.h"
 #import "BreatheEasyHealthyHomeVC.h"
+
+#import "MediaLibraryVC.h"
+
 @interface IAQCustomerChoiceVC ()
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
+@property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet UILabel *bestChoiceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *betterChoiceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *goodChoiceLabel;
@@ -73,7 +77,7 @@
     
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     
-    
+    self.libraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQCustomerChoice) {
         [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray array];
         [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray array];
@@ -319,6 +323,16 @@
     iaqEditServiceOptionsVC.selectedIndex = button.tag;
     [self.navigationController pushViewController:iaqEditServiceOptionsVC animated:true];
 }
+
+- (IBAction)libraryButtonClick:(id)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+    
+    MediaLibraryVC* mediaLibraryVC = [storyboard instantiateViewControllerWithIdentifier:@"MediaLibraryVC"];
+    [self.navigationController pushViewController:mediaLibraryVC animated:true];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
