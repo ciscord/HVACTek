@@ -15,7 +15,6 @@
     NSMutableArray* selectedProductArray;
     float totalCost;
     NSString* authid;
-    NSString* customerName;
     NSString* iaqProductString;
 }
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
@@ -75,11 +74,9 @@
         
     }
     
-    customerName = [IAQDataModel sharedIAQDataModel].heatingStaticPressure.customerName;
     if (self.fromAddCart2) {
         NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
         iaqProductString = [userdefault objectForKey:@"iaqProduct"];
-        customerName = [userdefault objectForKey:@"customerName"];
         totalCost = [[userdefault objectForKey:@"totalCost"] floatValue];
         NSString *signature = [userdefault objectForKey:@"signature"];
         if (signature != nil) {
@@ -140,9 +137,12 @@
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        UITextField* emailField = [alertView.textFieldArray objectAtIndex:0];
-        
-        if (![emailField.text isValidEmail]) {
+        UITextField* nameField = [alertView.textFieldArray objectAtIndex:0];
+        UITextField* emailField = [alertView.textFieldArray objectAtIndex:1];
+        if ([nameField.text isEqualToString:@""]) {
+            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Empty name"];
+            [self presentViewController:alert animated:true completion:nil];
+        }else if (![emailField.text isValidEmail]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
             [self presentViewController:alert animated:true completion:nil];
             
@@ -174,7 +174,7 @@
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
             [[DataLoader sharedInstance] addIaqAuthorizeSale:iaqProductStringFormatted
-                                                    customer:customerName
+                                                    customer:nameField.text
                                                   technician:technicanName
                                                        price:totalCost
                                                    signature:signature
@@ -188,7 +188,6 @@
                                                                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
                                                                [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
                                                                [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
-                                                               [userdefault setObject:customerName forKey:@"customerName"];
                                                                [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
                                                                [userdefault setObject:signature forKey:@"signature"];
                                                                [userdefault synchronize];
@@ -226,6 +225,9 @@
     }]];
     
     [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Name:";
+    }];
+    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Email:";
     }];
     
@@ -242,9 +244,12 @@
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     __weak typeof (self) weakSelf = self;
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        UITextField* emailField = [alertView.textFieldArray objectAtIndex:0];
-        
-        if (![emailField.text isValidEmail]) {
+        UITextField* nameField = [alertView.textFieldArray objectAtIndex:0];
+        UITextField* emailField = [alertView.textFieldArray objectAtIndex:1];
+        if ([nameField.text isEqualToString:@""]) {
+            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Empty name"];
+            [self presentViewController:alert animated:true completion:nil];
+        }else if (![emailField.text isValidEmail]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
             [self presentViewController:alert animated:true completion:nil];
             
@@ -276,7 +281,7 @@
             NSString* technicanName = [NSString stringWithFormat:@"%@ %@", [DataLoader sharedInstance].currentUser.firstName, [DataLoader sharedInstance].currentUser.lastName];
             
             [[DataLoader sharedInstance] addIaqAuthorizeSaleUnapproved:iaqProductStringFormatted
-                                                    customer:customerName
+                                                    customer:nameField.text
                                                   technician:technicanName
                                                        price:totalCost
                                                    onSuccess:^(NSDictionary *dataDictionary) {
@@ -289,7 +294,6 @@
                                                                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
                                                                [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
                                                                [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
-                                                               [userdefault setObject:customerName forKey:@"customerName"];
                                                                [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
                                                                [userdefault synchronize];
                                                                
@@ -326,6 +330,9 @@
         
     }]];
     
+    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Name:";
+    }];
     [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Email:";
     }];
