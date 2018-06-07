@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="enC-KU-ZUB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" colorMatched="YES" initialViewController="enC-KU-ZUB">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-        </array>
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-            <string>HelveticaNeue-Thin</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Product Admin Table View Controller-->
         <scene sceneID="p7y-aa-jx6">
@@ -504,12 +494,12 @@
                                 <rect key="frame" x="0.0" y="66" width="768" height="220"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="OZn-dc-lmm">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="100"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" id="OZn-dc-lmm">
+                                        <rect key="frame" x="439" y="0.0" width="83" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HWR-7E-YNT">
-                                                <rect key="frame" x="21" y="20" width="100" height="17"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HWR-7E-YNT">
+                                                <rect key="frame" x="0.0" y="20" width="80" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Cart 1">
@@ -525,8 +515,8 @@
                                                     <action selector="btncart1:" destination="3cm-Mv-pde" eventType="touchUpInside" id="wzW-bA-CTC"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKa-rj-H4D">
-                                                <rect key="frame" x="21" y="41" width="100" height="17"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKa-rj-H4D">
+                                                <rect key="frame" x="0.0" y="41" width="80" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Cart 2">
@@ -542,8 +532,8 @@
                                                     <action selector="btnCart2:" destination="3cm-Mv-pde" eventType="touchUpInside" id="JpE-hq-Eeg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VxT-d4-gsd">
-                                                <rect key="frame" x="21" y="62" width="100" height="17"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VxT-d4-gsd">
+                                                <rect key="frame" x="0.0" y="62" width="80" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="0.035351606610000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Cart 3">
@@ -563,7 +553,7 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="FQO-M4-SCl">
-                                        <rect key="frame" x="253" y="5" width="263" height="100"/>
+                                        <rect key="frame" x="253" y="5" width="178" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
@@ -1746,6 +1736,7 @@ $</string>
                     <navigationItem key="navigationItem" id="JKq-oW-hnd">
                         <barButtonItem key="rightBarButtonItem" title="Next" style="plain" id="dV5-Aw-7c9">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SFJ-NW-7ee">
+                                <rect key="frame" x="710" y="5" width="38" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Next"/>

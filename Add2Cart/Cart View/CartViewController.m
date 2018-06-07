@@ -151,14 +151,13 @@
 }
 
 - (IBAction)btnDone:(id)sender {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
+    
+    [self resetRebatesOnHome];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 
 -(void) home {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
+    [self resetRebatesOnHome];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -243,12 +242,12 @@
     if (self.carts.count <= 1) {
         testerViewController * vc =(testerViewController*)self.testerVC;
         if (vc.isEditing) {
-            acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %u",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"] + 1];
+            acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"] + 1];
         }else{
             if(self.isViewingCart) {
                 acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart 1"];
             }else{
-                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %u",vc.savedCarts.count + 1];
+                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",vc.savedCarts.count + 1];
             }
         }
     }else{
@@ -298,7 +297,7 @@
     
     int editIndex = 0;
     if ([vc.savedCarts containsObject:cart]) {
-        editIndex = [vc.savedCarts indexOfObject:cart];
+        editIndex = (int)[vc.savedCarts indexOfObject:cart];
         
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
@@ -316,7 +315,7 @@
         vc.fastMonth = [monthCount intValue];
         
         if (!vc.isEditing) {
-            int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
+            int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
             [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -341,7 +340,7 @@
         
         if (vc.isEditing) {
             
-            int curIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
+            int curIndex = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
             [vc.savedCarts replaceObjectAtIndex:curIndex withObject:cart];
             
             [vc.cartItems removeAllObjects];
@@ -361,7 +360,7 @@
                 vc.fastMonth = [monthCount intValue];
                 
                 
-                int newIndex = [vc.savedCarts count] < 3 ? [vc.savedCarts count] : 2;
+                int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
                 [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
                 
                 [self.delegate saveCartSelected];
@@ -378,8 +377,7 @@
 -(void)done{
     testerViewController * vc =(testerViewController*)self.testerVC;
     [vc clearCart];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
+    [self resetRebatesOnHome];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 };
 
@@ -409,7 +407,7 @@
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
-            itm.include = NO;
+            itm.include = [NSNumber numberWithBool:NO];
         }
     }
     

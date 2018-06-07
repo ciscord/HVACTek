@@ -88,6 +88,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     //need to update
     easyPaymentFactor = 0;
@@ -415,8 +416,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void) home {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud showWhileExecuting:@selector(resetRebatesOnHome) onTarget:self withObject:nil animated:YES];
+    [self resetRebatesOnHome];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -425,8 +425,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void) viewDidAppear:(BOOL)animated   {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud showWhileExecuting:@selector(resetCartData) onTarget:self withObject:nil animated:YES];
+    
+    [self resetCartData];
 }
 
 #pragma mark - Color Scheme
@@ -486,40 +486,46 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 - (void)resetCartData {
-    //Fetch the data.
-    [self fetchData];
     
-    totalAmount = 0.0f;
-    totalSavings = 0.0f;
-    afterSavings =0.0f ;
-    finacePay = 0.0f;
-    monthlyPay = 0.0f;
     
-    [self assignChoosedOptionsValues];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Fetch the data.
+        [self fetchData];
+        
+        totalAmount = 0.0f;
+        totalSavings = 0.0f;
+        afterSavings =0.0f ;
+        finacePay = 0.0f;
+        monthlyPay = 0.0f;
+        
+        [self assignChoosedOptionsValues];
+        
+        [self buildQuote];
+        
+        btnCart1.hidden = !(self.savedCarts.count > 0);
+        btnCart2.hidden = !(self.savedCarts.count > 1);
+        btnCart3.hidden = !(self.savedCarts.count > 2);
+        
+        if (self.isEditing) {
+            cartButton.enabled = YES;
+            btnCart1.enabled = NO;
+            btnCart2.enabled = NO;
+            btnCart3.enabled = NO;
+            btnCart1.alpha = 0.5;
+            btnCart2.alpha = 0.5;
+            btnCart3.alpha = 0.5;
+        }else{
+            cartButton.enabled = self.savedCarts.count < 3;
+            btnCart1.enabled = YES;
+            btnCart2.enabled = YES;
+            btnCart3.enabled = YES;
+            btnCart1.alpha = 1.0;
+            btnCart2.alpha = 1.0;
+            btnCart3.alpha = 1.0;
+        }
+    });
     
-    [self buildQuote];
     
-    btnCart1.hidden = !(self.savedCarts.count > 0);
-    btnCart2.hidden = !(self.savedCarts.count > 1);
-    btnCart3.hidden = !(self.savedCarts.count > 2);
-    
-    if (self.isEditing) {
-        cartButton.enabled = YES;
-        btnCart1.enabled = NO;
-        btnCart2.enabled = NO;
-        btnCart3.enabled = NO;
-        btnCart1.alpha = 0.5;
-        btnCart2.alpha = 0.5;
-        btnCart3.alpha = 0.5;
-    }else{
-        cartButton.enabled = self.savedCarts.count < 3;
-        btnCart1.enabled = YES;
-        btnCart2.enabled = YES;
-        btnCart3.enabled = YES;
-        btnCart1.alpha = 1.0;
-        btnCart2.alpha = 1.0;
-        btnCart3.alpha = 1.0;
-    }
 }
 
 -(void) setupArrays {
@@ -1038,7 +1044,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [sections addObject:[NSNumber numberWithInt:tappedSection]];
     }
     
-    if ([sections containsObject:[NSNumber numberWithInt:indexPath.section]]) {
+    if ([sections containsObject:[NSNumber numberWithInteger:indexPath.section]]) {
         return 30.0f;
     } else {
         switch (indexPath.section) {
@@ -1434,7 +1440,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     if (!swipedCell.tapped) {
         swipedCell.tapped = TRUE;
         tapped = TRUE;
-        tappedSection = swipedIndexPath.section;
+        tappedSection = (int)swipedIndexPath.section;
         [tableViewX reloadData];
         
     } else {
@@ -1781,11 +1787,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     if (isEasy) {
         item = self.easyFinancialsData[indexPath.item];
         self.easyMonth = item.month.intValue;
-        self.easySelectedIndex = indexPath.item;
+        self.easySelectedIndex = (int)indexPath.item;
     }else {
         item = self.fastFinancialsData[indexPath.item];
         self.fastMonth = item.month.intValue;
-        self.fastSelectedIndex = indexPath.item;
+        self.fastSelectedIndex = (int)indexPath.item;
     }
     
     secView.hidden = YES;
@@ -1807,7 +1813,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void) buyButton:(id)sender {
-    int j = [sender tag];
+    int j = (int)[sender tag];
     
     Item *itm;
     switch (j) {
@@ -1882,7 +1888,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void) remButton:(id)sender {
-    int j = [sender tag];
+    int j = (int)[sender tag];
     Item *itm;
     switch (j) {
         case 3:{
@@ -2196,7 +2202,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 #pragma mark - Buttons Actions
 - (IBAction)monthBut:(id)sender {
-    int mon = [sender tag];
+    int mon = (int)[sender tag];
     if (isEasy) {
         self.easyMonth = mon;
         self.fastMonth = -1;
@@ -2498,7 +2504,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     for (int j = 0; j  < allData.count; j++){
         Item *itm = allData[j];
         if ([itm.type isEqualToString:@"Rebates"]) {
-            itm.include = NO;
+            itm.include = [NSNumber numberWithBool:NO];
         }
     }
     
