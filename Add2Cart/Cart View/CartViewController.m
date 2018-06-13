@@ -115,7 +115,7 @@
 }
 
 -(void)configureVC{
-    [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell"];
+    [self.cartstableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:@"CartCell1"];
      self.cartstableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -167,7 +167,7 @@
     if (self.isViewingCart) {
         testerViewController * vc =(testerViewController*)self.testerVC;
         if (vc.savedCarts.count < 3) {
-            [vc.cartItems removeAllObjects];
+//            [vc.cartItems removeAllObjects];
             [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
             vc.isEditing = NO;
             [self.delegate saveCartSelected];
@@ -236,7 +236,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CartCell *acell = [self.cartstableView dequeueReusableCellWithIdentifier:@"CartCell"];
+    CartCell *acell = [tableView dequeueReusableCellWithIdentifier:@"CartCell1" forIndexPath:indexPath];
     acell.delegate = self;
     acell.cart = self.carts[indexPath.row];
     if (self.carts.count <= 1) {
@@ -298,10 +298,9 @@
     int editIndex = 0;
     if ([vc.savedCarts containsObject:cart]) {
         editIndex = (int)[vc.savedCarts indexOfObject:cart];
-        
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
-        
+       
         vc.fastMonth = [monthCount intValue];
         
         [[NSUserDefaults standardUserDefaults] setInteger:editIndex forKey:@"workingCurrentCartIndex"];
@@ -323,6 +322,7 @@
     }
     
 };
+
 
 
 -(void)save:(NSMutableDictionary*)cart withIndex:(NSInteger)cartIndex andMonths:(NSNumber *)monthCount {

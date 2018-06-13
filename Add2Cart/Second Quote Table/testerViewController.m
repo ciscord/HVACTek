@@ -502,27 +502,27 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         [self buildQuote];
         
-        btnCart1.hidden = !(self.savedCarts.count > 0);
-        btnCart2.hidden = !(self.savedCarts.count > 1);
-        btnCart3.hidden = !(self.savedCarts.count > 2);
-        
-        if (self.isEditing) {
-            cartButton.enabled = YES;
-            btnCart1.enabled = NO;
-            btnCart2.enabled = NO;
-            btnCart3.enabled = NO;
-            btnCart1.alpha = 0.5;
-            btnCart2.alpha = 0.5;
-            btnCart3.alpha = 0.5;
-        }else{
-            cartButton.enabled = self.savedCarts.count < 3;
-            btnCart1.enabled = YES;
-            btnCart2.enabled = YES;
-            btnCart3.enabled = YES;
-            btnCart1.alpha = 1.0;
-            btnCart2.alpha = 1.0;
-            btnCart3.alpha = 1.0;
-        }
+//        btnCart1.hidden = !(self.savedCarts.count > 0);
+//        btnCart2.hidden = !(self.savedCarts.count > 1);
+//        btnCart3.hidden = !(self.savedCarts.count > 2);
+//        
+//        if (self.isEditing) {
+//            cartButton.enabled = YES;
+//            btnCart1.enabled = NO;
+//            btnCart2.enabled = NO;
+//            btnCart3.enabled = NO;
+//            btnCart1.alpha = 0.5;
+//            btnCart2.alpha = 0.5;
+//            btnCart3.alpha = 0.5;
+//        }else{
+//            cartButton.enabled = self.savedCarts.count < 3;
+//            btnCart1.enabled = YES;
+//            btnCart2.enabled = YES;
+//            btnCart3.enabled = YES;
+//            btnCart1.alpha = 1.0;
+//            btnCart2.alpha = 1.0;
+//            btnCart3.alpha = 1.0;
+//        }
     });
     
     
@@ -1982,7 +1982,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     isLast = TRUE;
     [self buildQuote];
     
-    [self saveCart];
+//    [self saveCart];
 }
 
 -(void) removeTheProd:(Item *)itm {
@@ -2013,7 +2013,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     [self buildQuote];
     
-    [self saveCart];
+//    [self saveCart];
 }
 
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
@@ -2021,7 +2021,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [_cartItems addObjectsFromArray:purchData];
     }
     
-    [self saveCart];
+//    [self saveCart];
 }
 
 -(float) parseTheString:(NSString *) string {
@@ -2424,45 +2424,60 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     if ([segue.identifier isEqualToString:@"cart"]) {
         
-        CartViewController *cartView = segue.destinationViewController;
-        cartView.delegate = self;
-        cartView.managedObjectContext = managedObjectContext;
-        NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
-        
-        for (int jj = 0; jj <additemsB.count; jj++) {
-            Item *itm = additemsB[jj];
+        if (self.isEditing || _cartItems.count == 0 || self.savedCarts.count >= 3) {
+            CartViewController *cartView = segue.destinationViewController;
+            cartView.delegate = self;
+            cartView.testerVC = self;
+            cartView.isViewingCart = YES;
+            cartView.managedObjectContext = managedObjectContext;
             
-            BOOL findItem = false;
-            for (int xx = 0; xx < tt.count; xx ++) {
-                CartItem* item = [tt objectAtIndex:xx];
-                if ([item.modelName isEqualToString:itm.modelName]) {
-                    findItem = true;
-                }
-            }
+            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
+            cartView.carts = self.carts;
+            [cartView.cartstableView reloadData];
+        }else {
+            CartViewController *cartView = segue.destinationViewController;
+            cartView.delegate = self;
+            cartView.managedObjectContext = managedObjectContext;
+            NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
             
-            if (!findItem) {
-                [tt addObject:itm];
-            }
+            for (int jj = 0; jj <additemsB.count; jj++) {
+                Item *itm = additemsB[jj];
                 
+                BOOL findItem = false;
+                for (int xx = 0; xx < tt.count; xx ++) {
+                    CartItem* item = [tt objectAtIndex:xx];
+                    if ([item.modelName isEqualToString:itm.modelName]) {
+                        findItem = true;
+                    }
+                }
+                
+                if (!findItem) {
+                    [tt addObject:itm];
+                }
+                
+            }
+            
+            NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
+            [cart setObject:tt forKey:@"cartItems"];
+            [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
+            [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
+            [cart setObject:[NSNumber numberWithInt:self.easySelectedIndex] forKey:@"easySelectedIndex"];
+            [cart setObject:[NSNumber numberWithInt:self.fastSelectedIndex] forKey:@"fastSelectedIndex"];
+            [cart setObject:investDescription forKey:@"investDescription"];
+            [cart setObject:rebates forKey:@"cartRebates"];
+            [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
+            [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
+            cartView.testerVC = self;
+            cartView.isViewingCart = NO;
+            
+            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
+            [self.carts addObject:cart];
+            cartView.carts = self.carts;
+            [cartView.cartstableView reloadData];
         }
         
-        NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
-        [cart setObject:tt forKey:@"cartItems"];
-        [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
-        [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
-        [cart setObject:[NSNumber numberWithInt:self.easySelectedIndex] forKey:@"easySelectedIndex"];
-        [cart setObject:[NSNumber numberWithInt:self.fastSelectedIndex] forKey:@"fastSelectedIndex"];
-        [cart setObject:investDescription forKey:@"investDescription"];
-        [cart setObject:rebates forKey:@"cartRebates"];
-        [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
-        [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
-        cartView.testerVC = self;
-        cartView.isViewingCart = NO;
-        
-        self.carts = [[NSMutableArray alloc]initWithArray:@[cart]];
-        cartView.carts = self.carts;
-        [cartView.cartstableView reloadData];
     }
+    
     
     if ([segue.identifier isEqualToString:@"savedCart"]) {
         CartViewController *cartView = segue.destinationViewController;
