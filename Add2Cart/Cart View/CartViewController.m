@@ -163,18 +163,6 @@
 
 -(void) back {
     
-    ///go back with new cart if entered with existent cart
-    if (self.isViewingCart) {
-        testerViewController * vc =(testerViewController*)self.testerVC;
-        if (vc.savedCarts.count < 3) {
-//            [vc.cartItems removeAllObjects];
-            [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
-            vc.isEditing = NO;
-            [self.delegate saveCartSelected];
-        }
-    }
-    
-    
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -239,21 +227,21 @@
     CartCell *acell = [tableView dequeueReusableCellWithIdentifier:@"CartCell1" forIndexPath:indexPath];
     acell.delegate = self;
     acell.cart = self.carts[indexPath.row];
-    if (self.carts.count <= 1) {
-        testerViewController * vc =(testerViewController*)self.testerVC;
-        if (vc.isEditing) {
-            acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"] + 1];
-        }else{
-            if(self.isViewingCart) {
-                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart 1"];
-            }else{
-                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",vc.savedCarts.count + 1];
-            }
-        }
-    }else{
+//    if (self.carts.count <= 1) {
+//        testerViewController * vc =(testerViewController*)self.testerVC;
+//        if (vc.isEditing) {
+//            acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"] + 1];
+//        }else{
+//            if(self.isViewingCart) {
+//                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart 1"];
+//            }else{
+//                acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %lu",vc.savedCarts.count + 1];
+//            }
+//        }
+//    }else{
         acell.lblCartNumber.text = [NSString stringWithFormat:@"Your Cart %li",(long)indexPath.row +1 ];
 
-    }
+//    }
     acell.editButton.tag = indexPath.row;
     [acell updateProductList];
        return acell;
@@ -296,27 +284,21 @@
      testerViewController * vc =(testerViewController*)self.testerVC;
     
     int editIndex = 0;
-    if ([vc.savedCarts containsObject:cart]) {
+    if ([vc.savedCarts containsObject:cart]) {//exist cart edit
         editIndex = (int)[vc.savedCarts indexOfObject:cart];
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
        
         vc.fastMonth = [monthCount intValue];
-        
+        vc.mode = 1;//edit mode
+        vc.editingIndex = editIndex;
         [[NSUserDefaults standardUserDefaults] setInteger:editIndex forKey:@"workingCurrentCartIndex"];
         [self.navigationController popViewControllerAnimated:YES];
         
         [self.delegate editCardSelected];
-    }else{
-        [vc.cartItems removeAllObjects];
-        [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
+    }else{//edit new cart
         
-        vc.fastMonth = [monthCount intValue];
-        
-        if (!vc.isEditing) {
-            int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
-            [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
-        }
+        vc.mode = 0;
         [self.navigationController popViewControllerAnimated:YES];
         
     }
@@ -329,47 +311,28 @@
     
     testerViewController * vc =(testerViewController*)self.testerVC;
     
-    if (self.isViewingCart) {
-        if ([vc.savedCarts containsObject:cart]) {
-            [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
-            
-            [self.delegate saveCartSelected];
-        }
-        
+    
+    if ([vc.savedCarts containsObject:cart]) {//save existing cart
+        vc.fastMonth = [monthCount intValue];
+        [vc.savedCarts replaceObjectAtIndex:cartIndex withObject:cart];
+        [vc.cartItems removeAllObjects];
+        vc.mode = 0;
+        [self.delegate saveCartSelected];
     }else {
         
-        if (vc.isEditing) {
-            
-            int curIndex = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"workingCurrentCartIndex"];
-            [vc.savedCarts replaceObjectAtIndex:curIndex withObject:cart];
-            
+        if (vc.savedCarts.count < 3) {
+            [vc.savedCarts addObject:cart];
             [vc.cartItems removeAllObjects];
             
             vc.fastMonth = [monthCount intValue];
             
-            if (vc.savedCarts.count < 3)
-                [[NSUserDefaults standardUserDefaults] setInteger:[vc.savedCarts count] - 1 forKey:@"workingCurrentCartIndex"];
-            
+            int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
+            [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
+            vc.mode = 0;
             [self.delegate saveCartSelected];
-            
-        }else{
-            if (vc.savedCarts.count < 3) {
-                [vc.savedCarts addObject:cart];
-                [vc.cartItems removeAllObjects];
-                
-                vc.fastMonth = [monthCount intValue];
-                
-                
-                int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
-                [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
-                
-                [self.delegate saveCartSelected];
-            }
         }
-
     }
     
-    vc.isEditing = NO;
     [self.navigationController popViewControllerAnimated:YES];
     
 };

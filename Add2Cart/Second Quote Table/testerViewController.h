@@ -89,7 +89,8 @@
 ///    BOOL isEditing;
 }
 
-@property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, assign) int mode;
+@property (nonatomic, assign) int editingIndex;
 @property (nonatomic, assign) int easyMonth;
 @property (nonatomic, assign) int fastMonth;
 @property (nonatomic, assign) int easySelectedIndex;

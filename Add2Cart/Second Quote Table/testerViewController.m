@@ -16,12 +16,12 @@
     
     IBOutlet UILabel *lblSystemRebates;
     IBOutlet UILabel *lblInvestemts;
-//    IBOutlet UILabel *lblFinancing;
+    //    IBOutlet UILabel *lblFinancing;
     
     IBOutlet UIButton *btnFinancing;
     
     __weak IBOutlet UIButton *btnEasyPay;
-//    IBOutlet UILabel *lblFinancingValue;
+    //    IBOutlet UILabel *lblFinancingValue;
     IBOutlet UIButton *btnCart1;
     IBOutlet UIButton *btnCart2;
     IBOutlet UIButton *btnCart3;
@@ -42,7 +42,7 @@
     
     __weak IBOutlet UILabel *lblFastPay;
     __weak IBOutlet UILabel *lblFastPrice;
-
+    
     float easyPaymentFactor;
     float fastPaymentFactor;
     
@@ -108,7 +108,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     allData = [[NSMutableArray alloc] init];
     
-     [self.monthsCollectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
+    [self.monthsCollectionView registerNib:[UINib nibWithNibName:kCellIdentifier bundle:nil] forCellWithReuseIdentifier:kCellIdentifier];
     
     //Init the ints ??????
     choosedAirCon = 0;
@@ -181,7 +181,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 - (void) clearCart {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CartItem" inManagedObjectContext:self.managedObjectContext];
-  
+    
     [fetchRequest setEntity:entity];
     
     NSError *fetchingError = nil;
@@ -226,7 +226,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     for (int x = 0; x < _cartItems.count; x++) {
         Item * item = [_cartItems objectAtIndex:x];
         CartItem *cartItem = (CartItem*) [NSEntityDescription insertNewObjectForEntityForName:@"CartItem" inManagedObjectContext:self.managedObjectContext];
-    
+        
         cartItem.currentCart = item.currentCart;
         cartItem.finalOption = item.finalOption;
         cartItem.finalPrice = item.finalPrice;
@@ -347,8 +347,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSError *fetchingError = nil;
     _cartItems = [NSMutableArray array];
     [_cartItems addObjectsFromArray:[self.managedObjectContext
-                                                  executeFetchRequest:fetchRequest error:&fetchingError]];
-   
+                                     executeFetchRequest:fetchRequest error:&fetchingError]];
+    
 }
 
 -(void)fetchFinancingObjects {
@@ -365,7 +365,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     NSError *fetchingError = nil;
     
     [self.easyFinancialsData addObjectsFromArray:[self.managedObjectContext
-                                  executeFetchRequest:fetchRequest error:&fetchingError]];
+                                                  executeFetchRequest:fetchRequest error:&fetchingError]];
     
     //fast financial
     NSFetchRequest *fetchRequest1 = [[NSFetchRequest alloc] init];
@@ -373,7 +373,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     fetchRequest1.predicate = [NSPredicate predicateWithFormat:@"type = %@",@"fast"];
     sort =[NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
     fetchRequest1.sortDescriptors =[NSArray arrayWithObject:sort];
-
+    
     [fetchRequest1 setEntity:entity];
     
     [self.fastFinancialsData addObjectsFromArray:[self.managedObjectContext
@@ -404,7 +404,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     }else {
         self.easyMonth = -1;
     }
-
+    
     if (self.fastFinancialsData.count > 0) {
         Financials *item = self.fastFinancialsData[0];
         self.fastMonth = item.month.intValue;
@@ -434,28 +434,28 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     self.detailsView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     secView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     cartButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-//    iaqButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    //    iaqButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     videoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     tcoButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.rebatesButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.investmentButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-   // btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
-     btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    // btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary35];
+    btnFinancing.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     btnEasyPay.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     __weak UIImageView *weakImageView = logoImageView;
     [logoImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[[[DataLoader sharedInstance] currentCompany] logo]]]
-                              placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           
-                                           UIImageView *strongImageView = weakImageView;
-                                           if (!strongImageView) return;
-                                           
-                                           strongImageView.image = image;
-                                       }
-                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                           //
-                                       }];
+                         placeholderImage:[UIImage imageNamed:@"bg-top-bar"]
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                      
+                                      UIImageView *strongImageView = weakImageView;
+                                      if (!strongImageView) return;
+                                      
+                                      strongImageView.image = image;
+                                  }
+                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                      //
+                                  }];
 }
 
 
@@ -502,27 +502,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         
         [self buildQuote];
         
-//        btnCart1.hidden = !(self.savedCarts.count > 0);
-//        btnCart2.hidden = !(self.savedCarts.count > 1);
-//        btnCart3.hidden = !(self.savedCarts.count > 2);
-//        
-//        if (self.isEditing) {
-//            cartButton.enabled = YES;
-//            btnCart1.enabled = NO;
-//            btnCart2.enabled = NO;
-//            btnCart3.enabled = NO;
-//            btnCart1.alpha = 0.5;
-//            btnCart2.alpha = 0.5;
-//            btnCart3.alpha = 0.5;
-//        }else{
-//            cartButton.enabled = self.savedCarts.count < 3;
-//            btnCart1.enabled = YES;
-//            btnCart2.enabled = YES;
-//            btnCart3.enabled = YES;
-//            btnCart1.alpha = 1.0;
-//            btnCart2.alpha = 1.0;
-//            btnCart3.alpha = 1.0;
-//        }
     });
     
     
@@ -1417,7 +1396,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     cell.clipsToBounds = YES;
     
     if (![itm.finalOption isEqualToString:@"None"]) {
-      
+        
         Photos *photoObj = (Photos *)itm.image;
         cell.photo.image = [UIImage imageWithData:photoObj.photoData];
         cell.manufacturerLabel.text = itm.manu;
@@ -1982,7 +1961,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     isLast = TRUE;
     [self buildQuote];
     
-//    [self saveCart];
+    //    [self saveCart];
 }
 
 -(void) removeTheProd:(Item *)itm {
@@ -2013,7 +1992,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     [self buildQuote];
     
-//    [self saveCart];
+    //    [self saveCart];
 }
 
 -(void)receiveData:(NSArray *)theRebateData :(NSArray *)purchData {
@@ -2021,7 +2000,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
         [_cartItems addObjectsFromArray:purchData];
     }
     
-//    [self saveCart];
+    //    [self saveCart];
 }
 
 -(float) parseTheString:(NSString *) string {
@@ -2129,8 +2108,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 -(void) updateLabels:(float)total :(float)totalSave :(float)afterSaving :(float)financeP :(float)month localInvest:(float)localInvest easyFinanceObject:(Financials*)easyFinanceObject fastFinanceObject:(Financials*)fastFinanceObject {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-       // Some code
-    
+        // Some code
+        
         totalAmountLabel.text = [NSString stringWithFormat:@"Total Amount\n$%.0f",total];
         totalSavingsLabel.text = [NSString stringWithFormat:@"Total Savings\n$%.0f",totalSave];
         afterSavingsLabel.text = [NSString stringWithFormat:@"After Savings\n$%.0f",afterSaving];
@@ -2237,7 +2216,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 - (IBAction)fastPayClick:(id)sender {
-//    [self performSegueWithIdentifier:@"cart" sender:nil];
+    //    [self performSegueWithIdentifier:@"cart" sender:nil];
     isEasy = false;
     [_monthsCollectionView reloadData];
     secView.hidden = NO;
@@ -2286,7 +2265,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 
 #pragma mark - CartViewController Delegates
 -(void)editCardSelected {
-    self.isEditing = YES;
     
 }
 
@@ -2424,20 +2402,23 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     if ([segue.identifier isEqualToString:@"cart"]) {
         
-        if (self.isEditing || _cartItems.count == 0 || self.savedCarts.count >= 3) {
+        if (self.mode == 0) {//new cart
+            
+            if (self.savedCarts.count >= 3) {//view mode
+                CartViewController *cartView = segue.destinationViewController;
+                cartView.delegate = self;
+                cartView.testerVC = self;
+                cartView.managedObjectContext = managedObjectContext;
+                
+                self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
+                cartView.carts = self.carts;
+                [cartView.cartstableView reloadData];
+                return;
+            }
             CartViewController *cartView = segue.destinationViewController;
             cartView.delegate = self;
-            cartView.testerVC = self;
-            cartView.isViewingCart = YES;
             cartView.managedObjectContext = managedObjectContext;
             
-            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
-            cartView.carts = self.carts;
-            [cartView.cartstableView reloadData];
-        }else {
-            CartViewController *cartView = segue.destinationViewController;
-            cartView.delegate = self;
-            cartView.managedObjectContext = managedObjectContext;
             NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
             
             for (int jj = 0; jj <additemsB.count; jj++) {
@@ -2468,27 +2449,57 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
             [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
             cartView.testerVC = self;
-            cartView.isViewingCart = NO;
             
             self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
             [self.carts addObject:cart];
             cartView.carts = self.carts;
             [cartView.cartstableView reloadData];
+            
+        }else if (self.mode == 1) {//edit mode
+            CartViewController *cartView = segue.destinationViewController;
+            cartView.delegate = self;
+            cartView.managedObjectContext = managedObjectContext;
+            
+            NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:_cartItems];
+            
+            for (int jj = 0; jj <additemsB.count; jj++) {
+                Item *itm = additemsB[jj];
+                
+                BOOL findItem = false;
+                for (int xx = 0; xx < tt.count; xx ++) {
+                    CartItem* item = [tt objectAtIndex:xx];
+                    if ([item.modelName isEqualToString:itm.modelName]) {
+                        findItem = true;
+                    }
+                }
+                
+                if (!findItem) {
+                    [tt addObject:itm];
+                }
+                
+            }
+            
+            NSMutableDictionary * cart = [[NSMutableDictionary alloc]init];
+            [cart setObject:tt forKey:@"cartItems"];
+            [cart setObject:[NSNumber numberWithInt:self.fastMonth] forKey:@"fastMonth"];
+            [cart setObject:[NSNumber numberWithInt:self.easyMonth] forKey:@"easyMonth"];
+            [cart setObject:[NSNumber numberWithInt:self.easySelectedIndex] forKey:@"easySelectedIndex"];
+            [cart setObject:[NSNumber numberWithInt:self.fastSelectedIndex] forKey:@"fastSelectedIndex"];
+            [cart setObject:investDescription forKey:@"investDescription"];
+            [cart setObject:rebates forKey:@"cartRebates"];
+            [cart setObject:self.fastFinancialsData forKey:@"fastFinancialsData"];
+            [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
+            cartView.testerVC = self;
+            
+            [self.savedCarts replaceObjectAtIndex:self.editingIndex withObject:cart];
+            
+            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
+            
+            cartView.carts = self.carts;
+            [cartView.cartstableView reloadData];
         }
         
-    }
-    
-    
-    if ([segue.identifier isEqualToString:@"savedCart"]) {
-        CartViewController *cartView = segue.destinationViewController;
-        cartView.delegate = self;
-        cartView.testerVC = self;
-        cartView.isViewingCart = YES;
-        cartView.managedObjectContext = managedObjectContext;        
         
-        self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
-        cartView.carts = self.carts;
-        [cartView.cartstableView reloadData];
     }
 }
 

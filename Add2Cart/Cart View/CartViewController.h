@@ -26,7 +26,6 @@
     
 }
 @property (nonatomic, retain) id<CartViewControllerDelegate> delegate;
-@property (nonatomic, assign) BOOL isViewingCart;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
