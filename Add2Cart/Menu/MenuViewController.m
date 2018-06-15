@@ -23,6 +23,7 @@
 #import "HvacTekConstants.h"
 #import "Financials+CoreDataClass.h"
 #import "MBProgressHUD.h"
+#import "Add2CartData.h"
 static const CGSize progressViewSize = { 300.0f, 20.0f };
 
 typedef void(^myCompletion)(BOOL);
@@ -76,6 +77,9 @@ typedef void(^myCompletion)(BOOL);
     
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    Add2CartData.sharedAdd2CartData.savedCarts = [NSMutableArray array];
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
@@ -309,7 +313,7 @@ typedef void(^myCompletion)(BOOL);
 
     [self startSyncing:YES];
     [self clearEverything];
-
+    
     [[DataLoader sharedInstance] getAdd2CartProducts: ^(NSString *successMessage, NSDictionary *reciveData) {
                                            [self performSelectorInBackground:@selector(fetchedAdd2CartItems:) withObject:reciveData];
                                             //[self performSelectorOnMainThread:@selector(fetchedAdd2CartItems:) withObject:reciveData waitUntilDone:NO];

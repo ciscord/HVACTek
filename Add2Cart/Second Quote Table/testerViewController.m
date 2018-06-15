@@ -12,6 +12,7 @@
 #import "RRQuestionsVC.h"
 #import "HealthyHomeSolutionsAgreementVC.h"
 #import "IAQDataModel.h"
+#import "Add2CartData.h"
 @interface testerViewController () <CartViewControllerDelegate>{
     
     IBOutlet UILabel *lblSystemRebates;
@@ -137,7 +138,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     //Move to a mutable array for later.
     _cartItems = [[NSMutableArray alloc]init];
     [self fetchCartObjects];
-    self.savedCarts = [[NSMutableArray alloc]init];
     
     //Setup the navbar.
     UIBarButtonItem *btnShare = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(home)];
@@ -421,6 +421,29 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
 }
 
 -(void) back {
+    
+    for (NSMutableDictionary * cart in Add2CartData.sharedAdd2CartData.savedCarts) {
+        NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:[cart objectForKey:@"cartItems"]];
+        
+        for (int jj = 0; jj <additemsB.count; jj++) {
+            Item *itm = additemsB[jj];
+            
+            BOOL findItem = false;
+            for (int xx = 0; xx < tt.count; xx ++) {
+                CartItem* item = [tt objectAtIndex:xx];
+                if ([item.modelName isEqualToString:itm.modelName]) {
+                    findItem = true;
+                }
+            }
+            
+            if (findItem) {
+                [tt removeObject:itm];
+            }
+            
+        }
+        [cart setObject:tt forKey:@"cartItems"];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -2175,7 +2198,7 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeProcessVC"];
+    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
     [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
 }
 
@@ -2402,16 +2425,37 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
     if ([segue.identifier isEqualToString:@"cart"]) {
         
+        for (NSMutableDictionary * cart in Add2CartData.sharedAdd2CartData.savedCarts) {
+            NSMutableArray *tt = [[NSMutableArray alloc]initWithArray:[cart objectForKey:@"cartItems"]];
+            
+            for (int jj = 0; jj <additemsB.count; jj++) {
+                Item *itm = additemsB[jj];
+                
+                BOOL findItem = false;
+                for (int xx = 0; xx < tt.count; xx ++) {
+                    CartItem* item = [tt objectAtIndex:xx];
+                    if ([item.modelName isEqualToString:itm.modelName]) {
+                        findItem = true;
+                    }
+                }
+                
+                if (!findItem) {
+                    [tt addObject:itm];
+                }
+                
+            }
+            [cart setObject:tt forKey:@"cartItems"];
+        }
         if (self.mode == 0) {//new cart
             
-            if (self.savedCarts.count >= 3) {//view mode
+            if (Add2CartData.sharedAdd2CartData.savedCarts.count >= 3) {//view mode
                 CartViewController *cartView = segue.destinationViewController;
                 cartView.delegate = self;
                 cartView.testerVC = self;
                 cartView.managedObjectContext = managedObjectContext;
                 
-                self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
-                cartView.carts = self.carts;
+                NSMutableArray* carts = [[NSMutableArray alloc] initWithArray:Add2CartData.sharedAdd2CartData.savedCarts];
+                cartView.carts = carts;
                 [cartView.cartstableView reloadData];
                 return;
             }
@@ -2450,9 +2494,9 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
             cartView.testerVC = self;
             
-            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
-            [self.carts addObject:cart];
-            cartView.carts = self.carts;
+            NSMutableArray* carts = [[NSMutableArray alloc] initWithArray:Add2CartData.sharedAdd2CartData.savedCarts];
+            [carts addObject:cart];
+            cartView.carts = carts;
             [cartView.cartstableView reloadData];
             
         }else if (self.mode == 1) {//edit mode
@@ -2491,11 +2535,11 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
             [cart setObject:self.easyFinancialsData forKey:@"easyFinancialsData"];
             cartView.testerVC = self;
             
-            [self.savedCarts replaceObjectAtIndex:self.editingIndex withObject:cart];
+            [Add2CartData.sharedAdd2CartData.savedCarts replaceObjectAtIndex:self.editingIndex withObject:cart];
             
-            self.carts = [[NSMutableArray alloc] initWithArray:self.savedCarts];
+            NSMutableArray *carts = [[NSMutableArray alloc] initWithArray:Add2CartData.sharedAdd2CartData.savedCarts];
             
-            cartView.carts = self.carts;
+            cartView.carts = carts;
             [cartView.cartstableView reloadData];
         }
         

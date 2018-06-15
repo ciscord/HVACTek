@@ -164,6 +164,7 @@
 		75F3DF8D1A3F057200F60652 /* CustomerChoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8C1A3F057200F60652 /* CustomerChoiceVC.m */; };
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
+		840AAAEC20D42BCA00E07165 /* Add2CartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AAAEB20D42BCA00E07165 /* Add2CartData.m */; };
 		84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */; };
 		8421B00620602D61000FF69A /* TechDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421B00520602D61000FF69A /* TechDataModel.m */; };
 		849478282075535900321316 /* MediaLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849478262075535900321316 /* MediaLibraryVC.m */; };
@@ -492,6 +493,8 @@
 		75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTableViewCell.m; sourceTree = "<group>"; };
 		75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendationTableViewCell.xib; sourceTree = "<group>"; };
 		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
+		840AAAEA20D42BCA00E07165 /* Add2CartData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Add2CartData.h; sourceTree = "<group>"; };
+		840AAAEB20D42BCA00E07165 /* Add2CartData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Add2CartData.m; sourceTree = "<group>"; };
 		84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataProperties.m"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.m"; sourceTree = "<absolute>"; };
 		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = "<absolute>"; };
 		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
@@ -703,6 +706,8 @@
 				5265782B1C6A0A2500EC1AA5 /* Photos.m */,
 				4FD2EB1C1A361A0F0056D4C4 /* FirstOption.h */,
 				4FD2EB1D1A361A0F0056D4C4 /* FirstOption.m */,
+				840AAAEA20D42BCA00E07165 /* Add2CartData.h */,
+				840AAAEB20D42BCA00E07165 /* Add2CartData.m */,
 			);
 			path = Add2CartDataModel;
 			sourceTree = "<group>";
@@ -1745,6 +1750,7 @@
 				4FD2EB861A361A0F0056D4C4 /* RebateTableViewCell.m in Sources */,
 				84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */,
 				75399F5B1A39CD2E0013EAC0 /* RepairVsServiceVC.m in Sources */,
+				840AAAEC20D42BCA00E07165 /* Add2CartData.m in Sources */,
 				4FF901BC1AB847FE00D87FAB /* PlatinumOptionCell.m in Sources */,
 				52F3D1E81CFF0B7D008D24C9 /* VideoLibraryCell.m in Sources */,
 				5277B18B1C16DC95008929ED /* RRQuestionsView.m in Sources */,

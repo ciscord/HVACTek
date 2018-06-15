@@ -8,7 +8,7 @@
 
 #import "CartViewController.h"
 #import "CartCell.h"
-
+#import "Add2CartData.h"
 @interface CartViewController ()<UITableViewDataSource, UITableViewDelegate, CartCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *productList;
@@ -284,8 +284,8 @@
      testerViewController * vc =(testerViewController*)self.testerVC;
     
     int editIndex = 0;
-    if ([vc.savedCarts containsObject:cart]) {//exist cart edit
-        editIndex = (int)[vc.savedCarts indexOfObject:cart];
+    if ([Add2CartData.sharedAdd2CartData.savedCarts containsObject:cart]) {//exist cart edit
+        editIndex = (int)[Add2CartData.sharedAdd2CartData.savedCarts indexOfObject:cart];
         [vc.cartItems removeAllObjects];
         [vc.cartItems addObjectsFromArray:[cart objectForKey:@"cartItems"]];
        
@@ -312,21 +312,21 @@
     testerViewController * vc =(testerViewController*)self.testerVC;
     
     
-    if ([vc.savedCarts containsObject:cart]) {//save existing cart
+    if ([Add2CartData.sharedAdd2CartData.savedCarts containsObject:cart]) {//save existing cart
         vc.fastMonth = [monthCount intValue];
-        [vc.savedCarts replaceObjectAtIndex:cartIndex withObject:cart];
+        [Add2CartData.sharedAdd2CartData.savedCarts replaceObjectAtIndex:cartIndex withObject:cart];
         [vc.cartItems removeAllObjects];
         vc.mode = 0;
         [self.delegate saveCartSelected];
     }else {
         
-        if (vc.savedCarts.count < 3) {
-            [vc.savedCarts addObject:cart];
+        if (Add2CartData.sharedAdd2CartData.savedCarts.count < 3) {
+            [Add2CartData.sharedAdd2CartData.savedCarts addObject:cart];
             [vc.cartItems removeAllObjects];
             
             vc.fastMonth = [monthCount intValue];
             
-            int newIndex = [vc.savedCarts count] < 3 ? (int)[vc.savedCarts count] : 2;
+            int newIndex = [Add2CartData.sharedAdd2CartData.savedCarts count] < 3 ? (int)[Add2CartData.sharedAdd2CartData.savedCarts count] : 2;
             [[NSUserDefaults standardUserDefaults] setInteger:newIndex forKey:@"workingCurrentCartIndex"];
             vc.mode = 0;
             [self.delegate saveCartSelected];
