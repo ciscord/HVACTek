@@ -45,21 +45,13 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self trySendingLogWithMessage:@"Success" andResponse:message.description];
         [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianHome];
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        if (appDelegate.homeController) {
-            [self.navigationController popToViewController:appDelegate.homeController animated:YES];
+        if (self.navigationController.viewControllers.count > 1) {
+            UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:1];
+            [self.navigationController popToViewController:homeViewController animated:true];
         }else {
-            if (self.navigationController.viewControllers.count > 1) {
-                UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:1];
-                [self.navigationController popToViewController:homeViewController animated:true];
-            }else {
-                [self.navigationController popViewControllerAnimated:true];
-            }
-            
-            
+            [self.navigationController popToRootViewControllerAnimated:true];
         }
-        
         
     } onError:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
