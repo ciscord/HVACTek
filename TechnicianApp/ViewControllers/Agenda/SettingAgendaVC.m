@@ -11,22 +11,12 @@
 
 @interface SettingAgendaVC ()
 
-@property (weak, nonatomic) IBOutlet UILabel *presentationLbl;
-@property (weak, nonatomic) IBOutlet UILabel *thankLbl;
-@property (weak, nonatomic) IBOutlet UILabel *introduceLbl;
+@property (weak, nonatomic) IBOutlet UITextView *presentationLbl;
 @property (nonatomic, strong) NSString *techName;
 @property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *costumerName;
 
 @property (weak, nonatomic) IBOutlet UIButton *continuBtn;
-@property (weak, nonatomic) IBOutlet UILabel *label1;
-@property (weak, nonatomic) IBOutlet UILabel *label2;
-@property (weak, nonatomic) IBOutlet UILabel *label3;
-@property (weak, nonatomic) IBOutlet UILabel *label4;
-@property (weak, nonatomic) IBOutlet UILabel *label5;
-@property (weak, nonatomic) IBOutlet UILabel *label6;
-@property (weak, nonatomic) IBOutlet UILabel *label7;
-@property (weak, nonatomic) IBOutlet UILabel *label8;
 
 
 @end
@@ -50,17 +40,7 @@
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continuBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label4.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label5.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label6.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label7.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label8.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.presentationLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.thankLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.introduceLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -94,9 +74,8 @@
 }
 
 - (void)setLabelsTexts {
-    self.presentationLbl.text = [NSString stringWithFormat:@"Hello, My name is %@ from %@.", self.techName, self.companyName];
-    self.thankLbl.text = [NSString stringWithFormat:@"I want to thank you for choosing %@ to service you today.", self.companyName];
-    self.introduceLbl.text = [NSString stringWithFormat:@"I understand I am here today for (........................), is that correct?  Before I get started today I would like to let you know what you can expect from today's call."];   //self.costumerName
+    self.presentationLbl.text = [NSString stringWithFormat:@"My Name Is %@ From %@ \n \nThank You For Choosing %@ To Service You Today \n \nAm I OK Where I Am Parked? \n \n Is It OK To Come In? \n \nLet Me Put My Shoe Covers On \n \n I Understand I Am Here Today For %@\nCan You Tell Me A Little Bit More About What's Going On \n \nI Would Like To Share With You What You Can Expect From Today's Call \n \n First I'm Going To Ask You A Few Questions To Help Me Do My Job Better & Then I Will Answer Any Questions You Have \n \n Next I'm Going To Do A Thorough Evaluation Of Your Entire System \n \n If I Notice Anything That May Be A Safety, Health Or Mechanical Concern, Is It OK If I Bring It To Your Attention? \n \nRest Assured I Will Not Do Any Work Without Your Approval \n \nIf There Are Any Issues That Do Need Attention\nI Will Do Everything I Can To Take Care Of Them For You Today %@ Fair Enough? \n \n It Will Take Me About ... (Minutes / Hours)\nTo Provide You With A Great Service Experience Today...Are We OK On Time? \n \n Is There Somewhere We Can Sit Down For A Few Minutes \nSo We Can Start With My Questions?", self.techName, self.companyName, self.companyName, @"You", @""];
+    
 }
 
 
