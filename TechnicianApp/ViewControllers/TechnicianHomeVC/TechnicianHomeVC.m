@@ -324,39 +324,33 @@
 
 - (IBAction)btnCutomerlookupTouch:(id)sender
 {
-    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] == jstNeedDebrief) {
-        [self custumerlookup];
-    }else{
-        if (!self.edtJobId.hasText) {
-            ShowOkAlertWithTitle(@"Enter Job ID", self);
-        }
-        else
-        {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            self.numberOfHuds++;
-            __weak typeof (self) weakSelf = self;
-            [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
-                                                                   onSuccess:^(NSString *successMessage) {
-                                                                       //[weakSelf checkJobStatus];
-                                                                       //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                                       [self checkNumberOfHuds:--self.numberOfHuds];
-                                                                       [weakSelf custumerlookup];
-                                                                       
-                                                                   } onError:^(NSError *error) {
-                                                                       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                                       ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
-                                                                   }];
-        }
+    
+    if (!self.edtJobId.hasText) {
+        ShowOkAlertWithTitle(@"Enter Job ID", self);
     }
+    else
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.numberOfHuds++;
+        __weak typeof (self) weakSelf = self;
+        [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
+                                                               onSuccess:^(NSString *successMessage) {
+                                                                   //[weakSelf checkJobStatus];
+                                                                   //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                   [self checkNumberOfHuds:--self.numberOfHuds];
+                                                                   [weakSelf custumerlookup];
+                                                                   
+                                                               } onError:^(NSError *error) {
+                                                                   [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                                   ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                                               }];
+    }
+    
 }
 
 
 -(void)custumerlookup{
-    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] == jstNeedDebrief)
-    {
-        [self performSegueWithIdentifier:@"debriefRminderSegue" sender:self];
-    }
-    else if ([[[DataLoader sharedInstance] currentUser] activeJob])
+    if ([[[DataLoader sharedInstance] currentUser] activeJob])
     {
         [self performSegueWithIdentifier:@"dispatchSegue" sender:self];
     }
