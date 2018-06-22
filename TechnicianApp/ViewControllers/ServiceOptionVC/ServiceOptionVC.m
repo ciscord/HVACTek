@@ -342,9 +342,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         [weakSelf selectOptionsToEditAtRow:rowIndex];
     }];
     
-    
-    
-    
     return cell;
 }
 
@@ -369,8 +366,8 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     vc.enlargeMidleLabelString = cell.financingLabel.text;
     vc.enlargeOptionsArray = items;
     vc.enlargeFullOptionsArray = [option objectForKey:@"removedItems"];
-    
-    //[self.navigationController pushViewController:vc animated:YES];
+    vc.parentVC = self;
+//    [self.navigationController pushViewController:vc animated:YES];
     
     [self presentViewController:vc animated:YES completion:nil];
 
@@ -445,9 +442,5 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     
 }
-
-
-
-
 
 @end

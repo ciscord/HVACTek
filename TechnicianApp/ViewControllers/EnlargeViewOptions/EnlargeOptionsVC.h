@@ -20,6 +20,6 @@
 @property (nonatomic, strong) NSString *enlargeMonthlyPrice;
 @property (nonatomic, strong) NSString *enlargeSavings;
 @property (nonatomic, strong) NSString *enlargeMidleLabelString;
-
+@property (weak, nonatomic) UIViewController *parentVC;
 
 @end

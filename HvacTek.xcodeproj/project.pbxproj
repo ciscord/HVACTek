@@ -174,6 +174,7 @@
 		84A7A6FC206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A7A6F2206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld */; };
 		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
 		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
+		84F1D76620DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
 		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
 		867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */; };
@@ -520,6 +521,8 @@
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
 		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
 		84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoolingStaticPressureVC.m; sourceTree = "<group>"; };
+		84F1D76420DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SummaryOfFindingOptionsEditVC.h; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.h; sourceTree = SOURCE_ROOT; };
+		84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SummaryOfFindingOptionsEditVC.m; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.m; sourceTree = SOURCE_ROOT; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
 		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
 		862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -1390,6 +1393,8 @@
 				75D73F171A38AB950051143C /* ServiceOptionViewCell.h */,
 				75D73F181A38AB950051143C /* ServiceOptionViewCell.m */,
 				75D73F191A38AB950051143C /* ServiceOptionViewCell.xib */,
+				84F1D76420DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.h */,
+				84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */,
 			);
 			name = SummaryOfFindingsOptionsVC;
 			path = ServiceOptionsVC;
@@ -1771,6 +1776,7 @@
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
 				5011B7561FC5CC720041BDAA /* FileModel.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
+				84F1D76620DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m in Sources */,
 				8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import "EnlargeOptionsVC.h"
-
+#import "SummaryOfFindingOptionsEditVC.h"
+#import "SummaryOfFindingsOptionsVC.h"
 @interface EnlargeOptionsVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView *enlargeTable;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *separatorView1;
 @property (weak, nonatomic) IBOutlet UIView *separatorView2;
 @property (weak, nonatomic) IBOutlet UIView *separatorView3;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+
 @end
 
 @implementation EnlargeOptionsVC
@@ -59,6 +62,7 @@
     self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.separatorView3.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.optionNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.editButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -147,6 +151,31 @@
     
 
     
+}
+- (IBAction)tapEditButton:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSArray* viewcontrollers = self.parentVC.navigationController.viewControllers;
+        
+        for (UIViewController* viewController in viewcontrollers) {
+            if ([viewController isKindOfClass:[SummaryOfFindingsOptionsVC class]]) {
+                [self.parentVC.navigationController popToViewController:viewController animated:NO];
+                return;
+            }
+        }
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+        UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
+        SummaryOfFindingsOptionsVC* questionsVC = (SummaryOfFindingsOptionsVC*) currentViewController;
+        
+        questionsVC.isiPadCommonRepairsOptions = YES;
+        
+        [self.parentVC.navigationController pushViewController:questionsVC animated:NO];
+    }];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
+//
+//    SummaryOfFindingOptionsEditVC* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingOptionsEditVC"];
+//    [self.navigationController pushViewController:currentViewController animated:true];
 }
 
 /*
