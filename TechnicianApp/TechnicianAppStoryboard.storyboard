@@ -2788,48 +2788,14 @@ Troy, PA 16947</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" id="Y73-v0-kj7">
-                                <rect key="frame" x="0.0" y="173" width="768" height="851"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="oBb-ji-vMO" customClass="SFRoundProgressCounterView">
-                                        <rect key="frame" x="339" y="555" width="90" height="90"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RRz-Vr-e8o">
-                                        <rect key="frame" x="97" y="85" width="575" height="389"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Run Every Call With Passion &amp; Purpose">
-                                                <attributes>
-                                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" size="77" name="Arial-BoldMT"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dgQ-nw-avB">
-                                        <rect key="frame" x="58" y="21" width="653" height="517"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="yqb-ak-E3G"/>
                     <connections>
                         <outlet property="beginBtn" destination="DT0-xz-w87" id="ZFi-Q9-ZFn"/>
-                        <outlet property="imgInspiration" destination="dgQ-nw-avB" id="ngM-BR-4eT"/>
                         <outlet property="lbCustomerInfo" destination="OM7-Ln-HVO" id="6SM-yl-HfV"/>
-                        <outlet property="lbInspirationSentence" destination="RRz-Vr-e8o" id="2yD-pC-1Jj"/>
                         <outlet property="txtClientProblems" destination="Z6U-sI-RLb" id="amg-HC-h4Z"/>
-                        <outlet property="vwCounter" destination="oBb-ji-vMO" id="18w-Us-CZf"/>
-                        <outlet property="vwInspiration" destination="Y73-v0-kj7" id="tfq-Gk-xDT"/>
                         <segue destination="dBc-mz-UYT" kind="push" identifier="customerOverviewSegue" id="buC-pP-plQ"/>
                     </connections>
                 </viewController>
@@ -3090,23 +3056,6 @@ you must debrief from job</string>
                                     <action selector="beginAppointment:" destination="dBc-mz-UYT" eventType="touchUpInside" id="h5f-Gd-0LW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RLx-Bw-0Oz">
-                                <rect key="frame" x="499" y="965" width="235" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.46666666870000001" green="0.74117647060000003" blue="0.26274511220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
-                                <state key="normal" title="RETURN VISIT">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="btnReturnVisit:" destination="dBc-mz-UYT" eventType="touchUpInside" id="co1-xA-bLf"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cGu-ma-SyJ">
                                 <rect key="frame" x="92" y="260" width="585" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3130,7 +3079,6 @@ you must debrief from job</string>
                         <outlet property="lbCustomerInfoTitle" destination="Etv-lI-FL3" id="tfS-3D-axE"/>
                         <outlet property="lbServiceHistoryInfoTitle" destination="ahk-TP-42Q" id="d3T-m4-O31"/>
                         <outlet property="lbSystemInfoTitle" destination="dP3-FZ-aEi" id="Hly-7j-X1N"/>
-                        <outlet property="returnBtn" destination="RLx-Bw-0Oz" id="sAA-tc-U8m"/>
                         <outlet property="segmentedControl" destination="cGu-ma-SyJ" id="f4n-6f-uL8"/>
                         <outlet property="separator1" destination="Ecd-5H-Mvy" id="wmS-UY-FGI"/>
                         <outlet property="separator2" destination="UdZ-Db-7XM" id="fF6-N7-pAf"/>

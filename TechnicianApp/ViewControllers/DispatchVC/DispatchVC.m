@@ -14,13 +14,9 @@
 @interface DispatchVC () <SFRoundProgressCounterViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *beginBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *imgInspiration;
-@property (weak, nonatomic) IBOutlet UILabel *lbInspirationSentence;
-@property (weak, nonatomic) IBOutlet SFRoundProgressCounterView *vwCounter;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbCustomerInfo;
 @property (weak, nonatomic) IBOutlet UITextView *txtClientProblems;
-@property (weak, nonatomic) IBOutlet UIView *vwInspiration;
 @property (strong, nonatomic) UIViewController *customerOverviewVC;
 
 @end
@@ -37,17 +33,6 @@
     
 	self.isTitleViewHidden = YES;
 
-	self.vwCounter.delegate = self;
-	NSNumber *interval = [NSNumber numberWithLong:5000.0];
-	self.vwCounter.intervals = @[interval];
-	self.vwCounter.outerProgressColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-	self.vwCounter.outerTrackColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
-    self.vwCounter.labelColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-	self.vwCounter.innerCircleView.backgroundColor = self.view.backgroundColor;
-	self.vwCounter.outerCircleView.backgroundColor = [UIColor clearColor];
-	self.vwCounter.hideFraction = YES;
-	self.vwInspiration.backgroundColor = self.view.backgroundColor;
-	[self.imgInspiration setImageWithURL:[NSURL URLWithString:[[DataLoader sharedInstance] inspirationImagePath]] placeholderImage:nil];
     [self setCustomerInfo];
     
     [[TechDataModel sharedTechDataModel] saveCurrentStep:Dispatch];
@@ -59,7 +44,6 @@
 - (void)configureColorScheme {
     self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.lbCustomerInfo.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.lbInspirationSentence.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
 
@@ -83,8 +67,6 @@
 	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
 	paragraphStyle.alignment = NSTextAlignmentCenter;
 
-    self.lbInspirationSentence.text = @"";
-   
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
 
     NSDictionary *jobInfo = job.swapiJobInfo;
@@ -96,7 +78,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	self.vwInspiration.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,19 +102,8 @@
         [job.managedObjectContext save];
     }
     
-    [self performSelector:@selector(prepareCustomerOverview) withObject:nil afterDelay:1];
-
-	self.vwInspiration.hidden = NO;
-	[self.vwCounter start];
-}
-
--(void)prepareCustomerOverview {
     self.customerOverviewVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CustomerOverviewVC"];
-}
-
-#pragma mark = SFRoundProgressTimerViewDelegate
-- (void)countdownDidEnd:(SFRoundProgressCounterView *)progressTimerView {
-	[self.navigationController pushViewController:self.customerOverviewVC animated:YES];
+    [self.navigationController pushViewController:self.customerOverviewVC animated:YES];
 }
 
 @end
