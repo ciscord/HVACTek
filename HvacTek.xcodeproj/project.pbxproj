@@ -496,8 +496,8 @@
 		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
 		840AAAEA20D42BCA00E07165 /* Add2CartData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Add2CartData.h; sourceTree = "<group>"; };
 		840AAAEB20D42BCA00E07165 /* Add2CartData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Add2CartData.m; sourceTree = "<group>"; };
-		84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataProperties.m"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "/Volumes/Work/Outsourcing/HVACTek - App/iOS/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = "<absolute>"; };
+		84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataProperties.m"; path = "/Users/geoff/Documents/repositories/hvactek/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.m"; sourceTree = "<absolute>"; };
+		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = SOURCE_ROOT; };
 		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
 		8421B00520602D61000FF69A /* TechDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechDataModel.m; sourceTree = "<group>"; };
 		849478262075535900321316 /* MediaLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaLibraryVC.m; sourceTree = "<group>"; };
@@ -1581,7 +1581,7 @@
 				ORGANIZATIONNAME = Unifeyed;
 				TargetAttributes = {
 					D29F06FA197023CA0020D83C = {
-						DevelopmentTeam = 5JZ562WR45;
+						DevelopmentTeam = 8WY55993RN;
 						LastSwiftMigration = 0910;
 					};
 				};
@@ -1973,7 +1973,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5JZ562WR45;
+				DEVELOPMENT_TEAM = 8WY55993RN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2000,7 +2000,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5JZ562WR45;
+				DEVELOPMENT_TEAM = 8WY55993RN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
