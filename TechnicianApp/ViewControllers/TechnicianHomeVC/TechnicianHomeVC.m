@@ -324,7 +324,16 @@
 
 - (IBAction)btnCutomerlookupTouch:(id)sender
 {
-    
+    if ([[DataLoader sharedInstance] currentUser].jobs != nil) {
+        NSArray* jobsArray = [[DataLoader sharedInstance] currentUser].jobs.allObjects;
+        
+        for (Job* jobItem in jobsArray) {
+            if ([[jobItem jobStatus] integerValue] == jstNeedDebrief && [[jobItem jobID] isEqualToString:self.edtJobId.text]) {
+                ShowOkAlertWithTitle(@"There is no job assigned for you.", self);
+                return;
+            }
+        }
+    }
     if (!self.edtJobId.hasText) {
         ShowOkAlertWithTitle(@"Enter Job ID", self);
     }
