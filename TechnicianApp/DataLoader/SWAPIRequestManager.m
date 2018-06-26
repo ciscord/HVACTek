@@ -199,7 +199,7 @@ NSString *const kResultStatusOK = @"000";
         id list = result[@"JobQueryData"][@"JobQueryRecord"];
         
         if ([result[@"JobQueryData"][@"_ReturnedRows"] intValue ]==0) {
-            NSError * error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : @"Job not find"}];
+            NSError * error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : @"Job not found"}];
             onError(error);
         } else
         {
