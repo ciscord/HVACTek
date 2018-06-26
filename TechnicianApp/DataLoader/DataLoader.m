@@ -16,7 +16,7 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
