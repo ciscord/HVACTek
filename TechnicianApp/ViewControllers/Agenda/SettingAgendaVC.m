@@ -74,8 +74,36 @@
 }
 
 - (void)setLabelsTexts {
-    self.presentationLbl.text = [NSString stringWithFormat:@"My Name Is %@ From %@ \n \nThank You For Choosing %@ To Service You Today \n \nAm I OK Where I Am Parked? \n \n Is It OK To Come In? \n \nLet Me Put My Shoe Covers On \n \n I Understand I Am Here Today For %@\nCan You Tell Me A Little Bit More About What's Going On \n \nI Would Like To Share With You What You Can Expect From Today's Call \n \n First I'm Going To Ask You A Few Questions To Help Me Do My Job Better & Then I Will Answer Any Questions You Have \n \n Next I'm Going To Do A Thorough Evaluation Of Your Entire System \n \n If I Notice Anything That May Be A Safety, Health Or Mechanical Concern, Is It OK If I Bring It To Your Attention? \n \nRest Assured I Will Not Do Any Work Without Your Approval \n \nIf There Are Any Issues That Do Need Attention\nI Will Do Everything I Can To Take Care Of Them For You Today %@ Fair Enough? \n \n It Will Take Me About ... (Minutes / Hours)\nTo Provide You With A Great Service Experience Today...Are We OK On Time? \n \n Is There Somewhere We Can Sit Down For A Few Minutes \nSo We Can Start With My Questions?", self.techName, self.companyName, self.companyName, @"You", @""];
     
+    NSString *infoString = @"Introduce Yourself: My Name Is ... From ... \n \nThank You: Thank You For Choosing ... To Service You Today \n \nParked OK: Am I OK Where I Am Parked? \n \nOk To Come In: Is It OK To Come In? \n \nShoe Covers: Let Me Put My Shoe Covers On \n \nConfirm Why You're There: I Understand I Am Here Today For ...\nCan You Tell Me A Little Bit More About What's Going On \n \nSet Expectations For Today's Call: I Would Like To Share With You What You Can Expect From Today's Call \n \nAsk & Answer Questions: First I'm Going To Ask You A Few Questions To Help Me Do My Job Better & Then I Will Answer Any Questions You Have \n \nThorough Evaluation Of Entire System: Next I'm Going To Do A Thorough Evaluation Of Your Entire System \n \nObservations That Need Attention: If I Notice Anything That May Be A Safety, Health Or Mechanical Concern, Is It OK If I Bring It To Your Attention? \n \nNo Work w/o Your Approval: Rest Assured I Will Not Do Any Work Without Your Approval \n \nComplete Work Today: If There Are Any Issues That Do Need Attention\nI Will Do Everything I Can To Take Care Of Them For You Today ... Fair Enough? \n \nTime Frame: It Will Take Me About ... (Minutes / Hours)\nTo Provide You With A Great Service Experience Today...Are We OK On Time? \n \nKitchen Table: Is There Somewhere We Can Sit Down For A Few Minutes \nSo We Can Start With My Questions?";
+    
+    NSMutableAttributedString *attString=[[NSMutableAttributedString alloc] initWithString:infoString];
+    
+    UIFont *font_bold=[UIFont fontWithName:@"Helvetica-Bold" size:15.0f];
+    
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Introduce Yourself:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Thank You:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Parked OK:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Ok To Come In:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Shoe Covers:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Confirm Why You're There:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Set Expectations For Today's Call:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Ask & Answer Questions:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Thorough Evaluation Of Entire System:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Observations That Need Attention:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"No Work w/o Your Approval:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Complete Work Today:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Time Frame:"]];
+    [attString addAttribute:NSFontAttributeName value:font_bold range:[infoString rangeOfString:@"Kitchen Table:"]];
+    
+    //add color
+    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor cs_getColorWithProperty:kColorPrimary] range:NSMakeRange(0, infoString.length)];
+
+    [self.presentationLbl setAttributedText:attString];
+    
+    
+    self.presentationLbl.editable = false;
+    self.presentationLbl.selectable = false;
 }
 
 
