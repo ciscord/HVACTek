@@ -19,9 +19,9 @@
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
 
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
-@property (weak, nonatomic) IBOutlet UILabel *bestChoiceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *betterChoiceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *goodChoiceLabel;
+@property (weak, nonatomic) IBOutlet UITextView *bestChoiceLabel;
+@property (weak, nonatomic) IBOutlet UITextView *betterChoiceLabel;
+@property (weak, nonatomic) IBOutlet UITextView *goodChoiceLabel;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *detailButtonArray;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *optionButtonArray;
@@ -160,17 +160,36 @@
         self.topLabelHeightConstraint.constant = 0;
     }
     
-    //calculate best price
-    NSString* iaqProductString = @"";
+    //calculate best price ------------------
+    
     float totalCost = 0;
     
-    for (IAQProductModel* iaqProduct in [IAQDataModel sharedIAQDataModel].iaqBestProductsArray) {
-        iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
-        totalCost += [iaqProduct.price floatValue] * [iaqProduct.quantity intValue];
+    UIFont *text2Font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+    NSMutableAttributedString *attributedString1 =
+    [[NSMutableAttributedString alloc] initWithString:@"" attributes:@{ NSFontAttributeName : text2Font }];
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+        
+        if ([[IAQDataModel sharedIAQDataModel].iaqBestProductsArray containsObject:iaqModel]) {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font }];
+            [attributedString1 appendAttributedString:attributedString2];
+            
+            totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
+        }else {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
+            [attributedString1 appendAttributedString:attributedString2];
+        }
+        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+
+        
     }
     
     [IAQDataModel sharedIAQDataModel].bestTotalPrice = totalCost;
-    self.bestChoiceLabel.text = iaqProductString;
+    self.bestChoiceLabel.attributedText = attributedString1;
     [self.bestFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
@@ -183,17 +202,33 @@
         self.bestEqual24Label.text = @"";
     }
     
-    //calculate better price
-    iaqProductString = @"";
+    //calculate better price ----------------
     totalCost = 0;
     
-    for (IAQProductModel* iaqProduct in [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray) {
-        iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
-        totalCost += [iaqProduct.price floatValue] * [iaqProduct.quantity intValue];
+    attributedString1 =
+    [[NSMutableAttributedString alloc] initWithString:@"" attributes:@{ NSFontAttributeName : text2Font }];
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+        
+        if ([[IAQDataModel sharedIAQDataModel].iaqBetterProductsArray containsObject:iaqModel]) {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font }];
+            [attributedString1 appendAttributedString:attributedString2];
+            
+            totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
+        }else {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
+            [attributedString1 appendAttributedString:attributedString2];
+        }
+        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+   
+        
     }
     
     [IAQDataModel sharedIAQDataModel].betterTotalPrice = totalCost;
-    self.betterChoiceLabel.text = iaqProductString;
+    self.betterChoiceLabel.attributedText = attributedString1;
     [self.betterFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
@@ -206,17 +241,33 @@
         self.betterEqual24Label.text = @"";
     }
     
-    //calculate good price
-    iaqProductString = @"";
+    //calculate good price ----------------
     totalCost = 0;
     
-    for (IAQProductModel* iaqProduct in [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray) {
-        iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
-        totalCost += [iaqProduct.price floatValue] * [iaqProduct.quantity intValue];
+    attributedString1 =
+    [[NSMutableAttributedString alloc] initWithString:@"" attributes:@{ NSFontAttributeName : text2Font }];
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+        
+        if ([[IAQDataModel sharedIAQDataModel].iaqGoodProductsArray containsObject:iaqModel]) {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font }];
+            [attributedString1 appendAttributedString:attributedString2];
+            
+            totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
+        }else {
+            
+            NSMutableAttributedString *attributedString2 =
+            [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
+            [attributedString1 appendAttributedString:attributedString2];
+        }
+        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+        
+        
     }
     
     [IAQDataModel sharedIAQDataModel].goodTotalPrice = totalCost;
-    self.goodChoiceLabel.text = iaqProductString;
+    self.goodChoiceLabel.attributedText = attributedString1;
     [self.goodFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {

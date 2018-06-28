@@ -1402,10 +1402,10 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EPAlogo" translatesAutoresizingMaskIntoConstraints="NO" id="VJz-0O-QmD">
-                                        <rect key="frame" x="42" y="386" width="250" height="266"/>
+                                        <rect key="frame" x="20" y="452" width="200" height="200"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="bM3-kx-bmy"/>
-                                            <constraint firstAttribute="height" constant="266" id="ypU-Ur-1F2"/>
+                                            <constraint firstAttribute="width" constant="200" id="bM3-kx-bmy"/>
+                                            <constraint firstAttribute="height" constant="200" id="ypU-Ur-1F2"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1417,7 +1417,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                     <constraint firstItem="P2g-lc-1Yx" firstAttribute="top" secondItem="E0J-mJ-PTw" secondAttribute="top" id="IYq-Nt-lSI"/>
                                     <constraint firstItem="DXB-1M-bhk" firstAttribute="top" secondItem="E0J-mJ-PTw" secondAttribute="top" constant="32" id="Tky-SC-zEU"/>
                                     <constraint firstItem="wZu-il-MqI" firstAttribute="leading" secondItem="DXB-1M-bhk" secondAttribute="trailing" constant="109" id="UYF-QU-kYR"/>
-                                    <constraint firstItem="VJz-0O-QmD" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" constant="42" id="Vjy-2y-GYe"/>
+                                    <constraint firstItem="VJz-0O-QmD" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" constant="20" id="Vjy-2y-GYe"/>
                                     <constraint firstAttribute="trailing" secondItem="3Zg-RQ-2kF" secondAttribute="trailing" constant="48" id="XU2-Fd-94h"/>
                                     <constraint firstAttribute="bottom" secondItem="zBn-Ji-34h" secondAttribute="bottom" constant="30" id="Xkq-q0-bQD"/>
                                     <constraint firstItem="nmQ-xh-Zk0" firstAttribute="leading" secondItem="E0J-mJ-PTw" secondAttribute="leading" id="cP9-fD-fxE"/>
@@ -1493,7 +1493,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouu-OB-o1M">
                                         <rect key="frame" x="304" y="61" width="160" height="160"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="66" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAI-Uj-DTL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAI-Uj-DTL">
                                                 <rect key="frame" x="0.0" y="40" width="160" height="76"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="76" id="7Ew-f7-jMK"/>
@@ -1502,7 +1502,7 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-7U-vjD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u41-7U-vjD">
                                                 <rect key="frame" x="8" y="114" width="144" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="6JJ-B1-ned"/>
@@ -1542,12 +1542,21 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                             <constraint firstAttribute="height" constant="221" id="Etg-yN-M9k"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EPAlogo" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-Xt-wup">
+                                        <rect key="frame" x="20" y="452" width="200" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="GAA-95-6jJ"/>
+                                            <constraint firstAttribute="height" constant="200" id="x95-Ya-DBu"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.96470588239999999" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="oIg-Cu-mSb" firstAttribute="top" secondItem="Agm-9V-b3p" secondAttribute="bottom" constant="30" id="1hE-CJ-JzT"/>
+                                    <constraint firstAttribute="bottom" secondItem="D6R-Xt-wup" secondAttribute="bottom" constant="182" id="BON-Jl-bRV"/>
                                     <constraint firstItem="Agm-9V-b3p" firstAttribute="centerX" secondItem="LgC-sG-j3a" secondAttribute="centerX" id="Est-Tb-X0y"/>
                                     <constraint firstAttribute="trailing" secondItem="BwZ-Mo-OuL" secondAttribute="trailing" id="Iaf-c0-1as"/>
+                                    <constraint firstItem="D6R-Xt-wup" firstAttribute="leading" secondItem="LgC-sG-j3a" secondAttribute="leading" constant="20" id="N3u-aQ-Jcd"/>
                                     <constraint firstItem="EGI-3t-sDL" firstAttribute="leading" secondItem="LgC-sG-j3a" secondAttribute="leading" id="QvX-ey-AaI"/>
                                     <constraint firstAttribute="bottom" secondItem="oIg-Cu-mSb" secondAttribute="bottom" constant="30" id="UEc-gz-86p"/>
                                     <constraint firstItem="ouu-OB-o1M" firstAttribute="centerX" secondItem="LgC-sG-j3a" secondAttribute="centerX" id="Xk0-Ar-Vw4"/>
@@ -1631,17 +1640,6 @@ Once They Tell You What Makes The Most Sense To Them Go Back To Finishing Your W
                                                     <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="6kA-hk-k6r"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8g-K1-ths">
-                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
-                                                <string key="text">Add PVC Uniton for pump Access
-Bypass Humidifier Maintenance
-Comprehensive Diagnostic
-install EZ Trap &amp; Test Drain Line
-Install Safety Wet Switch &amp; Test System Operation</string>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDO-1U-s6g">
                                                 <rect key="frame" x="571" y="8" width="124" height="38"/>
                                                 <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1722,22 +1720,28 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                     <constraint firstAttribute="width" constant="220" id="Uay-Ly-71Y"/>
                                                 </constraints>
                                             </view>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMN-ZE-Xzc">
+                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <attributedString key="attributedText"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="jDO-1U-s6g" secondAttribute="trailing" constant="17" id="6Oj-Y6-LNw"/>
+                                            <constraint firstAttribute="bottom" secondItem="pMN-ZE-Xzc" secondAttribute="bottom" id="7RV-4I-Ltf"/>
                                             <constraint firstAttribute="bottom" secondItem="CFN-cx-9iu" secondAttribute="bottom" constant="8" id="9MY-r1-HdV"/>
                                             <constraint firstAttribute="height" constant="140" id="AKG-if-86i"/>
                                             <constraint firstAttribute="trailing" secondItem="CFN-cx-9iu" secondAttribute="trailing" id="Fif-qG-HTg"/>
+                                            <constraint firstItem="pMN-ZE-Xzc" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" id="GIB-p4-Enz"/>
                                             <constraint firstItem="jDO-1U-s6g" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" constant="8" id="Icl-CA-mFd"/>
-                                            <constraint firstItem="z8g-K1-ths" firstAttribute="leading" secondItem="uBc-2f-WAC" secondAttribute="trailing" constant="23" id="Ryw-ba-anE"/>
                                             <constraint firstItem="uBc-2f-WAC" firstAttribute="leading" secondItem="RfP-OV-4jU" secondAttribute="leading" id="caJ-eS-zHY"/>
                                             <constraint firstItem="CFN-cx-9iu" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" constant="8" id="dl5-bU-hOH"/>
-                                            <constraint firstItem="z8g-K1-ths" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" id="fpK-Hy-NKQ"/>
+                                            <constraint firstItem="pMN-ZE-Xzc" firstAttribute="leading" secondItem="uBc-2f-WAC" secondAttribute="trailing" constant="23" id="dzl-Tf-7Xe"/>
+                                            <constraint firstItem="CFN-cx-9iu" firstAttribute="leading" secondItem="pMN-ZE-Xzc" secondAttribute="trailing" constant="8" id="i4f-Mb-kXd"/>
                                             <constraint firstAttribute="bottom" secondItem="uBc-2f-WAC" secondAttribute="bottom" id="iix-bZ-Zdb"/>
                                             <constraint firstItem="uBc-2f-WAC" firstAttribute="top" secondItem="RfP-OV-4jU" secondAttribute="top" id="lgQ-3N-YPT"/>
-                                            <constraint firstAttribute="bottom" secondItem="z8g-K1-ths" secondAttribute="bottom" id="oos-od-Kk9"/>
-                                            <constraint firstItem="CFN-cx-9iu" firstAttribute="leading" secondItem="z8g-K1-ths" secondAttribute="trailing" constant="8" id="xBb-H7-t0J"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMa-lm-0jK">
@@ -1757,16 +1761,6 @@ Install Safety Wet Switch &amp; Test System Operation</string>
                                                     <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="wAi-fl-9k9"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMx-5f-mNl">
-                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
-                                                <string key="text">Add PVC Uniton for Pump Access
-Bypass Humidifier Maintenance
-Comprehensive Diagnostic
-Install EZ Trap &amp; Test Drain Line</string>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lj9-vd-TkQ">
                                                 <rect key="frame" x="571" y="8" width="124" height="38"/>
                                                 <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1847,20 +1841,26 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                     <constraint firstAttribute="width" constant="220" id="IZa-AN-tQp"/>
                                                 </constraints>
                                             </view>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMp-gA-53y">
+                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="KMx-5f-mNl" secondAttribute="bottom" id="0Mj-GZ-RLp"/>
                                             <constraint firstItem="zqX-aY-SpN" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" id="1fW-5h-Ed0"/>
                                             <constraint firstAttribute="bottom" secondItem="zqX-aY-SpN" secondAttribute="bottom" id="2dP-76-hdJ"/>
-                                            <constraint firstItem="KMx-5f-mNl" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" id="5CZ-ha-rPP"/>
-                                            <constraint firstItem="KMx-5f-mNl" firstAttribute="leading" secondItem="zqX-aY-SpN" secondAttribute="trailing" constant="23" id="7sH-xD-kuD"/>
+                                            <constraint firstAttribute="bottom" secondItem="rMp-gA-53y" secondAttribute="bottom" id="5Re-Hv-ble"/>
                                             <constraint firstItem="3vj-16-BiT" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" constant="8" id="E0z-9D-Z4K"/>
                                             <constraint firstAttribute="trailing" secondItem="3vj-16-BiT" secondAttribute="trailing" id="Kma-pR-JmP"/>
+                                            <constraint firstItem="3vj-16-BiT" firstAttribute="leading" secondItem="rMp-gA-53y" secondAttribute="trailing" constant="8" id="NJj-vP-H7f"/>
                                             <constraint firstAttribute="height" constant="140" id="NWM-to-Fr5"/>
                                             <constraint firstAttribute="trailing" secondItem="Lj9-vd-TkQ" secondAttribute="trailing" constant="17" id="OOk-MY-eM0"/>
                                             <constraint firstItem="Lj9-vd-TkQ" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" constant="8" id="Qyy-1j-oUC"/>
-                                            <constraint firstItem="3vj-16-BiT" firstAttribute="leading" secondItem="KMx-5f-mNl" secondAttribute="trailing" constant="8" id="enl-7I-HwD"/>
+                                            <constraint firstItem="rMp-gA-53y" firstAttribute="leading" secondItem="zqX-aY-SpN" secondAttribute="trailing" constant="23" id="hho-15-nkS"/>
+                                            <constraint firstItem="rMp-gA-53y" firstAttribute="top" secondItem="EMa-lm-0jK" secondAttribute="top" id="twV-oc-52L"/>
                                             <constraint firstItem="zqX-aY-SpN" firstAttribute="leading" secondItem="EMa-lm-0jK" secondAttribute="leading" id="xbb-dG-i8V"/>
                                             <constraint firstAttribute="bottom" secondItem="3vj-16-BiT" secondAttribute="bottom" constant="8" id="xj6-Gs-UhV"/>
                                         </constraints>
@@ -1882,15 +1882,6 @@ Install EZ Trap &amp; Test Drain Line</string>
                                                     <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="Qe3-jJ-1YY"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acP-Do-R9g">
-                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
-                                                <string key="text">Add PVC Uniton for Pump Access
-Bypass Humidifier Maintenance
-Comprehensive Diagnostic</string>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKU-vn-MWG">
                                                 <rect key="frame" x="571" y="8" width="124" height="38"/>
                                                 <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1971,19 +1962,25 @@ Comprehensive Diagnostic</string>
                                                     <constraint firstAttribute="width" constant="220" id="uTE-nj-5F3"/>
                                                 </constraints>
                                             </view>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFM-ee-0CH">
+                                                <rect key="frame" x="163" y="0.0" width="321" height="140"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="XET-Ho-Wlq" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" id="3tZ-p8-4Zn"/>
-                                            <constraint firstItem="acP-Do-R9g" firstAttribute="leading" secondItem="XET-Ho-Wlq" secondAttribute="trailing" constant="23" id="9VD-p7-Aqu"/>
+                                            <constraint firstItem="ZFM-ee-0CH" firstAttribute="leading" secondItem="XET-Ho-Wlq" secondAttribute="trailing" constant="23" id="A4r-e4-SQa"/>
+                                            <constraint firstItem="ZFM-ee-0CH" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" id="A8b-AS-IFa"/>
                                             <constraint firstItem="jKU-vn-MWG" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" constant="8" id="GkJ-2x-Gm4"/>
                                             <constraint firstAttribute="trailing" secondItem="MBL-fQ-kSY" secondAttribute="trailing" id="HgN-Ut-8Wj"/>
                                             <constraint firstItem="XET-Ho-Wlq" firstAttribute="leading" secondItem="8Jy-LT-YdZ" secondAttribute="leading" id="JBG-cg-yWd"/>
-                                            <constraint firstItem="MBL-fQ-kSY" firstAttribute="leading" secondItem="acP-Do-R9g" secondAttribute="trailing" constant="8" id="Lhj-Wb-IP4"/>
                                             <constraint firstAttribute="bottom" secondItem="MBL-fQ-kSY" secondAttribute="bottom" constant="8" id="SFv-j5-JqI"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZFM-ee-0CH" secondAttribute="bottom" id="UWD-YO-1ko"/>
                                             <constraint firstItem="MBL-fQ-kSY" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" constant="8" id="Xdi-xc-Dvb"/>
-                                            <constraint firstAttribute="bottom" secondItem="acP-Do-R9g" secondAttribute="bottom" id="ZYs-gn-MuM"/>
-                                            <constraint firstItem="acP-Do-R9g" firstAttribute="top" secondItem="8Jy-LT-YdZ" secondAttribute="top" id="kiI-vq-3SC"/>
+                                            <constraint firstItem="MBL-fQ-kSY" firstAttribute="leading" secondItem="ZFM-ee-0CH" secondAttribute="trailing" constant="8" id="fRS-8w-InX"/>
                                             <constraint firstAttribute="height" constant="140" id="nGY-AP-HZd"/>
                                             <constraint firstAttribute="trailing" secondItem="jKU-vn-MWG" secondAttribute="trailing" constant="17" id="q7Y-ED-mJG"/>
                                             <constraint firstAttribute="bottom" secondItem="XET-Ho-Wlq" secondAttribute="bottom" id="zDi-TM-kbF"/>
@@ -2050,17 +2047,17 @@ Comprehensive Diagnostic</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bestChoiceLabel" destination="z8g-K1-ths" id="g0X-i5-lq7"/>
+                        <outlet property="bestChoiceLabel" destination="pMN-ZE-Xzc" id="Xhy-47-HYu"/>
                         <outlet property="bestEqual24Label" destination="pdf-y2-cpc" id="9GW-aS-gOn"/>
                         <outlet property="bestFinancingLabel" destination="tBL-bo-DVs" id="aQc-av-nRU"/>
                         <outlet property="bestFirstPrice" destination="xdm-lI-iyF" id="8IG-nf-24M"/>
                         <outlet property="bestSecondPrice" destination="Zvv-gJ-OKm" id="Jsp-AI-q89"/>
-                        <outlet property="betterChoiceLabel" destination="KMx-5f-mNl" id="2AN-SW-lIE"/>
+                        <outlet property="betterChoiceLabel" destination="rMp-gA-53y" id="xTX-Av-N9O"/>
                         <outlet property="betterEqual24Label" destination="gWX-jd-zxa" id="30l-ad-vXx"/>
                         <outlet property="betterFinancingLabel" destination="9M1-C5-JL4" id="nPW-xy-BNq"/>
                         <outlet property="betterFirstPrice" destination="C7b-2o-Ex3" id="xP5-5I-nlm"/>
                         <outlet property="betterSecondPrice" destination="Z58-Lh-34v" id="IgT-j1-eKC"/>
-                        <outlet property="goodChoiceLabel" destination="acP-Do-R9g" id="hFl-jx-2se"/>
+                        <outlet property="goodChoiceLabel" destination="ZFM-ee-0CH" id="ok9-Gv-wiR"/>
                         <outlet property="goodEqual24Label" destination="tp3-1H-Gw5" id="XOE-tx-ZuB"/>
                         <outlet property="goodFinancingLabel" destination="Ble-MG-73d" id="UAl-hh-1V5"/>
                         <outlet property="goodFirstPrice" destination="7Z2-Sr-XMo" id="q0U-hH-gdd"/>
@@ -2075,9 +2072,6 @@ Comprehensive Diagnostic</string>
                         <outletCollection property="optionButtonArray" destination="jDO-1U-s6g" id="kX0-3w-ifd"/>
                         <outletCollection property="optionButtonArray" destination="Lj9-vd-TkQ" id="MUR-v6-AyS"/>
                         <outletCollection property="optionButtonArray" destination="jKU-vn-MWG" id="u5c-e1-4yf"/>
-                        <outletCollection property="descriptionLabelArray" destination="z8g-K1-ths" id="qLX-Nr-PGJ"/>
-                        <outletCollection property="descriptionLabelArray" destination="KMx-5f-mNl" id="fBl-1E-B9C"/>
-                        <outletCollection property="descriptionLabelArray" destination="acP-Do-R9g" id="MtJ-fV-2xe"/>
                         <outletCollection property="priceViewArray" destination="CFN-cx-9iu" id="cXf-1c-Cnq"/>
                         <outletCollection property="priceViewArray" destination="3vj-16-BiT" id="6Lr-Md-t1E"/>
                         <outletCollection property="priceViewArray" destination="MBL-fQ-kSY" id="lYK-5W-AsL"/>
