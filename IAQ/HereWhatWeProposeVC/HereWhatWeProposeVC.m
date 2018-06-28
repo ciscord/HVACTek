@@ -27,25 +27,9 @@
     UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
     [self.navigationItem setRightBarButtonItem:techButton];
     
-    self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
-    self.myhomePointLabel.text = [NSString stringWithFormat:@"%d", [IAQDataModel sharedIAQDataModel].calculatedScore];
-    
-    self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#99ccff" alpha:1];
-    if ([IAQDataModel sharedIAQDataModel].calculatedScore <= 50) {
-        self.homeImageView.image = [UIImage imageNamed:@"sad"];
-        self.scoreLabel.text = @"POOR";
-    }else if ([IAQDataModel sharedIAQDataModel].calculatedScore < 70) {
-        self.homeImageView.image = [UIImage imageNamed:@"ok"];
-        self.scoreLabel.text = @"FAIR";
-    }else if ([IAQDataModel sharedIAQDataModel].calculatedScore < 85) {
-        self.homeImageView.image = [UIImage imageNamed:@"happy"];
-        self.scoreLabel.text = @"GOOD";
-    }else if ([IAQDataModel sharedIAQDataModel].calculatedScore <= 100) {
-        self.homeImageView.image = [UIImage imageNamed:@"best"];
-        self.scoreLabel.text = @"BEST";
+    self.myhomePointLabel.text = [NSString stringWithFormat:@"%d", 100];
         
-        self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
-    }
+    self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
