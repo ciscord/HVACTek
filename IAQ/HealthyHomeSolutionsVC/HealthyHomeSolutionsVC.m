@@ -19,6 +19,7 @@
 #import "QuestionsVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
 #import "ServiceOptionVC.h"
+#import "SummaryOfFindingVC.h"
 @interface HealthyHomeSolutionsVC ()<UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 {
     
@@ -66,16 +67,9 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
                 [checkedProducts addObject:@"0"];
             }
         }
-        
-        //skip sort page if array count is 1
-        if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
-            IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
-            
-            [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
-        }else {
-            HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-            [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
-        }
+       
+        SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
+        [self.navigationController pushViewController:summaryOfFindingVC animated:true];
         
     }else {
         [self downloadIAQProducts];
@@ -176,25 +170,13 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
-    
-    if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
-        [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoice]  forKey:@"iaqCurrentStep"];
-    }else{
-        [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolutionSort]  forKey:@"iaqCurrentStep"];
-    }
+    [userdefault setObject:[NSNumber numberWithInteger:IAQSummaryOfFinding]  forKey:@"iaqCurrentStep"];
     
     [userdefault synchronize];
     
-    //skip sort page if array count is 1
-    if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 1) {
-        IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
+    SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
+    [self.navigationController pushViewController:summaryOfFindingVC animated:true];
         
-        [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
-    }else {
-        HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
-    }
-    
 }
 //////////////////////////////////////////////
 - (void) downloadIAQProducts {

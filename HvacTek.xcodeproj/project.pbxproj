@@ -165,7 +165,6 @@
 		75F3DF911A3F1E3E00F60652 /* RecommendationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F3DF8F1A3F1E3E00F60652 /* RecommendationTableViewCell.m */; };
 		75F3DF921A3F1E3E00F60652 /* RecommendationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F3DF901A3F1E3E00F60652 /* RecommendationTableViewCell.xib */; };
 		840AAAEC20D42BCA00E07165 /* Add2CartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 840AAAEB20D42BCA00E07165 /* Add2CartData.m */; };
-		84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */; };
 		8421B00620602D61000FF69A /* TechDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421B00520602D61000FF69A /* TechDataModel.m */; };
 		849478282075535900321316 /* MediaLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849478262075535900321316 /* MediaLibraryVC.m */; };
 		8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8494782920755B5C00321316 /* PDFViewController1VC.m */; };
@@ -174,6 +173,10 @@
 		84A7A6FC206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A7A6F2206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld */; };
 		84AFAD921FB61F3D006CA298 /* HealthyHomeSolutionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */; };
 		84AFAD961FB6207E006CA298 /* CoolingStaticPressureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */; };
+		84D23FFE20E3D14B008C549D /* CartItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D23FFD20E3D14B008C549D /* CartItem+CoreDataProperties.m */; };
+		84D2400520E512CE008C549D /* SummaryOfFindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D2400120E512CE008C549D /* SummaryOfFindingVC.m */; };
+		84D2400620E512CE008C549D /* SummaryOfFindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D2400220E512CE008C549D /* SummaryOfFindingCell.m */; };
+		84D2400720E512CE008C549D /* SummaryOfFindingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */; };
 		84F1D76620DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
 		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
@@ -496,7 +499,6 @@
 		7E7694AAE6C0D1041CE304DC /* Pods-HvacTek.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HvacTek.release.xcconfig"; path = "Pods/Target Support Files/Pods-HvacTek/Pods-HvacTek.release.xcconfig"; sourceTree = "<group>"; };
 		840AAAEA20D42BCA00E07165 /* Add2CartData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Add2CartData.h; sourceTree = "<group>"; };
 		840AAAEB20D42BCA00E07165 /* Add2CartData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Add2CartData.m; sourceTree = "<group>"; };
-		84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CartItem+CoreDataProperties.m"; path = "/Users/geoff/Documents/repositories/hvactek/Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.m"; sourceTree = "<absolute>"; };
 		84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CartItem+CoreDataProperties.h"; path = "Add2Cart/Add2CartDataModel/CartItem+CoreDataProperties.h"; sourceTree = SOURCE_ROOT; };
 		8421B00420602D61000FF69A /* TechDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TechDataModel.h; sourceTree = "<group>"; };
 		8421B00520602D61000FF69A /* TechDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechDataModel.m; sourceTree = "<group>"; };
@@ -521,6 +523,12 @@
 		84AFAD911FB61F3D006CA298 /* HealthyHomeSolutionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthyHomeSolutionsVC.m; sourceTree = "<group>"; };
 		84AFAD941FB6207E006CA298 /* CoolingStaticPressureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoolingStaticPressureVC.h; sourceTree = "<group>"; };
 		84AFAD951FB6207E006CA298 /* CoolingStaticPressureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoolingStaticPressureVC.m; sourceTree = "<group>"; };
+		84D23FFD20E3D14B008C549D /* CartItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CartItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		84D2400020E512CE008C549D /* SummaryOfFindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryOfFindingCell.h; sourceTree = "<group>"; };
+		84D2400120E512CE008C549D /* SummaryOfFindingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryOfFindingVC.m; sourceTree = "<group>"; };
+		84D2400220E512CE008C549D /* SummaryOfFindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryOfFindingCell.m; sourceTree = "<group>"; };
+		84D2400320E512CE008C549D /* SummaryOfFindingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryOfFindingVC.h; sourceTree = "<group>"; };
+		84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryOfFindingCell.xib; sourceTree = "<group>"; };
 		84F1D76420DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SummaryOfFindingOptionsEditVC.h; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.h; sourceTree = SOURCE_ROOT; };
 		84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SummaryOfFindingOptionsEditVC.m; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.m; sourceTree = SOURCE_ROOT; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -693,8 +701,8 @@
 				84A7A6F2206BE8730003E075 /* Unifeiyed_Quoting.xcdatamodeld */,
 				84A7A6EE206BE8600003E075 /* CartItem+CoreDataClass.h */,
 				84A7A6EF206BE8600003E075 /* CartItem+CoreDataClass.m */,
+				84D23FFD20E3D14B008C549D /* CartItem+CoreDataProperties.m */,
 				84186E57205AB8BB0065AFFD /* CartItem+CoreDataProperties.h */,
-				84186E54205AB8BB0065AFFD /* CartItem+CoreDataProperties.m */,
 				862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */,
 				862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */,
 				862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */,
@@ -1122,6 +1130,7 @@
 				5085662A1FB399EA000B0F56 /* HeatingStaticPressureVC */,
 				84AFAD931FB62066006CA298 /* CoolingStaticPressureVC */,
 				84AFAD8F1FB61F13006CA298 /* HealthyHomeSolutionsVC */,
+				84D23FFF20E51295008C549D /* SummaryOfFindingVC */,
 				505C6B5E1FB68B8800761B04 /* HealthyHomeSolutionsSortVC */,
 				505C6B621FB68E2000761B04 /* IAQCustomerChoiceVC */,
 				505C6B6A1FB69DEA00761B04 /* BreatheEasyHealthyHomeVC */,
@@ -1462,6 +1471,18 @@
 			path = CoolingStaticPressureVC;
 			sourceTree = "<group>";
 		};
+		84D23FFF20E51295008C549D /* SummaryOfFindingVC */ = {
+			isa = PBXGroup;
+			children = (
+				84D2400020E512CE008C549D /* SummaryOfFindingCell.h */,
+				84D2400220E512CE008C549D /* SummaryOfFindingCell.m */,
+				84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */,
+				84D2400320E512CE008C549D /* SummaryOfFindingVC.h */,
+				84D2400120E512CE008C549D /* SummaryOfFindingVC.m */,
+			);
+			path = SummaryOfFindingVC;
+			sourceTree = "<group>";
+		};
 		867BF0A61DBDE5EF00AF8CD6 /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1612,6 +1633,7 @@
 				52F3D1E91CFF0B7D008D24C9 /* VideoLibraryCell.xib in Resources */,
 				91BA9A091B8DF034005EA4EA /* ProductCell.xib in Resources */,
 				4FD2EB8A1A361A0F0056D4C4 /* InfoPlist.strings in Resources */,
+				84D2400720E512CE008C549D /* SummaryOfFindingCell.xib in Resources */,
 				524FDFF71B79046100480987 /* CustomerChoiceCell.xib in Resources */,
 				523329521C170871008ABA46 /* RROverviewCell.xib in Resources */,
 				528698B21C6B2BE9003F91C2 /* SortFindinsCell.xib in Resources */,
@@ -1780,6 +1802,7 @@
 				8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,
+				84D2400620E512CE008C549D /* SummaryOfFindingCell.m in Sources */,
 				84A16E161FC4928700F01106 /* IAQData.xcdatamodeld in Sources */,
 				505C6B811FB6AA4A00761B04 /* SVSegmentedControl.m in Sources */,
 				4FD2EB8C1A361BCB0056D4C4 /* main.m in Sources */,
@@ -1793,7 +1816,6 @@
 				52EAF0FC1B90C1FA002310B4 /* EnlargeOptionsVC.m in Sources */,
 				0E5DF02D1D2423B8007CE24F /* PictureLibraryVC.m in Sources */,
 				4FD2EBB51A385FCF0056D4C4 /* DispatchVC.m in Sources */,
-				84186E58205AB8BC0065AFFD /* CartItem+CoreDataProperties.m in Sources */,
 				862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */,
 				524037D71CEB4932008BF125 /* AddCustomRepairVC.m in Sources */,
 				52D388981D3655A2009D2D49 /* Logs+Functional.m in Sources */,
@@ -1803,6 +1825,7 @@
 				5265782E1C6A0A2500EC1AA5 /* Photos+CoreDataProperties.m in Sources */,
 				508566291FB3819F000B0F56 /* HealthyHomeProcessVC.m in Sources */,
 				5067725C1FB8B12B00274990 /* HealthyAgreementTableViewCell.m in Sources */,
+				84D23FFE20E3D14B008C549D /* CartItem+CoreDataProperties.m in Sources */,
 				52A1D00C1C6CDA0A00F68253 /* NSMutableAttributedString+Color.m in Sources */,
 				520159C91B8D8CCF0035909C /* AgendaPictureVC.m in Sources */,
 				91BA9A081B8DF034005EA4EA /* ProductCell.m in Sources */,
@@ -1856,6 +1879,7 @@
 				4F8EC7B71A604FD500999FA1 /* ExploreSummaryVC.m in Sources */,
 				5265782C1C6A0A2500EC1AA5 /* Item+CoreDataProperties.m in Sources */,
 				AA23D6491A379B4B00703952 /* TechnicianDebriefVC.m in Sources */,
+				84D2400520E512CE008C549D /* SummaryOfFindingVC.m in Sources */,
 				5233294D1C1706D9008ABA46 /* RROverviewVC.m in Sources */,
 				505C6B6D1FB69E1200761B04 /* BreatheEasyHealthyHomeVC.m in Sources */,
 				4F3C50B51A3F0D8C00778972 /* QuestionView.m in Sources */,

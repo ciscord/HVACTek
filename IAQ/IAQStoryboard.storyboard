@@ -2637,6 +2637,160 @@ Install Safety Wet Switch &amp; Test System Operation</string>
             </objects>
             <point key="canvasLocation" x="2247.65625" y="816.796875"/>
         </scene>
+        <!--Summary Of FindingVC-->
+        <scene sceneID="yzb-ff-Gbp">
+            <objects>
+                <viewController storyboardIdentifier="SummaryOfFindingVC" automaticallyAdjustsScrollViewInsets="NO" id="oIk-4b-sgV" customClass="SummaryOfFindingVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FWw-NW-dA4"/>
+                        <viewControllerLayoutGuide type="bottom" id="rOx-Sx-J1X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cru-T2-qta">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jf4-38-6n7" customClass="RoundCornerView">
+                                <rect key="frame" x="39" y="210" width="690" height="794"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oCx-IF-dTT">
+                                        <rect key="frame" x="45" y="30" width="600" height="526"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="oIk-4b-sgV" id="5Bd-z8-yHj"/>
+                                            <outlet property="delegate" destination="oIk-4b-sgV" id="vaK-fF-ncm"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WJ-UU-I7i">
+                                        <rect key="frame" x="45" y="721" width="188" height="52"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="188" id="nX8-D2-ulK"/>
+                                            <constraint firstAttribute="height" constant="52" id="qlG-uJ-L1I"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="nextButtonClick:" destination="oIk-4b-sgV" eventType="touchUpInside" id="dqo-Ec-lhP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0d-tP-ncf">
+                                        <rect key="frame" x="457" y="721" width="188" height="52"/>
+                                        <color key="backgroundColor" red="0.46274509800000002" green="0.74117647060000003" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="hvn-w3-I5G"/>
+                                            <constraint firstAttribute="width" constant="188" id="l11-oF-wuq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="28"/>
+                                        <state key="normal" title="Library">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="libraryButtonClick:" destination="oIk-4b-sgV" eventType="touchUpInside" id="0C4-fh-ma3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UM2-Ud-0aT">
+                                        <rect key="frame" x="45" y="564" width="140" height="140"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="2qX-qc-FY6"/>
+                                            <constraint firstAttribute="height" constant="140" id="jmc-63-o9K"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="BEST">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="5YB-PU-Y1d"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMC-EH-4r8">
+                                        <rect key="frame" x="275" y="564" width="140" height="140"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="bnZ-b5-fGo"/>
+                                            <constraint firstAttribute="height" constant="140" id="v8C-hO-uTB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="BETTER">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="8pK-va-Mf0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUP-kd-UuZ">
+                                        <rect key="frame" x="505" y="564" width="140" height="140"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="Wc2-Wr-TQX"/>
+                                            <constraint firstAttribute="height" constant="140" id="kqm-P4-gPl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <state key="normal" title="GOOD">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="detailsClick:" destination="p28-lU-3b5" eventType="touchUpInside" id="IqL-Rn-s0k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.67843137249999996" green="0.83137254900000002" blue="0.47843137250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="g0d-tP-ncf" firstAttribute="top" secondItem="cUP-kd-UuZ" secondAttribute="bottom" constant="17" id="4xY-Wn-U78"/>
+                                    <constraint firstAttribute="trailing" secondItem="cUP-kd-UuZ" secondAttribute="trailing" constant="45" id="74N-ev-mtN"/>
+                                    <constraint firstItem="oCx-IF-dTT" firstAttribute="leading" secondItem="jf4-38-6n7" secondAttribute="leading" constant="45" id="Dd6-ut-nuJ"/>
+                                    <constraint firstItem="UM2-Ud-0aT" firstAttribute="top" secondItem="oCx-IF-dTT" secondAttribute="bottom" constant="8" id="GVT-3d-jzN"/>
+                                    <constraint firstItem="UM2-Ud-0aT" firstAttribute="leading" secondItem="jf4-38-6n7" secondAttribute="leading" constant="45" id="N0n-RJ-eaH"/>
+                                    <constraint firstItem="oCx-IF-dTT" firstAttribute="top" secondItem="jf4-38-6n7" secondAttribute="top" constant="30" id="OrS-Yl-Aj4"/>
+                                    <constraint firstItem="bMC-EH-4r8" firstAttribute="centerX" secondItem="jf4-38-6n7" secondAttribute="centerX" id="PoQ-On-Hyy"/>
+                                    <constraint firstAttribute="trailing" secondItem="g0d-tP-ncf" secondAttribute="trailing" constant="45" id="Tgr-EX-MyO"/>
+                                    <constraint firstItem="3WJ-UU-I7i" firstAttribute="top" secondItem="UM2-Ud-0aT" secondAttribute="bottom" constant="17" id="VPi-EQ-yOb"/>
+                                    <constraint firstAttribute="trailing" secondItem="oCx-IF-dTT" secondAttribute="trailing" constant="45" id="XAp-2V-OPv"/>
+                                    <constraint firstAttribute="bottom" secondItem="g0d-tP-ncf" secondAttribute="bottom" constant="21" id="ZDe-id-FFr"/>
+                                    <constraint firstItem="3WJ-UU-I7i" firstAttribute="leading" secondItem="jf4-38-6n7" secondAttribute="leading" constant="45" id="emv-iw-dge"/>
+                                    <constraint firstAttribute="bottom" secondItem="bMC-EH-4r8" secondAttribute="bottom" constant="90" id="sHp-0a-3XW"/>
+                                    <constraint firstAttribute="bottom" secondItem="3WJ-UU-I7i" secondAttribute="bottom" constant="21" id="t5w-5A-5pS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="jf4-38-6n7" secondAttribute="trailing" constant="19" id="EwU-gv-rAU"/>
+                            <constraint firstItem="jf4-38-6n7" firstAttribute="top" secondItem="FWw-NW-dA4" secondAttribute="bottom" constant="190" id="LC5-Rx-Fkg"/>
+                            <constraint firstItem="rOx-Sx-J1X" firstAttribute="top" secondItem="jf4-38-6n7" secondAttribute="bottom" constant="20" id="VlD-hE-E53"/>
+                            <constraint firstItem="jf4-38-6n7" firstAttribute="leading" secondItem="Cru-T2-qta" secondAttribute="leadingMargin" constant="19" id="zUk-Rb-6pB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hfL-eM-sC3"/>
+                    <connections>
+                        <outlet property="btnContinue" destination="3WJ-UU-I7i" id="Kpp-kL-hbC"/>
+                        <outlet property="pictureButton" destination="g0d-tP-ncf" id="lqc-ac-zUL"/>
+                        <outlet property="tableView" destination="oCx-IF-dTT" id="XE7-Fc-Ig8"/>
+                        <outletCollection property="bigButtonArray" destination="UM2-Ud-0aT" id="K0l-z4-9zS"/>
+                        <outletCollection property="bigButtonArray" destination="bMC-EH-4r8" id="5xP-xJ-Qdb"/>
+                        <outletCollection property="bigButtonArray" destination="cUP-kd-UuZ" id="cwJ-zn-rek"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OLh-kk-O26" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="779.6875" y="816.796875"/>
+        </scene>
     </scenes>
     <resources>
         <image name="EPAlogo" width="412" height="449"/>

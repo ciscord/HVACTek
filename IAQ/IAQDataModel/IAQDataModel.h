@@ -13,6 +13,7 @@
 typedef NS_ENUM(NSInteger, IAQCurrentView) {
     IAQNone = -1,
     IAQHealthyHomeSolution,
+    IAQSummaryOfFinding,
     IAQHealthyHomeSolutionSort,
     IAQCustomerChoice,
     IAQBreatheEasyHealtyHome,
