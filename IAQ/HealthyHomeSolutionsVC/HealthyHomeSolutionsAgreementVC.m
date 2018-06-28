@@ -103,7 +103,7 @@
     }else{
         [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
         [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        _priceDescriptionLabel.text = @"15% Savings 0% Financing";
+        _priceDescriptionLabel.text = @"";
     }
     
     self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
