@@ -160,9 +160,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     self.roundedURLView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
 }
 
-
-
-
 - (void)updateTotalPrice {
     NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
     
@@ -273,13 +270,10 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     job.selectedServiceOptions = self.selectedServiceOptionsDict[@"removedItems"];
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptionsDict[@"ServiceID"]intValue]];
     
-    ///  job.jobStatus = @(jstNeedDebrief);
-    
     if (!job.startTime) {
         job.startTime = [NSDate date];
     }
     
-    //job.startTime = [NSDate date];
     [job.managedObjectContext save];
     
     NSMutableArray *items1 = self.selectedServiceOptionsDict[@"removedItems"];
@@ -348,11 +342,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     for (CompanyAditionalInfo * obj  in [[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData]) {
         [additionalInfo addObject:obj.info_id];
     }
-    //[[NSArray alloc] initWithObjects:@"1", @"13", nil];//
-    
-    
-    
-    
+ 
     NSDictionary * dict = @{@"userID" : [DataLoader sharedInstance].currentUser.userID,
                             @"userCode" : [DataLoader sharedInstance].currentUser.userCode,
                             @"userName" : [DataLoader sharedInstance].currentUser.userName,
@@ -383,8 +373,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     [[DataLoader sharedInstance] postInvoice:dict requestingPreview:1 onSuccess:^(NSString *message) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        ///    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        ///    [weakSelf.navigationController popToViewController:appDelegate.homeController animated:YES];
         
         self.invoicePreviewString = message;
         [self performSegueWithIdentifier:@"showInvoicePreviewVC" sender:self];

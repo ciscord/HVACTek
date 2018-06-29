@@ -91,18 +91,15 @@
     
     if (self.costType == SAVING) {
         [self.priceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        if (totalCost < 1000) {
-            [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-            _priceDescriptionLabel.text = @"15% Savings 0% Financing";
-        }else{
-            totalCost = totalCost * 0.85;
-            [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-            _priceDescriptionLabel.text = @"15% Savings 0% Financing";
-        }
+    
+        totalCost = totalCost * 0.85;
+        [self.priceButton setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
+        _priceDescriptionLabel.text = @"15% Savings 0% Financing";
+    
         
     }else{
         [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
-        [self.priceButton setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
+        [self.priceButton setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
         _priceDescriptionLabel.text = @"";
     }
     
@@ -374,5 +371,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (NSString *)changeCurrencyFormat:(float)number {
+    
+    NSNumberFormatter *formatterCurrency;
+    formatterCurrency = [[NSNumberFormatter alloc] init];
+    
+    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency stringFromNumber: @(12345.2324565)];
+    
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
+}
 
 @end

@@ -25,16 +25,6 @@ typedef void (^OnDidRemoveOption)(NSInteger rowIndex);
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self && ![self.accessoryView isKindOfClass:[UIButton class]]) {
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [button setShowsTouchWhenHighlighted:YES];
-//        [button setTitle:@"⊖" forState:UIControlStateNormal];
-////        [button.titleLabel setFont: [UIFont fontWithName:@"Calibri-Light" size: 14]];
-//        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [button setFrame:CGRectMake(0.0, 0.0, 24, 24)];
-//        [button addTarget:self action:@selector(didDeleteServiceOption:) forControlEvents:UIControlEventTouchUpInside];
-//        self.accessoryView = button;
-//    }
     return self;
 }
 
@@ -49,16 +39,6 @@ typedef void (^OnDidRemoveOption)(NSInteger rowIndex);
 #pragma mark -
 
 @interface RecommendationTableViewCell ()
-
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (nonatomic, strong) NSMutableArray     *serviceOptions;
-//@property (weak, nonatomic) IBOutlet UIView      *vSeparator1;
-//@property (weak, nonatomic) IBOutlet UIView      *vSeparator2;
-//@property (weak, nonatomic) IBOutlet UIView      *vPrice;
-//@property (weak, nonatomic) IBOutlet UIButton    *btnPrice1;
-//@property (weak, nonatomic) IBOutlet UIButton    *btnPrice2;
-//@property (weak, nonatomic) IBOutlet UILabel     *lbESAsaving;
-//@property (weak, nonatomic) IBOutlet UILabel     *lb24MonthRates;
 
 @property (nonatomic, strong) NSMutableArray     *serviceOptionsRemoved;
 
@@ -86,15 +66,9 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     [self.tableView reloadData];
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     
-    //    self.backgroundColor = [UIColor cs_getColorWithProperty:kColorSecondary10];
-    //    self.choiceOptionButton.layer.borderWidth = 1.0f;
-    //    self.choiceOptionButton.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary].CGColor;
-    //    [self.choiceOptionButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
     self.choiceOptionButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     [self.choiceOptionButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary0] forState:UIControlStateNormal];
     
@@ -219,7 +193,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                     totalQuantity = [p.quantity intValue];
                 
                 
-                totalPriceNormal += p.amount.floatValue * totalQuantity;
+                totalPriceNormal += p.amount.floatValue * totalQuantity;//this is 0.85 amount
                 totalPriceESA += p.amountESA.floatValue * totalQuantity;
             }
             
@@ -255,8 +229,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 }
 
-
-
 #pragma mark - OptionsBtn Action
 - (IBAction)optionsBtnClicked:(UIButton *)sender {
     if (self.optionButtonSelected) {
@@ -275,12 +247,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if ([self.serviceOptions count] == 0){
-//        return 0;
-//    }else{
-//        return [self.serviceOptionsRemoved count];
-//    }
-    
     
     if (self.optionsDisplayType == odtReadonlyWithPrice) {
         return [self.serviceOptionsRemoved count];;
@@ -289,30 +255,11 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     }
 }
 
-
-/*
- 
- PricebookItem *p = [self.selectedServiceOptions[@"removedItems"] objectAtIndex:indexPath.row - 1];
- NSString * serviceString;
- if ([p.quantity intValue] > 1) {
- serviceString = [NSString stringWithFormat:@"     (%@) ",p.quantity];
- }else{
- serviceString = @"     ";
- }
- cell.descriptionLabel.text = [serviceString stringByAppendingString:p.name];
- cell.priceLabel.text = @"";
- 
- */
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //__weak RecommendationTableViewCell *weakSelf = self;
 
     ServiceOptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCELL_IDENTIFIER];
     PricebookItem *pOptions    = self.serviceOptions[indexPath.row];
     cell.textLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-  ////  cell.accessoryView.hidden = !self.isEditable || pOptions.isMain;
-
     
     if (self.optionsDisplayType == odtReadonlyWithPrice) {
         PricebookItem *pRemoved    = self.serviceOptionsRemoved[indexPath.row];
@@ -357,18 +304,8 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
         
     }
     
-    
-    
-    ///cell.textLabel.text = p.name;
     cell.textLabel.font       = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
-    ///cell.accessoryView.hidden = !self.isEditable || p.isMain;
     cell.rowIndex             = indexPath.row;
-    
-    ///cell.rowIndex = [self.serviceOptions indexOfObject:p];
-//    [cell setOnRemovedOption:^(NSInteger rowIndex) {
-//         [weakSelf didRemoveOptionAtIndex:rowIndex];
-//     }];
-    
     
     return cell;
 }
@@ -387,7 +324,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectZero];
     headerView.backgroundColor = [UIColor clearColor];
-    //[headerView addSubview:titleLabel];
     return headerView;
 }
 
@@ -406,8 +342,6 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     return MAX(130.0, height);
 }
 
-
-
 - (NSString *)changeCurrencyFormat:(float)number {
     
     NSNumberFormatter *formatterCurrency;
@@ -419,18 +353,5 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
     
     return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
-
-
-/*
- NSNumberFormatter *formatterCurrency;
- formatterCurrency = [[NSNumberFormatter alloc] init];
- 
- formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
- [formatterCurrency setMaximumFractionDigits:0];
- [formatterCurrency stringFromNumber: @(12345.2324565)];
- 
- return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
- 
- */
 
 @end

@@ -190,16 +190,16 @@
     
     [IAQDataModel sharedIAQDataModel].bestTotalPrice = totalCost;
     self.bestChoiceLabel.attributedText = attributedString1;
-    [self.bestFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
+    [self.bestFirstPrice setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
+    
+    [self.bestSecondPrice setTitle:[self changeCurrencyFormat:(totalCost * 0.85)] forState:UIControlStateNormal];
     
     if (totalCost >= 1000) {
-        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.bestFinancingLabel.text = @"0% Financing";
-        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
+        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
     }else{
-        [self.bestSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.bestFinancingLabel.text = @"0% Financing";
-        self.bestEqual24Label.text = @"";
+        self.bestFinancingLabel.text = @"Does Not Qualify";
+        self.bestEqual24Label.text = @"For Financing";
     }
     
     //calculate better price ----------------
@@ -229,16 +229,14 @@
     
     [IAQDataModel sharedIAQDataModel].betterTotalPrice = totalCost;
     self.betterChoiceLabel.attributedText = attributedString1;
-    [self.betterFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-    
+    [self.betterFirstPrice setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
+    [self.betterSecondPrice setTitle:[self changeCurrencyFormat:(totalCost * 0.85)] forState:UIControlStateNormal];
     if (totalCost >= 1000) {
-        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.betterFinancingLabel.text = @"0% Financing";
-        self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
+        self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
     }else{
-        [self.betterSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.betterFinancingLabel.text = @"0% Financing";
-        self.betterEqual24Label.text = @"";
+        self.bestFinancingLabel.text = @"Does Not Qualify";
+        self.bestEqual24Label.text = @"For Financing";
     }
     
     //calculate good price ----------------
@@ -268,16 +266,14 @@
     
     [IAQDataModel sharedIAQDataModel].goodTotalPrice = totalCost;
     self.goodChoiceLabel.attributedText = attributedString1;
-    [self.goodFirstPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-    
+    [self.goodFirstPrice setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
+    [self.goodSecondPrice setTitle:[self changeCurrencyFormat:(totalCost * 0.85)] forState:UIControlStateNormal];
     if (totalCost >= 1000) {
-        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)(totalCost * 0.85)] forState:UIControlStateNormal];
         self.goodFinancingLabel.text = @"0% Financing";
-        self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)(totalCost / 24)];
+        self.goodEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
     }else{
-        [self.goodSecondPrice setTitle:[NSString stringWithFormat:@"$%d", (int)totalCost] forState:UIControlStateNormal];
-        self.goodFinancingLabel.text = @"0% Financing";
-        self.goodEqual24Label.text = @"";
+        self.goodFinancingLabel.text = @"Does Not Qualify";
+        self.goodEqual24Label.text = @"For Financing";
     }
 }
 #pragma mark Button event
@@ -382,6 +378,18 @@
     MediaLibraryVC* mediaLibraryVC = [storyboard instantiateViewControllerWithIdentifier:@"MediaLibraryVC"];
     [self.navigationController pushViewController:mediaLibraryVC animated:true];
     
+}
+
+- (NSString *)changeCurrencyFormat:(float)number {
+    
+    NSNumberFormatter *formatterCurrency;
+    formatterCurrency = [[NSNumberFormatter alloc] init];
+    
+    formatterCurrency.numberStyle = NSNumberFormatterCurrencyStyle;
+    [formatterCurrency setMaximumFractionDigits:0];
+    [formatterCurrency stringFromNumber: @(12345.2324565)];
+    
+    return [formatterCurrency stringFromNumber:[NSNumber numberWithInt:number]];
 }
 
 - (void)didReceiveMemoryWarning {
