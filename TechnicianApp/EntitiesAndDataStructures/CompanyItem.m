@@ -14,12 +14,15 @@
                          address1:(NSString*)address1
                          address2:(NSString*)address2
                          admin_id:(NSString*)admin_id
+                       alias_name:(NSString*)alias_name
                     business_name:(NSString *)business_name
                              city:(NSString *)city
                    contact_f_name:(NSString *)contact_f_name
                    contact_l_name:(NSString *)contact_l_name
                     contact_phone:(NSString *)contact_phone
+                         csv_name:(NSString *)csv_name
                           deleted:(NSString *)deleted
+                    invoice_email:(NSString *)invoice_email
                              logo:(NSString *)logo
                     primary_color:(NSString *)primary_color
                   secondary_color:(NSString *)secondary_color
@@ -51,6 +54,9 @@
     company.plumbing_category  = plumbing_category;
     company.plumbing_group  = plumbing_group;
     company.isPlumbing      = isPlumbing;
+    company.invoice_email = invoice_email;
+    company.alias_name = alias_name;
+    company.csv_name = csv_name;
     return company;
 }
 
@@ -77,6 +83,9 @@
         self.zip                = [aDecoder decodeObjectForKey:@"zip"];
         self.plumbing_category  = [aDecoder decodeObjectForKey:@"plumbing_category"];
         self.plumbing_group     = [aDecoder decodeObjectForKey:@"plumbing_group"];
+        self.invoice_email     = [aDecoder decodeObjectForKey:@"invoice_email"];
+        self.alias_name     = [aDecoder decodeObjectForKey:@"alias_name"];
+        self.csv_name     = [aDecoder decodeObjectForKey:@"csv_name"];
         self.isPlumbing         = [[aDecoder decodeObjectForKey:@"isPlumbing"] boolValue];
     }
     return self;
@@ -103,6 +112,9 @@
     [aCoder encodeObject:self.zip               forKey:@"zip"];
     [aCoder encodeObject:self.plumbing_category forKey:@"plumbing_category"];
     [aCoder encodeObject:self.plumbing_group    forKey:@"plumbing_group"];
+    [aCoder encodeObject:self.invoice_email    forKey:@"invoice_email"];
+    [aCoder encodeObject:self.alias_name    forKey:@"alias_name"];
+    [aCoder encodeObject:self.csv_name    forKey:@"csv_name"];
     [aCoder encodeObject:[NSNumber numberWithBool:self.isPlumbing] forKey:@"isPlumbing"];
 }
 

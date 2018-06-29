@@ -80,6 +80,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 @property (nonatomic, strong) SWAPIRequestManager *SWAPIManager;
 @property (nonatomic, strong) User                *currentUser;
+@property (nonatomic, strong) CompanyItem   *currentCompany;
 @property (nonatomic, readonly) NSString          *userEmail;
 @property (nonatomic, readonly) NSString          *username;
 @property (nonatomic, readonly) NSString          *token;
@@ -100,9 +101,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, assign) QuestionType currentJobCallType;
 
 @property (nonatomic, readonly) PricebookItem *diagnosticOnlyOption;
-
-@property (nonatomic, readonly) CompanyItem *currentCompany;
-
 
 + (DataLoader *)sharedInstance;
 
@@ -245,6 +243,11 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 -(void)getMainVideo: (void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
             onError:(void (^)(NSError *error))onError;
-
+//------------------------------------------------------------------------------------------
+#pragma mark - Timer
+//------------------------------------------------------------------------------------------
+-(void)startTimeWithJobId:(NSString *)jobId
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError;
 
 @end

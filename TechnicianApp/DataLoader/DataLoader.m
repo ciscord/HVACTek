@@ -90,7 +90,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 @property (nonatomic, strong) NSMutableArray *iPadCommonRepairsOptionsLocal;
 @property (nonatomic, strong) NSMutableArray *otherOptionsLocal;
 @property (nonatomic, strong) PricebookItem *diagnosticOnlyOption;
-@property (nonatomic, strong) CompanyItem   *currentCompany;
+
 @property (readwrite) BOOL hasInternet;
 @end
 
@@ -387,27 +387,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
 }
 
 //------------------------------------------------------------------------------------------
-#pragma mark - Account swapi connect
-//------------------------------------------------------------------------------------------
-//- (void)connectToSWAPIonSucces:(void (^)(NSString *message))onSuccess
-//                       onError:(void (^)(NSError *error))onError{
-//    
-//    __weak typeof(self) weakSelf = self;
-//    weakSelf.SWAPIManager = [SWAPIRequestManager sharedInstance];
-//    weakSelf.SWAPIManager.SWAPIUserCode = weakSelf.currentUser.userCode;
-//    weakSelf.SWAPIManager.SWAPIUsername = weakSelf.currentUser.userName;
-//    weakSelf.SWAPIManager.SWAPIUserPassword = weakSelf.currentUser.password;
-//    weakSelf.SWAPIManager.SWAPIUserPassword = weakSelf.currentUser.password;
-//    
-//    [weakSelf.SWAPIManager connectOnSuccess:^(NSString *successMessage) {
-//        onSuccess(@"OK");
-//    } onError:^(NSError *error) {
-//        onError(error);
-//    }];
-//    
-//};
-
-//------------------------------------------------------------------------------------------
 #pragma mark - Account API methods(Create, Login, GetUserInfo, Logout...)
 //------------------------------------------------------------------------------------------
 
@@ -422,13 +401,12 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     dateTimeFormatter.timeZone = [NSTimeZone timeZoneWithName:@"America/Los_Angeles"];
     md5String                  = [md5String stringByAppendingString:[dateTimeFormatter stringFromDate:[NSDate date]]];
     NSData   *hmacData  = [DataLoader hmacForKey:API_SECRET_KEY andData:md5String];
-    NSString *signature = [hmacData base64EncodedStringWithOptions:0];     //[[NSString alloc] initWithData:hmacData encoding:NSASCIIStringEncoding];
+    NSString *signature = [hmacData base64EncodedStringWithOptions:0];
     
     __weak typeof(self) weakSelf = self;
       NSLog(@"%@",signature);
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
-    //self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
     [self POST:USER_LOGIN
     parameters:@{ @"email":username, @"password":password, @"signature":signature }
@@ -446,12 +424,14 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                                                            address1:companyDict[@"address1"]
                                                            address2:companyDict[@"address2"]
                                                            admin_id:companyDict[@"admin_id"]
-                                                      business_name:companyDict[@"business_name"]
+                                                         alias_name:companyDict[@"alias_name"] business_name:companyDict[@"business_name"]
                                                                city:companyDict[@"city"]
                                                      contact_f_name:companyDict[@"contact_f_name"]
                                                      contact_l_name:companyDict[@"contact_l_name"]
                                                       contact_phone:companyDict[@"contact_phone"]
+                                                           csv_name:companyDict[@"csv_name"]
                                                             deleted:companyDict[@"deleted"]
+                                                      invoice_email:companyDict[@"invoice_email"]
                                                                logo:companyDict[@"logo"]
                                                       primary_color:companyDict[@"primary_color"]                           //companyDict[@"primary_color"]   @"#4690CD"
                                                     secondary_color:companyDict[@"secondary_color"]                           //companyDict[@"secondary_color"]  @"#EE4236"
@@ -488,7 +468,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                
                onSuccess(@"OK");
                
-               // [weakSelf getAssignmentListFromSWAPIonSuccess:onSuccess onError:onError];
                
            } else if (onError) {
                NSLog(@"%@", responseObject[@"message"]);
@@ -515,10 +494,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
         [self.SWAPIManager assignmentListQueryForEmployee:self.SWAPIManager.SWAPIUserCode
                                                 withJobID:JobID
                                                     onSuccess:^(NSString *successMessage) {
-                                                        
-//                                                        if (self.SWAPIManager.currentJob && !self.currentUser.activeJob) {
-//                                                            [Job jobWithDictionnary:self.SWAPIManager.currentJob forUser:self.currentUser];
-//                                                        }
                                                         
                                                         [Job jobWithDictionnary:self.SWAPIManager.currentJob forUser:self.currentUser];
 
@@ -631,20 +606,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
           }
       }];
 }
-//ItemGroup = "SERVICE APP
-
-/*
- "plumbing_category" = "SCHNELLER PLBG";
- "plumbing_group" = "";
- 
- "pricebook_category" = "SCHNELLER HVAC";
- "pricebook_group" = "SERVICE APP";
- */
-
-- (NSNumber *)roundNumber:(NSNumber *)number {
-    NSNumber *roundedNumber = [NSNumber numberWithFloat: ceilf(number.floatValue)];
-    return roundedNumber;
-}
 
 #pragma mark - Get PriceBook
 - (void)getPricebookOptionsOnSuccess:(void (^)(NSArray *iPadCommonRepairsOptions, NSArray *otherOptions, PricebookItem *diagnosticOnlyOption))onSuccess
@@ -671,31 +632,8 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                                                    itemCategory:pricebookInfo[@"ItemCategory"]
                                                            name:pricebookInfo[@"Description"]
                                                        quantity:@""
-                                                         amount:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)]
-                                                   andAmountESA:[self roundNumber:@([pricebookInfo[@"TaskTotalPrice"] floatValue])]];
-              
-              
-//              if ([p.itemGroup isEqualToString:kPricebookGroup]) {
-//                  if (self.currentCompany.isPlumbing) {
-//                      if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
-//                          [plumbingCommonRepairsOptions addObject:p];
-//                      else
-//                          [iPadCommonRepairsOptions addObject:p];
-//                  }else{
-//                      [iPadCommonRepairsOptions addObject:p];
-//                  }
-//              }
-//              else {
-//                  if (self.currentCompany.isPlumbing) {
-//                      if ([p.itemCategory isEqualToString:self.currentCompany.plumbing_category])
-//                          [plumbingOtherOptions addObject:p];
-//                      else
-//                          [otherOptions addObject:p];
-//                  }else{
-//                      [otherOptions addObject:p];
-//                  }
-//              }
-              
+                                                         amount:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)
+                                                   andAmountESA:@([pricebookInfo[@"TaskTotalPrice"] floatValue])];
               
     /////////////////////////////////
               if (self.currentCompany.isPlumbing) {
@@ -1290,8 +1228,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
 }
 
-
-
 -(void)deleteRebatesFromPortalWithId:(NSString *)rebate_id
                      onSuccess:(void (^)(NSString *successMessage))onSuccess
                        onError:(void (^)(NSError *error))onError {
@@ -1325,41 +1261,37 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
        }];
 }
 
-/*
- -(void)addRebatesToPortal:(NSString *)title
- amount:(CGFloat)amount
- included:(NSString *)included
- onSuccess:(void (^)(NSString *successMessage))onSuccess
- onError:(void (^)(NSError *error))onError {
- 
- self.responseSerializer = [AFJSONResponseSerializer serializer];
- [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
- 
- [self POST:ADD_REBATES
- parameters:@{ @"title":title, @"amount":[NSNumber numberWithFloat:amount], @"included":included }
- success:^(AFHTTPRequestOperation *operation, id responseObject) {
- 
- NSLog(@"responseObject: %@",responseObject);
- 
- if ([responseObject[@"status"] integerValue] == kStatusOK) {
- //[weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];
- onSuccess(@"OK");
- 
- } else if (onError) {
- NSLog(@"%@", responseObject[@"message"]);
- onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
- }
- }
- failure:^(AFHTTPRequestOperation *operation, NSError *error) {
- if (onError) {
- onError(error);
- }
- }];
- 
- 
- 
- }
-*/
+#pragma mark - Timeer Requests
+
+-(void)startTimeWithJobId:(NSString *)jobId
+                           onSuccess:(void (^)(NSString *successMessage))onSuccess
+                             onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSString* startTimeUrl = [NSString stringWithFormat:@"start_tracker/%@", jobId];
+    [self POST:startTimeUrl
+    parameters:@{}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               
+               onSuccess(@"OK");
+               
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+}
 
 - (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
 {

@@ -135,17 +135,16 @@
     }
     TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    alertView.alertViewWidth = [UIScreen mainScreen].bounds.size.width / 3 * 2;
+    alertView.textFieldHeight = 60;
+    alertView.buttonHeight = 60;
     
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         UITextField* nameField = [alertView.textFieldArray objectAtIndex:0];
-        UITextField* emailField = [alertView.textFieldArray objectAtIndex:1];
+        
         if ([nameField.text isEqualToString:@""]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Empty name"];
             [self presentViewController:alert animated:true completion:nil];
-        }else if (![emailField.text isValidEmail]) {
-            TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
-            [self presentViewController:alert animated:true completion:nil];
-            
         }else {
             
             NSString* iaqProductStringFormatted = @"";
@@ -182,7 +181,7 @@
                                                        
                                                        authid = [dataDictionary objectForKey:@"id"];
                                                        
-                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:[DataLoader sharedInstance].currentCompany.invoice_email onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                                            
                                                            dispatch_async(dispatch_get_main_queue(), ^{
                                                                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
@@ -192,7 +191,7 @@
                                                                [userdefault setObject:signature forKey:@"signature"];
                                                                [userdefault synchronize];
                                                                
-                                                               [self showEmailSentAlert:emailField.text];
+                                                               [self showEmailSentAlert:[DataLoader sharedInstance].currentCompany.invoice_email];
                                                            });
                                                            
                                                            
@@ -227,12 +226,9 @@
     [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Name:";
     }];
-    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"Email:";
-    }];
     
     TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
-    
+    alertController.backgoundTapDismissEnable = true;
     [self presentViewController:alertController animated:true completion: nil];
     
     
@@ -242,14 +238,25 @@
     
     TYAlertView* alertView = [TYAlertView alertViewWithTitle:@"" message:@""];
     alertView.buttonDefaultBgColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    alertView.alertViewWidth = [UIScreen mainScreen].bounds.size.width / 3 * 2;
+    alertView.textFieldHeight = 60;
+    alertView.buttonHeight = 60;
     __weak typeof (self) weakSelf = self;
+    
     [alertView addAction:[TYAlertAction actionWithTitle:@"Continue" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         UITextField* nameField = [alertView.textFieldArray objectAtIndex:0];
         UITextField* emailField = [alertView.textFieldArray objectAtIndex:1];
+        
+        NSString* emailString = emailField.text;
+        if ([emailString isEqualToString:@""]) {
+            emailString = [NSString stringWithFormat:@"%@, %@", [DataLoader sharedInstance].currentUser.userName, [DataLoader sharedInstance].currentCompany.invoice_email];
+        }else {
+            emailString = [NSString stringWithFormat:@"%@, %@, %@", emailString, [DataLoader sharedInstance].currentUser.userName, [DataLoader sharedInstance].currentCompany.invoice_email];
+        }
         if ([nameField.text isEqualToString:@""]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Empty name"];
             [self presentViewController:alert animated:true completion:nil];
-        }else if (![emailField.text isValidEmail]) {
+        }else if (![emailString isValidEmail]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Invalid Email"];
             [self presentViewController:alert animated:true completion:nil];
             
@@ -338,7 +345,7 @@
     }];
     
     TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
-    
+    alertController.backgoundTapDismissEnable = true;
     [self presentViewController:alertController animated:true completion: nil];
     
 }
@@ -360,7 +367,6 @@
     }]];
     
     TYAlertController* alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle: TYAlertControllerStyleAlert];
-    
     [self presentViewController:alertController animated:true completion: nil];
 }
 - (void)didReceiveMemoryWarning {

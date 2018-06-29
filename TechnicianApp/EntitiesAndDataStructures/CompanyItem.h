@@ -13,13 +13,16 @@
 @property (nonatomic, strong) NSString *address1;
 @property (nonatomic, strong) NSString *address2;
 @property (nonatomic, strong) NSString *admin_id;
+@property (nonatomic, strong) NSString *alias_name;
 @property (nonatomic, strong) NSString *business_name;
 @property (nonatomic, strong) NSString *city;
 @property (nonatomic, strong) NSString *contact_f_name;
 @property (nonatomic, strong) NSString *contact_l_name;
 @property (nonatomic, strong) NSString *contact_phone;
+@property (nonatomic, strong) NSString *csv_name;
 @property (nonatomic, strong) NSString *deleted;
 @property (nonatomic, strong) NSString *itemID;
+@property (nonatomic, strong) NSString *invoice_email;
 @property (nonatomic, strong) NSString *logo;
 @property (nonatomic, strong) NSString *primary_color;
 @property (nonatomic, strong) NSString *secondary_color;
@@ -28,6 +31,8 @@
 @property (nonatomic, strong) NSString *zip;
 @property (nonatomic, strong) NSString *plumbing_category;
 @property (nonatomic, strong) NSString *plumbing_group;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *web;
 @property(nonatomic, assign) BOOL isPlumbing;
 
 
@@ -35,12 +40,15 @@
                          address1:(NSString*)address1
                          address2:(NSString*)address2
                          admin_id:(NSString*)admin_id
+                        alias_name:(NSString*)alias_name
                     business_name:(NSString *)business_name
                              city:(NSString *)city
                    contact_f_name:(NSString *)contact_f_name
                    contact_l_name:(NSString *)contact_l_name
                     contact_phone:(NSString *)contact_phone
+                        csv_name:(NSString *)csv_name
                           deleted:(NSString *)deleted
+                        invoice_email:(NSString *)invoice_email
                              logo:(NSString *)logo
                     primary_color:(NSString *)primary_color
                   secondary_color:(NSString *)secondary_color
