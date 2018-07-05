@@ -32,7 +32,17 @@
     
     [self configureVC];
     self.choosenType = [DataLoader loadQuestionType];
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:SettingAgenda];
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > SettingAgenda) {
+        AgendaPictureVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
+
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SettingAgenda];
+    }
+    
+    
 }
 
 

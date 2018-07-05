@@ -16,5 +16,5 @@
 
 @property (nonatomic, strong) NSString *previewHtmlString;
 @property (nonatomic, strong) NSDictionary *invoiceDictionary;
-
+@property (readwrite) BOOL isAutoLoad;
 @end

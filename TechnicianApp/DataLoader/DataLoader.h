@@ -95,7 +95,6 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 @property (nonatomic, strong) NSMutableArray *otherOptions;
 @property (nonatomic, strong) NSMutableArray *plumbingCommonRepairsOptions;
 @property (nonatomic, strong) NSMutableArray *plumbingOtherOptions;
-@property (nonatomic, strong) NSMutableArray *selectedRepairTemporarOptions;
 @property (nonatomic, strong) NSArray *companyAdditionalInfo;
 
 @property (nonatomic, assign) QuestionType currentJobCallType;
@@ -134,6 +133,10 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 + (QuestionType) loadQuestionType;
 
 + (void) clearAllLocalData;
+
++ (void)saveOptions;
++ (void)loadOptions;
+
 //------------------------------------------------------------------------------------------
 #pragma mark - Login
 //------------------------------------------------------------------------------------------

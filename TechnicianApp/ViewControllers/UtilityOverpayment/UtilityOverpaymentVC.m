@@ -34,9 +34,16 @@
     
     self.title = NSLocalizedString(@"Utility Overpayment", nil);
     [self configureVC];
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > UtilityOverpayment) {
+        ExploreSummaryVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ExploreSummaryVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:UtilityOverpayment];
+    }
+    
 }
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -80,8 +87,6 @@
     }
 }
 
-
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
     NSMutableString *mutableString = [[textField text] mutableCopy];
@@ -111,9 +116,6 @@
                              stringByReplacingOccurrencesOfString:
                              [local objectForKey:NSLocaleGroupingSeparator] withString:@""];
 
-//    NSDecimalNumber *paymentPence = [NSDecimalNumber decimalNumberWithString:penceString];
-//    [textField setText:[paymentFormatter stringFromNumber:[paymentPence decimalNumberByMultiplyingByPowerOf10:0]]];
-    
     NSNumber *someAmount = [NSNumber numberWithDouble:[penceString doubleValue]];
     [textField setText:[paymentFormatter stringFromNumber:someAmount]];
     

@@ -33,7 +33,15 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionSummaryCell" bundle:nil] forCellReuseIdentifier:@"QuestionSummaryCell"];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:ExploreSummary];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ExploreSummary) {
+        SummaryOfFindingsOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
+        currentViewController.isAutoLoad = true;
+        currentViewController.isiPadCommonRepairsOptions = YES;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:ExploreSummary];
+    }
+    
 }
 
 

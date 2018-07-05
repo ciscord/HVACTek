@@ -587,6 +587,7 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
         [self.navigationController popToViewController:homeViewController animated:true];
     }
     
+    [[TechDataModel sharedTechDataModel] saveCurrentStep:TechNone];
     //[appDelegate.homeController getNextJob];
     ShowOkAlertWithTitle(@"Job Done!", appDelegate.homeController);
 }

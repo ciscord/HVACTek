@@ -177,7 +177,6 @@
 		84D2400520E512CE008C549D /* SummaryOfFindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D2400120E512CE008C549D /* SummaryOfFindingVC.m */; };
 		84D2400620E512CE008C549D /* SummaryOfFindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D2400220E512CE008C549D /* SummaryOfFindingCell.m */; };
 		84D2400720E512CE008C549D /* SummaryOfFindingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */; };
-		84F1D76620DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */; };
 		862A38821DBBAED000BCF34E /* Financials+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */; };
 		862A38831DBBAED000BCF34E /* Financials+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 862A38811DBBAED000BCF34E /* Financials+CoreDataProperties.m */; };
 		867BF0AA1DBDE64000AF8CD6 /* MonthsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 867BF0A81DBDE64000AF8CD6 /* MonthsCollectionViewCell.m */; };
@@ -529,8 +528,6 @@
 		84D2400220E512CE008C549D /* SummaryOfFindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryOfFindingCell.m; sourceTree = "<group>"; };
 		84D2400320E512CE008C549D /* SummaryOfFindingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryOfFindingVC.h; sourceTree = "<group>"; };
 		84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryOfFindingCell.xib; sourceTree = "<group>"; };
-		84F1D76420DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SummaryOfFindingOptionsEditVC.h; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.h; sourceTree = SOURCE_ROOT; };
-		84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SummaryOfFindingOptionsEditVC.m; path = TechnicianApp/ViewControllers/SummaryOfFindingsVC/SummaryOfFindingOptionsEditVC.m; sourceTree = SOURCE_ROOT; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
 		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
 		862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -854,8 +851,6 @@
 			children = (
 				4FD2EB9E1A37337A0056D4C4 /* BaseVC.h */,
 				4FD2EB9F1A37337A0056D4C4 /* BaseVC.m */,
-				520159CA1B8D8D630035909C /* BenefitsESA */,
-				520159C31B8D8C940035909C /* Agenda */,
 				4FD2EB9D1A3624180056D4C4 /* MainVC */,
 				4FD2EBA41A3762350056D4C4 /* LoginVC */,
 				4FD2EBAC1A376E670056D4C4 /* TechnicianHomeVC */,
@@ -863,21 +858,23 @@
 				4FD2EBC71A38B2720056D4C4 /* DebriefReminderVC */,
 				AA23D6461A379B1900703952 /* TechnicianDebriefVC */,
 				7569FBC61A373BDA00D9EC94 /* CustomerOverviewVC */,
+				520159C31B8D8C940035909C /* Agenda */,
 				4FE495951A38E7C000E09FD7 /* QuestionVC */,
+				520159CA1B8D8D630035909C /* BenefitsESA */,
 				523628791C0EF2EF00B04A71 /* UtilityOverpayment */,
 				4F8EC7B81A604FDA00999FA1 /* ExploreSummaryVC */,
 				75D73F131A38A9D20051143C /* SummaryOfFindingsOptionsVC */,
-				524037D41CEB48D6008BF125 /* CustomRepairVC */,
 				528698AA1C6B1EB0003F91C2 /* SortFindings */,
+				75D1A8FE1A3B15B5000F6765 /* ServiceOptionVC */,
+				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
+				4FF901B81AB8460900D87FAB /* PlatinumOptionsVC */,
+				5277B1841C16D8AD008929ED /* RepairVsReplace */,
+				75F3DF8A1A3F055C00F60652 /* CustomerChoiceVC */,
+				524037D41CEB48D6008BF125 /* CustomRepairVC */,
 				75399F581A39CD250013EAC0 /* RepairVsServiceVC */,
 				75D73F1C1A38BFD10051143C /* SummaryOfFindingsVC */,
 				52EAF0F91B90C1D7002310B4 /* EnlargeViewOptions */,
-				75D1A8FE1A3B15B5000F6765 /* ServiceOptionVC */,
-				5277B1841C16D8AD008929ED /* RepairVsReplace */,
 				521DB6B01C107050003E40D2 /* EditServiceOptions */,
-				4FF901B81AB8460900D87FAB /* PlatinumOptionsVC */,
-				4F11D3E41AA63F8C007FC0A8 /* ViewOptionsVC */,
-				75F3DF8A1A3F055C00F60652 /* CustomerChoiceVC */,
 				52F3D1E11CFF0356008D24C9 /* VideoLibrary */,
 				0E5DF02A1D2423B8007CE24F /* PictureLibrary */,
 				849478252075532800321316 /* Media Library */,
@@ -1402,8 +1399,6 @@
 				75D73F171A38AB950051143C /* ServiceOptionViewCell.h */,
 				75D73F181A38AB950051143C /* ServiceOptionViewCell.m */,
 				75D73F191A38AB950051143C /* ServiceOptionViewCell.xib */,
-				84F1D76420DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.h */,
-				84F1D76520DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m */,
 			);
 			name = SummaryOfFindingsOptionsVC;
 			path = ServiceOptionsVC;
@@ -1798,7 +1793,6 @@
 				522746D21B79FB6A00AC38A5 /* NewCustomerChoiceVC.m in Sources */,
 				5011B7561FC5CC720041BDAA /* FileModel.m in Sources */,
 				4FD2EBD11A3B45F80056D4C4 /* Customer.m in Sources */,
-				84F1D76620DCFFBA00EE0442 /* SummaryOfFindingOptionsEditVC.m in Sources */,
 				8494782B20755B5C00321316 /* PDFViewController1VC.m in Sources */,
 				4F11D4011AA7738D007FC0A8 /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				4FD2EB851A361A0F0056D4C4 /* RebateAddViewController.m in Sources */,

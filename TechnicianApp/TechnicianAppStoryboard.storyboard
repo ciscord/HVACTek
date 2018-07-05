@@ -656,7 +656,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RcU-AX-Yqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="806-YT-Glv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5178" y="4413"/>
+            <point key="canvasLocation" x="4268" y="4566"/>
         </scene>
         <!--Summary Of Findings OptionsVC-->
         <scene sceneID="cg4-P7-Euz">
@@ -1590,7 +1590,7 @@ the work you've selected</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKs-OQ-blw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="C7y-Sx-Bgk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3301" y="3206"/>
+            <point key="canvasLocation" x="3420" y="3206"/>
         </scene>
         <!--New Customer ChoiceVC-->
         <scene sceneID="sWk-ch-aPX">
@@ -2066,7 +2066,7 @@ the work you've selected</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aP3-oN-TjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5178" y="3206"/>
+            <point key="canvasLocation" x="4268" y="3206"/>
         </scene>
         <!--Invoice PreviewVC-->
         <scene sceneID="TXM-sf-rZC">
@@ -2133,7 +2133,7 @@ the work you've selected</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyQ-yn-RKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6079" y="3206"/>
+            <point key="canvasLocation" x="5178" y="3206"/>
         </scene>
         <!--Repair Vs ServiceVC-->
         <scene sceneID="0Nm-56-97n">
@@ -3330,7 +3330,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kmS-JN-8Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560" y="4413"/>
+            <point key="canvasLocation" x="1870" y="4413"/>
         </scene>
         <!--Platinum OptionsVC-->
         <scene sceneID="YrD-1r-tZa">
@@ -3772,7 +3772,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5c-T4-a8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3301" y="4413"/>
+            <point key="canvasLocation" x="3301" y="4566"/>
         </scene>
         <!--OverviewVC-->
         <scene sceneID="hNj-rW-tcL">
@@ -3839,7 +3839,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCg-Ms-67X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4200" y="4413"/>
+            <point key="canvasLocation" x="3301" y="5813"/>
         </scene>
         <!--Final ChoiceVC-->
         <scene sceneID="5de-oX-Vw5">
@@ -4595,7 +4595,7 @@ you must debrief from job</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1B-yq-hv3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xhw-dK-8mb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2425" y="5554"/>
+            <point key="canvasLocation" x="2425" y="5813"/>
         </scene>
         <!--Sort FindingsVC-->
         <scene sceneID="rrS-pk-wCJ">
@@ -4710,7 +4710,7 @@ you must debrief from job</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-E7-bAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="4413"/>
+            <point key="canvasLocation" x="634" y="5570"/>
         </scene>
         <!--Picture LibraryVC-->
         <scene sceneID="MTw-lz-cfN">
@@ -5127,13 +5127,13 @@ you must debrief from job</string>
         <image name="summary-findings-rr" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jqz-G0-X87"/>
+        <segue reference="XFb-hP-yDf"/>
         <segue reference="xdW-7q-blD"/>
-        <segue reference="mwd-zf-CaD"/>
+        <segue reference="XZV-au-UwI"/>
         <segue reference="5bY-p7-VHi"/>
-        <segue reference="jvv-2R-Bdt"/>
+        <segue reference="6og-9q-Y4v"/>
         <segue reference="O98-Ps-4c5"/>
-        <segue reference="DnI-yT-bKf"/>
+        <segue reference="8nk-Wv-Mwf"/>
         <segue reference="SE9-0n-Nc6"/>
     </inferredMetricsTieBreakers>
 </document>

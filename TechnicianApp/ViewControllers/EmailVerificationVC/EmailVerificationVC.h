@@ -11,5 +11,5 @@
 #import "DataLoader.h"
 
 @interface EmailVerificationVC : UIViewController <UITextFieldDelegate>
-
+@property (readwrite) BOOL isAutoLoad;
 @end

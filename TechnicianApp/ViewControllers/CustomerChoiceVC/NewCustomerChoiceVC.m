@@ -92,10 +92,18 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         self.stopView.hidden = YES;
     
     [self updateTotalPrice];
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:NewCustomerChoice];
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > NewCustomerChoice) {
+        InvoicePreviewVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InvoicePreviewVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:NewCustomerChoice];
+    }
+    
+    
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {

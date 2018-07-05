@@ -12,7 +12,7 @@
 #import "PricebookItem.h"
 #import "SortFindingsVC.h"
 #import "AddCustomRepairVC.h"
-
+#import "SortFindingsVC.h"
 
 @interface SummaryOfFindingsOptionsVC ()
 
@@ -62,15 +62,14 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
         self.allOptions = [self getOptionsTypeOfArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]];
         
-        if ([[DataLoader sharedInstance] selectedRepairTemporarOptions].count > 0){
-            self.selectedOptions = [[DataLoader sharedInstance] selectedRepairTemporarOptions].mutableCopy;
-        }else{
+        self.selectedOptions = [DataLoader loadLocalSavedOptions];
+        
+        if (!self.selectedOptions) {
             self.selectedOptions = self.allOptions.mutableCopy;
         }
-    }
-    else {
+    }else {
         [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions2];
-        self.selectedOptions = [DataLoader loadLocalSavedOptions];
+        self.selectedOptions = [DataLoader loadLocalSavedFindingOptions];
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
@@ -84,10 +83,53 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
     }
     
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > SummaryOfFindingsOptions1 && [TechDataModel sharedTechDataModel].currentStep < SummaryOfFindingsOptions2) {
+        SummaryOfFindingsOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC2"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep >= SummaryOfFindingsOptions2) {
+        NSArray* viewControllers = self.navigationController.viewControllers;
+        
+        int countOfQuestionVC = 0;
+        for (UIViewController* vc in viewControllers) {
+            if ([vc isKindOfClass:[SummaryOfFindingsOptionsVC class]]) {
+                countOfQuestionVC++;
+                
+            }
+        }
+        if (countOfQuestionVC == 1) {
+            SummaryOfFindingsOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC2"];
+            currentViewController.isAutoLoad = true;
+            [self.navigationController pushViewController:currentViewController animated:false];
+        }else {
+            if ([TechDataModel sharedTechDataModel].currentStep > SummaryOfFindingsOptions2) {
+                SortFindingsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SortFindingsVC"];
+                currentViewController.isAutoLoad = true;
+                [self.navigationController pushViewController:currentViewController animated:false];
+            }
+            
+        }
+        
+        
+    }else {
+        if (self.isiPadCommonRepairsOptions) {
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
+            
+        }else {
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions2];
+            
+        }
+        
+    }
     
 }
-
-
+- (void) viewWillDisappear:(BOOL)animated {
+    if (self.isiPadCommonRepairsOptions) {
+        [DataLoader saveOptionsLocal:self.selectedOptions];
+    }else {
+        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
+    }
+}
 -(NSMutableArray *)getOptionsTypeOfArray:(NSMutableArray *)array {
     if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
         if ([array isEqualToArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]])
@@ -104,8 +146,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     return returnArr;
 }
 
-
-
 - (void)customRepairOtionAdded:(NSNotification *)info {
     self.allOptions = nil;
     NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
@@ -115,26 +155,20 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     self.allOptions = allOptionsArray.mutableCopy;
 }
 
-
-
-
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    if (self.isMovingFromParentViewController) {
-        [DataLoader sharedInstance].selectedRepairTemporarOptions = self.selectedOptions.mutableCopy;
+    if (self.isiPadCommonRepairsOptions) {
+        [DataLoader saveOptionsLocal:self.selectedOptions];
+    }else {
+        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
     }
-    
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -146,7 +180,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     self.tfSearch.layer.borderWidth   = 1.0;
     self.tfSearch.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
 }
-
 
 #pragma mark -
 
@@ -181,7 +214,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [self.collectionView reloadData];
 }
 
-
 #pragma mark - Continue Action
 - (IBAction)btnContinueTouch:(id)sender {
 
@@ -196,24 +228,19 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
 }
 
-
 #pragma mark - Custom Repair Button
 - (IBAction)customRepairClicked:(id)sender {
 
 }
-
-
 
 #pragma mark - UICollectionViewDatasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.filteredOptions count];
 }
 
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger itemIndex = indexPath.item;
@@ -228,17 +255,16 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     cell.qtyTextField.tag = itemIndex;
     cell.tag = itemIndex;
     [cell setOnCheckboxToggle:^(BOOL selected){
-         id selectedItem = weakSelf.filteredOptions[itemIndex];
-         if ([self.selectedOptions containsObject:selectedItem]) {
-             [weakSelf.selectedOptions removeObject:selectedItem];
-         } else {
-             [weakSelf.selectedOptions addObject:selectedItem];
-         }
+        id selectedItem = weakSelf.filteredOptions[itemIndex];
+        if ([self.selectedOptions containsObject:selectedItem]) {
+            [weakSelf.selectedOptions removeObject:selectedItem];
+        } else {
+            [weakSelf.selectedOptions addObject:selectedItem];
+        }
+        
      }];
     return cell;
 }
-
-
 
 #pragma mark - UICollectionViewDelegate
 

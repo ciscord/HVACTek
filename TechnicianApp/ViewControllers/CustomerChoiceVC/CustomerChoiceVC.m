@@ -86,7 +86,14 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
    
     [self refreshSubtotalPrice];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerChoice];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > CustomerChoice) {
+        NewCustomerChoiceVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCustomerChoiceVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerChoice];
+    }
 }
 
 #pragma mark - Color Scheme
@@ -494,7 +501,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showAdditionalInfoPageVC"]) {
-        AdditionalInfoPageVC *vc = [segue destinationViewController];
+        NewCustomerChoiceVC *vc = [segue destinationViewController];
        
         NSString* paymentValue;
         if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {

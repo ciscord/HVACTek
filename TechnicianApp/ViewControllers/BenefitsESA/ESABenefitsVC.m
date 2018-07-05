@@ -40,10 +40,16 @@
     
     [self configureColorScheme];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:ESABenefits];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ESABenefits) {
+        QuestionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC1"];
+        currentViewController.questionType = qtTechnician;
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:ESABenefits];
+    }
+    
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -56,8 +62,6 @@
     self.titleLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
    // self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
-
-
 
 - (IBAction)continueButtonClicked:(id)sender {
     if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing)
@@ -73,13 +77,10 @@
     [self.navigationController pushViewController:mediaLibraryVC animated:true];
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 
@@ -87,7 +88,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue destinationViewController] isKindOfClass:[QuestionsVC class]]) {
-        
+        QuestionsVC *currentViewController = segue.destinationViewController;
+        currentViewController.questionType = qtTechnician;
         [DataLoader saveQuestionType:qtTechnician];
     }
     

@@ -210,7 +210,15 @@ const int kControllerWidth = 190;
     self.selectedType = qtHeating;
     [self performSelector:@selector(configureData) withObject:nil afterDelay:0.1];
    
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerOverview];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > CustomerOverview) {
+        SettingAgendaVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingAgendaVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerOverview];
+    }
+    
+    
 }
 
 

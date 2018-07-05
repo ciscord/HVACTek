@@ -7,7 +7,7 @@
 //
 
 #import "InvoicePreviewVC.h"
-
+#import "EmailVerificationVC.h"
 @interface InvoicePreviewVC ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *invoiceWebView;
@@ -23,8 +23,7 @@
     
     [self configureColorScheme];
     [self.invoiceWebView loadHTMLString:self.previewHtmlString baseURL:nil];
-    
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:InvoicePreview];
+        
 }
 
 #pragma mark - Color Scheme

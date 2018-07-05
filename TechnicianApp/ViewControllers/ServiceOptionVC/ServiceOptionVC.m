@@ -15,8 +15,6 @@
 #import "EditServiceOptionsVC.h"
 #import "RRFinalChoiceVC.h"
 
-
-
 @interface ServiceOptionVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
@@ -53,20 +51,19 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     self.btnZeroPercent.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 
     self.optionsDisplayType = [DataLoader loadOptionsDisplayType];
+    
+    self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_immediateRepair"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                     @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_systemPrevention"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                     @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_cleanAirSolution"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
+                     @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_totalComfortEnhancement"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
+    
     if (self.optionsDisplayType == odtEditing) {
-        self.options = @[@{@"ServiceID": @"0", @"title": @"Immediate Repair", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_immediateRepair"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"1", @"title": @"System Preservation", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_systemPrevention"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_cleanAirSolution"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
-                         @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_totalComfortEnhancement"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
         
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption1];
-        
+        self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
     }else {
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption2];
+        self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
     }
 
-    self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
-    
     self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
     
     if (self.priceBookAndServiceOptions) {
@@ -75,11 +72,61 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         [self.tableView reloadData];
     }
     
+    if (self.isAutoLoad) {
+        _priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
+        self.options = _priceBookAndServiceOptions.mutableCopy;
+    }
     self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
     
-    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ServiceOption1 && [TechDataModel sharedTechDataModel].currentStep < ServiceOption2) {
+        
+        ViewOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewOptionsVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:true];
+    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ServiceOption2) {
+        NSArray* viewControllers = self.navigationController.viewControllers;
+        
+        int countOfQuestionVC = 0;
+        for (UIViewController* vc in viewControllers) {
+            if ([vc isKindOfClass:[ServiceOptionVC class]]) {
+                countOfQuestionVC++;
+                
+            }
+        }
+        if (countOfQuestionVC == 1) {
+            ViewOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewOptionsVC"];
+            currentViewController.isAutoLoad = true;
+            [self.navigationController pushViewController:currentViewController animated:false];
+        }else {
+            
+            if ([TechDataModel sharedTechDataModel].currentStep >= RRFinalChoice) {
+                Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+                
+                if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isInstantRRFinal"])
+                    [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
+                else {
+                    if (![job.totalInvestmentsRR isEqualToString:@""] && job.totalInvestmentsRR != nil) {
+                        [self performSegueWithIdentifier:@"showInstantRRFinalChoiceVC" sender:self];
+                    }else{
+                        [self performSegueWithIdentifier:@"showRRQuestionsVC" sender:self];
+                    }
+                }
+            }else {
+                CustomerChoiceVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CustomerChoiceVC"];
+                currentViewController.isAutoLoad = true;
+                [self.navigationController pushViewController:currentViewController animated:false];
+            }
+            
+        }
+    }else {
+        if (self.optionsDisplayType == odtEditing) {
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption1];
+            
+        }else {
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:ServiceOption2];
+        }
+    }
 }
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -94,14 +141,10 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tableView reloadData];
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - EnlargeOptionsVC
 - (void)setPriceBookAndServiceOptions:(NSArray *)priceBookAndServiceOptions {
@@ -118,7 +161,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
-
 - (void)resetOptions {
 
     if (self.optionsDisplayType == odtEditing) {
@@ -133,7 +175,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         [self.tableView reloadData];
     }
 }
-
 
 - (void)didSelectOptionsWithRow:(NSInteger)index withOptionIndex:(NSInteger)optionIndex {
 
@@ -169,14 +210,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [self.tableView reloadData];
 }
 
-
 - (IBAction)btnDiagnosticOnlyTouch:(id)sender {
     self.isDiagnositcOnlyPriceSelected = YES;
     self.isDiscountedPriceSelected     = NO;
     [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
 }
-
-
 
 #pragma mark - Repair vs Replace Action
 - (IBAction)repairVsReplaceClicked:(UIButton *)sender {
@@ -194,21 +232,20 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
-
-
-
 #pragma mark - Clicked Next Without Option
 - (IBAction)nextClickedWithOutAnyOption:(UIButton *)sender {
     self.isEmptyOptionSelected = YES;
         [self performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
 }
 
-
-
-
 #pragma mark - Options Action
 - (void)selectOptionsToEditAtRow:(NSInteger)index {
     
+    [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+        
+    } onError:^(NSError *error) {
+        
+    }];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
     EditServiceOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EditServiceOptionsVC"];
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -239,8 +276,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
-
-
 - (BOOL)servicesOptionsWereEdited {
     for (NSInteger i = 0; i < self.options.count; i++) {
         NSMutableDictionary *option = self.options[i];
@@ -251,23 +286,17 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     return NO;
 }
 
-
-
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];
     }
 }
 
-
-
 #pragma mark - UITableViewDelegate & DataSource
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10;
 }
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -276,7 +305,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     return v;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self.options objectAtIndex:indexPath.section];
     
@@ -284,14 +312,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.options.count;
 }
 
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[cell setBackgroundColor:[UIColor clearColor]];
     cell.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
 }
 
@@ -300,7 +325,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     return 1;
 
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak ServiceOptionVC *weakSelf = self;
@@ -335,9 +359,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         [weakSelf performSegueWithIdentifier:@"customerChoiceSegue" sender:self];
      }];
     
-    
-    
-    ////////
     [cell setOptionButtonSelected:^(NSInteger rowIndex){
         [weakSelf selectOptionsToEditAtRow:rowIndex];
     }];
@@ -367,13 +388,10 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     vc.enlargeOptionsArray = items;
     vc.enlargeFullOptionsArray = [option objectForKey:@"removedItems"];
     vc.parentVC = self;
-//    [self.navigationController pushViewController:vc animated:YES];
     
     [self presentViewController:vc animated:YES completion:nil];
 
 }
-
-
 
 #pragma mark - Unwind Segues
 - (IBAction)unwindToServiceOptionVC:(UIStoryboardSegue *)unwindSegue
@@ -392,8 +410,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
-
-
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -404,7 +420,6 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         
     } else if ([vc isKindOfClass:[ServiceOptionVC class]]) {
         
-//        ServiceOptionVC *vc = [segue destinationViewController];
         [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
         [DataLoader saveFindingOptionsLocal:self.options];
         

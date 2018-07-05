@@ -40,7 +40,17 @@
                        range:NSMakeRange(0, [textString length])];
     self.titleLabel.attributedText = attrString;
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:ViewOptions];
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ViewOptions) {
+        
+        PlatinumOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlatinumOptionsVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:ViewOptions];
+    }
+    
     
 }
 

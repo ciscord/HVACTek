@@ -145,14 +145,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
     
 }
-+ (void)saveOptionsLocal:(NSMutableArray*)selectedOptions {
-    
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:encodedObject forKey:@"selectedOptions"];
-    [defaults synchronize];
-    
-}
 
 + (void) saveOptionsDisplayType : (OptionsDisplayType) currentType {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -186,11 +178,79 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
 }
 
++ (void)saveOptions {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:[DataLoader sharedInstance].iPadCommonRepairsOptions];
+    [defaults setObject:encodedObject forKey:@"iPadCommonRepairsOptions"];
+    
+    encodedObject = [NSKeyedArchiver archivedDataWithRootObject:[DataLoader sharedInstance].otherOptions ];
+    [defaults setObject:encodedObject forKey:@"otherOptions"];
+    
+    encodedObject = [NSKeyedArchiver archivedDataWithRootObject:[DataLoader sharedInstance].plumbingCommonRepairsOptions];
+    [defaults setObject:encodedObject forKey:@"plumbingCommonRepairsOptions"];
+    
+    encodedObject = [NSKeyedArchiver archivedDataWithRootObject:[DataLoader sharedInstance].plumbingOtherOptions];
+    [defaults setObject:encodedObject forKey:@"plumbingOtherOptions"];
+    
+    [defaults synchronize];
+    
+}
++ (void) loadOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"iPadCommonRepairsOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    [DataLoader sharedInstance].iPadCommonRepairsOptions = [NSMutableArray arrayWithArray:notes];
+    
+    
+    notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"otherOptions"];
+    notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    [DataLoader sharedInstance].otherOptions = [NSMutableArray arrayWithArray:notes];
+    
+    
+    notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"plumbingCommonRepairsOptions"];
+    notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    [DataLoader sharedInstance].plumbingCommonRepairsOptions = [NSMutableArray arrayWithArray:notes];
+    
+    
+    notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"plumbingOtherOptions"];
+    notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    [DataLoader sharedInstance].plumbingOtherOptions = [NSMutableArray arrayWithArray:notes];
+
+     return;
+}
+
++ (void)saveOptionsLocal:(NSMutableArray*)selectedOptions {
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"selectedOptions"];
+    [defaults synchronize];
+    
+}
 + (NSMutableArray*)loadLocalSavedOptions {
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    NSArray* allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+    
+    NSMutableArray* selectedOptions = [NSMutableArray array];
+    for (PricebookItem* selectedItem in notes) {
+    
+        for (PricebookItem *item in allOptions) {
+            if ([item.itemID isEqualToString:selectedItem.itemID]) {
+                item.quantity = selectedItem.quantity;
+                [selectedOptions addObject:item];
+                break;
+            }
+        }
+        
+    }
+    
     return selectedOptions;
 }
 
@@ -207,8 +267,23 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFindingOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    NSArray* allOptions = [[DataLoader sharedInstance] otherOptions];
+    
+    NSMutableArray* selectedOptions = [NSMutableArray array];
+    for (PricebookItem* selectedItem in notes) {
+        
+        for (PricebookItem *item in allOptions) {
+            if ([item.itemID isEqualToString:selectedItem.itemID]) {
+                item.quantity = selectedItem.quantity;
+                [selectedOptions addObject:item];
+                break;
+            }
+        }
+        
+    }
+    
     return selectedOptions;
+    
 }
 
 + (void)savePriceBookAndServiceOptionsLocal:(NSMutableArray*)selectedOptions {
@@ -663,6 +738,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
           weakSelf.plumbingCommonRepairsOptions = plumbingCommonRepairsOptions;
           weakSelf.plumbingOtherOptions = plumbingOtherOptions;
           
+          [DataLoader saveOptions];
           if (onSuccess) {
               onSuccess(weakSelf.iPadCommonRepairsOptions, weakSelf.otherOptions, weakSelf.diagnosticOnlyOption);
           }

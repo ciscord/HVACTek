@@ -12,7 +12,8 @@
 #import <MBProgressHUD.h>
 #import <TWRDownloadManager/TWRDownloadManager.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "DispatchVC.h"
+#import "TechnicianDebriefVC.h"
 @interface TechnicianHomeVC ()
 @property (weak, nonatomic) IBOutlet UIView *vwDebrief;
 @property (strong, nonatomic) IBOutlet UITextField *edtJobId;
@@ -51,7 +52,19 @@
     [self checkSyncStatus];
     [self checkForLogs];
 
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianHome];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep >= TechnicianDebrief) {
+        TechnicianDebriefVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TechnicianDebriefVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > TechnicianHome) {
+        [DataLoader loadOptions];
+        DispatchVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DispatchVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianHome];
+    }
+    
 }
 
 
@@ -280,7 +293,6 @@
 
 
 -(void)checkJobStatus {
-    [[[DataLoader sharedInstance] selectedRepairTemporarOptions] removeAllObjects];
     
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] jobStatus] integerValue] != jstNeedDebrief) {
         self.vwDebrief.hidden = YES;

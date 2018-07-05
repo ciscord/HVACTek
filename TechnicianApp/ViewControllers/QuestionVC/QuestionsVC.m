@@ -12,7 +12,7 @@
 #import "UtilityOverpaymentVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
 #import <BCGenieEffect/UIView+Genie.h>
-
+#import "ESABenefitsVC.h"
 @interface QuestionsVC ()
 
 @property (weak, nonatomic) IBOutlet RoundCornerView *vwContent;
@@ -28,9 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    self.questionType = [DataLoader loadQuestionType];
-    
     self.title = (self.questionType == qtTechnician ? @"Tech Observations" : @"Explore Summary");
     
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
@@ -45,10 +42,8 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     if (self.questionType == qtTechnician) {
         questionsArray = job.techObservations;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions1];
     }else{
         questionsArray = job.custumerQuestions;
-        [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
     }
     
     if (!questionsArray.count) {
@@ -64,6 +59,41 @@
     }else{
         self.questions = questionsArray;
         [self prepareQuestionToDisplay];
+    }
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > Questions && [TechDataModel sharedTechDataModel].currentStep < Questions1) {
+        ESABenefitsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ESABenefitsVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > Questions1) {
+        NSArray* viewControllers = self.navigationController.viewControllers;
+        
+        int countOfQuestionVC = 0;
+        for (UIViewController* vc in viewControllers) {
+            if ([vc isKindOfClass:[QuestionsVC class]]) {
+                countOfQuestionVC++;
+                
+            }
+        }
+        if (countOfQuestionVC == 1) {
+            ESABenefitsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ESABenefitsVC"];
+            currentViewController.isAutoLoad = true;
+            [self.navigationController pushViewController:currentViewController animated:false];
+        }else {
+            UtilityOverpaymentVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UtilityOverpaymentVC"];
+            currentViewController.isAutoLoad = true;
+            [self.navigationController pushViewController:currentViewController animated:false];
+        }
+        
+        
+    }else {
+        if (self.questionType == qtTechnician) {
+         
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions1];
+        }else{
+         
+            [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
+        }
     }
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
@@ -237,13 +267,18 @@
             job.techObservations = self.questions;
             [job.managedObjectContext save];
             [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
-        } else
-        {
+        }else {
             job.custumerQuestions = self.questions;
             [job.managedObjectContext save];
             [self performSegueWithIdentifier:@"showMemberBenefitsVC" sender:self];
         }
         
+    }
+    
+    if (self.questionType == qtTechnician) {//should remove
+        [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
+    }else {
+        [self performSegueWithIdentifier:@"showMemberBenefitsVC" sender:self];
     }
 }
 

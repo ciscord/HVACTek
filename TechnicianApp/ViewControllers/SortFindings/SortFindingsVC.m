@@ -34,17 +34,26 @@ static NSString *findingsCellID = @"SortFindinsCell";
   
     self.findingsArray = [DataLoader loadLocalSavedFindingOptions];
     
-    NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"amount" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
-    NSArray *sortArr = [self.findingsArray sortedArrayUsingDescriptors:sortDescriptors];
-    self.findingsArray = [sortArr mutableCopy];
-  
     self.continueButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:SortFindings];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > SortFindings) {
+        
+        [DataLoader saveOptionsDisplayType:odtEditing];
+        
+        ServiceOptionVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ServiceOptionVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+    
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SortFindings];
+    }
+    
+    
 }
 
-
+- (void) viewWillDisappear:(BOOL)animated {
+    [DataLoader saveFindingOptionsLocal:self.findingsArray];
+}
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 60;

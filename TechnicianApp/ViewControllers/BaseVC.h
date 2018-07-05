@@ -25,6 +25,7 @@
 @property (nonatomic, assign) BOOL isTitleViewHidden;
 @property(nonatomic, strong) UILabel *lbTitle;
 @property(nonatomic, strong) IBOutlet UIButton *nextButton;
+@property (readwrite) BOOL isAutoLoad;
 - (NSString *)changeCurrencyFormat:(float)number;
 - (void) tapTechButton;
 - (void) tapIAQButton;

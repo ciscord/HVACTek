@@ -43,7 +43,9 @@
     
     [self configureColorScheme];
     [self configureVC];
+    
     [[TechDataModel sharedTechDataModel] saveCurrentStep:RRFinalChoice];
+    
 }
 
 

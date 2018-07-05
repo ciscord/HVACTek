@@ -10,14 +10,14 @@
 #import <SFRoundProgressCounterView/SFRoundProgressCounterView.h>
 #import "SFCounterLabel+SignatureFormat.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "CustomerOverviewVC.h"
 @interface DispatchVC () <SFRoundProgressCounterViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *beginBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbCustomerInfo;
 @property (weak, nonatomic) IBOutlet UITextView *txtClientProblems;
-@property (strong, nonatomic) UIViewController *customerOverviewVC;
+@property (strong, nonatomic) CustomerOverviewVC *customerOverviewVC;
 
 @end
 
@@ -35,7 +35,13 @@
 
     [self setCustomerInfo];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:Dispatch];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > Dispatch) {
+        CustomerOverviewVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CustomerOverviewVC"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:Dispatch];
+    }
     
 }
 

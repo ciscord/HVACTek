@@ -34,9 +34,19 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:PlatinumOptions];
-    
     self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
+    
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > PlatinumOptions) {
+        [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
+        [DataLoader saveFinalOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
+        ServiceOptionVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ServiceOptionVC2"];
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:PlatinumOptions];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,14 +95,14 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     
     if ([[segue destinationViewController] isKindOfClass:[ViewOptionsVC class]])
     {
-        [DataLoader saveFindingOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
+        [DataLoader saveFinalOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
        
     }
     
     if ([[segue destinationViewController] isKindOfClass:[ServiceOptionVC class]]) {
 //        ServiceOptionVC *vc = [segue destinationViewController];
         [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
-        [DataLoader saveFindingOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
+        [DataLoader saveFinalOptionsLocal:[NSMutableArray arrayWithArray:self.priceBookAndServiceOptions]];
     }
 }
 

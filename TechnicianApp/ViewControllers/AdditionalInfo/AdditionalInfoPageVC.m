@@ -46,7 +46,16 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     [self configureColorScheme];
     [self configureVC];
     [self loadAdditionalInfo];
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:AdditionalInfoPage];
+    
+    if ([TechDataModel sharedTechDataModel].currentStep > AdditionalInfoPage) {
+        NewCustomerChoiceVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCustomerChoiceVC"];
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:AdditionalInfoPage];
+    }
+    
+    
 }
 
 

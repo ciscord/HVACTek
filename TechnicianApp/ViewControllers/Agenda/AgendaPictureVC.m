@@ -38,7 +38,15 @@
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
-    [[TechDataModel sharedTechDataModel] saveCurrentStep:AgendaPicture];
+    if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > AgendaPicture) {
+        QuestionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QuestionsVC"];
+        currentViewController.questionType = 0;
+        currentViewController.isAutoLoad = true;
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else {
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:AgendaPicture];
+    }
+    
 }
 
 

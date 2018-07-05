@@ -7,7 +7,6 @@
 //
 
 #import "EnlargeOptionsVC.h"
-#import "SummaryOfFindingOptionsEditVC.h"
 #import "SummaryOfFindingsOptionsVC.h"
 @interface EnlargeOptionsVC ()
 
@@ -53,9 +52,6 @@
     
 }
 
-
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -64,8 +60,6 @@
     self.optionNameLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.editButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
-
-
 
 - (void)viewWasTapped {
     [self dismissViewControllerAnimated:YES completion:nil];
