@@ -275,11 +275,6 @@
         
     }
     
-    if (self.questionType == qtTechnician) {//should remove
-        [self performSegueWithIdentifier:@"showUtilityOverpayment" sender:self];
-    }else {
-        [self performSegueWithIdentifier:@"showMemberBenefitsVC" sender:self];
-    }
 }
 
 
