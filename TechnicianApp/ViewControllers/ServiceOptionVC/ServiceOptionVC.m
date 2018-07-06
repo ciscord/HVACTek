@@ -57,24 +57,37 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
                      @{@"ServiceID": @"2", @"title": @"Clean Air Solution", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_cleanAirSolution"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy,
                      @{@"ServiceID": @"3", @"title": @"Total Comfort Enchacement", @"isEditable": @(NO), @"optionImage" : UIImageJPEGRepresentation([UIImage imageNamed:@"btn_totalComfortEnhancement"], 0.0f), @"items" : @[].mutableCopy, @"removedItems" : @[].mutableCopy}.mutableCopy].mutableCopy;
     
-    if (self.optionsDisplayType == odtEditing) {
-        
-        self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
-    }else {
-        self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
-    }
-
-    self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
-    
-    if (self.priceBookAndServiceOptions) {
-        [self resetOptions];
-    } else {
-        [self.tableView reloadData];
-    }
     
     if (self.isAutoLoad) {
         _priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
-        self.options = _priceBookAndServiceOptions.mutableCopy;
+        
+        if (_priceBookAndServiceOptions == nil || _priceBookAndServiceOptions.count == 0) {
+            self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+        
+            if (self.priceBookAndServiceOptions) {
+                [self resetOptions];
+            } else {
+                [self.tableView reloadData];
+            }
+        }else {
+            self.options = _priceBookAndServiceOptions.mutableCopy;
+        }
+        
+    }else {
+        if (self.optionsDisplayType == odtEditing) {
+            
+            self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+        }else {
+            self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
+        }
+        
+        self.tableView.allowsSelection = _optionsDisplayType == odtReadonlyWithPrice;
+        
+        if (self.priceBookAndServiceOptions) {
+            [self resetOptions];
+        } else {
+            [self.tableView reloadData];
+        }
     }
     self.removedOptions = [[NSMutableArray alloc] initWithArray:[self.options[0] objectForKey:@"items"]];
     
