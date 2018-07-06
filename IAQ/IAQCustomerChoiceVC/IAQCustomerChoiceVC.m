@@ -315,19 +315,49 @@
     UIButton* detailButton = (UIButton*) sender;
     HealthyHomeSolutionsDetailVC* healthyHomeSolutionsDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsDetailVC"];
     
+    NSString* totalPrice;
+    NSString* ESAPrice;
+    
+    NSString* enlargeSavings;
+    NSString* enlargeMidleLabelString;
+    NSString* titleString;
     switch (detailButton.tag) {
         case 0:
             healthyHomeSolutionsDetailVC.iaqType = BEST;
+            totalPrice = self.bestFirstPrice.titleLabel.text;
+            ESAPrice = self.bestSecondPrice.titleLabel.text;
+            enlargeSavings = self.goodFinancingLabel.text;
+            enlargeMidleLabelString = self.goodEqual24Label.text;
+            titleString = @"BEST";
             break;
         case 1:
             healthyHomeSolutionsDetailVC.iaqType = BETTER;
+            totalPrice = self.betterFirstPrice.titleLabel.text;
+            ESAPrice = self.betterSecondPrice.titleLabel.text;
+            enlargeSavings = self.goodFinancingLabel.text;
+            enlargeMidleLabelString = self.goodEqual24Label.text;
+            titleString = @"BETTER";
             break;
         case 2:
             healthyHomeSolutionsDetailVC.iaqType = GOOD;
+            totalPrice = self.goodFirstPrice.titleLabel.text;
+            ESAPrice = self.goodSecondPrice.titleLabel.text;
+            enlargeSavings = self.goodFinancingLabel.text;
+            enlargeMidleLabelString = self.goodEqual24Label.text;
+            titleString = @"GOOD";
             break;
         default:
             break;
     }
+    
+    healthyHomeSolutionsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    healthyHomeSolutionsDetailVC.enlargeOptionName = titleString;
+    healthyHomeSolutionsDetailVC.enlargeTotalPrice = totalPrice;
+    healthyHomeSolutionsDetailVC.enlargeESAPrice = ESAPrice;
+    
+    healthyHomeSolutionsDetailVC.firstLabelString = @"15% Savings";
+    healthyHomeSolutionsDetailVC.secondLabelString = enlargeSavings;
+    healthyHomeSolutionsDetailVC.thirdLabelString = enlargeMidleLabelString;
     
     [self.navigationController pushViewController:healthyHomeSolutionsDetailVC animated:true];
 }

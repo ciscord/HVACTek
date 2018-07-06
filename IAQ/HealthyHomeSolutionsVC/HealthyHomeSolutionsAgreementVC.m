@@ -18,16 +18,20 @@
     NSString* iaqProductString;
 }
 @property (weak, nonatomic) IBOutlet RoundCornerView *layer1View;
-@property (weak, nonatomic) IBOutlet UIView *topBannerView;
-@property (weak, nonatomic) IBOutlet UIButton *circleButton;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UIButton *priceButton;
-@property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *authorizeButton;
 @property (weak, nonatomic) IBOutlet UIButton *mainMenuButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet SignatureView *signatureView;
+
+@property (weak, nonatomic) IBOutlet UITableView *enlargeTable;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
+@property (weak, nonatomic) IBOutlet UILabel *optionNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *thirdLabel;
+@property (weak, nonatomic) IBOutlet UIView *separatorView1;
+@property (weak, nonatomic) IBOutlet UIView *separatorView2;
 
 @end
 
@@ -40,38 +44,28 @@
     
     UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
     [self.navigationItem setRightBarButtonItem:techButton];
-    
-    self.topBannerView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
-    [self.circleButton setTitleColor:[UIColor cs_getColorWithProperty:kColorPrimary] forState:UIControlStateNormal];
-    self.circleButton.layer.cornerRadius = self.circleButton.bounds.size.width/2;
-    self.circleButton.clipsToBounds = true;
-    
-    self.descriptionLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
+  
     self.signatureView.layer.borderWidth   = 1.0;
     self.signatureView.layer.borderColor   = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.signatureView.backgroundColor   = [UIColor cs_getColorWithProperty:kColorPrimary0];
     self.signatureView.foregroundLineColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
+    self.separatorView1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.separatorView2.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.priceLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
     if (self.iaqType == BEST) {
-        [self.circleButton setTitle:@"Best" forState:UIControlStateNormal];
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBestProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].bestTotalPrice;
+        self.optionNameLabel.text = @"BEST";
     }else if (self.iaqType == BETTER) {
-        [self.circleButton setTitle:@"Better" forState:UIControlStateNormal];
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].betterTotalPrice;
+        self.optionNameLabel.text = @"BETTER";
     }else if (self.iaqType == GOOD) {
-        [self.circleButton setTitle:@"Good" forState:UIControlStateNormal];
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].goodTotalPrice;
-    }
-    
-    iaqProductString = @"";
-    for (IAQProductModel* iaqProduct in selectedProductArray) {
-        iaqProductString = [NSString stringWithFormat:@"%@\n%@", iaqProductString, iaqProduct.title];
-        
+        self.optionNameLabel.text = @"GOOD";
     }
     
     if (self.fromAddCart2) {
@@ -87,20 +81,40 @@
         
         
     }
-    self.descriptionLabel.text = iaqProductString;
     
     if (self.costType == SAVING) {
-        [self.priceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.firstLabel.text = @"15% Savings";
+        
+        if (totalCost >= 1000) {
+            self.secondLabel.text = @"0% Financing";
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
+        }else{
+            self.secondLabel.text = @"Does Not Qualify";
+            self.thirdLabel.text = @"For Financing";
+        }
+        
+        [self.priceLabel setTextColor:[UIColor blackColor]];
     
         totalCost = totalCost * 0.85;
-        [self.priceButton setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
-        _priceDescriptionLabel.text = @"15% Savings 0% Financing";
-    
+        self.priceLabel.text = [self changeCurrencyFormat:totalCost];
+        
+        
         
     }else{
-        [self.priceButton setTitleColor:[UIColor hx_colorWithHexString:@"C42E3C"] forState:UIControlStateNormal];
-        [self.priceButton setTitle:[self changeCurrencyFormat:totalCost] forState:UIControlStateNormal];
-        _priceDescriptionLabel.text = @"";
+        
+        self.firstLabel.text = @"15% Savings";
+        
+        if (totalCost >= 1000) {
+            self.secondLabel.text = @"0% Financing";
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
+        }else{
+            self.secondLabel.text = @"Does Not Qualify";
+            self.thirdLabel.text = @"For Financing";
+        }
+        
+        [self.priceLabel setTextColor:[UIColor hx_colorWithHexString:@"C42E3C"]];
+        self.priceLabel.text = [self changeCurrencyFormat:totalCost];
+        
     }
     
     self.authorizeButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -246,9 +260,9 @@
         
         NSString* emailString = emailField.text;
         if ([emailString isEqualToString:@""]) {
-            emailString = [NSString stringWithFormat:@"%@, %@", [DataLoader sharedInstance].currentUser.userName, [DataLoader sharedInstance].currentCompany.invoice_email];
+            emailString = [NSString stringWithFormat:@"%@, %@", [DataLoader sharedInstance].currentUser.email, [DataLoader sharedInstance].currentCompany.invoice_email];
         }else {
-            emailString = [NSString stringWithFormat:@"%@, %@, %@", emailString, [DataLoader sharedInstance].currentUser.userName, [DataLoader sharedInstance].currentCompany.invoice_email];
+            emailString = [NSString stringWithFormat:@"%@, %@, %@", emailString, [DataLoader sharedInstance].currentUser.email, [DataLoader sharedInstance].currentCompany.invoice_email];
         }
         if ([nameField.text isEqualToString:@""]) {
             TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Empty name"];
@@ -292,7 +306,7 @@
                                                        
                                                        authid = [dataDictionary objectForKey:@"id"];
                                                        
-                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailField.text onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
+                                                       [[DataLoader sharedInstance] emailIaqAuthorizeSale:authid email:emailString onSuccess:^(NSString *successMessage, NSDictionary *reciveData) {
                                                            
                                                            dispatch_async(dispatch_get_main_queue(), ^{
                                                                NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
@@ -301,7 +315,7 @@
                                                                [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
                                                                [userdefault synchronize];
                                                                
-                                                               [self showEmailSentAlert:emailField.text];
+                                                               [self showEmailSentAlert:emailString];
                                                            });
                                                            
                                                            
@@ -371,7 +385,80 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDelegate & DataSource
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell setBackgroundColor:[UIColor clearColor]];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([selectedProductArray count] == 0){
+        return 0;
+    }else{
+        return [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellIdentifier = @"identifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    IAQProductModel * iaqModel = [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray[indexPath.row];
+    
+    NSString * serviceString;
+    if ([iaqModel.quantity intValue] > 1) {
+        serviceString = [NSString stringWithFormat:@"(%@) ",iaqModel.quantity];
+    }else{
+        serviceString = @"";
+    }
+    NSString * nameString = [serviceString stringByAppendingString:iaqModel.title];
+    
+    if (![selectedProductArray containsObject:iaqModel]){
+        
+        NSDictionary* attributes = @{
+                                     NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
+                                     };
+        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
+        cell.textLabel.attributedText = attrText;
+        
+        
+    }else{
+        if (cell.textLabel.attributedText){
+            cell.textLabel.attributedText = nil;
+        }
+        cell.textLabel.text = nameString;
+    }
+    
+    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font          = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
+    cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
+    
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+}
 - (NSString *)changeCurrencyFormat:(float)number {
     
     NSNumberFormatter *formatterCurrency;
