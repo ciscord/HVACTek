@@ -14,7 +14,14 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DispatchVC.h"
 #import "TechnicianDebriefVC.h"
+#import "THProgressView.h"
+
+static const CGSize progressViewSize = { 300.0f, 20.0f };
+
 @interface TechnicianHomeVC ()
+{
+    int downloadedCount;
+}
 @property (weak, nonatomic) IBOutlet UIView *vwDebrief;
 @property (strong, nonatomic) IBOutlet UITextField *edtJobId;
 @property (weak, nonatomic) IBOutlet UILabel *selectTaskLabel;
@@ -33,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *syncProgressLabel;
 @property (nonatomic) int numberOfHuds;
 
+@property (nonatomic, strong) THProgressView *progressBar;
 @end
 
 @implementation TechnicianHomeVC
@@ -45,6 +53,7 @@
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.homeController = self;
+    [self initializeProgressBar];
     
     self.numberOfHuds = 0;
    /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
@@ -79,7 +88,6 @@
     self.selectTaskLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.jobIdLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.finishJobLabel.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    
     self.edtJobId.layer.borderWidth = 1.0;
     self.edtJobId.layer.borderColor = [UIColor cs_getColorWithProperty:kColorPrimary50].CGColor;
     self.edtJobId.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary0];
@@ -164,7 +172,8 @@
     [self.syncButton setEnabled:NO];
     [self.syncButton setTitle:@"Sync Started" forState:UIControlStateNormal];
     [self syncLabelStatus:NO];
-    self.lastSyncLabel.text = @"Last Sync Date: Now";
+    self.progressBar.hidden = NO;
+    self.syncProgressLabel.hidden = false;
     [self checkForDownloading];
 }
 
@@ -172,27 +181,64 @@
 
 #pragma mark - Downloading
 - (void)checkForDownloading {
-    int x = [self numberOfVideoObjects];
-    int y = 0;
     
-    for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
+    downloadedCount = 0;
+    [[TWRDownloadManager sharedManager] cancelAllDownloads];
+    
+    if ([[DataLoader sharedInstance] companyAdditionalInfo].count > 0) {
+        [self downloadOnebyOne];
+    }
+    
+    
+}
+- (void) downloadOnebyOne {
+    
+    NSUInteger totalCount = [[DataLoader sharedInstance] companyAdditionalInfo].count;
+    
+    if (downloadedCount < totalCount) {
+        CompanyAditionalInfo *companyObject = [[[DataLoader sharedInstance] companyAdditionalInfo] objectAtIndex:downloadedCount];
+        
         if (companyObject.isVideo) {
-            y++;
             if (![[TWRDownloadManager sharedManager] fileExistsForUrl:companyObject.info_url]) {
                 [self startDownloadingVideo:companyObject];
-            }else{
-                if (y==x) {
-                    [self setDefaultSyncButton];
-                    [self modifySyncStatus];
-                }
+            }else {
+                downloadedCount++;
+                
+                [self downloadOnebyOne];
+                return;
             }
         }else if (companyObject.isPicture) {
             [self downloadImageFromURL:companyObject.info_url];
+        }else {
+            downloadedCount++;
+            [self downloadOnebyOne];
+            return;
         }
     }
+    
+    [self updateProgress];
+    if (totalCount == downloadedCount) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.progressBar.hidden = true;
+            self.syncProgressLabel.hidden = true;
+            [self.progressBar setProgress:0];
+            [self setDefaultSyncButton];
+            [self modifySyncStatus];
+        });
+        
+    }
+    
 }
-
-
+- (void) updateProgress {
+    
+    float value = (float)downloadedCount / (float)[[DataLoader sharedInstance] companyAdditionalInfo].count;
+    int percent = value * 100;
+    NSString *str = [NSString stringWithFormat:@"Sync In Progress - %d%%", percent];
+    
+    [self.syncProgressLabel performSelectorOnMainThread:@selector(setText:) withObject:str waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(updateProgressForValue:) withObject:[NSNumber numberWithFloat:value] waitUntilDone:YES];
+    
+}
 -(int)numberOfVideoObjects {
     int x = 0;
     for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
@@ -214,34 +260,38 @@
                            completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
                                if (image && finished) {
                                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageURL];
+                                   
                                }
+                               downloadedCount++;
+                               [self downloadOnebyOne];
                            }];
 }
 
 
 
 -(void)startDownloadingVideo:(CompanyAditionalInfo *)object {
+    
     [[TWRDownloadManager sharedManager] downloadFileForURL:object.info_url progressBlock:^(CGFloat progress) {
-       // NSLog(@"progress %f video file:%@",progress, object.info_url);
+        NSLog(@"progress %f video file:%@",progress, object.info_url);
+        
     } completionBlock:^(BOOL completed) {
         NSLog(@"~~~completed downloading~~~");
-        if ([[TWRDownloadManager sharedManager] currentDownloads].count == 0) {
-            [self modifySyncStatus];
-            [self setDefaultSyncButton];
-        }
+        downloadedCount++;
+        [self downloadOnebyOne];
     } enableBackgroundMode:YES];
 }
 
 
 - (void)setDefaultSyncButton {
-    [self.syncButton setTitle:@"Sync" forState:UIControlStateNormal];
+    [self.syncButton setTitle:@"Sync Completed" forState:UIControlStateNormal];
     [self.syncButton setEnabled:YES];
+    
 }
 
 
 - (void)modifySyncStatus {
     [[DataLoader sharedInstance] updateStatusForAdditionalInfoOnSuccess:^(NSString *message) {
-        //
+        [self checkSyncStatus];
     } onError:^(NSError *error) {
         ShowOkAlertWithTitle(error.localizedDescription, self);
     }];
@@ -379,4 +429,24 @@
         ShowOkAlertWithTitle(@"There is no job assigned for you.", self);
     }
 }
+
+
+#pragma mark - ProgressBar
+- (void)initializeProgressBar {
+    self.progressBar = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.frame) - progressViewSize.width / 2.0f,
+                                                                        CGRectGetMidY(self.view.frame) - progressViewSize.height / 2.0f + 184,
+                                                                        progressViewSize.width,
+                                                                        progressViewSize.height)];
+    self.progressBar.borderTintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.progressBar.progressTintColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    self.progressBar.progressBackgroundColor = [UIColor whiteColor];
+    self.progressBar.hidden = YES;
+    [self.view addSubview:self.progressBar];
+}
+
+- (void)updateProgressForValue:(NSNumber *)newValue
+{
+    [self.progressBar setProgress:[newValue floatValue] animated:YES];
+}
+
 @end
