@@ -528,6 +528,7 @@
 		84D2400220E512CE008C549D /* SummaryOfFindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryOfFindingCell.m; sourceTree = "<group>"; };
 		84D2400320E512CE008C549D /* SummaryOfFindingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryOfFindingVC.h; sourceTree = "<group>"; };
 		84D2400420E512CE008C549D /* SummaryOfFindingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryOfFindingCell.xib; sourceTree = "<group>"; };
+		84DBAC8C20EFF2D20012DAD6 /* SignatureModel 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SignatureModel 13.xcdatamodel"; sourceTree = "<group>"; };
 		862A387E1DBBAED000BCF34E /* Financials+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataClass.h"; sourceTree = "<group>"; };
 		862A387F1DBBAED000BCF34E /* Financials+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Financials+CoreDataClass.m"; sourceTree = "<group>"; };
 		862A38801DBBAED000BCF34E /* Financials+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Financials+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -2064,6 +2065,7 @@
 		4F11D3E51AA76FA7007FC0A8 /* SignatureModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84DBAC8C20EFF2D20012DAD6 /* SignatureModel 13.xcdatamodel */,
 				506E00291FD06F9800C74A4D /* SignatureModel 12.xcdatamodel */,
 				52FB2A3D1D363E3F0054D664 /* SignatureModel 11.xcdatamodel */,
 				5247C51D1CEDAF8900670D4A /* SignatureModel 10.xcdatamodel */,
@@ -2076,7 +2078,7 @@
 				91044CC01ACD9F11000192FC /* SignatureModel 2.xcdatamodel */,
 				4F11D3E61AA76FA7007FC0A8 /* SignatureModel.xcdatamodel */,
 			);
-			currentVersion = 506E00291FD06F9800C74A4D /* SignatureModel 12.xcdatamodel */;
+			currentVersion = 84DBAC8C20EFF2D20012DAD6 /* SignatureModel 13.xcdatamodel */;
 			path = SignatureModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

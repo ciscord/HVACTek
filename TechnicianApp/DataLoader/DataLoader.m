@@ -524,6 +524,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                weakSelf.currentUser.password = swapiDict[@"password"];
                weakSelf.currentUser.firstName = weakSelf.userInfo[@"firstname"];
                weakSelf.currentUser.lastName = weakSelf.userInfo[@"lastname"];
+               weakSelf.currentUser.email = weakSelf.userInfo[@"email"];
                [weakSelf.currentUser.managedObjectContext save];
                
                [weakSelf.requestSerializer setValue:weakSelf.userInfo[@"token"] forHTTPHeaderField:@"TOKEN"];

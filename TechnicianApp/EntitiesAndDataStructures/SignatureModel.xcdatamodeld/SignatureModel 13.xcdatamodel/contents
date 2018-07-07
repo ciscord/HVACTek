@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17D102" minimumToolsVersion="Xcode 4.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Job" representedClassName="Job" syncable="YES">
+        <attribute name="addedCustomRepairsOptions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="additionalInfoData" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="completionTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="custumerQuestions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="dispatchTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="endTimeQuestions" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="initialCostumerRR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="initialTechRR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="rrQuestions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="selectedServiceOptions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="serviceLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="signatureFile" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="startTimeQuestions" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="swapiJobInfo" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="techObservations" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="totalInvestmentsRR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unselectedServiceOptiunons" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="utilityOverpaymentHVAC" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="jobs" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Logs" representedClassName="Logs" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="module" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="request" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="response" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="add2cart" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tech" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="jobs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Job" inverseName="user" inverseEntity="Job" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Job" positionX="288" positionY="-25" width="198" height="405"/>
+        <element name="Logs" positionX="747" positionY="117" width="128" height="135"/>
+        <element name="User" positionX="90" positionY="68" width="128" height="195"/>
+    </elements>
+</model>
