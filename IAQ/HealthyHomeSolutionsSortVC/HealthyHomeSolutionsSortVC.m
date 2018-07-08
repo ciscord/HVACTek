@@ -36,7 +36,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
         
         IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
         
-        [self.navigationController pushViewController:iaqCustomerChoiceVC animated:true];
+        [self.navigationController pushViewController:iaqCustomerChoiceVC animated:false];
         
     }
 }

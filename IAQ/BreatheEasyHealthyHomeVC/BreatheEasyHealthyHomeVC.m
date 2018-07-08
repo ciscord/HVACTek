@@ -29,7 +29,7 @@
     
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQBreatheEasyHealtyHome) {
         VideoForCustomerVC* videoForCustomerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoForCustomerVC"];
-        [self.navigationController pushViewController:videoForCustomerVC animated:true];
+        [self.navigationController pushViewController:videoForCustomerVC animated:false];
     }
 }
 #pragma mark Button event

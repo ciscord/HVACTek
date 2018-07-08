@@ -42,7 +42,7 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQSummaryOfFinding) {
     
         HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
+        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:false];
     
     }
 }

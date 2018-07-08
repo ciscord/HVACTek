@@ -69,12 +69,32 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
        
         SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
-        [self.navigationController pushViewController:summaryOfFindingVC animated:true];
+        [self.navigationController pushViewController:summaryOfFindingVC animated:false];
         
     }else {
         [self downloadIAQProducts];
         
     }
+}
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger itemIndex = indexPath.item;
+    
+    NSString* checkedState = [checkedProducts objectAtIndex:indexPath.item];
+    
+    [checkedProducts removeObjectAtIndex:itemIndex];
+    if ([checkedState isEqualToString:@"1"]) {
+        [checkedProducts insertObject:@"0" atIndex:itemIndex];
+        
+    }else {
+        [checkedProducts insertObject:@"1" atIndex:itemIndex];
+        
+    }
+    
+    
+    ServiceOptionViewCell *cell = (ServiceOptionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.btnCheckbox.selected = ([checkedState isEqualToString:@"1"] ? false : true);
 }
 
 #pragma mark - UICollectionViewDatasource
@@ -113,18 +133,9 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         [checkedProducts removeObjectAtIndex:itemIndex];
         if (selected) {
             [checkedProducts insertObject:@"1" atIndex:itemIndex];
-            if ([item.quantity isEqualToString:@"0"]) {
-                item.quantity = @"1";
-                
-                [collectionView reloadData];
-            }
             
         }else {
             [checkedProducts insertObject:@"0" atIndex:itemIndex];
-           
-            item.quantity = @"0";
-            
-            [collectionView reloadData];
             
         }
         
@@ -149,7 +160,12 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     
     for (int i = 0; i <  [IAQDataModel sharedIAQDataModel].iaqProductsArray.count; i++) {
         IAQProductModel * iaqModel  = [[IAQDataModel sharedIAQDataModel].iaqProductsArray objectAtIndex:i];
-        if ([iaqModel.quantity intValue] > 0 && [[checkedProducts objectAtIndex:i] isEqualToString:@"1"]) {
+        if ([[checkedProducts objectAtIndex:i] isEqualToString:@"1"]) {
+            
+            if ([iaqModel.quantity isEqualToString:@""]) {
+                iaqModel.quantity = @"1";
+            }
+            
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
             [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
@@ -158,7 +174,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }
     
     if ([IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count == 0) {
-        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please input quantity"];
+        TYAlertController* alert = [TYAlertController showAlertWithStyle1:@"" message:@"Please select at least one"];
         [self presentViewController:alert animated:true completion:nil];
         return;
     }
@@ -237,8 +253,8 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         [self loadIAQFromCoredata];
         checkedProducts = [NSMutableArray array];
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-            [checkedProducts addObject:@"1"];
-            iaqModel.quantity = @"1";
+            [checkedProducts addObject:@"0"];
+            iaqModel.quantity = @"";
         }
         [self.collectionView reloadData];
     }onError:^(NSError *error) {

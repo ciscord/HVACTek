@@ -10,7 +10,7 @@
 #import "PictureLibraryVC.h"
 #import "VideoLibraryVC.h"
 #import "RRQuestionsVC.h"
-#import "HealthyHomeSolutionsAgreementVC.h"
+#import "HealthyHomeSolutionsVC.h"
 #import "IAQDataModel.h"
 #import "Add2CartData.h"
 @interface testerViewController () <CartViewControllerDelegate>{
@@ -2198,8 +2198,8 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-    HealthyHomeSolutionsAgreementVC* healthyHomeSolutionsAgreementVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
-    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+    HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
 }
 
 #pragma mark - Buttons Actions
@@ -2239,7 +2239,6 @@ static NSString *kCellIdentifier = @"MonthsCollectionViewCell";
     
 }
 - (IBAction)fastPayClick:(id)sender {
-    //    [self performSegueWithIdentifier:@"cart" sender:nil];
     isEasy = false;
     [_monthsCollectionView reloadData];
     secView.hidden = NO;

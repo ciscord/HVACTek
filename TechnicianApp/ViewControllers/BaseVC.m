@@ -221,7 +221,7 @@
     
         TechnicianHomeVC* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"TechnicianHomeVC"];
         currentViewController.isAutoLoad = true;
-        [navController pushViewController:currentViewController animated:true];
+        [navController pushViewController:currentViewController animated:false];
     });
     
 }
@@ -247,7 +247,7 @@
         
         HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
         healthyHomeSolutionsVC.isAutoLoad = true;
-        [navController pushViewController:healthyHomeSolutionsVC animated:true];
+        [navController pushViewController:healthyHomeSolutionsVC animated:false];
     });
     
     

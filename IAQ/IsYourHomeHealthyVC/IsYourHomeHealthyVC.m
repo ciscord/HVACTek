@@ -102,7 +102,7 @@
         [IAQDataModel sharedIAQDataModel].isfinal = [[userdefault objectForKey:@"isfinal"] intValue];
         
         HereWhatWeProposeVC* hereWhatWeProposeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HereWhatWeProposeVC"];
-        [self.navigationController pushViewController:hereWhatWeProposeVC animated:true];
+        [self.navigationController pushViewController:hereWhatWeProposeVC animated:false];
     
     }
     

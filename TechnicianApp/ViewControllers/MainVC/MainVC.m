@@ -67,9 +67,13 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-//    UIViewController *vc = [storyboard instantiateInitialViewController];
-//
-//    [self.navigationController pushViewController:vc animated:YES];
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolution]  forKey:@"iaqCurrentStep"];
+    
+    [userdefault synchronize];
+    
     HealthyHomeSolutionsVC* healthyHomeSolutionsVC = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
     [self.navigationController pushViewController:healthyHomeSolutionsVC animated:true];
     

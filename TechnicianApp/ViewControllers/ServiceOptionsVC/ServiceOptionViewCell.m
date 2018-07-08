@@ -31,6 +31,7 @@
         self.onCheckboxToggle(sender.selected);
     }
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -57,29 +58,19 @@
                 IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[selectedItemIndex];
                 
                 item.quantity = string;
-                [self.parentViewController.checkedProducts removeObjectAtIndex:selectedItemIndex];
-                [self.parentViewController.checkedProducts insertObject:@"1" atIndex:selectedItemIndex];
-                
-                
-                self.btnCheckbox.selected = true;
                 
             }
             return false;
         }
         
     }
+    NSInteger itemIndex = textField.tag;
+    IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
+    
     if (textField.text.length == 1 && string.length == 0) {
-        textField.text = @"0";
-        IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[selectedItemIndex];
-        item.quantity = @"0";
-        [self.parentViewController.checkedProducts removeObjectAtIndex:selectedItemIndex];
-        [self.parentViewController.checkedProducts insertObject:@"0" atIndex:selectedItemIndex];
         
-        
-        self.btnCheckbox.selected = false;
-        
-        
-        return false;
+        item.quantity = @"";
+        return true;
     }else if (textField.text.length > 1 && string.length == 0) {
         newString = [newString substringWithRange:NSMakeRange(0, newString.length-1)];
     }
@@ -89,16 +80,7 @@
     BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
     
     if (stringIsValid) {
-        
-        NSInteger itemIndex = textField.tag;
-        IAQProductModel *item = [IAQDataModel sharedIAQDataModel].iaqProductsArray[itemIndex];
-        
         item.quantity = newString;
-        
-        [self.parentViewController.checkedProducts removeObjectAtIndex:itemIndex];
-        [self.parentViewController.checkedProducts insertObject:@"1" atIndex:itemIndex];
-        
-        self.btnCheckbox.selected = true;
         
     }
     

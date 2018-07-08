@@ -84,7 +84,7 @@
 
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQVideoForCustomer) {
         IsYourHomeHealthyVC* isYourHomeHealthyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IsYourHomeHealthyVC"];
-        [self.navigationController pushViewController:isYourHomeHealthyVC animated:true];
+        [self.navigationController pushViewController:isYourHomeHealthyVC animated:false];
     }
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
