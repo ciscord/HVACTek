@@ -69,10 +69,6 @@
         detailButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     }
     
-    for (UIButton* bigButton in self.bigButtonArray) {
-        bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    }
-    
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
@@ -112,7 +108,7 @@
         }else {
             //go to next screen
             BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
-            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:true];
+            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:false];
         }
         
     }else{
@@ -125,6 +121,14 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    for (UIButton* bigButton in self.bigButtonArray) {
+        bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        if ([IAQDataModel sharedIAQDataModel].isfinal == 0) {
+            bigButton.enabled = false;
+        }else {
+            bigButton.enabled = true;
+        }
+    }
     [self reloadData];
 }
 
@@ -235,8 +239,8 @@
         self.betterFinancingLabel.text = @"0% Financing";
         self.betterEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
     }else{
-        self.bestFinancingLabel.text = @"Does Not Qualify";
-        self.bestEqual24Label.text = @"For Financing";
+        self.betterFinancingLabel.text = @"Does Not Qualify";
+        self.betterEqual24Label.text = @"For Financing";
     }
     
     //calculate good price ----------------
@@ -312,6 +316,9 @@
     [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
 }
 - (IBAction)detailsClick:(id)sender {
+    if ([IAQDataModel sharedIAQDataModel].isfinal != 1)
+        return;
+        
     UIButton* detailButton = (UIButton*) sender;
     HealthyHomeSolutionsDetailVC* healthyHomeSolutionsDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsDetailVC"];
     
