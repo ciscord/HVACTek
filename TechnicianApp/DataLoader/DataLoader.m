@@ -1370,6 +1370,36 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
        }];
 }
 
+-(void)pauseTimeWithJobId:(NSString *)jobId
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError {
+    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSString* startTimeUrl = [NSString stringWithFormat:@"pause_tracker/%@", jobId];
+    [self POST:startTimeUrl
+    parameters:@{}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
+           NSLog(@"responseObject: %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               
+               onSuccess(@"OK");
+               
+           } else if (onError) {
+               NSLog(@"%@", responseObject[@"message"]);
+               onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           if (onError) {
+               onError(error);
+           }
+       }];
+}
+
 - (NSString*) convertDictionaryToString:(NSMutableDictionary*) dict
 {
     NSError* error;

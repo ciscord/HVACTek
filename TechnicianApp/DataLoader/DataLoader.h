@@ -252,5 +252,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 -(void)startTimeWithJobId:(NSString *)jobId
                 onSuccess:(void (^)(NSString *successMessage))onSuccess
                   onError:(void (^)(NSError *error))onError;
-
+-(void)pauseTimeWithJobId:(NSString *)jobId
+                onSuccess:(void (^)(NSString *successMessage))onSuccess
+                  onError:(void (^)(NSError *error))onError;
 @end

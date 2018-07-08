@@ -34,6 +34,13 @@
     
 }
 
+- (void) viewDidDisappear:(BOOL)animated {
+    [[DataLoader sharedInstance] pauseTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+        
+    } onError:^(NSError *error) {
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
