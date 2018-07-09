@@ -45,8 +45,8 @@
         [self trySendingLogWithMessage:@"Success" andResponse:message.description];
         [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianHome];
         
-        if (self.navigationController.viewControllers.count > 1) {
-            UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:1];
+        if (self.navigationController.viewControllers.count > 2) {
+            UIViewController* homeViewController = [self.navigationController.viewControllers objectAtIndex:2];
             [self.navigationController popToViewController:homeViewController animated:true];
         }else {
             [self.navigationController popToRootViewControllerAnimated:true];
