@@ -155,9 +155,8 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     self.allOptions = allOptionsArray.mutableCopy;
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
+- (void)dealloc {
+   
     if (self.isiPadCommonRepairsOptions) {
         [DataLoader saveOptionsLocal:self.selectedOptions];
     }else {

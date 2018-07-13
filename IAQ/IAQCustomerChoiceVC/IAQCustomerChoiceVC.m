@@ -75,6 +75,7 @@
     
     self.libraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQCustomerChoice) {
+    
         [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray array];
         [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray array];
         [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray array];
@@ -107,19 +108,87 @@
             
         }else {
             //go to next screen
-            BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
-            [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:false];
+            if ([IAQDataModel sharedIAQDataModel].currentStep == HealthyHomeSolutionsAgreement) {
+                UIButton* btn = [[UIButton alloc] init];
+                btn.tag = [[[NSUserDefaults standardUserDefaults] objectForKey:@"priceIndex"] integerValue];
+                
+                [self priceClick:btn];
+            }else {
+                BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];
+                [self.navigationController pushViewController:breatheEasyHealthyHomeVC animated:false];
+            }
+            
         }
         
     }else{
-        [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
-        [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
-        [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+        if (self.isAutoLoad) {
+            [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray array];
+            [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray array];
+            [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray array];
+            
+            [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [userdefault objectForKey:@"iaqBestProductsIdArray"];
+            [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [userdefault objectForKey:@"iaqBetterProductsIdArray"];
+            [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [userdefault objectForKey:@"iaqGoodProductsIdArray"];
+            
+            //load products
+            for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+                
+                //best
+                if ([[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray containsObject:iaqModel.productId]) {
+                    [[IAQDataModel sharedIAQDataModel].iaqBestProductsArray addObject:iaqModel];
+                }
+                
+                //better
+                if ([[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray containsObject:iaqModel.productId]) {
+                    [[IAQDataModel sharedIAQDataModel].iaqBetterProductsArray addObject:iaqModel];
+                }
+                
+                //good
+                if ([[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray containsObject:iaqModel.productId]) {
+                    [[IAQDataModel sharedIAQDataModel].iaqGoodProductsArray addObject:iaqModel];
+                }
+            }
+            
+            if ([IAQDataModel sharedIAQDataModel].currentStep == IAQCustomerChoiceFinal) {
+                [IAQDataModel sharedIAQDataModel].isfinal = [[userdefault objectForKey:@"isfinal"] intValue];
+            }
+        }else {
+            [IAQDataModel sharedIAQDataModel].iaqBestProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+            [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+            [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray = [NSMutableArray arrayWithArray:[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray];
+        }
+        
     }
     
     
 }
 
+- (void) dealloc {
+   
+    [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray = [NSMutableArray array];
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBestProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray addObject:iaqModel.productId];
+    }
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray addObject:iaqModel.productId];
+    }
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray) {
+        [[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray addObject:iaqModel.productId];
+    }
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray forKey:@"iaqBestProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray forKey:@"iaqBetterProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqGoodProductsIdArray forKey:@"iaqGoodProductsIdArray"];
+    
+    [userdefault synchronize];
+}
 - (void) viewWillAppear:(BOOL)animated {
     for (UIButton* bigButton in self.bigButtonArray) {
         bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -313,7 +382,10 @@
             break;
     }
     
-    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:true];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:priceButton.tag] forKey:@"priceIndex"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    healthyHomeSolutionsAgreementVC.isAutoLoad = self.isAutoLoad;
+    [self.navigationController pushViewController:healthyHomeSolutionsAgreementVC animated:!self.isAutoLoad];
 }
 - (IBAction)detailsClick:(id)sender {
     if ([IAQDataModel sharedIAQDataModel].isfinal != 1)

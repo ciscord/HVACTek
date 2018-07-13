@@ -56,7 +56,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
     [self initializeProgressBar];
     
     self.numberOfHuds = 0;
-   /// [self performSegueWithIdentifier:@"showWorkVC" sender:self];
     [self configureColorScheme];
     [self checkSyncStatus];
     [self checkForLogs];
@@ -137,7 +136,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
         BOOL syncStatus = [[infoDict objectForKey:@"sync"] boolValue];
         [self syncLabelStatus:syncStatus];
         [self syncDateLabel:[infoDict objectForKey:@"sync_date"]];
-        //[MBProgressHUD hideHUDForView:self.view animated:YES];
         [self checkNumberOfHuds:--self.numberOfHuds];
     }onError:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -332,7 +330,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
                                                                    [DataLoader clearAllLocalData];
                                                                    [weakSelf checkJobStatus];
                                                                    [[TechDataModel sharedTechDataModel] saveEditJobID:self.edtJobId.text];
-                                                                   //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                    [self checkNumberOfHuds:--self.numberOfHuds];
                                                                } onError:^(NSError *error) {
                                                                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -348,7 +345,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
         self.vwDebrief.hidden = YES;
         if ([[[DataLoader sharedInstance] currentUser] activeJob]) {
             self.edtJobId.text =[[[DataLoader sharedInstance] currentUser] activeJob].jobID;
-//            [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
         }
         else
         {
@@ -373,17 +369,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)btnCutomerlookupTouch:(id)sender
 {
     
@@ -397,8 +382,6 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
         __weak typeof (self) weakSelf = self;
         [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
                                                                onSuccess:^(NSString *successMessage) {
-                                                                   //[weakSelf checkJobStatus];
-                                                                   //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                                                                    [self checkNumberOfHuds:--self.numberOfHuds];
                                                                    [weakSelf custumerlookup];
                                                                    

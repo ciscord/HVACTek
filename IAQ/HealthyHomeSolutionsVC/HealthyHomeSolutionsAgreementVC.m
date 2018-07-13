@@ -68,11 +68,13 @@
         self.optionNameLabel.text = @"GOOD";
     }
     
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
     if (self.fromAddCart2) {
-        NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+        
         iaqProductString = [userdefault objectForKey:@"iaqProduct"];
         totalCost = [[userdefault objectForKey:@"totalCost"] floatValue];
-        NSString *signature = [userdefault objectForKey:@"signature"];
+        NSString *signature = [userdefault objectForKey:@"signatureiaq"];
         if (signature != nil) {
             NSData* imageData = [[NSData alloc] initWithBase64EncodedString:signature options:NSDataBase64DecodingIgnoreUnknownCharacters];
             UIImage* signatureImage = [UIImage imageWithData:imageData];
@@ -80,6 +82,13 @@
         }
         
         
+    }else {
+        NSString *signature = [userdefault objectForKey:@"signatureiaq"];
+        if (signature != nil) {
+            NSData* imageData = [[NSData alloc] initWithBase64EncodedString:signature options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            UIImage* signatureImage = [UIImage imageWithData:imageData];
+            [self.signatureView setImage:signatureImage];
+        }
     }
     
     if (self.costType == SAVING) {
@@ -122,6 +131,19 @@
     self.emailButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.backButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
+    [userdefault setObject:[NSNumber numberWithInteger:HealthyHomeSolutionsAgreement]  forKey:@"iaqCurrentStep"];
+    [userdefault synchronize];
+}
+
+- (void) dealloc  {
+    
+    UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
+    NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    if (signature) {
+        [[NSUserDefaults standardUserDefaults] setObject:signature forKey:@"signatureiaq"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 - (IBAction)authorizeSignatureClearClicked:(id)sender {
     [self.signatureView clear];
@@ -199,7 +221,7 @@
                                                                [userdefault setObject:iaqProductString forKey:@"iaqProduct"];
                                                                [userdefault setObject:iaqProductStringFormatted forKey:@"iaqProductStringFormatted"];
                                                                [userdefault setObject:[NSNumber numberWithFloat:totalCost] forKey:@"totalCost"];
-                                                               [userdefault setObject:signature forKey:@"signature"];
+                                                               [userdefault setObject:signature forKey:@"signatureiaq"];
                                                                [userdefault synchronize];
                                                                
                                                                [self showEmailSentAlert:[DataLoader sharedInstance].currentCompany.invoice_email];

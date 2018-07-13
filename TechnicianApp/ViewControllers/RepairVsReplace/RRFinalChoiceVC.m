@@ -86,7 +86,6 @@
     self.title = @"Customer's Choice";
 
   NSString * initialText = [NSString stringWithFormat:@"Over the next %@ it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.systemYearsToLast, self.totalInvestment];
-//    self.descriptionLabel.text = [NSString stringWithFormat:@"Over the next 5 years it looks like you are going to be spending approximately %@ on your current system. Do you think it makes sense to look at investing that money into a new system, or would you just like me to start the repair?", self.totalInvestment];
   
   NSMutableAttributedString *atrString = [[NSMutableAttributedString alloc] initWithString:initialText];
   [atrString setColorForText:self.totalInvestment withColor:[UIColor redColor]];
@@ -126,8 +125,6 @@
 - (IBAction)hideCustomerPriceView:(id)sender {
     self.customerPriceView.hidden = YES;
 }
-
-
 
 #pragma mark - TextField
 - (void)textFieldDidEndEditing:(UITextField *)textField {

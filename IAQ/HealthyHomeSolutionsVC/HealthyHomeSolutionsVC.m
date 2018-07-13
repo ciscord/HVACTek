@@ -58,10 +58,24 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         
         checkedProducts = [NSMutableArray array];
         
+        
+        ///load sorted array
+        for (int i = 0; i < [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray.count; i++) {
+        
+            NSString* productId = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray objectAtIndex:i];
+            for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+                if ([productId isEqualToString:iaqModel.productId]) {
+                    iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:i];
+                    [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+                    
+                }
+            }
+        }
+        
+        
+        //load checked state
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
             if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
-                iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
-                [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
                 [checkedProducts addObject:@"1"];
             }else {
                 [checkedProducts addObject:@"0"];
@@ -69,12 +83,41 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         }
        
         SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
+        summaryOfFindingVC.isAutoLoad = true;
         [self.navigationController pushViewController:summaryOfFindingVC animated:false];
         
     }else {
         [self downloadIAQProducts];
         
     }
+}
+
+- (void) dealloc {
+    
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
+    
+    for (int i = 0; i <  [IAQDataModel sharedIAQDataModel].iaqProductsArray.count; i++) {
+        IAQProductModel * iaqModel  = [[IAQDataModel sharedIAQDataModel].iaqProductsArray objectAtIndex:i];
+        if ([[checkedProducts objectAtIndex:i] isEqualToString:@"1"]) {
+            
+            if ([iaqModel.quantity isEqualToString:@""]) {
+                iaqModel.quantity = @"1";
+            }
+            
+            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
+            [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
+            
+        }
+    }
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
+    
+    [userdefault synchronize];
 }
 #pragma mark - UICollectionViewDelegate
 
@@ -196,6 +239,30 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 }
 //////////////////////////////////////////////
 - (void) downloadIAQProducts {
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    
+    if (self.isAutoLoad && [userdefault objectForKey:@"iaqSortedProductsIdArray"]) {
+        [self loadIAQFromCoredata];
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
+        
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [userdefault objectForKey:@"iaqSortedProductsIdArray"];
+        [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [userdefault objectForKey:@"iaqSortedProductsQuantityArray"];
+        
+        checkedProducts = [NSMutableArray array];
+        
+        for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
+            if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
+                iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
+                [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
+                [checkedProducts addObject:@"1"];
+            }else {
+                [checkedProducts addObject:@"0"];
+            }
+        }
+        
+        return;
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof (self) weakSelf = self;
     

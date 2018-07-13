@@ -37,17 +37,38 @@
     
 }
 
+- (void) dealloc {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:_currentRRQuestionIndex] forKey:@"currentRRQuestionIndex"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
+    if (self.questionType == qRepairVsReplace) {
+        job.rrQuestions = self.questionsArray;
+        [job.managedObjectContext save];
+    }
+    
+}
+
 #pragma mark - Load Questions
 - (void)loadQuestionsData {
     self.questionType = qRepairVsReplace;
     
     __weak typeof(self) weakSelf = self;
     [[DataLoader sharedInstance] getQuestionsOfType:self.questionType onSuccess:^(NSArray *resultQuestions) {
-            weakSelf.questionsArray = [NSMutableArray arrayWithArray:resultQuestions];
-            [weakSelf prepareRRQuestionToDisplay];
-        } onError:^(NSError *error) {
+        weakSelf.questionsArray = [NSMutableArray arrayWithArray:resultQuestions];
+        [weakSelf prepareRRQuestionToDisplay];
         
-        }];
+        if (self.isAutoLoad && [[NSUserDefaults standardUserDefaults] objectForKey:@"currentQuestionIndex"]) {
+            _currentRRQuestionIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:@"_currentRRQuestionIndex"] integerValue];
+            
+            weakSelf.currentRRQuestionView.questionRR = [_questionsArray objectAtIndex:_currentRRQuestionIndex];
+        }
+        
+        
+    } onError:^(NSError *error) {
+    
+    }];
 }
 
 #pragma mark - Prepare Questions
@@ -202,11 +223,8 @@
     }
     else
     {
-//        self.currentRRQuestionIndex--;
-//        [self performSegueWithIdentifier:@"showRROverviewVC" sender:self];
-      
-      self.currentRRQuestionIndex--;
-      ////////
+        self.currentRRQuestionIndex--;
+        
         Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
         if (self.questionType == qRepairVsReplace) {
             job.rrQuestions = self.questionsArray;

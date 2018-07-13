@@ -35,12 +35,30 @@ static NSString *findingsCellID = @"SortFindinsCell";
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHealthyHomeSolutionSort) {
         
         IAQCustomerChoiceVC* iaqCustomerChoiceVC = [self.storyboard instantiateViewControllerWithIdentifier:@"IAQCustomerChoiceVC"];
-        
+        iaqCustomerChoiceVC.isAutoLoad = true;
         [self.navigationController pushViewController:iaqCustomerChoiceVC animated:false];
         
     }
 }
 
+- (void) dealloc {
+    
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
+    [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
+    
+    for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray) {
+        
+        [[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray addObject:iaqModel.productId];
+        [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray addObject:iaqModel.quantity];
+        
+    }
+    
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
+    [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
+    
+    [userdefault synchronize];
+}
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;

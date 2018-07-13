@@ -9,7 +9,7 @@
 #import "QuestionView.h"
 #import "NAPickerView.h"
 
-@interface QuestionView ()  <NAPickerViewDelegate>
+@interface QuestionView ()  <NAPickerViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NAPickerView *customPicker;
 @property (nonatomic) NSInteger currentIndex;
@@ -39,15 +39,17 @@
                                                 andDelegate:self];
     self.customPicker.backgroundColor = [UIColor whiteColor];
     self.customPicker.showOverlay = YES;
+    self.customPicker.delegate = self;
     [self addSubview:self.customPicker];
 }
 
 
 -(void)setQuestion:(Question *)question
 {
+    [self.txtAnswer addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _question = question;
     self.txtQuestion.text = question.question;
-    
+    self.txtAnswer.delegate = self;
     if ([question.fieldTypeId isEqualToString:@"1"]) {
         self.txtAnswer.text = question.answer;
         self.txtAnswer.hidden = question.type.integerValue == kNoAnswerQuestion;
@@ -60,6 +62,7 @@
         self.txtAnswer.hidden = YES;
         if (question.answer) {
             [self.customPicker setIndex:[pickerData indexOfObject:question.answer]];
+            [self.customPicker layoutSubviews];
         }
     }else if ([question.fieldTypeId isEqualToString:@"3"]) {
         [self setUpYearsPicker];
@@ -68,6 +71,7 @@
         self.txtAnswer.hidden = YES;
         if (question.answer) {
             [self.customPicker setIndex:[pickerData indexOfObject:question.answer]];
+            [self.customPicker layoutSubviews];
         }
     }
 }
@@ -122,7 +126,12 @@
     if ([self.question.fieldTypeId isEqualToString:@"1"]) {
         self.question.answer = self.txtAnswer.text;
     }else if ([self.question.fieldTypeId isEqualToString:@"2"] || [self.question.fieldTypeId isEqualToString:@"3"]) {
-        self.question.answer = [pickerData objectAtIndex:self.customPicker.selectedIndex];
+        if (pickerData.count <= self.customPicker.selectedIndex) {
+            self.question.answer = [pickerData objectAtIndex:0];
+        }else {
+            self.question.answer = [pickerData objectAtIndex:self.customPicker.selectedIndex];
+        }
+        
     }
     
     [self.customPicker removeFromSuperview];
@@ -136,8 +145,11 @@
 - (void)didSelectedAtIndexDel:(NSInteger)index
 {
     self.currentIndex = index;
+    self.question.answer = [pickerData objectAtIndex:self.customPicker.selectedIndex];
 }
 
-
-
+#pragma mark UITextfield delegate
+- (void)textFieldDidChange:(UITextField *)textField {
+    self.question.answer = self.txtAnswer.text;
+}
 @end

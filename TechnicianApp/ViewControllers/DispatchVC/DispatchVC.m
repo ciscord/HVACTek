@@ -45,7 +45,6 @@
     
 }
 
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
@@ -67,7 +66,6 @@
 
 
 - (void)setInspirationText:(NSString *)text {
-	//UIFont *font = [UIFont fontWithName:@"Arial-BoldMT" size:77];
 
 	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 	paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -91,15 +89,6 @@
 	// Dispose of any resources that can be recreated.
 }
 
-/*
-   #pragma mark - Navigation
-
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-   }
- */
 - (IBAction)btnBeginTouch:(id)sender {
 
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];

@@ -41,18 +41,8 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 - (IBAction)btnAdd2CartTouch:(id)sender
 {
@@ -79,29 +69,15 @@
     
 }
 
-- (IBAction)CustomerOverviewTest:(id)sender {
-  
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-    CustomerChoiceVC *vc = [storyboard instantiateViewControllerWithIdentifier:@"CustomerChoiceVC"];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-   
-}
-
 - (IBAction)btnTehnicianApp:(id)sender {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof (self) weakSelf = self;
     
-//    [[DataLoader sharedInstance]connectToSWAPIonSucces:^(NSString *message) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (weakSelf == weakSelf.navigationController.topViewController) {
-            [weakSelf performSegueWithIdentifier:@"tehnicianHome" sender:self];
-        }        
-//    } onError:^(NSError *error) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//        ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
-//    }];
+    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+    if (weakSelf == weakSelf.navigationController.topViewController) {
+        [weakSelf performSegueWithIdentifier:@"tehnicianHome" sender:self];
+    }
 
 }
 @end

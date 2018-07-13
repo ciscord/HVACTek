@@ -49,8 +49,6 @@
     
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

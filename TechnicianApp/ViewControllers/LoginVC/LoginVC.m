@@ -49,15 +49,6 @@
     [super viewWillAppear:animated];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)btnContinueTouch:(id)sender {
     [self login];
 }
@@ -75,10 +66,8 @@
                                              [userPassword setObject:weakSelf.txtAPI.text forKey:@"companyAPI"];
                                              [userPassword synchronize];
                                              
-                                             //[MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                             
                                              [weakSelf performSelectorOnMainThread:@selector(loadAdditionalInfo) withObject:nil waitUntilDone:NO];
-                                             //[weakSelf performSegueWithIdentifier:@"loginSuccessSegue" sender:self];
+                                             
                                          }
                                            onError:^(NSError *error) {
                                                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -92,7 +81,7 @@
 
 #pragma mark - Load Aditional Info
 - (void)loadAdditionalInfo {
-    //[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
         if (infoDict.count)
             [DataLoader sharedInstance].companyAdditionalInfo = [self saveAdditionalInfoFromDict:infoDict];

@@ -95,8 +95,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         
         ViewOptionsVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewOptionsVC"];
         currentViewController.isAutoLoad = true;
-        [self.navigationController pushViewController:currentViewController animated:true];
-    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > ServiceOption2) {
+        [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
+        [self.navigationController pushViewController:currentViewController animated:false];
+    }else if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep >= ServiceOption2) {
         NSArray* viewControllers = self.navigationController.viewControllers;
         
         int countOfQuestionVC = 0;
@@ -112,7 +113,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
             [self.navigationController pushViewController:currentViewController animated:false];
         }else {
             
-            if ([TechDataModel sharedTechDataModel].currentStep >= RRFinalChoice) {
+            if ([TechDataModel sharedTechDataModel].currentStep == ServiceOption2) {
+                
+            }else if ([TechDataModel sharedTechDataModel].currentStep >= RRFinalChoice) {
                 Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
                 
                 if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isInstantRRFinal"])
@@ -141,6 +144,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
+- (void) dealloc {
+    [DataLoader saveFinalOptionsLocal:self.options];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

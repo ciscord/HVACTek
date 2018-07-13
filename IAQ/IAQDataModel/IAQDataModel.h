@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, IAQCurrentView) {
     IAQIsYourHomeHealthy,
     IAQHereWhatWePropose,
     IAQCustomerChoiceFinal,
+    HealthyHomeSolutionsAgreement,
     IAQHealthyHomeProcess,
     IAQHeatingStaticPressure,
     IAQCoolingStaticPressure,

@@ -194,11 +194,11 @@ const int kControllerWidth = 190;
     [self configureSegmentControl];
     [self configureColorScheme];
 
-    self.lbCustomerInfoTitle.font       = [UIFont fontWithName:@"Calibri" size:16];
+    self.lbCustomerInfoTitle.font = [UIFont fontWithName:@"Calibri" size:16];
     self.lbServiceHistoryInfoTitle.font = self.lbCustomerInfoTitle.font;
     self.lbSystemInfoTitle.font         = self.lbCustomerInfoTitle.font;
 
-    self.isTitleViewHidden            = YES;
+    self.isTitleViewHidden = YES;
     
     [self.tvCustomerInfo registerClass:[CustomerInfoTableViewCell class] forCellReuseIdentifier:kCustomerInfoCellIdentifier];
 
@@ -220,8 +220,6 @@ const int kControllerWidth = 190;
     
     
 }
-
-
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -300,9 +298,7 @@ const int kControllerWidth = 190;
     
     Job          *job          = [[[DataLoader sharedInstance] currentUser] activeJob];
     NSDictionary *customerInfo = [job.swapiCustomerInfo objectForKey:@"dsLocationList.dsLocation"];
-    //@"dsLocationList.dsLocation"
-    // NSDictionary *jobInfo = job.swapiJobInfo;
-
+   
     id historyInfo = [job.swapiCustomerInfo valueForKeyPath:@"dsHistoryList.dsHistory"];
     if ([historyInfo isKindOfClass:[NSDictionary class]]) {
         historyInfo = @[historyInfo];

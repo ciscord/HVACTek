@@ -37,7 +37,6 @@
 @property (weak, nonatomic) IBOutlet UIView *helperView;
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
-@property (weak, nonatomic) IBOutlet UIButton *videoLibraryButton;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UILabel *mainDescriptLabel;
 @property (weak, nonatomic) IBOutlet UIView *separator1;
@@ -87,13 +86,80 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     [self refreshSubtotalPrice];
     
     if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > CustomerChoice) {
+        
+        if (self.isAutoLoad) {
+            
+            [self loadData];
+        }
+        
         NewCustomerChoiceVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCustomerChoiceVC"];
         currentViewController.isAutoLoad = true;
         [self.navigationController pushViewController:currentViewController animated:false];
     }else {
         
         [[TechDataModel sharedTechDataModel] saveCurrentStep:CustomerChoice];
+        
+        if (self.isAutoLoad) {
+            
+            [self loadData];
+        }
     }
+}
+
+- (void) loadData {
+    NSDictionary* customerChoiceData = [DataLoader loadLocalNewCustomerChoice];
+    
+    NSDictionary* selectedServiceOptionsDict = [customerChoiceData objectForKey:@"selectedServiceOptionsDict"];
+    
+    self.fullServiceOptions = [selectedServiceOptionsDict objectForKey:@"fullServiceOptions"];
+    self.isDiscounted = [[selectedServiceOptionsDict objectForKey:@"isDiscounted"] boolValue];
+    self.isOnlyDiagnostic = [[selectedServiceOptionsDict objectForKey:@"isOnlyDiagnostic"] boolValue];
+    self.isComingFromInvoice = [[selectedServiceOptionsDict objectForKey:@"isComingFromInvoice"] boolValue];
+    self.selectedServiceOptions = [selectedServiceOptionsDict objectForKey:@"selectedServiceOptions"];
+    
+    NSArray* removedItems = selectedServiceOptionsDict[@"removedItems"];
+    
+    for (PricebookItem* item in removedItems) {
+        if ([item.name isEqualToString:@"Discounts"]) {
+            self.textFieldDisconts.text = [NSString stringWithFormat:@"$%d", -[item.amount intValue]];
+            
+        }else if ([item.name isEqualToString:@"50% Deposit"]) {
+            self.textFieldDeposit.text = [NSString stringWithFormat:@"$%d", -[item.amount intValue]];
+            
+        }else if ([item.name isEqualToString:@"Comfort Club Membership"]) {
+            self.textFieldComfortClub.text = [NSString stringWithFormat:@"$%@", item.amount];
+            
+        }else if ([item.name isEqualToString:@"Payment"]) {
+            self.textFieldPayment.text = [NSString stringWithFormat:@"$%d", -[item.amount intValue]];
+            
+        }else if ([item.name isEqualToString:@"Diagnostic"]) {
+            self.textFieldDiagnostic.text = [NSString stringWithFormat:@"$%@", item.amount];
+            
+        }else if ([item.name isEqualToString:@"Comprehensive Precision Tune Up"]) {
+            self.textFieldCPT.text = [NSString stringWithFormat:@"$%@", item.amount];
+            
+        }
+    }
+}
+
+- (void) dealloc {
+    NSString* paymentValue;
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
+        paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
+    }else{
+        paymentValue = @"$0";
+    }
+    
+    NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
+                                         @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
+                                         
+                                         @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
+                                         @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
+                                         @"initialTotal" : self.subtotaPriceLabel.text,
+                                         @"paymentValue" : paymentValue,
+                                         }.mutableCopy;
+    [DataLoader saveNewCustomerChoice:customerChoiceData];
+    [DataLoader saveAdditionalInfo:customerChoiceData];
 }
 
 #pragma mark - Color Scheme
@@ -155,7 +221,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     self.backBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.videoLibraryButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
 
@@ -192,16 +257,34 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     }
 }
 
-
-
 #pragma mark - Button Actions
 - (IBAction)videoLibraryClicked:(id)sender {
 
 }
 
-
 - (IBAction)btnContinue:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showAdditionalInfoPageVC" sender:self];
+    
+    NSString* paymentValue;
+    if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
+        paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
+    }else{
+        paymentValue = @"$0";
+    }
+    
+    NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
+                                         @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
+                                         
+                                         @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
+                                         @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
+                                         @"initialTotal" : self.subtotaPriceLabel.text,
+                                         @"paymentValue" : paymentValue,
+                                         }.mutableCopy;
+    [DataLoader saveNewCustomerChoice:customerChoiceData];
+    [DataLoader saveAdditionalInfo:customerChoiceData];
+    
+    NewCustomerChoiceVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewCustomerChoiceVC"];
+    currentViewController.isAutoLoad = true;
+    [self.navigationController pushViewController:currentViewController animated:false];
 }
 
 
@@ -212,8 +295,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
-
 
 - (IBAction)btnSave:(id)sender {
 
@@ -231,7 +312,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     job.serviceLevel = [NSNumber numberWithInt:[self.selectedServiceOptions[@"ServiceID"]intValue]];
     
     job.jobStatus = @(jstNeedDebrief);
-   // job.startTime = [NSDate date];
     [job.managedObjectContext save];
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [self.navigationController popToViewController:appDelegate.homeController animated:YES];
@@ -370,12 +450,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 {
     if (textField.text.length  == 0)
     {
-        //textField.text = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
         textField.text = @"$";
     }
 }
-
-
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
@@ -391,7 +468,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return YES;
 }
 
-
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tvMainTable) {
@@ -405,11 +481,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return 0;
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tvMainTable) {
@@ -423,12 +497,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     return 0;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -499,29 +570,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"showAdditionalInfoPageVC"]) {
-        NewCustomerChoiceVC *vc = [segue destinationViewController];
-       
-        NSString* paymentValue;
-        if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
-            paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];
-        }else{
-            paymentValue = @"$0";
-        }
-        
-        NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
-                                             @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
-                                             
-                                             @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
-                                             @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
-                                             @"initialTotal" : self.subtotaPriceLabel.text,
-                                             @"paymentValue" : paymentValue,
-                                             }.mutableCopy;
-        [DataLoader saveNewCustomerChoice:customerChoiceData];
-        [DataLoader saveAdditionalInfo:customerChoiceData];
-    }
-    
     
 }
 @end

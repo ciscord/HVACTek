@@ -93,6 +93,15 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     [self updateTotalPrice];
     
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    NSString *signature = [userdefault objectForKey:@"signaturetech"];
+    if (signature != nil) {
+        NSData* imageData = [[NSData alloc] initWithBase64EncodedString:signature options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        UIImage* signatureImage = [UIImage imageWithData:imageData];
+        [self.signatureView setImage:signatureImage];
+        [self.authorizeSignatureImageView setImage:self.signatureView.image];
+    }
+    
     if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > NewCustomerChoice) {
         InvoicePreviewVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InvoicePreviewVC"];
         currentViewController.isAutoLoad = true;
@@ -103,6 +112,17 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     }
     
     
+}
+
+- (void) dealloc  {
+    
+    UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
+    NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    if (signature) {
+        [[NSUserDefaults standardUserDefaults] setObject:signature forKey:@"signaturetech"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 #pragma mark - Color Scheme
@@ -430,9 +450,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     NSDictionary * dict = @{ @"items" : selectedArray };
     
-    //post invoice
-    // NSLog(@"dictionary: %@", dict.description);
-    
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&err];
     NSString * passedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -458,8 +475,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     [self sendInvoiceToSWRForTest:NO];
 }
 
-
-
 - (NSString *)urlEncode:(NSString *)rawStr {
   NSString *encodedStr = (NSString *)CFBridgingRelease(
                                                        CFURLCreateStringByAddingPercentEscapes(
@@ -471,14 +486,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
   return encodedStr;
 }
 
-
-
 #pragma mark - URL Button
 - (IBAction)urlButtonClicked:(UIButton *)sender {
     [self sendInvoiceToSWRForTest:YES];
     self.hiddenURLView.hidden = NO;
 }
-
 
 - (IBAction)copyURLButtonClicked:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -493,7 +505,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     self.hiddenURLView.hidden = YES;
 }
 
-
 #pragma mark - Unwind Segues
 - (IBAction)unwindToNewCustumerChoicePage:(UIStoryboardSegue *)unwindSegue
 {
@@ -501,7 +512,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         [self setInvoicePreview];
     }
 }
-
 
 #pragma mark - Authorize Signature
 - (IBAction)authorizeSignatureClicked:(UIButton *)sender {
@@ -521,14 +531,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
         }];
     }];
     
-    
-    /*
-     
-     [UIView animateWithDuration:0.5 animations:^{
-     self.signatureView.frame = CGRectMake(0, 0, 684, 611);
-     } completion:^(BOOL finished) {
-     }];
-     */
 }
 
 - (IBAction)authorizeSignatureClearClicked:(id)sender {
@@ -539,7 +541,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     self.hiddenAuthorizeView.hidden = YES;
     [self.authorizeSignatureImageView setImage:self.signatureView.image];
 }
-
 
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -555,11 +556,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return 0;
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
@@ -582,9 +581,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     return 0;
 }
-
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -640,7 +636,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             
         }
         
-        
         if (indexPath.row != 0) {
             
             if ([[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Discounts"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"50% Deposit"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comfort Club Membership"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Payment"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Diagnostic"] || [[[self.selectedServiceOptionsDict[@"removedItems"] objectAtIndex:indexPath.row - 1] name] isEqualToString:@"Comprehensive Precision Tune Up"]) {
@@ -691,9 +686,6 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return result;
 }
 
-
-
-
 - (NSString *)appendSymbolToString:(NSString *)string {
     
     NSString *returnString = string;
@@ -717,14 +709,12 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     return returnString;
 }
 
-
 - (NSString *)getCurrentDate {
     NSDate *currDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MM/dd/YY HH:mm a"];
     return [dateFormatter stringFromDate:currDate];
 }
-
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

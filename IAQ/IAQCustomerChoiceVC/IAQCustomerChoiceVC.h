@@ -1,5 +1,5 @@
 //
-//  CustomerChoiceVC.h
+//  IAQCustomerChoiceVC.h
 //  HvacTek
 //
 //  Created by Max on 11/10/17.

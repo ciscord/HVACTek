@@ -88,7 +88,15 @@
         cell.textView.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     };
 }
-
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    CGRect tableFrame = self.tableView.frame;
+    tableFrame.size.height = CGRectGetHeight(self.bounds);
+    self.tableView.frame = tableFrame;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
 - (CGFloat)headerHeight
 {
     return self.bounds.size.height/2 - [self cellHeight]/2;
@@ -117,11 +125,35 @@
 
 - (void)setIndex:(NSInteger)index
 {
-    self.selectedIndex = index;
-    self.currentIndex = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.tableView scrollToRowAtIndexPath:self.currentIndex
-                          atScrollPosition:UITableViewScrollPositionMiddle
-                                  animated:NO];
+    [self setIndex:index animated:NO];
+}
+
+- (void)setIndex:(NSInteger)index animated:(BOOL)animated
+{
+    if (self.items.count == 0) {
+        return;
+    }
+    if (index == NSNotFound) {
+        self.selectedIndex = 0;
+    }else {
+        self.selectedIndex = index;
+    }
+    
+    if (self.selectedIndex == self.currentIndex.row)
+        return;
+    
+    self.currentIndex = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.tableView scrollToRowAtIndexPath:weakSelf.currentIndex
+                                  atScrollPosition:UITableViewScrollPositionMiddle
+                                          animated:animated];
+        
+        NAPickerCell *middleCell = (NAPickerCell *)[weakSelf.tableView cellForRowAtIndexPath:weakSelf.currentIndex];
+        self.highlightBlock(middleCell);
+        
+    });
 }
 
 - (void)setShowOverlay:(BOOL)showOverlay

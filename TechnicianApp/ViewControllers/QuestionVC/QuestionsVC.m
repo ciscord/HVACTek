@@ -32,12 +32,7 @@
     
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
-    
-    ////
-    //tech intrebari se scot mereu de pe portal
-    /////
-    
-    
+        
     NSArray *questionsArray;
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     if (self.questionType == qtTechnician) {
@@ -94,13 +89,34 @@
          
             [[TechDataModel sharedTechDataModel] saveCurrentStep:Questions];
         }
+        if (self.isAutoLoad && [[NSUserDefaults standardUserDefaults] objectForKey:@"currentQuestionIndex"]) {
+            _currentQuestionIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentQuestionIndex"] integerValue];
+            
+            self.currentQuestionView.question = [_questions objectAtIndex:_currentQuestionIndex];
+        }
     }
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
 }
 
-
+- (void) dealloc {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:_currentQuestionIndex] forKey:@"currentQuestionIndex"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
+    if (self.questionType == qtTechnician) {
+        job.techObservations = self.questions;
+        [job.managedObjectContext save];
+     
+    }else {
+        job.custumerQuestions = self.questions;
+        [job.managedObjectContext save];
+     
+    }
+    
+}
 -(void)prepareQuestionToDisplay
 {
     __weak typeof(self) weakSelf = self;

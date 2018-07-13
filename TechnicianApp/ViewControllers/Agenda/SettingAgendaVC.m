@@ -45,15 +45,11 @@
     
 }
 
-
-
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continuBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.presentationLbl.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

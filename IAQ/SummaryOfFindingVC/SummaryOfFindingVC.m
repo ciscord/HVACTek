@@ -37,6 +37,7 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     for (UIButton* bigButton in self.bigButtonArray) {
         bigButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        bigButton.userInteractionEnabled = false;
     }
     
     if ([IAQDataModel sharedIAQDataModel].currentStep > IAQSummaryOfFinding) {
@@ -51,8 +52,6 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,6 +98,7 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
     [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
     
 }
+
 - (IBAction)libraryButtonClick:(id)sender {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];

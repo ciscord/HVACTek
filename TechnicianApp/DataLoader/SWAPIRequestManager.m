@@ -186,14 +186,6 @@ NSString *const kResultStatusOK = @"000";
                       @"<SessionRequest SessionID=\"%@\"> <JobQuery> <JobNo>%@</JobNo></JobQuery></SessionRequest>",
                       self.sessionID,JobID
                       ];
-//    NSString *body = [NSString stringWithFormat:
-//                      @"<SessionRequest SessionID=\"%@\"><AssignmentListQuery><SchedDate>%@</SchedDate><EmployeeCode>%@</EmployeeCode>\
-//                      </AssignmentListQuery></SessionRequest>",
-//                      self.sessionID,
-//                     // [dateTimeFormatter stringFromDate:[NSDate date]],
-//                          [dateTimeFormatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:60*60*24*-1]],
-//                      employeeCode];
-
 
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
         id list = result[@"JobQueryData"][@"JobQueryRecord"];
@@ -215,12 +207,6 @@ NSString *const kResultStatusOK = @"000";
             [weakSelf whoListQueryForJobOnSuccess:nil onError:nil];
             [weakSelf departmentListQueryForJobOnSuccess:nil onError:nil];
             [weakSelf equipmentListQueryForJobOnSuccess:nil onError:nil];
-            
-            //        [weakSelf GetdsLocation:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
-            //            //
-            //        } onError:^(NSError *error) {
-            //            //
-            //        }:nil onError:nil];
             
             [weakSelf GetdsAgreeListForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
                 [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:^(NSString *successMessage) {
@@ -248,22 +234,6 @@ NSString *const kResultStatusOK = @"000";
                 onError(error);
             }];
         }
-        //         [weakSelf GetdsHistoryForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
-        //        [weakSelf GetdsEquipForJobWithLocationID:list[@"LocationID"] OnSuccess:nil onError:nil];
-        
-        //         if (onSuccess) {
-        //             onSuccess(nil);
-        //         }
-        
-        
-//        [weakSelf getCompanyInfoOnSuccess:^(NSString *company) {
-//            if (onSuccess) {
-//                onSuccess(nil);
-//            }
-//        } onError:^(NSError *error) {
-//            onError(error);
-//        }];
-//        
         
         
         self.requestsInProgress--;
@@ -580,7 +550,6 @@ NSString *const kResultStatusOK = @"000";
     [self requestOperationWithXMLString:body success:^(AFHTTPRequestOperation *operation, NSDictionary *result) {
         if (onSuccess) {
             onSuccess(result[@"AccountInfoQueryData"][@"AccountInfoQueryRecord"][@"CCAccount"]);
-            //onSuccess([result[@"AccountInfoUpdateData"][@"AccountInfoQueryRecord"][@"EmailAddress"] isEqualToString:email]);
         }
         
         self.requestsInProgress--;

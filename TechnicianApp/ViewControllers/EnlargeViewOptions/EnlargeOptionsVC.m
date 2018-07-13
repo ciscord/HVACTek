@@ -140,19 +140,20 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-
     
 }
 - (IBAction)tapEditButton:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:^{
         NSArray* viewcontrollers = self.parentVC.navigationController.viewControllers;
-        
+        [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
         for (UIViewController* viewController in viewcontrollers) {
             if ([viewController isKindOfClass:[SummaryOfFindingsOptionsVC class]]) {
+                SummaryOfFindingsOptionsVC* sumaryOfFindingsOptionsVC = (SummaryOfFindingsOptionsVC*) viewController;
+                [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions1;
+                sumaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
+                
                 [self.parentVC.navigationController popToViewController:viewController animated:NO];
                 return;
             }
@@ -160,26 +161,12 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
         UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
-        SummaryOfFindingsOptionsVC* questionsVC = (SummaryOfFindingsOptionsVC*) currentViewController;
+        SummaryOfFindingsOptionsVC* sumaryOfFindingsOptionsVC = (SummaryOfFindingsOptionsVC*) currentViewController;
+        [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions1;
+        sumaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
         
-        questionsVC.isiPadCommonRepairsOptions = YES;
-        
-        [self.parentVC.navigationController pushViewController:questionsVC animated:NO];
+        [self.parentVC.navigationController pushViewController:sumaryOfFindingsOptionsVC animated:NO];
     }];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-//
-//    SummaryOfFindingOptionsEditVC* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingOptionsEditVC"];
-//    [self.navigationController pushViewController:currentViewController animated:true];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

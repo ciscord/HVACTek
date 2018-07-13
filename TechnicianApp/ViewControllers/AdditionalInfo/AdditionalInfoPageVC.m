@@ -58,22 +58,11 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadAdditionalInfo {
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [[DataLoader sharedInstance] getAdditionalInfoOnSuccess:^(NSDictionary *infoDict) {
-//        self.additionalInfoArray = infoDict[@"1"][@"rows"];
-//        [self.infoTableView reloadData];
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//    }onError:^(NSError *error) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        ShowOkAlertWithTitle(error.localizedDescription, self);
-//    }];
     
     NSMutableArray *infoArray = [[NSMutableArray alloc] init];
     for (CompanyAditionalInfo *companyObject in [[DataLoader sharedInstance] companyAdditionalInfo]) {
@@ -85,13 +74,11 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     self.additionalInfoArray = infoArray.mutableCopy;
 }
 
-
 #pragma mark - Configure VC
 - (void)configureColorScheme {
     self.backButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.continueButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
 }
-
 
 -(void)configureVC {
     self.title = @"Customer's Choice";
@@ -104,13 +91,10 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     }
 }
 
-
-
 #pragma mark - Button Actions
 - (IBAction)backClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 - (IBAction)continueClicked:(id)sender {
     [[[DataLoader sharedInstance] currentUser] activeJob].additionalInfoData = self.selectedArray;
@@ -118,23 +102,18 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     [job.managedObjectContext save];
 }
 
-
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.additionalInfoArray.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -155,12 +134,9 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     return cell;
 }
 
-
-
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showNewCustomerChoiceVC"]) {
-//        NewCustomerChoiceVC *vc = [segue destinationViewController];
         
         NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
                                              @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],

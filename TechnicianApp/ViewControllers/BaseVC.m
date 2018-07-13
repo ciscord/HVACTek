@@ -29,18 +29,6 @@
 
 @implementation BaseVC
 @synthesize nextButton;
-/*
- 
- [self configureColorScheme];
- 
- #pragma mark - Color Scheme
- - (void)configureColorScheme {
- self.ButtonView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
- self.label.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
- }
- 
- 
- */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
