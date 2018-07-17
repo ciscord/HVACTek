@@ -14,12 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueBtn;
 @property (weak, nonatomic) IBOutlet UIView *agendaView;
 
-@property (weak, nonatomic) IBOutlet UILabel *label1;
-@property (weak, nonatomic) IBOutlet UILabel *label2;
-@property (weak, nonatomic) IBOutlet UILabel *label3;
-@property (weak, nonatomic) IBOutlet UILabel *label4;
-@property (weak, nonatomic) IBOutlet UILabel *label5;
-@property (weak, nonatomic) IBOutlet UILabel *label6;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *label;
 
 @property (weak, nonatomic) IBOutlet UIView *view1;
 
@@ -48,19 +43,20 @@
     }
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = AgendaPicture;
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.continueBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.agendaView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.view1.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    self.label1.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label2.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label3.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label4.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label5.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
-    self.label6.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+    for (UILabel* labelItem in self.label) {
+        labelItem.textColor = [UIColor cs_getColorWithProperty:kColorPrimary];
+        
+    }
 }
 
 
