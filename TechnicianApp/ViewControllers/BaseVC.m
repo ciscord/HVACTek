@@ -189,14 +189,6 @@
 
 - (void) tapTechButton {
     
-    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-    NSNumber* techCurrentStep = [userdefault objectForKey:@"techCurrentStep"];
-    Job* activeJob = [[[DataLoader sharedInstance] currentUser] activeJob];
-    if (techCurrentStep == nil || activeJob == nil) {
-        techCurrentStep = [NSNumber numberWithInteger:TechNone];
-    }
-    [TechDataModel sharedTechDataModel].currentStep = [techCurrentStep integerValue];
-    
     AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
     
     UINavigationController *navController = (UINavigationController *)appDelegate.window.rootViewController;
@@ -215,12 +207,6 @@
 }
 
 - (void)tapIAQButton {
-    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-    NSNumber* iaqCurrentStep = [userdefault objectForKey:@"iaqCurrentStep"];
-    if (iaqCurrentStep == nil) {
-        iaqCurrentStep = [NSNumber numberWithInteger:IAQNone];
-    }
-    [IAQDataModel sharedIAQDataModel].currentStep = [iaqCurrentStep integerValue];
     
     AppDelegate * appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
     

@@ -48,7 +48,10 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     }
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = PlatinumOptions;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

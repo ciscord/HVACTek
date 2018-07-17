@@ -53,7 +53,10 @@
     
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = ViewOptions;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

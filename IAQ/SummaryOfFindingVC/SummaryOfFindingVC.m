@@ -47,6 +47,10 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
     
     }
 }
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQSummaryOfFinding;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

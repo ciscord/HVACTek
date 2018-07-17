@@ -35,7 +35,10 @@
     [[TechDataModel sharedTechDataModel] saveCurrentStep:DebriefReminder];
 }
 
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = DebriefReminder;
+}
 
 
 #pragma mark - Color Scheme

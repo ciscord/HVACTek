@@ -47,7 +47,10 @@
     [[TechDataModel sharedTechDataModel] saveCurrentStep:RRFinalChoice];
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = RRFinalChoice;
+}
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {

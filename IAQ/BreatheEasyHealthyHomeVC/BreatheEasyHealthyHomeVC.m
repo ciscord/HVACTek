@@ -32,6 +32,10 @@
         [self.navigationController pushViewController:videoForCustomerVC animated:false];
     }
 }
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQBreatheEasyHealtyHome;
+}
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
     

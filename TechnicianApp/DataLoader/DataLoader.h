@@ -114,6 +114,7 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 + (void)    saveFinalOptionsLocal:(NSMutableArray*)selectedOptions;
 + (NSMutableArray*) loadLocalFinalOptions;
++ (void) removeLocalFinalOptions;
 
 + (void) saveCustomerChoiceData:(NSDictionary*)customerChoiceData;
 + (NSDictionary*)loadLocalCustomerChoiceData;

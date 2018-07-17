@@ -75,8 +75,13 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         
     }else {
         if (self.optionsDisplayType == odtEditing) {
+            if ([DataLoader loadLocalFinalOptions].count > 0) {
+                self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
+                self.options = _priceBookAndServiceOptions.mutableCopy;
+            }else {
+                self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+            }
             
-            self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
         }else {
             self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
         }
@@ -144,7 +149,14 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
-- (void) dealloc {
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    if (self.optionsDisplayType == odtEditing) {
+        [TechDataModel sharedTechDataModel].currentStep = ServiceOption1;
+        
+    }else {
+        [TechDataModel sharedTechDataModel].currentStep = ServiceOption2;
+    }
     [DataLoader saveFinalOptionsLocal:self.options];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -182,7 +194,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (void)resetOptions {
 
-    if (self.optionsDisplayType == odtEditing) {
+    if (self.optionsDisplayType == odtEditing && [DataLoader loadLocalFinalOptions].count == 0) {
 
         for (NSInteger i = 0; i < self.options.count; i++) {
             NSMutableDictionary *option = self.options[i];

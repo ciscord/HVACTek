@@ -142,7 +142,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     }
 }
 
-- (void) dealloc {
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = CustomerChoice;
     NSString* paymentValue;
     if ([NSNumber numberWithInt:[[self cutString:self.textFieldPayment.text] intValue]].intValue != 0) {
         paymentValue = [self changeCurrencyFormat:[[self cutString:self.textFieldPayment.text] intValue]];

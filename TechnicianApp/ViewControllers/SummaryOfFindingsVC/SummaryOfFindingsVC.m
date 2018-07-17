@@ -114,8 +114,9 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     }
 }
 
--(void) dealloc
-{
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindings;
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 

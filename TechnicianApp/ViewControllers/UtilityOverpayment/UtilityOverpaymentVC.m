@@ -44,7 +44,10 @@
     }
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = UtilityOverpayment;
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.separatorView.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

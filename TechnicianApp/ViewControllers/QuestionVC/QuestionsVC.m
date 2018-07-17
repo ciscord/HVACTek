@@ -100,7 +100,15 @@
     
 }
 
-- (void) dealloc {
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    if (self.questionType == qtTechnician) {
+        [TechDataModel sharedTechDataModel].currentStep = Questions1;
+    }else{
+        [TechDataModel sharedTechDataModel].currentStep = Questions1;
+    }
+    
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:_currentQuestionIndex] forKey:@"currentQuestionIndex"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

@@ -123,7 +123,27 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     }
     
 }
+
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    if (self.isiPadCommonRepairsOptions) {
+        [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions1;
+        
+    }else {
+        [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions2;
+        
+    }
+    
+    
+    if (self.isiPadCommonRepairsOptions) {
+        [DataLoader saveOptionsLocal:self.selectedOptions];
+    }else {
+        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
+    }
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
+    
     if (self.isiPadCommonRepairsOptions) {
         [DataLoader saveOptionsLocal:self.selectedOptions];
     }else {
@@ -155,14 +175,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     self.allOptions = allOptionsArray.mutableCopy;
 }
 
-- (void)dealloc {
-   
-    if (self.isiPadCommonRepairsOptions) {
-        [DataLoader saveOptionsLocal:self.selectedOptions];
-    }else {
-        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
-    }
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -216,6 +229,33 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 #pragma mark - Continue Action
 - (IBAction)btnContinueTouch:(id)sender {
 
+    
+    
+    if (!self.isiPadCommonRepairsOptions) {
+        NSArray* savedOptions = [DataLoader loadLocalSavedFindingOptions];
+        
+        if (self.selectedOptions.count == savedOptions.count) {
+            for (PricebookItem *item1 in savedOptions) {
+                BOOL findItem = false;
+                for (PricebookItem* item2 in self.selectedOptions) {
+                    if ([item1.itemID isEqualToString:item2.itemID]) {
+                        findItem = true;
+                        if (![item2.quantity isEqualToString:item1.quantity]) {
+                            [DataLoader removeLocalFinalOptions];//remove if quantity is different
+                        }
+                        
+                    }
+                }
+                
+                if (!findItem) {//remove if item not found
+                    [DataLoader removeLocalFinalOptions];//remove if quantity is different
+                }
+            }
+        }else {
+            [DataLoader removeLocalFinalOptions];
+        }
+    }
+    
     if (self.isiPadCommonRepairsOptions) {
         [DataLoader saveOptionsLocal:self.selectedOptions];
     }else {

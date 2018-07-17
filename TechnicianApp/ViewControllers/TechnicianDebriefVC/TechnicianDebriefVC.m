@@ -349,7 +349,10 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
    
     [[TechDataModel sharedTechDataModel] saveCurrentStep:TechnicianDebrief];
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = TechnicianDebrief;
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.finalizeBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

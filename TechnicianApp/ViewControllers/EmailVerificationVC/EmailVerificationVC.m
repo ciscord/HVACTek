@@ -24,14 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
-    [self.navigationItem setRightBarButtonItem:iaqButton];
-    
     [self configureColorScheme];
     [self configureVC];
     [[TechDataModel sharedTechDataModel] saveCurrentStep:EmailVerification];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

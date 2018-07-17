@@ -75,7 +75,10 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
     
 }
 
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = TechnicianHome;
+}
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.layer1View.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary20];

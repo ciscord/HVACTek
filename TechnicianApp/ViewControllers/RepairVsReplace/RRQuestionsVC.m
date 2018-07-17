@@ -36,11 +36,11 @@
     [self loadQuestionsData];
     
 }
-
-- (void) dealloc {
+- (void) tapIAQButton {
+    [super tapIAQButton];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:_currentRRQuestionIndex] forKey:@"currentRRQuestionIndex"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [TechDataModel sharedTechDataModel].currentStep = RRFinalChoice;
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     
     if (self.questionType == qRepairVsReplace) {

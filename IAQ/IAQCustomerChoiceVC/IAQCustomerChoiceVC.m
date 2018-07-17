@@ -163,7 +163,9 @@
     
 }
 
-- (void) dealloc {
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQCustomerChoice;
    
     [IAQDataModel sharedIAQDataModel].iaqBestProductsIdArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqBetterProductsIdArray = [NSMutableArray array];

@@ -88,6 +88,12 @@
     }
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQVideoForCustomer;
+}
+
 #pragma mark Button event
 -(IBAction)nextButtonClick:(id)sender {
     

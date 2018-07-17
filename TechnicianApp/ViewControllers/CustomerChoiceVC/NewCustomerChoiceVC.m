@@ -113,8 +113,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     
 }
-
-- (void) dealloc  {
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = NewCustomerChoice;
     
     UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];

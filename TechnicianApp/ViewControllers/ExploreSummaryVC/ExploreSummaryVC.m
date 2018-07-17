@@ -44,7 +44,10 @@
     
 }
 
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = ExploreSummary;
+}
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {

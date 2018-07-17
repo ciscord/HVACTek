@@ -50,85 +50,90 @@ static NSString *findingsCellID = @"SortFindinsCell";
     
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = SortFindings;
+}
 - (void) viewWillDisappear:(BOOL)animated {
     [DataLoader saveFindingOptionsLocal:self.findingsArray];
 }
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 60;
+    return 60;
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+    return 1;
 }
 
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.findingsArray count];
+    return [self.findingsArray count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  PricebookItem *option = self.findingsArray[indexPath.row];
-  SortFindinsCell *cell = [tableView dequeueReusableCellWithIdentifier:findingsCellID];
-  NSString * serviceString;
-  if ([option.quantity intValue] > 1) {
+
+    PricebookItem *option = self.findingsArray[indexPath.row];
+    SortFindinsCell *cell = [tableView dequeueReusableCellWithIdentifier:findingsCellID];
+    NSString * serviceString;
+    if ([option.quantity intValue] > 1) {
     serviceString = [NSString stringWithFormat:@"(%@) ",option.quantity];
-  }else{
+    }else{
     serviceString = @"";
-  }
-  NSString * nameString = [serviceString stringByAppendingString:option.name];
-  cell.lbTitle.text = nameString;
-  
-  if (indexPath.row == 0)
+    }
+    NSString * nameString = [serviceString stringByAppendingString:option.name];
+    cell.lbTitle.text = nameString;
+
+    if (indexPath.row == 0)
     cell.upButton.hidden = YES;
-  else
+    else
     cell.upButton.hidden = NO;
-  
-  if (indexPath.row == [self.findingsArray count] - 1)
+
+    if (indexPath.row == [self.findingsArray count] - 1)
     cell.downButton.hidden = YES;
-  else
+    else
     cell.downButton.hidden = NO;
   
-  cell.upButton.tag = indexPath.row;
-  cell.downButton.tag = indexPath.row;
-  [cell.upButton addTarget:self action:@selector(upButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-  [cell.downButton addTarget:self action:@selector(downButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cell.upButton.tag = indexPath.row;
+    cell.downButton.tag = indexPath.row;
+    [cell.upButton addTarget:self action:@selector(upButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.downButton addTarget:self action:@selector(downButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
   
-  return cell;
+    return cell;
 }
 
 
 
 #pragma mark - Change Row Position
 - (void)upButtonClicked:(id)sender {
-  [self.findingsTable setUserInteractionEnabled:NO];
-  [self.findingsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] - 1];
-  [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] - 1 inSection:0]];
-  [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
+    [self.findingsTable setUserInteractionEnabled:NO];
+    [self.findingsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] - 1];
+    [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] - 1 inSection:0]];
+    [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
+    [DataLoader removeLocalFinalOptions];//remove if quantity is different
  
 }
 
 
 - (void)downButtonClicked:(id)sender {
-  [self.findingsTable setUserInteractionEnabled:NO];
-  [self.findingsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] + 1];
-  [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] + 1 inSection:0]];
-  [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
+    [self.findingsTable setUserInteractionEnabled:NO];
+    [self.findingsArray exchangeObjectAtIndex:[sender tag] withObjectAtIndex:[sender tag] + 1];
+    [self.findingsTable moveRowAtIndexPath:[NSIndexPath indexPathForRow:[sender tag] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:[sender tag] + 1 inSection:0]];
+    [self performSelector:@selector(reloadFindingTable) withObject:nil afterDelay:.28];
+    [DataLoader removeLocalFinalOptions];//remove if quantity is different
 }
 
 
 -(void)reloadFindingTable {
-  [self.findingsTable reloadData];
-  [self.findingsTable setUserInteractionEnabled:YES];
+    [self.findingsTable reloadData];
+    [self.findingsTable setUserInteractionEnabled:YES];
 }
 
 

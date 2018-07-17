@@ -33,6 +33,7 @@
 static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 @implementation HealthyHomeSolutionsVC
 @synthesize checkedProducts;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -92,8 +93,9 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }
 }
 
-- (void) dealloc {
-    
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQHealthyHomeSolution;
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];

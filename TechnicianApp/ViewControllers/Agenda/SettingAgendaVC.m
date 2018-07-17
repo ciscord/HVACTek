@@ -44,6 +44,10 @@
     
     
 }
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = SettingAgenda;
+}
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
@@ -111,7 +115,6 @@
     self.presentationLbl.editable = false;
     self.presentationLbl.selectable = false;
 }
-
 
 - (IBAction)choiseBtnClicked:(id)sender {
     UIButton *button = sender;

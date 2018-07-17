@@ -110,6 +110,10 @@
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQIsYourHomeHealthy;
+}
 
 - (void) viewWillAppear:(BOOL)animated {
     if ([IAQDataModel sharedIAQDataModel].isfinal == 1) {

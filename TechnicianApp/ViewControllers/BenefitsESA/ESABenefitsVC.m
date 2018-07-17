@@ -50,6 +50,10 @@
     }
     
 }
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = ESABenefits;
+}
 
 #pragma mark - Color Scheme
 - (void)configureColorScheme {

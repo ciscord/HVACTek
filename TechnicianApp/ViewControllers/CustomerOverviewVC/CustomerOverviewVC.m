@@ -221,6 +221,11 @@ const int kControllerWidth = 190;
     
 }
 
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = CustomerOverview;
+}
+
 #pragma mark - Color Scheme
 - (void)configureColorScheme {
     self.beginBtn.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];

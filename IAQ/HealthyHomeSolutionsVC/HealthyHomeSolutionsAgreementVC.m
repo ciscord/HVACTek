@@ -135,8 +135,9 @@
     [userdefault synchronize];
 }
 
-- (void) dealloc  {
-    
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = HealthyHomeSolutionsAgreement;
     UIImage *image = [UIImage imageWithData:self.signatureView.signatureData];
     NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     

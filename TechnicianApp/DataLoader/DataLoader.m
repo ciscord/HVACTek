@@ -16,7 +16,7 @@
 
 
 
-#define DEVELOPMENT
+//#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -309,6 +309,12 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
 }
 
++ (void) removeLocalFinalOptions {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"FinalOptions"];
+    [defaults synchronize];
+    
+}
 +(NSMutableArray*)loadLocalFinalOptions {
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"FinalOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];

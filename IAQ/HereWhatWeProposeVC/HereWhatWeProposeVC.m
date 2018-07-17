@@ -33,7 +33,10 @@
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
-
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQHereWhatWePropose;
+}
 #pragma mark IBAction button
 - (IBAction)nextButtonClick:(id)sender {
     int viewsToPop = 4;//go to cutomer's choice screen

@@ -57,7 +57,10 @@ static NSString *kCELL_IDENTIFIER = @"AdditionalInfoPageCells";
     
     
 }
-
+- (void) tapIAQButton {
+    [super tapIAQButton];
+    [TechDataModel sharedTechDataModel].currentStep = AdditionalInfoPage;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

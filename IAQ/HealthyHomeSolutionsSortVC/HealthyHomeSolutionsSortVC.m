@@ -41,7 +41,9 @@ static NSString *findingsCellID = @"SortFindinsCell";
     }
 }
 
-- (void) dealloc {
+- (void) tapTechButton {
+    [super tapTechButton];
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQHealthyHomeSolutionSort;
     
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray = [NSMutableArray array];
     [IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray = [NSMutableArray array];
