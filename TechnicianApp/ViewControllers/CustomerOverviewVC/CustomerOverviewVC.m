@@ -529,6 +529,13 @@ const int kControllerWidth = 190;
     } else if(self.segmentedControl.selectedSegmentIndex == 2) {
         self.selectedType = qtPlumbing;
     }
+    
+    Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
+    
+    job.custumerQuestions = [NSArray array];
+    [job.managedObjectContext save];
+    
+
 }
 
 #pragma mark - UITableViewDelegate & DataSource
