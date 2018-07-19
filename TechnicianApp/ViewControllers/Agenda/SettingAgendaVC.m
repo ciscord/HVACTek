@@ -31,7 +31,6 @@
     self.title = NSLocalizedString(@"Setting The Agenda", nil);
     
     [self configureVC];
-    self.choosenType = [DataLoader loadQuestionType];
     
     if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > SettingAgenda) {
         AgendaPictureVC* currentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AgendaPictureVC"];
@@ -124,7 +123,6 @@
     else
         button.selected = NO;
 }
-
 
 #pragma mark - Navigation
 

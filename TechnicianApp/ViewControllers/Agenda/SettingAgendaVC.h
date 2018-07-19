@@ -9,5 +9,4 @@
 #import "BaseVC.h"
 
 @interface SettingAgendaVC : BaseVC
-@property (nonatomic, assign) QuestionType choosenType;
 @end
