@@ -16,7 +16,7 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -281,7 +281,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
         }
         
     }
-    
+    [selectedOptions addObjectsFromArray: [DataLoader loadLocalSavedOptions]];
     return selectedOptions;
     
 }

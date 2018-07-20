@@ -25,6 +25,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+    
     self.title = @"Summary of Findings Sort";
     
     UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];

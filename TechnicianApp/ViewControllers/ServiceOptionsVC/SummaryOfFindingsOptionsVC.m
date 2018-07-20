@@ -34,6 +34,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
 static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.title = (self.isiPadCommonRepairsOptions ? @"Common Repairs" : @"Specialized Repairs");
     

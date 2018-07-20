@@ -271,7 +271,7 @@
     
     if (totalCost >= 1000) {
         self.bestFinancingLabel.text = @"0% Financing";
-        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
+        self.bestEqual24Label.text = [NSString stringWithFormat:@"24 Equal Payments Of $%.0f", ((totalCost * 0.85) / 24.)];
     }else{
         self.bestFinancingLabel.text = @"Does Not Qualify";
         self.bestEqual24Label.text = @"For Financing";
