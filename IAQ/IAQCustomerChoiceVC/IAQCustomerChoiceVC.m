@@ -435,12 +435,11 @@
     healthyHomeSolutionsDetailVC.enlargeOptionName = titleString;
     healthyHomeSolutionsDetailVC.enlargeTotalPrice = totalPrice;
     healthyHomeSolutionsDetailVC.enlargeESAPrice = ESAPrice;
-    
+    healthyHomeSolutionsDetailVC.parentVC = self;
     healthyHomeSolutionsDetailVC.firstLabelString = @"15% Savings";
     healthyHomeSolutionsDetailVC.secondLabelString = enlargeSavings;
     healthyHomeSolutionsDetailVC.thirdLabelString = enlargeMidleLabelString;
-    
-    [self.navigationController pushViewController:healthyHomeSolutionsDetailVC animated:true];
+    [self presentViewController:healthyHomeSolutionsDetailVC animated:true completion:nil];
 }
 -(IBAction)nextButtonClick:(id)sender {
     BreatheEasyHealthyHomeVC* breatheEasyHealthyHomeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BreatheEasyHealthyHomeVC"];

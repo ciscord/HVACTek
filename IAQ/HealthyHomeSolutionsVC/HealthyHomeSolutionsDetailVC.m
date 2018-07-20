@@ -56,6 +56,10 @@
         default:
             break;
     }
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
+    tap.numberOfTapsRequired = 1;
+    tap.delegate = self;
+    [self.view addGestureRecognizer:tap];
 
 }
 
@@ -152,20 +156,21 @@
     
 }
 - (IBAction)tapEditButton:(id)sender {
-    
-    NSArray* viewcontrollers = self.navigationController.viewControllers;
-    
-    for (UIViewController* viewController in viewcontrollers) {
-        if ([viewController isKindOfClass:[HealthyHomeSolutionsVC class]]) {
-            [self.navigationController popToViewController:viewController animated:NO];
-            return;
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSArray* viewcontrollers = self.parentVC.navigationController.viewControllers;
+        
+        for (UIViewController* viewController in viewcontrollers) {
+            if ([viewController isKindOfClass:[HealthyHomeSolutionsVC class]]) {
+                [self.parentVC.navigationController popToViewController:viewController animated:NO];
+                return;
+            }
         }
-    }
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
-    UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
-   
-    [self.navigationController pushViewController:currentViewController animated:NO];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"IAQStoryboard" bundle:nil];
+        UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsVC"];
+        
+        [self.parentVC.navigationController pushViewController:currentViewController animated:NO];
+    }];
    
 }
 

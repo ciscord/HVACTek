@@ -19,5 +19,5 @@
 @property (nonatomic, strong) NSString *firstLabelString;
 @property (nonatomic, strong) NSString *secondLabelString;
 @property (nonatomic, strong) NSString *thirdLabelString;
-
+@property (weak, nonatomic) UIViewController *parentVC;
 @end
