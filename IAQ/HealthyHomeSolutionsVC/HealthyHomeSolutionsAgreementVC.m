@@ -96,7 +96,7 @@
         
         if (totalCost >= 1000) {
             self.secondLabel.text = @"0% Financing";
-            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf(((totalCost * 0.85) / 24.))];
         }else{
             self.secondLabel.text = @"Does Not Qualify";
             self.thirdLabel.text = @"For Financing";
@@ -115,7 +115,7 @@
         
         if (totalCost >= 1000) {
             self.secondLabel.text = @"0% Financing";
-            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%d", (int)((totalCost * 0.85) / 24)];
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf(((totalCost * 0.85) / 24))];
         }else{
             self.secondLabel.text = @"Does Not Qualify";
             self.thirdLabel.text = @"For Financing";

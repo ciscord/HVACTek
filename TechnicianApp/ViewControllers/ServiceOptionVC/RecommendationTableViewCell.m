@@ -203,15 +203,15 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                     self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceESA];
                 }
                 else {
-                    self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceNormal];
+                    self.lbSelectOption.text = [self changeCurrencyFormat:lroundf(totalPriceNormal)];
                 }
 
             } else {
                 [self.btnPrice1 setTitle:[self changeCurrencyFormat:totalPriceESA] forState:UIControlStateNormal];
-                [self.btnPrice2 setTitle:[self changeCurrencyFormat:totalPriceNormal] forState:UIControlStateNormal];
+                [self.btnPrice2 setTitle:[self changeCurrencyFormat:lroundf(totalPriceNormal)] forState:UIControlStateNormal];
                 
                 if (totalPriceESA > 1000) {
-                    self.lb24MonthRates.text = [NSString stringWithFormat:@"24 payments of $%.0f", totalPriceNormal/24.];
+                    self.lb24MonthRates.text = [NSString stringWithFormat:@"24 payments of $%ld", lroundf(totalPriceNormal/24.)];
                 }else{
                     self.lb24MonthRates.text = [NSString stringWithFormat:@"For 0%% Financing"];
                     self.financingLabel.text = [NSString stringWithFormat:@"Does Not Qualify"];
