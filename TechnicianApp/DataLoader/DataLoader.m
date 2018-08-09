@@ -267,7 +267,13 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFindingOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSArray* allOptions = [[DataLoader sharedInstance] otherOptions];
+    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] otherOptions]];
+    
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
+        [allOptions addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
+    }
+    
+    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] iPadCommonRepairsOptions]];
     
     NSMutableArray* selectedOptions = [NSMutableArray array];
     for (PricebookItem* selectedItem in notes) {
@@ -281,7 +287,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
         }
         
     }
-    [selectedOptions addObjectsFromArray: [DataLoader loadLocalSavedOptions]];
+    
     return selectedOptions;
     
 }
