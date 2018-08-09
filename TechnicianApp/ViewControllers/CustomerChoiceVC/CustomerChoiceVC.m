@@ -111,11 +111,11 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     NSDictionary* selectedServiceOptionsDict = [customerChoiceData objectForKey:@"selectedServiceOptionsDict"];
     
-    self.fullServiceOptions = [selectedServiceOptionsDict objectForKey:@"fullServiceOptions"];
+    self.fullServiceOptions = [customerChoiceData objectForKey:@"fullServiceOptions"];
     self.isDiscounted = [[selectedServiceOptionsDict objectForKey:@"isDiscounted"] boolValue];
     self.isOnlyDiagnostic = [[selectedServiceOptionsDict objectForKey:@"isOnlyDiagnostic"] boolValue];
     self.isComingFromInvoice = [[selectedServiceOptionsDict objectForKey:@"isComingFromInvoice"] boolValue];
-    self.selectedServiceOptions = [selectedServiceOptionsDict objectForKey:@"selectedServiceOptions"];
+    self.selectedServiceOptions = selectedServiceOptionsDict;
     
     NSArray* removedItems = selectedServiceOptionsDict[@"removedItems"];
     
@@ -154,7 +154,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
                                          @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
-                                         
+                                         @"fullServiceOptions" : self.fullServiceOptions,
                                          @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
                                          @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
                                          @"initialTotal" : self.subtotaPriceLabel.text,
@@ -275,7 +275,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
     
     NSDictionary* customerChoiceData = @{@"isDiscounted": [NSNumber numberWithBool:self.isDiscounted],
                                          @"isOnlyDiagnostic": [NSNumber numberWithBool:self.isOnlyDiagnostic],
-                                         
+                                         @"fullServiceOptions" : self.fullServiceOptions,
                                          @"unselectedOptionsArray" : self.unusedServiceOptions.mutableCopy,
                                          @"selectedServiceOptionsDict" : [self addDiscountsToDictionary:self.selectedServiceOptions].mutableCopy,
                                          @"initialTotal" : self.subtotaPriceLabel.text,

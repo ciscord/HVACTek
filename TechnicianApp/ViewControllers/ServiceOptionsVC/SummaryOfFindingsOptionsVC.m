@@ -259,6 +259,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     if (self.isiPadCommonRepairsOptions) {
         [DataLoader saveOptionsLocal:self.selectedOptions];
+        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
     }else {
         [DataLoader saveFindingOptionsLocal:self.selectedOptions];
     }
