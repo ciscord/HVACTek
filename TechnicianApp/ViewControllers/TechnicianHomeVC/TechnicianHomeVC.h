@@ -7,7 +7,7 @@
 //
 
 #import "BaseVC.h"
-
+#import "TechnicianDebriefVC.h"
 @interface TechnicianHomeVC : BaseVC
 
 - (void)getNextJob;

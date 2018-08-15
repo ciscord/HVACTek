@@ -140,6 +140,12 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [defaults removeObjectForKey:@"CustomerChoiceData"];
     [defaults removeObjectForKey:@"AdditionalInfo"];
     [defaults removeObjectForKey:@"NewCustomerChoice"];
+    [defaults removeObjectForKey:@"OptionsDisplayType"];
+    [defaults removeObjectForKey:@"QuestionType"];
+    [defaults removeObjectForKey:@"iPadCommonRepairsOptions"];
+    [defaults removeObjectForKey:@"otherOptions"];
+    [defaults removeObjectForKey:@"plumbingCommonRepairsOptions"];
+    [defaults removeObjectForKey:@"plumbingOtherOptions"];
     [defaults synchronize];
     
     [[[DataLoader sharedInstance] currentUser] deleteActiveJob];

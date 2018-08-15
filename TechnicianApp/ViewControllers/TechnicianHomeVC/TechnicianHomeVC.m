@@ -41,6 +41,12 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
 @property (nonatomic) int numberOfHuds;
 
 @property (nonatomic, strong) THProgressView *progressBar;
+
+@property (nonatomic, strong) Job                                 *jobToDebrief;
+@property (nonatomic, strong) NSArray                             *whoList;
+@property (nonatomic, strong) NSArray                             *whoListCodes;
+@property (nonatomic, strong) NSString                            *whoCurrent;
+
 @end
 
 @implementation TechnicianHomeVC
@@ -317,30 +323,102 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
     [self checkJobStatus];
 }
 
-
-- (void)getNextJob {
+- (void)debriefCurrentJob {
     
-    if (!self.edtJobId.hasText) {
-        ShowOkAlertWithTitle(@"Enter Job ID", self);
+    self.jobToDebrief.jobStatus = @(jstDone);
+    [self.jobToDebrief.managedObjectContext save];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.numberOfHuds++;
+    __weak typeof (self) weakSelf = self;
+    [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
+                                                           onSuccess:^(NSString *successMessage) {
+                                                               [self checkNumberOfHuds:--self.numberOfHuds];
+                                                               [weakSelf custumerlookup];
+                                                               
+                                                           } onError:^(NSError *error) {
+                                                               [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                               ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                                           }];
+    
+    
+}
+- (NSDictionary *)dictionaryWithvaluesForAPI {
+    
+    NSMutableDictionary *result = @{}.mutableCopy;
+    
+    self.jobToDebrief = [[[DataLoader sharedInstance] currentUser] activeJob];
+    /////
+
+    NSArray* defaultArray = [self defaultCellsArray];
+
+    for (NSInteger i = 0; i < defaultArray.count; i++) {
+        
+        [result addEntriesFromDictionary:[self valueForApi:[defaultArray objectAtIndex:i]]];
+        
     }
-    else
-    {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.numberOfHuds++;
-        __weak typeof (self) weakSelf = self;
-        [[DataLoader sharedInstance] getAssignmentListFromSWAPIWithJobID:self.edtJobId.text
-                                                               onSuccess:^(NSString *successMessage) {
-                                                                   [DataLoader clearAllLocalData];
-                                                                   [weakSelf checkJobStatus];
-                                                                   [[TechDataModel sharedTechDataModel] saveEditJobID:self.edtJobId.text];
-                                                                   [self checkNumberOfHuds:--self.numberOfHuds];
-                                                               } onError:^(NSError *error) {
-                                                                   [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                                                                   ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
-                                                               }];
-    }
+    
+    [result addEntriesFromDictionary:@{@"user_id" : [[[DataLoader sharedInstance] currentUser] userID]}];
+    [result addEntriesFromDictionary:@{@"status" : @(0)}];
+    
+    NSTimeInterval distanceBetweenQuestions = [self.jobToDebrief.startTimeQuestions timeIntervalSinceDate:self.jobToDebrief.endTimeQuestions];
+    double         secondsInAnHour          = 60;
+    double         totalMinutes             = ABS(distanceBetweenQuestions / secondsInAnHour);
+    
+    [result addEntriesFromDictionary:@{@"time_of_questions" : [NSString stringWithFormat:@"%.2f", totalMinutes]}];
+    
+    return result;
 }
 
+- (NSDictionary *)valueForApi:(NSDictionary*) _cellData {
+    
+    NSArray  *possValsTemp = _cellData[@"possVals"];
+    NSArray  *apiValsTemp  = _cellData[@"APIValues"];
+    NSString *value        = _cellData[@"accVal"];
+    
+    TDCellAccType _cellType = [_cellData[@"accType"] integerValue];
+    
+    switch (_cellType) {
+        case lblCellAcc:
+        {
+            value = apiValsTemp.firstObject;
+            break;
+        }
+        case drpDownCellAcc:
+        {
+            value = @"0";
+            if (possValsTemp.count > 0 && possValsTemp.count == apiValsTemp.count) {
+                
+                NSInteger index = [possValsTemp indexOfObject:value];
+                if (index != NSNotFound && index < apiValsTemp.count) {
+                    value = apiValsTemp[index];
+                }
+            }
+            break;
+        }
+        case txtViewCellAcc:
+        {
+            value = @"";
+            break;
+        }
+        case txtFieldCellAcc:
+        case txtFieldNumericCellAcc:
+        {
+            value = @"";
+            break;
+        }
+        case chkBoxCellAcc:
+        {
+            value = apiValsTemp[0];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    return @{_cellData[@"APIField"] : value};
+}
 
 -(void)checkJobStatus {
     
@@ -377,9 +455,28 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
     
     if (!self.edtJobId.hasText) {
         ShowOkAlertWithTitle(@"Enter Job ID", self);
+        return;
+        
     }
-    else
-    {
+    
+    if (![[[[DataLoader sharedInstance] currentUser] activeJob].jobID isEqualToString:self.edtJobId.text] && [[[[DataLoader sharedInstance] currentUser] activeJob].jobStatus integerValue]== jstNeedDebrief) {
+        __weak typeof (self) weakSelf = self;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        NSDictionary *params = [self dictionaryWithvaluesForAPI];
+        
+        [[DataLoader sharedInstance] debriefJobWithInfo:params
+                                              onSuccess:^(NSString *message) {
+                                                  
+                                                  [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                  [weakSelf debriefCurrentJob];
+                                                  
+                                              } onError:^(NSError *error) {
+                                                  [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                                                  ShowOkAlertWithTitle(error.localizedDescription, weakSelf);
+                                              }];
+        
+    }else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.numberOfHuds++;
         __weak typeof (self) weakSelf = self;
@@ -424,6 +521,177 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
 - (void)updateProgressForValue:(NSNumber *)newValue
 {
     [self.progressBar setProgress:[newValue floatValue] animated:YES];
+}
+
+
+
+- (NSArray *)defaultCellsArray {
+    
+    
+    NSDictionary *customerInfo = self.jobToDebrief.swapiCustomerInfo;
+    NSDictionary *jobInfo      = self.jobToDebrief.swapiJobInfo;
+    
+    NSDateFormatter *dateTimeFormatterToDisplay = [[NSDateFormatter alloc] init];
+    [dateTimeFormatterToDisplay setDateFormat:@"HH:mm a"];
+    
+    NSDateFormatter *dateTimeFormatterToAPI = [[NSDateFormatter alloc] init];
+    [dateTimeFormatterToAPI setDateFormat:@"HH:mm:ss"];
+    
+    NSTimeInterval distanceBetweenDates = [self.jobToDebrief.startTime timeIntervalSinceDate:self.jobToDebrief.completionTime];
+    double         secondsInAnHour      = 3600;
+    double         totalHoursValue      = ABS(distanceBetweenDates / secondsInAnHour);
+    
+    NSString *jobNameValue = [NSString stringWithFormat:@"%@ %@", customerInfo[@"FirstName"], customerInfo[@"LastName"]];
+    
+    
+    NSArray        *list            = [self.jobToDebrief.swapiJobInfo objectForKey:@"whoList"];//[[[DataLoader sharedInstance] SWAPIManager] whoList];
+    NSMutableArray *resultList      = @[].mutableCopy;
+    NSMutableArray *resultListCodes = @[].mutableCopy;
+    for (NSDictionary *employee in list) {
+        
+        [resultList addObject:[NSString stringWithFormat:@"%@ %@", employee[@"FirstName"], employee[@"LastName"]]];
+        [resultListCodes addObject:employee[@"EmployeeCode"]];
+        if ([employee[@"EmployeeCode"] isEqualToString:[[[DataLoader sharedInstance] currentUser] userCode]]) {
+            self.whoCurrent = resultList.lastObject;
+        }
+    }
+    
+    self.whoList      = resultList;
+    self.whoListCodes = resultListCodes;
+    
+    //// section 0 = 13
+    
+    
+    NSMutableDictionary *jobName                 = [self itemDicWith:@"Job Name" accType:lblCellAcc accVal:jobNameValue possVals:@[] align:cCenter APIField:@"job_name" APIValues:@[jobNameValue]];
+    NSMutableDictionary *jobNumber               = [self itemDicWith:@"Job Number" accType:lblCellAcc accVal:self.jobToDebrief.swapiJobInfo[@"JobNo"] possVals:@[] align:cCenter APIField:@"job_number" APIValues:@[self.jobToDebrief.swapiJobInfo[@"JobNo"]]];
+    NSMutableDictionary *dispathTime             = [self itemDicWith:@"Dispath Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.dispatchTime] possVals:@[] align:cCenter APIField:@"dispatch_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.dispatchTime]]];
+    
+    NSMutableDictionary *startTime               = [self itemDicWith:@"Start Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.startTime] possVals:@[] align:cCenter APIField:@"start_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.startTime]]];
+    NSMutableDictionary *completionTime          = [self itemDicWith:@"Completion Time" accType:lblCellAcc accVal:[dateTimeFormatterToDisplay stringFromDate:self.jobToDebrief.completionTime] possVals:@[] align:cCenter APIField:@"completion_time" APIValues:@[[dateTimeFormatterToAPI stringFromDate:self.jobToDebrief.completionTime]]];
+    NSMutableDictionary *totalHours              = [self itemDicWith:@"Total Hours" accType:lblCellAcc accVal:[NSString stringWithFormat:@"%.2f", totalHoursValue] possVals:@[] align:cCenter APIField:@"total_hours" APIValues:@[[NSString stringWithFormat:@"%.2f", totalHoursValue]]];
+    NSMutableDictionary *ageOfSystem             = [self itemDicWith:@"Age Of System" accType:txtFieldNumericCellAcc accVal:jobInfo[@"UnitAge"] possVals:@[] align:cCenter APIField:@"age_of_system" APIValues:@[]];
+    NSMutableDictionary *replacementLeadSheduled = [self itemDicWith:@"Replacement Lead Sheduled" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"replacement_lead_scheduled" APIValues:@[@1, @0]];
+    NSMutableDictionary *agreementOpportunity = [self itemDicWith:@"Agreement Opportunity" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"agreement_opportunity" APIValues:@[@1, @0]];
+    NSMutableDictionary *agreementSold = [self itemDicWith:@"Agreement Sold" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"agreement_sold" APIValues:@[@1, @0]];
+    NSMutableDictionary *totalRevenue            = [self itemDicWith:@"Total Revenue On This Ticket" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"total_revenue" APIValues:@[] cellValueType:ctCellTotalRevenue];
+    
+    NSMutableDictionary *paymentCollected                   = [self itemDicWith:@"Payment Collected" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"payment_collected" APIValues:@[@1, @0]];
+    NSMutableDictionary *paymentMethod                      = [self itemDicWith:@"Payment Method" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cCenter APIField:@"payment_method" APIValues:@[]];
+    
+    //// section 1 = 1/2
+    
+    NSMutableDictionary *callBack                           = [self itemDicWith:@"Call Back" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"callback" APIValues:@[@1, @0]];
+    NSMutableDictionary *who                                = [self itemDicWith:@"Who" accType:drpDownCellAcc accVal:self.whoCurrent possVals:self.whoList align:cRight APIField:@"who" APIValues:self.whoListCodes];
+    
+    //// section 2 = 1/12
+    
+    NSMutableDictionary *repairScheduled                    = [self itemDicWith:@"Repair Scheduled" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"repair_scheduled" APIValues:@[@1, @0]];
+    NSMutableDictionary *priceQuoted                        = [self itemDicWith:@"Price Quoted" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"price_quoted" APIValues:@[]];
+    NSMutableDictionary *priceApproved                      = [self itemDicWith:@"Price Approved" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cRight APIField:@"price_approved" APIValues:@[@1, @0]];
+    NSMutableDictionary *ammountof50PercentDepositCollected = [self itemDicWith:@"Amount Of 50% Deposit Collected" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"deposit_collected" APIValues:@[]];
+    NSMutableDictionary *partsOrderedBy                     = [self itemDicWith:@"Parts Ordered By" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"parts_ordered_by" APIValues:@[]];
+    NSMutableDictionary *supplerPartsOrderedFrom            = [self itemDicWith:@"Supplier Parts Ordered From" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"supplier_parts_ordered_form" APIValues:@[]];
+    NSMutableDictionary *timeNeededForRepair                = [self itemDicWith:@"Time Needed For Repair" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"time_needed_for_repair" APIValues:@[]];
+    NSMutableDictionary *whenIsTheRepairScheduled           = [self itemDicWith:@"When Is The Repair Scheduled" accType:txtFieldNumericCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"when_repair_scheduled" APIValues:@[]];
+    NSMutableDictionary *modelOfSystemNeedingRepair         = [self itemDicWith:@"Model Of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"model_system_needing_required" APIValues:@[]];
+    NSMutableDictionary *serialNumberOfSystemNeedingRepair  = [self itemDicWith:@"Serial Number Of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"serial_number_system_needing_repair" APIValues:@[]];
+    NSMutableDictionary *locationOfSystemNeedingRepair      = [self itemDicWith:@"Location of System Needing Repair" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"location_system_needing_repair" APIValues:@[]];
+    NSMutableDictionary *specialInstructionsOrToolsRequired = [self itemDicWith:@"Special Instructions Or Tools Required" accType:txtFieldCellAcc accVal:@"" possVals:@[] align:cRight APIField:@"special_instructions_or_tools_required" APIValues:@[]];
+    
+    
+    
+    //// section 3 = 7
+    
+    
+    NSMutableDictionary *installAndSignAllStickers          = [self itemDicWith:@"Install & Sign All Stickers" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"sign_all_stickers" APIValues:@[@1, @0]];
+    NSMutableDictionary *equipmentSwRemote          = [self itemDicWith:@"Equipment Entered In SW Remote" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"equipment_sw_remote" APIValues:@[@1, @0]];
+    NSMutableDictionary *verifiedEmail          = [self itemDicWith:@"Verified Email Address" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"verified_email" APIValues:@[@1, @0]];
+    NSMutableDictionary *sentAnglesListReviewLink           = [self itemDicWith:@"Sent Angie's List Review Link" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"list_review_link" APIValues:@[@1, @0]];
+    
+    NSMutableDictionary *sentReviewBuzzLink                 = [self itemDicWith:@"Sent Review Buzz Link" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"buzz_link" APIValues:@[@1, @0]];
+    NSMutableDictionary *attachAllPartsUsedToTicked         = [self itemDicWith:@"Johnstone App Parts Ordered" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"attach_all_parts_used_to_tiket" APIValues:@[@1, @0]];
+    NSMutableDictionary *thermostatSetAndSystemRunning      = [self itemDicWith:@"Thermostat Set & System Running" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"system_running" APIValues:@[@1, @0]];
+    
+    
+    
+    /////  section 4 = 1/2
+    NSMutableDictionary *followUpRequired         = [self itemDicWith:@"Follow Up Required" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"follow_up_required" APIValues:@[@1, @0]];
+    
+    
+    NSMutableDictionary *notesSwRemote        = [self itemDicWith:@"Work Performed Notes Entered in SWR" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_entered_sw_remote5" APIValues:@[@1, @0]];
+    NSMutableDictionary *suggestedNotesSwRemote        = [self itemDicWith:@"Work Suggested Notes Entered In SWR" accType:drpDownCellAcc accVal:@"NO" possVals:@[@"YES", @"NO"] align:cCenter APIField:@"notes_suggested_sw_remote" APIValues:@[@1, @0]];
+    
+    return @[jobName,
+             jobNumber,
+             dispathTime,
+             startTime,
+             completionTime,
+             totalHours,
+             ageOfSystem,
+             replacementLeadSheduled,
+             agreementOpportunity,
+             agreementSold,
+             totalRevenue,
+             paymentCollected,
+             paymentMethod,
+             callBack,
+             who,
+             repairScheduled,
+             priceQuoted,
+             priceApproved,
+             ammountof50PercentDepositCollected,
+             partsOrderedBy,
+             supplerPartsOrderedFrom,
+             timeNeededForRepair,
+             whenIsTheRepairScheduled,
+             modelOfSystemNeedingRepair,
+             serialNumberOfSystemNeedingRepair,
+             locationOfSystemNeedingRepair,
+             specialInstructionsOrToolsRequired,
+             installAndSignAllStickers,
+             equipmentSwRemote,
+             verifiedEmail,
+             sentAnglesListReviewLink,
+             sentReviewBuzzLink,
+             attachAllPartsUsedToTicked,
+             thermostatSetAndSystemRunning,
+             followUpRequired,
+             notesSwRemote,
+             suggestedNotesSwRemote];
+}
+
+- (NSMutableDictionary *)itemDicWith:(NSString *)title
+                             accType:(TDCellAccType)accessoryType
+                              accVal:(id)accVal
+                            possVals:(NSArray *)possVals
+                               align:(TDCellAlign)align
+                            APIField:(NSString *)APIField
+                           APIValues:(NSArray *)APIValues
+                       cellValueType:(CellType)cellType {
+    
+    NSString *accValTemp   = accVal ? accVal : @"";
+    NSArray  *possValsTemp = possVals ? possVals : @[];
+    
+    NSString *apiFieldTemp = APIField ? APIField : @"APIField";
+    NSArray  *apiValsTemp  = APIValues ? APIValues : @[];
+    
+    NSMutableDictionary *aDic = @{@"title":title, @"accType":@(accessoryType), @"accVal":accValTemp, @"possVals":possValsTemp, @"align":@(align),
+                                  @"APIField" : apiFieldTemp, @"APIValues" : apiValsTemp, @"cellType" : @(cellType)}.mutableCopy;
+    
+    return aDic;
+}
+
+- (NSMutableDictionary *)itemDicWith:(NSString *)title
+                             accType:(TDCellAccType)accessoryType
+                              accVal:(id)accVal
+                            possVals:(NSArray *)possVals
+                               align:(TDCellAlign)align
+                            APIField:(NSString *)APIField
+                           APIValues:(NSArray *)APIValues {
+    
+    NSMutableDictionary *aDic = [self itemDicWith:title accType:accessoryType accVal:accVal possVals:possVals align:align APIField:APIField APIValues:APIValues cellValueType:ctCellDefault];
+    
+    return aDic;
 }
 
 @end
