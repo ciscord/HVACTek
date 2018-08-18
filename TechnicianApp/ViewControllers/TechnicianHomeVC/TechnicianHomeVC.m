@@ -327,7 +327,7 @@ static const CGSize progressViewSize = { 300.0f, 20.0f };
     
     self.jobToDebrief.jobStatus = @(jstDone);
     [self.jobToDebrief.managedObjectContext save];
-    
+    [DataLoader clearAllLocalData];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.numberOfHuds++;
     __weak typeof (self) weakSelf = self;
