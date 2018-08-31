@@ -10,6 +10,7 @@
 #import "IAQCustomerChoiceVC.h"
 #import "VideoForCustomerVC.h"
 #import "IAQDataModel.h"
+#import "SummaryOfFindingVC.h"
 @interface HereWhatWeProposeVC ()
 @property (weak, nonatomic) IBOutlet UIView *myhomeCircleView;
 @property (weak, nonatomic) IBOutlet UILabel *myhomePointLabel;
@@ -32,6 +33,14 @@
     self.myhomeCircleView.backgroundColor = [UIColor hx_colorWithHexString:@"#ffcc00" alpha:1];
     
     [self.nextButton addTarget:self action:@selector(nextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQHereWhatWePropose) {
+        SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
+        summaryOfFindingVC.isAutoLoad = true;
+        [self.navigationController pushViewController:summaryOfFindingVC animated:false];
+    }
+    
+    
 }
 - (void) tapTechButton {
     [super tapTechButton];
@@ -39,16 +48,15 @@
 }
 #pragma mark IBAction button
 - (IBAction)nextButtonClick:(id)sender {
-    int viewsToPop = 4;//go to cutomer's choice screen
-    [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
-    
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-    [IAQDataModel sharedIAQDataModel].isfinal = 1;
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-        
-    [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];
-    [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoiceFinal]  forKey:@"iaqCurrentStep"];
-    [userdefault synchronize];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQSummaryOfFinding]  forKey:@"iaqCurrentStep"];
+    
+    SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
+    [self.navigationController pushViewController:summaryOfFindingVC animated:true];
+    
+    
+    
     
 }
 

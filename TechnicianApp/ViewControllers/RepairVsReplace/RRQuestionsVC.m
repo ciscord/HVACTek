@@ -29,7 +29,7 @@
     
     self.view.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary50];
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     self.title = @"Customer's Choice";

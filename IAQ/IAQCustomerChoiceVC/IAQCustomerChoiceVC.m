@@ -217,7 +217,7 @@
         for (UIButton* detailButton in self.detailButtonArray) {
             detailButton.hidden = false;
         }
-        self.topLabelHeightConstraint.constant = 44;
+        self.topLabelHeightConstraint.constant = 0;
         
         self.nextButton.hidden = true;
     }else {
@@ -252,16 +252,18 @@
             [attributedString1 appendAttributedString:attributedString2];
             
             totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
+            [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
         }else {
             
             if ([IAQDataModel sharedIAQDataModel].isfinal == 0) {
                 NSMutableAttributedString *attributedString2 =
                 [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
                 [attributedString1 appendAttributedString:attributedString2];
+                [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             
         }
-        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+        
 
         
     }
@@ -292,6 +294,7 @@
             NSMutableAttributedString *attributedString2 =
             [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font }];
             [attributedString1 appendAttributedString:attributedString2];
+            [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             
             totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
         }else {
@@ -299,11 +302,11 @@
                 NSMutableAttributedString *attributedString2 =
                 [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
                 [attributedString1 appendAttributedString:attributedString2];
+                [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             
         }
-        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
-   
+        
         
     }
     
@@ -333,16 +336,18 @@
             [attributedString1 appendAttributedString:attributedString2];
             
             totalCost += [iaqModel.price floatValue] * [iaqModel.quantity intValue];
+            [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
         }else {
             
             if ([IAQDataModel sharedIAQDataModel].isfinal == 0) {
                 NSMutableAttributedString *attributedString2 =
                 [[NSMutableAttributedString alloc] initWithString:iaqModel.title attributes:@{NSFontAttributeName : text2Font, NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] }];
                 [attributedString1 appendAttributedString:attributedString2];
+                [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
             }
             
         }
-        [attributedString1 appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];
+        
         
         
     }

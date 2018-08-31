@@ -7,7 +7,7 @@
 //
 
 #import "EnlargeOptionsVC.h"
-#import "SummaryOfFindingsOptionsVC.h"
+#import "ServiceOptionVC.h"
 @interface EnlargeOptionsVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView *enlargeTable;
@@ -146,10 +146,9 @@
         NSArray* viewcontrollers = self.parentVC.navigationController.viewControllers;
         [[TechDataModel sharedTechDataModel] saveCurrentStep:SummaryOfFindingsOptions1];
         for (UIViewController* viewController in viewcontrollers) {
-            if ([viewController isKindOfClass:[SummaryOfFindingsOptionsVC class]]) {
-                SummaryOfFindingsOptionsVC* sumaryOfFindingsOptionsVC = (SummaryOfFindingsOptionsVC*) viewController;
-                [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions1;
-                sumaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
+            if ([viewController isKindOfClass:[ServiceOptionVC class]]) {
+                ServiceOptionVC* serviceOptionVC = (ServiceOptionVC*) viewController;
+                [TechDataModel sharedTechDataModel].currentStep = ServiceOption1;
                 
                 [self.parentVC.navigationController popToViewController:viewController animated:NO];
                 return;
@@ -157,12 +156,11 @@
         }
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
-        UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingsOptionsVC1"];
-        SummaryOfFindingsOptionsVC* sumaryOfFindingsOptionsVC = (SummaryOfFindingsOptionsVC*) currentViewController;
-        [TechDataModel sharedTechDataModel].currentStep = SummaryOfFindingsOptions1;
-        sumaryOfFindingsOptionsVC.isiPadCommonRepairsOptions = YES;
+        UIViewController* currentViewController = [storyboard instantiateViewControllerWithIdentifier:@"ServiceOptionVC"];
+        ServiceOptionVC* serviceOptionVC = (ServiceOptionVC*) currentViewController;
+        [TechDataModel sharedTechDataModel].currentStep = ServiceOption1;
         
-        [self.parentVC.navigationController pushViewController:sumaryOfFindingsOptionsVC animated:NO];
+        [self.parentVC.navigationController pushViewController:serviceOptionVC animated:NO];
     }];
 }
 

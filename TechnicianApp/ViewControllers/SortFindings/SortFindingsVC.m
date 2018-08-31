@@ -28,7 +28,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
     
     self.title = @"Summary of Findings Sort";
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     [self.findingsTable registerNib:[UINib nibWithNibName:findingsCellID bundle:nil] forCellReuseIdentifier:findingsCellID];

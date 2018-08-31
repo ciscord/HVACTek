@@ -83,9 +83,8 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
             }
         }
        
-        SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
-        summaryOfFindingVC.isAutoLoad = true;
-        [self.navigationController pushViewController:summaryOfFindingVC animated:false];
+        HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
+        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
         
     }else {
         [self downloadIAQProducts];
@@ -225,19 +224,20 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     }
     [IAQDataModel sharedIAQDataModel].isfinal = false;
     
-    //reset auto load
-    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-    
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray  forKey:@"iaqSortedProductsIdArray"];
     [userdefault setObject:[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray  forKey:@"iaqSortedProductsQuantityArray"];
-    [userdefault setObject:[NSNumber numberWithInteger:IAQSummaryOfFinding]  forKey:@"iaqCurrentStep"];
+       
+    //changed
+    //reset auto load
+    [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
+    
+    [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolutionSort]  forKey:@"iaqCurrentStep"];
     
     [userdefault synchronize];
     
-    SummaryOfFindingVC* summaryOfFindingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SummaryOfFindingVC"];
-    [self.navigationController pushViewController:summaryOfFindingVC animated:true];
-        
+    HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
+    [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
 }
 //////////////////////////////////////////////
 - (void) downloadIAQProducts {
@@ -322,7 +322,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         [self loadIAQFromCoredata];
         checkedProducts = [NSMutableArray array];
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
-            [checkedProducts addObject:@"0"];
+            [checkedProducts addObject:@"1"];
             iaqModel.quantity = @"";
         }
         [self.collectionView reloadData];

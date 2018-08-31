@@ -46,7 +46,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     self.title = @"Develop Summary of Findings";
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     self.vControlContainer.backgroundColor = [UIColor colorWithRed:0.937 green:0.965 blue:0.886 alpha:1.000];

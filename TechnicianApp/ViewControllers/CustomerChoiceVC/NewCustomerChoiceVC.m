@@ -70,7 +70,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
     self.title = NSLocalizedString(@"Customer's Choice", nil);
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"IAQ" style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     NSDictionary* customerChoiceData = [DataLoader loadLocalNewCustomerChoice];

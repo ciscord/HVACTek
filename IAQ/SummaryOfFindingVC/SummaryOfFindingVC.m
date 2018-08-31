@@ -40,12 +40,6 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
         bigButton.userInteractionEnabled = false;
     }
     
-    if ([IAQDataModel sharedIAQDataModel].currentStep > IAQSummaryOfFinding) {
-    
-        HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-        [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:false];
-    
-    }
 }
 - (void) tapTechButton {
     [super tapTechButton];
@@ -89,17 +83,16 @@ static NSString *kSummaryOfFindingCellID = @"SummaryOfFindingCell";
 #pragma mark - button event
 -(IBAction)nextButtonClick:(id)sender {
     
-    //reset auto load
+    int viewsToPop = 5;//go to cutomer's choice screen
+    [self.navigationController popToViewController: self.navigationController.viewControllers[self.navigationController.viewControllers.count-viewsToPop-1] animated:NO];
+    
     [IAQDataModel sharedIAQDataModel].currentStep = IAQNone;
-    
+    [IAQDataModel sharedIAQDataModel].isfinal = 1;
     NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
-  
-    [userdefault setObject:[NSNumber numberWithInteger:IAQHealthyHomeSolutionSort]  forKey:@"iaqCurrentStep"];
     
+    [userdefault setObject:[NSNumber numberWithInt:1] forKey:@"isfinal"];
+    [userdefault setObject:[NSNumber numberWithInteger:IAQCustomerChoiceFinal]  forKey:@"iaqCurrentStep"];
     [userdefault synchronize];
-    
-    HealthyHomeSolutionsSortVC* healthyHomeSolutionsSortVC = [self.storyboard instantiateViewControllerWithIdentifier:@"HealthyHomeSolutionsSortVC"];
-    [self.navigationController pushViewController:healthyHomeSolutionsSortVC animated:true];
     
 }
 

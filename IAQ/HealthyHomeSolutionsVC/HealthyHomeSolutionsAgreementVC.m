@@ -430,7 +430,7 @@
     if ([selectedProductArray count] == 0){
         return 0;
     }else{
-        return [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count;
+        return selectedProductArray.count;
     }
 }
 
@@ -442,7 +442,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    IAQProductModel * iaqModel = [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray[indexPath.row];
+    IAQProductModel * iaqModel = selectedProductArray[indexPath.row];
     
     NSString * serviceString;
     if ([iaqModel.quantity intValue] > 1) {
@@ -452,23 +452,8 @@
     }
     NSString * nameString = [serviceString stringByAppendingString:iaqModel.title];
     
-    if (![selectedProductArray containsObject:iaqModel]){
-        
-        NSDictionary* attributes = @{
-                                     NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
-                                     };
-        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
-        cell.textLabel.attributedText = attrText;
-        
-        
-    }else{
-        if (cell.textLabel.attributedText){
-            cell.textLabel.attributedText = nil;
-        }
-        cell.textLabel.text = nameString;
-    }
-    
-    
+    cell.textLabel.text = nameString;
+   
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font          = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     cell.textLabel.textColor     = [UIColor cs_getColorWithProperty:kColorPrimary];
