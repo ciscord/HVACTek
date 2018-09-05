@@ -39,7 +39,7 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
     // Do any additional setup after loading the view.
     self.title = @"Healthy Home Solutions";
     
-    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStylePlain target:self action:@selector(tapTechButton)];
+    UIBarButtonItem *techButton = [[UIBarButtonItem alloc] initWithTitle:@"Tech" style:UIBarButtonItemStyleBordered target:self action:@selector(tapTechButton)];
     [self.navigationItem setRightBarButtonItem:techButton];
     
     [self.titleLabel setTextColor:[UIColor cs_getColorWithProperty:kColorPrimary]];
@@ -253,11 +253,13 @@ static NSString *kCellIdentifier = @"ServiceOptionViewCell";
         
         checkedProducts = [NSMutableArray array];
         
+        int countofchecked = 0;
         for (IAQProductModel * iaqModel in [IAQDataModel sharedIAQDataModel].iaqProductsArray) {
             if ([[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray containsObject:iaqModel.productId]) {
                 iaqModel.quantity = [[IAQDataModel sharedIAQDataModel].iaqSortedProductsQuantityArray objectAtIndex:[[IAQDataModel sharedIAQDataModel].iaqSortedProductsIdArray indexOfObject:iaqModel.productId]];
                 [[IAQDataModel sharedIAQDataModel].iaqSortedProductsArray addObject:iaqModel];
                 [checkedProducts addObject:@"1"];
+                countofchecked ++;
             }else {
                 [checkedProducts addObject:@"0"];
             }

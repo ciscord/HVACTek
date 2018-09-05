@@ -38,7 +38,17 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     [super viewDidLoad];
     self.title = (self.isiPadCommonRepairsOptions ? @"Common Repairs" : @"Specialized Repairs");
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIColor* titleColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    UIButton *someButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0, 45,25)];
+    [someButton setTitle:@" IAQ " forState:UIControlStateNormal];
+    [someButton addTarget:self action:@selector(tapIAQButton)
+         forControlEvents:UIControlEventTouchUpInside];
+    [someButton setShowsTouchWhenHighlighted:YES];
+    someButton.layer.borderWidth = 1;
+    someButton.layer.borderColor = titleColor.CGColor;
+    [someButton setTitleColor:titleColor forState:UIControlStateNormal];
+    UIBarButtonItem *iaqButton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+    
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     [self configureColorScheme];
@@ -65,7 +75,7 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         
         self.selectedOptions = [DataLoader loadLocalSavedOptions];
         
-        if (!self.selectedOptions) {
+        if (self.selectedOptions.count == 0) {
             self.selectedOptions = self.allOptions.mutableCopy;
         }
     }else {

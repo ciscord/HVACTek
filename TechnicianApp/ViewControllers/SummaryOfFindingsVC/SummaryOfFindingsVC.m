@@ -46,7 +46,17 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     
     self.title = @"Develop Summary of Findings";
     
-    UIBarButtonItem *iaqButton = [[UIBarButtonItem alloc] initWithTitle:@"  IAQ  " style:UIBarButtonItemStylePlain target:self action:@selector(tapIAQButton)];
+    UIColor* titleColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    UIButton *someButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0, 45,25)];
+    [someButton setTitle:@" IAQ " forState:UIControlStateNormal];
+    [someButton addTarget:self action:@selector(tapIAQButton)
+         forControlEvents:UIControlEventTouchUpInside];
+    [someButton setShowsTouchWhenHighlighted:YES];
+    someButton.layer.borderWidth = 1;
+    someButton.layer.borderColor = titleColor.CGColor;
+    [someButton setTitleColor:titleColor forState:UIControlStateNormal];
+    UIBarButtonItem *iaqButton =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+    
     [self.navigationItem setRightBarButtonItem:iaqButton];
     
     self.vControlContainer.backgroundColor = [UIColor colorWithRed:0.937 green:0.965 blue:0.886 alpha:1.000];

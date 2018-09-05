@@ -100,11 +100,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self.enlargeOptionsArray count] == 0){
-        return 0;
-    }else{
-        return [IAQDataModel sharedIAQDataModel].iaqSortedProductsArray.count;
-    }
+    return [self.enlargeOptionsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,22 +121,10 @@
     }
     NSString * nameString = [serviceString stringByAppendingString:iaqModel.title];
     
-    if (![self.enlargeOptionsArray containsObject:iaqModel]){
-        
-        NSDictionary* attributes = @{
-                                     NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
-                                     };
-        NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:nameString attributes:attributes];
-        cell.textLabel.attributedText = attrText;
-        
-        
-    }else{
-        if (cell.textLabel.attributedText){
-            cell.textLabel.attributedText = nil;
-        }
-        cell.textLabel.text = nameString;
+    if (cell.textLabel.attributedText){
+        cell.textLabel.attributedText = nil;
     }
-    
+    cell.textLabel.text = nameString;
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font          = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
