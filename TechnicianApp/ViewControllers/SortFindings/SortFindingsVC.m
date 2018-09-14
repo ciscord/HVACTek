@@ -43,7 +43,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
     
     [self.findingsTable registerNib:[UINib nibWithNibName:findingsCellID bundle:nil] forCellReuseIdentifier:findingsCellID];
   
-    self.findingsArray = [DataLoader loadLocalSavedFindingOptions];
+    self.findingsArray = [DataLoader loadSortFindingOptions];
     
     self.continueButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
@@ -66,7 +66,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
     [TechDataModel sharedTechDataModel].currentStep = SortFindings;
 }
 - (void) viewWillDisappear:(BOOL)animated {
-    [DataLoader saveFindingOptionsLocal:self.findingsArray];
+    [DataLoader saveSortFindingOptions:self.findingsArray];
 }
 #pragma mark - UITableViewDelegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,7 +158,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
         [DataLoader saveOptionsDisplayType:odtEditing];
-        [DataLoader saveFindingOptionsLocal:self.findingsArray];
+        [DataLoader saveSortFindingOptions:self.findingsArray];
     }
 }
 

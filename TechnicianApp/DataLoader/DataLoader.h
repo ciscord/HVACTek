@@ -121,10 +121,13 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 + (void) saveAdditionalInfo:(NSDictionary*)customerChoiceData;
 +(NSDictionary*)loadLocalAdditionalInfo;
-
++ (void)appandFindingOptions:(NSMutableArray*)selectedOptions;
 + (void) saveNewCustomerChoice:(NSDictionary*)customerChoiceData;
 +(NSDictionary*)loadLocalNewCustomerChoice;
 
++ (void) saveSortFindingOptions:(NSMutableArray*)selectedOptions;
++ (NSMutableArray*)loadSortFindingOptions;
+    
 + (void) saveOptionsDisplayType : (OptionsDisplayType) currentType;
 
 + (OptionsDisplayType) loadOptionsDisplayType;

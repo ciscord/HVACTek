@@ -72,7 +72,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         _priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
         
         if (_priceBookAndServiceOptions == nil || _priceBookAndServiceOptions.count == 0) {
-            self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+            self.priceBookAndServiceOptions = [DataLoader loadSortFindingOptions];
         
             if (self.priceBookAndServiceOptions) {
                 [self resetOptions];
@@ -89,7 +89,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
                 self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
                 self.options = _priceBookAndServiceOptions.mutableCopy;
             }else {
-                self.priceBookAndServiceOptions = [DataLoader loadLocalSavedFindingOptions];
+                self.priceBookAndServiceOptions = [DataLoader loadSortFindingOptions];
             }
             
         }else {

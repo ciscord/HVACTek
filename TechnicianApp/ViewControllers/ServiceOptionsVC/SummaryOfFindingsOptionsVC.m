@@ -153,14 +153,6 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     }
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-    
-    if (self.isiPadCommonRepairsOptions) {
-        [DataLoader saveOptionsLocal:self.selectedOptions];
-    }else {
-        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
-    }
-}
 -(NSMutableArray *)getOptionsTypeOfArray:(NSMutableArray *)array {
     if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
         if ([array isEqualToArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]])
@@ -240,38 +232,16 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 #pragma mark - Continue Action
 - (IBAction)btnContinueTouch:(id)sender {
 
-    
-    
-    if (!self.isiPadCommonRepairsOptions) {
-        NSArray* savedOptions = [DataLoader loadLocalSavedFindingOptions];
-        
-        if (self.selectedOptions.count == savedOptions.count) {
-            for (PricebookItem *item1 in savedOptions) {
-                BOOL findItem = false;
-                for (PricebookItem* item2 in self.selectedOptions) {
-                    if ([item1.itemID isEqualToString:item2.itemID]) {
-                        findItem = true;
-                        if (![item2.quantity isEqualToString:item1.quantity]) {
-                            [DataLoader removeLocalFinalOptions];//remove if quantity is different
-                        }
-                        
-                    }
-                }
-                
-                if (!findItem) {//remove if item not found
-                    [DataLoader removeLocalFinalOptions];//remove if quantity is different
-                }
-            }
-        }else {
-            [DataLoader removeLocalFinalOptions];
-        }
-    }
-    
     if (self.isiPadCommonRepairsOptions) {
         [DataLoader saveOptionsLocal:self.selectedOptions];
-        [DataLoader saveFindingOptionsLocal:self.selectedOptions];
     }else {
         [DataLoader saveFindingOptionsLocal:self.selectedOptions];
+        
+        NSMutableArray* initSortArray = [NSMutableArray arrayWithArray:self.selectedOptions];
+        
+        [initSortArray addObjectsFromArray:[DataLoader loadLocalSavedOptions]];
+        
+        [DataLoader saveSortFindingOptions:initSortArray];
     }
     
   

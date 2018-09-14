@@ -16,7 +16,7 @@
 
 
 
-#define DEVELOPMENT
+//#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -268,7 +268,6 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [defaults synchronize];
     
 }
-
 + (NSMutableArray*)loadLocalSavedFindingOptions {
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFindingOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
@@ -283,6 +282,46 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
     NSMutableArray* selectedOptions = [NSMutableArray array];
     for (PricebookItem* selectedItem in notes) {
+        
+        for (PricebookItem *item in allOptions) {
+            if ([item.itemID isEqualToString:selectedItem.itemID]) {
+                item.quantity = selectedItem.quantity;
+                [selectedOptions addObject:item];
+                break;
+            }
+        }
+        
+    }
+    
+    return selectedOptions;
+    
+}
+
++ (void) saveSortFindingOptions:(NSMutableArray*)selectedOptions {
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"saveSortFindingOptions"];
+    [defaults synchronize];
+    
+}
++ (NSMutableArray*)loadSortFindingOptions {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"saveSortFindingOptions"];
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray* allSavedOption = [NSMutableArray arrayWithArray:notes];
+    
+    
+    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] otherOptions]];
+    
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
+        [allOptions addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
+    }
+    
+    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] iPadCommonRepairsOptions]];
+    
+    NSMutableArray* selectedOptions = [NSMutableArray array];
+    for (PricebookItem* selectedItem in allSavedOption) {
         
         for (PricebookItem *item in allOptions) {
             if ([item.itemID isEqualToString:selectedItem.itemID]) {
