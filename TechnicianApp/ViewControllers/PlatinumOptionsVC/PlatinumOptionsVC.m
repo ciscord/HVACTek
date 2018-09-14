@@ -44,7 +44,7 @@ static NSString *s_PlatinumOptionCellID = @"PlatinumOptionCell";
     self.btnContinue.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     self.pictureButton.backgroundColor = [UIColor cs_getColorWithProperty:kColorPrimary];
     
-    self.priceBookAndServiceOptions = [DataLoader loadSortFindingOptions];
+    self.priceBookAndServiceOptions = [DataLoader loadLocalFinalOptions];
     
     if (self.isAutoLoad && [TechDataModel sharedTechDataModel].currentStep > PlatinumOptions) {
         [DataLoader saveOptionsDisplayType:odtReadonlyWithPrice];
