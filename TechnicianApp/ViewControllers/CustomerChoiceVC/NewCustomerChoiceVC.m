@@ -212,6 +212,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
             
             totalPriceNormal += p.amount.floatValue * totalQuantity;
             totalPriceESA += p.amountESA.floatValue * totalQuantity;
+            
         }
 
         
@@ -433,6 +434,8 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     for (PricebookItem *p in selectedItems) {
         NSNumber *price = self.isDiscounted? p.amountESA : p.amount;
         
+        int nPrice = (int)(price.floatValue + 0.5);
+        price = [NSNumber numberWithInt:nPrice];
         NSNumberFormatter *form  = [[NSNumberFormatter alloc] init];
         [form setNumberStyle:NSNumberFormatterDecimalStyle];
         [form setAllowsFloats:YES];
