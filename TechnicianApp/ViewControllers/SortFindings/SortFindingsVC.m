@@ -158,6 +158,7 @@ static NSString *findingsCellID = @"SortFindinsCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showServiceOptionsFromSort"]) {
         [DataLoader saveOptionsDisplayType:odtEditing];
+        [DataLoader removeLocalFinalOptions];//remove if quantity is different
         [DataLoader saveSortFindingOptions:self.findingsArray];
     }
 }
