@@ -153,6 +153,18 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
     }
 }
 
+// Objective-C
+-(void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent){
+        if (self.isiPadCommonRepairsOptions) {
+            [DataLoader saveOptionsLocal:self.selectedOptions];
+        }else {
+            [DataLoader saveFindingOptionsLocal:self.selectedOptions];
+        }
+    }
+}
+
 -(NSMutableArray *)getOptionsTypeOfArray:(NSMutableArray *)array {
     if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
         if ([array isEqualToArray:[[DataLoader sharedInstance] iPadCommonRepairsOptions]])

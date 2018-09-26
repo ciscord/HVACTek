@@ -310,6 +310,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 #pragma mark - Next Action
 - (IBAction)nextBtnClicked:(UIButton *)sender {
     if ([self servicesOptionsWereEdited]) {
+        [self sendScreenshot];
         [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"No options have been changed. Are you sure you wish to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
@@ -317,6 +318,25 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
 }
 
+- (UIImage *)pb_takeSnapshot {
+    UIView *subView = self.view;
+    UIGraphicsBeginImageContextWithOptions(subView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [subView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return snapshotImage;
+}
+
+- (void) sendScreenshot {
+    
+    [[DataLoader sharedInstance] upload_screenshot:[self pb_takeSnapshot] onSuccess:^(NSString *message) {
+        
+    } onError:^(NSError *error) {
+        
+    }];
+}
 - (BOOL)servicesOptionsWereEdited {
     for (NSInteger i = 0; i < self.options.count; i++) {
         NSMutableDictionary *option = self.options[i];
@@ -329,6 +349,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
+        [self sendScreenshot];
         [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];
     }
 }

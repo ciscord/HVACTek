@@ -250,6 +250,10 @@ void ShowOkAlertWithTitle(NSString *title, UIViewController *parentViewControlle
 
 -(void)getMainVideo: (void (^)(NSString *successMessage, NSDictionary *reciveData))onSuccess
             onError:(void (^)(NSError *error))onError;
+
+- (void)upload_screenshot:(UIImage*)image
+                onSuccess:(void (^)(NSString *message))onSuccess
+                  onError:(void (^)(NSError *error))onError;
 //------------------------------------------------------------------------------------------
 #pragma mark - Timer
 //------------------------------------------------------------------------------------------

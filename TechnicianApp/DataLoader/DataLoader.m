@@ -62,6 +62,7 @@ NSString *const INSPIRATION      = @"inspiration";
 NSString *const QUESTIONS        = @"questions";
 NSString *const PRICEBOOK        = @"pricebook";
 NSString *const DEBRIEF          = @"addDebrief";
+NSString* const UPLOADSCREENSHOT = @"upload_screenshot";
 NSString *const SURVEY           = @"saveSurvey";
 NSString *const INVOICE          = @"emailInvoice";
 NSString *const ADD_REBATES      = @"addRebate";
@@ -949,6 +950,45 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                NSError *error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : responseObject[@"message"]}];
                //    [self showErrorMessage:error];
                NSLog(@"%@",error);
+               onError(error);
+           }
+       }
+       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+           NSLog(@"%@", error);
+           if (onError) {
+               onError(error);
+           }
+       }];
+}
+
+#pragma mark send screenshot
+
+- (void)upload_screenshot:(UIImage*)image
+                 onSuccess:(void (^)(NSString *message))onSuccess
+                   onError:(void (^)(NSError *error))onError {
+    
+    NSString *signature = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if (signature == nil)  //signature was removed
+        signature = @"";
+  
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
+    
+    NSString * jobid = self.currentUser.activeJob.jobID;
+    [self POST:UPLOADSCREENSHOT
+    parameters:@{ @"job_id" : jobid, @"screenshot" :  signature}
+       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           NSLog(@"responseObject %@",responseObject);
+           
+           if ([responseObject[@"status"] integerValue] == kStatusOK) {
+               if (onSuccess) {
+                   onSuccess(nil);
+               }
+           }
+           else if (onError)
+           {
+               NSError *error = [NSError errorWithDomain:@"API Error" code:12345 userInfo:@{NSLocalizedDescriptionKey : responseObject[@"message"]}];
+               //    [self showErrorMessage:error];
                onError(error);
            }
        }
