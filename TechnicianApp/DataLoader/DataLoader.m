@@ -20,7 +20,7 @@
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
-#define BASE_URL                    @"http://staging.unifeyed.com/hvactek/api/"
+#define BASE_URL                    @"https://hvactek.unfstaging.com/api/"
 NSString *const API_KEY             = @"12b5401c039fe55e8df6304d8fcc121e";
 NSString *const API_SECRET_KEY      = @"Fab5F6286sig754133874o";
 
@@ -139,6 +139,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [defaults removeObjectForKey:@"priceBookAndServiceOptions"];
     [defaults removeObjectForKey:@"FinalOptions"];
     [defaults removeObjectForKey:@"CustomerChoiceData"];
+    [defaults removeObjectForKey:@"saveSortFindingOptions"];
     [defaults removeObjectForKey:@"AdditionalInfo"];
     [defaults removeObjectForKey:@"NewCustomerChoice"];
     [defaults removeObjectForKey:@"OptionsDisplayType"];
