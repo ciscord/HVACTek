@@ -204,12 +204,12 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                     self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceESA];
                 }
                 else {
-                    self.lbSelectOption.text = [self changeCurrencyFormat:(int)(totalPriceNormal)];
+                    self.lbSelectOption.text = [self changeCurrencyFormat:ceil(totalPriceNormal)];
                 }
 
             } else {
                 [self.btnPrice1 setTitle:[self changeCurrencyFormat:totalPriceESA] forState:UIControlStateNormal];
-                [self.btnPrice2 setTitle:[self changeCurrencyFormat:(int)(totalPriceNormal)] forState:UIControlStateNormal];
+                [self.btnPrice2 setTitle:[self changeCurrencyFormat:ceil(totalPriceNormal)] forState:UIControlStateNormal];
                 
                 if (totalPriceESA > 1000) {
                     self.lb24MonthRates.text = [NSString stringWithFormat:@"24 payments of $%d", (int)(totalPriceNormal/24.)];

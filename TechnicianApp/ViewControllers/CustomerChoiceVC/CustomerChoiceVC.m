@@ -260,9 +260,9 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell"; //RecommendationTable
 
         
         if (self.isDiscounted)
-            self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceESA];
+            self.subtotaPriceLabel.text = [self changeCurrencyFormat:ceil(totalPriceESA)];
         else
-            self.subtotaPriceLabel.text = [self changeCurrencyFormat:totalPriceNormal];
+            self.subtotaPriceLabel.text = [self changeCurrencyFormat:ceil(totalPriceNormal)];
         
     }else{
         self.subtotaPriceLabel.text = @"$0";

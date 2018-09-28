@@ -376,7 +376,7 @@ static NSString *kCELL_IDENTIFIER = @"CustomerChoiceCell";
     
    
     
-    int tprice = self.isDiscounted? (int)totalPriceESA : (int)totalPriceNormal;
+    int tprice = self.isDiscounted? (int)ceil(totalPriceESA) : (int)ceil(totalPriceNormal);
     
     NSMutableArray *additionalInfo = [[NSMutableArray alloc] init];
     for (CompanyAditionalInfo * obj  in [[[[DataLoader sharedInstance] currentUser] activeJob] additionalInfoData]) {
