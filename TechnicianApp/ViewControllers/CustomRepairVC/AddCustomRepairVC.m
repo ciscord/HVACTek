@@ -79,7 +79,9 @@
     
     NSNumber *number = @([[self getPriceAmountFromString:self.priceTextField.text] doubleValue] * 0.85);
     
-    PricebookItem *priceBook = [PricebookItem pricebookWithID:@""
+    int randomID = 2000 + arc4random_uniform(10000);
+
+    PricebookItem *priceBook = [PricebookItem pricebookWithID:[NSString stringWithFormat:@"%d", randomID]
                                            itemNumber:@"33XX01"
                                             itemGroup:@""
                                          itemCategory:@""
@@ -97,7 +99,9 @@
     Job *job = [[[DataLoader sharedInstance] currentUser] activeJob];
     [job.managedObjectContext save];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AddCustomRepairOptionNotification" object:nil];
+    NSDictionary* userInfo = @{@"addeditem": priceBook};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AddCustomRepairOptionNotification" object:nil userInfo:userInfo];
 }
 
 

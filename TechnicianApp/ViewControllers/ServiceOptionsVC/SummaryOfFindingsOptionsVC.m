@@ -84,11 +84,10 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
         if (!self.selectedOptions) {
             self.selectedOptions = @[].mutableCopy;
         }
+        NSMutableArray *allOptionsArray = [NSMutableArray array];
         
-        NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
-        if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
-            [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
-        }
+        [allOptionsArray addObjectsFromArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
+        
         self.allOptions = allOptionsArray.mutableCopy;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customRepairOtionAdded:) name:@"AddCustomRepairOptionNotification" object:nil];
@@ -182,12 +181,18 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 }
 
 - (void)customRepairOtionAdded:(NSNotification *)info {
+    
+    NSDictionary* userInfo = info.userInfo;
+    PricebookItem* addedItem = (PricebookItem*)userInfo[@"addeditem"];
+    
     self.allOptions = nil;
-    NSMutableArray *allOptionsArray = [[NSMutableArray alloc] initWithArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
-    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
-        [allOptionsArray addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
-    }
+    
+    NSMutableArray *allOptionsArray = [NSMutableArray array];
+    
+    [allOptionsArray addObjectsFromArray:[self getOptionsTypeOfArray:[[DataLoader sharedInstance] otherOptions]]];
+    
     self.allOptions = allOptionsArray.mutableCopy;
+    [self.selectedOptions addObject:addedItem];
 }
 
 
@@ -218,24 +223,58 @@ static NSString *localPriceBookFileName = @"LocalPriceBook.plist";
 
 -(void) setFilterTerm:(NSString *)filterTerm
 {
+    NSMutableArray * filteredAllOption = [NSMutableArray array];
     if ([filterTerm length]) {
         
-        [self.filteredOptions removeAllObjects];
         [self.allOptions enumerateObjectsUsingBlock:^(PricebookItem *priceBook, NSUInteger idx, BOOL *stop) {
             if ([priceBook.name rangeOfString: filterTerm options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                [self.filteredOptions addObject: priceBook];
+                [filteredAllOption addObject: priceBook];
             }
         }];
         
     } else {
-        self.filteredOptions = [NSMutableArray arrayWithArray: self.allOptions];
+        filteredAllOption = [NSMutableArray arrayWithArray: self.allOptions];
     }
-
+    
     NSSortDescriptor *sortDescriptor =
     [NSSortDescriptor sortDescriptorWithKey:@"name"
                                   ascending:YES
                                    selector:@selector(caseInsensitiveCompare:)];
-  self.filteredOptions = [[NSMutableArray alloc]initWithArray:[self.filteredOptions sortedArrayUsingDescriptors:@[sortDescriptor]]];
+    
+    filteredAllOption = [NSMutableArray arrayWithArray:[filteredAllOption sortedArrayUsingDescriptors:@[sortDescriptor]]];
+    
+    
+    self.filteredOptions = [NSMutableArray array];
+    
+    if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0 && !self.isiPadCommonRepairsOptions){
+        
+        NSSortDescriptor *sortDescriptor =
+        [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                      ascending:YES
+                                       selector:@selector(caseInsensitiveCompare:)];
+        NSMutableArray* customOptions = [[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions];
+        
+        NSMutableArray* customFilteredOptions = [NSMutableArray array];
+        if ([filterTerm length]) {
+            
+            [customOptions enumerateObjectsUsingBlock:^(PricebookItem *priceBook, NSUInteger idx, BOOL *stop) {
+                if ([priceBook.name rangeOfString: filterTerm options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                    [customFilteredOptions addObject: priceBook];
+                }
+            }];
+            
+        } else {
+            customFilteredOptions = [NSMutableArray arrayWithArray: customOptions];
+        }
+        
+        customFilteredOptions = [NSMutableArray arrayWithArray: [customFilteredOptions sortedArrayUsingDescriptors:@[sortDescriptor]]];
+        
+        [self.filteredOptions addObjectsFromArray:customFilteredOptions];
+    }
+    
+    
+    
+    [self.filteredOptions addObjectsFromArray:filteredAllOption];
     
     
     [self.collectionView reloadData];
