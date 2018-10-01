@@ -570,6 +570,8 @@ static NSString *kDebriefCellIdentifier = @"debriefCellIdentifier";
 
     self.jobToDebrief.jobStatus = @(jstDone);
     [self.jobToDebrief.managedObjectContext save];
+    [DataLoader clearAllLocalData];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (appDelegate.homeController) {
         [self.navigationController popToViewController:appDelegate.homeController animated:YES];
