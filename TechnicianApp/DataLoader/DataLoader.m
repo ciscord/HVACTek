@@ -16,7 +16,7 @@
 
 
 
-#define DEVELOPMENT
+//#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -232,6 +232,29 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
      return;
 }
 
+//for plumbing options
+- (NSArray*) loadCommonRepairsOptions {
+    
+    if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
+        return [[DataLoader sharedInstance] plumbingCommonRepairsOptions];
+        
+    }else{
+        return [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+    }
+    NSMutableArray *returnArr = [[NSMutableArray alloc] init];
+    return returnArr;
+
+}
+
+- (NSArray*) loadotherOptions {
+    if ([[DataLoader sharedInstance] currentJobCallType] == qtPlumbing) {
+        return [[DataLoader sharedInstance] plumbingOtherOptions];
+    }else{
+        return [[DataLoader sharedInstance] otherOptions];
+    }
+    NSMutableArray *returnArr = [[NSMutableArray alloc] init];
+    return returnArr;
+}
 + (void)saveOptionsLocal:(NSMutableArray*)selectedOptions {
     
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:selectedOptions];
@@ -244,7 +267,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSArray* allOptions = [[DataLoader sharedInstance] iPadCommonRepairsOptions];
+    NSArray* allOptions = [[DataLoader sharedInstance] loadCommonRepairsOptions];
     
     NSMutableArray* selectedOptions = [NSMutableArray array];
     for (PricebookItem* selectedItem in notes) {
@@ -274,13 +297,13 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedFindingOptions"];
     NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
     
-    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] otherOptions]];
+    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] loadotherOptions]];
     
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
         [allOptions addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
     }
     
-    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] iPadCommonRepairsOptions]];
+    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] loadCommonRepairsOptions]];
     
     NSMutableArray* selectedOptions = [NSMutableArray array];
     for (PricebookItem* selectedItem in notes) {
@@ -314,13 +337,13 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSMutableArray* allSavedOption = [NSMutableArray arrayWithArray:notes];
     
     
-    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] otherOptions]];
+    NSMutableArray* allOptions = [NSMutableArray arrayWithArray:[[DataLoader sharedInstance] loadotherOptions]];
     
     if ([[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions] count] > 0){
         [allOptions addObjectsFromArray:[[[[DataLoader sharedInstance] currentUser] activeJob] addedCustomRepairsOptions]];
     }
     
-    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] iPadCommonRepairsOptions]];
+    [allOptions addObjectsFromArray: [[DataLoader sharedInstance] loadCommonRepairsOptions]];
     
     NSMutableArray* selectedOptions = [NSMutableArray array];
     for (PricebookItem* selectedItem in allSavedOption) {
@@ -923,7 +946,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
- 
+//    self.responseSerializer = [AFHTTPResponseSerializer serializer];
   //  NSDictionary * params = [[NSDictionary alloc]initWithDictionary:InvoiceInfo];
     
     NSError * err;
@@ -934,6 +957,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [self POST:INVOICE
     parameters:@{ @"invoice" : myString, @"preview" : statusInt }
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           
            if ([responseObject[@"status"] integerValue] == kStatusOK) {
                if (onSuccess) {
                    
