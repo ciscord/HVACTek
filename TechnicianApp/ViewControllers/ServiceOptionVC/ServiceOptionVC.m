@@ -27,7 +27,8 @@
 @property (nonatomic, assign) BOOL                isDiagnositcOnlyPriceSelected;
 @property (nonatomic, assign) BOOL isEmptyOptionSelected;
 @property (nonatomic, assign) BOOL isInvoiceRRSelected;
-
+@property (readwrite) BOOL timestarted;
+@property (readwrite) BOOL editServiceOptionClicked;
 @property (nonatomic, strong) NSString *segueIdentifierToUnwindTo;
 
 @end
@@ -40,6 +41,11 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disappearSelector) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appearSelector) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disappearSelector) name:UIApplicationWillTerminateNotification object:nil];
+
+    
     self.title = @"Customer's Choice";
     
     UIColor* titleColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
@@ -180,6 +186,43 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
     }
     
     [self.tableView reloadData];
+    
+    [self appearSelector];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [self disappearSelector];
+}
+
+- (void) disappearSelector {
+    
+    if (self.optionsDisplayType == odtEditing) {
+        
+        if (self.editServiceOptionClicked) {
+            return;
+        }
+        if (self.timestarted) {
+            [[DataLoader sharedInstance] pauseTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+                self.timestarted = false;
+            } onError:^(NSError *error) {
+                
+            }];
+        }
+    }
+}
+
+- (void) appearSelector {
+    self.editServiceOptionClicked = false;
+    if (self.optionsDisplayType == odtEditing) {
+        if (!self.timestarted) {
+            
+            [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+                self.timestarted = true;
+            } onError:^(NSError *error) {
+                
+            }];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -282,11 +325,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 #pragma mark - Options Action
 - (void)selectOptionsToEditAtRow:(NSInteger)index {
     
-    [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
-        
-    } onError:^(NSError *error) {
-        
-    }];
+    self.editServiceOptionClicked = true;
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"TechnicianAppStoryboard" bundle:nil];
     EditServiceOptionsVC* vc = [sb instantiateViewControllerWithIdentifier:@"EditServiceOptionsVC"];
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -309,6 +348,7 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 #pragma mark - Next Action
 - (IBAction)nextBtnClicked:(UIButton *)sender {
+    self.editServiceOptionClicked = false;
     if ([self servicesOptionsWereEdited]) {
         [self sendScreenshot];
         [self performSegueWithIdentifier:@"showViewOptionsVC" sender:self];

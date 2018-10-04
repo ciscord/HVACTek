@@ -16,7 +16,7 @@
 
 
 
-//#define DEVELOPMENT
+#define DEVELOPMENT
 
 #ifdef DEVELOPMENT // development
 //  @"http://www.hvactek.com/api/"
@@ -1482,6 +1482,10 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                
            } else if (onError) {
                NSLog(@"%@", responseObject[@"message"]);
+               if ([responseObject[@"message"] isEqualToString:@"Tracking for this job is already started."]) {
+                   onSuccess(@"OK");
+                   return;
+               }
                onError([NSError errorWithDomain:@"API Error" code:12345 userInfo:@{ NSLocalizedDescriptionKey : responseObject[@"message"] }]);
            }
        }
