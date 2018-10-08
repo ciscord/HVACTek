@@ -201,27 +201,26 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         if (self.editServiceOptionClicked) {
             return;
         }
-        if (self.timestarted) {
-            [[DataLoader sharedInstance] pauseTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
-                self.timestarted = false;
-            } onError:^(NSError *error) {
-                
-            }];
-        }
+    
+        [[DataLoader sharedInstance] pauseTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+
+        } onError:^(NSError *error) {
+            
+        }];
+    
     }
 }
 
 - (void) appearSelector {
     self.editServiceOptionClicked = false;
     if (self.optionsDisplayType == odtEditing) {
-        if (!self.timestarted) {
+        
+        [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
+    
+        } onError:^(NSError *error) {
             
-            [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
-                self.timestarted = true;
-            } onError:^(NSError *error) {
-                
-            }];
-        }
+        }];
+    
     }
 }
 
