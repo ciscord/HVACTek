@@ -54,6 +54,10 @@ typedef NS_ENUM(NSInteger, IAQCurrentView) {
 @property (readwrite) float betterTotalPrice;
 @property (readwrite) float goodTotalPrice;
 
+@property (readwrite) float bestSubPrice;
+@property (readwrite) float betterSubPrice;
+@property (readwrite) float goodSubPrice;
+
 @property (readwrite) IAQCurrentView currentStep;
 +(IAQDataModel*) sharedIAQDataModel;
 

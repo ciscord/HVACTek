@@ -14,6 +14,7 @@
 {
     NSMutableArray* selectedProductArray;
     float totalCost;
+    float subCost;
     NSString* authid;
     NSString* iaqProductString;
 }
@@ -57,14 +58,17 @@
     if (self.iaqType == BEST) {
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBestProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].bestTotalPrice;
+        subCost = [IAQDataModel sharedIAQDataModel].bestSubPrice;
         self.optionNameLabel.text = @"BEST";
     }else if (self.iaqType == BETTER) {
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqBetterProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].betterTotalPrice;
+        subCost = [IAQDataModel sharedIAQDataModel].betterSubPrice;
         self.optionNameLabel.text = @"BETTER";
     }else if (self.iaqType == GOOD) {
         selectedProductArray = [IAQDataModel sharedIAQDataModel].iaqGoodProductsArray;
         totalCost = [IAQDataModel sharedIAQDataModel].goodTotalPrice;
+        subCost = [IAQDataModel sharedIAQDataModel].goodSubPrice;
         self.optionNameLabel.text = @"GOOD";
     }
     
@@ -96,7 +100,7 @@
         
         if (totalCost >= 1000) {
             self.secondLabel.text = @"0% Financing";
-            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf(((totalCost * 0.85) / 24.))];
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf((subCost / 24.))];
         }else{
             self.secondLabel.text = @"Does Not Qualify";
             self.thirdLabel.text = @"For Financing";
@@ -104,8 +108,7 @@
         
         [self.priceLabel setTextColor:[UIColor blackColor]];
     
-        totalCost = totalCost * 0.85;
-        self.priceLabel.text = [self changeCurrencyFormat:totalCost];
+        self.priceLabel.text = [self changeCurrencyFormat:subCost];
         
         
         
@@ -115,7 +118,7 @@
         
         if (totalCost >= 1000) {
             self.secondLabel.text = @"0% Financing";
-            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf(((totalCost * 0.85) / 24))];
+            self.thirdLabel.text = [NSString stringWithFormat:@"24 Equal Payments Of $%ld", lroundf((subCost/ 24))];
         }else{
             self.secondLabel.text = @"Does Not Qualify";
             self.thirdLabel.text = @"For Financing";

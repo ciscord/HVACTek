@@ -204,7 +204,7 @@ static NSString *kCELL_IDENTIFIER = @"OptionTableViewCell";
                     self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceESA];
                 }
                 else {
-                    self.lbSelectOption.text = [self changeCurrencyFormat:ceil(totalPriceNormal)];
+                    self.lbSelectOption.text = [self changeCurrencyFormat:totalPriceNormal];
                 }
 
             } else {

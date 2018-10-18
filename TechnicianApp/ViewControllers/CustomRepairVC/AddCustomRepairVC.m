@@ -77,7 +77,7 @@
 #pragma mark - Save Pricebook item
 -(void)addPricebookItem {
     
-    NSNumber *number = @([[self getPriceAmountFromString:self.priceTextField.text] doubleValue] * 0.85);
+    NSNumber *number = @(ceil([[self getPriceAmountFromString:self.priceTextField.text] doubleValue] * 0.85));
     
     int randomID = 2000 + arc4random_uniform(10000);
 

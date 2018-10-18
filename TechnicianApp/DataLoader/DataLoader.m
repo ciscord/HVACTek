@@ -790,7 +790,7 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
                                                    itemCategory:pricebookInfo[@"ItemCategory"]
                                                            name:pricebookInfo[@"Description"]
                                                        quantity:@""
-                                                         amount:@([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85)
+                                                         amount:@(ceil([pricebookInfo[@"TaskTotalPrice"] floatValue] * 0.85))
                                                    andAmountESA:@([pricebookInfo[@"TaskTotalPrice"] floatValue])];
               
     /////////////////////////////////
