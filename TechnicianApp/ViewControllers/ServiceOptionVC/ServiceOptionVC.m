@@ -16,7 +16,9 @@
 #import "RRFinalChoiceVC.h"
 
 @interface ServiceOptionVC ()
-
+{
+    NSString* startTime;
+}
 @property (weak, nonatomic) IBOutlet UITableView  *tableView;
 @property (weak, nonatomic) IBOutlet UIButton     *btnContinue;
 @property (weak, nonatomic) IBOutlet UIButton *btnZeroPercent;
@@ -201,25 +203,30 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
         if (self.editServiceOptionClicked) {
             return;
         }
+        
+        if (startTime == nil) {
+            return;
+        }
     
-        [[DataLoader sharedInstance] pauseTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
-
-        } onError:^(NSError *error) {
-            
-        }];
+        NSDateFormatter* df = [[NSDateFormatter alloc]init];
+        [df setDateFormat:@"hh:mm:ss"];
+        NSString* endTime = [df stringFromDate:[NSDate date]];
     
+        [DataLoader saveTimeLog:@{@"start":startTime, @"end":endTime}];
+        startTime = nil;
     }
 }
 
 - (void) appearSelector {
-    self.editServiceOptionClicked = false;
     if (self.optionsDisplayType == odtEditing) {
+        if (self.editServiceOptionClicked) {
+            self.editServiceOptionClicked = false;
+            return;
+        }
+        NSDateFormatter* df = [[NSDateFormatter alloc]init];
+        [df setDateFormat:@"hh:mm:ss"];
+        startTime = [df stringFromDate:[NSDate date]];
         
-        [[DataLoader sharedInstance] startTimeWithJobId:[[[DataLoader sharedInstance] currentUser] activeJob].jobID onSuccess:^(NSString *successMessage) {
-    
-        } onError:^(NSError *error) {
-            
-        }];
     
     }
 }
@@ -370,11 +377,9 @@ static NSString *kCELL_IDENTIFIER = @"RecommendationTableViewCell";
 
 - (void) sendScreenshot {
     
-    [[DataLoader sharedInstance] upload_screenshot:[self pb_takeSnapshot] onSuccess:^(NSString *message) {
-        
-    } onError:^(NSError *error) {
-        
-    }];
+    NSString *signature = [UIImagePNGRepresentation([self pb_takeSnapshot]) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    [DataLoader saveScreenshot:signature];
 }
 - (BOOL)servicesOptionsWereEdited {
     for (NSInteger i = 0; i < self.options.count; i++) {

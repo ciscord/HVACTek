@@ -148,6 +148,8 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     [defaults removeObjectForKey:@"otherOptions"];
     [defaults removeObjectForKey:@"plumbingCommonRepairsOptions"];
     [defaults removeObjectForKey:@"plumbingOtherOptions"];
+    [defaults removeObjectForKey:@"timelog"];
+    [defaults removeObjectForKey:@"screenshots"];
     [defaults synchronize];
     
     [[[DataLoader sharedInstance] currentUser] deleteActiveJob];
@@ -441,6 +443,51 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     return notes;
 }
 
+//////screenshot and time
+
++ (void)saveTimeLog:(NSDictionary*)timelog {
+    NSMutableArray* timelogs = [self getTimeLog];
+    [timelogs addObject:timelog];
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:timelogs];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"timelog"];
+    [defaults synchronize];
+    
+}
+
++(NSMutableArray*)getTimeLog {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"timelog"];
+    if (notesData == nil) {
+        return [NSMutableArray array];
+    }
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    return selectedOptions;
+}
+
++ (void)saveScreenshot:(NSString*)screenshot {
+    NSMutableArray* screenshots = [self getScreenshot];
+    [screenshots addObject:screenshot];
+    
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:screenshots];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:@"screenshots"];
+    [defaults synchronize];
+    
+}
+
++(NSMutableArray*)getScreenshot {
+    NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"screenshots"];
+    if (notesData == nil) {
+        return [NSMutableArray array];
+    }
+    NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+    
+    NSMutableArray *selectedOptions = [NSMutableArray arrayWithArray:notes];
+    return selectedOptions;
+}
 
 
 - (void)showErrorMessage:(NSError *)error {
@@ -906,6 +953,9 @@ NSString *const ADD2CARTFINANCIALS                  = @"add2cartFinancials";
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:debriefInfo];
     [params setObject:temp forKey:@"survey"];
   
+    //add time and screenshot
+    [params setObject:[DataLoader getTimeLog] forKey:@"timedata"];
+    [params setObject:[DataLoader getScreenshot] forKey:@"screenshots"];
     NSError * err;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&err];
     NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
